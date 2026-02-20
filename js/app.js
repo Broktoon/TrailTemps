@@ -3,7 +3,7 @@
    - Tool A enhancement: Temperature extremes across the hike (precomputed normals; no historical API calls)
    - Tool B: Weather lookup (State + Mile selection)
    - Leaflet map + OSM tiles
-   - AT overlay from local "appalachian-trail.geojson"
+   - AT overlay from local "trail.geojson"
    - Points from points.json
    - Weather: Open-Meteo forecast (5 days) + current
    - Planning (Weather tool): 7-year planning average high/low for selected Month/Day (window-smoothed)
@@ -14,12 +14,12 @@
 const trailSlug = window.TRAIL_SLUG || "appalachian-trail";
 
 // Fixed paths:
-const POINTS_URL = "/data/points.json";
-const AT_GEOJSON_URL = "/data/appalachian-trail.geojson";
+const POINTS_URL = `/data/${trailSlug}/points.json`;
+const AT_GEOJSON_URL = "/data/${trailSlug}/trail.geojson";
 
 // Option B (precomputed normals) single-file dataset:
 // Build this file locally using tools/build_planning_normals.js (included below in this response).
-const NORMALS_URL = "/data/planning_normals.json";
+const NORMALS_URL = "/data/${trailSlug}/historical_weather.json";
 
 // Open-Meteo endpoints
 const FORECAST_BASE = "https://api.open-meteo.com/v1/forecast";
@@ -441,7 +441,7 @@ async function computeAndRenderDurationExtremes({ direction, startDate, milesPer
   setHtmlIfExists("durExtremesCold", "");
 
   if (!normalsByPointId || normalsByPointId.size === 0) {
-    setDurStatus("Temperature extremes are unavailable because planning_normals.json is not loaded.");
+    setDurStatus("Temperature extremes are unavailable because historical_weather.json is not loaded.");
     return;
   }
 
@@ -546,7 +546,7 @@ function runDurationCalculator() {
       setDurStatus(`Error computing temperature extremes: ${err.message}`);
     });
   } else {
-    setDurStatus("Temperature extremes will appear once planning_normals.json is available.");
+    setDurStatus("Temperature extremes will appear once historical_weather.json is available.");
   }
 }
 
@@ -1182,7 +1182,7 @@ async function main() {
       }
     } catch (e) {
       console.warn(e);
-      setDurStatus("Precomputed planning normals not found. Add data/planning_normals.json to enable temperature extremes.");
+      setDurStatus("Precomputed planning normals not found. Add data/historical_weather.json to enable temperature extremes.");
     }
 
     setTimeout(() => {
