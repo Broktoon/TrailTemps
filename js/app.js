@@ -12,12 +12,12 @@
 */
 
 // Fixed paths:
-const POINTS_URL = "data/points.json";
-const AT_GEOJSON_URL = "data/appalachian-trail.geojson";
+const POINTS_URL = "/data/points.json";
+const AT_GEOJSON_URL = "/data/appalachian-trail.geojson";
 
 // Option B (precomputed normals) single-file dataset:
 // Build this file locally using tools/build_planning_normals.js (included below in this response).
-const NORMALS_URL = "data/planning_normals.json";
+const NORMALS_URL = "/data/planning_normals.json";
 
 // Open-Meteo endpoints
 const FORECAST_BASE = "https://api.open-meteo.com/v1/forecast";
