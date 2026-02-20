@@ -1,0 +1,1762 @@
+[
+  {
+    "id": "GA_0000_0",
+    "state": "GA",
+    "section": "Georgia: Springer to Bly Gap",
+    "mile_est": 0.0,
+    "lat": 34.626769,
+    "lon": -84.193879
+  },
+  {
+    "id": "GA_0010_0",
+    "state": "GA",
+    "section": "Georgia: Springer to Bly Gap",
+    "mile_est": 10.0,
+    "lat": 34.656281,
+    "lon": -84.106748
+  },
+  {
+    "id": "GA_0020_0",
+    "state": "GA",
+    "section": "Georgia: Springer to Bly Gap",
+    "mile_est": 20.0,
+    "lat": 34.677973,
+    "lon": -83.999416
+  },
+  {
+    "id": "GA_0030_0",
+    "state": "GA",
+    "section": "Georgia: Springer to Bly Gap",
+    "mile_est": 30.0,
+    "lat": 34.736808,
+    "lon": -83.91928
+  },
+  {
+    "id": "GA_0040_0",
+    "state": "GA",
+    "section": "Georgia: Springer to Bly Gap",
+    "mile_est": 40.0,
+    "lat": 34.768641,
+    "lon": -83.828899
+  },
+  {
+    "id": "GA_0050_0",
+    "state": "GA",
+    "section": "Georgia: Springer to Bly Gap",
+    "mile_est": 50.0,
+    "lat": 34.801243,
+    "lon": -83.744092
+  },
+  {
+    "id": "GA_0060_0",
+    "state": "GA",
+    "section": "Georgia: Springer to Bly Gap",
+    "mile_est": 60.0,
+    "lat": 34.850361,
+    "lon": -83.660568
+  },
+  {
+    "id": "GA_0070_0",
+    "state": "GA",
+    "section": "Georgia: Springer to Bly Gap",
+    "mile_est": 70.0,
+    "lat": 34.942296,
+    "lon": -83.593572
+  },
+  {
+    "id": "NC_0080_0",
+    "state": "NC",
+    "section": "Southern Appalachians (NC/TN): Nantahala & Smokies approach",
+    "mile_est": 80.0,
+    "lat": 35.048623,
+    "lon": -83.561955
+  },
+  {
+    "id": "NC_0090_0",
+    "state": "NC",
+    "section": "Southern Appalachians (NC/TN): Nantahala & Smokies approach",
+    "mile_est": 90.0,
+    "lat": 35.007501,
+    "lon": -83.486172
+  },
+  {
+    "id": "NC_0100_0",
+    "state": "NC",
+    "section": "Southern Appalachians (NC/TN): Nantahala & Smokies approach",
+    "mile_est": 100.0,
+    "lat": 35.087622,
+    "lon": -83.520043
+  },
+  {
+    "id": "NC_0110_0",
+    "state": "NC",
+    "section": "Southern Appalachians (NC/TN): Nantahala & Smokies approach",
+    "mile_est": 110.0,
+    "lat": 35.1525,
+    "lon": -83.580274
+  },
+  {
+    "id": "NC_0120_0",
+    "state": "NC",
+    "section": "Southern Appalachians (NC/TN): Nantahala & Smokies approach",
+    "mile_est": 120.0,
+    "lat": 35.232562,
+    "lon": -83.558757
+  },
+  {
+    "id": "NC_0130_0",
+    "state": "NC",
+    "section": "Southern Appalachians (NC/TN): Nantahala & Smokies approach",
+    "mile_est": 130.0,
+    "lat": 35.323714,
+    "lon": -83.589929
+  },
+  {
+    "id": "NC_0140_0",
+    "state": "NC",
+    "section": "Southern Appalachians (NC/TN): Nantahala & Smokies approach",
+    "mile_est": 140.0,
+    "lat": 35.328674,
+    "lon": -83.692338
+  },
+  {
+    "id": "NC_0150_0",
+    "state": "NC",
+    "section": "Southern Appalachians (NC/TN): Nantahala & Smokies approach",
+    "mile_est": 150.0,
+    "lat": 35.395852,
+    "lon": -83.765716
+  },
+  {
+    "id": "NC_0160_0",
+    "state": "NC",
+    "section": "Southern Appalachians (NC/TN): Nantahala & Smokies approach",
+    "mile_est": 160.0,
+    "lat": 35.452694,
+    "lon": -83.802466
+  },
+  {
+    "id": "NC_0170_0",
+    "state": "NC",
+    "section": "Great Smoky Mountains",
+    "mile_est": 170.0,
+    "lat": 35.541696,
+    "lon": -83.800266
+  },
+  {
+    "id": "TN_0180_0",
+    "state": "TN",
+    "section": "Great Smoky Mountains",
+    "mile_est": 180.0,
+    "lat": 35.568709,
+    "lon": -83.686656
+  },
+  {
+    "id": "TN_0190_0",
+    "state": "TN",
+    "section": "Great Smoky Mountains",
+    "mile_est": 190.0,
+    "lat": 35.564286,
+    "lon": -83.552487
+  },
+  {
+    "id": "TN_0200_0",
+    "state": "TN",
+    "section": "Great Smoky Mountains",
+    "mile_est": 200.0,
+    "lat": 35.611873,
+    "lon": -83.441371
+  },
+  {
+    "id": "TN_0210_0",
+    "state": "TN",
+    "section": "Great Smoky Mountains",
+    "mile_est": 210.0,
+    "lat": 35.663378,
+    "lon": -83.327084
+  },
+  {
+    "id": "TN_0220_0",
+    "state": "TN",
+    "section": "Great Smoky Mountains",
+    "mile_est": 220.0,
+    "lat": 35.721281,
+    "lon": -83.247577
+  },
+  {
+    "id": "TN_0230_0",
+    "state": "TN",
+    "section": "Great Smoky Mountains",
+    "mile_est": 230.0,
+    "lat": 35.765617,
+    "lon": -83.141578
+  },
+  {
+    "id": "TN_0240_0",
+    "state": "TN",
+    "section": "Highlands & Balds (TN/NC): Roan / Unaka / Iron Mtn",
+    "mile_est": 240.0,
+    "lat": 35.787417,
+    "lon": -83.047823
+  },
+  {
+    "id": "TN_0250_0",
+    "state": "TN",
+    "section": "Highlands & Balds (TN/NC): Roan / Unaka / Iron Mtn",
+    "mile_est": 250.0,
+    "lat": 35.803364,
+    "lon": -82.948263
+  },
+  {
+    "id": "TN_0260_0",
+    "state": "TN",
+    "section": "Highlands & Balds (TN/NC): Roan / Unaka / Iron Mtn",
+    "mile_est": 260.0,
+    "lat": 35.849341,
+    "lon": -82.890832
+  },
+  {
+    "id": "TN_0270_0",
+    "state": "TN",
+    "section": "Highlands & Balds (TN/NC): Roan / Unaka / Iron Mtn",
+    "mile_est": 270.0,
+    "lat": 35.884464,
+    "lon": -82.811366
+  },
+  {
+    "id": "TN_0280_0",
+    "state": "TN",
+    "section": "Highlands & Balds (TN/NC): Roan / Unaka / Iron Mtn",
+    "mile_est": 280.0,
+    "lat": 35.96826,
+    "lon": -82.778686
+  },
+  {
+    "id": "TN_0290_0",
+    "state": "TN",
+    "section": "Highlands & Balds (TN/NC): Roan / Unaka / Iron Mtn",
+    "mile_est": 290.0,
+    "lat": 36.028349,
+    "lon": -82.704835
+  },
+  {
+    "id": "TN_0300_0",
+    "state": "TN",
+    "section": "Highlands & Balds (TN/NC): Roan / Unaka / Iron Mtn",
+    "mile_est": 300.0,
+    "lat": 36.03952,
+    "lon": -82.600572
+  },
+  {
+    "id": "TN_0310_0",
+    "state": "TN",
+    "section": "Highlands & Balds (TN/NC): Roan / Unaka / Iron Mtn",
+    "mile_est": 310.0,
+    "lat": 35.96535,
+    "lon": -82.581513
+  },
+  {
+    "id": "TN_0320_0",
+    "state": "TN",
+    "section": "Highlands & Balds (TN/NC): Roan / Unaka / Iron Mtn",
+    "mile_est": 320.0,
+    "lat": 36.000151,
+    "lon": -82.473941
+  },
+  {
+    "id": "TN_0330_0",
+    "state": "TN",
+    "section": "Highlands & Balds (TN/NC): Roan / Unaka / Iron Mtn",
+    "mile_est": 330.0,
+    "lat": 36.067102,
+    "lon": -82.433491
+  },
+  {
+    "id": "TN_0340_0",
+    "state": "TN",
+    "section": "Highlands & Balds (TN/NC): Roan / Unaka / Iron Mtn",
+    "mile_est": 340.0,
+    "lat": 36.105302,
+    "lon": -82.396582
+  },
+  {
+    "id": "TN_0350_0",
+    "state": "TN",
+    "section": "Highlands & Balds (TN/NC): Roan / Unaka / Iron Mtn",
+    "mile_est": 350.0,
+    "lat": 36.134583,
+    "lon": -82.288784
+  },
+  {
+    "id": "TN_0360_0",
+    "state": "TN",
+    "section": "Highlands & Balds (TN/NC): Roan / Unaka / Iron Mtn",
+    "mile_est": 360.0,
+    "lat": 36.144559,
+    "lon": -82.182925
+  },
+  {
+    "id": "TN_0370_0",
+    "state": "TN",
+    "section": "Highlands & Balds (TN/NC): Roan / Unaka / Iron Mtn",
+    "mile_est": 370.0,
+    "lat": 36.105095,
+    "lon": -82.114558
+  },
+  {
+    "id": "TN_0380_0",
+    "state": "TN",
+    "section": "Highlands & Balds (TN/NC): Roan / Unaka / Iron Mtn",
+    "mile_est": 380.0,
+    "lat": 36.138107,
+    "lon": -82.008828
+  },
+  {
+    "id": "TN_0390_0",
+    "state": "TN",
+    "section": "Highlands & Balds (TN/NC): Roan / Unaka / Iron Mtn",
+    "mile_est": 390.0,
+    "lat": 36.204632,
+    "lon": -81.98211
+  },
+  {
+    "id": "TN_0400_0",
+    "state": "TN",
+    "section": "Highlands & Balds (TN/NC): Roan / Unaka / Iron Mtn",
+    "mile_est": 400.0,
+    "lat": 36.218262,
+    "lon": -82.05673
+  },
+  {
+    "id": "TN_0410_0",
+    "state": "TN",
+    "section": "Highlands & Balds (TN/NC): Roan / Unaka / Iron Mtn",
+    "mile_est": 410.0,
+    "lat": 36.276748,
+    "lon": -82.136397
+  },
+  {
+    "id": "TN_0420_0",
+    "state": "TN",
+    "section": "Virginia Highlands: Damascus to Grayson / Mt Rogers",
+    "mile_est": 420.0,
+    "lat": 36.32388,
+    "lon": -82.12151
+  },
+  {
+    "id": "TN_0430_0",
+    "state": "TN",
+    "section": "Virginia Highlands: Damascus to Grayson / Mt Rogers",
+    "mile_est": 430.0,
+    "lat": 36.410236,
+    "lon": -82.013611
+  },
+  {
+    "id": "TN_0440_0",
+    "state": "TN",
+    "section": "Virginia Highlands: Damascus to Grayson / Mt Rogers",
+    "mile_est": 440.0,
+    "lat": 36.50738,
+    "lon": -81.985812
+  },
+  {
+    "id": "TN_0450_0",
+    "state": "TN",
+    "section": "Virginia Highlands: Damascus to Grayson / Mt Rogers",
+    "mile_est": 450.0,
+    "lat": 36.584836,
+    "lon": -81.878571
+  },
+  {
+    "id": "VA_0460_0",
+    "state": "VA",
+    "section": "Virginia Highlands: Damascus to Grayson / Mt Rogers",
+    "mile_est": 460.0,
+    "lat": 36.627848,
+    "lon": -81.773732
+  },
+  {
+    "id": "VA_0470_0",
+    "state": "VA",
+    "section": "Virginia Highlands: Damascus to Grayson / Mt Rogers",
+    "mile_est": 470.0,
+    "lat": 36.652731,
+    "lon": -81.690643
+  },
+  {
+    "id": "VA_0480_0",
+    "state": "VA",
+    "section": "Virginia Highlands: Damascus to Grayson / Mt Rogers",
+    "mile_est": 480.0,
+    "lat": 36.633182,
+    "lon": -81.609169
+  },
+  {
+    "id": "VA_0490_0",
+    "state": "VA",
+    "section": "Virginia Highlands: Damascus to Grayson / Mt Rogers",
+    "mile_est": 490.0,
+    "lat": 36.640276,
+    "lon": -81.508168
+  },
+  {
+    "id": "VA_0500_0",
+    "state": "VA",
+    "section": "Virginia Highlands: Damascus to Grayson / Mt Rogers",
+    "mile_est": 500.0,
+    "lat": 36.698958,
+    "lon": -81.510374
+  },
+  {
+    "id": "VA_0510_0",
+    "state": "VA",
+    "section": "Virginia Highlands: Damascus to Grayson / Mt Rogers",
+    "mile_est": 510.0,
+    "lat": 36.73254,
+    "lon": -81.474716
+  },
+  {
+    "id": "VA_0520_0",
+    "state": "VA",
+    "section": "Virginia Highlands: Damascus to Grayson / Mt Rogers",
+    "mile_est": 520.0,
+    "lat": 36.799363,
+    "lon": -81.448958
+  },
+  {
+    "id": "VA_0530_0",
+    "state": "VA",
+    "section": "Virginia Highlands: Damascus to Grayson / Mt Rogers",
+    "mile_est": 530.0,
+    "lat": 36.856952,
+    "lon": -81.362315
+  },
+  {
+    "id": "VA_0540_0",
+    "state": "VA",
+    "section": "Virginia Highlands: Damascus to Grayson / Mt Rogers",
+    "mile_est": 540.0,
+    "lat": 36.947364,
+    "lon": -81.362259
+  },
+  {
+    "id": "VA_0550_0",
+    "state": "VA",
+    "section": "Virginia Highlands: Damascus to Grayson / Mt Rogers",
+    "mile_est": 550.0,
+    "lat": 37.005758,
+    "lon": -81.414389
+  },
+  {
+    "id": "VA_0560_0",
+    "state": "VA",
+    "section": "Virginia: Triple Crown & Blue Ridge",
+    "mile_est": 560.0,
+    "lat": 37.05721,
+    "lon": -81.369702
+  },
+  {
+    "id": "VA_0570_0",
+    "state": "VA",
+    "section": "Virginia: Triple Crown & Blue Ridge",
+    "mile_est": 570.0,
+    "lat": 37.087201,
+    "lon": -81.23867
+  },
+  {
+    "id": "VA_0580_0",
+    "state": "VA",
+    "section": "Virginia: Triple Crown & Blue Ridge",
+    "mile_est": 580.0,
+    "lat": 37.137264,
+    "lon": -81.137321
+  },
+  {
+    "id": "VA_0590_0",
+    "state": "VA",
+    "section": "Virginia: Triple Crown & Blue Ridge",
+    "mile_est": 590.0,
+    "lat": 37.147065,
+    "lon": -81.007432
+  },
+  {
+    "id": "VA_0600_0",
+    "state": "VA",
+    "section": "Virginia: Triple Crown & Blue Ridge",
+    "mile_est": 600.0,
+    "lat": 37.172512,
+    "lon": -80.899466
+  },
+  {
+    "id": "VA_0610_0",
+    "state": "VA",
+    "section": "Virginia: Triple Crown & Blue Ridge",
+    "mile_est": 610.0,
+    "lat": 37.239776,
+    "lon": -80.810123
+  },
+  {
+    "id": "VA_0620_0",
+    "state": "VA",
+    "section": "Virginia: Triple Crown & Blue Ridge",
+    "mile_est": 620.0,
+    "lat": 37.284585,
+    "lon": -80.803667
+  },
+  {
+    "id": "VA_0630_0",
+    "state": "VA",
+    "section": "Virginia: Triple Crown & Blue Ridge",
+    "mile_est": 630.0,
+    "lat": 37.357884,
+    "lon": -80.75389
+  },
+  {
+    "id": "VA_0640_0",
+    "state": "VA",
+    "section": "Virginia: Triple Crown & Blue Ridge",
+    "mile_est": 640.0,
+    "lat": 37.407876,
+    "lon": -80.677918
+  },
+  {
+    "id": "VA_0650_0",
+    "state": "VA",
+    "section": "Virginia: Triple Crown & Blue Ridge",
+    "mile_est": 650.0,
+    "lat": 37.405247,
+    "lon": -80.584113
+  },
+  {
+    "id": "VA_0660_0",
+    "state": "VA",
+    "section": "Virginia: Triple Crown & Blue Ridge",
+    "mile_est": 660.0,
+    "lat": 37.397134,
+    "lon": -80.474477
+  },
+  {
+    "id": "VA_0670_0",
+    "state": "VA",
+    "section": "Virginia: Triple Crown & Blue Ridge",
+    "mile_est": 670.0,
+    "lat": 37.351549,
+    "lon": -80.375184
+  },
+  {
+    "id": "VA_0680_0",
+    "state": "VA",
+    "section": "Virginia: Triple Crown & Blue Ridge",
+    "mile_est": 680.0,
+    "lat": 37.381394,
+    "lon": -80.258555
+  },
+  {
+    "id": "VA_0690_0",
+    "state": "VA",
+    "section": "Virginia: Triple Crown & Blue Ridge",
+    "mile_est": 690.0,
+    "lat": 37.385712,
+    "lon": -80.181973
+  },
+  {
+    "id": "VA_0700_0",
+    "state": "VA",
+    "section": "Virginia: Triple Crown & Blue Ridge",
+    "mile_est": 700.0,
+    "lat": 37.370132,
+    "lon": -80.114078
+  },
+  {
+    "id": "VA_0710_0",
+    "state": "VA",
+    "section": "Virginia: Triple Crown & Blue Ridge",
+    "mile_est": 710.0,
+    "lat": 37.418946,
+    "lon": -79.995399
+  },
+  {
+    "id": "VA_0720_0",
+    "state": "VA",
+    "section": "Virginia: Triple Crown & Blue Ridge",
+    "mile_est": 720.0,
+    "lat": 37.382544,
+    "lon": -79.929099
+  },
+  {
+    "id": "VA_0730_0",
+    "state": "VA",
+    "section": "Virginia: Triple Crown & Blue Ridge",
+    "mile_est": 730.0,
+    "lat": 37.410482,
+    "lon": -79.821482
+  },
+  {
+    "id": "VA_0740_0",
+    "state": "VA",
+    "section": "Virginia: Triple Crown & Blue Ridge",
+    "mile_est": 740.0,
+    "lat": 37.457798,
+    "lon": -79.710453
+  },
+  {
+    "id": "VA_0750_0",
+    "state": "VA",
+    "section": "Virginia: Triple Crown & Blue Ridge",
+    "mile_est": 750.0,
+    "lat": 37.531493,
+    "lon": -79.625687
+  },
+  {
+    "id": "VA_0760_0",
+    "state": "VA",
+    "section": "Virginia: Triple Crown & Blue Ridge",
+    "mile_est": 760.0,
+    "lat": 37.50121,
+    "lon": -79.537421
+  },
+  {
+    "id": "VA_0770_0",
+    "state": "VA",
+    "section": "Virginia: Triple Crown & Blue Ridge",
+    "mile_est": 770.0,
+    "lat": 37.563007,
+    "lon": -79.442426
+  },
+  {
+    "id": "VA_0780_0",
+    "state": "VA",
+    "section": "Virginia: Triple Crown & Blue Ridge",
+    "mile_est": 780.0,
+    "lat": 37.604294,
+    "lon": -79.388523
+  },
+  {
+    "id": "VA_0790_0",
+    "state": "VA",
+    "section": "Virginia: Triple Crown & Blue Ridge",
+    "mile_est": 790.0,
+    "lat": 37.674126,
+    "lon": -79.333666
+  },
+  {
+    "id": "VA_0800_0",
+    "state": "VA",
+    "section": "Baxter State Park & Katahdin",
+    "mile_est": 800.0,
+    "lat": 37.720266,
+    "lon": -79.258884
+  },
+  {
+    "id": "VA_0810_0",
+    "state": "VA",
+    "section": "Baxter State Park & Katahdin",
+    "mile_est": 810.0,
+    "lat": 37.789104,
+    "lon": -79.173716
+  },
+  {
+    "id": "VA_0820_0",
+    "state": "VA",
+    "section": "Baxter State Park & Katahdin",
+    "mile_est": 820.0,
+    "lat": 37.822935,
+    "lon": -79.089655
+  },
+  {
+    "id": "VA_0830_0",
+    "state": "VA",
+    "section": "Baxter State Park & Katahdin",
+    "mile_est": 830.0,
+    "lat": 37.844003,
+    "lon": -78.998524
+  },
+  {
+    "id": "VA_0840_0",
+    "state": "VA",
+    "section": "Shenandoah National Park vicinity",
+    "mile_est": 840.0,
+    "lat": 37.938903,
+    "lon": -78.950372
+  },
+  {
+    "id": "VA_0850_0",
+    "state": "VA",
+    "section": "Shenandoah National Park vicinity",
+    "mile_est": 850.0,
+    "lat": 37.983342,
+    "lon": -78.88371
+  },
+  {
+    "id": "VA_0860_0",
+    "state": "VA",
+    "section": "Shenandoah National Park vicinity",
+    "mile_est": 860.0,
+    "lat": 38.065939,
+    "lon": -78.801938
+  },
+  {
+    "id": "VA_0870_0",
+    "state": "VA",
+    "section": "Shenandoah National Park vicinity",
+    "mile_est": 870.0,
+    "lat": 38.158356,
+    "lon": -78.772295
+  },
+  {
+    "id": "VA_0880_0",
+    "state": "VA",
+    "section": "Shenandoah National Park vicinity",
+    "mile_est": 880.0,
+    "lat": 38.245619,
+    "lon": -78.698669
+  },
+  {
+    "id": "VA_0890_0",
+    "state": "VA",
+    "section": "Shenandoah National Park vicinity",
+    "mile_est": 890.0,
+    "lat": 38.293649,
+    "lon": -78.632722
+  },
+  {
+    "id": "VA_0900_0",
+    "state": "VA",
+    "section": "Shenandoah National Park vicinity",
+    "mile_est": 900.0,
+    "lat": 38.350149,
+    "lon": -78.552082
+  },
+  {
+    "id": "VA_0910_0",
+    "state": "VA",
+    "section": "Shenandoah National Park vicinity",
+    "mile_est": 910.0,
+    "lat": 38.445662,
+    "lon": -78.471065
+  },
+  {
+    "id": "VA_0920_0",
+    "state": "VA",
+    "section": "Shenandoah National Park vicinity",
+    "mile_est": 920.0,
+    "lat": 38.541431,
+    "lon": -78.417703
+  },
+  {
+    "id": "VA_0930_0",
+    "state": "VA",
+    "section": "Shenandoah National Park vicinity",
+    "mile_est": 930.0,
+    "lat": 38.627184,
+    "lon": -78.340322
+  },
+  {
+    "id": "VA_0940_0",
+    "state": "VA",
+    "section": "Shenandoah National Park vicinity",
+    "mile_est": 940.0,
+    "lat": 38.715452,
+    "lon": -78.327668
+  },
+  {
+    "id": "VA_0950_0",
+    "state": "VA",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 950.0,
+    "lat": 38.767412,
+    "lon": -78.225734
+  },
+  {
+    "id": "VA_0960_0",
+    "state": "VA",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 960.0,
+    "lat": 38.852575,
+    "lon": -78.164994
+  },
+  {
+    "id": "VA_0970_0",
+    "state": "VA",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 970.0,
+    "lat": 38.902444,
+    "lon": -78.056318
+  },
+  {
+    "id": "VA_0980_0",
+    "state": "VA",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 980.0,
+    "lat": 38.99799,
+    "lon": -77.987822
+  },
+  {
+    "id": "VA_0990_0",
+    "state": "VA",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 990.0,
+    "lat": 39.070348,
+    "lon": -77.902087
+  },
+  {
+    "id": "VA_1000_0",
+    "state": "VA",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 1000.0,
+    "lat": 39.152127,
+    "lon": -77.820729
+  },
+  {
+    "id": "VA_1010_0",
+    "state": "VA",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 1010.0,
+    "lat": 39.274879,
+    "lon": -77.752565
+  },
+  {
+    "id": "MD_1020_0",
+    "state": "MD",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 1020.0,
+    "lat": 39.333604,
+    "lon": -77.676766
+  },
+  {
+    "id": "MD_1030_0",
+    "state": "MD",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 1030.0,
+    "lat": 39.4574,
+    "lon": -77.626355
+  },
+  {
+    "id": "MD_1040_0",
+    "state": "MD",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 1040.0,
+    "lat": 39.568447,
+    "lon": -77.59763
+  },
+  {
+    "id": "MD_1050_0",
+    "state": "MD",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 1050.0,
+    "lat": 39.670908,
+    "lon": -77.53077
+  },
+  {
+    "id": "PA_1060_0",
+    "state": "PA",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 1060.0,
+    "lat": 39.775632,
+    "lon": -77.480917
+  },
+  {
+    "id": "PA_1070_0",
+    "state": "PA",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 1070.0,
+    "lat": 39.883547,
+    "lon": -77.495594
+  },
+  {
+    "id": "PA_1080_0",
+    "state": "PA",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 1080.0,
+    "lat": 39.973789,
+    "lon": -77.443082
+  },
+  {
+    "id": "PA_1090_0",
+    "state": "PA",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 1090.0,
+    "lat": 40.038291,
+    "lon": -77.330781
+  },
+  {
+    "id": "PA_1100_0",
+    "state": "PA",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 1100.0,
+    "lat": 40.068105,
+    "lon": -77.205938
+  },
+  {
+    "id": "PA_1110_0",
+    "state": "PA",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 1110.0,
+    "lat": 40.127455,
+    "lon": -77.109856
+  },
+  {
+    "id": "PA_1120_0",
+    "state": "PA",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 1120.0,
+    "lat": 40.232808,
+    "lon": -77.109046
+  },
+  {
+    "id": "PA_1130_0",
+    "state": "PA",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 1130.0,
+    "lat": 40.338,
+    "lon": -77.090911
+  },
+  {
+    "id": "PA_1140_0",
+    "state": "PA",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 1140.0,
+    "lat": 40.392267,
+    "lon": -77.013288
+  },
+  {
+    "id": "PA_1150_0",
+    "state": "PA",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 1150.0,
+    "lat": 40.42483,
+    "lon": -76.881719
+  },
+  {
+    "id": "PA_1160_0",
+    "state": "PA",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 1160.0,
+    "lat": 40.448499,
+    "lon": -76.745542
+  },
+  {
+    "id": "PA_1170_0",
+    "state": "PA",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 1170.0,
+    "lat": 40.501999,
+    "lon": -76.607102
+  },
+  {
+    "id": "PA_1180_0",
+    "state": "PA",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 1180.0,
+    "lat": 40.491993,
+    "lon": -76.494586
+  },
+  {
+    "id": "PA_1190_0",
+    "state": "PA",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 1190.0,
+    "lat": 40.511252,
+    "lon": -76.344576
+  },
+  {
+    "id": "PA_1200_0",
+    "state": "PA",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 1200.0,
+    "lat": 40.527387,
+    "lon": -76.222537
+  },
+  {
+    "id": "PA_1210_0",
+    "state": "PA",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 1210.0,
+    "lat": 40.548186,
+    "lon": -76.100928
+  },
+  {
+    "id": "PA_1220_0",
+    "state": "PA",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 1220.0,
+    "lat": 40.585497,
+    "lon": -75.977216
+  },
+  {
+    "id": "PA_1230_0",
+    "state": "PA",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 1230.0,
+    "lat": 40.607445,
+    "lon": -75.963952
+  },
+  {
+    "id": "PA_1240_0",
+    "state": "PA",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 1240.0,
+    "lat": 40.683096,
+    "lon": -75.877686
+  },
+  {
+    "id": "PA_1250_0",
+    "state": "PA",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 1250.0,
+    "lat": 40.743289,
+    "lon": -75.740137
+  },
+  {
+    "id": "PA_1260_0",
+    "state": "PA",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 1260.0,
+    "lat": 40.781177,
+    "lon": -75.610088
+  },
+  {
+    "id": "PA_1270_0",
+    "state": "PA",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 1270.0,
+    "lat": 40.812707,
+    "lon": -75.480088
+  },
+  {
+    "id": "PA_1280_0",
+    "state": "PA",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 1280.0,
+    "lat": 40.847052,
+    "lon": -75.336574
+  },
+  {
+    "id": "NJ_1290_0",
+    "state": "NJ",
+    "section": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+    "mile_est": 1290.0,
+    "lat": 40.921274,
+    "lon": -75.224313
+  },
+  {
+    "id": "NJ_1300_0",
+    "state": "NJ",
+    "section": "New Jersey & New York Ridges",
+    "mile_est": 1300.0,
+    "lat": 40.978705,
+    "lon": -75.136309
+  },
+  {
+    "id": "NJ_1310_0",
+    "state": "NJ",
+    "section": "New Jersey & New York Ridges",
+    "mile_est": 1310.0,
+    "lat": 41.024914,
+    "lon": -75.012401
+  },
+  {
+    "id": "NJ_1320_0",
+    "state": "NJ",
+    "section": "New Jersey & New York Ridges",
+    "mile_est": 1320.0,
+    "lat": 41.107667,
+    "lon": -74.900126
+  },
+  {
+    "id": "NJ_1330_0",
+    "state": "NJ",
+    "section": "New Jersey & New York Ridges",
+    "mile_est": 1330.0,
+    "lat": 41.181241,
+    "lon": -74.780769
+  },
+  {
+    "id": "NJ_1340_0",
+    "state": "NJ",
+    "section": "New Jersey & New York Ridges",
+    "mile_est": 1340.0,
+    "lat": 41.268216,
+    "lon": -74.676976
+  },
+  {
+    "id": "NJ_1350_0",
+    "state": "NJ",
+    "section": "New Jersey & New York Ridges",
+    "mile_est": 1350.0,
+    "lat": 41.310884,
+    "lon": -74.594582
+  },
+  {
+    "id": "NY_1360_0",
+    "state": "NY",
+    "section": "New Jersey & New York Ridges",
+    "mile_est": 1360.0,
+    "lat": 41.24927,
+    "lon": -74.49846
+  },
+  {
+    "id": "NY_1370_0",
+    "state": "NY",
+    "section": "New Jersey & New York Ridges",
+    "mile_est": 1370.0,
+    "lat": 41.20098,
+    "lon": -74.384126
+  },
+  {
+    "id": "NY_1380_0",
+    "state": "NY",
+    "section": "New Jersey & New York Ridges",
+    "mile_est": 1380.0,
+    "lat": 41.259275,
+    "lon": -74.273621
+  },
+  {
+    "id": "NY_1390_0",
+    "state": "NY",
+    "section": "New Jersey & New York Ridges",
+    "mile_est": 1390.0,
+    "lat": 41.269978,
+    "lon": -74.161263
+  },
+  {
+    "id": "NY_1400_0",
+    "state": "NY",
+    "section": "New Jersey & New York Ridges",
+    "mile_est": 1400.0,
+    "lat": 41.279655,
+    "lon": -74.059006
+  },
+  {
+    "id": "NY_1410_0",
+    "state": "NY",
+    "section": "New Jersey & New York Ridges",
+    "mile_est": 1410.0,
+    "lat": 41.314351,
+    "lon": -73.990108
+  },
+  {
+    "id": "NY_1420_0",
+    "state": "NY",
+    "section": "New Jersey & New York Ridges",
+    "mile_est": 1420.0,
+    "lat": 41.383818,
+    "lon": -73.892328
+  },
+  {
+    "id": "NY_1430_0",
+    "state": "NY",
+    "section": "New Jersey & New York Ridges",
+    "mile_est": 1430.0,
+    "lat": 41.471612,
+    "lon": -73.829365
+  },
+  {
+    "id": "NY_1440_0",
+    "state": "NY",
+    "section": "New Jersey & New York Ridges",
+    "mile_est": 1440.0,
+    "lat": 41.542072,
+    "lon": -73.730939
+  },
+  {
+    "id": "CT_1450_0",
+    "state": "CT",
+    "section": "New Jersey & New York Ridges",
+    "mile_est": 1450.0,
+    "lat": 41.609671,
+    "lon": -73.626681
+  },
+  {
+    "id": "CT_1460_0",
+    "state": "CT",
+    "section": "Connecticut & Berkshires (CT/MA)",
+    "mile_est": 1460.0,
+    "lat": 41.637601,
+    "lon": -73.53221
+  },
+  {
+    "id": "CT_1470_0",
+    "state": "CT",
+    "section": "Connecticut & Berkshires (CT/MA)",
+    "mile_est": 1470.0,
+    "lat": 41.70736,
+    "lon": -73.502178
+  },
+  {
+    "id": "CT_1480_0",
+    "state": "CT",
+    "section": "Connecticut & Berkshires (CT/MA)",
+    "mile_est": 1480.0,
+    "lat": 41.777169,
+    "lon": -73.421015
+  },
+  {
+    "id": "CT_1490_0",
+    "state": "CT",
+    "section": "Connecticut & Berkshires (CT/MA)",
+    "mile_est": 1490.0,
+    "lat": 41.882866,
+    "lon": -73.394151
+  },
+  {
+    "id": "MA_1500_0",
+    "state": "MA",
+    "section": "Connecticut & Berkshires (CT/MA)",
+    "mile_est": 1500.0,
+    "lat": 41.974126,
+    "lon": -73.376799
+  },
+  {
+    "id": "MA_1510_0",
+    "state": "MA",
+    "section": "Connecticut & Berkshires (CT/MA)",
+    "mile_est": 1510.0,
+    "lat": 42.032069,
+    "lon": -73.453449
+  },
+  {
+    "id": "MA_1520_0",
+    "state": "MA",
+    "section": "Connecticut & Berkshires (CT/MA)",
+    "mile_est": 1520.0,
+    "lat": 42.140497,
+    "lon": -73.437147
+  },
+  {
+    "id": "MA_1530_0",
+    "state": "MA",
+    "section": "Connecticut & Berkshires (CT/MA)",
+    "mile_est": 1530.0,
+    "lat": 42.152784,
+    "lon": -73.329367
+  },
+  {
+    "id": "MA_1540_0",
+    "state": "MA",
+    "section": "Connecticut & Berkshires (CT/MA)",
+    "mile_est": 1540.0,
+    "lat": 42.229361,
+    "lon": -73.24775
+  },
+  {
+    "id": "MA_1550_0",
+    "state": "MA",
+    "section": "Connecticut & Berkshires (CT/MA)",
+    "mile_est": 1550.0,
+    "lat": 42.272561,
+    "lon": -73.187034
+  },
+  {
+    "id": "MA_1560_0",
+    "state": "MA",
+    "section": "Connecticut & Berkshires (CT/MA)",
+    "mile_est": 1560.0,
+    "lat": 42.332282,
+    "lon": -73.166438
+  },
+  {
+    "id": "MA_1570_0",
+    "state": "MA",
+    "section": "Connecticut & Berkshires (CT/MA)",
+    "mile_est": 1570.0,
+    "lat": 42.449219,
+    "lon": -73.16428
+  },
+  {
+    "id": "MA_1580_0",
+    "state": "MA",
+    "section": "Connecticut & Berkshires (CT/MA)",
+    "mile_est": 1580.0,
+    "lat": 42.541366,
+    "lon": -73.146758
+  },
+  {
+    "id": "VT_1590_0",
+    "state": "VT",
+    "section": "Connecticut & Berkshires (CT/MA)",
+    "mile_est": 1590.0,
+    "lat": 42.638764,
+    "lon": -73.164783
+  },
+  {
+    "id": "VT_1600_0",
+    "state": "VT",
+    "section": "Connecticut & Berkshires (CT/MA)",
+    "mile_est": 1600.0,
+    "lat": 42.743684,
+    "lon": -73.155684
+  },
+  {
+    "id": "VT_1610_0",
+    "state": "VT",
+    "section": "Vermont Green Mountains",
+    "mile_est": 1610.0,
+    "lat": 42.850298,
+    "lon": -73.11915
+  },
+  {
+    "id": "VT_1620_0",
+    "state": "VT",
+    "section": "Vermont Green Mountains",
+    "mile_est": 1620.0,
+    "lat": 42.941282,
+    "lon": -73.063495
+  },
+  {
+    "id": "VT_1630_0",
+    "state": "VT",
+    "section": "Vermont Green Mountains",
+    "mile_est": 1630.0,
+    "lat": 43.032825,
+    "lon": -73.029159
+  },
+  {
+    "id": "VT_1640_0",
+    "state": "VT",
+    "section": "Vermont Green Mountains",
+    "mile_est": 1640.0,
+    "lat": 43.090162,
+    "lon": -72.929519
+  },
+  {
+    "id": "VT_1650_0",
+    "state": "VT",
+    "section": "Vermont Green Mountains",
+    "mile_est": 1650.0,
+    "lat": 43.17387,
+    "lon": -72.997857
+  },
+  {
+    "id": "VT_1660_0",
+    "state": "VT",
+    "section": "Vermont Green Mountains",
+    "mile_est": 1660.0,
+    "lat": 43.275967,
+    "lon": -72.938101
+  },
+  {
+    "id": "VT_1670_0",
+    "state": "VT",
+    "section": "Vermont Green Mountains",
+    "mile_est": 1670.0,
+    "lat": 43.369437,
+    "lon": -72.960934
+  },
+  {
+    "id": "VT_1680_0",
+    "state": "VT",
+    "section": "Vermont Green Mountains",
+    "mile_est": 1680.0,
+    "lat": 43.469697,
+    "lon": -72.938683
+  },
+  {
+    "id": "VT_1690_0",
+    "state": "VT",
+    "section": "Vermont Green Mountains",
+    "mile_est": 1690.0,
+    "lat": 43.545931,
+    "lon": -72.855976
+  },
+  {
+    "id": "VT_1700_0",
+    "state": "VT",
+    "section": "Vermont Green Mountains",
+    "mile_est": 1700.0,
+    "lat": 43.644854,
+    "lon": -72.84986
+  },
+  {
+    "id": "VT_1710_0",
+    "state": "VT",
+    "section": "Vermont Green Mountains",
+    "mile_est": 1710.0,
+    "lat": 43.692875,
+    "lon": -72.759509
+  },
+  {
+    "id": "VT_1720_0",
+    "state": "VT",
+    "section": "Vermont Green Mountains",
+    "mile_est": 1720.0,
+    "lat": 43.667072,
+    "lon": -72.635637
+  },
+  {
+    "id": "VT_1730_0",
+    "state": "VT",
+    "section": "Vermont Green Mountains",
+    "mile_est": 1730.0,
+    "lat": 43.681128,
+    "lon": -72.528236
+  },
+  {
+    "id": "NH_1740_0",
+    "state": "NH",
+    "section": "Vermont Green Mountains",
+    "mile_est": 1740.0,
+    "lat": 43.711393,
+    "lon": -72.42114
+  },
+  {
+    "id": "NH_1750_0",
+    "state": "NH",
+    "section": "Vermont Green Mountains",
+    "mile_est": 1750.0,
+    "lat": 43.704528,
+    "lon": -72.30383
+  },
+  {
+    "id": "NH_1760_0",
+    "state": "NH",
+    "section": "New Hampshire: Whites (Moosilauke to Gorham)",
+    "mile_est": 1760.0,
+    "lat": 43.718181,
+    "lon": -72.175134
+  },
+  {
+    "id": "NH_1770_0",
+    "state": "NH",
+    "section": "New Hampshire: Whites (Moosilauke to Gorham)",
+    "mile_est": 1770.0,
+    "lat": 43.792145,
+    "lon": -72.094265
+  },
+  {
+    "id": "NH_1780_0",
+    "state": "NH",
+    "section": "New Hampshire: Whites (Moosilauke to Gorham)",
+    "mile_est": 1780.0,
+    "lat": 43.873696,
+    "lon": -72.027508
+  },
+  {
+    "id": "NH_1790_0",
+    "state": "NH",
+    "section": "New Hampshire: Whites (Moosilauke to Gorham)",
+    "mile_est": 1790.0,
+    "lat": 43.953578,
+    "lon": -71.944499
+  },
+  {
+    "id": "NH_1800_0",
+    "state": "NH",
+    "section": "New Hampshire: Whites (Moosilauke to Gorham)",
+    "mile_est": 1800.0,
+    "lat": 44.017058,
+    "lon": -71.838758
+  },
+  {
+    "id": "NH_1810_0",
+    "state": "NH",
+    "section": "New Hampshire: Whites (Moosilauke to Gorham)",
+    "mile_est": 1810.0,
+    "lat": 44.093589,
+    "lon": -71.75588
+  },
+  {
+    "id": "NH_1820_0",
+    "state": "NH",
+    "section": "New Hampshire: Whites (Moosilauke to Gorham)",
+    "mile_est": 1820.0,
+    "lat": 44.111578,
+    "lon": -71.673902
+  },
+  {
+    "id": "NH_1830_0",
+    "state": "NH",
+    "section": "New Hampshire: Whites (Moosilauke to Gorham)",
+    "mile_est": 1830.0,
+    "lat": 44.194012,
+    "lon": -71.590579
+  },
+  {
+    "id": "NH_1840_0",
+    "state": "NH",
+    "section": "New Hampshire: Whites (Moosilauke to Gorham)",
+    "mile_est": 1840.0,
+    "lat": 44.179172,
+    "lon": -71.479745
+  },
+  {
+    "id": "NH_1850_0",
+    "state": "NH",
+    "section": "New Hampshire: Whites (Moosilauke to Gorham)",
+    "mile_est": 1850.0,
+    "lat": 44.192442,
+    "lon": -71.387707
+  },
+  {
+    "id": "NH_1860_0",
+    "state": "NH",
+    "section": "New Hampshire: Whites (Moosilauke to Gorham)",
+    "mile_est": 1860.0,
+    "lat": 44.280472,
+    "lon": -71.315341
+  },
+  {
+    "id": "NH_1870_0",
+    "state": "NH",
+    "section": "New Hampshire: Whites (Moosilauke to Gorham)",
+    "mile_est": 1870.0,
+    "lat": 44.276893,
+    "lon": -71.253562
+  },
+  {
+    "id": "NH_1880_0",
+    "state": "NH",
+    "section": "New Hampshire: Whites (Moosilauke to Gorham)",
+    "mile_est": 1880.0,
+    "lat": 44.289947,
+    "lon": -71.176177
+  },
+  {
+    "id": "NH_1890_0",
+    "state": "NH",
+    "section": "Mahoosucs (NH/ME border)",
+    "mile_est": 1890.0,
+    "lat": 44.393759,
+    "lon": -71.10736
+  },
+  {
+    "id": "ME_1900_0",
+    "state": "ME",
+    "section": "Mahoosucs (NH/ME border)",
+    "mile_est": 1900.0,
+    "lat": 44.443859,
+    "lon": -71.100535
+  },
+  {
+    "id": "ME_1910_0",
+    "state": "ME",
+    "section": "Mahoosucs (NH/ME border)",
+    "mile_est": 1910.0,
+    "lat": 44.506988,
+    "lon": -70.989208
+  },
+  {
+    "id": "ME_1920_0",
+    "state": "ME",
+    "section": "Mahoosucs (NH/ME border)",
+    "mile_est": 1920.0,
+    "lat": 44.590487,
+    "lon": -70.948244
+  },
+  {
+    "id": "ME_1930_0",
+    "state": "ME",
+    "section": "Maine: Western Mountains & Lakes",
+    "mile_est": 1930.0,
+    "lat": 44.663955,
+    "lon": -70.893733
+  },
+  {
+    "id": "ME_1940_0",
+    "state": "ME",
+    "section": "Maine: Western Mountains & Lakes",
+    "mile_est": 1940.0,
+    "lat": 44.720758,
+    "lon": -70.788562
+  },
+  {
+    "id": "ME_1950_0",
+    "state": "ME",
+    "section": "Maine: Western Mountains & Lakes",
+    "mile_est": 1950.0,
+    "lat": 44.827847,
+    "lon": -70.738376
+  },
+  {
+    "id": "ME_1960_0",
+    "state": "ME",
+    "section": "Maine: Western Mountains & Lakes",
+    "mile_est": 1960.0,
+    "lat": 44.846555,
+    "lon": -70.612004
+  },
+  {
+    "id": "ME_1970_0",
+    "state": "ME",
+    "section": "Maine: Western Mountains & Lakes",
+    "mile_est": 1970.0,
+    "lat": 44.918807,
+    "lon": -70.524191
+  },
+  {
+    "id": "ME_1980_0",
+    "state": "ME",
+    "section": "Maine: Western Mountains & Lakes",
+    "mile_est": 1980.0,
+    "lat": 44.976162,
+    "lon": -70.401365
+  },
+  {
+    "id": "ME_1990_0",
+    "state": "ME",
+    "section": "Maine: Western Mountains & Lakes",
+    "mile_est": 1990.0,
+    "lat": 45.039854,
+    "lon": -70.345246
+  },
+  {
+    "id": "ME_2000_0",
+    "state": "ME",
+    "section": "Maine: Western Mountains & Lakes",
+    "mile_est": 2000.0,
+    "lat": 45.128335,
+    "lon": -70.348937
+  },
+  {
+    "id": "ME_2010_0",
+    "state": "ME",
+    "section": "Maine: Western Mountains & Lakes",
+    "mile_est": 2010.0,
+    "lat": 45.144882,
+    "lon": -70.232699
+  },
+  {
+    "id": "ME_2020_0",
+    "state": "ME",
+    "section": "Maine: Western Mountains & Lakes",
+    "mile_est": 2020.0,
+    "lat": 45.159047,
+    "lon": -70.128859
+  },
+  {
+    "id": "ME_2030_0",
+    "state": "ME",
+    "section": "Maine: Western Mountains & Lakes",
+    "mile_est": 2030.0,
+    "lat": 45.217826,
+    "lon": -70.081352
+  },
+  {
+    "id": "ME_2040_0",
+    "state": "ME",
+    "section": "Maine: Western Mountains & Lakes",
+    "mile_est": 2040.0,
+    "lat": 45.266152,
+    "lon": -69.964778
+  },
+  {
+    "id": "ME_2050_0",
+    "state": "ME",
+    "section": "Maine: Western Mountains & Lakes",
+    "mile_est": 2050.0,
+    "lat": 45.250947,
+    "lon": -69.830382
+  },
+  {
+    "id": "ME_2060_0",
+    "state": "ME",
+    "section": "Maine: Western Mountains & Lakes",
+    "mile_est": 2060.0,
+    "lat": 45.278478,
+    "lon": -69.713208
+  },
+  {
+    "id": "ME_2070_0",
+    "state": "ME",
+    "section": "Maine: Western Mountains & Lakes",
+    "mile_est": 2070.0,
+    "lat": 45.285603,
+    "lon": -69.586993
+  },
+  {
+    "id": "ME_2080_0",
+    "state": "ME",
+    "section": "Maine: Western Mountains & Lakes",
+    "mile_est": 2080.0,
+    "lat": 45.352373,
+    "lon": -69.495398
+  },
+  {
+    "id": "ME_2090_0",
+    "state": "ME",
+    "section": "Hundred-Mile Wilderness",
+    "mile_est": 2090.0,
+    "lat": 45.410831,
+    "lon": -69.438048
+  },
+  {
+    "id": "ME_2100_0",
+    "state": "ME",
+    "section": "Hundred-Mile Wilderness",
+    "mile_est": 2100.0,
+    "lat": 45.437764,
+    "lon": -69.309597
+  },
+  {
+    "id": "ME_2110_0",
+    "state": "ME",
+    "section": "Hundred-Mile Wilderness",
+    "mile_est": 2110.0,
+    "lat": 45.484398,
+    "lon": -69.302866
+  },
+  {
+    "id": "ME_2120_0",
+    "state": "ME",
+    "section": "Hundred-Mile Wilderness",
+    "mile_est": 2120.0,
+    "lat": 45.555319,
+    "lon": -69.250032
+  },
+  {
+    "id": "ME_2130_0",
+    "state": "ME",
+    "section": "Hundred-Mile Wilderness",
+    "mile_est": 2130.0,
+    "lat": 45.616506,
+    "lon": -69.139157
+  },
+  {
+    "id": "ME_2140_0",
+    "state": "ME",
+    "section": "Hundred-Mile Wilderness",
+    "mile_est": 2140.0,
+    "lat": 45.654036,
+    "lon": -69.009764
+  },
+  {
+    "id": "ME_2150_0",
+    "state": "ME",
+    "section": "Hundred-Mile Wilderness",
+    "mile_est": 2150.0,
+    "lat": 45.735006,
+    "lon": -69.038922
+  },
+  {
+    "id": "ME_2160_0",
+    "state": "ME",
+    "section": "Hundred-Mile Wilderness",
+    "mile_est": 2160.0,
+    "lat": 45.760476,
+    "lon": -69.167132
+  },
+  {
+    "id": "ME_2170_0",
+    "state": "ME",
+    "section": "Hundred-Mile Wilderness",
+    "mile_est": 2170.0,
+    "lat": 45.823353,
+    "lon": -69.124178
+  },
+  {
+    "id": "ME_2180_0",
+    "state": "ME",
+    "section": "Hundred-Mile Wilderness",
+    "mile_est": 2180.0,
+    "lat": 45.824281,
+    "lon": -68.985755
+  },
+  {
+    "id": "ME_2190_0",
+    "state": "ME",
+    "section": "Baxter State Park & Katahdin",
+    "mile_est": 2190.0,
+    "lat": 45.883026,
+    "lon": -69.030766
+  }
+]

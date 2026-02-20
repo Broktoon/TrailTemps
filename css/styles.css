@@ -1,0 +1,367 @@
+/* Base layout */
+:root {
+  --maxw: 980px;
+  --mapw: min(720px, 100%);
+  --border: #ddd;
+  --muted: #444;
+  --bghead: #f6f6f6;
+}
+
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  line-height: 1.35;
+  color: #111;
+}
+
+.site-header,
+main,
+.site-footer {
+  max-width: var(--maxw);
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.site-header { margin-bottom: 14px; }
+
+h1 {
+  margin: 0 0 6px 0;
+  font-size: 22px;
+}
+
+.sub {
+  color: var(--muted);
+  margin: 0 0 16px 0;
+}
+
+.sub-brand {
+  font-weight: 600;
+  opacity: 0.75;
+  margin-top: -4px;
+}
+
+.data-attribution {
+  font-size: 0.85rem;
+  color: #555;
+  font-style: italic;
+  margin: 6px 0 12px 0;
+}
+
+.data-attribution a {
+  color: #2a6ebb;
+  text-decoration: none;
+}
+
+.data-attribution a:hover {
+  text-decoration: underline;
+}
+
+input, select, button {
+  padding: 10px;
+  font-size: 14px;
+}
+
+button { cursor: pointer; }
+
+.status {
+  margin-top: 2px;
+  color: #333;
+}
+
+/* Shared map container styling */
+#map,
+#durExtremesMap {
+  width: 100%;
+  max-width: var(--mapw);   /* keeps both maps same width */
+  height: clamp(280px, 35vh, 420px);
+  display: block;
+}
+
+#durExtremesMap {
+  margin-top: 16px;
+}
+
+/* Map */
+.map-wrap {
+  margin-top: 16px;
+  max-width: var(--maxw);
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+#weatherMapWrap {
+  display: none;
+}
+
+/* Content blocks */
+.grid { margin-top: 18px; }
+
+h2 {
+  font-size: 16px;
+  margin: 18px 0 8px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: var(--maxw);
+}
+
+th, td {
+  border: 1px solid var(--border);
+  padding: 8px;
+  font-size: 13px;
+}
+
+th {
+  background: var(--bghead);
+  text-align: left;
+}
+
+/* Force BOTH maps to the same centered width */
+#map,
+#durExtremesMap {
+  max-width: var(--mapw);
+}
+
+/* Keep attribution aligned with the map width */
+.map-wrap,
+#durExtremesWrap {
+  width: 100%;
+}
+
+.note {
+  color: var(--muted);
+  font-size: 12px;
+  max-width: var(--maxw);
+}
+
+/* Footer */
+.site-footer {
+  margin-top: 24px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.small { margin-top: 6px; font-size: 12px; color: var(--muted); }
+
+.section-title-block {
+  width: 100%;
+}
+.section-title-block h2 {
+  margin: 18px 0 4px;
+}
+.section-title-block .data-attribution {
+  margin: 0 0 12px 0;
+}
+
+
+/* ---------------------------
+   Month / Day picker styling
+---------------------------- */
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  align-items: center;
+}
+
+.date-label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.date-label select {
+  padding: 0.35rem 0.45rem;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+/* Ensure dropdowns don’t get too wide */
+#monthSelect {
+  min-width: 7.5rem;
+}
+
+#daySelect {
+  width: 4.5rem;
+}
+
+/* Improve tap targets on mobile */
+@media (max-width: 600px) {
+  .controls {
+    gap: 0.6rem;
+  }
+
+  .date-label {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .date-label select {
+    font-size: 1rem;
+    padding: 0.45rem 0.55rem;
+  }
+}
+
+/* =========================================================
+   Header: Trail selector + title/logo stack
+   (Cleaned: details/summary tap-friendly version only)
+   ========================================================= */
+
+/* Header layout */
+.header-with-trail .header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: nowrap;
+}
+
+.header-with-trail .header-text {
+  min-width: 240px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+}
+
+/* Responsive: allow wrapping on narrow screens */
+@media (max-width: 720px) {
+  .header-with-trail .header-inner {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .header-actions {
+    width: 100%;
+    margin-top: 10px;
+  }
+#map,
+  #durExtremesMap {
+    height: clamp(220px, 32vh, 320px);
+  }
+}
+
+/* Title block with larger logo + stacked brand */
+.title-with-logo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.trail-page-logo {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.title-stack {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title-stack h1 {
+  margin: 0;
+  line-height: 1.1;
+}
+
+.sub-brand {
+  font-weight: 600;
+  font-size: 0.95rem;
+  opacity: 0.75;
+  margin-top: 4px;
+}
+
+/* Tap-friendly Trail selector (details/summary) */
+.trail-selector {
+  position: relative;
+  display: inline-block;
+}
+
+.trail-selector > summary {
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.trail-selector > summary::-webkit-details-marker {
+  display: none;
+}
+
+.trail-selector-btn {
+  padding: 8px 14px;
+  font-weight: 700;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.25);
+  background: rgba(255,255,255,0.9);
+  line-height: 1;
+}
+
+.trail-selector-btn:hover {
+  background: rgba(255,255,255,1);
+}
+
+/* Menu */
+.trail-selector-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  min-width: 260px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.16);
+  background: rgba(255,255,255,0.98);
+  box-shadow: 0 12px 26px rgba(0,0,0,0.16);
+  overflow: hidden;
+  z-index: 9999;
+  padding: 6px 0;
+}
+
+/* Only show menu when details is open */
+.trail-selector:not([open]) .trail-selector-menu {
+  display: none;
+}
+
+.trail-option {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  text-decoration: none;
+  color: inherit;
+  font-weight: 600;
+}
+
+.trail-option:hover {
+  background: rgba(0,0,0,0.06);
+}
+
+.trail-option.current {
+  background: rgba(0,0,0,0.04);
+}
+
+.trail-status {
+  font-weight: 700;
+  opacity: 0.75;
+  white-space: nowrap;
+}
+
+.trail-divider {
+  height: 1px;
+  background: rgba(0,0,0,0.12);
+  margin: 6px 0;
+}

@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>National Scenic Trail Weather Planner — Appalachian Trail</title>
+
+  <!-- Your local CSS -->
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+</head>
+
+<body>
+
+<header class="site-header header-with-trail">
+  <div class="header-inner">
+
+    <div class="header-text">
+      <div class="title-with-logo">
+        <img src="images/ANSTLogo.jpg"
+             alt="Appalachian Trail logo"
+             class="trail-page-logo">
+
+        <div class="title-stack">
+          <h1>Appalachian Trail</h1>
+          <div class="sub-brand">National Scenic Trail Weather Planner</div>
+        </div>
+      </div>
+
+      <p class="sub">
+        Plan your hike duration and view forecast + historical weather along the AT.
+      </p>
+    </div>
+
+    <div class="header-actions">
+      <details class="trail-selector">
+        <summary class="trail-selector-btn">Trail ▾</summary>
+
+        <nav class="trail-selector-menu" aria-label="Trail selector">
+          <a class="trail-option current" href="at.html" aria-current="page">
+            Appalachian Trail <span class="trail-status">(Current)</span>
+          </a>
+
+          <a class="trail-option" href="pct.html">
+            Pacific Crest Trail <span class="trail-status">(Coming Soon)</span>
+          </a>
+
+          <a class="trail-option" href="cdt.html">
+            Continental Divide Trail <span class="trail-status">(Coming Soon)</span>
+          </a>
+
+          <div class="trail-divider"></div>
+
+          <a class="trail-option" href="index.html">
+            Trail Selector Hub
+          </a>
+        </nav>
+      </details>
+    </div>
+
+  </div>
+</header>
+
+  <main>
+
+    <!-- Card 1: Hike Duration / End Date Calculator (independent from weather) -->
+    <section class="controls" aria-label="Hike duration calculator">
+      <h2>Hike duration (end date)</h2>
+      <p class="card-instructions">
+        Choose a direction and a start month/day, then enter your expected miles per day.
+        You will receive an estimated hike duration and end date.
+      </p>
+
+      <div class="control-row">
+        <label class="date-label">
+          Direction:
+          <select id="durDirectionSelect">
+            <option value="NOBO">Northbound (Georgia → Maine)</option>
+            <option value="SOBO">Southbound (Maine → Georgia)</option>
+          </select>
+        </label>
+
+        <label class="date-label">
+          Start Date:
+          <select id="durMonthSelect"></select>
+          <select id="durDaySelect"></select>
+        </label>
+
+        <label class="date-label">
+          Miles per Day:
+          <input id="durMilesPerDay" type="number" inputmode="decimal" min="1" step="0.1" placeholder="e.g., 15" />
+        </label>
+
+        <button id="durBtn" type="button">Estimate End Date</button>
+      </div>
+
+      <div id="durStatus" class="status"></div>
+      <div id="durResult"></div>
+
+      <!-- Temperature Extremes Results + Map (Duration Tool) -->
+      <div id="durExtremesWrap" style="display:none; margin-top:16px;">
+        <h2>Temperature Extremes During Your Hike</h2>
+<div id="durExtremesMap"></div>
+
+<p class="data-attribution map-attribution">
+  Mapping data provided by 
+  <a href="https://www.openstreetmap.org/copyright" 
+     target="_blank" 
+     rel="noopener">
+    OpenStreetMap
+  </a> 
+  under the Open Database License.
+</p>
+
+<div id="durExtremesHot"></div>
+<div id="durExtremesCold" style="margin-top:12px;"></div>
+      </div>
+    </section>
+
+    <!-- Simple clean separation -->
+    <hr class="card-sep" />
+
+    <!-- Card 2: Weather Planner -->
+    <section class="controls" aria-label="Weather planner controls">
+    <div class="section-title-block">
+  <h2>Weather planner</h2>
+<p class="data-attribution">
+  Weather data provided by 
+  <a href="https://open-meteo.com/" target="_blank" rel="noopener">
+    Open-Meteo.com
+  </a> 
+  under the 4.0 International (CC BY 4.0) license.
+</p>
+
+</div>
+
+      <p class="card-instructions">
+        Select a state and a mile point, then choose a planning month/day.
+        You will receive current conditions, a 5-day forecast, and a recent 7-year planning average for that date.
+      </p>
+
+      <div class="control-row">
+        <label class="date-label">
+          State:
+          <select id="stateSelect"></select>
+        </label>
+
+        <label class="date-label">
+          Northbound Mile:
+          <select id="mileSelect"></select>
+        </label>
+
+        <label class="date-label">
+          Planning Date:
+          <select id="monthSelect"></select>
+          <select id="daySelect"></select>
+        </label>
+
+        <button id="goBtn" type="button">Get Weather</button>
+      </div>
+
+<section class="map-wrap" id="weatherMapWrap" style="display:none;">
+  <div id="map" aria-label="Map showing selected Appalachian Trail point"></div>
+
+  <p class="data-attribution map-attribution">
+    Mapping data provided by 
+    <a href="https://www.openstreetmap.org/copyright"
+       target="_blank"
+       rel="noopener">
+      OpenStreetMap
+    </a>
+    under the Open Database License.
+  </p>
+</section>
+
+</section>
+
+    <section class="grid">
+      <div id="planningSummaryBlock"></div>
+      <div id="currentBlock"></div>
+      <div id="forecastBlock"></div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+       <div class="small">
+      Informational only. Mountain weather can change rapidly; always verify conditions and heed local advisories.
+    </div>
+  </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Your local JS -->
+  <script src="js/app.js"></script>
+
+  <!-- Minimal fallback styling (does not require editing styles.css) -->
+  <style>
+    hr.card-sep {
+      border: 0;
+      border-top: 1px solid rgba(0,0,0,0.15);
+      margin: 1.25rem 0;
+    }
+    .card-instructions {
+      margin: 0.25rem 0 0.9rem 0;
+      opacity: 0.9;
+      line-height: 1.35;
+    }
+  </style>
+
+</body>
+</html>
