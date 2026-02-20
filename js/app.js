@@ -11,6 +11,8 @@
    - Caching: localStorage
 */
 
+const trailSlug = window.TRAIL_SLUG || "appalachian-trail";
+
 // Fixed paths:
 const POINTS_URL = "/data/points.json";
 const AT_GEOJSON_URL = "/data/appalachian-trail.geojson";
