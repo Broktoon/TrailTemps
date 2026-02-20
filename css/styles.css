@@ -343,7 +343,8 @@ th {
   padding: 10px 12px;
   text-decoration: none;
   color: inherit;
-  font-weight: 600;
+  font-weight: 500;
+  font-size: 0.8em; /* ~20% smaller */
 }
 
 .trail-option:hover {
