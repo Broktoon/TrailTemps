@@ -366,3 +366,39 @@ th {
   background: rgba(0,0,0,0.12);
   margin: 6px 0;
 }
+.donation-block {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-top: 1px solid #eee;
+  margin-top: 2rem;
+  background: #f9f9f9;
+  flex-wrap: wrap;
+}
+.donation-text {
+  margin: 0;
+  flex: 1 1 60%;
+  color: #333;
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
+.bmc-button {
+  background: #FFDD00;
+  color: #000;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 2px 0 rgba(0,0,0,0.08);
+}
+.bmc-button:hover {
+  filter: brightness(0.98);
+  transform: translateY(-1px);
+}
+@media (max-width: 600px) {
+  .donation-block { flex-direction: column; align-items: stretch; }
+  .bmc-button { width: 100%; text-align: center; }
+  .donation-text { flex-basis: 100%; margin-bottom: 0.5rem; }
+}
