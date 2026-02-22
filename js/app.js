@@ -21,6 +21,11 @@ const AT_GEOJSON_URL = `data/${trailSlug}/trail.geojson`;
 // Build this file locally using tools/build_planning_normals.js (included below in this response).
 const NORMALS_URL    = `data/${trailSlug}/historical_weather.json`;
 
+console.log("trailSlug =", trailSlug);
+console.log("POINTS_URL =", POINTS_URL);
+console.log("AT_GEOJSON_URL =", AT_GEOJSON_URL);
+console.log("NORMALS_URL =", NORMALS_URL);
+
 // Open-Meteo endpoints
 const FORECAST_BASE = "https://api.open-meteo.com/v1/forecast";
 const HIST_BASE     = "https://archive-api.open-meteo.com/v1/archive";
