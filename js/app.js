@@ -12,14 +12,13 @@
 */
 
 const trailSlug = window.TRAIL_SLUG || "appalachian-trail";
+const SITE_BASE = window.SITE_BASE || "";  // set in each HTML page if needed
+const url = (p) => `${SITE_BASE}${p.startsWith("/") ? p : "/" + p}`;
 
 // Fixed paths:
-const POINTS_URL     = `data/${trailSlug}/points.json`;
-const AT_GEOJSON_URL = `data/${trailSlug}/trail.geojson`;
-
-// Option B (precomputed normals) single-file dataset:
-// Build this file locally using tools/build_planning_normals.js (included below in this response).
-const NORMALS_URL    = `data/${trailSlug}/historical_weather.json`;
+const POINTS_URL     = url(`data/${trailSlug}/points.json`);
+const AT_GEOJSON_URL = url(`data/${trailSlug}/trail.geojson`);
+const NORMALS_URL    = url(`data/${trailSlug}/historical_weather.json`);
 
 console.log("trailSlug =", trailSlug);
 console.log("POINTS_URL =", POINTS_URL);
