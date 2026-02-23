@@ -12,13 +12,9 @@
 */
 
 const trailSlug = window.TRAIL_SLUG || "appalachian-trail";
-const SITE_BASE = window.SITE_BASE || "";  // set in each HTML page if needed
-const url = (p) => `${SITE_BASE}${p.startsWith("/") ? p : "/" + p}`;
 
 // Fixed paths (NEW structure: /trails/<slug>/data/...)
-const TRAIL_BASE = url(`/trails/${trailSlug}`);
-const DATA_BASE  = `${TRAIL_BASE}/data`;
-
+const DATA_BASE = "./data";
 const POINTS_URL     = `${DATA_BASE}/points.json`;
 const AT_GEOJSON_URL = `${DATA_BASE}/trail.geojson`;
 const NORMALS_URL    = `${DATA_BASE}/historical_weather.json`;
