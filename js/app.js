@@ -15,10 +15,13 @@ const trailSlug = window.TRAIL_SLUG || "appalachian-trail";
 const SITE_BASE = window.SITE_BASE || "";  // set in each HTML page if needed
 const url = (p) => `${SITE_BASE}${p.startsWith("/") ? p : "/" + p}`;
 
-// Fixed paths:
-const POINTS_URL     = url(`data/${trailSlug}/points.json`);
-const AT_GEOJSON_URL = url(`data/${trailSlug}/trail.geojson`);
-const NORMALS_URL    = url(`data/${trailSlug}/historical_weather.json`);
+// Fixed paths (NEW structure: /trails/<slug>/data/...)
+const TRAIL_BASE = url(`/trails/${trailSlug}`);
+const DATA_BASE  = `${TRAIL_BASE}/data`;
+
+const POINTS_URL     = `${DATA_BASE}/points.json`;
+const AT_GEOJSON_URL = `${DATA_BASE}/trail.geojson`;
+const NORMALS_URL    = `${DATA_BASE}/historical_weather.json`;
 
 console.log("trailSlug =", trailSlug);
 console.log("POINTS_URL =", POINTS_URL);
@@ -1186,7 +1189,7 @@ async function main() {
       }
     } catch (e) {
       console.warn(e);
-      setDurStatus("Precomputed planning normals not found. Add data/historical_weather.json to enable temperature extremes.");
+     setDurStatus(`Precomputed planning normals not found. Add /trails/${trailSlug}/data/historical_weather.json to enable temperature extremes.`);
     }
 
     setTimeout(() => {
