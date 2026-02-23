@@ -223,7 +223,7 @@ th {
 .header-with-trail .header-inner {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 24px;
   flex-wrap: nowrap;
 }
@@ -234,7 +234,9 @@ th {
 
 .header-actions {
   display: flex;
-  align-items: center;
+   align-items: flex-start; /* changed from center */
+  align-self: flex-start;  /* ensure it sits at the top */
+  padding-top: 2px;        /* tiny nudge to visually match the h1 baseline */
 }
 
 /* Responsive: allow wrapping on narrow screens */
@@ -310,6 +312,11 @@ th {
   border: 1px solid rgba(0,0,0,0.25);
   background: rgba(255,255,255,0.9);
   line-height: 1;
+
+  display: inline-flex;   /* new */
+  align-items: center;    /* new */
+  white-space: nowrap;    /* new: forces Trail + arrow on one line */
+  gap: 6px;               /* optional: nicer spacing if you later split arrow */
 }
 
 .trail-selector-btn:hover {
