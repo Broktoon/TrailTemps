@@ -490,10 +490,13 @@ async function computeAndRenderDurationExtremes({ direction, startDate, milesPer
     if (targetMile > trailMaxMiles) targetMile = trailMaxMiles;
 
     const point = getNearestPointByMile(targetMile);
-    if (!point) continue;
+if (!point) continue;
 
-    const normals = normalsByPointId.get(point.id);
-    if (!normals || !Array.isArray(normals.hi) || !Array.isArray(normals.lo)) continue;
+const normals =
+  normalsByPointId.get(point.id) ||
+  (point.legacy_id ? normalsByPointId.get(point.legacy_id) : null);
+
+if (!normals || !Array.isArray(normals.hi) || !Array.isArray(normals.lo)) continue;
 
     const monthDay = toISODate(date).slice(5); // MM-DD
     const idx = dayIndexInNonLeapYearFromMonthDay(monthDay);
