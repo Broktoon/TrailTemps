@@ -125,8 +125,32 @@ function fmtMile(m) {
   return (Math.round(Number(m) * 10) / 10).toFixed(1);
 }
 
+/**
+ * Expansion-safe mile accessor.
+ * Supports both legacy {mile_est} and new {mile}.
+ * Returns NaN if missing/invalid.
+ */
+function getPointMile(p) {
+  if (!p) return NaN;
+
+  // Prefer new field
+  if (typeof p.mile === "number" && Number.isFinite(p.mile)) return p.mile;
+
+  // Fall back to legacy field
+  if (typeof p.mile_est === "number" && Number.isFinite(p.mile_est)) return p.mile_est;
+
+  // Try coercion as last resort
+  const a = Number(p.mile);
+  if (Number.isFinite(a)) return a;
+
+  const b = Number(p.mile_est);
+  if (Number.isFinite(b)) return b;
+
+  return NaN;
+}
+
 function pointLabel(p) {
-  return `${p.state} – Mile ~${fmtMile(p.mile_est)}`;
+  return `${p.state} – Mile ~${fmtMile(getPointMile(p))}`;
 }
 
 function setHtmlIfExists(id, html) {
@@ -341,7 +365,7 @@ function getNearestPointByMile(targetMile) {
 
   while (lo <= hi) {
     const mid = (lo + hi) >> 1;
-    const m = arr[mid].mile_est;
+    const m = getPointMile(arr[mid]);
     if (m === targetMile) return arr[mid];
     if (m < targetMile) lo = mid + 1;
     else hi = mid - 1;
@@ -351,7 +375,8 @@ function getNearestPointByMile(targetMile) {
   const b = arr[Math.max(0, Math.min(arr.length - 1, lo))];
   if (!a) return b || null;
   if (!b) return a || null;
-  return Math.abs(a.mile_est - targetMile) <= Math.abs(b.mile_est - targetMile) ? a : b;
+
+  return Math.abs(getPointMile(a) - targetMile) <= Math.abs(getPointMile(b) - targetMile) ? a : b;
 }
 
 function renderDurExtremesBlocks(hottest, coldest) {
@@ -435,7 +460,6 @@ function renderDurExtremesMap(hottest, coldest) {
   const bounds = L.latLngBounds([hotLatLng, coldLatLng]);
   durMap.fitBounds(bounds, { padding: [30, 30] });
   setTimeout(invalidate, 0);
-
 }
 
 async function computeAndRenderDurationExtremes({ direction, startDate, milesPerDay, durationDays }) {
@@ -597,7 +621,7 @@ function buildPointsByState() {
     pointsByState.get(st).push(p);
   }
   for (const [st, arr] of pointsByState.entries()) {
-    arr.sort((a, b) => a.mile_est - b.mile_est);
+    arr.sort((a, b) => getPointMile(a) - getPointMile(b));
   }
 }
 
@@ -638,7 +662,7 @@ function renderMileOptionsForState(state) {
   for (const p of arr) {
     const opt = document.createElement("option");
     opt.value = p.id;
-    opt.textContent = fmtMile(p.mile_est);
+    opt.textContent = fmtMile(getPointMile(p));
     mileSel.appendChild(opt);
   }
 
@@ -831,23 +855,46 @@ async function loadPoints() {
   const data = await resp.json();
 
   allPoints = data
-    .map(p => ({
-      ...p,
-      state: (p.state || "").toString().toUpperCase(),
-      mile_est: Number(p.mile_est),
-      lat: Number(p.lat),
-      lon: Number(p.lon),
-      id: (p.id != null ? String(p.id) : `${(p.state || "").toString().toUpperCase()}_${Number(p.mile_est)}`)
-    }))
-    .filter(p => p && p.state && Number.isFinite(p.mile_est) && Number.isFinite(p.lat) && Number.isFinite(p.lon));
+    .map(p => {
+      const state = (p.state || "").toString().toUpperCase();
 
-  trailMaxMiles = allPoints.reduce((mx, p) => Math.max(mx, p.mile_est), -Infinity);
-  trailMinMiles = allPoints.reduce((mn, p) => Math.min(mn, p.mile_est),  Infinity);
+      // Accept either {mile} or {mile_est}. Prefer {mile}.
+      const mileVal = (p.mile != null && p.mile !== "")
+        ? Number(p.mile)
+        : Number(p.mile_est);
+
+      const lat = Number(p.lat);
+      const lon = Number(p.lon);
+
+      // Preserve existing id if present; otherwise generate something stable-ish.
+      // (We are NOT changing id strategy here.)
+      const id = (p.id != null ? String(p.id) : `${state}_${mileVal}`);
+
+      return {
+        ...p,
+        state,
+        mile: mileVal,         // normalized numeric
+        mile_est: mileVal,     // keep legacy numeric mirror for compatibility
+        lat,
+        lon,
+        id
+      };
+    })
+    .filter(p =>
+      p &&
+      p.state &&
+      Number.isFinite(getPointMile(p)) &&
+      Number.isFinite(p.lat) &&
+      Number.isFinite(p.lon)
+    );
+
+  trailMaxMiles = allPoints.reduce((mx, p) => Math.max(mx, getPointMile(p)), -Infinity);
+  trailMinMiles = allPoints.reduce((mn, p) => Math.min(mn, getPointMile(p)),  Infinity);
   trailTotalMiles = (Number.isFinite(trailMaxMiles) && Number.isFinite(trailMinMiles))
     ? (trailMaxMiles - trailMinMiles)
     : null;
 
-  allPointsSortedByMile = [...allPoints].sort((a, b) => a.mile_est - b.mile_est);
+  allPointsSortedByMile = [...allPoints].sort((a, b) => getPointMile(a) - getPointMile(b));
 
   buildPointsByState();
 }
@@ -1093,9 +1140,8 @@ async function runWeather() {
     return;
   }
 
-ensureWeatherMapVisibleAndInitialized();
-updateMap(point);
-
+  ensureWeatherMapVisibleAndInitialized();
+  updateMap(point);
 
   el("planningSummaryBlock").innerHTML = "";
   el("currentBlock").innerHTML = "";
@@ -1137,7 +1183,7 @@ function initWeatherUI() {
     renderMileOptionsForState(st);
 
     const p = getSelectedPointFromStateMile();
-   if (p && map) updateMap(p);
+    if (p && map) updateMap(p);
   });
 
   el("mileSelect")?.addEventListener("change", () => {
@@ -1185,7 +1231,7 @@ async function main() {
       }
     } catch (e) {
       console.warn(e);
-     setDurStatus(`Precomputed planning normals not found. Add /trails/${trailSlug}/data/historical_weather.json to enable temperature extremes.`);
+      setDurStatus(`Precomputed planning normals not found. Add /trails/${trailSlug}/data/historical_weather.json to enable temperature extremes.`);
     }
 
     setTimeout(() => {
