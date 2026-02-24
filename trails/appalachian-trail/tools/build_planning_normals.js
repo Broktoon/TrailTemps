@@ -14,7 +14,23 @@
  *  - This script makes network calls; run it locally (Node 18+ recommended).
  *  - It is rate-limit aware (429) and retries with exponential backoff.
  */
-
+/**
+ * DEPRECATED (2026-02-23)
+ * This script expects legacy points schema with { mile_est } and legacy point IDs.
+ *
+ * TrailTemps is now standardized on:
+ *   - points.json: uses { mile } only (mile_est removed)
+ *   - point IDs: at-main-mi<mile_thousandths>
+ *
+ * Use instead:
+ *   scripts/generate-missing-normals-at.js
+ *   scripts/normalize-points-mile-only.js
+ *
+ * If you must revive this script, update it to read { mile } and to use new IDs.
+ */
+throw new Error(
+  "DEPRECATED: This tool expects legacy {mile_est}. Use scripts/generate-missing-normals-at.js instead."
+);
 const fs = require("fs");
 const path = require("path");
 
