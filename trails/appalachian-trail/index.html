@@ -71,7 +71,7 @@
 
     <!-- Card 1: Hike Duration / End Date Calculator (independent from weather) -->
     <section class="controls" aria-label="Hike duration calculator">
-      <h2>Hike duration (end date)</h2>
+      <h2>Hike Duration (End Date) and Expected Weather Extremes</h2>
       <p class="card-instructions">
         Instructions: Choose a direction and a start month/day, then enter your expected miles per day.
         You will receive an estimated hike duration and end date, along with a map showing where the expected highest and lowest temperatures should be expected along the trail.
@@ -97,7 +97,7 @@
           <input id="durMilesPerDay" type="number" inputmode="decimal" min="1" step="1" placeholder="e.g., 15" />
         </label>
 
-        <button id="durBtn" type="button">Estimate End Date Showing Weather Extremes</button>
+        <button id="durBtn" type="button">Estimate End Date and Weather Extremes</button>
       </div>
 
       <div id="durStatus" class="status"></div>
@@ -187,6 +187,53 @@
       <div id="forecastBlock"></div>
     </section>
 
+    <!-- Simple clean separation -->
+    <hr class="card-sep" />
+
+    <!-- Weather Data Notes + Resources -->
+<section class="weather-data-notes" aria-labelledby="weather-data-notes-title">
+  <h2 id="weather-data-notes-title">Weather Data Notes</h2>
+
+  <div class="weather-data-notes__body">
+
+    <!-- Subsection: Notes on Data -->
+    <section class="weather-data-notes__subsection" aria-labelledby="notes-on-data-title">
+      <h3 id="notes-on-data-title">Notes on Data</h3>
+
+      <div class="weather-data-notes__content" id="notes-on-data-content">
+        <p>
+          This site uses average daily maximum and minimum temperature data from the last seven years.
+          This approach provides stability in planning values while also reflecting more recent shifts
+          in climate conditions.
+        </p>
+      </div>
+    </section>
+
+    <!-- Subsection: Additional Resources -->
+    <section class="weather-data-notes__subsection" aria-labelledby="additional-resources-title">
+      <h3 id="additional-resources-title">Additional Resources</h3>
+
+      <div class="weather-data-notes__content" id="additional-resources-content">
+        <ul class="weather-data-notes__links">
+          <li>
+            <a href="https://www.atweather.org/" target="_blank" rel="noopener noreferrer">
+              <strong>ATWeather</strong>
+            </a>
+            – Obtain current weather forecasts for individual camping and shelter sites.
+          </li>
+          <li>
+            <a href="https://www.mountain-forecast.com/" target="_blank" rel="noopener noreferrer">
+              <strong>Mountain-Forecast</strong>
+            </a>
+            – Obtain precise weather forecasts at high elevation and other highly variable weather areas.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+  </div>
+</section>
+
   </main>
 
   <footer class="site-footer">
@@ -204,20 +251,6 @@
   window.TRAIL_SLUG = "appalachian-trail";
 </script>
 <script defer src="js/app.js"></script>
-
-  <!-- Minimal fallback styling (does not require editing styles.css) -->
-  <style>
-    hr.card-sep {
-      border: 0;
-      border-top: 1px solid rgba(0,0,0,0.15);
-      margin: 1.25rem 0;
-    }
-    .card-instructions {
-      margin: 0.25rem 0 0.9rem 0;
-      opacity: 0.9;
-      line-height: 1.35;
-    }
-  </style>
 
 <!-- Donation block -->
 <div class="donation-block">

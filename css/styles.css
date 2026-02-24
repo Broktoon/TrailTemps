@@ -101,9 +101,25 @@ button { cursor: pointer; }
 /* Content blocks */
 .grid { margin-top: 18px; }
 
+/* Headings: main sections (h2) vs subsections (h3) */
 h2 {
-  font-size: 16px;
-  margin: 18px 0 8px;
+  font-size: 18px;
+  margin: 22px 0 10px;
+}
+
+h3 {
+  font-size: 14px;
+  margin: 14px 0 6px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+/* Section divider */
+.card-sep {
+  height: 0;
+  border: none;
+  border-top: 2px solid #999;
+  margin: 28px 0;
 }
 
 table {
@@ -139,6 +155,22 @@ th {
   color: var(--muted);
   font-size: 12px;
   max-width: var(--maxw);
+}
+.weather-data-notes__links {
+  margin: 6px 0 0;
+  padding-left: 18px;
+}
+
+.weather-data-notes__links li {
+  margin: 6px 0;
+}
+
+.weather-data-notes__links a {
+  text-decoration: none;
+}
+
+.weather-data-notes__links a:hover {
+  text-decoration: underline;
 }
 
 /* Footer */
@@ -287,6 +319,20 @@ th {
   font-size: 0.95rem;
   opacity: 0.75;
   margin-top: 4px;
+}
+
+/* Section divider */
+hr.card-sep {
+  border: 0;
+  border-top: 2px solid rgba(0,0,0,0.35);
+  margin: 1.5rem 0;
+}
+
+/* Card instructions text */
+.card-instructions {
+  margin: 0.25rem 0 0.9rem 0;
+  opacity: 0.9;
+  line-height: 1.35;
 }
 
 /* Tap-friendly Trail selector (details/summary) */
