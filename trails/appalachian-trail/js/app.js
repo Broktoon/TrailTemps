@@ -48,6 +48,8 @@ const FORECAST_TTL_MS = 30 * 60 * 1000;            // 30 minutes
 const HIST_TTL_MS     = 24 * 60 * 60 * 1000;       // 24 hours
 const AT_TTL_MS       = 30 * 24 * 60 * 60 * 1000;  // 30 days
 const NORMALS_TTL_MS  = 30 * 24 * 60 * 60 * 1000;  // 30 days
+// Bump this whenever you rebuild or change historical_weather.json format/content
+const NORMALS_CACHE_VERSION = "v2";
 
 let allPoints = [];
 let allPointsSortedByMile = [];
@@ -885,7 +887,7 @@ async function loadPoints() {
 }
 
 async function loadPrecomputedNormals() {
-  const CACHE_KEY = "planning_normals_cached_v1";
+const CACHE_KEY = `planning_normals_${trailSlug}_${NORMALS_CACHE_VERSION}`;
   const cached = cacheGet(CACHE_KEY, NORMALS_TTL_MS);
 
   let payload = cached;
