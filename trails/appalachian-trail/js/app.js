@@ -126,27 +126,13 @@ function fmtMile(m) {
 }
 
 /**
- * Expansion-safe mile accessor.
- * Supports both legacy {mile_est} and new {mile}.
+ * Canonical mile accessor (mile-only).
  * Returns NaN if missing/invalid.
  */
 function getPointMile(p) {
   if (!p) return NaN;
-
-  // Prefer new field
-  if (typeof p.mile === "number" && Number.isFinite(p.mile)) return p.mile;
-
-  // Fall back to legacy field
-  if (typeof p.mile_est === "number" && Number.isFinite(p.mile_est)) return p.mile_est;
-
-  // Try coercion as last resort
-  const a = Number(p.mile);
-  if (Number.isFinite(a)) return a;
-
-  const b = Number(p.mile_est);
-  if (Number.isFinite(b)) return b;
-
-  return NaN;
+  const m = Number(p.mile);
+  return Number.isFinite(m) ? m : NaN;
 }
 
 function pointLabel(p) {
@@ -861,10 +847,7 @@ async function loadPoints() {
     .map(p => {
       const state = (p.state || "").toString().toUpperCase();
 
-      // Accept either {mile} or {mile_est}. Prefer {mile}.
-      const mileVal = (p.mile != null && p.mile !== "")
-        ? Number(p.mile)
-        : Number(p.mile_est);
+   const mileVal = Number(p.mile);
 
       const lat = Number(p.lat);
       const lon = Number(p.lon);
@@ -877,7 +860,6 @@ async function loadPoints() {
         ...p,
         state,
         mile: mileVal,         // normalized numeric
-        mile_est: mileVal,     // keep legacy numeric mirror for compatibility
         lat,
         lon,
         id
