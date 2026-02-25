@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>National Scenic Trail Weather Planner — Pacific Crest Trail — Coming Soon</title>
+  <title>National Scenic Trail Weather Planner — Florida Trail — Coming Soon</title>
   <link rel="stylesheet" href="/css/styles.css" />
   <style>
     .coming-wrap { max-width: 900px; margin: 0 auto; padding: 24px 16px 40px; }
@@ -13,29 +13,30 @@
   </style>
 </head>
 
-<body data-trail="pacific-crest-trail">
-<script>window.SITE_BASE = "";</script>
 <script>
-  window.TRAIL_SLUG = "pacific-crest-trail";
+  window.TRAIL_SLUG = "florida-trail";
 </script>
-<script defer src="js/app.js"></script>
+<script defer src="/js/app.js"></script>
+
+<body data-trail="florida-trail">
+
 <header class="site-header header-with-trail">
   <div class="header-inner">
 
     <div class="header-text">
       <div class="title-with-logo">
-        <img src="/images/Pct-logo.svg.png"
-             alt="Pacific Crest Trail logo"
+        <img src="/images/Florida_Trail.png"
+             alt="Florida Trail logo"
              class="trail-page-logo">
 
         <div class="title-stack">
-          <h1>Pacific Crest Trail</h1>
+          <h1>Florida Trail</h1>
           <div class="sub-brand"><em>TrailTemps</em> - National Scenic Trail Weather Planner</div>
         </div>
       </div>
 
       <p class="sub">
-        Coming soon — this page is reserved for the PCT version of the planner.
+        Coming soon — this page is reserved for the FT version of the planner.
       </p>
     </div>
 
@@ -49,15 +50,15 @@
           </a>
 
           <a class="trail-option current" href="/trails/florida-trail/" aria-current="page">
-            Florida Trail <span class="trail-status">(Coming Soon)</span>
+            Florida Trail <span class="trail-status">(Current — Coming Soon)</span>
           </a>
 
-          <a class="trail-option" href="/trails/continental-divide-trail/">
+          <a class="trail-option current" href="/trails/continental-divide-trail/" aria-current="page">
             Continental Divide Trail <span class="trail-status">(Coming Soon)</span>
           </a>
 
-          <a class="trail-option current" href="/trails/pacific-crest-trail/" aria-current="page">
-            Pacific Crest Trail <span class="trail-status">(Current — Coming Soon)</span>
+          <a class="trail-option" href="/trails/pacific-crest-trail/">
+            Pacific Crest Trail <span class="trail-status">(Coming Soon)</span>
           </a>
 
           <div class="trail-divider"></div>
@@ -74,12 +75,17 @@
 
   <main class="coming-wrap">
     <div class="coming-card center">
-      <img class="logo" src="/images/Pct-logo.svg.png" alt="Pacific Crest Trail logo">
+      <img class="logo" src="/images/Florida_Trail.png" alt="Florida Trail logo">
       <h2>Coming Soon</h2>
-      <p>This page is reserved for the PCT version of the planner.</p>
+      <p>This page is reserved for the FT version of the planner.</p>
       <p><a href="index.html">← Back to trail selector</a></p>
     </div>
   </main>
+
+  <script>
+  window.TRAIL_SLUG = "florida-trail";
+</script>
+<script defer src="js/app.js"></script>
 
 <!-- Donation block -->
 <div class="donation-block">
@@ -93,11 +99,5 @@
   <footer class="site-footer">
     <div class="small">Informational only.</div>
   </footer>
-  
-<script>
-  window.TRAIL_SLUG = "pacific-crest-trail";
-</script>
-<script defer src="js/app.js"></script>
-
 </body>
 </html>
