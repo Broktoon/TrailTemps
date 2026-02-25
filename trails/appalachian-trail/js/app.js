@@ -11,17 +11,39 @@
    - Caching: localStorage
 */
 
-const trailSlug = window.TRAIL_SLUG || "appalachian-trail";
+function getTrailMeta() {
+  const slug =
+    window.TRAIL_SLUG ||
+    document.body?.dataset?.trail ||
+    "appalachian-trail";
 
-// Fixed paths (NEW structure: /trails/<slug>/data/...)
-const DATA_BASE = "./data";
-const POINTS_URL     = `${DATA_BASE}/points.json`;
-const AT_GEOJSON_URL = `${DATA_BASE}/trail.geojson`;
-const NORMALS_URL    = `${DATA_BASE}/historical_weather.json`;
+  // Resolve relative to the HTML page URL (not the JS file)
+  const pageDir = new URL(".", window.location.href);   // .../trails/<slug>/
+  const dataDir = new URL("./data/", pageDir);          // .../trails/<slug>/data/
 
-console.log("trailSlug =", trailSlug);
+  return {
+    slug,
+    pageDir: pageDir.href,
+    dataDir: dataDir.href,
+    pointsUrl: new URL("points.json", dataDir).href,
+    trailGeojsonUrl: new URL("trail.geojson", dataDir).href,
+    normalsUrl: new URL("historical_weather.json", dataDir).href,
+    defaultMapCenter: [38.5, -81.0],
+    defaultZoom: 4,
+  };
+}
+
+const META = getTrailMeta();
+
+// Backwards-compatible aliases (so you don't have to refactor all at once)
+const trailSlug = META.slug;
+const POINTS_URL = META.pointsUrl;
+const TRAIL_GEOJSON_URL = META.trailGeojsonUrl;
+const NORMALS_URL = META.normalsUrl;
+
+console.log("META.slug =", META.slug);
 console.log("POINTS_URL =", POINTS_URL);
-console.log("AT_GEOJSON_URL =", AT_GEOJSON_URL);
+console.log("TRAIL_GEOJSON_URL =", TRAIL_GEOJSON_URL);
 console.log("NORMALS_URL =", NORMALS_URL);
 
 // Open-Meteo endpoints
@@ -79,6 +101,28 @@ const INITIAL_ZOOM = 4;
 const SELECT_ZOOM  = 7;
 
 const el = (id) => document.getElementById(id);
+function boundsFromPoints(points) {
+  if (!points || points.length === 0) return null;
+  if (typeof L === "undefined") return null;
+
+  let minLat = Infinity, maxLat = -Infinity;
+  let minLon = Infinity, maxLon = -Infinity;
+
+  for (const p of points) {
+    const lat = Number(p.lat);
+    const lon = Number(p.lon);
+    if (!Number.isFinite(lat) || !Number.isFinite(lon)) continue;
+
+    if (lat < minLat) minLat = lat;
+    if (lat > maxLat) maxLat = lat;
+    if (lon < minLon) minLon = lon;
+    if (lon > maxLon) maxLon = lon;
+  }
+
+  if (!Number.isFinite(minLat) || !Number.isFinite(minLon)) return null;
+
+  return L.latLngBounds([minLat, minLon], [maxLat, maxLon]);
+}
 
 /* ---------------------------
    Shared utilities
@@ -410,7 +454,7 @@ function renderDurExtremesMap(hottest, coldest) {
   };
 
   if (!durMap) {
-    durMap = L.map("durExtremesMap", { zoomControl: true }).setView([38.5, -81.0], INITIAL_ZOOM);
+ durMap = L.map("durExtremesMap", { zoomControl: true }).setView([39.5, -98.35], 4);
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution: "&copy; OpenStreetMap contributors"
     }).addTo(durMap);
@@ -703,7 +747,8 @@ function initMap() {
     return;
   }
 
-  map = L.map("map", { zoomControl: true }).setView([38.5, -81.0], INITIAL_ZOOM);
+// Placeholder view; will be fit to trail bounds after points.json loads
+map = L.map("map", { zoomControl: true }).setView(META.defaultMapCenter, META.defaultZoom);
 
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "&copy; OpenStreetMap contributors"
@@ -738,14 +783,14 @@ function updateMap(point) {
 async function loadATPolylineLocal() {
   if (!map) return;
 
-  const CACHE_KEY = "at_geojson_cached_v1";
+  const CACHE_KEY = `trail_geojson_${trailSlug}_v1`;
   const cached = cacheGet(CACHE_KEY, AT_TTL_MS);
 
   try {
     let geojson = cached;
     if (!geojson) {
-      const resp = await fetch(AT_GEOJSON_URL, { cache: "no-cache" });
-      if (!resp.ok) throw new Error(`Failed to load ${AT_GEOJSON_URL} (${resp.status})`);
+      const resp = await fetch(TRAIL_GEOJSON_URL, { cache: "no-cache" });
+      if (!resp.ok) throw new Error(`Failed to load ${TRAIL_GEOJSON_URL} (${resp.status})`);
       geojson = await resp.json();
       cacheSet(CACHE_KEY, geojson);
     }
@@ -790,14 +835,14 @@ async function loadATPolylineLocal() {
 async function loadATPolylineLocalForDurMap() {
   if (!durMap) return;
 
-  const CACHE_KEY = "at_geojson_cached_v1";
+  const CACHE_KEY = `trail_geojson_${trailSlug}_v1`;
   const cached = cacheGet(CACHE_KEY, AT_TTL_MS);
 
   try {
     let geojson = cached;
     if (!geojson) {
-      const resp = await fetch(AT_GEOJSON_URL, { cache: "no-cache" });
-      if (!resp.ok) throw new Error(`Failed to load ${AT_GEOJSON_URL} (${resp.status})`);
+      const resp = await fetch(TRAIL_GEOJSON_URL, { cache: "no-cache" });
+      if (!resp.ok) throw new Error(`Failed to load ${TRAIL_GEOJSON_URL} (${resp.status})`);
       geojson = await resp.json();
       cacheSet(CACHE_KEY, geojson);
     }
@@ -1199,6 +1244,11 @@ async function main() {
 
   try {
     await loadPoints();
+    // Auto-fit the Weather map to this trail using points.json (runs once at startup)
+if (map) {
+  const b = boundsFromPoints(allPoints);
+  if (b) map.fitBounds(b, { padding: [20, 20] });
+}
 
     renderStateOptions();
 
