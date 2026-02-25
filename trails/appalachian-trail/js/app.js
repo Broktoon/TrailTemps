@@ -87,14 +87,14 @@ let normalsMeta = null;
 // Leaflet globals (Weather map)
 let map;
 let mapMarker;
-let atLayer;
-let atHaloLayer;
+let trailLayer;
+let trailHaloLayer;
 
 // Leaflet globals (Duration extremes map)
 let durMap = null;
 let durMapLayerGroup = null;
-let durAtLayer = null;
-let durAtHaloLayer = null;
+let durTrailLayer = null;
+let durTrailHaloLayer = null;
 
 // Map zoom requirements
 const INITIAL_ZOOM = 4;
@@ -461,7 +461,7 @@ function renderDurExtremesMap(hottest, coldest) {
     durMapLayerGroup = L.layerGroup().addTo(durMap);
 
     // Ensure the Appalachian Trail overlay also appears on the extremes map
-    loadATPolylineLocalForDurMap().catch(() => {});
+    loadTrailOverlayForDurMap().catch(() => {});
   }
 
   durMapLayerGroup.clearLayers();
@@ -735,7 +735,7 @@ function ensureWeatherMapVisibleAndInitialized() {
   // Initialize Leaflet only once, and only after the container is visible
   if (!map) {
     initMap();
-    loadATPolylineLocal(); // keep AT overlay behavior, but only once map exists
+    loadTrailOverlay(); // keep AT overlay behavior, but only once map exists
   }
 
   refreshMapSize();
@@ -780,7 +780,7 @@ function updateMap(point) {
 /* ---------------------------
    Local AT overlay
 ---------------------------- */
-async function loadATPolylineLocal() {
+async function loadTrailOverlay() {
   if (!map) return;
 
   const CACHE_KEY = `trail_geojson_${trailSlug}_v1`;
@@ -795,10 +795,10 @@ async function loadATPolylineLocal() {
       cacheSet(CACHE_KEY, geojson);
     }
 
-    if (atLayer) { try { map.removeLayer(atLayer); } catch {} atLayer = null; }
-    if (atHaloLayer) { try { map.removeLayer(atHaloLayer); } catch {} atHaloLayer = null; }
+    if (trailLayer) { try { map.removeLayer(trailLayer); } catch {} trailLayer = null; }
+    if (trailHaloLayer) { try { map.removeLayer(trailHaloLayer); } catch {} trailHaloLayer = null; }
 
-    atHaloLayer = L.geoJSON(geojson, {
+    trailHaloLayer = L.geoJSON(geojson, {
       style: () => ({
         color: "#ffffff",
         weight: 8,
@@ -809,7 +809,7 @@ async function loadATPolylineLocal() {
       interactive: false
     }).addTo(map);
 
-    atLayer = L.geoJSON(geojson, {
+    trailLayer = L.geoJSON(geojson, {
       style: () => ({
         color: "#cc0000",
         weight: 4.5,
@@ -820,8 +820,8 @@ async function loadATPolylineLocal() {
       interactive: false
     }).addTo(map);
 
-    if (atHaloLayer.bringToBack) atHaloLayer.bringToBack();
-    if (atLayer.bringToBack) atLayer.bringToBack();
+    if (trailHaloLayer.bringToBack) trailHaloLayer.bringToBack();
+    if (trailLayer.bringToBack) trailLayer.bringToBack();
     if (mapMarker && mapMarker.bringToFront) mapMarker.bringToFront();
 
   } catch (e) {
@@ -832,7 +832,7 @@ async function loadATPolylineLocal() {
 }
 
 // Same AT overlay for the Temperature Extremes map
-async function loadATPolylineLocalForDurMap() {
+async function loadTrailOverlayForDurMap() {
   if (!durMap) return;
 
   const CACHE_KEY = `trail_geojson_${trailSlug}_v1`;
@@ -847,10 +847,10 @@ async function loadATPolylineLocalForDurMap() {
       cacheSet(CACHE_KEY, geojson);
     }
 
-    if (durAtLayer) { try { durMap.removeLayer(durAtLayer); } catch {} durAtLayer = null; }
-    if (durAtHaloLayer) { try { durMap.removeLayer(durAtHaloLayer); } catch {} durAtHaloLayer = null; }
+    if (durTrailLayer) { try { durMap.removeLayer(durTrailLayer); } catch {} durTrailLayer = null; }
+    if (durTrailHaloLayer) { try { durMap.removeLayer(durTrailHaloLayer); } catch {} durTrailHaloLayer = null; }
 
-    durAtHaloLayer = L.geoJSON(geojson, {
+    durTrailHaloLayer = L.geoJSON(geojson, {
       style: () => ({
         color: "#ffffff",
         weight: 8,
@@ -861,7 +861,7 @@ async function loadATPolylineLocalForDurMap() {
       interactive: false
     }).addTo(durMap);
 
-    durAtLayer = L.geoJSON(geojson, {
+    durTrailLayer = L.geoJSON(geojson, {
       style: () => ({
         color: "#cc0000",
         weight: 4.5,
@@ -872,8 +872,8 @@ async function loadATPolylineLocalForDurMap() {
       interactive: false
     }).addTo(durMap);
 
-    if (durAtHaloLayer.bringToBack) durAtHaloLayer.bringToBack();
-    if (durAtLayer.bringToBack) durAtLayer.bringToBack();
+    if (durTrailHaloLayer.bringToBack) durTrailHaloLayer.bringToBack();
+    if (durTrailLayer.bringToBack) durTrailLayer.bringToBack();
 
   } catch (e) {
     console.warn("AT overlay (extremes map) failed:", e);
@@ -1240,7 +1240,7 @@ async function main() {
   initMap();
 
   // Load trail overlay (non-blocking)
-  loadATPolylineLocal();
+  loadTrailOverlay();
 
   try {
     await loadPoints();
