@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Florida Trail Map Check</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <style>
+    html, body, #map { height:100%; margin:0; }
+  </style>
+</head>
+<body>
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+const map = L.map('map').setView([28.5,-82],7);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 18
+}).addTo(map);
+
+// Backbone
+fetch('data/trail_backbone.geojson')
+  .then(r=>r.json())
+  .then(g=>{
+    L.geoJSON(g,{color:'red',weight:3}).addTo(map);
+  });
+
+// Points
+fetch('data/points_map.geojson')
+  .then(r=>r.json())
+  .then(g=>{
+    L.geoJSON(g,{
+      pointToLayer:(f,latlng)=>{
+        const c = f.properties.corridor;
+        const color = c==='Main'?'blue':(c==='Eastern'?'green':'orange');
+        return L.circleMarker(latlng,{radius:3,color});
+      }
+    }).addTo(map);
+  });
+</script>
+</body>
+</html>

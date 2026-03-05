@@ -1,0 +1,129 @@
+{
+  "meta": {
+    "trail_slug": "florida-trail",
+    "generated_on": "2026-02-27",
+    "note": "Derived from ArcGIS corridor join onto OSM-mile-axis points"
+  },
+  "runs": [
+    {
+      "name": "main",
+      "start_mile": 0,
+      "end_mile": 31,
+      "count": 32
+    },
+    {
+      "name": "unknown",
+      "start_mile": 32,
+      "end_mile": 35,
+      "count": 4
+    },
+    {
+      "name": "main",
+      "start_mile": 36,
+      "end_mile": 85,
+      "count": 50
+    },
+    {
+      "name": "unknown",
+      "start_mile": 86,
+      "end_mile": 93,
+      "count": 8
+    },
+    {
+      "name": "alt-west",
+      "start_mile": 94,
+      "end_mile": 150,
+      "count": 57
+    },
+    {
+      "name": "main",
+      "start_mile": 151,
+      "end_mile": 191,
+      "count": 41
+    },
+    {
+      "name": "unknown",
+      "start_mile": 192,
+      "end_mile": 192,
+      "count": 1
+    },
+    {
+      "name": "main",
+      "start_mile": 193,
+      "end_mile": 262,
+      "count": 70
+    },
+    {
+      "name": "alt-east",
+      "start_mile": 263,
+      "end_mile": 344,
+      "count": 82
+    },
+    {
+      "name": "unknown",
+      "start_mile": 345,
+      "end_mile": 345,
+      "count": 1
+    },
+    {
+      "name": "alt-east",
+      "start_mile": 346,
+      "end_mile": 367,
+      "count": 22
+    },
+    {
+      "name": "unknown",
+      "start_mile": 368,
+      "end_mile": 368,
+      "count": 1
+    },
+    {
+      "name": "alt-east",
+      "start_mile": 369,
+      "end_mile": 449,
+      "count": 81
+    },
+    {
+      "name": "main",
+      "start_mile": 450,
+      "end_mile": 457,
+      "count": 8
+    },
+    {
+      "name": "alt-east",
+      "start_mile": 458,
+      "end_mile": 465,
+      "count": 8
+    },
+    {
+      "name": "main",
+      "start_mile": 466,
+      "end_mile": 500,
+      "count": 35
+    },
+    {
+      "name": "alt-west",
+      "start_mile": 501,
+      "end_mile": 521,
+      "count": 21
+    },
+    {
+      "name": "main",
+      "start_mile": 522,
+      "end_mile": 737,
+      "count": 216
+    },
+    {
+      "name": "unknown",
+      "start_mile": 738,
+      "end_mile": 739,
+      "count": 2
+    },
+    {
+      "name": "main",
+      "start_mile": 740,
+      "end_mile": 1204,
+      "count": 465
+    }
+  ]
+}

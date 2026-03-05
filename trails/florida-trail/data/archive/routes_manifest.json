@@ -1,0 +1,35 @@
+{
+  "trail_slug": "florida-trail",
+  "generated_on": "2026-02-27",
+  "routes": [
+    {
+      "key": "main",
+      "label": "Florida Trail (Spine)",
+      "kind": "spine",
+      "points": "data/points.json",
+      "geometry": "data/trail_backbone.geojson"
+    },
+    {
+      "key": "alt4-blackwater-ext",
+      "label": "Blackwater River Side Trail",
+      "kind": "alternate",
+      "group": 4,
+      "points": "data/points_ext_blackwater.json",
+      "geometry": "data/trail_ext_blackwater_backbone.geojson",
+      "attach": {
+        "type": "single-tie-in",
+        "branch_spine_mile": 1034,
+        "snap_dist_miles": 0.283
+      },
+      "distance_effect": {
+        "mode": "replace-north-tail",
+        "branch_spine_mile": 1034,
+        "spine_len_miles": 1204.36,
+        "replace_tail_miles": 170.36,
+        "alternate_tail_miles": 46,
+        "new_total_miles": 1080,
+        "delta_total_miles": -124.36
+      }
+    }
+  ]
+}

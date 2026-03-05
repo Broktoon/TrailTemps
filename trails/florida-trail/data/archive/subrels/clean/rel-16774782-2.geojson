@@ -1,0 +1,4 @@
+{"type":"FeatureCollection", "features": [
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-81.0069234,28.5897098]},"properties":{"timestamp":"2023-12-21T12:28:50Z","version":"2","changeset":"145369101","user":"BoAbney","uid":"1455393","barrier":"stile","foot":"designated","maintainer":"FTA Central Florida","material":"wood","name":"4-Way Stile","size:tread":"2x6x4'","stile":"stepover","id":"node/6174005301","properties":{}},"id":"node/6174005301"},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-80.9962194,28.5839131]},"properties":{"timestamp":"2023-12-22T15:03:41Z","version":"6","changeset":"145410091","user":"BoAbney","uid":"1455393","colour":"white","information":"guidepost","maintainer":"FTA Central Florida","name":"FTA Sign","tourism":"information","wikimedia_commons":"Category:OWPintoBronsonSFFTASignage","id":"node/11403904335","properties":{}},"id":"node/11403904335"}
+]}

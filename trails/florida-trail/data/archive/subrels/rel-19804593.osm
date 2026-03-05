@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="openstreetmap-cgimap 2.1.0 (3797834 spike-06.openstreetmap.org)" copyright="OpenStreetMap and contributors" attribution="http://www.openstreetmap.org/copyright" license="http://opendatacommons.org/licenses/odbl/1-0/">
+ <node id="99576761" visible="true" version="4" changeset="11500485" timestamp="2012-05-04T18:27:07Z" user="NE2" uid="207745" lat="28.5250979" lon="-81.0955254"/>
+ <node id="364904752" visible="true" version="1" changeset="850075" timestamp="2009-03-23T09:08:07Z" user="dale_p" uid="60110" lat="28.5236681" lon="-81.0952821"/>
+ <node id="675441346" visible="true" version="2" changeset="174355735" timestamp="2025-11-07T23:43:12Z" user="griffin_greene" uid="23478176" lat="28.5186785" lon="-81.1100669"/>
+ <node id="2213223877" visible="true" version="1" changeset="15445082" timestamp="2013-03-21T16:37:55Z" user="NE2" uid="207745" lat="28.5191256" lon="-81.0952727"/>
+ <node id="13288199268" visible="true" version="1" changeset="174355735" timestamp="2025-11-07T23:43:12Z" user="griffin_greene" uid="23478176" lat="28.5190007" lon="-81.0952012"/>
+ <node id="13288199269" visible="true" version="1" changeset="174355735" timestamp="2025-11-07T23:43:12Z" user="griffin_greene" uid="23478176" lat="28.5188039" lon="-81.0951914"/>
+ <node id="13288199270" visible="true" version="1" changeset="174355735" timestamp="2025-11-07T23:43:12Z" user="griffin_greene" uid="23478176" lat="28.5187531" lon="-81.1099708"/>
+ <way id="1448319832" visible="true" version="1" changeset="174355735" timestamp="2025-11-07T23:43:12Z" user="griffin_greene" uid="23478176">
+  <nd ref="99576761"/>
+  <nd ref="364904752"/>
+  <nd ref="2213223877"/>
+  <nd ref="13288199268"/>
+  <nd ref="13288199269"/>
+  <nd ref="13288199270"/>
+  <nd ref="675441346"/>
+  <tag k="colour" v="orange"/>
+  <tag k="highway" v="path"/>
+  <tag k="name" v="Orange Blaze Trail"/>
+  <tag k="official_name" v="Pine Lily Preserve Connector Trail"/>
+  <tag k="surface" v="sand"/>
+  <tag k="trailblazed" v="symbols"/>
+ </way>
+ <relation id="19804593" visible="true" version="2" changeset="174356644" timestamp="2025-11-08T00:41:47Z" user="griffin_greene" uid="23478176">
+  <member type="way" ref="1448319832" role=""/>
+  <tag k="colour" v="orange"/>
+  <tag k="name" v="Orange Blaze Trail"/>
+  <tag k="network" v="lwn"/>
+  <tag k="operator" v="SJRWMD"/>
+  <tag k="osmc:symbol" v="orange:white:orange_rectangle"/>
+  <tag k="route" v="hiking"/>
+  <tag k="type" v="route"/>
+ </relation>
+</osm>

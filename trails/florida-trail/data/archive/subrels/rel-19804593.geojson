@@ -1,0 +1,108 @@
+{
+"type": "FeatureCollection",
+"features": [
+{
+  "type": "Feature",
+  "id": "relation/19804593",
+  "properties": {
+    "timestamp": "2025-11-08T00:41:47Z",
+    "version": "2",
+    "changeset": "174356644",
+    "user": "griffin_greene",
+    "uid": "23478176",
+    "colour": "orange",
+    "name": "Orange Blaze Trail",
+    "network": "lwn",
+    "operator": "SJRWMD",
+    "osmc:symbol": "orange:white:orange_rectangle",
+    "route": "hiking",
+    "type": "route",
+    "id": "relation/19804593"
+  },
+  "geometry": {
+    "type": "LineString",
+    "coordinates": [
+      [
+        -81.0955254,
+        28.5250979
+      ],
+      [
+        -81.0952821,
+        28.5236681
+      ],
+      [
+        -81.0952727,
+        28.5191256
+      ],
+      [
+        -81.0952012,
+        28.5190007
+      ],
+      [
+        -81.0951914,
+        28.5188039
+      ],
+      [
+        -81.1099708,
+        28.5187531
+      ],
+      [
+        -81.1100669,
+        28.5186785
+      ]
+    ]
+  }
+},
+{
+  "type": "Feature",
+  "id": "way/1448319832",
+  "properties": {
+    "timestamp": "2025-11-07T23:43:12Z",
+    "version": "1",
+    "changeset": "174355735",
+    "user": "griffin_greene",
+    "uid": "23478176",
+    "colour": "orange",
+    "highway": "path",
+    "name": "Orange Blaze Trail",
+    "official_name": "Pine Lily Preserve Connector Trail",
+    "surface": "sand",
+    "trailblazed": "symbols",
+    "id": "way/1448319832"
+  },
+  "geometry": {
+    "type": "LineString",
+    "coordinates": [
+      [
+        -81.0955254,
+        28.5250979
+      ],
+      [
+        -81.0952821,
+        28.5236681
+      ],
+      [
+        -81.0952727,
+        28.5191256
+      ],
+      [
+        -81.0952012,
+        28.5190007
+      ],
+      [
+        -81.0951914,
+        28.5188039
+      ],
+      [
+        -81.1099708,
+        28.5187531
+      ],
+      [
+        -81.1100669,
+        28.5186785
+      ]
+    ]
+  }
+}
+]
+}

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="openstreetmap-cgimap 2.1.0 (3797848 spike-06.openstreetmap.org)" copyright="OpenStreetMap and contributors" attribution="http://www.openstreetmap.org/copyright" license="http://opendatacommons.org/licenses/odbl/1-0/">
+ <node id="936124309" visible="true" version="2" changeset="144976068" timestamp="2023-12-10T20:06:15Z" user="BoAbney" uid="1455393" lat="28.5838962" lon="-80.9961746"/>
+ <node id="1478331756" visible="true" version="2" changeset="65918217" timestamp="2018-12-31T17:29:50Z" user="Shawn Riley" uid="7083988" lat="28.5836593" lon="-80.9798675"/>
+ <node id="1478331757" visible="true" version="2" changeset="161079181" timestamp="2025-01-07T00:41:51Z" user="rivermont" uid="4085780" lat="28.5837368" lon="-80.9877133"/>
+ <node id="6174005027" visible="true" version="3" changeset="144383692" timestamp="2023-11-23T21:08:16Z" user="BoAbney" uid="1455393" lat="28.5838745" lon="-80.9961531"/>
+ <node id="6174005028" visible="true" version="3" changeset="144383692" timestamp="2023-11-23T21:08:16Z" user="BoAbney" uid="1455393" lat="28.5840430" lon="-80.9964652"/>
+ <node id="6174005029" visible="true" version="3" changeset="144383692" timestamp="2023-11-23T21:08:16Z" user="BoAbney" uid="1455393" lat="28.5841469" lon="-80.9967019"/>
+ <node id="6174005030" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5842325" lon="-80.9968747"/>
+ <node id="6174005031" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5842556" lon="-80.9970447"/>
+ <node id="6174005032" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5842414" lon="-80.9972026"/>
+ <node id="6174005033" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5842556" lon="-80.9973746"/>
+ <node id="6174005034" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5843355" lon="-80.9975831"/>
+ <node id="6174005035" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5844973" lon="-80.9978684"/>
+ <node id="6174005036" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5845719" lon="-80.9980344"/>
+ <node id="6174005037" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5846963" lon="-80.9982004"/>
+ <node id="6174005038" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5848065" lon="-80.9982955"/>
+ <node id="6174005039" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5849043" lon="-80.9984149"/>
+ <node id="6174005040" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5850223" lon="-80.9985953"/>
+ <node id="6174005041" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5850952" lon="-80.9987030"/>
+ <node id="6174005042" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5852183" lon="-80.9988380"/>
+ <node id="6174005043" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5853192" lon="-80.9989774"/>
+ <node id="6174005044" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5855292" lon="-80.9990753"/>
+ <node id="6174005045" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5856798" lon="-80.9991299"/>
+ <node id="6174005046" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5859064" lon="-80.9992919"/>
+ <node id="6174005047" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5860701" lon="-80.9994162"/>
+ <node id="6174005048" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5862438" lon="-80.9994954"/>
+ <node id="6174005049" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5864373" lon="-80.9997572"/>
+ <node id="6174005050" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5866060" lon="-80.9997836"/>
+ <node id="6174005051" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5867400" lon="-80.9998702"/>
+ <node id="6174005052" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5868276" lon="-81.0001546"/>
+ <node id="6174005053" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5869583" lon="-81.0002940"/>
+ <node id="6174005054" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5870791" lon="-81.0004259"/>
+ <node id="6174005055" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5871700" lon="-81.0005784"/>
+ <node id="6174005056" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5872312" lon="-81.0007178"/>
+ <node id="6174005057" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5872544" lon="-81.0008233"/>
+ <node id="6174005058" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5872742" lon="-81.0009175"/>
+ <node id="6174005059" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5872544" lon="-81.0009947"/>
+ <node id="6174005060" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5873305" lon="-81.0010851"/>
+ <node id="6174005061" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5873685" lon="-81.0012622"/>
+ <node id="6174005062" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5873404" lon="-81.0014393"/>
+ <node id="6174005063" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5873420" lon="-81.0015598"/>
+ <node id="6174005064" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5873305" lon="-81.0016295"/>
+ <node id="6174005065" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5874297" lon="-81.0018838"/>
+ <node id="6174005066" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5875455" lon="-81.0019874"/>
+ <node id="6174005067" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5876249" lon="-81.0021456"/>
+ <node id="6174005068" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5876943" lon="-81.0023434"/>
+ <node id="6174005069" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5876861" lon="-81.0025845"/>
+ <node id="6174005070" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5877555" lon="-81.0027371"/>
+ <node id="6174005071" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5878085" lon="-81.0029104"/>
+ <node id="6174005072" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5878267" lon="-81.0030988"/>
+ <node id="6174005073" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5878465" lon="-81.0032551"/>
+ <node id="6174005074" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:24Z" user="Shawn Riley" uid="7083988" lat="28.5879011" lon="-81.0034246"/>
+ <node id="6174005075" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:25Z" user="Shawn Riley" uid="7083988" lat="28.5879325" lon="-81.0036827"/>
+ <node id="6174005076" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:25Z" user="Shawn Riley" uid="7083988" lat="28.5879507" lon="-81.0038503"/>
+ <node id="6174005077" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:25Z" user="Shawn Riley" uid="7083988" lat="28.5880152" lon="-81.0039973"/>
+ <node id="6174005078" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:25Z" user="Shawn Riley" uid="7083988" lat="28.5880169" lon="-81.0040707"/>
+ <node id="6174005079" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:25Z" user="Shawn Riley" uid="7083988" lat="28.5880913" lon="-81.0042365"/>
+ <node id="6174005080" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:25Z" user="Shawn Riley" uid="7083988" lat="28.5882203" lon="-81.0044324"/>
+ <node id="6174005081" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:25Z" user="Shawn Riley" uid="7083988" lat="28.5882782" lon="-81.0046415"/>
+ <node id="6174005082" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:25Z" user="Shawn Riley" uid="7083988" lat="28.5882964" lon="-81.0047790"/>
+ <node id="6174005083" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:25Z" user="Shawn Riley" uid="7083988" lat="28.5883758" lon="-81.0050935"/>
+ <node id="6174005084" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:25Z" user="Shawn Riley" uid="7083988" lat="28.5884932" lon="-81.0053101"/>
+ <node id="6174005285" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:25Z" user="Shawn Riley" uid="7083988" lat="28.5885065" lon="-81.0053648"/>
+ <node id="6174005286" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:25Z" user="Shawn Riley" uid="7083988" lat="28.5885875" lon="-81.0054213"/>
+ <node id="6174005287" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:25Z" user="Shawn Riley" uid="7083988" lat="28.5886090" lon="-81.0055607"/>
+ <node id="6174005288" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:25Z" user="Shawn Riley" uid="7083988" lat="28.5885892" lon="-81.0056341"/>
+ <node id="6174005289" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:25Z" user="Shawn Riley" uid="7083988" lat="28.5885462" lon="-81.0057735"/>
+ <node id="6174005290" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:25Z" user="Shawn Riley" uid="7083988" lat="28.5885759" lon="-81.0059694"/>
+ <node id="6174005291" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:25Z" user="Shawn Riley" uid="7083988" lat="28.5886371" lon="-81.0061182"/>
+ <node id="6174005292" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:25Z" user="Shawn Riley" uid="7083988" lat="28.5887430" lon="-81.0062444"/>
+ <node id="6174005293" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:25Z" user="Shawn Riley" uid="7083988" lat="28.5888588" lon="-81.0063235"/>
+ <node id="6174005294" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:25Z" user="Shawn Riley" uid="7083988" lat="28.5889249" lon="-81.0065081"/>
+ <node id="6174005295" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:25Z" user="Shawn Riley" uid="7083988" lat="28.5890093" lon="-81.0066475"/>
+ <node id="6174005296" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:25Z" user="Shawn Riley" uid="7083988" lat="28.5890986" lon="-81.0066080"/>
+ <node id="6174005297" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:25Z" user="Shawn Riley" uid="7083988" lat="28.5893301" lon="-81.0066155"/>
+ <node id="6174005298" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:25Z" user="Shawn Riley" uid="7083988" lat="28.5894310" lon="-81.0065326"/>
+ <node id="6174005299" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:25Z" user="Shawn Riley" uid="7083988" lat="28.5895700" lon="-81.0067455"/>
+ <node id="6174005300" visible="true" version="1" changeset="65901814" timestamp="2018-12-31T01:20:25Z" user="Shawn Riley" uid="7083988" lat="28.5896527" lon="-81.0068189"/>
+ <node id="6174005301" visible="true" version="2" changeset="145369101" timestamp="2023-12-21T12:28:50Z" user="BoAbney" uid="1455393" lat="28.5897098" lon="-81.0069234">
+  <tag k="barrier" v="stile"/>
+  <tag k="foot" v="designated"/>
+  <tag k="maintainer" v="FTA Central Florida"/>
+  <tag k="material" v="wood"/>
+  <tag k="name" v="4-Way Stile"/>
+  <tag k="size:tread" v="2x6x4'"/>
+  <tag k="stile" v="stepover"/>
+ </node>
+ <node id="11371810884" visible="true" version="2" changeset="144383692" timestamp="2023-11-23T21:08:16Z" user="BoAbney" uid="1455393" lat="28.5838917" lon="-80.9961530"/>
+ <node id="11371810885" visible="true" version="2" changeset="144383692" timestamp="2023-11-23T21:08:16Z" user="BoAbney" uid="1455393" lat="28.5839656" lon="-80.9963808"/>
+ <node id="11371810886" visible="true" version="1" changeset="144382232" timestamp="2023-11-23T20:04:12Z" user="BoAbney" uid="1455393" lat="28.5840971" lon="-80.9965882"/>
+ <node id="11372133418" visible="true" version="1" changeset="144383692" timestamp="2023-11-23T21:08:16Z" user="BoAbney" uid="1455393" lat="28.5837168" lon="-80.9861785"/>
+ <node id="11372133419" visible="true" version="2" changeset="144916818" timestamp="2023-12-08T20:26:08Z" user="BoAbney" uid="1455393" lat="28.5839226" lon="-80.9962736"/>
+ <node id="11372133420" visible="true" version="1" changeset="144383692" timestamp="2023-11-23T21:08:16Z" user="BoAbney" uid="1455393" lat="28.5839412" lon="-80.9963280"/>
+ <node id="11395179943" visible="true" version="1" changeset="144773410" timestamp="2023-12-04T23:53:25Z" user="BoAbney" uid="1455393" lat="28.5882878" lon="-81.0047144"/>
+ <node id="11403904335" visible="true" version="6" changeset="145410091" timestamp="2023-12-22T15:03:41Z" user="BoAbney" uid="1455393" lat="28.5839131" lon="-80.9962194">
+  <tag k="colour" v="white"/>
+  <tag k="information" v="guidepost"/>
+  <tag k="maintainer" v="FTA Central Florida"/>
+  <tag k="name" v="FTA Sign"/>
+  <tag k="tourism" v="information"/>
+  <tag k="wikimedia_commons" v="Category:OWPintoBronsonSFFTASignage"/>
+ </node>
+ <node id="11778255665" visible="true" version="2" changeset="161079181" timestamp="2025-01-07T00:41:51Z" user="rivermont" uid="4085780" lat="28.5837137" lon="-80.9873975"/>
+ <way id="1226257844" visible="true" version="10" changeset="144976068" timestamp="2023-12-10T20:06:15Z" user="BoAbney" uid="1455393">
+  <nd ref="6174005027"/>
+  <nd ref="11371810884"/>
+  <nd ref="936124309"/>
+  <nd ref="11403904335"/>
+  <nd ref="11372133419"/>
+  <nd ref="11372133420"/>
+  <nd ref="11371810885"/>
+  <nd ref="6174005028"/>
+  <nd ref="11371810886"/>
+  <nd ref="6174005029"/>
+  <nd ref="6174005030"/>
+  <nd ref="6174005031"/>
+  <nd ref="6174005032"/>
+  <nd ref="6174005033"/>
+  <nd ref="6174005034"/>
+  <nd ref="6174005035"/>
+  <nd ref="6174005036"/>
+  <nd ref="6174005037"/>
+  <nd ref="6174005038"/>
+  <nd ref="6174005039"/>
+  <nd ref="6174005040"/>
+  <nd ref="6174005041"/>
+  <nd ref="6174005042"/>
+  <nd ref="6174005043"/>
+  <nd ref="6174005044"/>
+  <nd ref="6174005045"/>
+  <nd ref="6174005046"/>
+  <nd ref="6174005047"/>
+  <nd ref="6174005048"/>
+  <nd ref="6174005049"/>
+  <nd ref="6174005050"/>
+  <nd ref="6174005051"/>
+  <nd ref="6174005052"/>
+  <nd ref="6174005053"/>
+  <nd ref="6174005054"/>
+  <nd ref="6174005055"/>
+  <nd ref="6174005056"/>
+  <nd ref="6174005057"/>
+  <nd ref="6174005058"/>
+  <nd ref="6174005059"/>
+  <nd ref="6174005060"/>
+  <nd ref="6174005061"/>
+  <nd ref="6174005062"/>
+  <nd ref="6174005063"/>
+  <nd ref="6174005064"/>
+  <nd ref="6174005065"/>
+  <nd ref="6174005066"/>
+  <nd ref="6174005067"/>
+  <nd ref="6174005068"/>
+  <nd ref="6174005069"/>
+  <nd ref="6174005070"/>
+  <nd ref="6174005071"/>
+  <nd ref="6174005072"/>
+  <nd ref="6174005073"/>
+  <nd ref="6174005074"/>
+  <nd ref="6174005075"/>
+  <nd ref="6174005076"/>
+  <nd ref="6174005077"/>
+  <nd ref="6174005078"/>
+  <nd ref="6174005079"/>
+  <nd ref="6174005080"/>
+  <nd ref="6174005081"/>
+  <nd ref="11395179943"/>
+  <nd ref="6174005082"/>
+  <nd ref="6174005083"/>
+  <nd ref="6174005084"/>
+  <nd ref="6174005285"/>
+  <nd ref="6174005286"/>
+  <nd ref="6174005287"/>
+  <nd ref="6174005288"/>
+  <nd ref="6174005289"/>
+  <nd ref="6174005290"/>
+  <nd ref="6174005291"/>
+  <nd ref="6174005292"/>
+  <nd ref="6174005293"/>
+  <nd ref="6174005294"/>
+  <nd ref="6174005295"/>
+  <nd ref="6174005296"/>
+  <nd ref="6174005297"/>
+  <nd ref="6174005298"/>
+  <nd ref="6174005299"/>
+  <nd ref="6174005300"/>
+  <nd ref="6174005301"/>
+  <tag k="bicycle" v="no"/>
+  <tag k="colour" v="white"/>
+  <tag k="foot" v="designated"/>
+  <tag k="highway" v="footway"/>
+  <tag k="horse" v="no"/>
+  <tag k="maintainer" v="FTA Central Florida"/>
+  <tag k="motor_vehicle" v="no"/>
+  <tag k="name" v="River Trail"/>
+  <tag k="surface" v="unpaved"/>
+  <tag k="trailblazed" v="yes"/>
+ </way>
+ <way id="1226264260" visible="true" version="5" changeset="149435246" timestamp="2024-04-01T13:31:16Z" user="SelfieCity" uid="9329719">
+  <nd ref="6174005027"/>
+  <nd ref="1478331757"/>
+  <nd ref="11778255665"/>
+  <nd ref="11372133418"/>
+  <tag k="bicycle" v="yes"/>
+  <tag k="colour" v="white"/>
+  <tag k="foot" v="yes"/>
+  <tag k="highway" v="track"/>
+  <tag k="horse" v="no"/>
+  <tag k="maintenance" v="Land Manager"/>
+  <tag k="motor_vehicle" v="no"/>
+  <tag k="name" v="FT High Water Alternate"/>
+  <tag k="surface" v="unpaved"/>
+  <tag k="trailblazed" v="FTA Central Florida"/>
+ </way>
+ <way id="1226327070" visible="true" version="2" changeset="145071255" timestamp="2023-12-13T11:22:59Z" user="BoAbney" uid="1455393">
+  <nd ref="11372133418"/>
+  <nd ref="1478331756"/>
+  <tag k="bicycle" v="yes"/>
+  <tag k="colour" v="blue"/>
+  <tag k="foot" v="yes"/>
+  <tag k="highway" v="track"/>
+  <tag k="horse" v="no"/>
+  <tag k="maintenance" v="Land Manager"/>
+  <tag k="motor_vehicle" v="no"/>
+  <tag k="name" v="FT High Water Alternate"/>
+  <tag k="surface" v="unpaved"/>
+  <tag k="trailblazed" v="FTA Central Florida"/>
+ </way>
+ <relation id="16774782" visible="true" version="1" changeset="144658233" timestamp="2023-12-01T11:13:50Z" user="BoAbney" uid="1455393">
+  <member type="way" ref="1226327070" role=""/>
+  <member type="way" ref="1226264260" role=""/>
+  <member type="way" ref="1226257844" role=""/>
+  <tag k="from" v="Orlando Wetlands Outflow"/>
+  <tag k="name" v="Florida Trail High Water Alternate"/>
+  <tag k="network" v="lwn"/>
+  <tag k="network:type" v="lwn"/>
+  <tag k="route" v="hiking"/>
+  <tag k="state" v="alternate"/>
+  <tag k="to" v="4-way stile"/>
+  <tag k="type" v="route"/>
+ </relation>
+</osm>
