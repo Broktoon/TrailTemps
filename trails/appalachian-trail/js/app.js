@@ -354,7 +354,6 @@ function renderDurationResult({ direction, startDate, endDate, distanceMiles, mi
     <table>
       <tr><th>Direction</th><td>${directionLabel}</td></tr>
       <tr><th>Start Date</th><td>${startStr}</td></tr>
-      <tr><th>Assumed Route</th><td>Full trail (terminus to terminus)</td></tr>
       <tr><th>Distance</th><td>${fmtMile(distanceMiles)} miles</td></tr>
       <tr><th>Miles per Day</th><td>${fmtMile(milesPerDay)}</td></tr>
       <tr><th>Estimated Duration</th><td>${durationDays} days</td></tr>

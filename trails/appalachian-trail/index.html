@@ -13,6 +13,102 @@
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
   />
+
+  <style>
+    /* -------------------------------------------------------
+       Control grid – matches Florida Trail duration tool style
+       A 3-column card layout: each field is a labeled column.
+       Stacks to 1-column on narrow screens.
+    ------------------------------------------------------- */
+    .control-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px 18px;
+      align-items: end;        /* align inputs to bottom so labels float above */
+      margin-bottom: 14px;
+    }
+
+    .control-grid .field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .control-grid .field label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #555;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .control-grid .field select,
+    .control-grid .field input[type="number"] {
+      padding: 9px 10px;
+      font-size: 0.95rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background: #fff;
+      width: 100%;
+    }
+
+    /* Date sub-row: month + day side-by-side inside a single field cell */
+    .control-grid .field .date-pair {
+      display: flex;
+      gap: 6px;
+    }
+
+    .control-grid .field .date-pair select:first-child {
+      flex: 2;          /* month wider */
+    }
+
+    .control-grid .field .date-pair select:last-child {
+      flex: 1;          /* day narrower */
+    }
+
+    /* Full-width button row below the grid */
+    .control-grid-btn {
+      margin-top: 4px;
+    }
+
+    .control-grid-btn button {
+      padding: 10px 22px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 6px;
+      border: none;
+      background: #2a6ebb;
+      color: #fff;
+      cursor: pointer;
+      transition: background 120ms ease;
+    }
+
+    .control-grid-btn button:hover {
+      background: #1d56a0;
+    }
+
+    /* Blue button — shared style for all primary action buttons */
+    .btn-primary {
+      padding: 10px 22px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 6px;
+      border: none;
+      background: #2a6ebb;
+      color: #fff;
+      cursor: pointer;
+      transition: background 120ms ease;
+    }
+    .btn-primary:hover {
+      background: #1d56a0;
+    }
+
+    @media (max-width: 640px) {
+      .control-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 
 <body data-trail="appalachian-trail">
@@ -38,7 +134,7 @@
 
       <p class="sub">
         <br>
-        Time your Appalachain Trail hike, find temperature extremes during that time, and get 5-day weather forecasts for any point along the trail. The two main tools are directly below, with various notes and other resources following at the bottom of the page.
+        Time your Appalachian Trail hike, find temperature extremes during that time, and get 5-day weather forecasts for any point along the trail. The two main tools are directly below, with various notes and other resources following at the bottom of the page.
       </p>
     </div>
 
@@ -51,10 +147,10 @@
             Appalachian Trail <span class="trail-status">(Current)</span>
           </a>
 
-          <a class="trail-option current" href="/trails/florida-trail/" aria-current="page">
+          <a class="trail-option" href="/trails/florida-trail/">
             Florida Trail <span class="trail-status">(Coming Next)</span>
           </a>
-          
+
           <a class="trail-option" href="/trails/continental-divide-trail/">
             Continental Divide Trail <span class="trail-status">(Coming Soon)</span>
           </a>
@@ -77,80 +173,97 @@
 
   <main>
 
-    <!-- Card 1: Hike Duration / End Date Calculator (independent from weather) -->
-    <section class="controls" aria-label="Hike duration calculator">
+    <!-- =====================================================
+         Tool 1: Hike Duration / End Date Calculator
+    ====================================================== -->
+    <section class="controls" aria-label="Hike duration calculator" style="flex-direction:column; align-items:flex-start;">
       <h2>Hike Duration (End Date) and Expected Weather Extremes</h2>
       <p class="card-instructions">
-        Instructions: Choose a direction and a start month/day, then enter your expected miles per day.
-        You will receive an estimated hike duration and end date, along with a map showing where the expected highest and lowest temperatures should be expected along the trail.
+        Choose a start date and your expected miles per day, then select your direction.
+        You will receive an estimated hike duration and end date, along with a map showing
+        where the expected highest and lowest temperatures should be encountered along the trail.
       </p>
 
-      <div class="control-row">
-        <label class="date-label">
-          Direction:
+      <!-- FT-style 3-column control grid: Start Date | Miles per Day | Direction -->
+      <div class="control-grid">
+
+        <div class="field">
+          <label for="durMonthSelect">Start Date</label>
+          <div class="date-pair">
+            <select id="durMonthSelect" aria-label="Start month"></select>
+            <select id="durDaySelect" aria-label="Start day"></select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="durMilesPerDay">Miles per Day</label>
+          <input id="durMilesPerDay"
+                 type="number"
+                 inputmode="decimal"
+                 min="1"
+                 step="1"
+                 placeholder="e.g., 15" />
+        </div>
+
+        <div class="field">
+          <label for="durDirectionSelect">Direction</label>
           <select id="durDirectionSelect">
             <option value="NOBO">Northbound (Georgia → Maine)</option>
             <option value="SOBO">Southbound (Maine → Georgia)</option>
           </select>
-        </label>
+        </div>
 
-        <label class="date-label">
-          Start Date:
-          <select id="durMonthSelect"></select>
-          <select id="durDaySelect"></select>
-        </label>
+      </div>
 
-        <label class="date-label">
-          Miles per Day:
-          <input id="durMilesPerDay" type="number" inputmode="decimal" min="1" step="1" placeholder="e.g., 15" />
-        </label>
-
-        <button id="durBtn" type="button">Estimate End Date and Weather Extremes</button>
+      <div class="control-grid-btn">
+        <button id="durBtn" type="button" class="btn-primary">Estimate End Date and Weather Extremes</button>
       </div>
 
       <div id="durStatus" class="status"></div>
       <div id="durResult"></div>
 
-      <!-- Temperature Extremes Results + Map (Duration Tool) -->
+      <!-- Temperature Extremes Results + Map -->
       <div id="durExtremesWrap" style="display:none; margin-top:16px;">
         <h2>Temperature Extremes During Your Hike</h2>
-<div id="durExtremesMap"></div>
+        <div id="durExtremesMap"></div>
 
-<p class="data-attribution map-attribution">
-  Mapping data provided by 
-  <a href="https://www.openstreetmap.org/copyright" 
-     target="_blank" 
-     rel="noopener">
-    OpenStreetMap
-  </a> 
-  under the Open Database License.
-</p>
+        <p class="data-attribution map-attribution">
+          Mapping data provided by
+          <a href="https://www.openstreetmap.org/copyright"
+             target="_blank"
+             rel="noopener">
+            OpenStreetMap
+          </a>
+          under the Open Database License.
+        </p>
 
-<div id="durExtremesHot"></div>
-<div id="durExtremesCold" style="margin-top:12px;"></div>
+        <div id="durExtremesHot"></div>
+        <div id="durExtremesCold" style="margin-top:12px;"></div>
       </div>
     </section>
 
     <!-- Simple clean separation -->
     <hr class="card-sep" />
 
-    <!-- Card 2: Weather Planner -->
+    <!-- =====================================================
+         Tool 2: Weather Planner
+    ====================================================== -->
     <section class="controls" aria-label="Weather planner controls">
-    <div class="section-title-block">
-  <h2>Weather Planner</h2>
-<p class="data-attribution">
-  Weather data provided by 
-  <a href="https://open-meteo.com/" target="_blank" rel="noopener">
-    Open-Meteo.com
-  </a> 
-  under the 4.0 International (CC BY 4.0) license.
-</p>
-
-</div>
+      <div class="section-title-block">
+        <h2>Weather Planner</h2>
+        <p class="data-attribution">
+          Weather data provided by
+          <a href="https://open-meteo.com/" target="_blank" rel="noopener">
+            Open-Meteo.com
+          </a>
+          under the 4.0 International (CC BY 4.0) license.
+        </p>
+      </div>
 
       <p class="card-instructions">
         Select a state and a mile point, then choose a planning month/day.
-        You will receive current conditions at that location, a 5-day forecast, and a recent 7-year average of weather condidtions for that date.
+        You will receive current conditions at that location, a 5-day forecast, and a recent
+        7-year average of weather conditions for that date.
       </p>
 
       <div class="control-row">
@@ -170,24 +283,23 @@
           <select id="daySelect"></select>
         </label>
 
-        <button id="goBtn" type="button">Get Weather</button>
+        <button id="goBtn" type="button" class="btn-primary">Get Weather</button>
       </div>
 
-<section class="map-wrap" id="weatherMapWrap" style="display:none;">
-  <div id="map" aria-label="Map showing selected Appalachian Trail point"></div>
+      <section class="map-wrap" id="weatherMapWrap" style="display:none;">
+        <div id="map" aria-label="Map showing selected Appalachian Trail point"></div>
 
-  <p class="data-attribution map-attribution">
-    Mapping data provided by 
-    <a href="https://www.openstreetmap.org/copyright"
-       target="_blank"
-       rel="noopener">
-      OpenStreetMap
-    </a>
-    under the Open Database License.
-  </p>
-</section>
-
-</section>
+        <p class="data-attribution map-attribution">
+          Mapping data provided by
+          <a href="https://www.openstreetmap.org/copyright"
+             target="_blank"
+             rel="noopener">
+            OpenStreetMap
+          </a>
+          under the Open Database License.
+        </p>
+      </section>
+    </section>
 
     <section class="grid">
       <div id="planningSummaryBlock"></div>
@@ -198,62 +310,68 @@
     <!-- Simple clean separation -->
     <hr class="card-sep" />
 
-    <!-- Weather Data Notes + Resources -->
-<section class="weather-data-notes" aria-labelledby="weather-data-notes-title">
-  <h2 id="weather-data-notes-title">Weather Data Notes</h2>
+    <!-- =====================================================
+         Weather Data Notes + Resources
+    ====================================================== -->
+    <section class="weather-data-notes" aria-labelledby="weather-data-notes-title">
+      <h2 id="weather-data-notes-title">Weather Data Notes</h2>
 
-  <div class="weather-data-notes__body">
+      <div class="weather-data-notes__body">
 
-    <!-- Subsection: Notes on Data -->
-    <section class="weather-data-notes__subsection" aria-labelledby="notes-on-data-title">
-      <h3 id="notes-on-data-title">Notes on Data</h3>
+        <section class="weather-data-notes__subsection" aria-labelledby="notes-on-data-title">
+          <h3 id="notes-on-data-title">Notes on Data</h3>
 
-      <div class="weather-data-notes__content" id="notes-on-data-content">
-        <p>
-          This site uses average daily maximum and minimum temperature data from the last seven years.
-          This approach provides stability in planning values while also reflecting more recent shifts
-          in climate conditions. Also, given that elevations do not change nearly as much on the Appalachian Trail as it does on other trails (like the PCT or the CDT), and they they correspondingly do not cause as much of a weather shift, I have not created an AT-specific algorithm to estimate changes based solely on elevation or for specific AT peaks. But those are in development for other trails and (if successful) may be for the AT in future builds.
-        </p>
+          <div class="weather-data-notes__content" id="notes-on-data-content">
+            <p>
+              This site uses average daily maximum and minimum temperature data from the last seven years.
+              This approach provides stability in planning values while also reflecting more recent shifts
+              in climate conditions. Also, given that elevations do not change nearly as much on the
+              Appalachian Trail as they do on other trails (like the PCT or the CDT), and they
+              correspondingly do not cause as much of a weather shift, I have not created an AT-specific
+              algorithm to estimate changes based solely on elevation or for specific AT peaks. But those
+              are in development for other trails and (if successful) may be for the AT in future builds.
+            </p>
+          </div>
+        </section>
+
+        <section class="weather-data-notes__subsection" aria-labelledby="additional-resources-title">
+          <h3 id="additional-resources-title">Additional Resources</h3>
+
+          <div class="weather-data-notes__content" id="additional-resources-content">
+            <ul class="weather-data-notes__links">
+              <li>
+                <a href="https://appalachiantrail.org/experience/hike-the-trail/essential-skills/safety/weather-hazards/"
+                   target="_blank" rel="noopener noreferrer">
+                  <strong>AT Weather Hazards</strong>
+                </a>
+                – Learn more about weather hazards along the AT from the Appalachian Trail Conservancy,
+                including how to prepare for and respond to them.
+              </li>
+
+              <li>
+                <a href="https://www.atweather.org/" target="_blank" rel="noopener noreferrer">
+                  <strong>ATWeather</strong>
+                </a>
+                – Obtain current weather forecasts for individual camping and shelter sites.
+              </li>
+
+              <li>
+                <a href="https://www.mountain-forecast.com/" target="_blank" rel="noopener noreferrer">
+                  <strong>Mountain-Forecast</strong>
+                </a>
+                – Obtain precise weather forecasts at high elevation and other highly variable weather areas.
+              </li>
+            </ul>
+          </div>
+        </section>
+
       </div>
     </section>
-
-    <!-- Subsection: Additional Resources -->
-    <section class="weather-data-notes__subsection" aria-labelledby="additional-resources-title">
-      <h3 id="additional-resources-title">Additional Resources</h3>
-
-      <div class="weather-data-notes__content" id="additional-resources-content">
-<ul class="weather-data-notes__links">
-  <li>
-    <a href="https://appalachiantrail.org/experience/hike-the-trail/essential-skills/safety/weather-hazards/" target="_blank" rel="noopener noreferrer">
-      <strong>AT Weather Hazards</strong>
-    </a>
-    – Learn more about weather hazards along the AT from the Appalachian Trail Conservancy, including how to prepare for and respond to them.
-  </li>
-
-  <li>
-    <a href="https://www.atweather.org/" target="_blank" rel="noopener noreferrer">
-      <strong>ATWeather</strong>
-    </a>
-    – Obtain current weather forecasts for individual camping and shelter sites.
-  </li>
-
-  <li>
-    <a href="https://www.mountain-forecast.com/" target="_blank" rel="noopener noreferrer">
-      <strong>Mountain-Forecast</strong>
-    </a>
-    – Obtain precise weather forecasts at high elevation and other highly variable weather areas.
-  </li>
-</ul>
-      </div>
-    </section>
-
-  </div>
-</section>
 
   </main>
 
   <footer class="site-footer">
-       <div class="small">
+    <div class="small">
       Informational only. Always verify conditions and heed local advisories.
     </div>
   </footer>
@@ -261,21 +379,26 @@
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-  <!-- Your local JS -->
-   <script>window.SITE_BASE = "";</script>
-<script>
-  window.TRAIL_SLUG = "appalachian-trail";
-</script>
-<script defer src="js/app.js"></script>
+  <!-- Trail JS -->
+  <script>window.SITE_BASE = "";</script>
+  <script>window.TRAIL_SLUG = "appalachian-trail";</script>
+  <script defer src="js/app.js"></script>
 
-<!-- Donation block -->
-<div class="donation-block">
-  <p class="donation-text">
-    Thank you for visiting and trying these tools. They are a labor of love for me, and I make no money from this site. However, if you wish to help support the site please consider
-    <a href="https://www.buymeacoffee.com/ihrhzL0ZC5" target="_blank" rel="noopener noreferrer">Buying Me a Coffee</a> — donations of $1, $5, or even $20 are deeply appreciated. I promise every cent will go to the ongoing operations, maintenance, development, and expansion of the site.
-  </p>
-  <a class="bmc-button" href="https://www.buymeacoffee.com/ihrhzL0ZC5" target="_blank" rel="noopener noreferrer" aria-label="Buy Me a Coffee">Buy Me a Coffee</a>
-</div>
+  <!-- Donation block -->
+  <div class="donation-block">
+    <p class="donation-text">
+      Thank you for visiting and trying these tools. They are a labor of love for me, and I make no
+      money from this site. However, if you wish to help support the site please consider
+      <a href="https://www.buymeacoffee.com/ihrhzL0ZC5" target="_blank" rel="noopener noreferrer">Buying Me a Coffee</a>
+      — donations of $1, $5, or even $20 are deeply appreciated. I promise every cent will go to the
+      ongoing operations, maintenance, development, and expansion of the site.
+    </p>
+    <a class="bmc-button"
+       href="https://www.buymeacoffee.com/ihrhzL0ZC5"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Buy Me a Coffee">Buy Me a Coffee</a>
+  </div>
 
 </body>
 </html>

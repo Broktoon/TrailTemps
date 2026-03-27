@@ -1,0 +1,494 @@
+{
+  "trail": {
+    "name": "Florida Trail",
+    "slug": "florida-trail",
+    "spine_miles": 1204,
+    "default_map_center": [
+      28.5,
+      -82.5
+    ],
+    "default_zoom": 7,
+    "termini": {
+      "south": {
+        "name": "Big Cypress",
+        "axis_mile": 0,
+        "lat": 25.8821,
+        "lon": -80.9134
+      },
+      "north_main": {
+        "name": "Fort Pickens",
+        "axis_mile": 1204,
+        "label": "Main"
+      },
+      "north_alt": {
+        "name": "Blackwater River",
+        "axis_mile": 1080,
+        "label": "Alt.",
+        "note": "Blackwater leads to a different physical northern terminus than the main spine. Hiker does not return to the main spine after the branch at mile 1034."
+      }
+    },
+    "direction_options": [
+      {
+        "value": "NOBO_PICKENS",
+        "label": "Big Cypress to Fort Pickens (Main)",
+        "direction": "NOBO",
+        "terminus": "north_main"
+      },
+      {
+        "value": "NOBO_BLACKWATER",
+        "label": "Big Cypress to Blackwater (Alt.)",
+        "direction": "NOBO",
+        "terminus": "north_alt"
+      },
+      {
+        "value": "SOBO_PICKENS",
+        "label": "Fort Pickens to Big Cypress (Main)",
+        "direction": "SOBO",
+        "terminus": "north_main"
+      },
+      {
+        "value": "SOBO_BLACKWATER",
+        "label": "Blackwater to Big Cypress (Alt.)",
+        "direction": "SOBO",
+        "terminus": "north_alt"
+      }
+    ]
+  },
+  "regions": [
+    {
+      "id": "southern",
+      "name": "Southern",
+      "order": 1
+    },
+    {
+      "id": "central",
+      "name": "Central",
+      "order": 2
+    },
+    {
+      "id": "northern",
+      "name": "Northern",
+      "order": 3
+    },
+    {
+      "id": "panhandle",
+      "name": "Panhandle",
+      "order": 4
+    }
+  ],
+  "sections": [
+    {
+      "id": "big_cypress_south",
+      "name": "Big Cypress South",
+      "region_id": "southern",
+      "order": 1,
+      "mile_start": 0,
+      "mile_end": 29
+    },
+    {
+      "id": "big_cypress_north",
+      "name": "Big Cypress North",
+      "region_id": "southern",
+      "order": 2,
+      "mile_start": 30,
+      "mile_end": 37
+    },
+    {
+      "id": "seminole",
+      "name": "Seminole",
+      "region_id": "southern",
+      "order": 3,
+      "mile_start": 38,
+      "mile_end": 56
+    },
+    {
+      "id": "okee_south",
+      "name": "Okeechobee South",
+      "region_id": "southern",
+      "order": 4,
+      "mile_start": 57,
+      "mile_end": 93
+    },
+    {
+      "id": "okeechobee_west",
+      "name": "Okeechobee West",
+      "region_id": "southern",
+      "order": 5,
+      "mile_start": 94,
+      "mile_end": 150,
+      "alt_group": "alt-okee",
+      "is_default_alt": true
+    },
+    {
+      "id": "okee_east",
+      "name": "Okeechobee East",
+      "region_id": "southern",
+      "order": 6,
+      "mile_start": 94,
+      "mile_end": 150,
+      "is_alt": true,
+      "alt_group": "alt-okee"
+    },
+    {
+      "id": "kiss_river",
+      "name": "Kissimmee River",
+      "region_id": "central",
+      "order": 7,
+      "mile_start": 151,
+      "mile_end": 200
+    },
+    {
+      "id": "kiss_prairie",
+      "name": "Kissimmee Prairie",
+      "region_id": "central",
+      "order": 8,
+      "mile_start": 201,
+      "mile_end": 222
+    },
+    {
+      "id": "kicco",
+      "name": "KICCO",
+      "region_id": "central",
+      "order": 9,
+      "mile_start": 223,
+      "mile_end": 239
+    },
+    {
+      "id": "three_lakes",
+      "name": "Three Lakes",
+      "region_id": "central",
+      "order": 10,
+      "mile_start": 240,
+      "mile_end": 275,
+      "alt_group": "alt-orlando-ocala-loop",
+      "is_default_alt": true
+    },
+    {
+      "id": "bull_creek",
+      "name": "Bull Creek",
+      "region_id": "central",
+      "order": 11,
+      "mile_start": 276,
+      "mile_end": 313,
+      "alt_group": "alt-orlando-ocala-loop",
+      "is_default_alt": true
+    },
+    {
+      "id": "tosohatchee",
+      "name": "Tosohatchee",
+      "region_id": "central",
+      "order": 12,
+      "mile_start": 314,
+      "mile_end": 339,
+      "alt_group": "alt-orlando-ocala-loop",
+      "is_default_alt": true
+    },
+    {
+      "id": "lake_jessup",
+      "name": "Lake Jessup",
+      "region_id": "central",
+      "order": 13,
+      "mile_start": 340,
+      "mile_end": 377,
+      "alt_group": "alt-orlando-ocala-loop",
+      "is_default_alt": true
+    },
+    {
+      "id": "upper_kiss",
+      "name": "Upper Kissimmee",
+      "region_id": "central",
+      "order": 14,
+      "mile_start": null,
+      "mile_end": null,
+      "alt_group": "alt-orlando-ocala-loop"
+    },
+    {
+      "id": "reedy_creek",
+      "name": "Reedy Creek",
+      "region_id": "central",
+      "order": 15,
+      "mile_start": null,
+      "mile_end": null,
+      "alt_group": "alt-orlando-ocala-loop"
+    },
+    {
+      "id": "green_swamp_east",
+      "name": "Green Swamp East",
+      "region_id": "central",
+      "order": 16,
+      "mile_start": null,
+      "mile_end": null,
+      "alt_group": "alt-orlando-ocala-loop"
+    },
+    {
+      "id": "green_swamp_west",
+      "name": "Richloam \u2013 Green Swamp West",
+      "region_id": "central",
+      "order": 17,
+      "mile_start": null,
+      "mile_end": null,
+      "alt_group": "alt-orlando-ocala-loop"
+    },
+    {
+      "id": "cassia",
+      "name": "Cassia",
+      "region_id": "northern",
+      "order": 18,
+      "mile_start": 378,
+      "mile_end": 412,
+      "alt_group": "alt-orlando-ocala-loop",
+      "is_default_alt": true
+    },
+    {
+      "id": "ocala_south",
+      "name": "Ocala South",
+      "region_id": "northern",
+      "order": 19,
+      "mile_start": 413,
+      "mile_end": 438,
+      "alt_group": "alt-orlando-ocala-loop",
+      "is_default_alt": true
+    },
+    {
+      "id": "ocala_north",
+      "name": "Ocala North",
+      "region_id": "northern",
+      "order": 20,
+      "mile_start": 439,
+      "mile_end": 484
+    },
+    {
+      "id": "rice_eton_gold",
+      "name": "Rice Creek \u2013 Etoniah \u2013 Gold Head",
+      "region_id": "northern",
+      "order": 21,
+      "mile_start": 485,
+      "mile_end": 517
+    },
+    {
+      "id": "camp_blanding",
+      "name": "Camp Blanding",
+      "region_id": "northern",
+      "order": 22,
+      "mile_start": 518,
+      "mile_end": 546
+    },
+    {
+      "id": "lake_butler_forest",
+      "name": "Lake Butler Forest",
+      "region_id": "northern",
+      "order": 23,
+      "mile_start": 547,
+      "mile_end": 569
+    },
+    {
+      "id": "osceola",
+      "name": "Osceola National Forest",
+      "region_id": "northern",
+      "order": 24,
+      "mile_start": 570,
+      "mile_end": 591
+    },
+    {
+      "id": "suwannee_river",
+      "name": "Suwannee River",
+      "region_id": "northern",
+      "order": 25,
+      "mile_start": 592,
+      "mile_end": 667
+    },
+    {
+      "id": "croom",
+      "name": "Croom",
+      "region_id": "northern",
+      "order": 26,
+      "mile_start": null,
+      "mile_end": null,
+      "alt_group": "alt-orlando-ocala-loop"
+    },
+    {
+      "id": "citrus",
+      "name": "Citrus",
+      "region_id": "northern",
+      "order": 27,
+      "mile_start": null,
+      "mile_end": null,
+      "alt_group": "alt-orlando-ocala-loop"
+    },
+    {
+      "id": "cfgwest",
+      "name": "Cross Florida Greenway West",
+      "region_id": "northern",
+      "order": 28,
+      "mile_start": null,
+      "mile_end": null,
+      "alt_group": "alt-orlando-ocala-loop"
+    },
+    {
+      "id": "cfgeast_ocalawest",
+      "name": "CFG East & Ocala West",
+      "region_id": "northern",
+      "order": 29,
+      "mile_start": null,
+      "mile_end": null,
+      "alt_group": "alt-orlando-ocala-loop"
+    },
+    {
+      "id": "apalachicola_east",
+      "name": "Apalachicola East",
+      "region_id": "panhandle",
+      "order": 30,
+      "mile_start": 668,
+      "mile_end": 783
+    },
+    {
+      "id": "apalachicola_west",
+      "name": "Apalachicola West",
+      "region_id": "panhandle",
+      "order": 31,
+      "mile_start": 784,
+      "mile_end": 849
+    },
+    {
+      "id": "chipola",
+      "name": "Chipola",
+      "region_id": "panhandle",
+      "order": 32,
+      "mile_start": 850,
+      "mile_end": 889
+    },
+    {
+      "id": "econfina_creek",
+      "name": "Econfina Creek",
+      "region_id": "panhandle",
+      "order": 33,
+      "mile_start": 890,
+      "mile_end": 915
+    },
+    {
+      "id": "pine_log",
+      "name": "Pine Log",
+      "region_id": "panhandle",
+      "order": 34,
+      "mile_start": 916,
+      "mile_end": 931
+    },
+    {
+      "id": "nokuse",
+      "name": "Nokuse",
+      "region_id": "panhandle",
+      "order": 35,
+      "mile_start": 932,
+      "mile_end": 959
+    },
+    {
+      "id": "eglin_east",
+      "name": "Eglin East",
+      "region_id": "panhandle",
+      "order": 36,
+      "mile_start": 960,
+      "mile_end": 979
+    },
+    {
+      "id": "eglin_north",
+      "name": "Eglin North",
+      "region_id": "panhandle",
+      "order": 37,
+      "mile_start": 980,
+      "mile_end": 1026
+    },
+    {
+      "id": "eglin_west",
+      "name": "Eglin West",
+      "region_id": "panhandle",
+      "order": 38,
+      "mile_start": 1027,
+      "mile_end": 1061
+    },
+    {
+      "id": "seashore",
+      "name": "Seashore (Gulf Islands)",
+      "region_id": "panhandle",
+      "order": 39,
+      "mile_start": 1062,
+      "mile_end": 1204
+    },
+    {
+      "id": "blackwater_ext",
+      "name": "Blackwater Extension",
+      "region_id": "panhandle",
+      "order": 40,
+      "mile_start": 1034,
+      "mile_end": 1080,
+      "is_alt": true,
+      "note": "Alternate northern terminus. Branches from main spine at mile 1034 and ends at Blackwater River / Alabama state line (mile 1080). Does not rejoin the main spine."
+    }
+  ],
+  "alt_groups": [
+    {
+      "id": "alt-okee",
+      "name": "Lake Okeechobee Alternate Routes",
+      "branch_mile": 94,
+      "rejoin_mile": 150,
+      "ui_radio_name": "alt-okee",
+      "sections": [
+        {
+          "section_id": "okeechobee_west",
+          "name": "Okeechobee West \u2014 Main Spine",
+          "delta_miles": 0,
+          "is_default": true,
+          "display_miles": 56
+        },
+        {
+          "section_id": "okee_east",
+          "name": "Okeechobee East \u2014 Alternate",
+          "delta_miles": 64,
+          "is_default": false,
+          "display_miles": 120
+        }
+      ]
+    },
+    {
+      "id": "alt-orlando-ocala-loop",
+      "name": "Ocala-Orlando Loop Alternate Routes",
+      "branch_mile": 240,
+      "rejoin_mile": 438,
+      "ui_radio_name": "alt-ocala-loop",
+      "sections": [
+        {
+          "section_id": "eastern_corridor",
+          "name": "Eastern Corridor \u2014 Main Spine",
+          "delta_miles": 0,
+          "is_default": true,
+          "display_miles_approx": 193,
+          "section_ids": [
+            "three_lakes",
+            "bull_creek",
+            "tosohatchee",
+            "lake_jessup",
+            "cassia",
+            "ocala_south"
+          ]
+        },
+        {
+          "section_id": "western_corridor",
+          "name": "Western Corridor \u2014 Alternate",
+          "delta_miles": -36,
+          "is_default": false,
+          "display_miles_approx": 157,
+          "note": "Mileage derived from geographic S-to-N extent per section after data corrections. Verify against FTA before publishing.",
+          "section_ids": [
+            "upper_kiss",
+            "reedy_creek",
+            "green_swamp_east",
+            "green_swamp_west",
+            "croom",
+            "citrus",
+            "cfgwest",
+            "cfgeast_ocalawest"
+          ]
+        }
+      ]
+    }
+  ]
+}
