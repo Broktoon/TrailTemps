@@ -3,13 +3,145 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>National Scenic Trail Weather Planner — Florida Trail — Coming Next</title>
+  <title>National Scenic Trail Weather Planner — Florida Trail</title>
+
+  <!-- Site CSS (root-relative so it works from /trails/... pages) -->
   <link rel="stylesheet" href="/css/styles.css" />
+
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+
   <style>
-    .coming-wrap { max-width: 900px; margin: 0 auto; padding: 24px 16px 40px; }
-    .coming-card { padding: 18px; border: 1px solid rgba(0,0,0,0.12); border-radius: 14px; background: rgba(255,255,255,0.9); }
-    .logo { width: 180px; height: 180px; object-fit: contain; display:block; margin: 10px auto 14px; }
-    .center { text-align: center; }
+    /* -------------------------------------------------------
+       Florida Trail: alternate-group toggle rows
+       ------------------------------------------------------- */
+    .alt-group-block {
+      margin: 10px 0 4px;
+      padding: 10px 12px;
+      border: 1px solid #d0d0d0;
+      border-radius: 8px;
+      background: #fafafa;
+      max-width: 680px;
+    }
+    .alt-group-block legend {
+      font-weight: 700;
+      font-size: 0.88rem;
+      padding: 0 4px;
+      color: #333;
+    }
+    .alt-group-block .alt-options {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .alt-group-block label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.88rem;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .alt-delta {
+      font-size: 0.78rem;
+      color: #666;
+      font-style: italic;
+    }
+
+    /* -------------------------------------------------------
+       Florida Trail: Weather Planner region/section/mile selectors
+       ------------------------------------------------------- */
+    .control-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.75rem;
+      align-items: flex-end;     /* align labels to bottom so button lines up */
+    }
+
+    /* Stacked label+select columns */
+    .ft-select-col {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.9rem;
+    }
+    .ft-select-col label {
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .ft-select-col select,
+    .ft-select-col input[type="number"] {
+      padding: 0.35rem 0.45rem;
+      font-size: 0.9rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background: #fff;
+      min-width: 0;
+    }
+
+    /* Section info line shown beneath the section dropdown */
+    #ftSectionInfo {
+      font-size: 0.82rem;
+      color: #555;
+      font-style: italic;
+      margin: 2px 0 0 0;
+      min-height: 1.1em;
+    }
+
+    /* Mile input sizing */
+    #ftMileInput {
+      width: 6rem;
+    }
+
+    /* Mile range hint shown next to input */
+    #ftMileRangeHint {
+      font-size: 0.8rem;
+      color: #666;
+      font-style: italic;
+      align-self: center;
+      padding-top: 18px;   /* nudge to align with input baseline */
+    }
+
+    @media (max-width: 600px) {
+      .ft-select-col {
+        width: 100%;
+      }
+      #ftMileRangeHint {
+        padding-top: 0;
+      }
+    }
+
+    /* Apparent temperature annotations in forecast table */
+    .feels-hotter {
+      font-size: 0.8rem;
+      color: #a03000;
+      font-style: italic;
+    }
+    .feels-cooler {
+      font-size: 0.8rem;
+      color: #0055aa;
+      font-style: italic;
+    }
+
+    /* Blue button — primary action buttons */
+    .btn-primary {
+      padding: 10px 22px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 6px;
+      border: none;
+      background: #2a6ebb;
+      color: #fff;
+      cursor: pointer;
+      transition: background 120ms ease;
+    }
+    .btn-primary:hover {
+      background: #1d56a0;
+    }
   </style>
 </head>
 
@@ -20,18 +152,23 @@
 
     <div class="header-text">
       <div class="title-with-logo">
-        <img src="/images/Florida_Trail.png"
-             alt="Florida Trail logo"
+        <img src="/images/TrailTemps_Logo.png"
+             alt="TrailTemps logo"
              class="trail-page-logo">
 
         <div class="title-stack">
           <h1>Florida Trail</h1>
           <div class="sub-brand"><em>TrailTemps</em> - National Scenic Trail Weather Planner</div>
         </div>
+
+        <img src="/images/Florida_Trail.png"
+             alt="Florida Trail logo"
+             class="trail-page-logo">
       </div>
 
       <p class="sub">
-        Coming soon — this page is reserved for the FT version of the planner. This version will have a particular emphasis on the dangers of humidity and heat index, and will be organized by section/segment rather than just mile along the trail.
+        <br>
+        Time your Florida Trail hike, find temperature extremes during that time, and get 5-day weather forecasts for any point along the trail. The two main tools are directly below, with various notes and other resources following at the bottom of the page.
       </p>
     </div>
 
@@ -41,14 +178,14 @@
 
         <nav class="trail-selector-menu" aria-label="Trail selector">
           <a class="trail-option" href="/trails/appalachian-trail/">
-            Appalachian Trail
+            Appalachian Trail <span class="trail-status"></span>
           </a>
 
           <a class="trail-option current" href="/trails/florida-trail/" aria-current="page">
-            Florida Trail <span class="trail-status">(Current — Coming Next)</span>
+            Florida Trail <span class="trail-status">(Current)</span>
           </a>
 
-          <a class="trail-option current" href="/trails/continental-divide-trail/" aria-current="page">
+          <a class="trail-option" href="/trails/continental-divide-trail/">
             Continental Divide Trail <span class="trail-status">(Coming Soon)</span>
           </a>
 
@@ -68,31 +205,532 @@
   </div>
 </header>
 
-  <main class="coming-wrap">
-    <div class="coming-card center">
-      <img class="logo" src="/images/Florida_Trail.png" alt="Florida Trail logo">
-      <h2>Coming Soon</h2>
-      <p>This page is reserved for the FT version of the planner.</p>
-      <p><a href="index.html">← Back to trail selector</a></p>
-    </div>
+  <main>
+
+    <!-- =====================================================
+         Card 1: Hike Duration / End Date Calculator
+         ===================================================== -->
+    <section class="controls" aria-label="Hike duration calculator">
+      <h2>Hike Duration (End Date) and Expected Weather Extremes</h2>
+      <p class="card-instructions">
+        Choose a direction and northern terminus, a start month/day, and your expected miles per day.
+        If you plan to take an alternate route instead of the primary path, select it below — the total
+        mileage will adjust automatically. You will receive an estimated hike duration and end date,
+        along with a map showing where the expected highest and lowest temperatures should be encountered.
+      </p>
+
+      <div class="control-row">
+
+        <!-- Start Date -->
+        <div class="ft-select-col">
+          <label>Start Date:</label>
+          <span style="display:flex; gap: 6px; align-items:center;">
+            <select id="durMonthSelect"></select>
+            <select id="durDaySelect"></select>
+          </span>
+        </div>
+
+        <!-- Miles per Day -->
+        <div class="ft-select-col">
+          <label for="durMilesPerDay">Miles per Day:</label>
+          <input id="durMilesPerDay" type="number" inputmode="decimal" min="1" step="1" placeholder="e.g., 12" style="width:6rem;" />
+        </div>
+
+        <!-- Direction + terminus combined -->
+        <div class="ft-select-col">
+          <label for="durDirectionSelect">Direction &amp; Destination:</label>
+          <select id="durDirectionSelect">
+            <optgroup label="Northbound">
+              <option value="NOBO_PICKENS">Big Cypress to Fort Pickens (Main)</option>
+              <option value="NOBO_BLACKWATER">Big Cypress to Blackwater (Alt.)</option>
+            </optgroup>
+            <optgroup label="Southbound">
+              <option value="SOBO_PICKENS">Fort Pickens to Big Cypress (Main)</option>
+              <option value="SOBO_BLACKWATER">Blackwater to Big Cypress (Alt.)</option>
+            </optgroup>
+          </select>
+        </div>
+
+      </div><!-- /.control-row -->
+
+      <!-- Alternate route selections -->
+      <div id="durAlternatesWrap" style="margin-top: 12px; width: 100%;">
+
+        <!-- Okeechobee Crossing alternate -->
+        <fieldset class="alt-group-block" id="altGroupOkee">
+          <legend>Lake Okeechobee Alternate Routes</legend>
+          <div class="alt-options">
+            <label>
+              <input type="radio" name="alt-okee" value="okeechobee_west" checked>
+              Okeechobee West — Main Spine
+              <span class="alt-delta">(56 mi)</span>
+            </label>
+            <label>
+              <input type="radio" name="alt-okee" value="okee_east">
+              Okeechobee East — Alternate
+              <span class="alt-delta">(120 mi &nbsp;·&nbsp; +64 mi longer)</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- Ocala-Orlando Loop alternate -->
+        <!--
+          Eastern Corridor (main spine): Bull Creek, Three Lakes, Tosohatchee,
+            Lake Jessup, Cassia, Ocala South  (sections with spine miles 276–438)
+          Western Corridor (alternate):  Upper Kissimmee, Reedy Creek,
+            Green Swamp East, Richloam–Green Swamp West, Croom, Citrus,
+            CFG West, CFG East & Ocala West  (named-route sections in Central/Northern)
+          These two corridors are mutually exclusive through the Orlando-area loop.
+        -->
+        <fieldset class="alt-group-block" id="altGroupOcalaLoop">
+          <legend>Ocala-Orlando Loop Alternate Routes</legend>
+          <div class="alt-options">
+            <label>
+              <input type="radio" name="alt-ocala-loop" value="eastern_corridor" checked>
+              Eastern Corridor — Main Spine
+              <span class="alt-delta">(193 mi)</span>
+            </label>
+            <label>
+              <input type="radio" name="alt-ocala-loop" value="western_corridor">
+              Western Corridor — Alternate
+              <span class="alt-delta">(~157 mi &nbsp;·&nbsp; −36 mi shorter)</span>
+            </label>
+          </div>
+        </fieldset>
+
+      </div><!-- /#durAlternatesWrap -->
+
+      <div style="margin-top: 12px; width: 100%;">
+        <button id="durBtn" type="button" class="btn-primary">Estimate End Date and Weather Extremes</button>
+      </div>
+
+      <div id="durStatus" class="status"></div>
+      <div id="durResult"></div>
+
+      <!-- Temperature Extremes Results + Map (Duration Tool) -->
+      <div id="durExtremesWrap" style="display:none; margin-top:16px;">
+        <h2>Temperature Extremes During Your Hike</h2>
+        <div id="durExtremesMap"></div>
+
+        <p class="data-attribution map-attribution">
+          Mapping data provided by
+          <a href="https://www.openstreetmap.org/copyright"
+             target="_blank"
+             rel="noopener">OpenStreetMap</a>
+          under the Open Database License.
+        </p>
+
+        <div id="durExtremesHot"></div>
+        <div id="durExtremesCold" style="margin-top:12px;"></div>
+      </div>
+    </section>
+
+    <!-- Simple clean separation -->
+    <hr class="card-sep" />
+
+    <!-- =====================================================
+         Card 2: Weather Planner
+         ===================================================== -->
+    <section class="controls" aria-label="Weather planner controls">
+      <div class="section-title-block">
+        <h2>Weather Planner</h2>
+        <p class="data-attribution">
+          Weather data provided by
+          <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a>
+          under the 4.0 International (CC BY 4.0) license.
+        </p>
+      </div>
+
+      <p class="card-instructions">
+        Select a region, then a trail section within that region. Enter a section mile (miles from
+        the southern end of that section) and choose a planning date. You will receive current
+        conditions at that location, a 5-day forecast, and a recent 7-year average of weather
+        conditions for that date.
+      </p>
+
+      <div class="control-row">
+
+        <!-- Planning date -->
+        <div class="ft-select-col">
+          <label>Planning Date:</label>
+          <span style="display:flex; gap: 6px; align-items:center;">
+            <select id="monthSelect"></select>
+            <select id="daySelect"></select>
+          </span>
+        </div>
+
+        <!-- Region selector -->
+        <div class="ft-select-col">
+          <label for="regionSelect">Region:</label>
+          <select id="regionSelect">
+            <option value="southern">Southern</option>
+            <option value="central">Central</option>
+            <option value="northern">Northern</option>
+            <option value="panhandle">Panhandle</option>
+          </select>
+        </div>
+
+        <!-- Section selector (populated by JS when region changes) -->
+        <div class="ft-select-col">
+          <label for="sectionSelect">Section (*=Alt. Route):</label>
+          <select id="sectionSelect"></select>
+        </div>
+
+        <!-- Mile input + range indicator side by side -->
+        <div class="ft-select-col">
+          <label for="ftMileInput">Section Mile:</label>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <input id="ftMileInput" type="number" inputmode="numeric"
+                   min="0" max="1204" step="1" placeholder="e.g., 10" />
+            <p id="ftSectionInfo" style="margin:0; font-size:0.82rem; color:#555; font-style:italic; white-space:nowrap;"></p>
+          </div>
+        </div>
+
+        <!-- Get Weather button on its own full-width row -->
+        <div style="width:100%; margin-top:6px;">
+          <button id="goBtn" type="button" class="btn-primary">Get Weather</button>
+        </div>
+
+      </div><!-- /.control-row -->
+
+
+      <section class="map-wrap" id="weatherMapWrap" style="display:none;">
+        <div id="map" aria-label="Map showing selected Florida Trail point"></div>
+
+        <p class="data-attribution map-attribution">
+          Mapping data provided by
+          <a href="https://www.openstreetmap.org/copyright"
+             target="_blank"
+             rel="noopener">OpenStreetMap</a>
+          under the Open Database License.
+        </p>
+      </section>
+
+    </section>
+
+    <section class="grid">
+      <div id="planningSummaryBlock"></div>
+      <div id="currentBlock"></div>
+      <div id="forecastBlock"></div>
+    </section>
+
+    <!-- Simple clean separation -->
+    <hr class="card-sep" />
+
+    <!-- =====================================================
+         Weather Data Notes + Resources
+         ===================================================== -->
+    <section class="weather-data-notes" aria-labelledby="weather-data-notes-title">
+      <h2 id="weather-data-notes-title">Notes on Weather and Map Data</h2>
+
+      <div class="weather-data-notes__body">
+
+        <section class="weather-data-notes__subsection" aria-labelledby="notes-on-data-title">
+          <h3 id="notes-on-data-title">Notes on Weather Data</h3>
+
+          <div class="weather-data-notes__content" id="notes-on-data-content">
+            <p>
+              This site uses average daily <em>apparent</em> maximum and minimum temperature data from
+              the last seven years, along with average <em>actual</em> temperatures. So why both?
+            </p>
+            <p>
+              In many areas you can rely on straight high and low temperatures to gauge comfort and
+              safety. Even on the AT, where the main cold-weather concerns (freezing nights in the
+              Smokies, New England shoulder seasons) dominate planning, a simple temperature metric
+              is sufficient.
+            </p>
+            <p>
+              The Florida Trail is different. One of the primary concerns for FT hikers is the
+              combination of heat and humidity that can create genuinely dangerous conditions at
+              certain times of year — particularly in August in the Big Cypress swamplands. To ensure
+              hikers are properly prepared, this planner provides information on both actual
+              temperature and heat index.
+            </p>
+            <p>
+              For heat index this planner uses the Steadman methodology, which handles both heat
+              index (humidity-driven) and wind chill at very low temperatures. The extreme cold
+              scenarios are less of a concern for most FT hikers, but building a flexible tool now
+              also eases development of future planners for the PCT and CDT where both extremes
+              matter greatly.
+            </p>
+          </div>
+        </section>
+
+        <section class="weather-data-notes__subsection" aria-labelledby="notes-on-map-data-title">
+          <h3 id="notes-on-map-data-title">Notes on Map Data</h3>
+
+          <div class="weather-data-notes__content" id="notes-on-map-data-content">
+            <p>
+              Mapping data used on this site was pulled from as many official sources as possible,
+              but even these official sources often differed on some of the details. Some define
+              regions differently, there are multiple side trails and spurs, and some alternate
+              trails split in different ways. So for those who are interested (or confused!) I
+              thought some additional notes would be helpful.
+            </p>
+            <p>
+              My two gold standards for the official route were the Florida Trail Association (FTA)
+              regional definitions, ArcGIS mapping data, and the US Forest Service. I also pulled
+              data from the OpenStreetMap database, as well as websites of various state and local
+              parks the FT runs through. Some specific issues:
+            </p>
+            <ul class="weather-data-notes__links">
+              <li>
+                <strong>Regions:</strong> Endpoints for the regions and segments were defined as
+                much as possible from the FTA, though their descriptions were not always as precise
+                as one would hope. I utilized both the narrative as well as the overall length to
+                develop the general boundaries, but where they weren't clearly defined I used
+                alternates such as the FT crossing a major highway, or dividing an "unclaimed" area
+                equally between its two neighbors. Admittedly not an exact science, but I think it
+                is the solution that will be most intuitive to most hikers and most useful to them.
+              </li>
+              <li>
+                <strong>Alternate Corridors:</strong> In addition to the main spine of the FT, the
+                mapping data also uses Western and Eastern corridors to describe some of the main
+                alternate routings. As much as I wanted to use that terminology as well, it seemed
+                too imprecise and did not cover the variety of alternate trail options the FT
+                allows. So where applicable I also describe them by the area or loop they are
+                associated with, such as the Lake Okeechobee or Orlando/Ocala areas.
+              </li>
+              <li>
+                <strong>Ocean-to-Lake Option:</strong> Some parts of the hiking community have been
+                advocating for a new 61-mile spur trail to be incorporated into the main Florida
+                Trail route from the eastern side of the Lake Okeechobee loop to Hobe Sound beach
+                on the Atlantic Ocean. As this is still a proposal, as it does not connect to a
+                larger trail segment (like the Blackwater Extension does into Georgia), and taking
+                it would bypass a significant amount of the main trail, I have not included it with
+                this tool. However, you can find general information at the
+                <a href="https://loxahatchee.floridatrail.org/" target="_blank" rel="noopener noreferrer">Loxahatchee FTA Regional Chapter</a>
+                website and find details on the actual route on the
+                <a href="https://www.alltrails.com" target="_blank" rel="noopener noreferrer">AllTrails</a>
+                site.
+              </li>
+              <li>
+                <strong>Spurs and Side Trails:</strong> Besides the main spine of the trail and
+                various major alternate corridor routes, there are also various side trails
+                (connecting different parts of the main and alternate trail) and spurs which start
+                on the trail but then veer off and don't connect back to the main FT. There are
+                even a few outliers considered "official" alternates that don't directly connect to
+                the main trail at all. I tried to include these on the display map for completeness
+                purposes, though the points used for hiking duration and weather pulls mainly ignore
+                small spurs and non-connecting side trails.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="weather-data-notes__subsection" aria-labelledby="additional-resources-title">
+          <h3 id="additional-resources-title">Additional Resources</h3>
+
+          <div class="weather-data-notes__content" id="additional-resources-content">
+            <ul class="weather-data-notes__links">
+              <li>
+                <a href="https://floridatrail.org/" target="_blank" rel="noopener noreferrer">
+                  <strong>Florida Trail Association</strong>
+                </a>
+                — Official site of the FTA, responsible for managing and maintaining the Florida
+                Trail. Of particular interest are the
+                <a href="https://floridatrail.org/plan-your-hike/regions-sections/" target="_blank" rel="noopener noreferrer">listing of FT Regions and Sections</a>
+                and the
+                <a href="https://floridatrail.org/trail-closures-and-notices/" target="_blank" rel="noopener noreferrer">current trail closures and notices</a>.
+              </li>
+
+              <li>
+                <a href="https://www.thruhikeflorida.com/" target="_blank" rel="noopener noreferrer">
+                  <strong>Thru-Hike Florida</strong>
+                </a>
+                — Extensive guide to planning and completing a thru-hike of the Florida Trail,
+                covering costs, logistics, gear, and health and safety considerations.
+              </li>
+
+              <li>
+                <a href="https://www.fs.usda.gov/trails/florida-nst/nature" target="_blank" rel="noopener noreferrer">
+                  <strong>Nature on the Florida Trail</strong>
+                </a>
+                — USDA guide to the flora and fauna of the Florida Trail, walking through the
+                unique ecosystems found in each section of the trail.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+      </div>
+    </section>
+
   </main>
 
-  <script>
-  window.TRAIL_SLUG = "florida-trail";
-</script>
-<script defer src="js/app.js"></script>
-
-<!-- Donation block -->
-<div class="donation-block">
-  <p class="donation-text">
-    Thank you for visiting and trying these tools. They are a labor of love for me, and I make no money from this site. However, if you wish to help support the site please consider
-    <a href="https://www.buymeacoffee.com/Broktoon" target="_blank" rel="noopener noreferrer">Buying Me a Coffee</a> — donations of $1, $5, or even $20 are deeply appreciated. I promise every cent will go to the ongoing operations, maintenance, development, and expansion of the site.
-  </p>
-  <a class="bmc-button" href="https://www.buymeacoffee.com/Broktoon" target="_blank" rel="noopener noreferrer" aria-label="Buy Me a Coffee">Buy Me a Coffee</a>
-</div>
-
   <footer class="site-footer">
-    <div class="small">Informational only.</div>
+    <div class="small">
+      Informational only. Always verify conditions and heed local advisories.
+    </div>
   </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Trail identity -->
+  <script>window.SITE_BASE = "";</script>
+  <script>window.TRAIL_SLUG = "florida-trail";</script>
+
+  <!-- -------------------------------------------------------
+       Inline bootstrap: FT section metadata + UI wiring.
+       Keeps the HTML self-contained for review; the full
+       ft_meta.json loader will be handled in app.js.
+       ------------------------------------------------------- -->
+  <script>
+    /*
+      FT_SECTIONS_BOOTSTRAP is an ordered array used ONLY to populate the
+      HTML selectors before app.js loads ft_meta.json.  It mirrors the
+      canonical section list in ft_meta.json (Section V-F of the canvas).
+
+      Structure per entry:
+        id          – matches section_id in points.json
+        name        – display name
+        region_id   – used to filter by regionSelect
+        mile_start  – southern boundary (axis_mile)
+        mile_end    – northern boundary (axis_mile)
+        is_alt      – true if this section is an alternate (hidden unless chosen)
+        alt_group   – which alt group this section belongs to (optional)
+    */
+    window.FT_SECTIONS_BOOTSTRAP = [
+      // ── Southern ──────────────────────────────────────────
+      { id:"big_cypress_south",  name:"Big Cypress South",                region_id:"southern",  mile_start:0,    mile_end:29   },
+      { id:"big_cypress_north",  name:"Big Cypress North",                region_id:"southern",  mile_start:30,   mile_end:37   },
+      { id:"seminole",           name:"Seminole",                         region_id:"southern",  mile_start:38,   mile_end:56   },
+      { id:"okee_south",         name:"Okeechobee South",                 region_id:"southern",  mile_start:57,   mile_end:93   },
+      { id:"okeechobee_west",    name:"Okeechobee West",                  region_id:"southern",  mile_start:94,   mile_end:150,  alt_group:"alt-okee", is_default_alt:true },
+      { id:"okee_east",          name:"Okeechobee East",                  region_id:"southern",  mile_start:94,   mile_end:150,  alt_group:"alt-okee", is_alt:true         },
+
+      // ── Central ───────────────────────────────────────────
+      { id:"kiss_river",         name:"Kissimmee River",                  region_id:"central",   mile_start:151,  mile_end:200  },
+      { id:"kiss_prairie",       name:"Kissimmee Prairie",                region_id:"central",   mile_start:201,  mile_end:222  },
+      { id:"kicco",              name:"KICCO",                            region_id:"central",   mile_start:223,  mile_end:239  },
+      { id:"three_lakes",        name:"Three Lakes",                      region_id:"central",   mile_start:240,  mile_end:275,  alt_group:"alt-orlando-ocala-loop", is_default_alt:true },
+      { id:"bull_creek",         name:"Bull Creek",                       region_id:"central",   mile_start:276,  mile_end:313,  alt_group:"alt-orlando-ocala-loop", is_default_alt:true },
+      { id:"tosohatchee",        name:"Tosohatchee",                      region_id:"central",   mile_start:314,  mile_end:339,  alt_group:"alt-orlando-ocala-loop", is_default_alt:true },
+      { id:"lake_jessup",        name:"Lake Jessup",                      region_id:"central",   mile_start:340,  mile_end:377,  alt_group:"alt-orlando-ocala-loop", is_default_alt:true },
+      { id:"upper_kiss",         name:"Upper Kissimmee",                  region_id:"central",   mile_start:null, mile_end:null, alt_group:"alt-orlando-ocala-loop", is_alt:true         },
+      { id:"reedy_creek",        name:"Reedy Creek",                      region_id:"central",   mile_start:null, mile_end:null, alt_group:"alt-orlando-ocala-loop", is_alt:true         },
+      { id:"green_swamp_east",   name:"Green Swamp East",                 region_id:"central",   mile_start:null, mile_end:null, alt_group:"alt-orlando-ocala-loop", is_alt:true         },
+      { id:"green_swamp_west",   name:"Richloam \u2013 Green Swamp West", region_id:"central",   mile_start:null, mile_end:null, alt_group:"alt-orlando-ocala-loop", is_alt:true         },
+
+      // ── Northern ──────────────────────────────────────────
+      { id:"cassia",             name:"Cassia",                           region_id:"northern",  mile_start:378,  mile_end:412,  alt_group:"alt-orlando-ocala-loop", is_default_alt:true },
+      { id:"ocala_south",        name:"Ocala South",                      region_id:"northern",  mile_start:413,  mile_end:438,  alt_group:"alt-orlando-ocala-loop", is_default_alt:true },
+      { id:"ocala_north",        name:"Ocala North",                      region_id:"northern",  mile_start:439,  mile_end:484  },
+      { id:"rice_eton_gold",     name:"Rice Creek \u2013 Etoniah \u2013 Gold Head", region_id:"northern", mile_start:485, mile_end:517 },
+      { id:"camp_blanding",      name:"Camp Blanding",                    region_id:"northern",  mile_start:518,  mile_end:546  },
+      { id:"lake_butler_forest", name:"Lake Butler Forest",               region_id:"northern",  mile_start:547,  mile_end:569  },
+      { id:"osceola",            name:"Osceola National Forest",          region_id:"northern",  mile_start:570,  mile_end:591  },
+      { id:"suwannee_river",     name:"Suwannee River",                   region_id:"northern",  mile_start:592,  mile_end:667  },
+      { id:"croom",              name:"Croom",                            region_id:"northern",  mile_start:null, mile_end:null, alt_group:"alt-orlando-ocala-loop", is_alt:true         },
+      { id:"citrus",             name:"Citrus",                           region_id:"northern",  mile_start:null, mile_end:null, alt_group:"alt-orlando-ocala-loop", is_alt:true         },
+      { id:"cfgwest",            name:"Cross Florida Greenway West",      region_id:"northern",  mile_start:null, mile_end:null, alt_group:"alt-orlando-ocala-loop", is_alt:true         },
+      { id:"cfgeast_ocalawest",  name:"CFG East \u0026 Ocala West",       region_id:"northern",  mile_start:null, mile_end:null, alt_group:"alt-orlando-ocala-loop", is_alt:true         },
+
+      // ── Panhandle ─────────────────────────────────────────
+      { id:"apalachicola_east",  name:"Apalachicola East",                region_id:"panhandle", mile_start:668,  mile_end:783  },
+      { id:"apalachicola_west",  name:"Apalachicola West",                region_id:"panhandle", mile_start:784,  mile_end:849  },
+      { id:"chipola",            name:"Chipola",                          region_id:"panhandle", mile_start:850,  mile_end:889  },
+      { id:"econfina_creek",     name:"Econfina Creek",                   region_id:"panhandle", mile_start:890,  mile_end:915  },
+      { id:"pine_log",           name:"Pine Log",                         region_id:"panhandle", mile_start:916,  mile_end:931  },
+      { id:"nokuse",             name:"Nokuse",                           region_id:"panhandle", mile_start:932,  mile_end:959  },
+      { id:"eglin_east",         name:"Eglin East",                       region_id:"panhandle", mile_start:960,  mile_end:979  },
+      { id:"eglin_north",        name:"Eglin North",                      region_id:"panhandle", mile_start:980,  mile_end:1026 },
+      { id:"eglin_west",         name:"Eglin West",                       region_id:"panhandle", mile_start:1027, mile_end:1061 },
+      { id:"seashore",           name:"Seashore (Gulf Islands)",          region_id:"panhandle", mile_start:1062, mile_end:1204 },
+      { id:"blackwater_ext",     name:"Blackwater Extension",             region_id:"panhandle", mile_start:1034, mile_end:1080, is_alt:true },
+    ];
+
+    /* ── Section selector wiring ─────────────────────────── */
+
+    function ftPopulateSections(regionId) {
+      const sel = document.getElementById("sectionSelect");
+      if (!sel) return;
+      sel.innerHTML = "";
+
+      // Which alt sections are currently active (for duration tool)?
+      // For the weather planner we show ALL sections (main + alts) so the
+      // user can still look up weather on alternate route miles.
+      const sections = window.FT_SECTIONS_BOOTSTRAP.filter(
+        s => s.region_id === regionId
+      );
+
+      for (const s of sections) {
+        const opt = document.createElement("option");
+        opt.value = s.id;
+        let label = s.name;
+        if (s.is_alt || s.named_only) label += " *";   // * = alternate or named-route-only section
+        opt.textContent = label;
+        sel.appendChild(opt);
+      }
+
+      ftUpdateSectionInfo();
+    }
+
+    function ftUpdateSectionInfo() {
+      const sectionId = document.getElementById("sectionSelect")?.value;
+      const infoEl    = document.getElementById("ftSectionInfo");
+      const mileInput = document.getElementById("ftMileInput");
+      if (!sectionId || !infoEl) return;
+
+      const sec = window.FT_SECTIONS_BOOTSTRAP.find(s => s.id === sectionId);
+      if (!sec) return;
+
+      if (sec.named_only || sec.mile_start == null) {
+        infoEl.textContent = "Named/roadwalk route — enter miles from your section entry point (0–99).";
+        if (mileInput) {
+          mileInput.min = 0;
+          mileInput.max = 99;
+          mileInput.step = 1;
+          mileInput.placeholder = "e.g., 10";
+          const cur = Number(mileInput.value);
+          if (!cur || cur < 0 || cur > 99) mileInput.value = "";
+        }
+      } else {
+        const secLen = sec.mile_end - sec.mile_start;
+        const mid = Math.round(secLen / 2);
+        infoEl.textContent = `Section Range: 0-${secLen} Miles`;
+        if (mileInput) {
+          mileInput.min = 0;
+          mileInput.max = secLen;
+          mileInput.step = 1;
+          mileInput.placeholder = `e.g., ${mid}`;
+          const cur = Number(mileInput.value);
+          if (!cur || cur < 0 || cur > secLen) mileInput.value = "";
+        }
+      }
+    }
+
+    /* ── Boot ──────────────────────────────────────────────── */
+    document.addEventListener("DOMContentLoaded", function () {
+      // Populate sections for first region
+      const regionSel = document.getElementById("regionSelect");
+      if (regionSel) {
+        ftPopulateSections(regionSel.value);
+        regionSel.addEventListener("change", () => ftPopulateSections(regionSel.value));
+      }
+
+      const sectionSel = document.getElementById("sectionSelect");
+      if (sectionSel) {
+        sectionSel.addEventListener("change", ftUpdateSectionInfo);
+      }
+    });
+  </script>
+
+  <script defer src="js/app.js"></script>
+
+  <!-- Donation block -->
+  <div class="donation-block">
+    <p class="donation-text">
+      Thank you for visiting and trying these tools. They are a labor of love for me, and I make
+      no money from this site. However, if you wish to help support the site please consider
+      <a href="https://www.buymeacoffee.com/ihrhzL0ZC5" target="_blank" rel="noopener noreferrer">Buying Me a Coffee</a>
+      — donations of $1, $5, or even $20 are deeply appreciated. I promise every cent will go to
+      the ongoing operations, maintenance, development, and expansion of the site.
+    </p>
+    <a class="bmc-button" href="https://www.buymeacoffee.com/ihrhzL0ZC5"
+       target="_blank" rel="noopener noreferrer" aria-label="Buy Me a Coffee">Buy Me a Coffee</a>
+  </div>
+
 </body>
 </html>
