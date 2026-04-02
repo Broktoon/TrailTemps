@@ -185,8 +185,8 @@
             Florida Trail <span class="trail-status">(Current)</span>
           </a>
 
-          <a class="trail-option current" href="/trails/new-england-trail/" aria-current="page">
-            New England Trail <span class="trail-status">(Coming Next)</span>
+          <a class="trail-option" href="/trails/new-england-trail/">
+            New England Trail <span class="trail-status"></span>
           </a>
 
           <a class="trail-option" href="/trails/continental-divide-trail/">
@@ -223,19 +223,10 @@
         Choose a direction and northern terminus, a start month/day, and your expected miles per day.
         If you plan to take an alternate route instead of the primary path, select it below — the total
         mileage will adjust automatically. You will receive an estimated hike duration and end date,
-        along with a map showing where the expected highest and lowest temperatures should be encountered.
+        along with a map showing where the expected highest and lowest temperatures will be encountered.
       </p>
 
       <div class="control-row">
-
-        <!-- Start Date -->
-        <div class="ft-select-col">
-          <label>Start Date:</label>
-          <span style="display:flex; gap: 6px; align-items:center;">
-            <select id="durMonthSelect"></select>
-            <select id="durDaySelect"></select>
-          </span>
-        </div>
 
         <!-- Miles per Day -->
         <div class="ft-select-col">
@@ -256,6 +247,15 @@
               <option value="SOBO_BLACKWATER">Blackwater to Big Cypress (Alt.)</option>
             </optgroup>
           </select>
+        </div>
+
+        <!-- Start Date -->
+        <div class="ft-select-col">
+          <label>Start Date:</label>
+          <span style="display:flex; gap: 6px; align-items:center;">
+            <select id="durMonthSelect"></select>
+            <select id="durDaySelect"></select>
+          </span>
         </div>
 
       </div><!-- /.control-row -->
@@ -311,8 +311,8 @@
         <button id="durBtn" type="button" class="btn-primary">Estimate End Date and Weather Extremes</button>
       </div>
 
-      <div id="durStatus" class="status"></div>
-      <div id="durResult"></div>
+      <div id="durStatus" class="status" style="width:100%;"></div>
+      <div id="durResult" style="width:100%;"></div>
 
       <!-- Temperature Extremes Results + Map (Duration Tool) -->
       <div id="durExtremesWrap" style="display:none; margin-top:16px;">
@@ -400,6 +400,7 @@
 
       </div><!-- /.control-row -->
 
+      <div id="weatherStatus" class="status"></div>
 
       <section class="map-wrap" id="weatherMapWrap" style="display:none;">
         <div id="map" aria-label="Map showing selected Florida Trail point"></div>

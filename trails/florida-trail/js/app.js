@@ -180,6 +180,9 @@ function setDisplayIfExists(id, val) {
 function setDurStatus(msg) {
   const s = el("durStatus"); if (s) s.textContent = msg;
 }
+function setWeatherStatus(msg) {
+  const s = el("weatherStatus"); if (s) s.textContent = msg;
+}
 
 function safeJSONParse(s) {
   try { return JSON.parse(s); } catch { return null; }
@@ -841,7 +844,7 @@ function renderCurrent(forecastData, point) {
     <table>
       <tr><th>Location</th><td>${secName} — Section Mile ~${fmtMile(point.sec_mile)}</td></tr>
       <tr><th>Temperature</th><td>${fmtTemp(c.temperature)}</td></tr>
-      <tr><th>Wind</th><td>${Math.round(c.windspeed)} mph (dir ${Math.round(c.winddirection)}°)</td></tr>
+      <tr><th>Wind</th><td>${Math.round(c.windspeed)} mph</td></tr>
       <tr><th>Time</th><td>${c.time}</td></tr>
     </table>
   `;
@@ -904,9 +907,10 @@ async function runWeather() {
   const secMileRaw = el("ftMileInput")?.value;
   const monthDay = getSelectedMonthDay("monthSelect","daySelect");
 
-  if (!sectionId) { setDurStatus("Please select a section."); return; }
-  if (secMileRaw === "" || secMileRaw == null) { setDurStatus("Please enter a section mile."); return; }
-  if (!monthDay) { setDurStatus("Please choose a planning date."); return; }
+  setWeatherStatus("");
+  if (!sectionId) { setWeatherStatus("Please select a section."); return; }
+  if (secMileRaw === "" || secMileRaw == null) { setWeatherStatus("Please enter a section mile."); return; }
+  if (!monthDay) { setWeatherStatus("Please choose a planning date."); return; }
 
   const secMile = Number(secMileRaw);
 
@@ -915,7 +919,7 @@ async function runWeather() {
   const activeSec = metaSections.find(s => s.id === sectionId);
   const secMax = activeSec?.mile_end != null ? (activeSec.mile_end - (activeSec.mile_start || 0)) : 99;
   if (secMile < 0 || secMile > secMax) {
-    setDurStatus("Section mileage entered must be within the listed range. Please try again.");
+    setWeatherStatus("Section mileage entered must be within the listed range. Please try again.");
     return;
   }
 

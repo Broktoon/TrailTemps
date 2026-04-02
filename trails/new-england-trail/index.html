@@ -3,20 +3,89 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>National Scenic Trail Weather Planner — New England Trail — Coming Next</title>
+  <title>National Scenic Trail Weather Planner — New England Trail</title>
+
   <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
   <style>
-    .coming-wrap { max-width: 900px; margin: 0 auto; padding: 24px 16px 40px; }
-    .coming-card { padding: 18px; border: 1px solid rgba(0,0,0,0.12); border-radius: 14px; background: rgba(255,255,255,0.9); }
-    .logo { width: 180px; height: 180px; object-fit: contain; display:block; margin: 10px auto 14px; }
-    .center { text-align: center; }
+    /* -------------------------------------------------------
+       NET: Weather Planner section/mile selectors
+       ------------------------------------------------------- */
+    .control-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.75rem;
+      align-items: flex-end;
+    }
+
+    .ft-select-col {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.9rem;
+    }
+    .ft-select-col label {
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .ft-select-col select,
+    .ft-select-col input[type="number"] {
+      padding: 0.35rem 0.45rem;
+      font-size: 0.9rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background: #fff;
+      min-width: 0;
+    }
+
+    #netSectionInfo {
+      font-size: 0.82rem;
+      color: #555;
+      font-style: italic;
+      margin: 2px 0 0 0;
+      min-height: 1.1em;
+    }
+
+    #netMileInput {
+      width: 6rem;
+    }
+
+    @media (max-width: 600px) {
+      .ft-select-col {
+        width: 100%;
+      }
+    }
+
+    /* Apparent temperature annotations in forecast table */
+    .feels-hotter {
+      font-size: 0.8rem;
+      color: #a03000;
+      font-style: italic;
+    }
+    .feels-cooler {
+      font-size: 0.8rem;
+      color: #0055aa;
+      font-style: italic;
+    }
+
+    /* Blue button */
+    .btn-primary {
+      padding: 10px 22px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 6px;
+      border: none;
+      background: #2a6ebb;
+      color: #fff;
+      cursor: pointer;
+      transition: background 120ms ease;
+    }
+    .btn-primary:hover {
+      background: #1d56a0;
+    }
   </style>
 </head>
-
-<script>
-  window.TRAIL_SLUG = "new-england-trail";
-</script>
-<script defer src="/js/app.js"></script>
 
 <body data-trail="new-england-trail">
 
@@ -25,39 +94,44 @@
 
     <div class="header-text">
       <div class="title-with-logo">
-        <img src="/images/new_england_trail-logo.png"
-             alt="New England Trail logo"
+        <img src="/images/TrailTemps_Logo.png"
+             alt="TrailTemps logo"
              class="trail-page-logo">
 
         <div class="title-stack">
           <h1>New England Trail</h1>
           <div class="sub-brand"><em>TrailTemps</em> - National Scenic Trail Weather Planner</div>
         </div>
+
+        <img src="/images/new_england_trail-logo.png"
+             alt="New England Trail logo"
+             class="trail-page-logo">
       </div>
 
       <p class="sub">
-        Coming soon — this page is reserved for the NET version of the planner.
+        <br>
+        Time your New England Trail hike, find temperature extremes during that time, and get 5-day weather forecasts for any point along the trail. The two main tools are directly below, with various notes and other resources following at the bottom of the page.
       </p>
     </div>
 
     <div class="header-actions">
       <details class="trail-selector">
-        <summary class="trail-selector-btn">Trail ▾</summary>
+        <summary class="trail-selector-btn">Trail &#9660;</summary>
 
         <nav class="trail-selector-menu" aria-label="Trail selector">
           <a class="trail-option" href="/trails/appalachian-trail/">
-            Appalachian Trail
+            Appalachian Trail <span class="trail-status"></span>
           </a>
 
-          <a class="trail-option current" href="/trails/florida-trail/" aria-current="page">
+          <a class="trail-option" href="/trails/florida-trail/">
             Florida Trail <span class="trail-status"></span>
           </a>
 
           <a class="trail-option current" href="/trails/new-england-trail/" aria-current="page">
-            New England Trail <span class="trail-status">(Current — Coming Next)</span>
+            New England Trail <span class="trail-status">(Current)</span>
           </a>
 
-          <a class="trail-option current" href="/trails/continental-divide-trail/" aria-current="page">
+          <a class="trail-option" href="/trails/continental-divide-trail/">
             Continental Divide Trail <span class="trail-status">(Coming Soon)</span>
           </a>
 
@@ -80,26 +154,307 @@
   </div>
 </header>
 
-  <main class="coming-wrap">
-    <div class="coming-card center">
-      <img class="logo" src="/images/new_england_trail-logo.png" alt="New England Trail logo">
-      <h2>Coming Next</h2>
-      <p>This page is reserved for the NET version of the planner.</p>
-      <p><a href="index.html">← Back to trail selector</a></p>
-    </div>
+  <main>
+
+    <!-- =====================================================
+         Card 1: Hike Duration / End Date Calculator
+         ===================================================== -->
+    <section class="controls" aria-label="Hike duration calculator">
+      <h2>Hike Duration (End Date) and Expected Weather Extremes</h2>
+      <p class="card-instructions">
+        Choose a direction and destination, a start month/day, and your expected miles per day.
+        You will receive an estimated hike duration and end date, along with a map showing
+        where the expected highest and lowest temperatures will be encountered.
+      </p>
+
+      <div class="control-row">
+
+        <!-- Miles per Day -->
+        <div class="ft-select-col">
+          <label for="durMilesPerDay">Miles per Day:</label>
+          <input id="durMilesPerDay" type="number" inputmode="decimal" min="1" step="1" placeholder="e.g., 12" style="width:6rem;" />
+        </div>
+
+        <!-- Direction + Destination -->
+        <div class="ft-select-col">
+          <label for="durDirectionSelect">Direction &amp; Destination:</label>
+          <select id="durDirectionSelect">
+            <optgroup label="Northbound">
+              <option value="nobo_main">Guilford, CT to Royalston Falls, MA (Main)</option>
+              <option value="nobo_alt">Middletown, CT to Royalston Falls, MA (Alt.)</option>
+            </optgroup>
+            <optgroup label="Southbound">
+              <option value="sobo_main">Royalston Falls, MA to Guilford, CT (Main)</option>
+              <option value="sobo_alt">Royalston Falls, MA to Middletown, CT (Alt.)</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <!-- Start Date -->
+        <div class="ft-select-col">
+          <label>Start Date:</label>
+          <span style="display:flex; gap: 6px; align-items:center;">
+            <select id="durMonthSelect"></select>
+            <select id="durDaySelect"></select>
+          </span>
+        </div>
+
+      </div><!-- /.control-row -->
+
+      <div style="margin-top: 12px; width: 100%;">
+        <button id="durBtn" type="button" class="btn-primary">Estimate End Date and Weather Extremes</button>
+      </div>
+
+      <div id="durStatus" class="status" style="width:100%;"></div>
+      <div id="durResult" style="width:100%;"></div>
+
+      <!-- Temperature Extremes Results + Map -->
+      <div id="durExtremesWrap" style="display:none; margin-top:16px;">
+        <h2>Temperature Extremes During Your Hike</h2>
+        <div id="durExtremesMap"></div>
+
+        <p class="data-attribution map-attribution">
+          Mapping data provided by
+          <a href="https://www.openstreetmap.org/copyright"
+             target="_blank" rel="noopener">OpenStreetMap</a>
+          under the Open Database License.
+        </p>
+
+        <div id="durExtremesHot"></div>
+        <div id="durExtremesCold" style="margin-top:12px;"></div>
+      </div>
+    </section>
+
+    <hr class="card-sep" />
+
+    <!-- =====================================================
+         Card 2: Weather Planner
+         ===================================================== -->
+    <section class="controls" aria-label="Weather planner controls">
+      <div class="section-title-block">
+        <h2>Weather Planner</h2>
+        <p class="data-attribution">
+          Weather data provided by
+          <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a>
+          under the 4.0 International (CC BY 4.0) license.
+        </p>
+      </div>
+
+      <p class="card-instructions">
+        Select a trail section, then enter a mile within that section's range. Choose a planning
+        date to receive current conditions, a 5-day forecast, and a 7-year average for that date
+        and location. For the Middletown Terminus section, enter a spur mile (0&ndash;28).
+        For Connecticut and Massachusetts sections, enter a spine mile within the displayed range.
+      </p>
+
+      <div class="control-row">
+
+        <!-- Planning date -->
+        <div class="ft-select-col">
+          <label>Planning Date:</label>
+          <span style="display:flex; gap: 6px; align-items:center;">
+            <select id="monthSelect"></select>
+            <select id="daySelect"></select>
+          </span>
+        </div>
+
+        <!-- Section selector -->
+        <div class="ft-select-col">
+          <label for="sectionSelect">Section:</label>
+          <select id="sectionSelect">
+            <option value="ct_guilford">Connecticut &mdash; Main Spine</option>
+            <option value="ct_middletown">Connecticut &mdash; Middletown Spur</option>
+            <option value="ma">Massachusetts &mdash; Main Spine</option>
+          </select>
+        </div>
+
+        <!-- Mile input + range indicator -->
+        <div class="ft-select-col">
+          <label for="netMileInput">Mile:</label>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <input id="netMileInput" type="number" inputmode="numeric"
+                   min="1" max="208" step="1" placeholder="e.g., 50" />
+            <p id="netSectionInfo" style="margin:0; font-size:0.82rem; color:#555; font-style:italic; white-space:nowrap;"></p>
+          </div>
+        </div>
+
+        <!-- Get Weather button -->
+        <div style="width:100%; margin-top:6px;">
+          <button id="goBtn" type="button" class="btn-primary">Get Weather</button>
+        </div>
+
+      </div><!-- /.control-row -->
+
+      <div id="weatherStatus" class="status"></div>
+
+      <section class="map-wrap" id="weatherMapWrap" style="display:none;">
+        <div id="map" aria-label="Map showing selected New England Trail point"></div>
+
+        <p class="data-attribution map-attribution">
+          Mapping data provided by
+          <a href="https://www.openstreetmap.org/copyright"
+             target="_blank" rel="noopener">OpenStreetMap</a>
+          under the Open Database License.
+        </p>
+      </section>
+
+    </section>
+
+    <section class="grid">
+      <div id="planningSummaryBlock"></div>
+      <div id="currentBlock"></div>
+      <div id="forecastBlock"></div>
+    </section>
+
+    <hr class="card-sep" />
+
+    <!-- =====================================================
+         Weather Data Notes + Resources
+         ===================================================== -->
+    <section class="weather-data-notes" aria-labelledby="weather-data-notes-title">
+      <h2 id="weather-data-notes-title">Notes on Weather and Map Data</h2>
+
+      <div class="weather-data-notes__body">
+
+        <section class="weather-data-notes__subsection" aria-labelledby="notes-on-data-title">
+          <h3 id="notes-on-data-title">Notes on Weather Data</h3>
+          <div class="weather-data-notes__content">
+            <p>
+              For hikers in Connecticut and Massachusetts, one of the primary weather concerns is cold air temperatures and wind chills. While New England summers can be gorgeous, late fall and winter can get quite cold and hikers need to have proper data for planning their trips during these seasons. 
+              Additionally, hiking through mountain areas (like Mount Monadnock and along the Metacomet Ridge) can expose hikers to significant wind chill.
+            </p>
+            <p>
+              This NET page is our first opportunity to incorporate Wind Chill into the planner, which accounts for how the weather actually feels on exposed skin. This site uses the Steadman methodology for calculating apparent temperature, which both applies heat index when humidity is high and wind chill when temperatures are low with significant wind. vations in the Metacomet Ridge and Mount Tom Range.
+            </p>
+            <p>
+              In addition, we have added cold weather warnings to this planner whenever expected actual or apparent temperatures are expected to fall below 20 degrees Fahrenheit. This is a critical threshold for hikers, as most standard cold-weather camping gear (sleeping bags, insulating layers, shelters) is rated to around 20 degrees. Conditions at or below this level may push typical gear (such as puffy jackets and sleeping bags/quilts) to or beyond their limits, and extra care in gear selection and camp planning is warranted. 
+            </p>
+              This is different than the formal Wind Chill Watches, Warnings, and Advisories issued by the National Weather Service at different levels.  These thresholds may vary by region and time of year. In southern New England, a Wind Chill Warning is typically issued when wind chills are expected to reach −10 °F to −20 °F, and a Wind Chill Advisory at −5 °F to −10 °F — though local NWS offices may adjust these thresholds. Always check your local NWS forecast before heading out in cold conditions.
+            </p>
+          </div>
+        </section>
+
+        <section class="weather-data-notes__subsection" aria-labelledby="notes-on-map-data-title">
+          <h3 id="notes-on-map-data-title">Notes on Map Data</h3>
+          <div class="weather-data-notes__content">
+            <ul class="weather-data-notes__links">
+              <li>
+                <strong>Trail Route:</strong> As one of the shorter National Scenic Trails, the New England Trail runs 200+ miles from Guilford,
+                CT on Long Island Sound to Royalston Falls, MA. It is also one of the newer scenic trails that has been built by connecting a number of existing trails into a single unit. 
+                One of the main components is the Metacomet trail which has one end at the Massachusetts border but the other end near Middletown, CT. The main NET reaches down to the southern shore, but it separates from the Metacomet at appsimately the NET 38 mile marker. 
+                This leaves an option spur to the NET which is not included in the "official" distance, but which is offered here as an alternate trail for those who wish to start/end in Middletown instead. 
+              </li>
+              <li>
+                <strong>Roadway Gaps:</strong> The NET is also one of the newer trails in the scenic trail system, having only been formally designated by law in 2009. It is still a work in progress, and while there are many miles of traditional hiking paths the trail utilizes, there are also portions that require walking along roads and sections with significant gaps. There are all stitched together as single map,
+                and the mileage is calculated as if there are no breaks.  But please note your experience on hiking day may not be as seamless as it appears on these maps. For example, crossing the Connecticut River on foot around mile 220 is not possible, you will need to either arrange a shuttle ride (by car or boat) across, or take a 10-mile detour to an acceptable pedestrian crossing. The Westfield River has similar issues.
+                <br>
+                There are also areas (such as the "Plainville Gap") where there are significant road sections hikers must contend with. This mileage is also included on the map like any other normal part of the trail. Though thankfully State and local governments are working to improve these sections in ways that balacne the needs of hikers and impacted neighbors.    
+
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="weather-data-notes__subsection" aria-labelledby="additional-resources-title">
+          <h3 id="additional-resources-title">Additional Resources</h3>
+          <div class="weather-data-notes__content">
+            <ul class="weather-data-notes__links">
+              <li>
+                <a href="https://newenglandtrail.org/" target="_blank" rel="noopener noreferrer">
+                  <strong>New England Trail:</strong>
+                </a>
+                Official web site for the New England Trail. Includes trail maps,
+                conditions, and planning guides, and information on some unique conditions (like extended roadwalks and major river crossings) inhert to thru-hiking the NET. Also includes the <a href="https://newenglandtrail.org/new-england-nature-watch/" target="_blank" rel="noopener noreferrer">NET Nature Watch</a> resource for encouraging and coordinating hiker participation in citizen science programs tracking area plant and animal populations.
+              </li>
+              <li>
+                <a href="https://www.tpl.org/our-work/new-england-national-scenic-trail" target="_blank" rel="noopener noreferrer">
+                  <strong>NET - Trust for Public Land:</strong>
+                </a>
+                Nonprofit devoted to acquiring and protecting land for public use. As the NET is still a trail under development, the Land Trust's assistance is vital for obtaining rights of way for hikers, ensuring beautiful viewscapes, and working collaboratively with private landowners to support the trail in their areas.
+              </li>
+              <li>
+                <a href="https://ctwoodlands.org/trails/" target="_blank" rel="noopener noreferrer">
+                  <strong>CTWoodlands:</strong>
+                </a>
+                Web site of the Connecticut Forest & Park Association, which manages the Metacomet Trail section of the NET (as well as the Menunkatuck and Mattabesett Trails). Includes detailed narrative on the trail routes, trail closure notices, and information on other intersecting trails overseen by the State of Connecticut.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+      </div>
+    </section>
+
   </main>
 
-<!-- Donation block -->
-<div class="donation-block">
-  <p class="donation-text">
-    Thank you for visiting and trying these tools. They are a labor of love for me, and I make no money from this site. However, if you wish to help support the site please consider
-    <a href="https://www.buymeacoffee.com/ihrhzL0ZC5" target="_blank" rel="noopener noreferrer">Buying Me a Coffee</a> — donations of $1, $5, or even $20 are deeply appreciated. I promise every cent will go to the ongoing operations, maintenance, development, and expansion of the site.
-  </p>
-  <a class="bmc-button" href="https://www.buymeacoffee.com/ihrhzL0ZC5n" target="_blank" rel="noopener noreferrer" aria-label="Buy Me a Coffee">Buy Me a Coffee</a>
-</div>
-
   <footer class="site-footer">
-    <div class="small">Informational only.</div>
+    <div class="small">
+      Informational only. Always verify conditions and heed local advisories.
+    </div>
   </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>window.SITE_BASE = "";</script>
+  <script>window.TRAIL_SLUG = "new-england-trail";</script>
+
+  <!-- -------------------------------------------------------
+       Inline bootstrap: NET section metadata for immediate
+       UI population before net_meta.json finishes loading.
+       ------------------------------------------------------- -->
+  <script>
+    window.NET_SECTIONS_BOOTSTRAP = [
+      { id: "ct_guilford",   name: "Connecticut \u2014 Main Spine",      mile_type: "spine", mile_start: 1,   mile_end: 109 },
+      { id: "ct_middletown", name: "Connecticut \u2014 Middletown Spur", mile_type: "spur",  mile_start: 0,   mile_end: 28  },
+      { id: "ma",            name: "Massachusetts \u2014 Main Spine",    mile_type: "spine", mile_start: 110, mile_end: 208 }
+    ];
+
+    function netUpdateSectionInfo() {
+      const sectionId = document.getElementById("sectionSelect")?.value;
+      const infoEl    = document.getElementById("netSectionInfo");
+      const mileInput = document.getElementById("netMileInput");
+      if (!sectionId || !infoEl) return;
+
+      const sec = window.NET_SECTIONS_BOOTSTRAP.find(s => s.id === sectionId);
+      if (!sec) return;
+
+      const isSpur    = sec.mile_type === "spur";
+      const rangeWord = "Section Range";
+      infoEl.textContent = `${rangeWord}: ${sec.mile_start}-${sec.mile_end} Miles`;
+
+      if (mileInput) {
+        mileInput.min  = sec.mile_start;
+        mileInput.max  = sec.mile_end;
+        mileInput.step = 0.1;
+        mileInput.placeholder = `e.g., ${Math.round((sec.mile_start + sec.mile_end) / 2)}`;
+        const cur = Number(mileInput.value);
+        if (cur < sec.mile_start || cur > sec.mile_end) mileInput.value = "";
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const sectionSel = document.getElementById("sectionSelect");
+      if (sectionSel) {
+        netUpdateSectionInfo();
+        sectionSel.addEventListener("change", netUpdateSectionInfo);
+      }
+    });
+  </script>
+
+  <script defer src="js/app.js"></script>
+
+  <!-- Donation block -->
+  <div class="donation-block">
+    <p class="donation-text">
+      Thank you for visiting and trying these tools. They are a labor of love for me, and I make
+      no money from this site. However, if you wish to help support the site please consider
+      <a href="https://www.buymeacoffee.com/ihrhzL0ZC5" target="_blank" rel="noopener noreferrer">Buying Me a Coffee</a>
+      &mdash; donations of $1, $5, or even $20 are deeply appreciated. I promise every cent will go to
+      the ongoing operations, maintenance, development, and expansion of the site.
+    </p>
+    <a class="bmc-button" href="https://www.buymeacoffee.com/ihrhzL0ZC5"
+       target="_blank" rel="noopener noreferrer" aria-label="Buy Me a Coffee">Buy Me a Coffee</a>
+  </div>
+
 </body>
 </html>

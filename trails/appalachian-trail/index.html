@@ -151,8 +151,8 @@
             Florida Trail <span class="trail-status"></span>
           </a>
 
-          <a class="trail-option current" href="/trails/new-england-trail/" aria-current="page">
-            New England Trail <span class="trail-status">(Coming Next)</span>
+          <a class="trail-option" href="/trails/new-england-trail/">
+            New England Trail <span class="trail-status"></span>
           </a>
 
           <a class="trail-option" href="/trails/continental-divide-trail/">
@@ -196,14 +196,6 @@
       <div class="control-grid">
 
         <div class="field">
-          <label for="durMonthSelect">Start Date</label>
-          <div class="date-pair">
-            <select id="durMonthSelect" aria-label="Start month"></select>
-            <select id="durDaySelect" aria-label="Start day"></select>
-          </div>
-        </div>
-
-        <div class="field">
           <label for="durMilesPerDay">Miles per Day</label>
           <input id="durMilesPerDay"
                  type="number"
@@ -219,6 +211,14 @@
             <option value="NOBO">Northbound (Georgia → Maine)</option>
             <option value="SOBO">Southbound (Maine → Georgia)</option>
           </select>
+        </div>
+
+        <div class="field">
+          <label for="durMonthSelect">Start Date</label>
+          <div class="date-pair">
+            <select id="durMonthSelect" aria-label="Start month"></select>
+            <select id="durDaySelect" aria-label="Start day"></select>
+          </div>
         </div>
 
       </div>

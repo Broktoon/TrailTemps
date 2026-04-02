@@ -1110,7 +1110,7 @@ function renderCurrent(forecastData, point) {
     <table>
       <tr><th>Location</th><td>${pointLabel(point)}</td></tr>
       <tr><th>Temperature</th><td>${Math.round(c.temperature)} °F</td></tr>
-      <tr><th>Wind</th><td>${Math.round(c.windspeed)} mph (dir ${Math.round(c.winddirection)}°)</td></tr>
+      <tr><th>Wind</th><td>${Math.round(c.windspeed)} mph</td></tr>
       <tr><th>Time</th><td>${c.time}</td></tr>
     </table>
   `;

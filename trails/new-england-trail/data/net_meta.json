@@ -1,0 +1,72 @@
+{
+  "trail": {
+    "name": "New England Trail",
+    "spine_miles": 208.3,
+    "map_center": [41.9, -72.5],
+    "map_zoom": 8,
+    "termini": {
+      "south": "Guilford, CT",
+      "north": "Royalston Falls, MA",
+      "alt_south": "Middletown, CT"
+    }
+  },
+  "sections": [
+    {
+      "id": "ct_guilford",
+      "name": "Connecticut \u2014 Guilford Terminus",
+      "mile_type": "spine",
+      "mile_start": 1,
+      "mile_end": 109
+    },
+    {
+      "id": "ct_middletown",
+      "name": "Connecticut \u2014 Middletown Terminus",
+      "mile_type": "spur",
+      "mile_start": 0,
+      "mile_end": 28
+    },
+    {
+      "id": "ma",
+      "name": "Massachusetts",
+      "mile_type": "spine",
+      "mile_start": 110,
+      "mile_end": 208
+    }
+  ],
+  "spur": {
+    "name": "Middletown Connector",
+    "start_terminus": "Middletown, CT",
+    "length_miles": 28,
+    "junction_spine_mile": 38
+  },
+  "direction_options": [
+    {
+      "id": "nobo_main",
+      "label": "Northbound \u2014 Guilford, CT \u2192 Royalston Falls, MA (Main)",
+      "total_miles": 208.3,
+      "uses_spur": false,
+      "is_nobo": true
+    },
+    {
+      "id": "nobo_alt",
+      "label": "Northbound \u2014 Middletown, CT \u2192 Royalston Falls, MA (Alt.)",
+      "total_miles": 198.3,
+      "uses_spur": true,
+      "is_nobo": true
+    },
+    {
+      "id": "sobo_main",
+      "label": "Southbound \u2014 Royalston Falls, MA \u2192 Guilford, CT (Main)",
+      "total_miles": 208.3,
+      "uses_spur": false,
+      "is_nobo": false
+    },
+    {
+      "id": "sobo_alt",
+      "label": "Southbound \u2014 Royalston Falls, MA \u2192 Middletown, CT (Alt.)",
+      "total_miles": 198.3,
+      "uses_spur": true,
+      "is_nobo": false
+    }
+  ]
+}

@@ -1,0 +1,1692 @@
+[
+  {
+    "id": "net-main-mi0001000",
+    "mile": 1,
+    "lat": 41.277264,
+    "lon": -72.676049,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0002000",
+    "mile": 2,
+    "lat": 41.285675,
+    "lon": -72.6724,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0003000",
+    "mile": 3,
+    "lat": 41.291258,
+    "lon": -72.658497,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0004000",
+    "mile": 4,
+    "lat": 41.301669,
+    "lon": -72.655609,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0005000",
+    "mile": 5,
+    "lat": 41.308614,
+    "lon": -72.665512,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0006000",
+    "mile": 6,
+    "lat": 41.314294,
+    "lon": -72.669666,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0007000",
+    "mile": 7,
+    "lat": 41.323234,
+    "lon": -72.669716,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0008000",
+    "mile": 8,
+    "lat": 41.331381,
+    "lon": -72.672504,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0009000",
+    "mile": 9,
+    "lat": 41.339024,
+    "lon": -72.672329,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0010000",
+    "mile": 10,
+    "lat": 41.341683,
+    "lon": -72.682556,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0011000",
+    "mile": 11,
+    "lat": 41.351325,
+    "lon": -72.682619,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0012000",
+    "mile": 12,
+    "lat": 41.360563,
+    "lon": -72.687911,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0013000",
+    "mile": 13,
+    "lat": 41.372921,
+    "lon": -72.690304,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0014000",
+    "mile": 14,
+    "lat": 41.380609,
+    "lon": -72.694875,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0015000",
+    "mile": 15,
+    "lat": 41.392339,
+    "lon": -72.687673,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0016000",
+    "mile": 16,
+    "lat": 41.402702,
+    "lon": -72.679325,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0017000",
+    "mile": 17,
+    "lat": 41.406282,
+    "lon": -72.690156,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0018000",
+    "mile": 18,
+    "lat": 41.405509,
+    "lon": -72.698705,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0019000",
+    "mile": 19,
+    "lat": 41.415142,
+    "lon": -72.69786,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0020000",
+    "mile": 20,
+    "lat": 41.41823,
+    "lon": -72.70888,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0021000",
+    "mile": 21,
+    "lat": 41.422227,
+    "lon": -72.719458,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0022000",
+    "mile": 22,
+    "lat": 41.429552,
+    "lon": -72.727528,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0023000",
+    "mile": 23,
+    "lat": 41.432962,
+    "lon": -72.734302,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0024000",
+    "mile": 24,
+    "lat": 41.438431,
+    "lon": -72.732424,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0025000",
+    "mile": 25,
+    "lat": 41.439956,
+    "lon": -72.743265,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0026000",
+    "mile": 26,
+    "lat": 41.452712,
+    "lon": -72.737408,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0027000",
+    "mile": 27,
+    "lat": 41.46101,
+    "lon": -72.731987,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0028000",
+    "mile": 28,
+    "lat": 41.471353,
+    "lon": -72.726138,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0029000",
+    "mile": 29,
+    "lat": 41.476321,
+    "lon": -72.738391,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0030000",
+    "mile": 30,
+    "lat": 41.48692,
+    "lon": -72.743942,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0031000",
+    "mile": 31,
+    "lat": 41.500019,
+    "lon": -72.746129,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0032000",
+    "mile": 32,
+    "lat": 41.513607,
+    "lon": -72.746625,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0033000",
+    "mile": 33,
+    "lat": 41.526172,
+    "lon": -72.740949,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0034000",
+    "mile": 34,
+    "lat": 41.5347,
+    "lon": -72.732209,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0035000",
+    "mile": 35,
+    "lat": 41.533474,
+    "lon": -72.744427,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0036000",
+    "mile": 36,
+    "lat": 41.546117,
+    "lon": -72.742233,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0037000",
+    "mile": 37,
+    "lat": 41.555602,
+    "lon": -72.734412,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0038000",
+    "mile": 38,
+    "lat": 41.561916,
+    "lon": -72.722803,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0039000",
+    "mile": 39,
+    "lat": 41.568893,
+    "lon": -72.728496,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0040000",
+    "mile": 40,
+    "lat": 41.56743,
+    "lon": -72.738089,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0041000",
+    "mile": 41,
+    "lat": 41.574824,
+    "lon": -72.746734,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0042000",
+    "mile": 42,
+    "lat": 41.567609,
+    "lon": -72.75857,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0043000",
+    "mile": 43,
+    "lat": 41.557632,
+    "lon": -72.758738,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0044000",
+    "mile": 44,
+    "lat": 41.561498,
+    "lon": -72.764489,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0045000",
+    "mile": 45,
+    "lat": 41.569799,
+    "lon": -72.764876,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0046000",
+    "mile": 46,
+    "lat": 41.581602,
+    "lon": -72.756315,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0047000",
+    "mile": 47,
+    "lat": 41.59336,
+    "lon": -72.748362,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0048000",
+    "mile": 48,
+    "lat": 41.600547,
+    "lon": -72.74079,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0049000",
+    "mile": 49,
+    "lat": 41.595861,
+    "lon": -72.757451,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0050000",
+    "mile": 50,
+    "lat": 41.594671,
+    "lon": -72.774614,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0051000",
+    "mile": 51,
+    "lat": 41.587722,
+    "lon": -72.785473,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0052000",
+    "mile": 52,
+    "lat": 41.581699,
+    "lon": -72.79487,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0053000",
+    "mile": 53,
+    "lat": 41.571305,
+    "lon": -72.801544,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0054000",
+    "mile": 54,
+    "lat": 41.562506,
+    "lon": -72.812383,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0055000",
+    "mile": 55,
+    "lat": 41.567851,
+    "lon": -72.824667,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0056000",
+    "mile": 56,
+    "lat": 41.55755,
+    "lon": -72.832757,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0057000",
+    "mile": 57,
+    "lat": 41.560006,
+    "lon": -72.843063,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0058000",
+    "mile": 58,
+    "lat": 41.571973,
+    "lon": -72.840353,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0059000",
+    "mile": 59,
+    "lat": 41.580871,
+    "lon": -72.828149,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0060000",
+    "mile": 60,
+    "lat": 41.588094,
+    "lon": -72.816974,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0061000",
+    "mile": 61,
+    "lat": 41.601708,
+    "lon": -72.817691,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0062000",
+    "mile": 62,
+    "lat": 41.603656,
+    "lon": -72.824791,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0063000",
+    "mile": 63,
+    "lat": 41.613874,
+    "lon": -72.822281,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0064000",
+    "mile": 64,
+    "lat": 41.622745,
+    "lon": -72.821208,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0065000",
+    "mile": 65,
+    "lat": 41.633287,
+    "lon": -72.813643,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0066000",
+    "mile": 66,
+    "lat": 41.639815,
+    "lon": -72.813142,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0067000",
+    "mile": 67,
+    "lat": 41.632538,
+    "lon": -72.824153,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0068000",
+    "mile": 68,
+    "lat": 41.631785,
+    "lon": -72.834584,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0069000",
+    "mile": 69,
+    "lat": 41.641502,
+    "lon": -72.833218,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0070000",
+    "mile": 70,
+    "lat": 41.650844,
+    "lon": -72.833484,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0071000",
+    "mile": 71,
+    "lat": 41.654266,
+    "lon": -72.824156,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0072000",
+    "mile": 72,
+    "lat": 41.66619,
+    "lon": -72.8214,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0073000",
+    "mile": 73,
+    "lat": 41.669603,
+    "lon": -72.82755,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0074000",
+    "mile": 74,
+    "lat": 41.677734,
+    "lon": -72.835979,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0075000",
+    "mile": 75,
+    "lat": 41.689747,
+    "lon": -72.832999,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0076000",
+    "mile": 76,
+    "lat": 41.698761,
+    "lon": -72.831574,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0077000",
+    "mile": 77,
+    "lat": 41.706857,
+    "lon": -72.830928,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0078000",
+    "mile": 78,
+    "lat": 41.715065,
+    "lon": -72.81917,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0079000",
+    "mile": 79,
+    "lat": 41.724741,
+    "lon": -72.808012,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0080000",
+    "mile": 80,
+    "lat": 41.736937,
+    "lon": -72.803489,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0081000",
+    "mile": 81,
+    "lat": 41.747922,
+    "lon": -72.795284,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0082000",
+    "mile": 82,
+    "lat": 41.75818,
+    "lon": -72.796771,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0083000",
+    "mile": 83,
+    "lat": 41.769149,
+    "lon": -72.799806,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0084000",
+    "mile": 84,
+    "lat": 41.782488,
+    "lon": -72.799106,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0085000",
+    "mile": 85,
+    "lat": 41.78673,
+    "lon": -72.78638,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0086000",
+    "mile": 86,
+    "lat": 41.79944,
+    "lon": -72.784692,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0087000",
+    "mile": 87,
+    "lat": 41.813487,
+    "lon": -72.785238,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0088000",
+    "mile": 88,
+    "lat": 41.820738,
+    "lon": -72.791445,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0089000",
+    "mile": 89,
+    "lat": 41.828623,
+    "lon": -72.797524,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0090000",
+    "mile": 90,
+    "lat": 41.835384,
+    "lon": -72.791019,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0091000",
+    "mile": 91,
+    "lat": 41.839002,
+    "lon": -72.784467,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0092000",
+    "mile": 92,
+    "lat": 41.852108,
+    "lon": -72.782966,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0093000",
+    "mile": 93,
+    "lat": 41.864541,
+    "lon": -72.779229,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0094000",
+    "mile": 94,
+    "lat": 41.87622,
+    "lon": -72.774179,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0095000",
+    "mile": 95,
+    "lat": 41.887335,
+    "lon": -72.770044,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0096000",
+    "mile": 96,
+    "lat": 41.900389,
+    "lon": -72.765464,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0097000",
+    "mile": 97,
+    "lat": 41.912276,
+    "lon": -72.762234,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0098000",
+    "mile": 98,
+    "lat": 41.908873,
+    "lon": -72.756589,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0099000",
+    "mile": 99,
+    "lat": 41.921709,
+    "lon": -72.7522,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0100000",
+    "mile": 100,
+    "lat": 41.931362,
+    "lon": -72.746277,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0101000",
+    "mile": 101,
+    "lat": 41.943935,
+    "lon": -72.742046,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0102000",
+    "mile": 102,
+    "lat": 41.956151,
+    "lon": -72.738364,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0103000",
+    "mile": 103,
+    "lat": 41.969309,
+    "lon": -72.740437,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0104000",
+    "mile": 104,
+    "lat": 41.981845,
+    "lon": -72.734879,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0105000",
+    "mile": 105,
+    "lat": 41.994745,
+    "lon": -72.73364,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0106000",
+    "mile": 106,
+    "lat": 42.006449,
+    "lon": -72.728392,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0107000",
+    "mile": 107,
+    "lat": 42.01544,
+    "lon": -72.722456,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0108000",
+    "mile": 108,
+    "lat": 42.028314,
+    "lon": -72.717019,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0109000",
+    "mile": 109,
+    "lat": 42.040814,
+    "lon": -72.714598,
+    "state": "CT"
+  },
+  {
+    "id": "net-main-mi0110000",
+    "mile": 110,
+    "lat": 42.053201,
+    "lon": -72.710506,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0111000",
+    "mile": 111,
+    "lat": 42.063058,
+    "lon": -72.709191,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0112000",
+    "mile": 112,
+    "lat": 42.076709,
+    "lon": -72.706299,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0113000",
+    "mile": 113,
+    "lat": 42.090005,
+    "lon": -72.701989,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0114000",
+    "mile": 114,
+    "lat": 42.102674,
+    "lon": -72.69659,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0115000",
+    "mile": 115,
+    "lat": 42.108773,
+    "lon": -72.687707,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0116000",
+    "mile": 116,
+    "lat": 42.116796,
+    "lon": -72.683355,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0117000",
+    "mile": 117,
+    "lat": 42.128478,
+    "lon": -72.685541,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0118000",
+    "mile": 118,
+    "lat": 42.141156,
+    "lon": -72.680164,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0119000",
+    "mile": 119,
+    "lat": 42.146228,
+    "lon": -72.688361,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0120000",
+    "mile": 120,
+    "lat": 42.159385,
+    "lon": -72.682581,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0121000",
+    "mile": 121,
+    "lat": 42.172694,
+    "lon": -72.677472,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0122000",
+    "mile": 122,
+    "lat": 42.184004,
+    "lon": -72.673775,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0123000",
+    "mile": 123,
+    "lat": 42.188593,
+    "lon": -72.662806,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0124000",
+    "mile": 124,
+    "lat": 42.197636,
+    "lon": -72.663529,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0125000",
+    "mile": 125,
+    "lat": 42.206106,
+    "lon": -72.661428,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0126000",
+    "mile": 126,
+    "lat": 42.215566,
+    "lon": -72.65173,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0127000",
+    "mile": 127,
+    "lat": 42.226862,
+    "lon": -72.644862,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0128000",
+    "mile": 128,
+    "lat": 42.233597,
+    "lon": -72.645236,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0129000",
+    "mile": 129,
+    "lat": 42.244034,
+    "lon": -72.647798,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0130000",
+    "mile": 130,
+    "lat": 42.256956,
+    "lon": -72.642415,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0131000",
+    "mile": 131,
+    "lat": 42.268279,
+    "lon": -72.633613,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0132000",
+    "mile": 132,
+    "lat": 42.2774,
+    "lon": -72.625207,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0133000",
+    "mile": 133,
+    "lat": 42.282952,
+    "lon": -72.62485,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0134000",
+    "mile": 134,
+    "lat": 42.287767,
+    "lon": -72.612782,
+    "state": "MA",
+    "gap": true
+  },
+  {
+    "id": "net-main-mi0135000",
+    "mile": 135,
+    "lat": 42.290848,
+    "lon": -72.598116,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0136000",
+    "mile": 136,
+    "lat": 42.299855,
+    "lon": -72.589015,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0137000",
+    "mile": 137,
+    "lat": 42.303674,
+    "lon": -72.573785,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0138000",
+    "mile": 138,
+    "lat": 42.304473,
+    "lon": -72.557293,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0139000",
+    "mile": 139,
+    "lat": 42.304705,
+    "lon": -72.541226,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0140000",
+    "mile": 140,
+    "lat": 42.305068,
+    "lon": -72.529326,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0141000",
+    "mile": 141,
+    "lat": 42.303566,
+    "lon": -72.516086,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0142000",
+    "mile": 142,
+    "lat": 42.305332,
+    "lon": -72.501717,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0143000",
+    "mile": 143,
+    "lat": 42.302673,
+    "lon": -72.493099,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0144000",
+    "mile": 144,
+    "lat": 42.306482,
+    "lon": -72.480619,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0145000",
+    "mile": 145,
+    "lat": 42.307757,
+    "lon": -72.469061,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0146000",
+    "mile": 146,
+    "lat": 42.309491,
+    "lon": -72.45534,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0147000",
+    "mile": 147,
+    "lat": 42.314132,
+    "lon": -72.441086,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0148000",
+    "mile": 148,
+    "lat": 42.322503,
+    "lon": -72.440581,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0149000",
+    "mile": 149,
+    "lat": 42.333816,
+    "lon": -72.446976,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0150000",
+    "mile": 150,
+    "lat": 42.346413,
+    "lon": -72.438984,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0151000",
+    "mile": 151,
+    "lat": 42.355311,
+    "lon": -72.428227,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0152000",
+    "mile": 152,
+    "lat": 42.367124,
+    "lon": -72.425712,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0153000",
+    "mile": 153,
+    "lat": 42.377455,
+    "lon": -72.426901,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0154000",
+    "mile": 154,
+    "lat": 42.386837,
+    "lon": -72.419418,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0155000",
+    "mile": 155,
+    "lat": 42.394049,
+    "lon": -72.424945,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0156000",
+    "mile": 156,
+    "lat": 42.403706,
+    "lon": -72.419873,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0157000",
+    "mile": 157,
+    "lat": 42.401736,
+    "lon": -72.409638,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0158000",
+    "mile": 158,
+    "lat": 42.406699,
+    "lon": -72.404873,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0159000",
+    "mile": 159,
+    "lat": 42.41918,
+    "lon": -72.403269,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0160000",
+    "mile": 160,
+    "lat": 42.430683,
+    "lon": -72.39995,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0161000",
+    "mile": 161,
+    "lat": 42.442394,
+    "lon": -72.396301,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0162000",
+    "mile": 162,
+    "lat": 42.454707,
+    "lon": -72.399077,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0163000",
+    "mile": 163,
+    "lat": 42.463725,
+    "lon": -72.387187,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0164000",
+    "mile": 164,
+    "lat": 42.472809,
+    "lon": -72.381359,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0165000",
+    "mile": 165,
+    "lat": 42.481477,
+    "lon": -72.369381,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0166000",
+    "mile": 166,
+    "lat": 42.494668,
+    "lon": -72.36529,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0167000",
+    "mile": 167,
+    "lat": 42.500779,
+    "lon": -72.37663,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0168000",
+    "mile": 168,
+    "lat": 42.498228,
+    "lon": -72.388866,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0169000",
+    "mile": 169,
+    "lat": 42.506821,
+    "lon": -72.394777,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0170000",
+    "mile": 170,
+    "lat": 42.511455,
+    "lon": -72.399804,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0171000",
+    "mile": 171,
+    "lat": 42.509014,
+    "lon": -72.417847,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0172000",
+    "mile": 172,
+    "lat": 42.505622,
+    "lon": -72.43467,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0173000",
+    "mile": 173,
+    "lat": 42.516512,
+    "lon": -72.440283,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0174000",
+    "mile": 174,
+    "lat": 42.528646,
+    "lon": -72.444367,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0175000",
+    "mile": 175,
+    "lat": 42.542284,
+    "lon": -72.446135,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0176000",
+    "mile": 176,
+    "lat": 42.553876,
+    "lon": -72.451027,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0177000",
+    "mile": 177,
+    "lat": 42.561989,
+    "lon": -72.449581,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0178000",
+    "mile": 178,
+    "lat": 42.570302,
+    "lon": -72.442886,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0179000",
+    "mile": 179,
+    "lat": 42.577665,
+    "lon": -72.43572,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0180000",
+    "mile": 180,
+    "lat": 42.588438,
+    "lon": -72.437136,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0181000",
+    "mile": 181,
+    "lat": 42.598513,
+    "lon": -72.439168,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0182000",
+    "mile": 182,
+    "lat": 42.607376,
+    "lon": -72.441367,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0183000",
+    "mile": 183,
+    "lat": 42.612958,
+    "lon": -72.42704,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0184000",
+    "mile": 184,
+    "lat": 42.620438,
+    "lon": -72.425803,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0185000",
+    "mile": 185,
+    "lat": 42.629965,
+    "lon": -72.418707,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0186000",
+    "mile": 186,
+    "lat": 42.640724,
+    "lon": -72.421381,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0187000",
+    "mile": 187,
+    "lat": 42.652255,
+    "lon": -72.421211,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0188000",
+    "mile": 188,
+    "lat": 42.659943,
+    "lon": -72.418086,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0189000",
+    "mile": 189,
+    "lat": 42.662154,
+    "lon": -72.40562,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0190000",
+    "mile": 190,
+    "lat": 42.673595,
+    "lon": -72.403188,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0191000",
+    "mile": 191,
+    "lat": 42.678932,
+    "lon": -72.405972,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0192000",
+    "mile": 192,
+    "lat": 42.689258,
+    "lon": -72.40202,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0193000",
+    "mile": 193,
+    "lat": 42.685153,
+    "lon": -72.391453,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0194000",
+    "mile": 194,
+    "lat": 42.683948,
+    "lon": -72.374359,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0195000",
+    "mile": 195,
+    "lat": 42.682441,
+    "lon": -72.357105,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0196000",
+    "mile": 196,
+    "lat": 42.677741,
+    "lon": -72.344604,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0197000",
+    "mile": 197,
+    "lat": 42.688724,
+    "lon": -72.3521,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0198000",
+    "mile": 198,
+    "lat": 42.701025,
+    "lon": -72.355513,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0199000",
+    "mile": 199,
+    "lat": 42.705121,
+    "lon": -72.344236,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0200000",
+    "mile": 200,
+    "lat": 42.702897,
+    "lon": -72.32678,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0201000",
+    "mile": 201,
+    "lat": 42.707804,
+    "lon": -72.321618,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0202000",
+    "mile": 202,
+    "lat": 42.707148,
+    "lon": -72.313841,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0203000",
+    "mile": 203,
+    "lat": 42.702895,
+    "lon": -72.302301,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0204000",
+    "mile": 204,
+    "lat": 42.71373,
+    "lon": -72.301587,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0205000",
+    "mile": 205,
+    "lat": 42.718585,
+    "lon": -72.293076,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0206000",
+    "mile": 206,
+    "lat": 42.715206,
+    "lon": -72.282035,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0207000",
+    "mile": 207,
+    "lat": 42.714951,
+    "lon": -72.267378,
+    "state": "MA"
+  },
+  {
+    "id": "net-main-mi0208000",
+    "mile": 208,
+    "lat": 42.717202,
+    "lon": -72.249877,
+    "state": "MA"
+  },
+  {
+    "id": "net-spur-mi0000000",
+    "spur_mile": 0,
+    "lat": 41.405858,
+    "lon": -72.683843,
+    "state": "CT",
+    "spur": true,
+    "alt_terminus": true
+  },
+  {
+    "id": "net-spur-mi0001000",
+    "spur_mile": 1,
+    "lat": 41.417007,
+    "lon": -72.677556,
+    "state": "CT",
+    "spur": true
+  },
+  {
+    "id": "net-spur-mi0002000",
+    "spur_mile": 2,
+    "lat": 41.428376,
+    "lon": -72.671436,
+    "state": "CT",
+    "spur": true
+  },
+  {
+    "id": "net-spur-mi0003000",
+    "spur_mile": 3,
+    "lat": 41.436499,
+    "lon": -72.680324,
+    "state": "CT",
+    "spur": true
+  },
+  {
+    "id": "net-spur-mi0004000",
+    "spur_mile": 4,
+    "lat": 41.44386,
+    "lon": -72.675589,
+    "state": "CT",
+    "spur": true
+  },
+  {
+    "id": "net-spur-mi0005000",
+    "spur_mile": 5,
+    "lat": 41.447192,
+    "lon": -72.67121,
+    "state": "CT",
+    "spur": true
+  },
+  {
+    "id": "net-spur-mi0006000",
+    "spur_mile": 6,
+    "lat": 41.441343,
+    "lon": -72.671393,
+    "state": "CT",
+    "spur": true
+  },
+  {
+    "id": "net-spur-mi0007000",
+    "spur_mile": 7,
+    "lat": 41.431561,
+    "lon": -72.667262,
+    "state": "CT",
+    "spur": true
+  },
+  {
+    "id": "net-spur-mi0008000",
+    "spur_mile": 8,
+    "lat": 41.437682,
+    "lon": -72.659779,
+    "state": "CT",
+    "spur": true
+  },
+  {
+    "id": "net-spur-mi0009000",
+    "spur_mile": 9,
+    "lat": 41.445809,
+    "lon": -72.653817,
+    "state": "CT",
+    "spur": true
+  },
+  {
+    "id": "net-spur-mi0010000",
+    "spur_mile": 10,
+    "lat": 41.456489,
+    "lon": -72.650178,
+    "state": "CT",
+    "spur": true
+  },
+  {
+    "id": "net-spur-mi0011000",
+    "spur_mile": 11,
+    "lat": 41.466173,
+    "lon": -72.64597,
+    "state": "CT",
+    "spur": true
+  },
+  {
+    "id": "net-spur-mi0012000",
+    "spur_mile": 12,
+    "lat": 41.470084,
+    "lon": -72.646236,
+    "state": "CT",
+    "spur": true
+  },
+  {
+    "id": "net-spur-mi0013000",
+    "spur_mile": 13,
+    "lat": 41.473076,
+    "lon": -72.635069,
+    "state": "CT",
+    "spur": true
+  },
+  {
+    "id": "net-spur-mi0014000",
+    "spur_mile": 14,
+    "lat": 41.475241,
+    "lon": -72.622954,
+    "state": "CT",
+    "spur": true
+  },
+  {
+    "id": "net-spur-mi0015000",
+    "spur_mile": 15,
+    "lat": 41.480901,
+    "lon": -72.610695,
+    "state": "CT",
+    "spur": true
+  },
+  {
+    "id": "net-spur-mi0016000",
+    "spur_mile": 16,
+    "lat": 41.490306,
+    "lon": -72.605434,
+    "state": "CT",
+    "spur": true
+  },
+  {
+    "id": "net-spur-mi0017000",
+    "spur_mile": 17,
+    "lat": 41.497884,
+    "lon": -72.602245,
+    "state": "CT",
+    "spur": true
+  },
+  {
+    "id": "net-spur-mi0018000",
+    "spur_mile": 18,
+    "lat": 41.501129,
+    "lon": -72.588409,
+    "state": "CT",
+    "spur": true
+  },
+  {
+    "id": "net-spur-mi0019000",
+    "spur_mile": 19,
+    "lat": 41.507892,
+    "lon": -72.577811,
+    "state": "CT",
+    "spur": true
+  },
+  {
+    "id": "net-spur-mi0020000",
+    "spur_mile": 20,
+    "lat": 41.513126,
+    "lon": -72.576418,
+    "state": "CT",
+    "spur": true
+  },
+  {
+    "id": "net-spur-mi0021000",
+    "spur_mile": 21,
+    "lat": 41.519997,
+    "lon": -72.5775,
+    "state": "CT",
+    "spur": true
+  },
+  {
+    "id": "net-spur-mi0022000",
+    "spur_mile": 22,
+    "lat": 41.519522,
+    "lon": -72.587652,
+    "state": "CT",
+    "spur": true
+  },
+  {
+    "id": "net-spur-mi0023000",
+    "spur_mile": 23,
+    "lat": 41.527462,
+    "lon": -72.591615,
+    "state": "CT",
+    "spur": true
+  },
+  {
+    "id": "net-spur-mi0024000",
+    "spur_mile": 24,
+    "lat": 41.532041,
+    "lon": -72.597843,
+    "state": "CT",
+    "spur": true
+  },
+  {
+    "id": "net-spur-mi0025000",
+    "spur_mile": 25,
+    "lat": 41.541348,
+    "lon": -72.600596,
+    "state": "CT",
+    "spur": true
+  },
+  {
+    "id": "net-spur-mi0026000",
+    "spur_mile": 26,
+    "lat": 41.544143,
+    "lon": -72.59722,
+    "state": "CT",
+    "spur": true
+  },
+  {
+    "id": "net-spur-mi0027000",
+    "spur_mile": 27,
+    "lat": 41.544312,
+    "lon": -72.587084,
+    "state": "CT",
+    "spur": true
+  },
+  {
+    "id": "net-spur-mi0028000",
+    "spur_mile": 28,
+    "lat": 41.553622,
+    "lon": -72.590594,
+    "state": "CT",
+    "spur": true
+  }
+]
