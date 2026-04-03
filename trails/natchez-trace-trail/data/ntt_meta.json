@@ -1,0 +1,74 @@
+{
+  "trail": {
+    "name": "Natchez Trace Trail",
+    "total_trail_miles": 68.89,
+    "travel_days_between_sections": 4,
+    "map_center": [33.5, -89.5],
+    "map_zoom": 7,
+    "termini": {
+      "south": "Portkopinu, MS",
+      "north": "Highland Rim, TN"
+    }
+  },
+  "sections": [
+    {
+      "id": "portkopinu",
+      "name": "Portkopinu",
+      "state": "MS",
+      "mile_start": 0,
+      "mile_end": 3.44,
+      "axis_start": 0.00,
+      "axis_end": 3.44
+    },
+    {
+      "id": "rocky-springs",
+      "name": "Rocky Springs",
+      "state": "MS",
+      "mile_start": 0,
+      "mile_end": 8.99,
+      "axis_start": 3.44,
+      "axis_end": 12.43
+    },
+    {
+      "id": "yockanookany",
+      "name": "Yockanookany",
+      "state": "MS",
+      "mile_start": 0,
+      "mile_end": 25.73,
+      "axis_start": 12.43,
+      "axis_end": 38.16
+    },
+    {
+      "id": "blackland-prairie",
+      "name": "Blackland Prairie",
+      "state": "MS",
+      "mile_start": 0,
+      "mile_end": 6.11,
+      "axis_start": 38.16,
+      "axis_end": 44.27
+    },
+    {
+      "id": "highland-rim",
+      "name": "Highland Rim",
+      "state": "TN",
+      "mile_start": 0,
+      "mile_end": 24.63,
+      "axis_start": 44.27,
+      "axis_end": 68.89
+    }
+  ],
+  "direction_options": [
+    {
+      "id": "nobo",
+      "label": "Northbound \u2014 Portkopinu, MS \u2192 Highland Rim, TN",
+      "total_miles": 68.89,
+      "is_nobo": true
+    },
+    {
+      "id": "sobo",
+      "label": "Southbound \u2014 Highland Rim, TN \u2192 Portkopinu, MS",
+      "total_miles": 68.89,
+      "is_nobo": false
+    }
+  ]
+}

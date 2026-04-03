@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>National Scenic Trail Weather Planner — Natchez Trace Trail</title>
+
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <style>
+    /* -------------------------------------------------------
+       NTT: Weather Planner section/mile selectors
+       ------------------------------------------------------- */
+    .control-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.75rem;
+      align-items: flex-end;
+    }
+
+    .ft-select-col {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.9rem;
+    }
+    .ft-select-col label {
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .ft-select-col select,
+    .ft-select-col input[type="number"] {
+      padding: 0.35rem 0.45rem;
+      font-size: 0.9rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background: #fff;
+      min-width: 0;
+    }
+
+    #nttSectionInfo {
+      font-size: 0.82rem;
+      color: #555;
+      font-style: italic;
+      margin: 2px 0 0 0;
+      min-height: 1.1em;
+    }
+
+    #nttMileInput {
+      width: 6rem;
+    }
+
+    @media (max-width: 600px) {
+      .ft-select-col {
+        width: 100%;
+      }
+    }
+
+    /* Apparent temperature annotations in forecast table */
+    .feels-hotter {
+      font-size: 0.8rem;
+      color: #a03000;
+      font-style: italic;
+    }
+    .feels-cooler {
+      font-size: 0.8rem;
+      color: #0055aa;
+      font-style: italic;
+    }
+
+    /* Blue button */
+    .btn-primary {
+      padding: 10px 22px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 6px;
+      border: none;
+      background: #2a6ebb;
+      color: #fff;
+      cursor: pointer;
+      transition: background 120ms ease;
+    }
+    .btn-primary:hover {
+      background: #1d56a0;
+    }
+  </style>
+</head>
+
+<body data-trail="natchez-trace-trail">
+
+<header class="site-header header-with-trail">
+  <div class="header-inner">
+
+    <div class="header-text">
+      <div class="title-with-logo">
+        <img src="/images/TrailTemps_Logo.png"
+             alt="TrailTemps logo"
+             class="trail-page-logo">
+
+        <div class="title-stack">
+          <h1>Natchez Trace Trail</h1>
+          <div class="sub-brand"><em>TrailTemps</em> - National Scenic Trail Weather Planner</div>
+        </div>
+
+        <img src="/images/natchez_trace_logo.jpg"
+             alt="Natchez Trace Trail logo"
+             class="trail-page-logo">
+      </div>
+
+      <p class="sub">
+        <br>
+        Time your Natchez Trace Trail hike, find temperature extremes during that time, and get 5-day
+        weather forecasts for any section along the trail. The two main tools are directly below,
+        with notes on the trail's unique discontinuous structure and other resources following.
+        Sure, the Natchez Trace is already a short set of hikes and planning will be different than with other Long Trails/National Scenic Trails, but I'm a completist. &#128512;
+      </p>
+    </div>
+
+    <div class="header-actions">
+      <details class="trail-selector">
+        <summary class="trail-selector-btn">Trail &#9660;</summary>
+
+        <nav class="trail-selector-menu" aria-label="Trail selector">
+          <a class="trail-option" href="/trails/appalachian-trail/">
+            Appalachian Trail <span class="trail-status"></span>
+          </a>
+
+          <a class="trail-option" href="/trails/florida-trail/">
+            Florida Trail <span class="trail-status"></span>
+          </a>
+
+          <a class="trail-option" href="/trails/new-england-trail/">
+            New England Trail <span class="trail-status"></span>
+          </a>
+
+          <a class="trail-option" href="/trails/arizona-trail/">
+            Arizona Trail <span class="trail-status"></span>
+          </a>
+
+          <a class="trail-option current" href="/trails/natchez-trace-trail/" aria-current="page">
+            Natchez Trace Trail <span class="trail-status">(Current)</span>
+          </a>
+
+          <a class="trail-option" href="/trails/continental-divide-trail/">
+            Continental Divide Trail <span class="trail-status">(Coming Soon)</span>
+          </a>
+
+          <a class="trail-option" href="/trails/pacific-crest-trail/">
+            Pacific Crest Trail <span class="trail-status">(Coming Soon)</span>
+          </a>
+
+          <a class="trail-option" href="/trails/potomac-heritage-trail/">
+            Potomac Heritage Trail <span class="trail-status">(Coming Soon)</span>
+          </a>
+          <div class="trail-divider"></div>
+
+          <a class="trail-option" href="/index.html">
+            Trail Selector Hub
+          </a>
+        </nav>
+      </details>
+    </div>
+
+  </div>
+</header>
+
+  <main>
+
+    <!-- =====================================================
+         Card 1: Hike Duration / End Date Calculator
+         ===================================================== -->
+    <section class="controls" aria-label="Hike duration calculator">
+      <h2>Hike Duration (End Date) and Expected Weather Extremes</h2>
+      <p class="card-instructions">
+        Choose a direction and a start month/day, and your expected miles per day.
+        You will receive an estimated hike duration and end date, including one travel day
+        between each of the five trail sections, along with a map showing where the
+        expected highest and lowest temperatures will be encountered.
+      </p>
+
+      <div class="control-row">
+
+        <!-- Miles per Day -->
+        <div class="ft-select-col">
+          <label for="durMilesPerDay">Miles per Day:</label>
+          <input id="durMilesPerDay" type="number" inputmode="decimal" min="1" step="1" placeholder="e.g., 10" style="width:6rem;" />
+        </div>
+
+        <!-- Direction -->
+        <div class="ft-select-col">
+          <label for="durDirectionSelect">Direction:</label>
+          <select id="durDirectionSelect">
+            <optgroup label="Northbound">
+              <option value="nobo">Portkopinu, MS &#x2192; Highland Rim, TN (Northbound)</option>
+            </optgroup>
+            <optgroup label="Southbound">
+              <option value="sobo">Highland Rim, TN &#x2192; Portkopinu, MS (Southbound)</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <!-- Start Date -->
+        <div class="ft-select-col">
+          <label>Start Date:</label>
+          <span style="display:flex; gap: 6px; align-items:center;">
+            <select id="durMonthSelect"></select>
+            <select id="durDaySelect"></select>
+          </span>
+        </div>
+
+      </div><!-- /.control-row -->
+
+      <div style="margin-top: 12px; width: 100%;">
+        <button id="durBtn" type="button" class="btn-primary">Estimate End Date and Weather Extremes</button>
+      </div>
+
+      <div id="durStatus" class="status" style="width:100%;"></div>
+      <div id="durResult" style="width:100%;"></div>
+
+      <!-- Temperature Extremes Results + Map -->
+      <div id="durExtremesWrap" style="display:none; margin-top:16px;">
+        <h2>Temperature Extremes During Your Hike</h2>
+        <div id="durExtremesMap"></div>
+
+        <p class="data-attribution map-attribution">
+          Mapping data provided by
+          <a href="https://www.openstreetmap.org/copyright"
+             target="_blank" rel="noopener">OpenStreetMap</a>
+          under the Open Database License.
+        </p>
+
+        <div id="durExtremesHot"></div>
+        <div id="durExtremesCold" style="margin-top:12px;"></div>
+      </div>
+    </section>
+
+    <hr class="card-sep" />
+
+    <!-- =====================================================
+         Card 2: Weather Planner
+         ===================================================== -->
+    <section class="controls" aria-label="Weather planner controls">
+      <div class="section-title-block">
+        <h2>Weather Planner</h2>
+        <p class="data-attribution">
+          Weather data provided by
+          <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a>
+          under the 4.0 International (CC BY 4.0) license.
+        </p>
+      </div>
+
+      <p class="card-instructions">
+        Select a trail section and enter a mile within that section's range.
+        Choose a planning date to receive current conditions, a 5-day forecast, and a 7-year
+        average for that date and location.
+      </p>
+
+      <div class="control-row">
+
+        <!-- Planning date -->
+        <div class="ft-select-col">
+          <label>Planning Date:</label>
+          <span style="display:flex; gap: 6px; align-items:center;">
+            <select id="monthSelect"></select>
+            <select id="daySelect"></select>
+          </span>
+        </div>
+
+        <!-- Section selector -->
+        <div class="ft-select-col">
+          <label for="nttSectionSelect">Section:</label>
+          <select id="nttSectionSelect">
+            <option value="portkopinu">Portkopinu</option>
+            <option value="rocky-springs">Rocky Springs</option>
+            <option value="yockanookany">Yockanookany</option>
+            <option value="blackland-prairie">Blackland Prairie</option>
+            <option value="highland-rim">Highland Rim</option>
+          </select>
+        </div>
+
+        <!-- Mile input + range indicator -->
+        <div class="ft-select-col">
+          <label for="nttMileInput">Section Mile:</label>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <input id="nttMileInput" type="number" inputmode="numeric"
+                   min="0" max="23" step="0.1" placeholder="e.g., 5" />
+            <p id="nttSectionInfo" style="margin:0; font-size:0.82rem; color:#555; font-style:italic; white-space:nowrap;"></p>
+          </div>
+        </div>
+
+        <!-- Get Weather button -->
+        <div style="width:100%; margin-top:6px;">
+          <button id="goBtn" type="button" class="btn-primary">Get Weather</button>
+        </div>
+
+      </div><!-- /.control-row -->
+
+      <div id="weatherStatus" class="status"></div>
+
+      <section class="map-wrap" id="weatherMapWrap" style="display:none;">
+        <div id="map" aria-label="Map showing selected Natchez Trace Trail point"></div>
+
+        <p class="data-attribution map-attribution">
+          Mapping data provided by
+          <a href="https://www.openstreetmap.org/copyright"
+             target="_blank" rel="noopener">OpenStreetMap</a>
+          under the Open Database License.
+        </p>
+      </section>
+
+    </section>
+
+    <section class="grid">
+      <div id="planningSummaryBlock"></div>
+      <div id="currentBlock"></div>
+      <div id="forecastBlock"></div>
+    </section>
+
+    <hr class="card-sep" />
+
+    <!-- =====================================================
+         Weather Data Notes + Resources
+         ===================================================== -->
+    <section class="weather-data-notes" aria-labelledby="weather-data-notes-title">
+      <h2 id="weather-data-notes-title">Notes on Weather and Trail Data</h2>
+
+      <div class="weather-data-notes__body">
+
+        <section class="weather-data-notes__subsection" aria-labelledby="notes-on-structure-title">
+          <h3 id="notes-on-structure-title">The Natchez Trace Trail's Unique Structure</h3>
+          <div class="weather-data-notes__content">
+            <p>
+              Unlike most National Scenic Trails, the Natchez Trace Trail is not a single continuous
+              footpath. Instead, it consists of five separate hiking sections spaced along the
+              ~444-mile Natchez Trace Parkway corridor between southwest Mississippi and central
+              Tennessee. The sections — Portkopinu, Rocky Springs, Yockanookany, Blackland Prairie,
+              and Highland Rim — total approximately 59 miles of actual trail.
+              All mileage inputs in this tool are <strong>section miles</strong> — the distance from
+              the start of a given section, numbered from zero. The weather extremes map and duration
+              estimate use a <strong>cumulative trail mile</strong> (0–59) to track position across
+              all five sections.
+            </p>
+            <p>
+              Hiking the complete trail therefore involves driving between sections as well as hiking
+              within them. 
+              The Hike Duration calculator above accounts for this by adding one travel
+              day between each pair of consecutive sections (four travel days total for a complete
+              thru-traverse). Did I just make up that number?  Yes! I figured if someone is thru-hiking this type of trail they are likely doing so in a way that let's them smell the roses and enjoy their time (not expecting many FKTs on this one).  So adding a day for travel seemed reasonable. But if you really want to combine sections into a same-day hike-and-drive routine you may wish to
+              mentally reduce the assumed travel days accordingly.
+            </p>
+          </div>
+        </section>
+
+        <section class="weather-data-notes__subsection" aria-labelledby="notes-on-data-title">
+          <h3 id="notes-on-data-title">Notes on Weather Data</h3>
+          <div class="weather-data-notes__content">
+             <p>
+              The Natchez Trace corridor runs through the Deep South and lower mid-South, where
+              summer heat and humidity are the dominant weather concerns. Heat index values can
+              exceed 100&nbsp;&deg;F during summer months, particularly in the lower Mississippi
+              sections (Portkopinu, Rocky Springs, and Yockanookany). A
+              <strong>heat index advisory</strong> is shown whenever the apparent high temperature
+              during your hike is expected to reach or exceed 100&nbsp;&deg;F.
+            </p>
+            <p>
+              Spring (March–April) and fall (October–November) are the most popular hiking windows
+              on the Natchez Trace Trail, offering mild temperatures across all five sections.
+              Weather data is provided by Open-Meteo with Apparent Temperature data calculated using the Steadman methodology
+              to determine the heat index at high humidity and the wind chill at low temperatures with wind).
+            </p>
+          </div>
+        </section>
+
+        <section class="weather-data-notes__subsection" aria-labelledby="additional-resources-title">
+          <h3 id="additional-resources-title">Additional Resources</h3>
+          <div class="weather-data-notes__content">
+            <ul class="weather-data-notes__links">
+              <li>
+                <a href="https://www.nps.gov/natr/index.htm" target="_blank" rel="noopener noreferrer">
+                  <strong>Natchez Trace Parkway (NPS):</strong>
+                </a>
+                The National Park Service page for the Natchez Trace Parkway, including trail maps,
+                campground locations, permit information, and visitor resources for all five
+                trail sections.
+              </li>
+              <li>
+                <a href="https://tnmuseum.org/junior-curators/posts/go-see-tennessee-tracing-history-on-the-old-natchez-trace" target="_blank" rel="noopener noreferrer">
+                  <strong>Go See Tennessee: Tracing History on the Old Natchez Trace:</strong>
+                </a>
+                Historical guide to a few select places along Natchez Trace Trail highligting the geographic and cultural context of the trail,
+                as well as the infamous Trail of Tears.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="small">
+      Informational only. Always verify conditions and heed local advisories.
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>window.SITE_BASE = "";</script>
+  <script>window.TRAIL_SLUG = "natchez-trace-trail";</script>
+
+  <!-- -------------------------------------------------------
+       Section data bootstrap — used as a fallback by app.js
+       while ntt_meta.json is fetching. All UI initialization
+       and event wiring is handled by app.js.
+       ------------------------------------------------------- -->
+  <script>
+    /* Section mileages sourced from NPS Natchez Trace Parkway trail data.
+       Axis miles are cumulative trail miles (0-59) across all five sections
+       in NOBO order (Portkopinu → Highland Rim). Per-section miles always
+       start at 0. */
+    window.NTT_SECTIONS_BOOTSTRAP = [
+      { id: "portkopinu",        name: "Portkopinu",        state: "MS", mile_start: 0, mile_end:  3.44, axis_start:  0.00, axis_end:  3.44 },
+      { id: "rocky-springs",     name: "Rocky Springs",     state: "MS", mile_start: 0, mile_end:  8.99, axis_start:  3.44, axis_end: 12.43 },
+      { id: "yockanookany",      name: "Yockanookany",      state: "MS", mile_start: 0, mile_end: 25.73, axis_start: 12.43, axis_end: 38.16 },
+      { id: "blackland-prairie", name: "Blackland Prairie", state: "MS", mile_start: 0, mile_end:  6.11, axis_start: 38.16, axis_end: 44.27 },
+      { id: "highland-rim",      name: "Highland Rim",      state: "TN", mile_start: 0, mile_end: 24.63, axis_start: 44.27, axis_end: 68.89 },
+    ];
+
+    window.NTT_DIRECTION_OPTIONS_BOOTSTRAP = [
+      { id: "nobo", label: "Northbound \u2014 Portkopinu, MS \u2192 Highland Rim, TN", total_miles: 68.89, is_nobo: true  },
+      { id: "sobo", label: "Southbound \u2014 Highland Rim, TN \u2192 Portkopinu, MS", total_miles: 68.89, is_nobo: false },
+    ];
+  </script>
+
+  <script defer src="js/app.js"></script>
+
+  <!-- Donation block -->
+  <div class="donation-block">
+    <p class="donation-text">
+      Thank you for visiting and trying these tools. They are a labor of love for me, and I make
+      no money from this site. However, if you wish to help support the site please consider
+      <a href="https://www.buymeacoffee.com/ihrhzL0ZC5" target="_blank" rel="noopener noreferrer">Buying Me a Coffee</a>
+      &mdash; donations of $1, $5, or even $20 are deeply appreciated. I promise every cent will go to
+      the ongoing operations, maintenance, development, and expansion of the site.
+    </p>
+    <a class="bmc-button" href="https://www.buymeacoffee.com/ihrhzL0ZC5"
+       target="_blank" rel="noopener noreferrer" aria-label="Buy Me a Coffee">Buy Me a Coffee</a>
+  </div>
+
+</body>
+</html>

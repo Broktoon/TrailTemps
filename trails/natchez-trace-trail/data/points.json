@@ -1,0 +1,6230 @@
+[
+  {
+    "id": "ntt-portkopinu-mi0000",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 0,
+    "axis_mile": 0,
+    "lat": 31.744803,
+    "lon": -91.1564
+  },
+  {
+    "id": "ntt-portkopinu-mi0001",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 0.1,
+    "axis_mile": 0.1,
+    "lat": 31.744403,
+    "lon": -91.158005
+  },
+  {
+    "id": "ntt-portkopinu-mi0002",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 0.2,
+    "axis_mile": 0.2,
+    "lat": 31.743264,
+    "lon": -91.158675
+  },
+  {
+    "id": "ntt-portkopinu-mi0003",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 0.3,
+    "axis_mile": 0.3,
+    "lat": 31.741856,
+    "lon": -91.158368
+  },
+  {
+    "id": "ntt-portkopinu-mi0004",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 0.4,
+    "axis_mile": 0.4,
+    "lat": 31.740663,
+    "lon": -91.159264
+  },
+  {
+    "id": "ntt-portkopinu-mi0005",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 0.5,
+    "axis_mile": 0.5,
+    "lat": 31.740025,
+    "lon": -91.160752
+  },
+  {
+    "id": "ntt-portkopinu-mi0006",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 0.6,
+    "axis_mile": 0.6,
+    "lat": 31.739202,
+    "lon": -91.1621
+  },
+  {
+    "id": "ntt-portkopinu-mi0007",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 0.7,
+    "axis_mile": 0.7,
+    "lat": 31.738391,
+    "lon": -91.163497
+  },
+  {
+    "id": "ntt-portkopinu-mi0008",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 0.8,
+    "axis_mile": 0.8,
+    "lat": 31.737391,
+    "lon": -91.16471
+  },
+  {
+    "id": "ntt-portkopinu-mi0009",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 0.9,
+    "axis_mile": 0.9,
+    "lat": 31.736257,
+    "lon": -91.165506
+  },
+  {
+    "id": "ntt-portkopinu-mi0010",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 1,
+    "axis_mile": 1,
+    "lat": 31.734974,
+    "lon": -91.165979
+  },
+  {
+    "id": "ntt-portkopinu-mi0011",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 1.1,
+    "axis_mile": 1.1,
+    "lat": 31.733741,
+    "lon": -91.166027
+  },
+  {
+    "id": "ntt-portkopinu-mi0012",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 1.2,
+    "axis_mile": 1.2,
+    "lat": 31.732307,
+    "lon": -91.165887
+  },
+  {
+    "id": "ntt-portkopinu-mi0013",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 1.3,
+    "axis_mile": 1.3,
+    "lat": 31.730879,
+    "lon": -91.16607
+  },
+  {
+    "id": "ntt-portkopinu-mi0014",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 1.4,
+    "axis_mile": 1.4,
+    "lat": 31.729473,
+    "lon": -91.166409
+  },
+  {
+    "id": "ntt-portkopinu-mi0015",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 1.5,
+    "axis_mile": 1.5,
+    "lat": 31.728097,
+    "lon": -91.16664
+  },
+  {
+    "id": "ntt-portkopinu-mi0016",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 1.6,
+    "axis_mile": 1.6,
+    "lat": 31.726735,
+    "lon": -91.166481
+  },
+  {
+    "id": "ntt-portkopinu-mi0017",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 1.7,
+    "axis_mile": 1.7,
+    "lat": 31.725363,
+    "lon": -91.166054
+  },
+  {
+    "id": "ntt-portkopinu-mi0018",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 1.8,
+    "axis_mile": 1.8,
+    "lat": 31.724021,
+    "lon": -91.16663
+  },
+  {
+    "id": "ntt-portkopinu-mi0019",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 1.9,
+    "axis_mile": 1.9,
+    "lat": 31.722718,
+    "lon": -91.167175
+  },
+  {
+    "id": "ntt-portkopinu-mi0020",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 2,
+    "axis_mile": 2,
+    "lat": 31.721352,
+    "lon": -91.167179
+  },
+  {
+    "id": "ntt-portkopinu-mi0021",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 2.1,
+    "axis_mile": 2.1,
+    "lat": 31.72,
+    "lon": -91.166701
+  },
+  {
+    "id": "ntt-portkopinu-mi0022",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 2.2,
+    "axis_mile": 2.2,
+    "lat": 31.718732,
+    "lon": -91.167291
+  },
+  {
+    "id": "ntt-portkopinu-mi0023",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 2.3,
+    "axis_mile": 2.3,
+    "lat": 31.717736,
+    "lon": -91.168489
+  },
+  {
+    "id": "ntt-portkopinu-mi0024",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 2.4,
+    "axis_mile": 2.4,
+    "lat": 31.716388,
+    "lon": -91.168956
+  },
+  {
+    "id": "ntt-portkopinu-mi0025",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 2.5,
+    "axis_mile": 2.5,
+    "lat": 31.715394,
+    "lon": -91.170137
+  },
+  {
+    "id": "ntt-portkopinu-mi0026",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 2.6,
+    "axis_mile": 2.6,
+    "lat": 31.714544,
+    "lon": -91.171382
+  },
+  {
+    "id": "ntt-portkopinu-mi0027",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 2.7,
+    "axis_mile": 2.7,
+    "lat": 31.713436,
+    "lon": -91.172287
+  },
+  {
+    "id": "ntt-portkopinu-mi0028",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 2.8,
+    "axis_mile": 2.8,
+    "lat": 31.711994,
+    "lon": -91.172345
+  },
+  {
+    "id": "ntt-portkopinu-mi0029",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 2.9,
+    "axis_mile": 2.9,
+    "lat": 31.710719,
+    "lon": -91.173134
+  },
+  {
+    "id": "ntt-portkopinu-mi0030",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 3,
+    "axis_mile": 3,
+    "lat": 31.709789,
+    "lon": -91.174394
+  },
+  {
+    "id": "ntt-portkopinu-mi0031",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 3.1,
+    "axis_mile": 3.1,
+    "lat": 31.708903,
+    "lon": -91.175616
+  },
+  {
+    "id": "ntt-portkopinu-mi0032",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 3.2,
+    "axis_mile": 3.2,
+    "lat": 31.707561,
+    "lon": -91.176051
+  },
+  {
+    "id": "ntt-portkopinu-mi0033",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 3.3,
+    "axis_mile": 3.3,
+    "lat": 31.706166,
+    "lon": -91.176414
+  },
+  {
+    "id": "ntt-portkopinu-mi0034",
+    "section": "portkopinu",
+    "state": "MS",
+    "mile": 3.4,
+    "axis_mile": 3.4,
+    "lat": 31.704813,
+    "lon": -91.176988
+  },
+  {
+    "id": "ntt-rocky-springs-mi0000",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 0,
+    "axis_mile": 3.4,
+    "lat": 32.060612,
+    "lon": -90.826125
+  },
+  {
+    "id": "ntt-rocky-springs-mi0001",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 0.1,
+    "axis_mile": 3.5,
+    "lat": 32.061384,
+    "lon": -90.826953
+  },
+  {
+    "id": "ntt-rocky-springs-mi0002",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 0.2,
+    "axis_mile": 3.6,
+    "lat": 32.062005,
+    "lon": -90.825649
+  },
+  {
+    "id": "ntt-rocky-springs-mi0003",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 0.3,
+    "axis_mile": 3.7,
+    "lat": 32.062617,
+    "lon": -90.824498
+  },
+  {
+    "id": "ntt-rocky-springs-mi0004",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 0.4,
+    "axis_mile": 3.8,
+    "lat": 32.063098,
+    "lon": -90.823713
+  },
+  {
+    "id": "ntt-rocky-springs-mi0005",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 0.5,
+    "axis_mile": 3.9,
+    "lat": 32.06376,
+    "lon": -90.822545
+  },
+  {
+    "id": "ntt-rocky-springs-mi0006",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 0.6,
+    "axis_mile": 4,
+    "lat": 32.064515,
+    "lon": -90.821278
+  },
+  {
+    "id": "ntt-rocky-springs-mi0007",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 0.7,
+    "axis_mile": 4.1,
+    "lat": 32.065824,
+    "lon": -90.820566
+  },
+  {
+    "id": "ntt-rocky-springs-mi0008",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 0.8,
+    "axis_mile": 4.2,
+    "lat": 32.066689,
+    "lon": -90.819518
+  },
+  {
+    "id": "ntt-rocky-springs-mi0009",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 0.9,
+    "axis_mile": 4.3,
+    "lat": 32.067735,
+    "lon": -90.818533
+  },
+  {
+    "id": "ntt-rocky-springs-mi0010",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 1,
+    "axis_mile": 4.4,
+    "lat": 32.067978,
+    "lon": -90.817162
+  },
+  {
+    "id": "ntt-rocky-springs-mi0011",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 1.1,
+    "axis_mile": 4.5,
+    "lat": 32.068989,
+    "lon": -90.816171
+  },
+  {
+    "id": "ntt-rocky-springs-mi0012",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 1.2,
+    "axis_mile": 4.6,
+    "lat": 32.069549,
+    "lon": -90.814859
+  },
+  {
+    "id": "ntt-rocky-springs-mi0013",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 1.3,
+    "axis_mile": 4.7,
+    "lat": 32.070446,
+    "lon": -90.813811
+  },
+  {
+    "id": "ntt-rocky-springs-mi0014",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 1.4,
+    "axis_mile": 4.8,
+    "lat": 32.071324,
+    "lon": -90.812738
+  },
+  {
+    "id": "ntt-rocky-springs-mi0015",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 1.5,
+    "axis_mile": 4.9,
+    "lat": 32.072362,
+    "lon": -90.811646
+  },
+  {
+    "id": "ntt-rocky-springs-mi0016",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 1.6,
+    "axis_mile": 5,
+    "lat": 32.072616,
+    "lon": -90.811278
+  },
+  {
+    "id": "ntt-rocky-springs-mi0017",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 1.7,
+    "axis_mile": 5.1,
+    "lat": 32.073815,
+    "lon": -90.810502
+  },
+  {
+    "id": "ntt-rocky-springs-mi0018",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 1.8,
+    "axis_mile": 5.2,
+    "lat": 32.074269,
+    "lon": -90.809272
+  },
+  {
+    "id": "ntt-rocky-springs-mi0019",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 1.9,
+    "axis_mile": 5.3,
+    "lat": 32.074698,
+    "lon": -90.809418
+  },
+  {
+    "id": "ntt-rocky-springs-mi0020",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 2,
+    "axis_mile": 5.4,
+    "lat": 32.075737,
+    "lon": -90.809197
+  },
+  {
+    "id": "ntt-rocky-springs-mi0021",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 2.1,
+    "axis_mile": 5.5,
+    "lat": 32.076306,
+    "lon": -90.8078
+  },
+  {
+    "id": "ntt-rocky-springs-mi0022",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 2.2,
+    "axis_mile": 5.6,
+    "lat": 32.077267,
+    "lon": -90.808339
+  },
+  {
+    "id": "ntt-rocky-springs-mi0023",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 2.3,
+    "axis_mile": 5.7,
+    "lat": 32.078455,
+    "lon": -90.807405
+  },
+  {
+    "id": "ntt-rocky-springs-mi0024",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 2.4,
+    "axis_mile": 5.8,
+    "lat": 32.079593,
+    "lon": -90.806399
+  },
+  {
+    "id": "ntt-rocky-springs-mi0025",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 2.5,
+    "axis_mile": 5.9,
+    "lat": 32.080857,
+    "lon": -90.80604
+  },
+  {
+    "id": "ntt-rocky-springs-mi0026",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 2.6,
+    "axis_mile": 6,
+    "lat": 32.08227,
+    "lon": -90.806312
+  },
+  {
+    "id": "ntt-rocky-springs-mi0027",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 2.7,
+    "axis_mile": 6.1,
+    "lat": 32.083657,
+    "lon": -90.806799
+  },
+  {
+    "id": "ntt-rocky-springs-mi0028",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 2.8,
+    "axis_mile": 6.2,
+    "lat": 32.085045,
+    "lon": -90.807285
+  },
+  {
+    "id": "ntt-rocky-springs-mi0029",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 2.9,
+    "axis_mile": 6.3,
+    "lat": 32.086432,
+    "lon": -90.807772
+  },
+  {
+    "id": "ntt-rocky-springs-mi0030",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 3,
+    "axis_mile": 6.4,
+    "lat": 32.08782,
+    "lon": -90.808258
+  },
+  {
+    "id": "ntt-rocky-springs-mi0031",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 3.1,
+    "axis_mile": 6.5,
+    "lat": 32.089115,
+    "lon": -90.808521
+  },
+  {
+    "id": "ntt-rocky-springs-mi0032",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 3.2,
+    "axis_mile": 6.6,
+    "lat": 32.089483,
+    "lon": -90.806914
+  },
+  {
+    "id": "ntt-rocky-springs-mi0033",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 3.3,
+    "axis_mile": 6.7,
+    "lat": 32.090483,
+    "lon": -90.805682
+  },
+  {
+    "id": "ntt-rocky-springs-mi0034",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 3.4,
+    "axis_mile": 6.8,
+    "lat": 32.091464,
+    "lon": -90.804429
+  },
+  {
+    "id": "ntt-rocky-springs-mi0035",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 3.5,
+    "axis_mile": 6.9,
+    "lat": 32.092079,
+    "lon": -90.802904
+  },
+  {
+    "id": "ntt-rocky-springs-mi0036",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 3.6,
+    "axis_mile": 7,
+    "lat": 32.092949,
+    "lon": -90.80155
+  },
+  {
+    "id": "ntt-rocky-springs-mi0037",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 3.7,
+    "axis_mile": 7.1,
+    "lat": 32.09325,
+    "lon": -90.79998
+  },
+  {
+    "id": "ntt-rocky-springs-mi0038",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 3.8,
+    "axis_mile": 7.2,
+    "lat": 32.094036,
+    "lon": -90.800062
+  },
+  {
+    "id": "ntt-rocky-springs-mi0039",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 3.9,
+    "axis_mile": 7.3,
+    "lat": 32.094283,
+    "lon": -90.798594
+  },
+  {
+    "id": "ntt-rocky-springs-mi0040",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 4,
+    "axis_mile": 7.4,
+    "lat": 32.095135,
+    "lon": -90.79769
+  },
+  {
+    "id": "ntt-rocky-springs-mi0041",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 4.1,
+    "axis_mile": 7.5,
+    "lat": 32.095679,
+    "lon": -90.796547
+  },
+  {
+    "id": "ntt-rocky-springs-mi0042",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 4.2,
+    "axis_mile": 7.6,
+    "lat": 32.096827,
+    "lon": -90.795641
+  },
+  {
+    "id": "ntt-rocky-springs-mi0043",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 4.3,
+    "axis_mile": 7.7,
+    "lat": 32.098063,
+    "lon": -90.794773
+  },
+  {
+    "id": "ntt-rocky-springs-mi0044",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 4.4,
+    "axis_mile": 7.8,
+    "lat": 32.099367,
+    "lon": -90.794119
+  },
+  {
+    "id": "ntt-rocky-springs-mi0045",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 4.5,
+    "axis_mile": 7.9,
+    "lat": 32.099427,
+    "lon": -90.792761
+  },
+  {
+    "id": "ntt-rocky-springs-mi0046",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 4.6,
+    "axis_mile": 8,
+    "lat": 32.099101,
+    "lon": -90.791159
+  },
+  {
+    "id": "ntt-rocky-springs-mi0047",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 4.7,
+    "axis_mile": 8.1,
+    "lat": 32.098596,
+    "lon": -90.789578
+  },
+  {
+    "id": "ntt-rocky-springs-mi0048",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 4.8,
+    "axis_mile": 8.2,
+    "lat": 32.097671,
+    "lon": -90.788405
+  },
+  {
+    "id": "ntt-rocky-springs-mi0049",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 4.9,
+    "axis_mile": 8.3,
+    "lat": 32.096636,
+    "lon": -90.787357
+  },
+  {
+    "id": "ntt-rocky-springs-mi0050",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 5,
+    "axis_mile": 8.4,
+    "lat": 32.095902,
+    "lon": -90.786179
+  },
+  {
+    "id": "ntt-rocky-springs-mi0051",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 5.1,
+    "axis_mile": 8.5,
+    "lat": 32.096988,
+    "lon": -90.78514
+  },
+  {
+    "id": "ntt-rocky-springs-mi0052",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 5.2,
+    "axis_mile": 8.6,
+    "lat": 32.098098,
+    "lon": -90.784131
+  },
+  {
+    "id": "ntt-rocky-springs-mi0053",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 5.3,
+    "axis_mile": 8.7,
+    "lat": 32.098769,
+    "lon": -90.782863
+  },
+  {
+    "id": "ntt-rocky-springs-mi0054",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 5.4,
+    "axis_mile": 8.8,
+    "lat": 32.099128,
+    "lon": -90.78146
+  },
+  {
+    "id": "ntt-rocky-springs-mi0055",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 5.5,
+    "axis_mile": 8.9,
+    "lat": 32.100012,
+    "lon": -90.780501
+  },
+  {
+    "id": "ntt-rocky-springs-mi0056",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 5.6,
+    "axis_mile": 9,
+    "lat": 32.100714,
+    "lon": -90.779864
+  },
+  {
+    "id": "ntt-rocky-springs-mi0057",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 5.7,
+    "axis_mile": 9.1,
+    "lat": 32.101166,
+    "lon": -90.77843
+  },
+  {
+    "id": "ntt-rocky-springs-mi0058",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 5.8,
+    "axis_mile": 9.2,
+    "lat": 32.10187,
+    "lon": -90.777254
+  },
+  {
+    "id": "ntt-rocky-springs-mi0059",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 5.9,
+    "axis_mile": 9.3,
+    "lat": 32.102518,
+    "lon": -90.776081
+  },
+  {
+    "id": "ntt-rocky-springs-mi0060",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 6,
+    "axis_mile": 9.4,
+    "lat": 32.103428,
+    "lon": -90.775352
+  },
+  {
+    "id": "ntt-rocky-springs-mi0061",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 6.1,
+    "axis_mile": 9.5,
+    "lat": 32.104532,
+    "lon": -90.774277
+  },
+  {
+    "id": "ntt-rocky-springs-mi0062",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 6.2,
+    "axis_mile": 9.6,
+    "lat": 32.105777,
+    "lon": -90.773615
+  },
+  {
+    "id": "ntt-rocky-springs-mi0063",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 6.3,
+    "axis_mile": 9.7,
+    "lat": 32.107082,
+    "lon": -90.773117
+  },
+  {
+    "id": "ntt-rocky-springs-mi0064",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 6.4,
+    "axis_mile": 9.8,
+    "lat": 32.108381,
+    "lon": -90.772534
+  },
+  {
+    "id": "ntt-rocky-springs-mi0065",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 6.5,
+    "axis_mile": 9.9,
+    "lat": 32.109593,
+    "lon": -90.771846
+  },
+  {
+    "id": "ntt-rocky-springs-mi0066",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 6.6,
+    "axis_mile": 10,
+    "lat": 32.11088,
+    "lon": -90.7714
+  },
+  {
+    "id": "ntt-rocky-springs-mi0067",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 6.7,
+    "axis_mile": 10.1,
+    "lat": 32.111837,
+    "lon": -90.770759
+  },
+  {
+    "id": "ntt-rocky-springs-mi0068",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 6.8,
+    "axis_mile": 10.2,
+    "lat": 32.112833,
+    "lon": -90.77037
+  },
+  {
+    "id": "ntt-rocky-springs-mi0069",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 6.9,
+    "axis_mile": 10.3,
+    "lat": 32.113943,
+    "lon": -90.769847
+  },
+  {
+    "id": "ntt-rocky-springs-mi0070",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 7,
+    "axis_mile": 10.4,
+    "lat": 32.114393,
+    "lon": -90.7686
+  },
+  {
+    "id": "ntt-rocky-springs-mi0071",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 7.1,
+    "axis_mile": 10.5,
+    "lat": 32.115414,
+    "lon": -90.767582
+  },
+  {
+    "id": "ntt-rocky-springs-mi0072",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 7.2,
+    "axis_mile": 10.6,
+    "lat": 32.116004,
+    "lon": -90.766165
+  },
+  {
+    "id": "ntt-rocky-springs-mi0073",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 7.3,
+    "axis_mile": 10.7,
+    "lat": 32.116708,
+    "lon": -90.765448
+  },
+  {
+    "id": "ntt-rocky-springs-mi0074",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 7.4,
+    "axis_mile": 10.8,
+    "lat": 32.117909,
+    "lon": -90.76523
+  },
+  {
+    "id": "ntt-rocky-springs-mi0075",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 7.5,
+    "axis_mile": 10.9,
+    "lat": 32.118737,
+    "lon": -90.764073
+  },
+  {
+    "id": "ntt-rocky-springs-mi0076",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 7.6,
+    "axis_mile": 11,
+    "lat": 32.119653,
+    "lon": -90.762774
+  },
+  {
+    "id": "ntt-rocky-springs-mi0077",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 7.7,
+    "axis_mile": 11.1,
+    "lat": 32.120633,
+    "lon": -90.762023
+  },
+  {
+    "id": "ntt-rocky-springs-mi0078",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 7.8,
+    "axis_mile": 11.2,
+    "lat": 32.121043,
+    "lon": -90.760585
+  },
+  {
+    "id": "ntt-rocky-springs-mi0079",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 7.9,
+    "axis_mile": 11.3,
+    "lat": 32.121874,
+    "lon": -90.759364
+  },
+  {
+    "id": "ntt-rocky-springs-mi0080",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 8,
+    "axis_mile": 11.4,
+    "lat": 32.122806,
+    "lon": -90.758262
+  },
+  {
+    "id": "ntt-rocky-springs-mi0081",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 8.1,
+    "axis_mile": 11.5,
+    "lat": 32.123817,
+    "lon": -90.757436
+  },
+  {
+    "id": "ntt-rocky-springs-mi0082",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 8.2,
+    "axis_mile": 11.6,
+    "lat": 32.124484,
+    "lon": -90.756049
+  },
+  {
+    "id": "ntt-rocky-springs-mi0083",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 8.3,
+    "axis_mile": 11.7,
+    "lat": 32.125497,
+    "lon": -90.755357
+  },
+  {
+    "id": "ntt-rocky-springs-mi0084",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 8.4,
+    "axis_mile": 11.8,
+    "lat": 32.1263,
+    "lon": -90.753935
+  },
+  {
+    "id": "ntt-rocky-springs-mi0085",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 8.5,
+    "axis_mile": 11.9,
+    "lat": 32.127103,
+    "lon": -90.752513
+  },
+  {
+    "id": "ntt-rocky-springs-mi0086",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 8.6,
+    "axis_mile": 12,
+    "lat": 32.127381,
+    "lon": -90.751014
+  },
+  {
+    "id": "ntt-rocky-springs-mi0087",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 8.7,
+    "axis_mile": 12.1,
+    "lat": 32.128098,
+    "lon": -90.749529
+  },
+  {
+    "id": "ntt-rocky-springs-mi0088",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 8.8,
+    "axis_mile": 12.2,
+    "lat": 32.128818,
+    "lon": -90.748046
+  },
+  {
+    "id": "ntt-rocky-springs-mi0089",
+    "section": "rocky-springs",
+    "state": "MS",
+    "mile": 8.9,
+    "axis_mile": 12.3,
+    "lat": 32.129447,
+    "lon": -90.746526
+  },
+  {
+    "id": "ntt-yockanookany-mi0000",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 0,
+    "axis_mile": 12.4,
+    "lat": 32.4668,
+    "lon": -90.056077
+  },
+  {
+    "id": "ntt-yockanookany-mi0001",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 0.1,
+    "axis_mile": 12.5,
+    "lat": 32.465868,
+    "lon": -90.056745
+  },
+  {
+    "id": "ntt-yockanookany-mi0002",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 0.2,
+    "axis_mile": 12.6,
+    "lat": 32.466963,
+    "lon": -90.056068
+  },
+  {
+    "id": "ntt-yockanookany-mi0003",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 0.3,
+    "axis_mile": 12.7,
+    "lat": 32.468064,
+    "lon": -90.05507
+  },
+  {
+    "id": "ntt-yockanookany-mi0004",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 0.4,
+    "axis_mile": 12.8,
+    "lat": 32.468782,
+    "lon": -90.053604
+  },
+  {
+    "id": "ntt-yockanookany-mi0005",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 0.5,
+    "axis_mile": 12.9,
+    "lat": 32.469369,
+    "lon": -90.052036
+  },
+  {
+    "id": "ntt-yockanookany-mi0006",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 0.6,
+    "axis_mile": 13,
+    "lat": 32.469623,
+    "lon": -90.050473
+  },
+  {
+    "id": "ntt-yockanookany-mi0007",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 0.7,
+    "axis_mile": 13.1,
+    "lat": 32.469673,
+    "lon": -90.04887
+  },
+  {
+    "id": "ntt-yockanookany-mi0008",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 0.8,
+    "axis_mile": 13.2,
+    "lat": 32.469921,
+    "lon": -90.047389
+  },
+  {
+    "id": "ntt-yockanookany-mi0009",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 0.9,
+    "axis_mile": 13.3,
+    "lat": 32.470331,
+    "lon": -90.045756
+  },
+  {
+    "id": "ntt-yockanookany-mi0010",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 1,
+    "axis_mile": 13.4,
+    "lat": 32.470792,
+    "lon": -90.044195
+  },
+  {
+    "id": "ntt-yockanookany-mi0011",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 1.1,
+    "axis_mile": 13.5,
+    "lat": 32.470889,
+    "lon": -90.042564
+  },
+  {
+    "id": "ntt-yockanookany-mi0012",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 1.2,
+    "axis_mile": 13.6,
+    "lat": 32.472181,
+    "lon": -90.042816
+  },
+  {
+    "id": "ntt-yockanookany-mi0013",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 1.3,
+    "axis_mile": 13.7,
+    "lat": 32.47284,
+    "lon": -90.041882
+  },
+  {
+    "id": "ntt-yockanookany-mi0014",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 1.4,
+    "axis_mile": 13.8,
+    "lat": 32.473403,
+    "lon": -90.040452
+  },
+  {
+    "id": "ntt-yockanookany-mi0015",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 1.5,
+    "axis_mile": 13.9,
+    "lat": 32.473664,
+    "lon": -90.038965
+  },
+  {
+    "id": "ntt-yockanookany-mi0016",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 1.6,
+    "axis_mile": 14,
+    "lat": 32.474323,
+    "lon": -90.037537
+  },
+  {
+    "id": "ntt-yockanookany-mi0017",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 1.7,
+    "axis_mile": 14.1,
+    "lat": 32.474812,
+    "lon": -90.03613
+  },
+  {
+    "id": "ntt-yockanookany-mi0018",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 1.8,
+    "axis_mile": 14.2,
+    "lat": 32.475888,
+    "lon": -90.035028
+  },
+  {
+    "id": "ntt-yockanookany-mi0019",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 1.9,
+    "axis_mile": 14.3,
+    "lat": 32.476408,
+    "lon": -90.033552
+  },
+  {
+    "id": "ntt-yockanookany-mi0020",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 2,
+    "axis_mile": 14.4,
+    "lat": 32.47746,
+    "lon": -90.032642
+  },
+  {
+    "id": "ntt-yockanookany-mi0021",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 2.1,
+    "axis_mile": 14.5,
+    "lat": 32.478378,
+    "lon": -90.031568
+  },
+  {
+    "id": "ntt-yockanookany-mi0022",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 2.2,
+    "axis_mile": 14.6,
+    "lat": 32.479038,
+    "lon": -90.030287
+  },
+  {
+    "id": "ntt-yockanookany-mi0023",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 2.3,
+    "axis_mile": 14.7,
+    "lat": 32.480255,
+    "lon": -90.029624
+  },
+  {
+    "id": "ntt-yockanookany-mi0024",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 2.4,
+    "axis_mile": 14.8,
+    "lat": 32.481275,
+    "lon": -90.028782
+  },
+  {
+    "id": "ntt-yockanookany-mi0025",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 2.5,
+    "axis_mile": 14.9,
+    "lat": 32.482398,
+    "lon": -90.027771
+  },
+  {
+    "id": "ntt-yockanookany-mi0026",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 2.6,
+    "axis_mile": 15,
+    "lat": 32.483393,
+    "lon": -90.026767
+  },
+  {
+    "id": "ntt-yockanookany-mi0027",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 2.7,
+    "axis_mile": 15.1,
+    "lat": 32.484307,
+    "lon": -90.025566
+  },
+  {
+    "id": "ntt-yockanookany-mi0028",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 2.8,
+    "axis_mile": 15.2,
+    "lat": 32.485464,
+    "lon": -90.025744
+  },
+  {
+    "id": "ntt-yockanookany-mi0029",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 2.9,
+    "axis_mile": 15.3,
+    "lat": 32.486836,
+    "lon": -90.025789
+  },
+  {
+    "id": "ntt-yockanookany-mi0030",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 3,
+    "axis_mile": 15.4,
+    "lat": 32.487683,
+    "lon": -90.024809
+  },
+  {
+    "id": "ntt-yockanookany-mi0031",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 3.1,
+    "axis_mile": 15.5,
+    "lat": 32.488877,
+    "lon": -90.023946
+  },
+  {
+    "id": "ntt-yockanookany-mi0032",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 3.2,
+    "axis_mile": 15.6,
+    "lat": 32.490116,
+    "lon": -90.023106
+  },
+  {
+    "id": "ntt-yockanookany-mi0033",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 3.3,
+    "axis_mile": 15.7,
+    "lat": 32.491474,
+    "lon": -90.022895
+  },
+  {
+    "id": "ntt-yockanookany-mi0034",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 3.4,
+    "axis_mile": 15.8,
+    "lat": 32.492754,
+    "lon": -90.022178
+  },
+  {
+    "id": "ntt-yockanookany-mi0035",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 3.5,
+    "axis_mile": 15.9,
+    "lat": 32.494144,
+    "lon": -90.021761
+  },
+  {
+    "id": "ntt-yockanookany-mi0036",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 3.6,
+    "axis_mile": 16,
+    "lat": 32.495416,
+    "lon": -90.021117
+  },
+  {
+    "id": "ntt-yockanookany-mi0037",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 3.7,
+    "axis_mile": 16.1,
+    "lat": 32.496648,
+    "lon": -90.020371
+  },
+  {
+    "id": "ntt-yockanookany-mi0038",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 3.8,
+    "axis_mile": 16.2,
+    "lat": 32.497781,
+    "lon": -90.01946
+  },
+  {
+    "id": "ntt-yockanookany-mi0039",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 3.9,
+    "axis_mile": 16.3,
+    "lat": 32.498702,
+    "lon": -90.018316
+  },
+  {
+    "id": "ntt-yockanookany-mi0040",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 4,
+    "axis_mile": 16.4,
+    "lat": 32.499644,
+    "lon": -90.017147
+  },
+  {
+    "id": "ntt-yockanookany-mi0041",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 4.1,
+    "axis_mile": 16.5,
+    "lat": 32.499834,
+    "lon": -90.015551
+  },
+  {
+    "id": "ntt-yockanookany-mi0042",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 4.2,
+    "axis_mile": 16.6,
+    "lat": 32.500511,
+    "lon": -90.014252
+  },
+  {
+    "id": "ntt-yockanookany-mi0043",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 4.3,
+    "axis_mile": 16.7,
+    "lat": 32.500288,
+    "lon": -90.012661
+  },
+  {
+    "id": "ntt-yockanookany-mi0044",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 4.4,
+    "axis_mile": 16.8,
+    "lat": 32.500091,
+    "lon": -90.011056
+  },
+  {
+    "id": "ntt-yockanookany-mi0045",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 4.5,
+    "axis_mile": 16.9,
+    "lat": 32.500289,
+    "lon": -90.009447
+  },
+  {
+    "id": "ntt-yockanookany-mi0046",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 4.6,
+    "axis_mile": 17,
+    "lat": 32.500072,
+    "lon": -90.008036
+  },
+  {
+    "id": "ntt-yockanookany-mi0047",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 4.7,
+    "axis_mile": 17.1,
+    "lat": 32.500045,
+    "lon": -90.006564
+  },
+  {
+    "id": "ntt-yockanookany-mi0048",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 4.8,
+    "axis_mile": 17.2,
+    "lat": 32.500611,
+    "lon": -90.005118
+  },
+  {
+    "id": "ntt-yockanookany-mi0049",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 4.9,
+    "axis_mile": 17.3,
+    "lat": 32.501212,
+    "lon": -90.003785
+  },
+  {
+    "id": "ntt-yockanookany-mi0050",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 5,
+    "axis_mile": 17.4,
+    "lat": 32.502241,
+    "lon": -90.002907
+  },
+  {
+    "id": "ntt-yockanookany-mi0051",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 5.1,
+    "axis_mile": 17.5,
+    "lat": 32.503024,
+    "lon": -90.001848
+  },
+  {
+    "id": "ntt-yockanookany-mi0052",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 5.2,
+    "axis_mile": 17.6,
+    "lat": 32.503948,
+    "lon": -90.000718
+  },
+  {
+    "id": "ntt-yockanookany-mi0053",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 5.3,
+    "axis_mile": 17.7,
+    "lat": 32.503735,
+    "lon": -89.999145
+  },
+  {
+    "id": "ntt-yockanookany-mi0054",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 5.4,
+    "axis_mile": 17.8,
+    "lat": 32.50497,
+    "lon": -89.998256
+  },
+  {
+    "id": "ntt-yockanookany-mi0055",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 5.5,
+    "axis_mile": 17.9,
+    "lat": 32.506234,
+    "lon": -89.997436
+  },
+  {
+    "id": "ntt-yockanookany-mi0056",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 5.6,
+    "axis_mile": 18,
+    "lat": 32.507368,
+    "lon": -89.996402
+  },
+  {
+    "id": "ntt-yockanookany-mi0057",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 5.7,
+    "axis_mile": 18.1,
+    "lat": 32.508003,
+    "lon": -89.996006
+  },
+  {
+    "id": "ntt-yockanookany-mi0058",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 5.8,
+    "axis_mile": 18.2,
+    "lat": 32.509237,
+    "lon": -89.995214
+  },
+  {
+    "id": "ntt-yockanookany-mi0059",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 5.9,
+    "axis_mile": 18.3,
+    "lat": 32.510572,
+    "lon": -89.995062
+  },
+  {
+    "id": "ntt-yockanookany-mi0060",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 6,
+    "axis_mile": 18.4,
+    "lat": 32.511901,
+    "lon": -89.994566
+  },
+  {
+    "id": "ntt-yockanookany-mi0061",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 6.1,
+    "axis_mile": 18.5,
+    "lat": 32.513219,
+    "lon": -89.994148
+  },
+  {
+    "id": "ntt-yockanookany-mi0062",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 6.2,
+    "axis_mile": 18.6,
+    "lat": 32.51438,
+    "lon": -89.993245
+  },
+  {
+    "id": "ntt-yockanookany-mi0063",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 6.3,
+    "axis_mile": 18.7,
+    "lat": 32.515545,
+    "lon": -89.992541
+  },
+  {
+    "id": "ntt-yockanookany-mi0064",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 6.4,
+    "axis_mile": 18.8,
+    "lat": 32.516514,
+    "lon": -89.991343
+  },
+  {
+    "id": "ntt-yockanookany-mi0065",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 6.5,
+    "axis_mile": 18.9,
+    "lat": 32.51698,
+    "lon": -89.990136
+  },
+  {
+    "id": "ntt-yockanookany-mi0066",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 6.6,
+    "axis_mile": 19,
+    "lat": 32.517147,
+    "lon": -89.988481
+  },
+  {
+    "id": "ntt-yockanookany-mi0067",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 6.7,
+    "axis_mile": 19.1,
+    "lat": 32.517488,
+    "lon": -89.986966
+  },
+  {
+    "id": "ntt-yockanookany-mi0068",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 6.8,
+    "axis_mile": 19.2,
+    "lat": 32.518264,
+    "lon": -89.98598
+  },
+  {
+    "id": "ntt-yockanookany-mi0069",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 6.9,
+    "axis_mile": 19.3,
+    "lat": 32.518109,
+    "lon": -89.984285
+  },
+  {
+    "id": "ntt-yockanookany-mi0070",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 7,
+    "axis_mile": 19.4,
+    "lat": 32.518236,
+    "lon": -89.982619
+  },
+  {
+    "id": "ntt-yockanookany-mi0071",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 7.1,
+    "axis_mile": 19.5,
+    "lat": 32.51945,
+    "lon": -89.982271
+  },
+  {
+    "id": "ntt-yockanookany-mi0072",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 7.2,
+    "axis_mile": 19.6,
+    "lat": 32.520014,
+    "lon": -89.98125
+  },
+  {
+    "id": "ntt-yockanookany-mi0073",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 7.3,
+    "axis_mile": 19.7,
+    "lat": 32.520836,
+    "lon": -89.980031
+  },
+  {
+    "id": "ntt-yockanookany-mi0074",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 7.4,
+    "axis_mile": 19.8,
+    "lat": 32.521899,
+    "lon": -89.978918
+  },
+  {
+    "id": "ntt-yockanookany-mi0075",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 7.5,
+    "axis_mile": 19.9,
+    "lat": 32.523103,
+    "lon": -89.978154
+  },
+  {
+    "id": "ntt-yockanookany-mi0076",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 7.6,
+    "axis_mile": 20,
+    "lat": 32.524489,
+    "lon": -89.977846
+  },
+  {
+    "id": "ntt-yockanookany-mi0077",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 7.7,
+    "axis_mile": 20.1,
+    "lat": 32.52591,
+    "lon": -89.977895
+  },
+  {
+    "id": "ntt-yockanookany-mi0078",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 7.8,
+    "axis_mile": 20.2,
+    "lat": 32.527129,
+    "lon": -89.97712
+  },
+  {
+    "id": "ntt-yockanookany-mi0079",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 7.9,
+    "axis_mile": 20.3,
+    "lat": 32.527843,
+    "lon": -89.975718
+  },
+  {
+    "id": "ntt-yockanookany-mi0080",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 8,
+    "axis_mile": 20.4,
+    "lat": 32.528122,
+    "lon": -89.974385
+  },
+  {
+    "id": "ntt-yockanookany-mi0081",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 8.1,
+    "axis_mile": 20.5,
+    "lat": 32.527507,
+    "lon": -89.972956
+  },
+  {
+    "id": "ntt-yockanookany-mi0082",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 8.2,
+    "axis_mile": 20.6,
+    "lat": 32.527538,
+    "lon": -89.9715
+  },
+  {
+    "id": "ntt-yockanookany-mi0083",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 8.3,
+    "axis_mile": 20.7,
+    "lat": 32.528381,
+    "lon": -89.970189
+  },
+  {
+    "id": "ntt-yockanookany-mi0084",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 8.4,
+    "axis_mile": 20.8,
+    "lat": 32.529137,
+    "lon": -89.968893
+  },
+  {
+    "id": "ntt-yockanookany-mi0085",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 8.5,
+    "axis_mile": 20.9,
+    "lat": 32.529995,
+    "lon": -89.967615
+  },
+  {
+    "id": "ntt-yockanookany-mi0086",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 8.6,
+    "axis_mile": 21,
+    "lat": 32.53057,
+    "lon": -89.966485
+  },
+  {
+    "id": "ntt-yockanookany-mi0087",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 8.7,
+    "axis_mile": 21.1,
+    "lat": 32.531506,
+    "lon": -89.96561
+  },
+  {
+    "id": "ntt-yockanookany-mi0088",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 8.8,
+    "axis_mile": 21.2,
+    "lat": 32.532585,
+    "lon": -89.964538
+  },
+  {
+    "id": "ntt-yockanookany-mi0089",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 8.9,
+    "axis_mile": 21.3,
+    "lat": 32.533518,
+    "lon": -89.963374
+  },
+  {
+    "id": "ntt-yockanookany-mi0090",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 9,
+    "axis_mile": 21.4,
+    "lat": 32.534645,
+    "lon": -89.962441
+  },
+  {
+    "id": "ntt-yockanookany-mi0091",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 9.1,
+    "axis_mile": 21.5,
+    "lat": 32.535757,
+    "lon": -89.961417
+  },
+  {
+    "id": "ntt-yockanookany-mi0092",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 9.2,
+    "axis_mile": 21.6,
+    "lat": 32.536324,
+    "lon": -89.96002
+  },
+  {
+    "id": "ntt-yockanookany-mi0093",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 9.3,
+    "axis_mile": 21.7,
+    "lat": 32.537183,
+    "lon": -89.959196
+  },
+  {
+    "id": "ntt-yockanookany-mi0094",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 9.4,
+    "axis_mile": 21.8,
+    "lat": 32.53801,
+    "lon": -89.957927
+  },
+  {
+    "id": "ntt-yockanookany-mi0095",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 9.5,
+    "axis_mile": 21.9,
+    "lat": 32.538821,
+    "lon": -89.956549
+  },
+  {
+    "id": "ntt-yockanookany-mi0096",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 9.6,
+    "axis_mile": 22,
+    "lat": 32.539561,
+    "lon": -89.955221
+  },
+  {
+    "id": "ntt-yockanookany-mi0097",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 9.7,
+    "axis_mile": 22.1,
+    "lat": 32.540476,
+    "lon": -89.953944
+  },
+  {
+    "id": "ntt-yockanookany-mi0098",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 9.8,
+    "axis_mile": 22.2,
+    "lat": 32.541315,
+    "lon": -89.952612
+  },
+  {
+    "id": "ntt-yockanookany-mi0099",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 9.9,
+    "axis_mile": 22.3,
+    "lat": 32.541943,
+    "lon": -89.951206
+  },
+  {
+    "id": "ntt-yockanookany-mi0100",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 10,
+    "axis_mile": 22.4,
+    "lat": 32.542786,
+    "lon": -89.949898
+  },
+  {
+    "id": "ntt-yockanookany-mi0101",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 10.1,
+    "axis_mile": 22.5,
+    "lat": 32.543452,
+    "lon": -89.948547
+  },
+  {
+    "id": "ntt-yockanookany-mi0102",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 10.2,
+    "axis_mile": 22.6,
+    "lat": 32.544188,
+    "lon": -89.947193
+  },
+  {
+    "id": "ntt-yockanookany-mi0103",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 10.3,
+    "axis_mile": 22.7,
+    "lat": 32.544909,
+    "lon": -89.945748
+  },
+  {
+    "id": "ntt-yockanookany-mi0104",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 10.4,
+    "axis_mile": 22.8,
+    "lat": 32.545707,
+    "lon": -89.944386
+  },
+  {
+    "id": "ntt-yockanookany-mi0105",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 10.5,
+    "axis_mile": 22.9,
+    "lat": 32.546361,
+    "lon": -89.943001
+  },
+  {
+    "id": "ntt-yockanookany-mi0106",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 10.6,
+    "axis_mile": 23,
+    "lat": 32.547186,
+    "lon": -89.941678
+  },
+  {
+    "id": "ntt-yockanookany-mi0107",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 10.7,
+    "axis_mile": 23.1,
+    "lat": 32.547814,
+    "lon": -89.940256
+  },
+  {
+    "id": "ntt-yockanookany-mi0108",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 10.8,
+    "axis_mile": 23.2,
+    "lat": 32.548632,
+    "lon": -89.938987
+  },
+  {
+    "id": "ntt-yockanookany-mi0109",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 10.9,
+    "axis_mile": 23.3,
+    "lat": 32.549604,
+    "lon": -89.938065
+  },
+  {
+    "id": "ntt-yockanookany-mi0110",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 11,
+    "axis_mile": 23.4,
+    "lat": 32.550665,
+    "lon": -89.937001
+  },
+  {
+    "id": "ntt-yockanookany-mi0111",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 11.1,
+    "axis_mile": 23.5,
+    "lat": 32.551406,
+    "lon": -89.935661
+  },
+  {
+    "id": "ntt-yockanookany-mi0112",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 11.2,
+    "axis_mile": 23.6,
+    "lat": 32.552378,
+    "lon": -89.934473
+  },
+  {
+    "id": "ntt-yockanookany-mi0113",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 11.3,
+    "axis_mile": 23.7,
+    "lat": 32.55321,
+    "lon": -89.933107
+  },
+  {
+    "id": "ntt-yockanookany-mi0114",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 11.4,
+    "axis_mile": 23.8,
+    "lat": 32.553851,
+    "lon": -89.931692
+  },
+  {
+    "id": "ntt-yockanookany-mi0115",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 11.5,
+    "axis_mile": 23.9,
+    "lat": 32.554158,
+    "lon": -89.930082
+  },
+  {
+    "id": "ntt-yockanookany-mi0116",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 11.6,
+    "axis_mile": 24,
+    "lat": 32.555015,
+    "lon": -89.928851
+  },
+  {
+    "id": "ntt-yockanookany-mi0117",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 11.7,
+    "axis_mile": 24.1,
+    "lat": 32.555531,
+    "lon": -89.92745
+  },
+  {
+    "id": "ntt-yockanookany-mi0118",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 11.8,
+    "axis_mile": 24.2,
+    "lat": 32.556411,
+    "lon": -89.926165
+  },
+  {
+    "id": "ntt-yockanookany-mi0119",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 11.9,
+    "axis_mile": 24.3,
+    "lat": 32.557068,
+    "lon": -89.924849
+  },
+  {
+    "id": "ntt-yockanookany-mi0120",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 12,
+    "axis_mile": 24.4,
+    "lat": 32.557725,
+    "lon": -89.923454
+  },
+  {
+    "id": "ntt-yockanookany-mi0121",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 12.1,
+    "axis_mile": 24.5,
+    "lat": 32.558576,
+    "lon": -89.922225
+  },
+  {
+    "id": "ntt-yockanookany-mi0122",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 12.2,
+    "axis_mile": 24.6,
+    "lat": 32.559363,
+    "lon": -89.920816
+  },
+  {
+    "id": "ntt-yockanookany-mi0123",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 12.3,
+    "axis_mile": 24.7,
+    "lat": 32.559792,
+    "lon": -89.919321
+  },
+  {
+    "id": "ntt-yockanookany-mi0124",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 12.4,
+    "axis_mile": 24.8,
+    "lat": 32.560925,
+    "lon": -89.918854
+  },
+  {
+    "id": "ntt-yockanookany-mi0125",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 12.5,
+    "axis_mile": 24.9,
+    "lat": 32.56115,
+    "lon": -89.917185
+  },
+  {
+    "id": "ntt-yockanookany-mi0126",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 12.6,
+    "axis_mile": 25,
+    "lat": 32.561922,
+    "lon": -89.915771
+  },
+  {
+    "id": "ntt-yockanookany-mi0127",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 12.7,
+    "axis_mile": 25.1,
+    "lat": 32.562419,
+    "lon": -89.914262
+  },
+  {
+    "id": "ntt-yockanookany-mi0128",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 12.8,
+    "axis_mile": 25.2,
+    "lat": 32.563156,
+    "lon": -89.912879
+  },
+  {
+    "id": "ntt-yockanookany-mi0129",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 12.9,
+    "axis_mile": 25.3,
+    "lat": 32.563534,
+    "lon": -89.911309
+  },
+  {
+    "id": "ntt-yockanookany-mi0130",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 13,
+    "axis_mile": 25.4,
+    "lat": 32.563943,
+    "lon": -89.909753
+  },
+  {
+    "id": "ntt-yockanookany-mi0131",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 13.1,
+    "axis_mile": 25.5,
+    "lat": 32.564564,
+    "lon": -89.908272
+  },
+  {
+    "id": "ntt-yockanookany-mi0132",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 13.2,
+    "axis_mile": 25.6,
+    "lat": 32.564946,
+    "lon": -89.906755
+  },
+  {
+    "id": "ntt-yockanookany-mi0133",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 13.3,
+    "axis_mile": 25.7,
+    "lat": 32.56555,
+    "lon": -89.905225
+  },
+  {
+    "id": "ntt-yockanookany-mi0134",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 13.4,
+    "axis_mile": 25.8,
+    "lat": 32.566449,
+    "lon": -89.90402
+  },
+  {
+    "id": "ntt-yockanookany-mi0135",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 13.5,
+    "axis_mile": 25.9,
+    "lat": 32.567034,
+    "lon": -89.902456
+  },
+  {
+    "id": "ntt-yockanookany-mi0136",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 13.6,
+    "axis_mile": 26,
+    "lat": 32.567314,
+    "lon": -89.900813
+  },
+  {
+    "id": "ntt-yockanookany-mi0137",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 13.7,
+    "axis_mile": 26.1,
+    "lat": 32.567954,
+    "lon": -89.899301
+  },
+  {
+    "id": "ntt-yockanookany-mi0138",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 13.8,
+    "axis_mile": 26.2,
+    "lat": 32.568429,
+    "lon": -89.897747
+  },
+  {
+    "id": "ntt-yockanookany-mi0139",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 13.9,
+    "axis_mile": 26.3,
+    "lat": 32.569194,
+    "lon": -89.896315
+  },
+  {
+    "id": "ntt-yockanookany-mi0140",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 14,
+    "axis_mile": 26.4,
+    "lat": 32.569665,
+    "lon": -89.894739
+  },
+  {
+    "id": "ntt-yockanookany-mi0141",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 14.1,
+    "axis_mile": 26.5,
+    "lat": 32.570008,
+    "lon": -89.89389
+  },
+  {
+    "id": "ntt-yockanookany-mi0142",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 14.2,
+    "axis_mile": 26.6,
+    "lat": 32.570626,
+    "lon": -89.892641
+  },
+  {
+    "id": "ntt-yockanookany-mi0143",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 14.3,
+    "axis_mile": 26.7,
+    "lat": 32.571344,
+    "lon": -89.891528
+  },
+  {
+    "id": "ntt-yockanookany-mi0144",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 14.4,
+    "axis_mile": 26.8,
+    "lat": 32.571636,
+    "lon": -89.890083
+  },
+  {
+    "id": "ntt-yockanookany-mi0145",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 14.5,
+    "axis_mile": 26.9,
+    "lat": 32.572326,
+    "lon": -89.888691
+  },
+  {
+    "id": "ntt-yockanookany-mi0146",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 14.6,
+    "axis_mile": 27,
+    "lat": 32.572612,
+    "lon": -89.887358
+  },
+  {
+    "id": "ntt-yockanookany-mi0147",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 14.7,
+    "axis_mile": 27.1,
+    "lat": 32.572808,
+    "lon": -89.885942
+  },
+  {
+    "id": "ntt-yockanookany-mi0148",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 14.8,
+    "axis_mile": 27.2,
+    "lat": 32.573468,
+    "lon": -89.884673
+  },
+  {
+    "id": "ntt-yockanookany-mi0149",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 14.9,
+    "axis_mile": 27.3,
+    "lat": 32.573888,
+    "lon": -89.883162
+  },
+  {
+    "id": "ntt-yockanookany-mi0150",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 15,
+    "axis_mile": 27.4,
+    "lat": 32.574523,
+    "lon": -89.881641
+  },
+  {
+    "id": "ntt-yockanookany-mi0151",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 15.1,
+    "axis_mile": 27.5,
+    "lat": 32.575156,
+    "lon": -89.880127
+  },
+  {
+    "id": "ntt-yockanookany-mi0152",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 15.2,
+    "axis_mile": 27.6,
+    "lat": 32.575802,
+    "lon": -89.87861
+  },
+  {
+    "id": "ntt-yockanookany-mi0153",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 15.3,
+    "axis_mile": 27.7,
+    "lat": 32.57655,
+    "lon": -89.877343
+  },
+  {
+    "id": "ntt-yockanookany-mi0154",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 15.4,
+    "axis_mile": 27.8,
+    "lat": 32.57718,
+    "lon": -89.875989
+  },
+  {
+    "id": "ntt-yockanookany-mi0155",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 15.5,
+    "axis_mile": 27.9,
+    "lat": 32.577641,
+    "lon": -89.874453
+  },
+  {
+    "id": "ntt-yockanookany-mi0156",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 15.6,
+    "axis_mile": 28,
+    "lat": 32.57833,
+    "lon": -89.872988
+  },
+  {
+    "id": "ntt-yockanookany-mi0157",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 15.7,
+    "axis_mile": 28.1,
+    "lat": 32.579407,
+    "lon": -89.872058
+  },
+  {
+    "id": "ntt-yockanookany-mi0158",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 15.8,
+    "axis_mile": 28.2,
+    "lat": 32.579982,
+    "lon": -89.870655
+  },
+  {
+    "id": "ntt-yockanookany-mi0159",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 15.9,
+    "axis_mile": 28.3,
+    "lat": 32.581026,
+    "lon": -89.869527
+  },
+  {
+    "id": "ntt-yockanookany-mi0160",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 16,
+    "axis_mile": 28.4,
+    "lat": 32.581574,
+    "lon": -89.868176
+  },
+  {
+    "id": "ntt-yockanookany-mi0161",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 16.1,
+    "axis_mile": 28.5,
+    "lat": 32.582415,
+    "lon": -89.867226
+  },
+  {
+    "id": "ntt-yockanookany-mi0162",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 16.2,
+    "axis_mile": 28.6,
+    "lat": 32.583362,
+    "lon": -89.865973
+  },
+  {
+    "id": "ntt-yockanookany-mi0163",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 16.3,
+    "axis_mile": 28.7,
+    "lat": 32.583698,
+    "lon": -89.864583
+  },
+  {
+    "id": "ntt-yockanookany-mi0164",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 16.4,
+    "axis_mile": 28.8,
+    "lat": 32.584765,
+    "lon": -89.864048
+  },
+  {
+    "id": "ntt-yockanookany-mi0165",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 16.5,
+    "axis_mile": 28.9,
+    "lat": 32.585515,
+    "lon": -89.862742
+  },
+  {
+    "id": "ntt-yockanookany-mi0166",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 16.6,
+    "axis_mile": 29,
+    "lat": 32.5865,
+    "lon": -89.86165
+  },
+  {
+    "id": "ntt-yockanookany-mi0167",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 16.7,
+    "axis_mile": 29.1,
+    "lat": 32.58728,
+    "lon": -89.860402
+  },
+  {
+    "id": "ntt-yockanookany-mi0168",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 16.8,
+    "axis_mile": 29.2,
+    "lat": 32.588225,
+    "lon": -89.859586
+  },
+  {
+    "id": "ntt-yockanookany-mi0169",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 16.9,
+    "axis_mile": 29.3,
+    "lat": 32.589106,
+    "lon": -89.858384
+  },
+  {
+    "id": "ntt-yockanookany-mi0170",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 17,
+    "axis_mile": 29.4,
+    "lat": 32.589785,
+    "lon": -89.857342
+  },
+  {
+    "id": "ntt-yockanookany-mi0171",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 17.1,
+    "axis_mile": 29.5,
+    "lat": 32.590924,
+    "lon": -89.85645
+  },
+  {
+    "id": "ntt-yockanookany-mi0172",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 17.2,
+    "axis_mile": 29.6,
+    "lat": 32.592113,
+    "lon": -89.855706
+  },
+  {
+    "id": "ntt-yockanookany-mi0173",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 17.3,
+    "axis_mile": 29.7,
+    "lat": 32.593275,
+    "lon": -89.854682
+  },
+  {
+    "id": "ntt-yockanookany-mi0174",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 17.4,
+    "axis_mile": 29.8,
+    "lat": 32.594464,
+    "lon": -89.853707
+  },
+  {
+    "id": "ntt-yockanookany-mi0175",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 17.5,
+    "axis_mile": 29.9,
+    "lat": 32.595632,
+    "lon": -89.852694
+  },
+  {
+    "id": "ntt-yockanookany-mi0176",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 17.6,
+    "axis_mile": 30,
+    "lat": 32.596842,
+    "lon": -89.851757
+  },
+  {
+    "id": "ntt-yockanookany-mi0177",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 17.7,
+    "axis_mile": 30.1,
+    "lat": 32.597964,
+    "lon": -89.850675
+  },
+  {
+    "id": "ntt-yockanookany-mi0178",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 17.8,
+    "axis_mile": 30.2,
+    "lat": 32.598441,
+    "lon": -89.849713
+  },
+  {
+    "id": "ntt-yockanookany-mi0179",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 17.9,
+    "axis_mile": 30.3,
+    "lat": 32.599571,
+    "lon": -89.849218
+  },
+  {
+    "id": "ntt-yockanookany-mi0180",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 18,
+    "axis_mile": 30.4,
+    "lat": 32.600671,
+    "lon": -89.848611
+  },
+  {
+    "id": "ntt-yockanookany-mi0181",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 18.1,
+    "axis_mile": 30.5,
+    "lat": 32.601991,
+    "lon": -89.847949
+  },
+  {
+    "id": "ntt-yockanookany-mi0182",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 18.2,
+    "axis_mile": 30.6,
+    "lat": 32.601824,
+    "lon": -89.846548
+  },
+  {
+    "id": "ntt-yockanookany-mi0183",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 18.3,
+    "axis_mile": 30.7,
+    "lat": 32.602861,
+    "lon": -89.847301
+  },
+  {
+    "id": "ntt-yockanookany-mi0184",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 18.4,
+    "axis_mile": 30.8,
+    "lat": 32.603764,
+    "lon": -89.84599
+  },
+  {
+    "id": "ntt-yockanookany-mi0185",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 18.5,
+    "axis_mile": 30.9,
+    "lat": 32.604824,
+    "lon": -89.844907
+  },
+  {
+    "id": "ntt-yockanookany-mi0186",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 18.6,
+    "axis_mile": 31,
+    "lat": 32.606154,
+    "lon": -89.844267
+  },
+  {
+    "id": "ntt-yockanookany-mi0187",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 18.7,
+    "axis_mile": 31.1,
+    "lat": 32.607281,
+    "lon": -89.843326
+  },
+  {
+    "id": "ntt-yockanookany-mi0188",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 18.8,
+    "axis_mile": 31.2,
+    "lat": 32.608185,
+    "lon": -89.842166
+  },
+  {
+    "id": "ntt-yockanookany-mi0189",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 18.9,
+    "axis_mile": 31.3,
+    "lat": 32.609432,
+    "lon": -89.841486
+  },
+  {
+    "id": "ntt-yockanookany-mi0190",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 19,
+    "axis_mile": 31.4,
+    "lat": 32.609982,
+    "lon": -89.840083
+  },
+  {
+    "id": "ntt-yockanookany-mi0191",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 19.1,
+    "axis_mile": 31.5,
+    "lat": 32.611075,
+    "lon": -89.839085
+  },
+  {
+    "id": "ntt-yockanookany-mi0192",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 19.2,
+    "axis_mile": 31.6,
+    "lat": 32.611673,
+    "lon": -89.837995
+  },
+  {
+    "id": "ntt-yockanookany-mi0193",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 19.3,
+    "axis_mile": 31.7,
+    "lat": 32.61277,
+    "lon": -89.837438
+  },
+  {
+    "id": "ntt-yockanookany-mi0194",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 19.4,
+    "axis_mile": 31.8,
+    "lat": 32.613453,
+    "lon": -89.83628
+  },
+  {
+    "id": "ntt-yockanookany-mi0195",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 19.5,
+    "axis_mile": 31.9,
+    "lat": 32.614185,
+    "lon": -89.834886
+  },
+  {
+    "id": "ntt-yockanookany-mi0196",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 19.6,
+    "axis_mile": 32,
+    "lat": 32.61509,
+    "lon": -89.833747
+  },
+  {
+    "id": "ntt-yockanookany-mi0197",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 19.7,
+    "axis_mile": 32.1,
+    "lat": 32.615863,
+    "lon": -89.832471
+  },
+  {
+    "id": "ntt-yockanookany-mi0198",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 19.8,
+    "axis_mile": 32.2,
+    "lat": 32.616248,
+    "lon": -89.831001
+  },
+  {
+    "id": "ntt-yockanookany-mi0199",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 19.9,
+    "axis_mile": 32.3,
+    "lat": 32.61727,
+    "lon": -89.829843
+  },
+  {
+    "id": "ntt-yockanookany-mi0200",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 20,
+    "axis_mile": 32.4,
+    "lat": 32.618422,
+    "lon": -89.829038
+  },
+  {
+    "id": "ntt-yockanookany-mi0201",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 20.1,
+    "axis_mile": 32.5,
+    "lat": 32.619531,
+    "lon": -89.828231
+  },
+  {
+    "id": "ntt-yockanookany-mi0202",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 20.2,
+    "axis_mile": 32.6,
+    "lat": 32.6202,
+    "lon": -89.827074
+  },
+  {
+    "id": "ntt-yockanookany-mi0203",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 20.3,
+    "axis_mile": 32.7,
+    "lat": 32.620569,
+    "lon": -89.826089
+  },
+  {
+    "id": "ntt-yockanookany-mi0204",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 20.4,
+    "axis_mile": 32.8,
+    "lat": 32.621623,
+    "lon": -89.825414
+  },
+  {
+    "id": "ntt-yockanookany-mi0205",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 20.5,
+    "axis_mile": 32.9,
+    "lat": 32.62274,
+    "lon": -89.824589
+  },
+  {
+    "id": "ntt-yockanookany-mi0206",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 20.6,
+    "axis_mile": 33,
+    "lat": 32.624117,
+    "lon": -89.824378
+  },
+  {
+    "id": "ntt-yockanookany-mi0207",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 20.7,
+    "axis_mile": 33.1,
+    "lat": 32.625071,
+    "lon": -89.823677
+  },
+  {
+    "id": "ntt-yockanookany-mi0208",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 20.8,
+    "axis_mile": 33.2,
+    "lat": 32.626462,
+    "lon": -89.823583
+  },
+  {
+    "id": "ntt-yockanookany-mi0209",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 20.9,
+    "axis_mile": 33.3,
+    "lat": 32.627802,
+    "lon": -89.823488
+  },
+  {
+    "id": "ntt-yockanookany-mi0210",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 21,
+    "axis_mile": 33.4,
+    "lat": 32.629104,
+    "lon": -89.823292
+  },
+  {
+    "id": "ntt-yockanookany-mi0211",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 21.1,
+    "axis_mile": 33.5,
+    "lat": 32.630462,
+    "lon": -89.822869
+  },
+  {
+    "id": "ntt-yockanookany-mi0212",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 21.2,
+    "axis_mile": 33.6,
+    "lat": 32.631779,
+    "lon": -89.822421
+  },
+  {
+    "id": "ntt-yockanookany-mi0213",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 21.3,
+    "axis_mile": 33.7,
+    "lat": 32.632831,
+    "lon": -89.8218
+  },
+  {
+    "id": "ntt-yockanookany-mi0214",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 21.4,
+    "axis_mile": 33.8,
+    "lat": 32.634063,
+    "lon": -89.82102
+  },
+  {
+    "id": "ntt-yockanookany-mi0215",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 21.5,
+    "axis_mile": 33.9,
+    "lat": 32.635114,
+    "lon": -89.819969
+  },
+  {
+    "id": "ntt-yockanookany-mi0216",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 21.6,
+    "axis_mile": 34,
+    "lat": 32.636143,
+    "lon": -89.818811
+  },
+  {
+    "id": "ntt-yockanookany-mi0217",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 21.7,
+    "axis_mile": 34.1,
+    "lat": 32.636909,
+    "lon": -89.817498
+  },
+  {
+    "id": "ntt-yockanookany-mi0218",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 21.8,
+    "axis_mile": 34.2,
+    "lat": 32.637511,
+    "lon": -89.816009
+  },
+  {
+    "id": "ntt-yockanookany-mi0219",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 21.9,
+    "axis_mile": 34.3,
+    "lat": 32.638311,
+    "lon": -89.814626
+  },
+  {
+    "id": "ntt-yockanookany-mi0220",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 22,
+    "axis_mile": 34.4,
+    "lat": 32.639147,
+    "lon": -89.813324
+  },
+  {
+    "id": "ntt-yockanookany-mi0221",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 22.1,
+    "axis_mile": 34.5,
+    "lat": 32.639317,
+    "lon": -89.811647
+  },
+  {
+    "id": "ntt-yockanookany-mi0222",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 22.2,
+    "axis_mile": 34.6,
+    "lat": 32.640075,
+    "lon": -89.810331
+  },
+  {
+    "id": "ntt-yockanookany-mi0223",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 22.3,
+    "axis_mile": 34.7,
+    "lat": 32.640251,
+    "lon": -89.808709
+  },
+  {
+    "id": "ntt-yockanookany-mi0224",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 22.4,
+    "axis_mile": 34.8,
+    "lat": 32.640683,
+    "lon": -89.807194
+  },
+  {
+    "id": "ntt-yockanookany-mi0225",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 22.5,
+    "axis_mile": 34.9,
+    "lat": 32.640879,
+    "lon": -89.805538
+  },
+  {
+    "id": "ntt-yockanookany-mi0226",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 22.6,
+    "axis_mile": 35,
+    "lat": 32.641389,
+    "lon": -89.804178
+  },
+  {
+    "id": "ntt-yockanookany-mi0227",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 22.7,
+    "axis_mile": 35.1,
+    "lat": 32.641118,
+    "lon": -89.802678
+  },
+  {
+    "id": "ntt-yockanookany-mi0228",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 22.8,
+    "axis_mile": 35.2,
+    "lat": 32.642007,
+    "lon": -89.801877
+  },
+  {
+    "id": "ntt-yockanookany-mi0229",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 22.9,
+    "axis_mile": 35.3,
+    "lat": 32.642108,
+    "lon": -89.800333
+  },
+  {
+    "id": "ntt-yockanookany-mi0230",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 23,
+    "axis_mile": 35.4,
+    "lat": 32.642511,
+    "lon": -89.798854
+  },
+  {
+    "id": "ntt-yockanookany-mi0231",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 23.1,
+    "axis_mile": 35.5,
+    "lat": 32.643173,
+    "lon": -89.797663
+  },
+  {
+    "id": "ntt-yockanookany-mi0232",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 23.2,
+    "axis_mile": 35.6,
+    "lat": 32.643506,
+    "lon": -89.796381
+  },
+  {
+    "id": "ntt-yockanookany-mi0233",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 23.3,
+    "axis_mile": 35.7,
+    "lat": 32.644016,
+    "lon": -89.794845
+  },
+  {
+    "id": "ntt-yockanookany-mi0234",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 23.4,
+    "axis_mile": 35.8,
+    "lat": 32.644696,
+    "lon": -89.793348
+  },
+  {
+    "id": "ntt-yockanookany-mi0235",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 23.5,
+    "axis_mile": 35.9,
+    "lat": 32.645238,
+    "lon": -89.791929
+  },
+  {
+    "id": "ntt-yockanookany-mi0236",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 23.6,
+    "axis_mile": 36,
+    "lat": 32.64605,
+    "lon": -89.790584
+  },
+  {
+    "id": "ntt-yockanookany-mi0237",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 23.7,
+    "axis_mile": 36.1,
+    "lat": 32.64679,
+    "lon": -89.789219
+  },
+  {
+    "id": "ntt-yockanookany-mi0238",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 23.8,
+    "axis_mile": 36.2,
+    "lat": 32.647965,
+    "lon": -89.788336
+  },
+  {
+    "id": "ntt-yockanookany-mi0239",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 23.9,
+    "axis_mile": 36.3,
+    "lat": 32.648988,
+    "lon": -89.787229
+  },
+  {
+    "id": "ntt-yockanookany-mi0240",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 24,
+    "axis_mile": 36.4,
+    "lat": 32.649791,
+    "lon": -89.785905
+  },
+  {
+    "id": "ntt-yockanookany-mi0241",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 24.1,
+    "axis_mile": 36.5,
+    "lat": 32.650953,
+    "lon": -89.785004
+  },
+  {
+    "id": "ntt-yockanookany-mi0242",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 24.2,
+    "axis_mile": 36.6,
+    "lat": 32.652004,
+    "lon": -89.783876
+  },
+  {
+    "id": "ntt-yockanookany-mi0243",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 24.3,
+    "axis_mile": 36.7,
+    "lat": 32.653104,
+    "lon": -89.782768
+  },
+  {
+    "id": "ntt-yockanookany-mi0244",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 24.4,
+    "axis_mile": 36.8,
+    "lat": 32.654112,
+    "lon": -89.781545
+  },
+  {
+    "id": "ntt-yockanookany-mi0245",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 24.5,
+    "axis_mile": 36.9,
+    "lat": 32.655182,
+    "lon": -89.78042
+  },
+  {
+    "id": "ntt-yockanookany-mi0246",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 24.6,
+    "axis_mile": 37,
+    "lat": 32.655364,
+    "lon": -89.778809
+  },
+  {
+    "id": "ntt-yockanookany-mi0247",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 24.7,
+    "axis_mile": 37.1,
+    "lat": 32.656068,
+    "lon": -89.777347
+  },
+  {
+    "id": "ntt-yockanookany-mi0248",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 24.8,
+    "axis_mile": 37.2,
+    "lat": 32.657028,
+    "lon": -89.776361
+  },
+  {
+    "id": "ntt-yockanookany-mi0249",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 24.9,
+    "axis_mile": 37.3,
+    "lat": 32.657632,
+    "lon": -89.774948
+  },
+  {
+    "id": "ntt-yockanookany-mi0250",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 25,
+    "axis_mile": 37.4,
+    "lat": 32.658187,
+    "lon": -89.773632
+  },
+  {
+    "id": "ntt-yockanookany-mi0251",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 25.1,
+    "axis_mile": 37.5,
+    "lat": 32.658898,
+    "lon": -89.772175
+  },
+  {
+    "id": "ntt-yockanookany-mi0252",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 25.2,
+    "axis_mile": 37.6,
+    "lat": 32.659427,
+    "lon": -89.770634
+  },
+  {
+    "id": "ntt-yockanookany-mi0253",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 25.3,
+    "axis_mile": 37.7,
+    "lat": 32.660129,
+    "lon": -89.76937
+  },
+  {
+    "id": "ntt-yockanookany-mi0254",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 25.4,
+    "axis_mile": 37.8,
+    "lat": 32.660841,
+    "lon": -89.767975
+  },
+  {
+    "id": "ntt-yockanookany-mi0255",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 25.5,
+    "axis_mile": 37.9,
+    "lat": 32.6611,
+    "lon": -89.766432
+  },
+  {
+    "id": "ntt-yockanookany-mi0256",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 25.6,
+    "axis_mile": 38,
+    "lat": 32.66177,
+    "lon": -89.765089
+  },
+  {
+    "id": "ntt-yockanookany-mi0257",
+    "section": "yockanookany",
+    "state": "MS",
+    "mile": 25.7,
+    "axis_mile": 38.1,
+    "lat": 32.662459,
+    "lon": -89.763607
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0000",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 0,
+    "axis_mile": 38.2,
+    "lat": 34.265,
+    "lon": -88.75332
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0001",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 0.1,
+    "axis_mile": 38.3,
+    "lat": 34.266039,
+    "lon": -88.752236
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0002",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 0.2,
+    "axis_mile": 38.4,
+    "lat": 34.267161,
+    "lon": -88.751196
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0003",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 0.3,
+    "axis_mile": 38.5,
+    "lat": 34.268236,
+    "lon": -88.750423
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0004",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 0.4,
+    "axis_mile": 38.6,
+    "lat": 34.269292,
+    "lon": -88.749284
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0005",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 0.5,
+    "axis_mile": 38.7,
+    "lat": 34.270377,
+    "lon": -88.748162
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0006",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 0.6,
+    "axis_mile": 38.8,
+    "lat": 34.271414,
+    "lon": -88.747001
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0007",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 0.7,
+    "axis_mile": 38.9,
+    "lat": 34.272435,
+    "lon": -88.746063
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0008",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 0.8,
+    "axis_mile": 39,
+    "lat": 34.273274,
+    "lon": -88.745303
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0009",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 0.9,
+    "axis_mile": 39.1,
+    "lat": 34.273516,
+    "lon": -88.743747
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0010",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 1,
+    "axis_mile": 39.2,
+    "lat": 34.274674,
+    "lon": -88.742933
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0011",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 1.1,
+    "axis_mile": 39.3,
+    "lat": 34.276063,
+    "lon": -88.743158
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0012",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 1.2,
+    "axis_mile": 39.4,
+    "lat": 34.277486,
+    "lon": -88.743456
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0013",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 1.3,
+    "axis_mile": 39.5,
+    "lat": 34.278913,
+    "lon": -88.743367
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0014",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 1.4,
+    "axis_mile": 39.6,
+    "lat": 34.278651,
+    "lon": -88.742203
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0015",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 1.5,
+    "axis_mile": 39.7,
+    "lat": 34.278043,
+    "lon": -88.740648
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0016",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 1.6,
+    "axis_mile": 39.8,
+    "lat": 34.277301,
+    "lon": -88.739473
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0017",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 1.7,
+    "axis_mile": 39.9,
+    "lat": 34.276891,
+    "lon": -88.738066
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0018",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 1.8,
+    "axis_mile": 40,
+    "lat": 34.277933,
+    "lon": -88.736922
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0019",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 1.9,
+    "axis_mile": 40.1,
+    "lat": 34.278922,
+    "lon": -88.735823
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0020",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 2,
+    "axis_mile": 40.2,
+    "lat": 34.280268,
+    "lon": -88.735419
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0021",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 2.1,
+    "axis_mile": 40.3,
+    "lat": 34.281483,
+    "lon": -88.734749
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0022",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 2.2,
+    "axis_mile": 40.4,
+    "lat": 34.28169,
+    "lon": -88.733098
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0023",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 2.3,
+    "axis_mile": 40.5,
+    "lat": 34.282647,
+    "lon": -88.732502
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0024",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 2.4,
+    "axis_mile": 40.6,
+    "lat": 34.283975,
+    "lon": -88.732207
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0025",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 2.5,
+    "axis_mile": 40.7,
+    "lat": 34.284874,
+    "lon": -88.731027
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0026",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 2.6,
+    "axis_mile": 40.8,
+    "lat": 34.286228,
+    "lon": -88.730464
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0027",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 2.7,
+    "axis_mile": 40.9,
+    "lat": 34.28757,
+    "lon": -88.729958
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0028",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 2.8,
+    "axis_mile": 41,
+    "lat": 34.288925,
+    "lon": -88.729384
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0029",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 2.9,
+    "axis_mile": 41.1,
+    "lat": 34.290103,
+    "lon": -88.728498
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0030",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 3,
+    "axis_mile": 41.2,
+    "lat": 34.291507,
+    "lon": -88.728257
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0031",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 3.1,
+    "axis_mile": 41.3,
+    "lat": 34.292921,
+    "lon": -88.728014
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0032",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 3.2,
+    "axis_mile": 41.4,
+    "lat": 34.294235,
+    "lon": -88.727457
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0033",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 3.3,
+    "axis_mile": 41.5,
+    "lat": 34.295598,
+    "lon": -88.727157
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0034",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 3.4,
+    "axis_mile": 41.6,
+    "lat": 34.296969,
+    "lon": -88.726659
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0035",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 3.5,
+    "axis_mile": 41.7,
+    "lat": 34.29832,
+    "lon": -88.726467
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0036",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 3.6,
+    "axis_mile": 41.8,
+    "lat": 34.299559,
+    "lon": -88.727124
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0037",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 3.7,
+    "axis_mile": 41.9,
+    "lat": 34.30095,
+    "lon": -88.726646
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0038",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 3.8,
+    "axis_mile": 42,
+    "lat": 34.301875,
+    "lon": -88.725455
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0039",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 3.9,
+    "axis_mile": 42.1,
+    "lat": 34.303084,
+    "lon": -88.725061
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0040",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 4,
+    "axis_mile": 42.2,
+    "lat": 34.304232,
+    "lon": -88.724329
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0041",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 4.1,
+    "axis_mile": 42.3,
+    "lat": 34.305095,
+    "lon": -88.723431
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0042",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 4.2,
+    "axis_mile": 42.4,
+    "lat": 34.305963,
+    "lon": -88.722145
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0043",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 4.3,
+    "axis_mile": 42.5,
+    "lat": 34.307262,
+    "lon": -88.721373
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0044",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 4.4,
+    "axis_mile": 42.6,
+    "lat": 34.308458,
+    "lon": -88.720703
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0045",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 4.5,
+    "axis_mile": 42.7,
+    "lat": 34.309794,
+    "lon": -88.72003
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0046",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 4.6,
+    "axis_mile": 42.8,
+    "lat": 34.311135,
+    "lon": -88.719372
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0047",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 4.7,
+    "axis_mile": 42.9,
+    "lat": 34.312505,
+    "lon": -88.718806
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0048",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 4.8,
+    "axis_mile": 43,
+    "lat": 34.313883,
+    "lon": -88.718531
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0049",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 4.9,
+    "axis_mile": 43.1,
+    "lat": 34.315297,
+    "lon": -88.718286
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0050",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 5,
+    "axis_mile": 43.2,
+    "lat": 34.316235,
+    "lon": -88.717525
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0051",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 5.1,
+    "axis_mile": 43.3,
+    "lat": 34.317478,
+    "lon": -88.717634
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0052",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 5.2,
+    "axis_mile": 43.4,
+    "lat": 34.31849,
+    "lon": -88.716816
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0053",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 5.3,
+    "axis_mile": 43.5,
+    "lat": 34.319859,
+    "lon": -88.716854
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0054",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 5.4,
+    "axis_mile": 43.6,
+    "lat": 34.321186,
+    "lon": -88.716457
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0055",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 5.5,
+    "axis_mile": 43.7,
+    "lat": 34.322434,
+    "lon": -88.716029
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0056",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 5.6,
+    "axis_mile": 43.8,
+    "lat": 34.323568,
+    "lon": -88.715267
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0057",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 5.7,
+    "axis_mile": 43.9,
+    "lat": 34.324842,
+    "lon": -88.714689
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0058",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 5.8,
+    "axis_mile": 44,
+    "lat": 34.326086,
+    "lon": -88.71426
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0059",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 5.9,
+    "axis_mile": 44.1,
+    "lat": 34.32736,
+    "lon": -88.713886
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0060",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 6,
+    "axis_mile": 44.2,
+    "lat": 34.328432,
+    "lon": -88.713105
+  },
+  {
+    "id": "ntt-blackland-prairie-mi0061",
+    "section": "blackland-prairie",
+    "state": "MS",
+    "mile": 6.1,
+    "axis_mile": 44.3,
+    "lat": 34.329763,
+    "lon": -88.713245
+  },
+  {
+    "id": "ntt-highland-rim-mi0000",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 0,
+    "axis_mile": 44.3,
+    "lat": 35.722517,
+    "lon": -87.261461
+  },
+  {
+    "id": "ntt-highland-rim-mi0001",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 0.1,
+    "axis_mile": 44.4,
+    "lat": 35.723336,
+    "lon": -87.260251
+  },
+  {
+    "id": "ntt-highland-rim-mi0002",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 0.2,
+    "axis_mile": 44.5,
+    "lat": 35.724197,
+    "lon": -87.259544
+  },
+  {
+    "id": "ntt-highland-rim-mi0003",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 0.3,
+    "axis_mile": 44.6,
+    "lat": 35.724497,
+    "lon": -87.257877
+  },
+  {
+    "id": "ntt-highland-rim-mi0004",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 0.4,
+    "axis_mile": 44.7,
+    "lat": 35.724978,
+    "lon": -87.256225
+  },
+  {
+    "id": "ntt-highland-rim-mi0005",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 0.5,
+    "axis_mile": 44.8,
+    "lat": 35.725742,
+    "lon": -87.254795
+  },
+  {
+    "id": "ntt-highland-rim-mi0006",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 0.6,
+    "axis_mile": 44.9,
+    "lat": 35.726152,
+    "lon": -87.253123
+  },
+  {
+    "id": "ntt-highland-rim-mi0007",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 0.7,
+    "axis_mile": 45,
+    "lat": 35.726347,
+    "lon": -87.251456
+  },
+  {
+    "id": "ntt-highland-rim-mi0008",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 0.8,
+    "axis_mile": 45.1,
+    "lat": 35.726171,
+    "lon": -87.249705
+  },
+  {
+    "id": "ntt-highland-rim-mi0009",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 0.9,
+    "axis_mile": 45.2,
+    "lat": 35.726263,
+    "lon": -87.248017
+  },
+  {
+    "id": "ntt-highland-rim-mi0010",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 1,
+    "axis_mile": 45.3,
+    "lat": 35.726043,
+    "lon": -87.246327
+  },
+  {
+    "id": "ntt-highland-rim-mi0011",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 1.1,
+    "axis_mile": 45.4,
+    "lat": 35.725909,
+    "lon": -87.244581
+  },
+  {
+    "id": "ntt-highland-rim-mi0012",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 1.2,
+    "axis_mile": 45.5,
+    "lat": 35.725792,
+    "lon": -87.24283
+  },
+  {
+    "id": "ntt-highland-rim-mi0013",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 1.3,
+    "axis_mile": 45.6,
+    "lat": 35.725843,
+    "lon": -87.24141
+  },
+  {
+    "id": "ntt-highland-rim-mi0014",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 1.4,
+    "axis_mile": 45.7,
+    "lat": 35.725921,
+    "lon": -87.239747
+  },
+  {
+    "id": "ntt-highland-rim-mi0015",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 1.5,
+    "axis_mile": 45.8,
+    "lat": 35.726451,
+    "lon": -87.238174
+  },
+  {
+    "id": "ntt-highland-rim-mi0016",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 1.6,
+    "axis_mile": 45.9,
+    "lat": 35.726706,
+    "lon": -87.236508
+  },
+  {
+    "id": "ntt-highland-rim-mi0017",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 1.7,
+    "axis_mile": 46,
+    "lat": 35.727019,
+    "lon": -87.234948
+  },
+  {
+    "id": "ntt-highland-rim-mi0018",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 1.8,
+    "axis_mile": 46.1,
+    "lat": 35.727704,
+    "lon": -87.233636
+  },
+  {
+    "id": "ntt-highland-rim-mi0019",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 1.9,
+    "axis_mile": 46.2,
+    "lat": 35.728291,
+    "lon": -87.232625
+  },
+  {
+    "id": "ntt-highland-rim-mi0020",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 2,
+    "axis_mile": 46.3,
+    "lat": 35.728832,
+    "lon": -87.231245
+  },
+  {
+    "id": "ntt-highland-rim-mi0021",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 2.1,
+    "axis_mile": 46.4,
+    "lat": 35.72972,
+    "lon": -87.229933
+  },
+  {
+    "id": "ntt-highland-rim-mi0022",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 2.2,
+    "axis_mile": 46.5,
+    "lat": 35.7306,
+    "lon": -87.228644
+  },
+  {
+    "id": "ntt-highland-rim-mi0023",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 2.3,
+    "axis_mile": 46.6,
+    "lat": 35.731619,
+    "lon": -87.227762
+  },
+  {
+    "id": "ntt-highland-rim-mi0024",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 2.4,
+    "axis_mile": 46.7,
+    "lat": 35.732148,
+    "lon": -87.226655
+  },
+  {
+    "id": "ntt-highland-rim-mi0025",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 2.5,
+    "axis_mile": 46.8,
+    "lat": 35.732426,
+    "lon": -87.225175
+  },
+  {
+    "id": "ntt-highland-rim-mi0026",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 2.6,
+    "axis_mile": 46.9,
+    "lat": 35.733462,
+    "lon": -87.224238
+  },
+  {
+    "id": "ntt-highland-rim-mi0027",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 2.7,
+    "axis_mile": 47,
+    "lat": 35.733683,
+    "lon": -87.222512
+  },
+  {
+    "id": "ntt-highland-rim-mi0028",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 2.8,
+    "axis_mile": 47.1,
+    "lat": 35.73411,
+    "lon": -87.22092
+  },
+  {
+    "id": "ntt-highland-rim-mi0029",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 2.9,
+    "axis_mile": 47.2,
+    "lat": 35.73463,
+    "lon": -87.219561
+  },
+  {
+    "id": "ntt-highland-rim-mi0030",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 3,
+    "axis_mile": 47.3,
+    "lat": 35.734731,
+    "lon": -87.217981
+  },
+  {
+    "id": "ntt-highland-rim-mi0031",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 3.1,
+    "axis_mile": 47.4,
+    "lat": 35.734219,
+    "lon": -87.216876
+  },
+  {
+    "id": "ntt-highland-rim-mi0032",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 3.2,
+    "axis_mile": 47.5,
+    "lat": 35.734731,
+    "lon": -87.215292
+  },
+  {
+    "id": "ntt-highland-rim-mi0033",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 3.3,
+    "axis_mile": 47.6,
+    "lat": 35.735427,
+    "lon": -87.213732
+  },
+  {
+    "id": "ntt-highland-rim-mi0034",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 3.4,
+    "axis_mile": 47.7,
+    "lat": 35.736454,
+    "lon": -87.212547
+  },
+  {
+    "id": "ntt-highland-rim-mi0035",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 3.5,
+    "axis_mile": 47.8,
+    "lat": 35.737763,
+    "lon": -87.211827
+  },
+  {
+    "id": "ntt-highland-rim-mi0036",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 3.6,
+    "axis_mile": 47.9,
+    "lat": 35.738989,
+    "lon": -87.210899
+  },
+  {
+    "id": "ntt-highland-rim-mi0037",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 3.7,
+    "axis_mile": 48,
+    "lat": 35.740255,
+    "lon": -87.210046
+  },
+  {
+    "id": "ntt-highland-rim-mi0038",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 3.8,
+    "axis_mile": 48.1,
+    "lat": 35.741418,
+    "lon": -87.208994
+  },
+  {
+    "id": "ntt-highland-rim-mi0039",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 3.9,
+    "axis_mile": 48.2,
+    "lat": 35.742464,
+    "lon": -87.208155
+  },
+  {
+    "id": "ntt-highland-rim-mi0040",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 4,
+    "axis_mile": 48.3,
+    "lat": 35.743497,
+    "lon": -87.208247
+  },
+  {
+    "id": "ntt-highland-rim-mi0041",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 4.1,
+    "axis_mile": 48.4,
+    "lat": 35.74471,
+    "lon": -87.207363
+  },
+  {
+    "id": "ntt-highland-rim-mi0042",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 4.2,
+    "axis_mile": 48.5,
+    "lat": 35.745893,
+    "lon": -87.207062
+  },
+  {
+    "id": "ntt-highland-rim-mi0043",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 4.3,
+    "axis_mile": 48.6,
+    "lat": 35.746594,
+    "lon": -87.205827
+  },
+  {
+    "id": "ntt-highland-rim-mi0044",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 4.4,
+    "axis_mile": 48.7,
+    "lat": 35.747766,
+    "lon": -87.205969
+  },
+  {
+    "id": "ntt-highland-rim-mi0045",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 4.5,
+    "axis_mile": 48.8,
+    "lat": 35.749027,
+    "lon": -87.205667
+  },
+  {
+    "id": "ntt-highland-rim-mi0046",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 4.6,
+    "axis_mile": 48.9,
+    "lat": 35.750454,
+    "lon": -87.205447
+  },
+  {
+    "id": "ntt-highland-rim-mi0047",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 4.7,
+    "axis_mile": 49,
+    "lat": 35.751809,
+    "lon": -87.204916
+  },
+  {
+    "id": "ntt-highland-rim-mi0048",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 4.8,
+    "axis_mile": 49.1,
+    "lat": 35.753172,
+    "lon": -87.205279
+  },
+  {
+    "id": "ntt-highland-rim-mi0049",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 4.9,
+    "axis_mile": 49.2,
+    "lat": 35.754349,
+    "lon": -87.206279
+  },
+  {
+    "id": "ntt-highland-rim-mi0050",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 5,
+    "axis_mile": 49.3,
+    "lat": 35.755741,
+    "lon": -87.206526
+  },
+  {
+    "id": "ntt-highland-rim-mi0051",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 5.1,
+    "axis_mile": 49.4,
+    "lat": 35.757187,
+    "lon": -87.206619
+  },
+  {
+    "id": "ntt-highland-rim-mi0052",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 5.2,
+    "axis_mile": 49.5,
+    "lat": 35.758633,
+    "lon": -87.206689
+  },
+  {
+    "id": "ntt-highland-rim-mi0053",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 5.3,
+    "axis_mile": 49.6,
+    "lat": 35.759969,
+    "lon": -87.20723
+  },
+  {
+    "id": "ntt-highland-rim-mi0054",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 5.4,
+    "axis_mile": 49.7,
+    "lat": 35.761309,
+    "lon": -87.20768
+  },
+  {
+    "id": "ntt-highland-rim-mi0055",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 5.5,
+    "axis_mile": 49.8,
+    "lat": 35.762541,
+    "lon": -87.208278
+  },
+  {
+    "id": "ntt-highland-rim-mi0056",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 5.6,
+    "axis_mile": 49.9,
+    "lat": 35.763351,
+    "lon": -87.208673
+  },
+  {
+    "id": "ntt-highland-rim-mi0057",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 5.7,
+    "axis_mile": 50,
+    "lat": 35.764455,
+    "lon": -87.20869
+  },
+  {
+    "id": "ntt-highland-rim-mi0058",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 5.8,
+    "axis_mile": 50.1,
+    "lat": 35.765197,
+    "lon": -87.209756
+  },
+  {
+    "id": "ntt-highland-rim-mi0059",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 5.9,
+    "axis_mile": 50.2,
+    "lat": 35.766624,
+    "lon": -87.210004
+  },
+  {
+    "id": "ntt-highland-rim-mi0060",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 6,
+    "axis_mile": 50.3,
+    "lat": 35.767867,
+    "lon": -87.209179
+  },
+  {
+    "id": "ntt-highland-rim-mi0061",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 6.1,
+    "axis_mile": 50.4,
+    "lat": 35.768937,
+    "lon": -87.208467
+  },
+  {
+    "id": "ntt-highland-rim-mi0062",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 6.2,
+    "axis_mile": 50.5,
+    "lat": 35.77024,
+    "lon": -87.208821
+  },
+  {
+    "id": "ntt-highland-rim-mi0063",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 6.3,
+    "axis_mile": 50.6,
+    "lat": 35.771361,
+    "lon": -87.207916
+  },
+  {
+    "id": "ntt-highland-rim-mi0064",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 6.4,
+    "axis_mile": 50.7,
+    "lat": 35.772458,
+    "lon": -87.206976
+  },
+  {
+    "id": "ntt-highland-rim-mi0065",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 6.5,
+    "axis_mile": 50.8,
+    "lat": 35.773821,
+    "lon": -87.206831
+  },
+  {
+    "id": "ntt-highland-rim-mi0066",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 6.6,
+    "axis_mile": 50.9,
+    "lat": 35.774777,
+    "lon": -87.206331
+  },
+  {
+    "id": "ntt-highland-rim-mi0067",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 6.7,
+    "axis_mile": 51,
+    "lat": 35.775861,
+    "lon": -87.20537
+  },
+  {
+    "id": "ntt-highland-rim-mi0068",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 6.8,
+    "axis_mile": 51.1,
+    "lat": 35.777024,
+    "lon": -87.204867
+  },
+  {
+    "id": "ntt-highland-rim-mi0069",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 6.9,
+    "axis_mile": 51.2,
+    "lat": 35.778026,
+    "lon": -87.203626
+  },
+  {
+    "id": "ntt-highland-rim-mi0070",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 7,
+    "axis_mile": 51.3,
+    "lat": 35.779151,
+    "lon": -87.202502
+  },
+  {
+    "id": "ntt-highland-rim-mi0071",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 7.1,
+    "axis_mile": 51.4,
+    "lat": 35.780355,
+    "lon": -87.201518
+  },
+  {
+    "id": "ntt-highland-rim-mi0072",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 7.2,
+    "axis_mile": 51.5,
+    "lat": 35.781656,
+    "lon": -87.200742
+  },
+  {
+    "id": "ntt-highland-rim-mi0073",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 7.3,
+    "axis_mile": 51.6,
+    "lat": 35.782927,
+    "lon": -87.199895
+  },
+  {
+    "id": "ntt-highland-rim-mi0074",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 7.4,
+    "axis_mile": 51.7,
+    "lat": 35.78386,
+    "lon": -87.198701
+  },
+  {
+    "id": "ntt-highland-rim-mi0075",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 7.5,
+    "axis_mile": 51.8,
+    "lat": 35.785086,
+    "lon": -87.198192
+  },
+  {
+    "id": "ntt-highland-rim-mi0076",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 7.6,
+    "axis_mile": 51.9,
+    "lat": 35.785112,
+    "lon": -87.196667
+  },
+  {
+    "id": "ntt-highland-rim-mi0077",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 7.7,
+    "axis_mile": 52,
+    "lat": 35.786398,
+    "lon": -87.19639
+  },
+  {
+    "id": "ntt-highland-rim-mi0078",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 7.8,
+    "axis_mile": 52.1,
+    "lat": 35.787493,
+    "lon": -87.195582
+  },
+  {
+    "id": "ntt-highland-rim-mi0079",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 7.9,
+    "axis_mile": 52.2,
+    "lat": 35.788307,
+    "lon": -87.195689
+  },
+  {
+    "id": "ntt-highland-rim-mi0080",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 8,
+    "axis_mile": 52.3,
+    "lat": 35.789189,
+    "lon": -87.194542
+  },
+  {
+    "id": "ntt-highland-rim-mi0081",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 8.1,
+    "axis_mile": 52.4,
+    "lat": 35.790274,
+    "lon": -87.193646
+  },
+  {
+    "id": "ntt-highland-rim-mi0082",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 8.2,
+    "axis_mile": 52.5,
+    "lat": 35.7912,
+    "lon": -87.192873
+  },
+  {
+    "id": "ntt-highland-rim-mi0083",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 8.3,
+    "axis_mile": 52.6,
+    "lat": 35.792254,
+    "lon": -87.191933
+  },
+  {
+    "id": "ntt-highland-rim-mi0084",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 8.4,
+    "axis_mile": 52.7,
+    "lat": 35.793196,
+    "lon": -87.190653
+  },
+  {
+    "id": "ntt-highland-rim-mi0085",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 8.5,
+    "axis_mile": 52.8,
+    "lat": 35.794335,
+    "lon": -87.189801
+  },
+  {
+    "id": "ntt-highland-rim-mi0086",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 8.6,
+    "axis_mile": 52.9,
+    "lat": 35.795596,
+    "lon": -87.189002
+  },
+  {
+    "id": "ntt-highland-rim-mi0087",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 8.7,
+    "axis_mile": 53,
+    "lat": 35.796992,
+    "lon": -87.188573
+  },
+  {
+    "id": "ntt-highland-rim-mi0088",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 8.8,
+    "axis_mile": 53.1,
+    "lat": 35.798083,
+    "lon": -87.187981
+  },
+  {
+    "id": "ntt-highland-rim-mi0089",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 8.9,
+    "axis_mile": 53.2,
+    "lat": 35.799353,
+    "lon": -87.187354
+  },
+  {
+    "id": "ntt-highland-rim-mi0090",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 9,
+    "axis_mile": 53.3,
+    "lat": 35.800705,
+    "lon": -87.186899
+  },
+  {
+    "id": "ntt-highland-rim-mi0091",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 9.1,
+    "axis_mile": 53.4,
+    "lat": 35.802076,
+    "lon": -87.186477
+  },
+  {
+    "id": "ntt-highland-rim-mi0092",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 9.2,
+    "axis_mile": 53.5,
+    "lat": 35.803508,
+    "lon": -87.186304
+  },
+  {
+    "id": "ntt-highland-rim-mi0093",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 9.3,
+    "axis_mile": 53.6,
+    "lat": 35.804746,
+    "lon": -87.186346
+  },
+  {
+    "id": "ntt-highland-rim-mi0094",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 9.4,
+    "axis_mile": 53.7,
+    "lat": 35.806173,
+    "lon": -87.186338
+  },
+  {
+    "id": "ntt-highland-rim-mi0095",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 9.5,
+    "axis_mile": 53.8,
+    "lat": 35.807559,
+    "lon": -87.186255
+  },
+  {
+    "id": "ntt-highland-rim-mi0096",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 9.6,
+    "axis_mile": 53.9,
+    "lat": 35.808951,
+    "lon": -87.186045
+  },
+  {
+    "id": "ntt-highland-rim-mi0097",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 9.7,
+    "axis_mile": 54,
+    "lat": 35.810285,
+    "lon": -87.185448
+  },
+  {
+    "id": "ntt-highland-rim-mi0098",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 9.8,
+    "axis_mile": 54.1,
+    "lat": 35.811377,
+    "lon": -87.184727
+  },
+  {
+    "id": "ntt-highland-rim-mi0099",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 9.9,
+    "axis_mile": 54.2,
+    "lat": 35.812251,
+    "lon": -87.183723
+  },
+  {
+    "id": "ntt-highland-rim-mi0100",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 10,
+    "axis_mile": 54.3,
+    "lat": 35.812922,
+    "lon": -87.182526
+  },
+  {
+    "id": "ntt-highland-rim-mi0101",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 10.1,
+    "axis_mile": 54.4,
+    "lat": 35.813206,
+    "lon": -87.181505
+  },
+  {
+    "id": "ntt-highland-rim-mi0102",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 10.2,
+    "axis_mile": 54.5,
+    "lat": 35.813856,
+    "lon": -87.180873
+  },
+  {
+    "id": "ntt-highland-rim-mi0103",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 10.3,
+    "axis_mile": 54.6,
+    "lat": 35.814039,
+    "lon": -87.179195
+  },
+  {
+    "id": "ntt-highland-rim-mi0104",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 10.4,
+    "axis_mile": 54.7,
+    "lat": 35.813962,
+    "lon": -87.177502
+  },
+  {
+    "id": "ntt-highland-rim-mi0105",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 10.5,
+    "axis_mile": 54.8,
+    "lat": 35.813688,
+    "lon": -87.175814
+  },
+  {
+    "id": "ntt-highland-rim-mi0106",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 10.6,
+    "axis_mile": 54.9,
+    "lat": 35.813721,
+    "lon": -87.174277
+  },
+  {
+    "id": "ntt-highland-rim-mi0107",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 10.7,
+    "axis_mile": 55,
+    "lat": 35.813859,
+    "lon": -87.172668
+  },
+  {
+    "id": "ntt-highland-rim-mi0108",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 10.8,
+    "axis_mile": 55.1,
+    "lat": 35.814135,
+    "lon": -87.170968
+  },
+  {
+    "id": "ntt-highland-rim-mi0109",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 10.9,
+    "axis_mile": 55.2,
+    "lat": 35.814095,
+    "lon": -87.169642
+  },
+  {
+    "id": "ntt-highland-rim-mi0110",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 11,
+    "axis_mile": 55.3,
+    "lat": 35.814539,
+    "lon": -87.168389
+  },
+  {
+    "id": "ntt-highland-rim-mi0111",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 11.1,
+    "axis_mile": 55.4,
+    "lat": 35.814672,
+    "lon": -87.166736
+  },
+  {
+    "id": "ntt-highland-rim-mi0112",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 11.2,
+    "axis_mile": 55.5,
+    "lat": 35.814563,
+    "lon": -87.165073
+  },
+  {
+    "id": "ntt-highland-rim-mi0113",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 11.3,
+    "axis_mile": 55.6,
+    "lat": 35.814294,
+    "lon": -87.163474
+  },
+  {
+    "id": "ntt-highland-rim-mi0114",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 11.4,
+    "axis_mile": 55.7,
+    "lat": 35.814323,
+    "lon": -87.162059
+  },
+  {
+    "id": "ntt-highland-rim-mi0115",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 11.5,
+    "axis_mile": 55.8,
+    "lat": 35.814003,
+    "lon": -87.160567
+  },
+  {
+    "id": "ntt-highland-rim-mi0116",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 11.6,
+    "axis_mile": 55.9,
+    "lat": 35.813874,
+    "lon": -87.158999
+  },
+  {
+    "id": "ntt-highland-rim-mi0117",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 11.7,
+    "axis_mile": 56,
+    "lat": 35.814149,
+    "lon": -87.157283
+  },
+  {
+    "id": "ntt-highland-rim-mi0118",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 11.8,
+    "axis_mile": 56.1,
+    "lat": 35.814612,
+    "lon": -87.155736
+  },
+  {
+    "id": "ntt-highland-rim-mi0119",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 11.9,
+    "axis_mile": 56.2,
+    "lat": 35.81494,
+    "lon": -87.154115
+  },
+  {
+    "id": "ntt-highland-rim-mi0120",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 12,
+    "axis_mile": 56.3,
+    "lat": 35.815667,
+    "lon": -87.152686
+  },
+  {
+    "id": "ntt-highland-rim-mi0121",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 12.1,
+    "axis_mile": 56.4,
+    "lat": 35.816738,
+    "lon": -87.151525
+  },
+  {
+    "id": "ntt-highland-rim-mi0122",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 12.2,
+    "axis_mile": 56.5,
+    "lat": 35.817723,
+    "lon": -87.15025
+  },
+  {
+    "id": "ntt-highland-rim-mi0123",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 12.3,
+    "axis_mile": 56.6,
+    "lat": 35.81854,
+    "lon": -87.148806
+  },
+  {
+    "id": "ntt-highland-rim-mi0124",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 12.4,
+    "axis_mile": 56.7,
+    "lat": 35.818876,
+    "lon": -87.147128
+  },
+  {
+    "id": "ntt-highland-rim-mi0125",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 12.5,
+    "axis_mile": 56.8,
+    "lat": 35.819059,
+    "lon": -87.145382
+  },
+  {
+    "id": "ntt-highland-rim-mi0126",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 12.6,
+    "axis_mile": 56.9,
+    "lat": 35.819792,
+    "lon": -87.144009
+  },
+  {
+    "id": "ntt-highland-rim-mi0127",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 12.7,
+    "axis_mile": 57,
+    "lat": 35.819816,
+    "lon": -87.142725
+  },
+  {
+    "id": "ntt-highland-rim-mi0128",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 12.8,
+    "axis_mile": 57.1,
+    "lat": 35.820507,
+    "lon": -87.141705
+  },
+  {
+    "id": "ntt-highland-rim-mi0129",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 12.9,
+    "axis_mile": 57.2,
+    "lat": 35.820624,
+    "lon": -87.140491
+  },
+  {
+    "id": "ntt-highland-rim-mi0130",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 13,
+    "axis_mile": 57.3,
+    "lat": 35.820893,
+    "lon": -87.139102
+  },
+  {
+    "id": "ntt-highland-rim-mi0131",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 13.1,
+    "axis_mile": 57.4,
+    "lat": 35.821206,
+    "lon": -87.137976
+  },
+  {
+    "id": "ntt-highland-rim-mi0132",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 13.2,
+    "axis_mile": 57.5,
+    "lat": 35.820835,
+    "lon": -87.136468
+  },
+  {
+    "id": "ntt-highland-rim-mi0133",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 13.3,
+    "axis_mile": 57.6,
+    "lat": 35.820637,
+    "lon": -87.134821
+  },
+  {
+    "id": "ntt-highland-rim-mi0134",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 13.4,
+    "axis_mile": 57.7,
+    "lat": 35.82021,
+    "lon": -87.133625
+  },
+  {
+    "id": "ntt-highland-rim-mi0135",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 13.5,
+    "axis_mile": 57.8,
+    "lat": 35.819907,
+    "lon": -87.132012
+  },
+  {
+    "id": "ntt-highland-rim-mi0136",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 13.6,
+    "axis_mile": 57.9,
+    "lat": 35.82059,
+    "lon": -87.131591
+  },
+  {
+    "id": "ntt-highland-rim-mi0137",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 13.7,
+    "axis_mile": 58,
+    "lat": 35.820308,
+    "lon": -87.129897
+  },
+  {
+    "id": "ntt-highland-rim-mi0138",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 13.8,
+    "axis_mile": 58.1,
+    "lat": 35.820232,
+    "lon": -87.128181
+  },
+  {
+    "id": "ntt-highland-rim-mi0139",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 13.9,
+    "axis_mile": 58.2,
+    "lat": 35.82099,
+    "lon": -87.126902
+  },
+  {
+    "id": "ntt-highland-rim-mi0140",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 14,
+    "axis_mile": 58.3,
+    "lat": 35.82176,
+    "lon": -87.125471
+  },
+  {
+    "id": "ntt-highland-rim-mi0141",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 14.1,
+    "axis_mile": 58.4,
+    "lat": 35.822607,
+    "lon": -87.124137
+  },
+  {
+    "id": "ntt-highland-rim-mi0142",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 14.2,
+    "axis_mile": 58.5,
+    "lat": 35.823572,
+    "lon": -87.123765
+  },
+  {
+    "id": "ntt-highland-rim-mi0143",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 14.3,
+    "axis_mile": 58.6,
+    "lat": 35.824747,
+    "lon": -87.123005
+  },
+  {
+    "id": "ntt-highland-rim-mi0144",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 14.4,
+    "axis_mile": 58.7,
+    "lat": 35.825975,
+    "lon": -87.122619
+  },
+  {
+    "id": "ntt-highland-rim-mi0145",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 14.5,
+    "axis_mile": 58.8,
+    "lat": 35.827181,
+    "lon": -87.122466
+  },
+  {
+    "id": "ntt-highland-rim-mi0146",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 14.6,
+    "axis_mile": 58.9,
+    "lat": 35.827938,
+    "lon": -87.121116
+  },
+  {
+    "id": "ntt-highland-rim-mi0147",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 14.7,
+    "axis_mile": 59,
+    "lat": 35.828726,
+    "lon": -87.120262
+  },
+  {
+    "id": "ntt-highland-rim-mi0148",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 14.8,
+    "axis_mile": 59.1,
+    "lat": 35.82857,
+    "lon": -87.11869
+  },
+  {
+    "id": "ntt-highland-rim-mi0149",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 14.9,
+    "axis_mile": 59.2,
+    "lat": 35.82926,
+    "lon": -87.117278
+  },
+  {
+    "id": "ntt-highland-rim-mi0150",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 15,
+    "axis_mile": 59.3,
+    "lat": 35.830001,
+    "lon": -87.115937
+  },
+  {
+    "id": "ntt-highland-rim-mi0151",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 15.1,
+    "axis_mile": 59.4,
+    "lat": 35.830169,
+    "lon": -87.114255
+  },
+  {
+    "id": "ntt-highland-rim-mi0152",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 15.2,
+    "axis_mile": 59.5,
+    "lat": 35.830175,
+    "lon": -87.112492
+  },
+  {
+    "id": "ntt-highland-rim-mi0153",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 15.3,
+    "axis_mile": 59.6,
+    "lat": 35.829535,
+    "lon": -87.110955
+  },
+  {
+    "id": "ntt-highland-rim-mi0154",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 15.4,
+    "axis_mile": 59.7,
+    "lat": 35.828522,
+    "lon": -87.109794
+  },
+  {
+    "id": "ntt-highland-rim-mi0155",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 15.5,
+    "axis_mile": 59.8,
+    "lat": 35.827541,
+    "lon": -87.108702
+  },
+  {
+    "id": "ntt-highland-rim-mi0156",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 15.6,
+    "axis_mile": 59.9,
+    "lat": 35.827223,
+    "lon": -87.107313
+  },
+  {
+    "id": "ntt-highland-rim-mi0157",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 15.7,
+    "axis_mile": 60,
+    "lat": 35.826612,
+    "lon": -87.105723
+  },
+  {
+    "id": "ntt-highland-rim-mi0158",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 15.8,
+    "axis_mile": 60.1,
+    "lat": 35.826729,
+    "lon": -87.104091
+  },
+  {
+    "id": "ntt-highland-rim-mi0159",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 15.9,
+    "axis_mile": 60.2,
+    "lat": 35.826232,
+    "lon": -87.102501
+  },
+  {
+    "id": "ntt-highland-rim-mi0160",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 16,
+    "axis_mile": 60.3,
+    "lat": 35.826181,
+    "lon": -87.100921
+  },
+  {
+    "id": "ntt-highland-rim-mi0161",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 16.1,
+    "axis_mile": 60.4,
+    "lat": 35.826336,
+    "lon": -87.099397
+  },
+  {
+    "id": "ntt-highland-rim-mi0162",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 16.2,
+    "axis_mile": 60.5,
+    "lat": 35.827359,
+    "lon": -87.098324
+  },
+  {
+    "id": "ntt-highland-rim-mi0163",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 16.3,
+    "axis_mile": 60.6,
+    "lat": 35.82819,
+    "lon": -87.097072
+  },
+  {
+    "id": "ntt-highland-rim-mi0164",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 16.4,
+    "axis_mile": 60.7,
+    "lat": 35.828636,
+    "lon": -87.095949
+  },
+  {
+    "id": "ntt-highland-rim-mi0165",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 16.5,
+    "axis_mile": 60.8,
+    "lat": 35.829343,
+    "lon": -87.094596
+  },
+  {
+    "id": "ntt-highland-rim-mi0166",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 16.6,
+    "axis_mile": 60.9,
+    "lat": 35.829553,
+    "lon": -87.092855
+  },
+  {
+    "id": "ntt-highland-rim-mi0167",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 16.7,
+    "axis_mile": 61,
+    "lat": 35.829518,
+    "lon": -87.091247
+  },
+  {
+    "id": "ntt-highland-rim-mi0168",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 16.8,
+    "axis_mile": 61.1,
+    "lat": 35.829751,
+    "lon": -87.089659
+  },
+  {
+    "id": "ntt-highland-rim-mi0169",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 16.9,
+    "axis_mile": 61.2,
+    "lat": 35.830855,
+    "lon": -87.089053
+  },
+  {
+    "id": "ntt-highland-rim-mi0170",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 17,
+    "axis_mile": 61.3,
+    "lat": 35.831913,
+    "lon": -87.088137
+  },
+  {
+    "id": "ntt-highland-rim-mi0171",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 17.1,
+    "axis_mile": 61.4,
+    "lat": 35.832506,
+    "lon": -87.086798
+  },
+  {
+    "id": "ntt-highland-rim-mi0172",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 17.2,
+    "axis_mile": 61.5,
+    "lat": 35.83348,
+    "lon": -87.085854
+  },
+  {
+    "id": "ntt-highland-rim-mi0173",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 17.3,
+    "axis_mile": 61.6,
+    "lat": 35.832892,
+    "lon": -87.084454
+  },
+  {
+    "id": "ntt-highland-rim-mi0174",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 17.4,
+    "axis_mile": 61.7,
+    "lat": 35.833187,
+    "lon": -87.082927
+  },
+  {
+    "id": "ntt-highland-rim-mi0175",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 17.5,
+    "axis_mile": 61.8,
+    "lat": 35.833186,
+    "lon": -87.081147
+  },
+  {
+    "id": "ntt-highland-rim-mi0176",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 17.6,
+    "axis_mile": 61.9,
+    "lat": 35.832953,
+    "lon": -87.079547
+  },
+  {
+    "id": "ntt-highland-rim-mi0177",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 17.7,
+    "axis_mile": 62,
+    "lat": 35.833134,
+    "lon": -87.077869
+  },
+  {
+    "id": "ntt-highland-rim-mi0178",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 17.8,
+    "axis_mile": 62.1,
+    "lat": 35.833259,
+    "lon": -87.076115
+  },
+  {
+    "id": "ntt-highland-rim-mi0179",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 17.9,
+    "axis_mile": 62.2,
+    "lat": 35.833178,
+    "lon": -87.074418
+  },
+  {
+    "id": "ntt-highland-rim-mi0180",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 18,
+    "axis_mile": 62.3,
+    "lat": 35.83366,
+    "lon": -87.073283
+  },
+  {
+    "id": "ntt-highland-rim-mi0181",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 18.1,
+    "axis_mile": 62.4,
+    "lat": 35.833676,
+    "lon": -87.071982
+  },
+  {
+    "id": "ntt-highland-rim-mi0182",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 18.2,
+    "axis_mile": 62.5,
+    "lat": 35.833484,
+    "lon": -87.070632
+  },
+  {
+    "id": "ntt-highland-rim-mi0183",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 18.3,
+    "axis_mile": 62.6,
+    "lat": 35.833562,
+    "lon": -87.068894
+  },
+  {
+    "id": "ntt-highland-rim-mi0184",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 18.4,
+    "axis_mile": 62.7,
+    "lat": 35.833968,
+    "lon": -87.067281
+  },
+  {
+    "id": "ntt-highland-rim-mi0185",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 18.5,
+    "axis_mile": 62.8,
+    "lat": 35.834983,
+    "lon": -87.066239
+  },
+  {
+    "id": "ntt-highland-rim-mi0186",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 18.6,
+    "axis_mile": 62.9,
+    "lat": 35.835875,
+    "lon": -87.064968
+  },
+  {
+    "id": "ntt-highland-rim-mi0187",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 18.7,
+    "axis_mile": 63,
+    "lat": 35.836972,
+    "lon": -87.063808
+  },
+  {
+    "id": "ntt-highland-rim-mi0188",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 18.8,
+    "axis_mile": 63.1,
+    "lat": 35.837953,
+    "lon": -87.062752
+  },
+  {
+    "id": "ntt-highland-rim-mi0189",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 18.9,
+    "axis_mile": 63.2,
+    "lat": 35.838637,
+    "lon": -87.061516
+  },
+  {
+    "id": "ntt-highland-rim-mi0190",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 19,
+    "axis_mile": 63.3,
+    "lat": 35.839225,
+    "lon": -87.060039
+  },
+  {
+    "id": "ntt-highland-rim-mi0191",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 19.1,
+    "axis_mile": 63.4,
+    "lat": 35.839991,
+    "lon": -87.058838
+  },
+  {
+    "id": "ntt-highland-rim-mi0192",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 19.2,
+    "axis_mile": 63.5,
+    "lat": 35.841114,
+    "lon": -87.05783
+  },
+  {
+    "id": "ntt-highland-rim-mi0193",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 19.3,
+    "axis_mile": 63.6,
+    "lat": 35.842122,
+    "lon": -87.056789
+  },
+  {
+    "id": "ntt-highland-rim-mi0194",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 19.4,
+    "axis_mile": 63.7,
+    "lat": 35.843162,
+    "lon": -87.055848
+  },
+  {
+    "id": "ntt-highland-rim-mi0195",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 19.5,
+    "axis_mile": 63.8,
+    "lat": 35.844392,
+    "lon": -87.054957
+  },
+  {
+    "id": "ntt-highland-rim-mi0196",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 19.6,
+    "axis_mile": 63.9,
+    "lat": 35.845613,
+    "lon": -87.054475
+  },
+  {
+    "id": "ntt-highland-rim-mi0197",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 19.7,
+    "axis_mile": 64,
+    "lat": 35.847011,
+    "lon": -87.054395
+  },
+  {
+    "id": "ntt-highland-rim-mi0198",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 19.8,
+    "axis_mile": 64.1,
+    "lat": 35.848136,
+    "lon": -87.053509
+  },
+  {
+    "id": "ntt-highland-rim-mi0199",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 19.9,
+    "axis_mile": 64.2,
+    "lat": 35.849511,
+    "lon": -87.053859
+  },
+  {
+    "id": "ntt-highland-rim-mi0200",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 20,
+    "axis_mile": 64.3,
+    "lat": 35.850739,
+    "lon": -87.053027
+  },
+  {
+    "id": "ntt-highland-rim-mi0201",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 20.1,
+    "axis_mile": 64.4,
+    "lat": 35.852041,
+    "lon": -87.052631
+  },
+  {
+    "id": "ntt-highland-rim-mi0202",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 20.2,
+    "axis_mile": 64.5,
+    "lat": 35.853424,
+    "lon": -87.052544
+  },
+  {
+    "id": "ntt-highland-rim-mi0203",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 20.3,
+    "axis_mile": 64.6,
+    "lat": 35.85479,
+    "lon": -87.052259
+  },
+  {
+    "id": "ntt-highland-rim-mi0204",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 20.4,
+    "axis_mile": 64.7,
+    "lat": 35.855727,
+    "lon": -87.051772
+  },
+  {
+    "id": "ntt-highland-rim-mi0205",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 20.5,
+    "axis_mile": 64.8,
+    "lat": 35.857102,
+    "lon": -87.052205
+  },
+  {
+    "id": "ntt-highland-rim-mi0206",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 20.6,
+    "axis_mile": 64.9,
+    "lat": 35.858246,
+    "lon": -87.051992
+  },
+  {
+    "id": "ntt-highland-rim-mi0207",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 20.7,
+    "axis_mile": 65,
+    "lat": 35.858862,
+    "lon": -87.051468
+  },
+  {
+    "id": "ntt-highland-rim-mi0208",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 20.8,
+    "axis_mile": 65.1,
+    "lat": 35.859175,
+    "lon": -87.050732
+  },
+  {
+    "id": "ntt-highland-rim-mi0209",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 20.9,
+    "axis_mile": 65.2,
+    "lat": 35.8599,
+    "lon": -87.050641
+  },
+  {
+    "id": "ntt-highland-rim-mi0210",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 21,
+    "axis_mile": 65.3,
+    "lat": 35.859986,
+    "lon": -87.049346
+  },
+  {
+    "id": "ntt-highland-rim-mi0211",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 21.1,
+    "axis_mile": 65.4,
+    "lat": 35.860063,
+    "lon": -87.048097
+  },
+  {
+    "id": "ntt-highland-rim-mi0212",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 21.2,
+    "axis_mile": 65.5,
+    "lat": 35.860803,
+    "lon": -87.046866
+  },
+  {
+    "id": "ntt-highland-rim-mi0213",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 21.3,
+    "axis_mile": 65.6,
+    "lat": 35.861636,
+    "lon": -87.045414
+  },
+  {
+    "id": "ntt-highland-rim-mi0214",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 21.4,
+    "axis_mile": 65.7,
+    "lat": 35.86155,
+    "lon": -87.043726
+  },
+  {
+    "id": "ntt-highland-rim-mi0215",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 21.5,
+    "axis_mile": 65.8,
+    "lat": 35.861945,
+    "lon": -87.042313
+  },
+  {
+    "id": "ntt-highland-rim-mi0216",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 21.6,
+    "axis_mile": 65.9,
+    "lat": 35.862852,
+    "lon": -87.040992
+  },
+  {
+    "id": "ntt-highland-rim-mi0217",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 21.7,
+    "axis_mile": 66,
+    "lat": 35.863447,
+    "lon": -87.039367
+  },
+  {
+    "id": "ntt-highland-rim-mi0218",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 21.8,
+    "axis_mile": 66.1,
+    "lat": 35.864366,
+    "lon": -87.038024
+  },
+  {
+    "id": "ntt-highland-rim-mi0219",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 21.9,
+    "axis_mile": 66.2,
+    "lat": 35.86574,
+    "lon": -87.037517
+  },
+  {
+    "id": "ntt-highland-rim-mi0220",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 22,
+    "axis_mile": 66.3,
+    "lat": 35.86679,
+    "lon": -87.036639
+  },
+  {
+    "id": "ntt-highland-rim-mi0221",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 22.1,
+    "axis_mile": 66.4,
+    "lat": 35.867664,
+    "lon": -87.035247
+  },
+  {
+    "id": "ntt-highland-rim-mi0222",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 22.2,
+    "axis_mile": 66.5,
+    "lat": 35.869001,
+    "lon": -87.034582
+  },
+  {
+    "id": "ntt-highland-rim-mi0223",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 22.3,
+    "axis_mile": 66.6,
+    "lat": 35.869706,
+    "lon": -87.033114
+  },
+  {
+    "id": "ntt-highland-rim-mi0224",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 22.4,
+    "axis_mile": 66.7,
+    "lat": 35.870652,
+    "lon": -87.031824
+  },
+  {
+    "id": "ntt-highland-rim-mi0225",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 22.5,
+    "axis_mile": 66.8,
+    "lat": 35.871989,
+    "lon": -87.031237
+  },
+  {
+    "id": "ntt-highland-rim-mi0226",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 22.6,
+    "axis_mile": 66.9,
+    "lat": 35.873397,
+    "lon": -87.030828
+  },
+  {
+    "id": "ntt-highland-rim-mi0227",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 22.7,
+    "axis_mile": 67,
+    "lat": 35.87435,
+    "lon": -87.03022
+  },
+  {
+    "id": "ntt-highland-rim-mi0228",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 22.8,
+    "axis_mile": 67.1,
+    "lat": 35.873343,
+    "lon": -87.031377
+  },
+  {
+    "id": "ntt-highland-rim-mi0229",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 22.9,
+    "axis_mile": 67.2,
+    "lat": 35.873721,
+    "lon": -87.031798
+  },
+  {
+    "id": "ntt-highland-rim-mi0230",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 23,
+    "axis_mile": 67.3,
+    "lat": 35.874649,
+    "lon": -87.030604
+  },
+  {
+    "id": "ntt-highland-rim-mi0231",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 23.1,
+    "axis_mile": 67.4,
+    "lat": 35.875652,
+    "lon": -87.031342
+  },
+  {
+    "id": "ntt-highland-rim-mi0232",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 23.2,
+    "axis_mile": 67.5,
+    "lat": 35.875187,
+    "lon": -87.032967
+  },
+  {
+    "id": "ntt-highland-rim-mi0233",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 23.3,
+    "axis_mile": 67.6,
+    "lat": 35.874233,
+    "lon": -87.034198
+  },
+  {
+    "id": "ntt-highland-rim-mi0234",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 23.4,
+    "axis_mile": 67.7,
+    "lat": 35.872874,
+    "lon": -87.034705
+  },
+  {
+    "id": "ntt-highland-rim-mi0235",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 23.5,
+    "axis_mile": 67.8,
+    "lat": 35.871905,
+    "lon": -87.036028
+  },
+  {
+    "id": "ntt-highland-rim-mi0236",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 23.6,
+    "axis_mile": 67.9,
+    "lat": 35.871358,
+    "lon": -87.03764
+  },
+  {
+    "id": "ntt-highland-rim-mi0237",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 23.7,
+    "axis_mile": 68,
+    "lat": 35.870989,
+    "lon": -87.039345
+  },
+  {
+    "id": "ntt-highland-rim-mi0238",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 23.8,
+    "axis_mile": 68.1,
+    "lat": 35.869998,
+    "lon": -87.040328
+  },
+  {
+    "id": "ntt-highland-rim-mi0239",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 23.9,
+    "axis_mile": 68.2,
+    "lat": 35.868737,
+    "lon": -87.040877
+  },
+  {
+    "id": "ntt-highland-rim-mi0240",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 24,
+    "axis_mile": 68.3,
+    "lat": 35.867491,
+    "lon": -87.040824
+  },
+  {
+    "id": "ntt-highland-rim-mi0241",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 24.1,
+    "axis_mile": 68.4,
+    "lat": 35.866361,
+    "lon": -87.039888
+  },
+  {
+    "id": "ntt-highland-rim-mi0242",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 24.2,
+    "axis_mile": 68.5,
+    "lat": 35.865724,
+    "lon": -87.040906
+  },
+  {
+    "id": "ntt-highland-rim-mi0243",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 24.3,
+    "axis_mile": 68.6,
+    "lat": 35.8645,
+    "lon": -87.04125
+  },
+  {
+    "id": "ntt-highland-rim-mi0244",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 24.4,
+    "axis_mile": 68.7,
+    "lat": 35.863519,
+    "lon": -87.041195
+  },
+  {
+    "id": "ntt-highland-rim-mi0245",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 24.5,
+    "axis_mile": 68.8,
+    "lat": 35.863234,
+    "lon": -87.04252
+  },
+  {
+    "id": "ntt-highland-rim-mi0246",
+    "section": "highland-rim",
+    "state": "TN",
+    "mile": 24.6,
+    "axis_mile": 68.9,
+    "lat": 35.861825,
+    "lon": -87.042718
+  }
+]
