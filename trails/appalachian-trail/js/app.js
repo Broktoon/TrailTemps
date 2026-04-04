@@ -53,6 +53,8 @@ const HIST_BASE     = "https://archive-api.open-meteo.com/v1/archive";
 const FORECAST_DAILY_VARS = [
   "temperature_2m_max",
   "temperature_2m_min",
+  "apparent_temperature_max",
+  "apparent_temperature_min",
   "precipitation_probability_max",
   "windspeed_10m_max"
 ].join(",");
@@ -71,7 +73,7 @@ const HIST_TTL_MS     = 24 * 60 * 60 * 1000;       // 24 hours
 const AT_TTL_MS       = 30 * 24 * 60 * 60 * 1000;  // 30 days
 const NORMALS_TTL_MS  = 30 * 24 * 60 * 60 * 1000;  // 30 days
 // Bump this whenever you rebuild or change historical_weather.json format/content
-const NORMALS_CACHE_VERSION = "v2";
+const NORMALS_CACHE_VERSION = "v3";
 
 let allPoints = [];
 let allPointsSortedByMile = [];
@@ -131,6 +133,39 @@ function boundsFromPoints(points) {
 function setDurStatus(msg) {
   const s = el("durStatus");
   if (s) s.textContent = msg;
+}
+
+function setWeatherStatus(msg) {
+  const s = el("weatherStatus");
+  if (s) s.textContent = msg;
+}
+
+/* ---------------------------
+   Apparent temperature helpers
+   (used when normals lack hi_app/lo_app — fallback only)
+---------------------------- */
+function windChill(tempF, windMph) {
+  // NWS formula: valid when T ≤ 50 °F and wind ≥ 3 mph
+  if (tempF > 50 || windMph < 3) return null;
+  return 35.74 + 0.6215 * tempF
+       - 35.75  * Math.pow(windMph, 0.16)
+       + 0.4275 * tempF * Math.pow(windMph, 0.16);
+}
+
+function heatIndex(tempF, rh) {
+  // Steadman/NWS formula: valid when T ≥ 80 °F
+  if (tempF < 80) return null;
+  const hi =
+    -42.379
+    + 2.04901523  * tempF
+    + 10.14333127 * rh
+    - 0.22475541  * tempF * rh
+    - 0.00683783  * tempF * tempF
+    - 0.05481717  * rh * rh
+    + 0.00122874  * tempF * tempF * rh
+    + 0.00085282  * tempF * rh * rh
+    - 0.00000199  * tempF * tempF * rh * rh;
+  return hi;
 }
 
 function safeJSONParse(s) {
@@ -427,6 +462,7 @@ function renderDurExtremesBlocks(hottest, coldest) {
       <tr><th>Location</th><td>${pointLabel(hottest.point)}</td></tr>
       <tr><th>Approx. Daily Mile</th><td>${fmtMile(hottest.targetMile)}</td></tr>
       <tr><th>Avg High</th><td>${hottest.avgHigh != null ? Math.round(hottest.avgHigh) + " °F" : "—"}</td></tr>
+      <tr><th>Apparent High</th><td>${hottest.appHigh != null ? Math.round(hottest.appHigh) + " °F" : "—"}</td></tr>
       <tr><th>Avg Low</th><td>${hottest.avgLow != null ? Math.round(hottest.avgLow) + " °F" : "—"}</td></tr>
     </table>
   `);
@@ -439,6 +475,7 @@ function renderDurExtremesBlocks(hottest, coldest) {
       <tr><th>Approx. Daily Mile</th><td>${fmtMile(coldest.targetMile)}</td></tr>
       <tr><th>Avg High</th><td>${coldest.avgHigh != null ? Math.round(coldest.avgHigh) + " °F" : "—"}</td></tr>
       <tr><th>Avg Low</th><td>${coldest.avgLow != null ? Math.round(coldest.avgLow) + " °F" : "—"}</td></tr>
+      <tr><th>Apparent Low</th><td>${coldest.appLow != null ? Math.round(coldest.appLow) + " °F" : "—"}</td></tr>
     </table>
   `);
 }
@@ -533,14 +570,37 @@ if (!normals || !Array.isArray(normals.hi) || !Array.isArray(normals.lo)) contin
     const idx = dayIndexInNonLeapYearFromMonthDay(monthDay);
 
     const avgHigh = normals.hi[idx];
-    const avgLow = normals.lo[idx];
+    const avgLow  = normals.lo[idx];
 
     if (!Number.isFinite(avgHigh) || !Number.isFinite(avgLow)) continue;
 
-    const rec = { date, targetMile, point, avgHigh, avgLow };
+    // Apparent temps — use normals if available, otherwise fall back to NWS formulas
+    const appHigh = (normals.hi_app && Number.isFinite(normals.hi_app[idx]))
+      ? normals.hi_app[idx]
+      : (normals.rh_hi ? (heatIndex(avgHigh, normals.rh_hi[idx]) ?? avgHigh) : avgHigh);
 
-    if (!hottest || rec.avgHigh > hottest.avgHigh) hottest = rec;
-    if (!coldest || rec.avgLow < coldest.avgLow) coldest = rec;
+    const wsVal = (normals.ws && Number.isFinite(normals.ws[idx])) ? normals.ws[idx] : 0;
+    const appLow = (normals.lo_app && Number.isFinite(normals.lo_app[idx]))
+      ? normals.lo_app[idx]
+      : (windChill(avgLow, wsVal) ?? avgLow);
+
+    const rec = { date, targetMile, point, avgHigh, avgLow, appHigh, appLow };
+
+    if (!hottest || rec.appHigh > hottest.appHigh) hottest = rec;
+    if (!coldest || rec.appLow  < coldest.appLow)  coldest = rec;
+  }
+
+  // Advisories
+  const durStatusEl = el("durStatus");
+  if (durStatusEl) {
+    const advisories = [];
+    if (hottest && hottest.appHigh >= 100) {
+      advisories.push("⚠ Heat advisory: the hottest day on your hike has an apparent high at or above 100 °F. Plan around midday heat, carry extra water, and check local NWS forecasts before your hike.");
+    }
+    if (coldest && coldest.appLow <= 20) {
+      advisories.push("⚠ Cold weather advisory: the coldest night on your hike is expected to be at or below 20 °F. Conditions at this level may be hazardous without proper preparation and equipment. See the weather notes at the bottom of the page for details, and check local NWS forecasts before your hike.");
+    }
+    durStatusEl.textContent = advisories.join(" ");
   }
 
   setDisplayIfExists("durExtremesWrap", "block");
@@ -659,6 +719,14 @@ function buildPointsByState() {
   }
 }
 
+function getStateMileRange(state) {
+  const arr = pointsByState.get(state) || [];
+  if (arr.length === 0) return null;
+  const miles = arr.map(p => getPointMile(p)).filter(Number.isFinite);
+  return { min: Math.min(...miles), max: Math.max(...miles) };
+}
+
+
 function renderStateOptions() {
   const stateSel = el("stateSelect");
   if (!stateSel) return;
@@ -673,9 +741,11 @@ function renderStateOptions() {
   });
 
   for (const st of statesInData) {
+    const range = getStateMileRange(st);
+    const rangeStr = range ? ` (Miles ${Math.round(range.min)}–${Math.round(range.max)})` : "";
     const opt = document.createElement("option");
     opt.value = st;
-    opt.textContent = STATE_NAME[st] || st;
+    opt.textContent = (STATE_NAME[st] || st) + rangeStr;
     stateSel.appendChild(opt);
   }
 
@@ -687,34 +757,15 @@ function renderStateOptions() {
   }
 }
 
-function renderMileOptionsForState(state) {
-  const mileSel = el("mileSelect");
-  if (!mileSel) return;
-  mileSel.innerHTML = "";
-
-  const arr = pointsByState.get(state) || [];
-  for (const p of arr) {
-    const opt = document.createElement("option");
-    opt.value = p.id;
-    opt.textContent = fmtMile(getPointMile(p));
-    mileSel.appendChild(opt);
-  }
-
-  if (arr.length === 0) {
-    const opt = document.createElement("option");
-    opt.value = "";
-    opt.textContent = "No mile points for state";
-    mileSel.appendChild(opt);
-  }
-}
-
-function getSelectedPointFromStateMile() {
+function getSelectedPointFromMileInput() {
   const state = el("stateSelect")?.value;
-  const pointId = el("mileSelect")?.value;
-  if (!state || !pointId) return null;
+  const mileRaw = el("atMileInput")?.value;
+  if (!state || mileRaw === "" || mileRaw == null) return null;
 
-  const arr = pointsByState.get(state) || [];
-  return arr.find(p => p.id === pointId) || null;
+  const mile = Number(mileRaw);
+  if (!Number.isFinite(mile)) return null;
+
+  return getNearestPointByMile(mile) || null;
 }
 
 /* ---------------------------
@@ -931,18 +982,12 @@ async function loadPoints() {
 }
 
 async function loadPrecomputedNormals() {
-const CACHE_KEY = `planning_normals_${trailSlug}_${NORMALS_CACHE_VERSION}`;
-  const cached = cacheGet(CACHE_KEY, NORMALS_TTL_MS);
-
-  let payload = cached;
-  if (!payload) {
-    const resp = await fetch(NORMALS_URL, { cache: "no-cache" });
-    if (!resp.ok) {
-      throw new Error(`Failed to load ${NORMALS_URL} (${resp.status})`);
-    }
-    payload = await resp.json();
-    cacheSet(CACHE_KEY, payload);
+  // historical_weather.json is too large for localStorage — rely on HTTP cache instead.
+  const resp = await fetch(NORMALS_URL);
+  if (!resp.ok) {
+    throw new Error(`Failed to load ${NORMALS_URL} (${resp.status})`);
   }
+  const payload = await resp.json();
 
   normalsByPointId = new Map();
   normalsMeta = payload.meta || null;
@@ -951,7 +996,15 @@ const CACHE_KEY = `planning_normals_${trailSlug}_${NORMALS_CACHE_VERSION}`;
   for (const p of pts) {
     if (!p || !p.id) continue;
     if (!Array.isArray(p.hi) || !Array.isArray(p.lo)) continue;
-    normalsByPointId.set(String(p.id), { hi: p.hi, lo: p.lo });
+    normalsByPointId.set(String(p.id), {
+      hi:     p.hi,
+      lo:     p.lo,
+      hi_app: Array.isArray(p.hi_app) ? p.hi_app : null,
+      lo_app: Array.isArray(p.lo_app) ? p.lo_app : null,
+      rh_hi:  Array.isArray(p.rh_hi)  ? p.rh_hi  : null,
+      rh_lo:  Array.isArray(p.rh_lo)  ? p.rh_lo  : null,
+      ws:     Array.isArray(p.ws)     ? p.ws     : null,
+    });
   }
 }
 
@@ -1078,8 +1131,13 @@ function computePlanningAverageForMonthDay(histDaily, monthDay, windowDays) {
 /* ---------------------------
    Rendering (Weather tool)
 ---------------------------- */
-function renderPlanningSummary(point, monthDay, range, avgHigh, avgLow) {
+function renderPlanningSummary(point, monthDay, range, avgHigh, avgLow, appHigh, appLow) {
   const niceDate = formatMonthDayName(monthDay);
+
+  const appHighRow = appHigh != null
+    ? `<tr><th>Apparent High</th><td>${Math.round(appHigh)} \u00B0F</td></tr>` : "";
+  const appLowRow  = appLow  != null
+    ? `<tr><th>Apparent Low</th><td>${Math.round(appLow)} \u00B0F</td></tr>`  : "";
 
   el("planningSummaryBlock").innerHTML = `
     <h2>Planning: 7-year average</h2>
@@ -1087,13 +1145,15 @@ function renderPlanningSummary(point, monthDay, range, avgHigh, avgLow) {
       <tr><th>Location</th><td>${pointLabel(point)}</td></tr>
       <tr><th>Planning Date</th><td>${niceDate}</td></tr>
       <tr><th>7-year Avg High</th><td>${avgHigh != null ? Math.round(avgHigh) + " °F" : "—"}</td></tr>
+      ${appHighRow}
       <tr><th>7-year Avg Low</th><td>${avgLow != null ? Math.round(avgLow) + " °F" : "—"}</td></tr>
+      ${appLowRow}
       <tr><th>Historical Range Used</th><td>${range.start_date} to ${range.end_date}</td></tr>
     </table>
     <p class="note">
       Averages are computed from daily highs/lows across the range above, using a
       ${TYPICAL_WINDOW_DAYS * 2 + 1}-day window centered on the Planning Date.
-      This is a “recent planning average,” not an official 30-year climate normal.
+      This is a "recent planning average," not an official 30-year climate normal.
     </p>
   `;
 }
@@ -1124,16 +1184,20 @@ function renderForecastTable(forecastData) {
   }
 
   const rows = d.time.map((date, i) => {
-    const hi = d.temperature_2m_max?.[i];
-    const lo = d.temperature_2m_min?.[i];
-    const p  = d.precipitation_probability_max?.[i];
-    const w  = d.windspeed_10m_max?.[i];
+    const hi     = d.temperature_2m_max?.[i];
+    const lo     = d.temperature_2m_min?.[i];
+    const app_hi = d.apparent_temperature_max?.[i];
+    const app_lo = d.apparent_temperature_min?.[i];
+    const p      = d.precipitation_probability_max?.[i];
+    const w      = d.windspeed_10m_max?.[i];
 
     return `
       <tr>
         <td>${date}</td>
         <td>${hi != null ? Math.round(hi) + " °F" : ""}</td>
+        <td>${app_hi != null ? Math.round(app_hi) + " °F" : ""}</td>
         <td>${lo != null ? Math.round(lo) + " °F" : ""}</td>
+        <td>${app_lo != null ? Math.round(app_lo) + " °F" : ""}</td>
         <td>${p != null ? Math.round(p) + "%" : ""}</td>
         <td>${w != null ? Math.round(w) + " mph" : ""}</td>
       </tr>
@@ -1146,7 +1210,9 @@ function renderForecastTable(forecastData) {
       <tr>
         <th>Date</th>
         <th>Forecast High</th>
+        <th>Apparent High</th>
         <th>Forecast Low</th>
+        <th>Apparent Low</th>
         <th>Precip (max)</th>
         <th>Wind (max)</th>
       </tr>
@@ -1161,13 +1227,43 @@ function renderForecastTable(forecastData) {
    Weather run
 ---------------------------- */
 async function runWeather() {
-  const point = getSelectedPointFromStateMile();
+  setWeatherStatus("");
+
+  const state = el("stateSelect")?.value;
+  const mileRaw = el("atMileInput")?.value;
+
+  if (!state) {
+    setWeatherStatus("Please select a state.");
+    return;
+  }
+  if (mileRaw === "" || mileRaw == null) {
+    setWeatherStatus("Please enter a northbound mile.");
+    return;
+  }
+  const mileNum = Number(mileRaw);
+  if (!Number.isFinite(mileNum) || mileNum < 0) {
+    setWeatherStatus("Please enter a valid mile number.");
+    return;
+  }
+  const range = getStateMileRange(state);
+  if (range && (mileNum < range.min || mileNum > range.max)) {
+    setWeatherStatus(`Mile ${mileNum} is outside ${STATE_NAME[state] || state}'s range (Miles ${Math.round(range.min)}–${Math.round(range.max)}).`);
+    return;
+  }
+  if (!range && (mileNum < 0 || mileNum > 2190)) {
+    setWeatherStatus("Please enter a northbound mile between 0 and 2190.");
+    return;
+  }
+
+  const point = getSelectedPointFromMileInput();
   if (!point) {
+    setWeatherStatus("No trail point found for that mile. Please try again.");
     return;
   }
 
   const monthDay = getSelectedMonthDay();
   if (!monthDay) {
+    setWeatherStatus("Please choose a planning date.");
     return;
   }
 
@@ -1194,7 +1290,19 @@ async function runWeather() {
     }
 
     const planning = computePlanningAverageForMonthDay(histDaily, monthDay, TYPICAL_WINDOW_DAYS);
-    renderPlanningSummary(point, monthDay, range, planning.avgHigh, planning.avgLow);
+
+    // Apparent temps from precomputed normals (if available for this point)
+    let appHigh = null;
+    let appLow  = null;
+    const nearestNormals = normalsByPointId.get(point.id)
+      || (point.legacy_id ? normalsByPointId.get(point.legacy_id) : null);
+    if (nearestNormals) {
+      const idx = dayIndexInNonLeapYearFromMonthDay(monthDay);
+      if (nearestNormals.hi_app && Number.isFinite(nearestNormals.hi_app[idx])) appHigh = nearestNormals.hi_app[idx];
+      if (nearestNormals.lo_app && Number.isFinite(nearestNormals.lo_app[idx])) appLow  = nearestNormals.lo_app[idx];
+    }
+
+    renderPlanningSummary(point, monthDay, range, planning.avgHigh, planning.avgLow, appHigh, appLow);
 
   } catch (err) {
     console.error(err);
@@ -1210,16 +1318,7 @@ function initWeatherUI() {
   el("goBtn")?.addEventListener("click", runWeather);
 
   el("stateSelect")?.addEventListener("change", () => {
-    const st = el("stateSelect").value;
-    renderMileOptionsForState(st);
-
-    const p = getSelectedPointFromStateMile();
-    if (p && map) updateMap(p);
-  });
-
-  el("mileSelect")?.addEventListener("change", () => {
-    const p = getSelectedPointFromStateMile();
-    if (p) updateMap(p);
+    el("atMileInput") && (el("atMileInput").value = "");
   });
 
   initMonthDayPicker();
@@ -1254,9 +1353,7 @@ if (map) {
     const stateSel = el("stateSelect");
     const firstState = stateSel?.value;
     if (firstState) {
-      renderMileOptionsForState(firstState);
-      const firstPoint = getSelectedPointFromStateMile() || (pointsByState.get(firstState) ? pointsByState.get(firstState)[0] : null);
-      if (firstPoint) updateMap(firstPoint);
+      // Range shown in dropdown labels; no separate hint needed
     }
 
     // Load precomputed normals (best-effort)

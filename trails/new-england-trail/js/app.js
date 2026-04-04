@@ -357,15 +357,10 @@ async function loadPoints() {
 }
 
 async function loadPrecomputedNormals() {
-  const key = `net_normals_${trailSlug}_${NORMALS_CACHE_VERSION}`;
-  const cached = cacheGet(key, NORMALS_TTL_MS);
-  let payload = cached;
-  if (!payload) {
-    const r = await fetch(META.normalsUrl, { cache: "no-cache" });
-    if (!r.ok) throw new Error(`historical_weather.json fetch failed (${r.status})`);
-    payload = await r.json();
-    cacheSet(key, payload);
-  }
+  // historical_weather.json is too large for localStorage — rely on HTTP cache instead.
+  const r = await fetch(META.normalsUrl);
+  if (!r.ok) throw new Error(`historical_weather.json fetch failed (${r.status})`);
+  const payload = await r.json();
 
   normalsByPointId = new Map();
   normalsMeta = payload.meta || null;
@@ -400,7 +395,7 @@ async function loadPrecomputedNormals() {
    ============================================================ */
 
 async function fetchTrailGeojson() {
-  const key = `trail_geojson_${trailSlug}_v1`;
+  const key = `trail_geojson_${trailSlug}_v2`;
   const cached = cacheGet(key, TRAIL_TTL_MS);
   if (cached) return cached;
   const r = await fetch(META.trailGeojsonUrl, { cache: "no-store" });
@@ -431,7 +426,7 @@ function applyTrailOverlay(targetMap, haloRef, layerRef, onDone) {
       if (layerRef.current) { try { targetMap.removeLayer(layerRef.current); } catch {} }
 
       layerRef.current = L.geoJSON(clean, {
-        style: { color: "#4466cc", weight: 3.25, opacity: 0.85, lineCap: "round", lineJoin: "round" },
+        style: { color: "#e06060", weight: 3.25, opacity: 0.85, lineCap: "round", lineJoin: "round" },
         interactive: false
       }).addTo(targetMap);
 
