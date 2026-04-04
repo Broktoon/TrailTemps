@@ -108,6 +108,46 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* -------------------------------------------------------
+       Weather Planner row — matches FT/NET layout
+    ------------------------------------------------------- */
+    .control-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.75rem;
+      align-items: flex-end;
+    }
+
+    .ft-select-col {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.9rem;
+    }
+    .ft-select-col label {
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .ft-select-col select,
+    .ft-select-col input[type="number"] {
+      padding: 0.35rem 0.45rem;
+      font-size: 0.9rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background: #fff;
+      min-width: 0;
+    }
+
+    #atMileInput {
+      width: 6rem;
+    }
+
+    @media (max-width: 600px) {
+      .ft-select-col {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 
@@ -127,7 +167,7 @@
           <div class="sub-brand"><em>TrailTemps</em> - National Scenic Trail Weather Planner</div>
         </div>
 
-        <img src="/images/ANSTLogo.jpg"
+        <img src="/images/ANSTLogo.png"
              alt="Appalachian Trail logo"
              class="trail-page-logo">
       </div>
@@ -151,8 +191,16 @@
             Florida Trail <span class="trail-status"></span>
           </a>
 
+          <a class="trail-option" href="/trails/natchez-trace-trail/">
+            Natchez Trace Trail <span class="trail-status"></span>
+          </a>
+
           <a class="trail-option" href="/trails/new-england-trail/">
             New England Trail <span class="trail-status"></span>
+          </a>
+
+          <a class="trail-option" href="/trails/arizona-trail/">
+            Arizona Trail <span class="trail-status">(Coming Next)</span>
           </a>
 
           <a class="trail-option" href="/trails/continental-divide-trail/">
@@ -161,6 +209,10 @@
 
           <a class="trail-option" href="/trails/pacific-crest-trail/">
             Pacific Crest Trail <span class="trail-status">(Coming Soon)</span>
+          </a>
+
+          <a class="trail-option current" href="/trails/pacific-northwest-trail/" aria-current="page">
+            Pacific Northwest Trail <span class="trail-status">(Coming Soon)</span>
           </a>
 
           <a class="trail-option" href="/trails/potomac-heritage-trail/">
@@ -256,7 +308,7 @@
     <!-- =====================================================
          Tool 2: Weather Planner
     ====================================================== -->
-    <section class="controls" aria-label="Weather planner controls">
+    <section class="controls" aria-label="Weather planner controls" style="flex-direction:column; align-items:flex-start;">
       <div class="section-title-block">
         <h2>Weather Planner</h2>
         <p class="data-attribution">
@@ -269,30 +321,42 @@
       </div>
 
       <p class="card-instructions">
-        Select a state and a mile point, then choose a planning month/day.
-        You will receive current conditions at that location, a 5-day forecast, and a recent
-        7-year average of weather conditions for that date.
+        Choose a planning date, select a state, then enter a northbound mile within that
+        state's range. You will receive current conditions at that location, a 5-day forecast,
+        and a 7-year planning average for that date and location.
       </p>
 
       <div class="control-row">
-        <label class="date-label">
-          State:
+
+        <!-- Planning Date -->
+        <div class="ft-select-col">
+          <label>Planning Date:</label>
+          <span style="display:flex; gap:6px; align-items:center;">
+            <select id="monthSelect"></select>
+            <select id="daySelect"></select>
+          </span>
+        </div>
+
+        <!-- State selector -->
+        <div class="ft-select-col">
+          <label for="stateSelect">State:</label>
           <select id="stateSelect"></select>
-        </label>
+        </div>
 
-        <label class="date-label">
-          Northbound Mile:
-          <select id="mileSelect"></select>
-        </label>
+        <!-- Mile input -->
+        <div class="ft-select-col">
+          <label for="atMileInput">Northbound Mile:</label>
+          <input id="atMileInput" type="number" inputmode="numeric"
+                 min="0" max="2190" step="1" placeholder="e.g., 500" />
+        </div>
 
-        <label class="date-label">
-          Planning Date:
-          <select id="monthSelect"></select>
-          <select id="daySelect"></select>
-        </label>
+      </div><!-- /.control-row -->
 
+      <div style="margin-top:10px;">
         <button id="goBtn" type="button" class="btn-primary">Get Weather</button>
       </div>
+
+      <div id="weatherStatus" class="status"></div>
 
       <section class="map-wrap" id="weatherMapWrap" style="display:none;">
         <div id="map" aria-label="Map showing selected Appalachian Trail point"></div>
@@ -331,13 +395,16 @@
 
           <div class="weather-data-notes__content" id="notes-on-data-content">
             <p>
-              This site uses average daily maximum and minimum temperature data from the last seven years.
+              This site uses average daily maximum and minimum temperature data from the last seven years, along with <i>apparent</i> temperature data that addresses heat index and wind chill issues.
               This approach provides stability in planning values while also reflecting more recent shifts
-              in climate conditions. Also, given that elevations do not change nearly as much on the
-              Appalachian Trail as they do on other trails (like the PCT or the CDT), and they
+              in climate conditions.  We use the standard Steadman approach to these, and feel free to read more about them in the notes of the <a href="/trails/florida-trail/">Florida Trail</a> (for Heat Index) and <a href="/trails/new-england-trail/">New England Trail</a> (for Wind Chill) sites where I first incorporated each into the planning tool.
+            </p>
+            <p>
+              All that being said, given that elevations do not change nearly as much on the
+              Appalachian Trail as they do on other trails (like the Pacific Crest Trail or Continental Divide Trail), and they
               correspondingly do not cause as much of a weather shift, I have not created an AT-specific
               algorithm to estimate changes based solely on elevation or for specific AT peaks. But those
-              are in development for other trails and (if successful) may be for the AT in future builds.
+              are in development for the Arizona Trail and (if successful) may be for the AT in future builds.
             </p>
           </div>
         </section>
