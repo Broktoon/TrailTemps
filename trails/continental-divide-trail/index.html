@@ -16,6 +16,7 @@
 <script>
   window.TRAIL_SLUG = "continental-divide-trail";
 </script>
+<script defer src="/js/trail-nav.js"></script>
 <script defer src="/js/app.js"></script>
 
 <body data-trail="continental-divide-trail">
@@ -41,61 +42,7 @@
     </div>
 
     <div class="header-actions">
-      <details class="trail-selector">
-        <summary class="trail-selector-btn">Trail ▾</summary>
-
-        <nav class="trail-selector-menu" aria-label="Trail selector">
-         <a class="trail-option" href="/trails/appalachian-trail/">
-            Appalachian Trail <span class="trail-status"></span>
-          </a>
-
-          <a class="trail-option current" href="/trails/florida-trail/" aria-current="page">
-            Florida Trail <span class="trail-status"></span>
-          </a>
-
-          <a class="trail-option" href="/trails/natchez-trace-trail/">
-            Natchez Trace Trail <span class="trail-status">(Current)</span>
-          </a>
-
-          <a class="trail-option" href="/trails/new-england-trail/">
-            New England Trail <span class="trail-status"></span>
-          </a>
-
-          <a class="trail-option" href="/trails/arizona-trail/">
-            Arizona Trail <span class="trail-status">(Coming Next)</span>
-          </a>
-
-          <a class="trail-option current" href="/trails/continental-divide-trail/" aria-current="page">
-            Continental Divide Trail <span class="trail-status">(Current - Coming Soon)</span>
-          </a>
-
-          <a class="trail-option" href="/trails/ice-age-trail/">
-            Ice Age Trail <span class="trail-status">(Coming Soon)</span>
-          </a>
-
-          <a class="trail-option" href="/trails/north-country-trail/">
-            North Country Trail <span class="trail-status">(Coming Soon)</span>
-          </a>
-
-          <a class="trail-option" href="/trails/pacific-crest-trail/">
-            Pacific Crest Trail <span class="trail-status">(Coming Soon)</span>
-          </a>
-
-          <a class="trail-option current" href="/trails/pacific-northwest-trail/" aria-current="page">
-            Pacific Northwest Trail <span class="trail-status">(Coming Soon)</span>
-          </a>
-
-          <a class="trail-option" href="/trails/potomac-heritage-trail/">
-            Potomac Heritage Trail <span class="trail-status">(Coming Soon)</span>
-          </a>
-
-          <div class="trail-divider"></div>
-
-          <a class="trail-option" href="/index.html">
-            Trail Selector Hub
-          </a>
-        </nav>
-      </details>
+      <div id="trail-nav-mount"></div>
     </div>
 
   </div>

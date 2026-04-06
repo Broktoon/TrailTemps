@@ -9,36 +9,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
   <style>
-    /* -------------------------------------------------------
-       NTT: Weather Planner section/mile selectors
-       ------------------------------------------------------- */
-    .control-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem 0.75rem;
-      align-items: flex-end;
-    }
-
-    .ft-select-col {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      font-size: 0.9rem;
-    }
-    .ft-select-col label {
-      font-weight: 600;
-      white-space: nowrap;
-    }
-    .ft-select-col select,
-    .ft-select-col input[type="number"] {
-      padding: 0.35rem 0.45rem;
-      font-size: 0.9rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      background: #fff;
-      min-width: 0;
-    }
-
+    /* Natchez Trace Trail: section info + mile input (trail-specific IDs) */
     #nttSectionInfo {
       font-size: 0.82rem;
       color: #555;
@@ -49,40 +20,6 @@
 
     #nttMileInput {
       width: 6rem;
-    }
-
-    @media (max-width: 600px) {
-      .ft-select-col {
-        width: 100%;
-      }
-    }
-
-    /* Apparent temperature annotations in forecast table */
-    .feels-hotter {
-      font-size: 0.8rem;
-      color: #a03000;
-      font-style: italic;
-    }
-    .feels-cooler {
-      font-size: 0.8rem;
-      color: #0055aa;
-      font-style: italic;
-    }
-
-    /* Blue button */
-    .btn-primary {
-      padding: 10px 22px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      border-radius: 6px;
-      border: none;
-      background: #2a6ebb;
-      color: #fff;
-      cursor: pointer;
-      transition: background 120ms ease;
-    }
-    .btn-primary:hover {
-      background: #1d56a0;
     }
   </style>
 </head>
@@ -118,60 +55,7 @@
     </div>
 
     <div class="header-actions">
-      <details class="trail-selector">
-        <summary class="trail-selector-btn">Trail &#9660;</summary>
-
-        <nav class="trail-selector-menu" aria-label="Trail selector">
-           <a class="trail-option" href="/trails/appalachian-trail/">
-            Appalachian Trail <span class="trail-status"></span>
-          </a>
-
-          <a class="trail-option current" href="/trails/florida-trail/" aria-current="page">
-            Florida Trail <span class="trail-status"></span>
-          </a>
-
-          <a class="trail-option" href="/trails/natchez-trace-trail/">
-            Natchez Trace Trail <span class="trail-status">(Current)</span>
-          </a>
-
-          <a class="trail-option" href="/trails/new-england-trail/">
-            New England Trail <span class="trail-status"></span>
-          </a>
-
-          <a class="trail-option" href="/trails/arizona-trail/">
-            Arizona Trail <span class="trail-status">(Coming Next)</span>
-          </a>
-
-          <a class="trail-option current" href="/trails/continental-divide-trail/" aria-current="page">
-            Continental Divide Trail <span class="trail-status">(Coming Soon)</span>
-          </a>
-
-          <a class="trail-option" href="/trails/ice-age-trail/">
-            Ice Age Trail <span class="trail-status">(Coming Soon)</span>
-          </a>
-
-          <a class="trail-option" href="/trails/north-country-trail/">
-            North Country Trail <span class="trail-status">(Coming Soon)</span>
-          </a>
-
-          <a class="trail-option" href="/trails/pacific-crest-trail/">
-            Pacific Crest Trail <span class="trail-status">(Coming Soon)</span>
-          </a>
-
-          <a class="trail-option current" href="/trails/pacific-northwest-trail/" aria-current="page">
-            Pacific Northwest Trail <span class="trail-status">(Coming Soon)</span>
-          </a>
-
-          <a class="trail-option" href="/trails/potomac-heritage-trail/">
-            Potomac Heritage Trail <span class="trail-status">(Coming Soon)</span>
-          </a>
-          <div class="trail-divider"></div>
-
-          <a class="trail-option" href="/index.html">
-            Trail Selector Hub
-          </a>
-        </nav>
-      </details>
+      <div id="trail-nav-mount"></div>
     </div>
 
   </div>
@@ -295,8 +179,8 @@
         <div class="ft-select-col">
           <label for="nttMileInput">Section Mile:</label>
           <div style="display:flex; align-items:center; gap:8px;">
-            <input id="nttMileInput" type="number" inputmode="numeric"
-                   min="0" max="23" step="0.1" placeholder="e.g., 5" />
+            <input id="nttMileInput" type="text" inputmode="numeric"
+                   pattern="[0-9.]*" placeholder="e.g., 5" />
             <p id="nttSectionInfo" style="margin:0; font-size:0.82rem; color:#555; font-style:italic; white-space:nowrap;"></p>
           </div>
         </div>
@@ -447,6 +331,8 @@
     ];
   </script>
 
+  <script defer src="/js/trail-nav.js"></script>
+  <script defer src="/js/shared-utils.js"></script>
   <script defer src="js/app.js"></script>
 
   <!-- Donation block -->

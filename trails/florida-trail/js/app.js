@@ -166,67 +166,13 @@ let durTrailHaloLayer = null;
 const SELECT_ZOOM = 8;
 
 /* ============================================================
-   6. UTILITY FUNCTIONS
+   6. UTILITY FUNCTIONS (trail-specific only — shared utils in /js/shared-utils.js)
    ============================================================ */
-
-const el = (id) => document.getElementById(id);
-
-function setHtmlIfExists(id, html) {
-  const n = el(id); if (n) n.innerHTML = html;
-}
-function setDisplayIfExists(id, val) {
-  const n = el(id); if (n) n.style.display = val;
-}
-function setDurStatus(msg) {
-  const s = el("durStatus"); if (s) s.textContent = msg;
-}
-function setWeatherStatus(msg) {
-  const s = el("weatherStatus"); if (s) s.textContent = msg;
-}
-
-function safeJSONParse(s) {
-  try { return JSON.parse(s); } catch { return null; }
-}
-
-function cacheGet(key, ttlMs) {
-  const raw = localStorage.getItem(key);
-  if (!raw) return null;
-  const obj = safeJSONParse(raw);
-  if (!obj || !obj.ts) return null;
-  if (Date.now() - obj.ts > ttlMs) return null;
-  return obj.data;
-}
-function cacheSet(key, data) {
-  try {
-    localStorage.setItem(key, JSON.stringify({ ts: Date.now(), data }));
-  } catch { /* quota exceeded — silently skip */ }
-}
-
-function addDays(d, n) {
-  const r = new Date(d.getTime()); r.setDate(r.getDate() + n); return r;
-}
-function toISODate(d) {
-  return `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}`;
-}
-function pad2(n) { return String(n).padStart(2,"0"); }
-function fmtMile(m) { return (Math.round(Number(m)*10)/10).toFixed(1); }
 
 function refreshMapSize() {
   if (map) setTimeout(() => { try { map.invalidateSize(); } catch {} }, 0);
 }
 
-function boundsFromPoints(pts) {
-  if (!pts?.length || typeof L === "undefined") return null;
-  let minLat=Infinity, maxLat=-Infinity, minLon=Infinity, maxLon=-Infinity;
-  for (const p of pts) {
-    const la=Number(p.lat), lo=Number(p.lon);
-    if (!isFinite(la)||!isFinite(lo)) continue;
-    if (la<minLat) minLat=la; if (la>maxLat) maxLat=la;
-    if (lo<minLon) minLon=lo; if (lo>maxLon) maxLon=lo;
-  }
-  if (!isFinite(minLat)) return null;
-  return L.latLngBounds([minLat,minLon],[maxLat,maxLon]);
-}
 
 /* ============================================================
    7. POINT LABEL HELPERS
@@ -238,75 +184,6 @@ function ftPointLabel(p) {
     || window.FT_SECTIONS_BOOTSTRAP?.find(s => s.id === p.section_id);
   const secName = sec?.name || p.section_id;
   return `${secName} — Section Mile ${fmtMile(p.sec_mile)}`;
-}
-
-/* ============================================================
-   8. MONTH/DAY PICKER
-   ============================================================ */
-
-const MONTH_NAMES = [
-  "January","February","March","April","May","June",
-  "July","August","September","October","November","December"
-];
-
-function daysInMonth(monthIdx) {
-  return new Date(2021, monthIdx+1, 0).getDate();
-}
-
-function formatMonthDayName(monthDay) {
-  const [mm,dd] = monthDay.split("-").map(Number);
-  return `${MONTH_NAMES[mm-1]} ${dd}`;
-}
-
-function initMonthDayPickerGeneric(monthSelId, daySelId) {
-  const mSel = el(monthSelId), dSel = el(daySelId);
-  if (!mSel || !dSel) return;
-
-  mSel.innerHTML = "";
-  MONTH_NAMES.forEach((name,i) => {
-    const o = document.createElement("option");
-    o.value = i+1; o.textContent = name; mSel.appendChild(o);
-  });
-
-  function populateDays() {
-    const mi = Number(mSel.value)-1;
-    const max = daysInMonth(mi);
-    const prev = Number(dSel.value) || 1;
-    dSel.innerHTML = "";
-    for (let d=1; d<=max; d++) {
-      const o = document.createElement("option");
-      o.value = d; o.textContent = d; dSel.appendChild(o);
-    }
-    dSel.value = Math.min(prev, max);
-  }
-
-  mSel.addEventListener("change", populateDays);
-  const today = new Date();
-  mSel.value = today.getMonth()+1;
-  populateDays();
-  dSel.value = Math.min(today.getDate(), daysInMonth(today.getMonth()));
-}
-
-function getSelectedMonthDay(monthSelId, daySelId) {
-  const m = el(monthSelId)?.value, d = el(daySelId)?.value;
-  if (!m || !d) return null;
-  return `${pad2(m)}-${pad2(d)}`;
-}
-
-/* ============================================================
-   9. COLORED PIN ICON (for extremes map)
-   ============================================================ */
-
-function makeColoredPinIcon(colorHex) {
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="41" viewBox="0 0 25 41">
-    <path d="M12.5 0C5.6 0 0 5.6 0 12.5c0 10.2 12.5 28.5 12.5 28.5S25 22.7 25 12.5C25 5.6 19.4 0 12.5 0z"
-          fill="${colorHex}" stroke="#333" stroke-width="1"/>
-    <circle cx="12.5" cy="12.5" r="4.2" fill="#ffffff" opacity="0.95"/>
-  </svg>`.trim();
-  return L.icon({
-    iconUrl: "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg),
-    iconSize: [25,41], iconAnchor: [12,41], popupAnchor: [0,-34]
-  });
 }
 
 /* ============================================================
@@ -384,26 +261,6 @@ function calcTotalMiles(direction, selectedAlts) {
 }
 
 /* ============================================================
-   11. START DATE RESOLUTION
-   ============================================================ */
-
-function resolveStartDate(monthDay) {
-  const [mm, dd] = monthDay.split("-").map(Number);
-  const today = new Date();
-  const base = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-  let candidate = new Date(base.getFullYear(), mm-1, dd);
-  if (candidate < base) candidate = new Date(base.getFullYear()+1, mm-1, dd);
-  return candidate;
-}
-
-function numVal(id) {
-  const v = el(id)?.value;
-  if (v == null || v === "") return null;
-  const n = Number(v);
-  return isFinite(n) ? n : null;
-}
-
-/* ============================================================
    12. DATA LOADING
    ============================================================ */
 
@@ -460,15 +317,10 @@ async function loadPoints() {
 }
 
 async function loadPrecomputedNormals() {
-  const key = `ft_normals_${trailSlug}_${NORMALS_CACHE_VERSION}`;
-  const cached = cacheGet(key, NORMALS_TTL_MS);
-  let payload = cached;
-  if (!payload) {
-    const r = await fetch(META.normalsUrl, { cache: "no-cache" });
-    if (!r.ok) throw new Error(`historical_weather.json fetch failed (${r.status})`);
-    payload = await r.json();
-    cacheSet(key, payload);
-  }
+  // historical_weather.json is too large for localStorage — rely on HTTP cache instead.
+  const r = await fetch(META.normalsUrl);
+  if (!r.ok) throw new Error(`historical_weather.json fetch failed (${r.status})`);
+  const payload = await r.json();
 
   normalsByPointId = new Map();
   normalsMeta = payload.meta || null;
@@ -777,29 +629,6 @@ function computePlanningAverages(histDaily, monthDay, windowDays) {
     avgRhHigh:  avg(buckets["relative_humidity_2m_max"]),
     avgRhLow:   avg(buckets["relative_humidity_2m_min"]),
   };
-}
-
-/* ============================================================
-   18. TEMPERATURE DISPLAY HELPERS
-   ============================================================ */
-
-function fmtTemp(v) {
-  return v != null ? `${Math.round(v)} °F` : "—";
-}
-function fmtRh(v) {
-  return v != null ? `${Math.round(v)}%` : "—";
-}
-
-/**
- * Returns a plain-language "feels like" label when apparent differs meaningfully from actual.
- */
-function feelsLikeNote(actual, apparent) {
-  if (actual == null || apparent == null) return "";
-  const diff = apparent - actual;
-  if (Math.abs(diff) < 3) return "";
-  return diff > 0
-    ? ` <span class="feels-hotter">(feels hotter: ${Math.round(apparent)} °F)</span>`
-    : ` <span class="feels-cooler">(feels cooler: ${Math.round(apparent)} °F)</span>`;
 }
 
 /* ============================================================
@@ -1180,8 +1009,8 @@ function renderDurExtremesBlocks(hottest, coldest) {
       <table>
         <tr><th>Date / Location</th><td colspan="3">${niceDate} — ${secName}, Mile ~${fmtMile(rec.point.sec_mile)}</td></tr>
         <tr><th></th><th style="background:#f0f0f0;">Actual Temp</th><th style="background:#f0f0f0;">Apparent Temp</th><th style="background:#f0f0f0;">Relative Humidity</th></tr>
-        <tr><th>High</th><td>${fmtTemp(rec.avgHigh)}</td><td>${fmtTemp(rec.appHigh)}</td><td>${fmtRh(rec.rhHigh)}</td></tr>
-        <tr><th>Low</th><td>${fmtTemp(rec.avgLow)}</td><td>${fmtTemp(rec.appLow)}</td><td>${fmtRh(rec.rhLow)}</td></tr>
+        <tr><th>Anticipated High</th><td>${fmtTemp(rec.avgHigh)}</td><td>${fmtTemp(rec.appHigh)}</td><td>${fmtRh(rec.rhHigh)}</td></tr>
+        <tr><th>Anticipated Low</th><td>${fmtTemp(rec.avgLow)}</td><td>${fmtTemp(rec.appLow)}</td><td>${fmtRh(rec.rhLow)}</td></tr>
       </table>`;
   }
 
@@ -1444,7 +1273,7 @@ async function main() {
   try {
     await loadPrecomputedNormals();
     if (normalsMeta?.source) {
-      setDurStatus(`Planning normals loaded (${normalsMeta.source}).`);
+      setDurStatus(`Historical weather data loaded (${normalsMeta.source}).`);
     } else {
       setDurStatus(""); // normals loaded silently
     }

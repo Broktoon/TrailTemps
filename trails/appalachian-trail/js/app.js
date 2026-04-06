@@ -102,109 +102,9 @@ let durTrailHaloLayer = null;
 const INITIAL_ZOOM = 4;
 const SELECT_ZOOM  = 7;
 
-const el = (id) => document.getElementById(id);
-function boundsFromPoints(points) {
-  if (!points || points.length === 0) return null;
-  if (typeof L === "undefined") return null;
-
-  let minLat = Infinity, maxLat = -Infinity;
-  let minLon = Infinity, maxLon = -Infinity;
-
-  for (const p of points) {
-    const lat = Number(p.lat);
-    const lon = Number(p.lon);
-    if (!Number.isFinite(lat) || !Number.isFinite(lon)) continue;
-
-    if (lat < minLat) minLat = lat;
-    if (lat > maxLat) maxLat = lat;
-    if (lon < minLon) minLon = lon;
-    if (lon > maxLon) maxLon = lon;
-  }
-
-  if (!Number.isFinite(minLat) || !Number.isFinite(minLon)) return null;
-
-  return L.latLngBounds([minLat, minLon], [maxLat, maxLon]);
-}
-
 /* ---------------------------
-   Shared utilities
+   AT-specific helpers (shared utils in /js/shared-utils.js)
 ---------------------------- */
-
-function setDurStatus(msg) {
-  const s = el("durStatus");
-  if (s) s.textContent = msg;
-}
-
-function setWeatherStatus(msg) {
-  const s = el("weatherStatus");
-  if (s) s.textContent = msg;
-}
-
-/* ---------------------------
-   Apparent temperature helpers
-   (used when normals lack hi_app/lo_app — fallback only)
----------------------------- */
-function windChill(tempF, windMph) {
-  // NWS formula: valid when T ≤ 50 °F and wind ≥ 3 mph
-  if (tempF > 50 || windMph < 3) return null;
-  return 35.74 + 0.6215 * tempF
-       - 35.75  * Math.pow(windMph, 0.16)
-       + 0.4275 * tempF * Math.pow(windMph, 0.16);
-}
-
-function heatIndex(tempF, rh) {
-  // Steadman/NWS formula: valid when T ≥ 80 °F
-  if (tempF < 80) return null;
-  const hi =
-    -42.379
-    + 2.04901523  * tempF
-    + 10.14333127 * rh
-    - 0.22475541  * tempF * rh
-    - 0.00683783  * tempF * tempF
-    - 0.05481717  * rh * rh
-    + 0.00122874  * tempF * tempF * rh
-    + 0.00085282  * tempF * rh * rh
-    - 0.00000199  * tempF * tempF * rh * rh;
-  return hi;
-}
-
-function safeJSONParse(s) {
-  try { return JSON.parse(s); } catch { return null; }
-}
-
-function cacheGet(key, ttlMs) {
-  const raw = localStorage.getItem(key);
-  if (!raw) return null;
-  const obj = safeJSONParse(raw);
-  if (!obj || !obj.ts) return null;
-  if (Date.now() - obj.ts > ttlMs) return null;
-  return obj.data;
-}
-
-function cacheSet(key, data) {
-  localStorage.setItem(key, JSON.stringify({ ts: Date.now(), data }));
-}
-
-function addDays(dateObj, days) {
-  const d = new Date(dateObj.getTime());
-  d.setDate(d.getDate() + days);
-  return d;
-}
-
-function toISODate(d) {
-  const yyyy = d.getFullYear();
-  const mm = String(d.getMonth() + 1).padStart(2, "0");
-  const dd = String(d.getDate()).padStart(2, "0");
-  return `${yyyy}-${mm}-${dd}`;
-}
-
-function pad2(n) {
-  return String(n).padStart(2, "0");
-}
-
-function fmtMile(m) {
-  return (Math.round(Number(m) * 10) / 10).toFixed(1);
-}
 
 /**
  * Canonical mile accessor (mile-only).
@@ -217,116 +117,12 @@ function getPointMile(p) {
 }
 
 function pointLabel(p) {
-  return `${p.state} – Mile ~${fmtMile(getPointMile(p))}`;
+  return `${p.state} \u2013 Mile ~${fmtMile(getPointMile(p))}`;
 }
 
-function setHtmlIfExists(id, html) {
-  const node = el(id);
-  if (node) node.innerHTML = html;
-}
-
-function setDisplayIfExists(id, value) {
-  const node = el(id);
-  if (node) node.style.display = value;
-}
-
-/* ---------------------------
-   Map sizing normalization:
-   Make the Weather map (#map) use the same width as the Extremes map (#durExtremesMap).
-   This avoids UI mismatch when the two tools are in different card layouts.
----------------------------- */
+/* Map helpers */
 function syncWeatherMapWidthToExtremesMap() {
-  // Do NOT change DOM widths; it causes snapping when the extremes map becomes visible.
-  // Just tell Leaflet to re-measure its container if needed.
   refreshMapSize();
-}
-
-/* ---------------------------
-   Pin icon for extremes map (teardrop marker, color-coded)
----------------------------- */
-function makeColoredPinIcon(colorHex) {
-  const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="41" viewBox="0 0 25 41">
-      <path d="M12.5 0C5.6 0 0 5.6 0 12.5c0 10.2 12.5 28.5 12.5 28.5S25 22.7 25 12.5C25 5.6 19.4 0 12.5 0z"
-            fill="${colorHex}" stroke="#333" stroke-width="1"/>
-      <circle cx="12.5" cy="12.5" r="4.2" fill="#ffffff" opacity="0.95"/>
-    </svg>
-  `.trim();
-
-  const url = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
-
-  return L.icon({
-    iconUrl: url,
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [0, -34]
-  });
-}
-
-/* ---------------------------
-   Month/Day picker (no year) – reusable
----------------------------- */
-const MONTH_NAMES = [
-  "January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
-];
-
-function daysInMonth(monthIndex) {
-  return new Date(2021, monthIndex + 1, 0).getDate(); // 2021 is non-leap
-}
-
-function formatMonthDayName(monthDay) {
-  const [mmStr, ddStr] = monthDay.split("-");
-  const mm = Number(mmStr);
-  const dd = Number(ddStr);
-  const name = MONTH_NAMES[mm - 1] || mmStr;
-  return `${name} ${dd}`;
-}
-
-function initMonthDayPickerGeneric(monthSelectId, daySelectId) {
-  const monthSel = el(monthSelectId);
-  const daySel = el(daySelectId);
-  if (!monthSel || !daySel) return;
-
-  monthSel.innerHTML = "";
-  MONTH_NAMES.forEach((name, i) => {
-    const opt = document.createElement("option");
-    opt.value = i + 1; // 1..12
-    opt.textContent = name;
-    monthSel.appendChild(opt);
-  });
-
-  function populateDays() {
-    const monthIndex = Number(monthSel.value) - 1;
-    const maxDays = daysInMonth(monthIndex);
-
-    const prevDay = Number(daySel.value) || 1;
-    daySel.innerHTML = "";
-
-    for (let d = 1; d <= maxDays; d++) {
-      const opt = document.createElement("option");
-      opt.value = d;
-      opt.textContent = d;
-      daySel.appendChild(opt);
-    }
-
-    daySel.value = Math.min(prevDay, maxDays);
-  }
-
-  monthSel.addEventListener("change", populateDays);
-
-  // Default to today
-  const today = new Date();
-  monthSel.value = today.getMonth() + 1;
-  populateDays();
-  daySel.value = Math.min(today.getDate(), daysInMonth(today.getMonth()));
-}
-
-function getSelectedMonthDayFrom(monthSelectId, daySelectId) {
-  const m = el(monthSelectId)?.value;
-  const d = el(daySelectId)?.value;
-  if (!m || !d) return null;
-  return `${pad2(m)}-${pad2(d)}`; // "MM-DD"
 }
 
 /* ---------------------------
@@ -344,27 +140,6 @@ function isKatahdinSnowSeason(dateObj) {
   if (m === 5 && d <= 15) return true;
 
   return false;
-}
-
-function resolveStartDateFromMonthDay(monthDay) {
-  // Interpret MM-DD as the next occurrence relative to today (including today)
-  const [mmStr, ddStr] = monthDay.split("-");
-  const mm = Number(mmStr);
-  const dd = Number(ddStr);
-
-  const now = new Date();
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-
-  let candidate = new Date(today.getFullYear(), mm - 1, dd);
-  if (candidate < today) candidate = new Date(today.getFullYear() + 1, mm - 1, dd);
-  return candidate;
-}
-
-function numVal(id) {
-  const v = el(id)?.value;
-  if (v == null || v === "") return null;
-  const n = Number(v);
-  return Number.isFinite(n) ? n : null;
 }
 
 function renderDurationResult({ direction, startDate, endDate, distanceMiles, milesPerDay, durationDays }) {
@@ -447,37 +222,26 @@ function getNearestPointByMile(targetMile) {
 
 function renderDurExtremesBlocks(hottest, coldest) {
   if (!hottest || !coldest) {
-    setHtmlIfExists("durExtremesHot", `<p><strong>Unable to compute extremes.</strong> Missing precomputed normals for one or more points.</p>`);
-    setHtmlIfExists("durExtremesCold", ``);
+    setHtmlIfExists("durExtremesHot", "<p>Temperature extremes unavailable \u2014 historical normals not loaded.</p>");
+    setHtmlIfExists("durExtremesCold", "");
     return;
   }
 
-  const hotNice = hottest.date.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
-  const coldNice = coldest.date.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+  function extremeTable(rec, label) {
+    const niceDate = rec.date.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+    const location = `${STATE_NAME[rec.point.state] || rec.point.state} \u2014 Mile ~${fmtMile(rec.targetMile)}`;
+    return `
+      <h3>${label}</h3>
+      <table>
+        <tr><th>Date / Location</th><td colspan="3">${niceDate} \u2014 ${location}</td></tr>
+        <tr><th></th><th style="background:#f0f0f0;">Actual Temp</th><th style="background:#f0f0f0;">Apparent Temp</th><th style="background:#f0f0f0;">Relative Humidity</th></tr>
+        <tr><th>Anticipated High</th><td>${fmtTemp(rec.avgHigh)}</td><td>${fmtTemp(rec.appHigh)}</td><td>${fmtRh(rec.rhHigh)}</td></tr>
+        <tr><th>Anticipated Low</th><td>${fmtTemp(rec.avgLow)}</td><td>${fmtTemp(rec.appLow)}</td><td>${fmtRh(rec.rhLow)}</td></tr>
+      </table>`;
+  }
 
-  setHtmlIfExists("durExtremesHot", `
-    <h3>Hottest Day (Average High)</h3>
-    <table>
-      <tr><th>Date</th><td>${hotNice}</td></tr>
-      <tr><th>Location</th><td>${pointLabel(hottest.point)}</td></tr>
-      <tr><th>Approx. Daily Mile</th><td>${fmtMile(hottest.targetMile)}</td></tr>
-      <tr><th>Avg High</th><td>${hottest.avgHigh != null ? Math.round(hottest.avgHigh) + " °F" : "—"}</td></tr>
-      <tr><th>Apparent High</th><td>${hottest.appHigh != null ? Math.round(hottest.appHigh) + " °F" : "—"}</td></tr>
-      <tr><th>Avg Low</th><td>${hottest.avgLow != null ? Math.round(hottest.avgLow) + " °F" : "—"}</td></tr>
-    </table>
-  `);
-
-  setHtmlIfExists("durExtremesCold", `
-    <h3>Coldest Day/Night (Average Low)</h3>
-    <table>
-      <tr><th>Date</th><td>${coldNice}</td></tr>
-      <tr><th>Location</th><td>${pointLabel(coldest.point)}</td></tr>
-      <tr><th>Approx. Daily Mile</th><td>${fmtMile(coldest.targetMile)}</td></tr>
-      <tr><th>Avg High</th><td>${coldest.avgHigh != null ? Math.round(coldest.avgHigh) + " °F" : "—"}</td></tr>
-      <tr><th>Avg Low</th><td>${coldest.avgLow != null ? Math.round(coldest.avgLow) + " °F" : "—"}</td></tr>
-      <tr><th>Apparent Low</th><td>${coldest.appLow != null ? Math.round(coldest.appLow) + " °F" : "—"}</td></tr>
-    </table>
-  `);
+  setHtmlIfExists("durExtremesHot",  extremeTable(hottest, "Hottest Day (Highest Apparent High)"));
+  setHtmlIfExists("durExtremesCold", extremeTable(coldest, "Coldest Night (Lowest Apparent Low)"));
 }
 
 function renderDurExtremesMap(hottest, coldest) {
@@ -584,7 +348,10 @@ if (!normals || !Array.isArray(normals.hi) || !Array.isArray(normals.lo)) contin
       ? normals.lo_app[idx]
       : (windChill(avgLow, wsVal) ?? avgLow);
 
-    const rec = { date, targetMile, point, avgHigh, avgLow, appHigh, appLow };
+    const rhHigh = (normals.rh_hi && Number.isFinite(normals.rh_hi[idx])) ? normals.rh_hi[idx] : null;
+    const rhLow  = (normals.rh_lo && Number.isFinite(normals.rh_lo[idx])) ? normals.rh_lo[idx] : null;
+
+    const rec = { date, targetMile, point, avgHigh, avgLow, appHigh, appLow, rhHigh, rhLow };
 
     if (!hottest || rec.appHigh > hottest.appHigh) hottest = rec;
     if (!coldest || rec.appLow  < coldest.appLow)  coldest = rec;
@@ -614,7 +381,7 @@ function runDurationCalculator() {
   setDisplayIfExists("durExtremesWrap", "none");
 
   const direction = el("durDirectionSelect")?.value || "NOBO";
-  const monthDay = getSelectedMonthDayFrom("durMonthSelect", "durDaySelect");
+  const monthDay = getSelectedMonthDay("durMonthSelect", "durDaySelect");
   const mpd = numVal("durMilesPerDay");
 
   if (!monthDay) {
@@ -634,7 +401,7 @@ function runDurationCalculator() {
     return;
   }
 
-  const startDate = resolveStartDateFromMonthDay(monthDay);
+  const startDate = resolveStartDate(monthDay);
   const distance = trailTotalMiles;
   const durationDays = Math.ceil(distance / mpd);
 
@@ -671,17 +438,6 @@ function runDurationCalculator() {
   }
 }
 
-/* ---------------------------
-   Weather tool: Month/Day picker
----------------------------- */
-function getSelectedMonthDay() {
-  return getSelectedMonthDayFrom("monthSelect", "daySelect");
-}
-
-function initMonthDayPicker() {
-  initMonthDayPickerGeneric("monthSelect", "daySelect");
-}
-
 // Northbound order (GA -> ME)
 const STATE_ORDER = [
   "GA","NC","TN","VA","WV","MD","PA","NJ","NY","CT","MA","VT","NH","ME"
@@ -714,7 +470,7 @@ function buildPointsByState() {
     if (!pointsByState.has(st)) pointsByState.set(st, []);
     pointsByState.get(st).push(p);
   }
-  for (const [st, arr] of pointsByState.entries()) {
+  for (const [, arr] of pointsByState.entries()) {
     arr.sort((a, b) => getPointMile(a) - getPointMile(b));
   }
 }
@@ -1261,7 +1017,7 @@ async function runWeather() {
     return;
   }
 
-  const monthDay = getSelectedMonthDay();
+  const monthDay = getSelectedMonthDay("monthSelect", "daySelect");
   if (!monthDay) {
     setWeatherStatus("Please choose a planning date.");
     return;
@@ -1321,7 +1077,7 @@ function initWeatherUI() {
     el("atMileInput") && (el("atMileInput").value = "");
   });
 
-  initMonthDayPicker();
+  initMonthDayPickerGeneric("monthSelect", "daySelect");
 }
 
 /* ---------------------------
@@ -1360,7 +1116,7 @@ if (map) {
     try {
       await loadPrecomputedNormals();
       if (normalsMeta?.source) {
-        setDurStatus(`Precomputed planning normals loaded (${normalsMeta.source}).`);
+        setDurStatus(`Historical weather data loaded (${normalsMeta.source}).`);
       }
     } catch (e) {
       console.warn(e);

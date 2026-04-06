@@ -1,0 +1,106 @@
+{
+  "trail": {
+    "name": "Arizona Trail",
+    "spine_miles": 798.6,
+    "map_center": [33.5, -111.5],
+    "map_zoom": 6,
+    "termini": {
+      "south": "Coronado Natl. Memorial, AZ",
+      "north": "Stateline, AZ/UT"
+    }
+  },
+
+  "regions": [
+    { "id": "south",   "name": "Southern Arizona", "passage_start": 1,  "passage_end": 13 },
+    { "id": "central", "name": "Central Arizona",  "passage_start": 14, "passage_end": 26 },
+    { "id": "north",   "name": "Northern Arizona", "passage_start": 27, "passage_end": 43 }
+  ],
+
+  "passages": [
+    { "region":"south",    "id":"p01",  "num":1,    "name":"Passage 1 \u2014 Huachuca Mountains",               "mile_start":   0.0, "mile_end":  20.3 },
+    { "region":"south",    "id":"p02",  "num":2,    "name":"Passage 2 \u2014 Canelo Hills East",                 "mile_start":  20.3, "mile_end":  34.1 },
+    { "region":"south",    "id":"p03",  "num":3,    "name":"Passage 3 \u2014 Canelo Hills West",                 "mile_start":  34.1, "mile_end":  52.2 },
+    { "region":"south",    "id":"p04",  "num":4,    "name":"Passage 4 \u2014 Casa Blanca Canyons",               "mile_start":  52.2, "mile_end":  73.1 },
+    { "region":"south",    "id":"p05",  "num":5,    "name":"Passage 5 \u2014 Santa Rita Mountains",              "mile_start":  73.1, "mile_end":  86.9 },
+    { "region":"south",    "id":"p06",  "num":6,    "name":"Passage 6 \u2014 Las Colinas",                       "mile_start":  86.9, "mile_end": 100.0 },
+    { "region":"south",    "id":"p07",  "num":7,    "name":"Passage 7 \u2014 Las Cienegas",                      "mile_start": 100.0, "mile_end": 112.6 },
+    { "region":"south",    "id":"p08",  "num":8,    "name":"Passage 8 \u2014 Rincon Valley",                     "mile_start": 112.6, "mile_end": 126.5 },
+    { "region":"south",    "id":"p09",  "num":9,    "name":"Passage 9 \u2014 Rincon Mountains",                  "mile_start": 126.5, "mile_end": 150.8 },
+    { "region":"south",    "id":"p10",  "num":10,   "name":"Passage 10 \u2014 Redington Pass",                   "mile_start": 150.8, "mile_end": 164.0 },
+    { "region":"south",    "id":"p11",  "num":11,   "name":"Passage 11 \u2014 Santa Catalina Mountains",         "mile_start": 164.0, "mile_end": 183.0, "alt_group":"pusch", "alt_variant":"main" },
+    { "region":"south",    "id":"p11e", "num":"11e","name":"Passage 11e \u2014 Pusch Ridge Bypass",              "mile_start": 164.0, "mile_end": 185.6, "alt_group":"pusch", "alt_variant":"alt"  },
+    { "region":"south",    "id":"p12",  "num":12,   "name":"Passage 12 \u2014 Red Ridge",                        "mile_start": 183.0, "mile_end": 200.8 },
+    { "region":"south",    "id":"p13",  "num":13,   "name":"Passage 13 \u2014 Oracle",                           "mile_start": 200.8, "mile_end": 209.4 },
+
+    { "region":"central",  "id":"p14",  "num":14,   "name":"Passage 14 \u2014 Black Hills",                      "mile_start": 209.4, "mile_end": 237.0 },
+    { "region":"central",  "id":"p15",  "num":15,   "name":"Passage 15 \u2014 Tortilla Mountains",               "mile_start": 237.0, "mile_end": 265.2 },
+    { "region":"central",  "id":"p16",  "num":16,   "name":"Passage 16 \u2014 Gila River Canyons",               "mile_start": 265.2, "mile_end": 290.9 },
+    { "region":"central",  "id":"p17",  "num":17,   "name":"Passage 17 \u2014 Alamo Canyon",                     "mile_start": 290.9, "mile_end": 302.5 },
+    { "region":"central",  "id":"p18",  "num":18,   "name":"Passage 18 \u2014 Reavis Canyon",                    "mile_start": 302.5, "mile_end": 320.3 },
+    { "region":"central",  "id":"p19",  "num":19,   "name":"Passage 19 \u2014 Superstition Wilderness",          "mile_start": 320.3, "mile_end": 349.1 },
+    { "region":"central",  "id":"p20",  "num":20,   "name":"Passage 20 \u2014 Four Peaks",                       "mile_start": 349.1, "mile_end": 367.7 },
+    { "region":"central",  "id":"p21",  "num":21,   "name":"Passage 21 \u2014 Pine Mountain",                    "mile_start": 367.7, "mile_end": 387.1 },
+    { "region":"central",  "id":"p22",  "num":22,   "name":"Passage 22 \u2014 Saddle Mountain",                  "mile_start": 387.1, "mile_end": 403.7 },
+    { "region":"central",  "id":"p23",  "num":23,   "name":"Passage 23 \u2014 Mazatzal Divide",                  "mile_start": 403.7, "mile_end": 427.8 },
+    { "region":"central",  "id":"p24",  "num":24,   "name":"Passage 24 \u2014 Red Hills",                        "mile_start": 427.8, "mile_end": 438.5 },
+    { "region":"central",  "id":"p25",  "num":25,   "name":"Passage 25 \u2014 Whiterock Mesa",                   "mile_start": 438.5, "mile_end": 459.2 },
+    { "region":"central",  "id":"p26",  "num":26,   "name":"Passage 26 \u2014 Highline",                         "mile_start": 459.2, "mile_end": 483.1 },
+
+    { "region":"north", "id":"p27",  "num":27,   "name":"Passage 27 \u2014 Blue Ridge",                       "mile_start": 483.1, "mile_end": 498.5 },
+    { "region":"north", "id":"p28",  "num":28,   "name":"Passage 28 \u2014 Happy Jack",                       "mile_start": 498.5, "mile_end": 528.0 },
+    { "region":"north", "id":"p29",  "num":29,   "name":"Passage 29 \u2014 Mormon Lake",                      "mile_start": 528.0, "mile_end": 542.8 },
+    { "region":"north", "id":"p30",  "num":30,   "name":"Passage 30 \u2014 Anderson Mesa",                    "mile_start": 542.8, "mile_end": 560.6 },
+    { "region":"north", "id":"p31",  "num":31,   "name":"Passage 31 \u2014 Walnut Canyon",                    "mile_start": 560.6, "mile_end": 581.4 },
+    { "region":"north", "id":"p32",  "num":32,   "name":"Passage 32 \u2014 Elden Mountain",                   "mile_start": 581.4, "mile_end": 596.3, "alt_group":"flagstaff", "alt_variant":"main" },
+    { "region":"north", "id":"p33",  "num":33,   "name":"Passage 33 \u2014 Flagstaff Urban Route",            "mile_start": 568.3, "mile_end": 596.3, "alt_group":"flagstaff", "alt_variant":"alt"  },
+    { "region":"north", "id":"p34",  "num":34,   "name":"Passage 34 \u2014 San Francisco Peaks",              "mile_start": 596.3, "mile_end": 631.8 },
+
+    { "region":"north",  "id":"p35",  "num":35,   "name":"Passage 35 \u2014 Babbitt Ranch",                    "mile_start": 631.8, "mile_end": 659.4 },
+    { "region":"north",  "id":"p36",  "num":36,   "name":"Passage 36 \u2014 Coconino Rim",                     "mile_start": 659.4, "mile_end": 677.6 },
+    { "region":"north",  "id":"p37",  "num":37,   "name":"Passage 37 \u2014 Grand Canyon \u2013 South Rim",    "mile_start": 677.6, "mile_end": 700.0 },
+    { "region":"north",  "id":"p38",  "num":38,   "name":"Passage 38 \u2014 Grand Canyon \u2013 Inner Gorge",  "mile_start": 700.0, "mile_end": 721.4 },
+    { "region":"north",  "id":"p39",  "num":39,   "name":"Passage 39 \u2014 Grand Canyon \u2013 North Rim",    "mile_start": 721.4, "mile_end": 733.4 },
+    { "region":"north",  "id":"p40",  "num":40,   "name":"Passage 40 \u2014 Kaibab Plateau South",             "mile_start": 733.4, "mile_end": 754.1 },
+    { "region":"north",  "id":"p41",  "num":41,   "name":"Passage 41 \u2014 Kaibab Plateau Central",           "mile_start": 754.1, "mile_end": 770.9 },
+    { "region":"north",  "id":"p42",  "num":42,   "name":"Passage 42 \u2014 Kaibab Plateau North",             "mile_start": 770.9, "mile_end": 788.0 },
+    { "region":"north",  "id":"p43",  "num":43,   "name":"Passage 43 \u2014 Buckskin Mountain",                "mile_start": 788.0, "mile_end": 798.6 }
+  ],
+
+  "alt_groups": [
+    {
+      "id": "flagstaff",
+      "label": "Flagstaff Route",
+      "branch_mile": 568.3,
+      "rejoin_mile": 596.3,
+      "main_passage": "p32",
+      "alt_passage":  "p33",
+      "delta_miles":  -12.6,
+      "note": "Main route (P32) continues through Walnut Canyon and Elden Mountain wilderness. Alternate (P33) branches mid-P31 at Fisher Point through Flagstaff city for resupply, saving approximately 12.6 miles."
+    },
+    {
+      "id": "pusch",
+      "label": "Pusch Ridge",
+      "branch_mile": 164.0,
+      "rejoin_mile": 183.0,
+      "main_passage": "p11",
+      "alt_passage":  "p11e",
+      "delta_miles":  -1.4,
+      "note": "Main route (P11) traverses Pusch Ridge Wilderness. Bypass (P11e) avoids the wilderness closure area and is 1.4 miles shorter."
+    }
+  ],
+
+  "direction_options": [
+    {
+      "id": "nobo",
+      "label": "Northbound \u2014 Coronado Memorial/Mexico \u2192 Utah Border",
+      "total_miles": 882.5,
+      "is_nobo": true
+    },
+    {
+      "id": "sobo",
+      "label": "Southbound \u2014 Utah Border \u2192 Coronado Memorial/Mexico",
+      "total_miles": 882.5,
+      "is_nobo": false
+    }
+  ]
+}

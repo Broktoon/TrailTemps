@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>National Scenic Trail Weather Planner — Arizona Trail</title>
+
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <style>
+    /* Arizona Trail: passage info + mile input (trail-specific IDs) */
+    #aztPassageInfo {
+      font-size: 0.82rem;
+      color: #555;
+      font-style: italic;
+      margin: 2px 0 0 0;
+      min-height: 1.1em;
+    }
+
+    #aztMileInput {
+      width: 6rem;
+    }
+
+    /* Elevation adjustment annotation (AZT-specific) */
+    .elev-adjusted {
+      font-size: 0.8rem;
+      color: #7a5200;
+      font-style: italic;
+    }
+  </style>
+</head>
+
+<body data-trail="arizona-trail">
+
+<header class="site-header header-with-trail">
+  <div class="header-inner">
+
+    <div class="header-text">
+      <div class="title-with-logo">
+        <img src="/images/TrailTemps_Logo.png"
+             alt="TrailTemps logo"
+             class="trail-page-logo">
+
+        <div class="title-stack">
+          <h1>Arizona Trail</h1>
+          <div class="sub-brand"><em>TrailTemps</em> - National Scenic Trail Weather Planner</div>
+        </div>
+
+        <img src="/images/Arizona_trail_logo_transparent.png"
+             alt="Arizona Trail logo"
+             class="trail-page-logo">
+      </div>
+
+      <p class="sub">
+        <br>
+        Time your Arizona Trail hike, find temperature extremes during that time, and get 5-day
+        weather forecasts for any passage along the trail. The two main tools are directly below,
+        with notes on the trail's extreme elevation variation and other resources following.
+      </p>
+    </div>
+
+    <div class="header-actions">
+      <div id="trail-nav-mount"></div>
+    </div>
+
+  </div>
+</header>
+
+  <main>
+
+    <!-- =====================================================
+         Card 1: Hike Duration / End Date Calculator
+         ===================================================== -->
+    <section class="controls" aria-label="Hike duration calculator">
+      <h2>Hike Duration (End Date) and Expected Weather Extremes</h2>
+      <p class="card-instructions">
+        Choose a direction and route, a start month/day, and your expected miles per day.
+        You will receive an estimated hike duration and end date, along with a map showing
+        where the expected highest and lowest temperatures will be encountered.
+      </p>
+
+      <div class="control-row">
+
+        <!-- Miles per Day -->
+        <div class="ft-select-col">
+          <label for="durMilesPerDay">Miles per Day:</label>
+          <input id="durMilesPerDay" type="number" inputmode="decimal" min="1" step="1" placeholder="e.g., 15" style="width:6rem;" />
+        </div>
+
+        <!-- Direction -->
+        <div class="ft-select-col">
+          <label for="durDirectionSelect">Direction:</label>
+          <select id="durDirectionSelect">
+            <option value="nobo">Northbound — Coronado Memorial/Mexico to Utah Border</option>
+            <option value="sobo">Southbound — Utah Border to Coronado Memorial/Mexico</option>
+          </select>
+        </div>
+
+        <!-- Start Date -->
+        <div class="ft-select-col">
+          <label>Start Date:</label>
+          <span style="display:flex; gap: 6px; align-items:center;">
+            <select id="durMonthSelect"></select>
+            <select id="durDaySelect"></select>
+          </span>
+        </div>
+
+      </div><!-- /.control-row -->
+
+      <!-- Alternate route selections -->
+      <div id="durAlternatesWrap" style="margin-top: 12px; width: 100%;">
+
+        <!-- Pusch Ridge alternate -->
+        <fieldset class="alt-group-block" id="altGroupPusch">
+          <legend>Pusch Ridge Alternate Routes</legend>
+          <div class="alt-options">
+            <label>
+              <input type="radio" name="alt-pusch" value="p11" checked>
+              Santa Catalina Mountains — Main Route
+              <span class="alt-delta">(19.0 mi)</span>
+            </label>
+            <label>
+              <input type="radio" name="alt-pusch" value="p11e">
+              Pusch Ridge Bypass — Alternate
+              <span class="alt-delta">(17.6 mi &nbsp;·&nbsp; −1.4 mi shorter)</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- Flagstaff alternate -->
+        <fieldset class="alt-group-block" id="altGroupFlagstaff">
+          <legend>Flagstaff Alternate Routes</legend>
+          <div class="alt-options">
+            <label>
+              <input type="radio" name="alt-flagstaff" value="p32" checked>
+              Elden Mountain — Main Route
+              <span class="alt-delta">(28.1 mi)</span>
+            </label>
+            <label>
+              <input type="radio" name="alt-flagstaff" value="p33">
+              Flagstaff Urban Route — Alternate
+              <span class="alt-delta">(15.4 mi &nbsp;·&nbsp; −12.6 mi shorter)</span>
+            </label>
+          </div>
+        </fieldset>
+
+      </div><!-- /#durAlternatesWrap -->
+
+      <div style="margin-top: 12px; width: 100%;">
+        <button id="durBtn" type="button" class="btn-primary">Estimate End Date and Weather Extremes</button>
+      </div>
+
+      <div id="durStatus" class="status" style="width:100%;"></div>
+      <div id="durResult" style="width:100%;"></div>
+
+      <!-- Temperature Extremes Results + Map -->
+      <div id="durExtremesWrap" style="display:none; margin-top:16px;">
+        <h2>Temperature Extremes During Your Hike</h2>
+        <div id="durExtremesMap"></div>
+
+        <p class="data-attribution map-attribution">
+          Mapping data provided by
+          <a href="https://www.openstreetmap.org/copyright"
+             target="_blank" rel="noopener">OpenStreetMap</a>
+          under the Open Database License.
+        </p>
+
+        <div id="durExtremesHot"></div>
+        <div id="durExtremesCold" style="margin-top:12px;"></div>
+      </div>
+    </section>
+
+    <hr class="card-sep" />
+
+    <!-- =====================================================
+         Card 2: Weather Planner
+         ===================================================== -->
+    <section class="controls" aria-label="Weather planner controls">
+      <div class="section-title-block">
+        <h2>Weather Planner</h2>
+        <p class="data-attribution">
+          Weather data provided by
+          <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a>
+          under the 4.0 International (CC BY 4.0) license.
+        </p>
+      </div>
+
+      <p class="card-instructions">
+        Select a region, then a passage within that region, and enter a mile within the passage's
+        range. Choose a planning date to receive current conditions, a 5-day forecast, and a 7-year
+        average for that date and location. 
+      </p>
+
+      <div class="control-row">
+
+        <!-- Planning date -->
+        <div class="ft-select-col">
+          <label>Planning Date:</label>
+          <span style="display:flex; gap: 6px; align-items:center;">
+            <select id="monthSelect"></select>
+            <select id="daySelect"></select>
+          </span>
+        </div>
+
+        <!-- Region selector -->
+        <div class="ft-select-col">
+          <label for="aztRegionSelect">Region:</label>
+          <select id="aztRegionSelect">
+            <option value="south">Southern</option>
+            <option value="central">Central</option>
+            <option value="north">Northern</option>
+          </select>
+        </div>
+
+        <!-- Passage selector -->
+        <div class="ft-select-col">
+          <label for="aztPassageSelect">Passage:</label>
+          <select id="aztPassageSelect">
+            <!-- Populated dynamically by bootstrap script below -->
+          </select>
+        </div>
+
+        <!-- Mile input + range indicator -->
+        <div class="ft-select-col">
+          <label for="aztMileInput">Passage Mile:</label>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <input id="aztMileInput" type="text" inputmode="numeric"
+                   pattern="[0-9]*" placeholder="e.g., 10" />
+            <p id="aztPassageInfo" style="margin:0; font-size:0.82rem; color:#555; font-style:italic; white-space:nowrap;"></p>
+          </div>
+        </div>
+
+        <!-- Get Weather button -->
+        <div style="width:100%; margin-top:6px;">
+          <button id="goBtn" type="button" class="btn-primary">Get Weather</button>
+        </div>
+
+      </div><!-- /.control-row -->
+
+      <div id="weatherStatus" class="status"></div>
+
+      <section class="map-wrap" id="weatherMapWrap" style="display:none;">
+        <div id="map" aria-label="Map showing selected Arizona Trail point"></div>
+
+        <p class="data-attribution map-attribution">
+          Mapping data provided by
+          <a href="https://www.openstreetmap.org/copyright"
+             target="_blank" rel="noopener">OpenStreetMap</a>
+          under the Open Database License.
+        </p>
+      </section>
+
+    </section>
+
+    <section class="grid">
+      <div id="planningSummaryBlock"></div>
+      <div id="currentBlock"></div>
+      <div id="forecastBlock"></div>
+    </section>
+
+    <hr class="card-sep" />
+
+    <!-- =====================================================
+         Weather Data Notes + Resources
+         ===================================================== -->
+    <section class="weather-data-notes" aria-labelledby="weather-data-notes-title">
+      <h2 id="weather-data-notes-title">Notes on Weather and Map Data</h2>
+
+      <div class="weather-data-notes__body">
+
+        <section class="weather-data-notes__subsection" aria-labelledby="notes-on-elevation-title">
+          <h3 id="notes-on-elevation-title">Elevation and Temperature on the Arizona Trail</h3>
+          <div class="weather-data-notes__content">
+            <p>
+              The Arizona Trail presents some of the most extreme elevation variation found on any
+              National Scenic Trail. The route climbs from approximately 4,800 feet at the Mexico
+              border, surges above 9,000 feet through the Santa Catalinas, Mazatzals, and San
+              Francisco Peaks, and descends to the Colorado Plateau near the Utah border. This
+              dramatic relief means that a single day's hike can swing from scorching desert heat
+              to near-freezing conditions, and hikers need to be prepared for it.
+            </p>
+            <p>
+              For most thru-hikers, the primary weather concern on the Arizona Trail is heat. The
+              desert sections (the Sonoran Desert corridors south of Tucson, the lower Gila
+              River drainage, and the high-desert grasslands) can see
+              apparent temperatures well above 100&nbsp;&deg;F during spring and early summer. A
+              heat index advisory is shown whenever apparent high temperatures are expected to reach
+              or exceed 100&nbsp;&deg;F.
+           </p>
+            <p>
+              The higher-elevation sections can experience severe wind chill, particularly outside the primary
+              spring hiking window. A wind chill advisory is shown whenever apparent low temperatures
+              are expected to fall to or below 20&nbsp;&deg;F, the approximate gear-rating floor for
+              most standard cold-weather hiking equipmen (without purchasing more expensive specialty gear).
+              This threshold is independent of the formal Wind Chill Watches, Warnings, and
+              Advisories issued by the National Weather Service, whose thresholds vary by region
+              and season. Always check your local NWS forecast before heading into high-elevation
+              terrain in cold conditions.
+            </p>
+             <p>
+              The weather data used by TrailTemps comes from Open-Meteo and is generated at
+              approximately 9-kilometer resolution. In Arizona's rugged terrain a single grid cell
+              can span canyon floors and ridgeline crests that differ by thousands of feet in
+              elevation. When the actual trail point sits well above or below the grid's reference
+              elevation, the apparent temperature (much less the actual temperature data) will not accurately reflect what a hiker on the
+              trail will experience. TrailTemps applies the following elevation-based corrections to
+              apparent temperature for each Arizona Trail waypoint.  This is not an exact science (there are way too many variables involved), but it should give a reasoanble approximation for long-term planning purposes.
+            </p>
+            <ul class="weather-data-notes__links">
+              <li>
+                <strong>Trail Significantly Above Weather Grid</strong>: At higher altitude the atmosphere is thinner and
+                this reduced thermal mass at exposed heights can reduce temperatures both night and day. Therefore, during the day, an adjustment of
+                <strong>+3.5&nbsp;&deg;F</strong> per 1,000 feet elevation difference is possible and this is applied to the expected apparent high temperatures. However, at night this cooling effect can be slightly offset by warm air from the valleys rising up the mountain sides,
+                so the expected increase to the apparent low temperatures is a bit lower at only <strong>&minus;2&nbsp;&deg;F</strong> per 1,00 foot elevation difference.
+              </li>
+              <li>
+                <strong>Trail Significantly Below Weather Grid</strong> (canyon bottoms, desert
+                basins): During the day canyon walls can absorb and re-radiate heat, trapping warm air and driving
+                ground-level temperatures above what surrounding terrain or grid data suggest. An
+                adjustment of <strong>+3.5&nbsp;&deg;F</strong> per 1,000 feet below the grid
+                elevation is applied to apparent highs in these cases. Apparent lows, however, are not adjusted, since
+                cold air can "drain" into canyons at night and this tends to approximately offset the various
+                heating effects encountered during the day.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="weather-data-notes__subsection" aria-labelledby="notes-on-map-data-title">
+          <h3 id="notes-on-map-data-title">Notes on Map Data</h3>
+          <div class="weather-data-notes__content">
+            <ul class="weather-data-notes__links">
+              <li>
+                <strong>Trail Route:</strong> The Arizona Trail runs approximately 800 miles from
+                the Mexican border at Coronado National Memorial (near the town of Hereford, AZ)
+                north to the Utah state line at Stateline Campground. The trail is organized into
+                43 numbered Passages maintained by the Arizona Trail Association. This planner
+                groups those passages into three broad regions, 1) Southern, 2) Central, and
+                3) Northern Arizona to make navigation easier.
+              </li>
+              <li>
+                <strong>Alternate Routes:</strong> Near Flagstaff, the Arizona Trail offers two route options through the area. The main
+              route traverses the San Francisco Peaks wilderness, passing through high alpine terrain
+              above 11,000 feet. 
+              <br><br>
+              The Flagstaff Urban Alternate descends into the city of Flagstaff (allowing hikers to resupply) and rejoins the main route on the far side of town. There are also a few side spurs and mountain bike trails that connect to various portions of the AZT, but as they are not part of the primary route and are not used by the typical through-hiker, they have been left out of the map and duration calculations.
+              The urban alternate is commonly used when the peaks route is closed due to snow or
+              fire restrictions. The urban route saves approximately 12.6 miles. Both options
+              are selectable in the Alternate Route section above.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="weather-data-notes__subsection" aria-labelledby="additional-resources-title">
+          <h3 id="additional-resources-title">Additional Resources</h3>
+          <div class="weather-data-notes__content">
+            <ul class="weather-data-notes__links">
+              <li>
+                <a href="https://aztrail.org/" target="_blank" rel="noopener noreferrer">
+                  <strong>Arizona Trail Association:</strong>
+                </a>
+                The official organization managing the Arizona Trail. Includes passage-by-passage
+                trail conditions, water reports, permit information, and thru-hiker resources.
+              </li>
+              <li>
+                <a href="https://www.theforrestbiome.com/arizona-trail-at-grand-canyon"
+                   target="_blank" rel="noopener noreferrer">
+                  <strong>The Forrest Biome:</strong>
+                </a>
+                Comprehensive web site discussing the AZT and Grand Canyon by local hiker, biker, science teacher and trail steward Forrest Radarian. 
+                Come here initially for a thorough discussion of important Grand Canyon and AZT logistics, which are as up-to-date and thorough as any you'll find elsewhere.
+                But stick around for his writings on the beauty and joy of the Canyon. 
+              </li>
+              <li>
+                <a href="https://www.nps.gov/grca/planyourvisit/backcountry.htm"
+                   target="_blank" rel="noopener noreferrer">
+                  <strong>Grand Canyon Backcountry Permits:</strong>
+                </a>
+                The Grand Canyon crossing is one of the most logistically complex sections of any National Scenic Trail. 
+                There are two small campsites set aside for AZT hikers (Bright Angel and Cottonwood), but permits are required
+                for overnight camping at these sites and mustbe obtained in advance from the National Park Service. 
+                While a limited number of "Day Of" permits MIGHT be available, plan your crossing dates well in advance of your hike as permit availability is constrained at certain times of the year.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="small">
+      Informational only. Always verify conditions and heed local advisories.
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>window.SITE_BASE = "";</script>
+  <script>window.TRAIL_SLUG = "arizona-trail";</script>
+
+  <!-- -------------------------------------------------------
+       Passage data bootstrap — used as a fallback by app.js
+       while azt_meta.json is fetching. All UI initialization
+       and event wiring is handled by app.js.
+       ------------------------------------------------------- -->
+  <script>
+    /* Sourced from ATA (https://aztrail.org/explore/passages/, April 2026).
+       Cumulative miles computed from official ATA passage lengths, S→N. */
+    window.AZT_PASSAGES_BOOTSTRAP = [
+      { region:"south",    id:"p01",  num:1,    name:"Passage 1 \u2014 Huachuca Mountains",               mile_start:   0.0, mile_end:  20.3 },
+      { region:"south",    id:"p02",  num:2,    name:"Passage 2 \u2014 Canelo Hills East",                 mile_start:  20.3, mile_end:  34.1 },
+      { region:"south",    id:"p03",  num:3,    name:"Passage 3 \u2014 Canelo Hills West",                 mile_start:  34.1, mile_end:  52.2 },
+      { region:"south",    id:"p04",  num:4,    name:"Passage 4 \u2014 Casa Blanca Canyons",               mile_start:  52.2, mile_end:  73.1 },
+      { region:"south",    id:"p05",  num:5,    name:"Passage 5 \u2014 Santa Rita Mountains",              mile_start:  73.1, mile_end:  86.9 },
+      { region:"south",    id:"p06",  num:6,    name:"Passage 6 \u2014 Las Colinas",                       mile_start:  86.9, mile_end: 100.0 },
+      { region:"south",    id:"p07",  num:7,    name:"Passage 7 \u2014 Las Cienegas",                      mile_start: 100.0, mile_end: 112.6 },
+      { region:"south",    id:"p08",  num:8,    name:"Passage 8 \u2014 Rincon Valley",                     mile_start: 112.6, mile_end: 126.5 },
+      { region:"south",    id:"p09",  num:9,    name:"Passage 9 \u2014 Rincon Mountains",                  mile_start: 126.5, mile_end: 150.8 },
+      { region:"south",    id:"p10",  num:10,   name:"Passage 10 \u2014 Redington Pass",                   mile_start: 150.8, mile_end: 164.0 },
+      { region:"south",    id:"p11",  num:11,   name:"Passage 11 \u2014 Santa Catalina Mountains",         mile_start: 164.0, mile_end: 183.0, alt_group:"pusch",     alt_variant:"main" },
+      { region:"south",    id:"p11e", num:"11e",name:"Passage 11e \u2014 Pusch Ridge Bypass",              mile_start: 164.0, mile_end: 185.6, alt_group:"pusch",     alt_variant:"alt"  },
+      { region:"south",    id:"p12",  num:12,   name:"Passage 12 \u2014 Red Ridge",                        mile_start: 183.0, mile_end: 200.8 },
+      { region:"south",    id:"p13",  num:13,   name:"Passage 13 \u2014 Oracle",                           mile_start: 200.8, mile_end: 209.4 },
+      { region:"central",  id:"p14",  num:14,   name:"Passage 14 \u2014 Black Hills",                      mile_start: 209.4, mile_end: 237.0 },
+      { region:"central",  id:"p15",  num:15,   name:"Passage 15 \u2014 Tortilla Mountains",               mile_start: 237.0, mile_end: 265.2 },
+      { region:"central",  id:"p16",  num:16,   name:"Passage 16 \u2014 Gila River Canyons",               mile_start: 265.2, mile_end: 290.9 },
+      { region:"central",  id:"p17",  num:17,   name:"Passage 17 \u2014 Alamo Canyon",                     mile_start: 290.9, mile_end: 302.5 },
+      { region:"central",  id:"p18",  num:18,   name:"Passage 18 \u2014 Reavis Canyon",                    mile_start: 302.5, mile_end: 320.3 },
+      { region:"central",  id:"p19",  num:19,   name:"Passage 19 \u2014 Superstition Wilderness",          mile_start: 320.3, mile_end: 349.1 },
+      { region:"central",  id:"p20",  num:20,   name:"Passage 20 \u2014 Four Peaks",                       mile_start: 349.1, mile_end: 367.7 },
+      { region:"central",  id:"p21",  num:21,   name:"Passage 21 \u2014 Pine Mountain",                    mile_start: 367.7, mile_end: 387.1 },
+      { region:"central",  id:"p22",  num:22,   name:"Passage 22 \u2014 Saddle Mountain",                  mile_start: 387.1, mile_end: 403.7 },
+      { region:"central",  id:"p23",  num:23,   name:"Passage 23 \u2014 Mazatzal Divide",                  mile_start: 403.7, mile_end: 427.8 },
+      { region:"central",  id:"p24",  num:24,   name:"Passage 24 \u2014 Red Hills",                        mile_start: 427.8, mile_end: 438.5 },
+      { region:"central",  id:"p25",  num:25,   name:"Passage 25 \u2014 Whiterock Mesa",                   mile_start: 438.5, mile_end: 459.2 },
+      { region:"central",  id:"p26",  num:26,   name:"Passage 26 \u2014 Highline",                         mile_start: 459.2, mile_end: 483.1 },
+      { region:"north",    id:"p27",  num:27,   name:"Passage 27 \u2014 Blue Ridge",                       mile_start: 483.1, mile_end: 498.5 },
+      { region:"north",    id:"p28",  num:28,   name:"Passage 28 \u2014 Happy Jack",                       mile_start: 498.5, mile_end: 528.0 },
+      { region:"north",    id:"p29",  num:29,   name:"Passage 29 \u2014 Mormon Lake",                      mile_start: 528.0, mile_end: 542.8 },
+      { region:"north",    id:"p30",  num:30,   name:"Passage 30 \u2014 Anderson Mesa",                    mile_start: 542.8, mile_end: 560.6 },
+      { region:"north",    id:"p31",  num:31,   name:"Passage 31 \u2014 Walnut Canyon",                    mile_start: 560.6, mile_end: 581.4 },
+      { region:"north",    id:"p32",  num:32,   name:"Passage 32 \u2014 Elden Mountain",                   mile_start: 581.4, mile_end: 596.3, alt_group:"flagstaff", alt_variant:"main" },
+      { region:"north",    id:"p33",  num:33,   name:"Passage 33 \u2014 Flagstaff Urban Route",            mile_start: 568.3, mile_end: 596.3, alt_group:"flagstaff", alt_variant:"alt"  },
+      { region:"north",    id:"p34",  num:34,   name:"Passage 34 \u2014 San Francisco Peaks",              mile_start: 596.3, mile_end: 631.8 },
+      { region:"north",    id:"p35",  num:35,   name:"Passage 35 \u2014 Babbitt Ranch",                    mile_start: 631.8, mile_end: 659.4 },
+      { region:"north",    id:"p36",  num:36,   name:"Passage 36 \u2014 Coconino Rim",                     mile_start: 659.4, mile_end: 677.6 },
+      { region:"north",    id:"p37",  num:37,   name:"Passage 37 \u2014 Grand Canyon \u2013 South Rim",    mile_start: 677.6, mile_end: 700.0 },
+      { region:"north",    id:"p38",  num:38,   name:"Passage 38 \u2014 Grand Canyon \u2013 Inner Gorge",  mile_start: 700.0, mile_end: 721.4 },
+      { region:"north",    id:"p39",  num:39,   name:"Passage 39 \u2014 Grand Canyon \u2013 North Rim",    mile_start: 721.4, mile_end: 733.4 },
+      { region:"north",    id:"p40",  num:40,   name:"Passage 40 \u2014 Kaibab Plateau South",             mile_start: 733.4, mile_end: 754.1 },
+      { region:"north",    id:"p41",  num:41,   name:"Passage 41 \u2014 Kaibab Plateau Central",           mile_start: 754.1, mile_end: 770.9 },
+      { region:"north",    id:"p42",  num:42,   name:"Passage 42 \u2014 Kaibab Plateau North",             mile_start: 770.9, mile_end: 788.0 },
+      { region:"north",    id:"p43",  num:43,   name:"Passage 43 \u2014 Buckskin Mountain",                mile_start: 788.0, mile_end: 798.6 }
+    ];
+  </script>
+
+  <script defer src="/js/trail-nav.js"></script>
+  <script defer src="/js/shared-utils.js"></script>
+  <script defer src="js/app.js"></script>
+
+  <!-- Donation block -->
+  <div class="donation-block">
+    <p class="donation-text">
+      Thank you for visiting and trying these tools. They are a labor of love for me, and I make
+      no money from this site. However, if you wish to help support the site please consider
+      <a href="https://www.buymeacoffee.com/ihrhzL0ZC5" target="_blank" rel="noopener noreferrer">Buying Me a Coffee</a>
+      &mdash; donations of $1, $5, or even $20 are deeply appreciated. I promise every cent will go to
+      the ongoing operations, maintenance, development, and expansion of the site.
+    </p>
+    <a class="bmc-button" href="https://www.buymeacoffee.com/ihrhzL0ZC5"
+       target="_blank" rel="noopener noreferrer" aria-label="Buy Me a Coffee">Buy Me a Coffee</a>
+  </div>
+
+</body>
+</html>

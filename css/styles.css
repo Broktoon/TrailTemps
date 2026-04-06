@@ -455,3 +455,103 @@ hr.card-sep {
   .bmc-button { width: 100%; text-align: center; }
   .donation-text { flex-basis: 100%; margin-bottom: 0.5rem; }
 }
+
+/* -------------------------------------------------------
+   Shared trail tool layout — Weather Planner control row
+   Used across AT, FT, NET, NTT (and future trails)
+------------------------------------------------------- */
+.control-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  align-items: flex-end;
+}
+
+/* Stacked label + select/input columns */
+.ft-select-col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.9rem;
+}
+.ft-select-col label {
+  font-weight: 600;
+  white-space: nowrap;
+}
+.ft-select-col select,
+.ft-select-col input[type="number"],
+.ft-select-col input[type="text"] {
+  padding: 0.35rem 0.45rem;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  min-width: 0;
+}
+
+@media (max-width: 600px) {
+  .ft-select-col { width: 100%; }
+}
+
+/* Apparent temperature annotations */
+.feels-hotter {
+  font-size: 0.8rem;
+  color: #a03000;
+  font-style: italic;
+}
+.feels-cooler {
+  font-size: 0.8rem;
+  color: #0055aa;
+  font-style: italic;
+}
+
+/* Alternate route toggle fieldsets — shared across all trail pages */
+.alt-group-block {
+  margin: 10px 0 4px;
+  padding: 10px 12px;
+  border: 1px solid #d0d0d0;
+  border-radius: 8px;
+  background: #fafafa;
+  max-width: 680px;
+}
+.alt-group-block legend {
+  font-weight: 700;
+  font-size: 0.88rem;
+  padding: 0 4px;
+  color: #333;
+}
+.alt-group-block .alt-options {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 6px;
+}
+.alt-group-block label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.88rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.alt-delta {
+  font-size: 0.78rem;
+  color: #666;
+  font-style: italic;
+}
+
+/* Primary action button — shared across all trail pages */
+.btn-primary {
+  padding: 10px 22px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: none;
+  background: #2a6ebb;
+  color: #fff;
+  cursor: pointer;
+  transition: background 120ms ease;
+}
+.btn-primary:hover {
+  background: #1d56a0;
+}
