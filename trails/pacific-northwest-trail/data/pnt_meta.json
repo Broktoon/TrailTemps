@@ -1,0 +1,71 @@
+{
+  "trail": {
+    "name": "Pacific Northwest Trail",
+    "total_trail_miles": 1217.77,
+    "map_center": [
+      48.2,
+      -119.5
+    ],
+    "map_zoom": 6,
+    "termini": {
+      "east": "Chief Mountain, MT (Glacier NP)",
+      "west": "Cape Alava / Shi Shi Beach, WA"
+    },
+    "ferry": {
+      "name": "Puget Sound Ferry",
+      "crossing": "Coupeville → Port Townsend",
+      "note": "~30 min crossing; no hiking miles added"
+    }
+  },
+  "sections": [
+    {
+      "id": "rocky-mountains",
+      "name": "Rocky Mountains",
+      "state": "MT/ID",
+      "mile_start": 0,
+      "mile_end": 310.04
+    },
+    {
+      "id": "columbia-mountains",
+      "name": "Columbia Mountains",
+      "state": "WA",
+      "mile_start": 310.04,
+      "mile_end": 620.76
+    },
+    {
+      "id": "north-cascades",
+      "name": "North Cascades",
+      "state": "WA",
+      "mile_start": 620.76,
+      "mile_end": 852.7
+    },
+    {
+      "id": "puget-sound",
+      "name": "Puget Sound",
+      "state": "WA",
+      "mile_start": 852.7,
+      "mile_end": 1000.5
+    },
+    {
+      "id": "olympic-peninsula",
+      "name": "Olympic Peninsula",
+      "state": "WA",
+      "mile_start": 1000.5,
+      "mile_end": 1217.77
+    }
+  ],
+  "direction_options": [
+    {
+      "id": "webo",
+      "label": "Westbound — Chief Mountain, MT → Cape Alava, WA",
+      "total_miles": 1217.77,
+      "is_webo": true
+    },
+    {
+      "id": "eabo",
+      "label": "Eastbound — Cape Alava, WA → Chief Mountain, MT",
+      "total_miles": 1217.77,
+      "is_webo": false
+    }
+  ]
+}

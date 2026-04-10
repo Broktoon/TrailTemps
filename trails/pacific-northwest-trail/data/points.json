@@ -1,0 +1,1962 @@
+[
+  {
+    "id": "pnt-main-mi0000000",
+    "mile": 0,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.996115,
+    "lon": -113.65918
+  },
+  {
+    "id": "pnt-main-mi0005000",
+    "mile": 5,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.943132,
+    "lon": -113.702303
+  },
+  {
+    "id": "pnt-main-mi0010000",
+    "mile": 10,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.915914,
+    "lon": -113.781069
+  },
+  {
+    "id": "pnt-main-mi0015000",
+    "mile": 15,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.87282,
+    "lon": -113.84554
+  },
+  {
+    "id": "pnt-main-mi0020000",
+    "mile": 20,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.902772,
+    "lon": -113.905553
+  },
+  {
+    "id": "pnt-main-mi0025000",
+    "mile": 25,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.958082,
+    "lon": -113.904612
+  },
+  {
+    "id": "pnt-main-mi0030000",
+    "mile": 30,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.940514,
+    "lon": -113.997583
+  },
+  {
+    "id": "pnt-main-mi0035000",
+    "mile": 35,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.937978,
+    "lon": -114.074255
+  },
+  {
+    "id": "pnt-main-mi0040000",
+    "mile": 40,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.887849,
+    "lon": -114.136296
+  },
+  {
+    "id": "pnt-main-mi0045000",
+    "mile": 45,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.833947,
+    "lon": -114.201656
+  },
+  {
+    "id": "pnt-main-mi0050000",
+    "mile": 50,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.794475,
+    "lon": -114.269245
+  },
+  {
+    "id": "pnt-main-mi0055000",
+    "mile": 55,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.75267,
+    "lon": -114.300316
+  },
+  {
+    "id": "pnt-main-mi0060000",
+    "mile": 60,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.767756,
+    "lon": -114.397532
+  },
+  {
+    "id": "pnt-main-mi0065000",
+    "mile": 65,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.749231,
+    "lon": -114.496922
+  },
+  {
+    "id": "pnt-main-mi0070000",
+    "mile": 70,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.741882,
+    "lon": -114.566628
+  },
+  {
+    "id": "pnt-main-mi0075000",
+    "mile": 75,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.769924,
+    "lon": -114.639888
+  },
+  {
+    "id": "pnt-main-mi0080000",
+    "mile": 80,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.804018,
+    "lon": -114.719309
+  },
+  {
+    "id": "pnt-main-mi0085000",
+    "mile": 85,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.853573,
+    "lon": -114.704895
+  },
+  {
+    "id": "pnt-main-mi0090000",
+    "mile": 90,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.897553,
+    "lon": -114.774528
+  },
+  {
+    "id": "pnt-main-mi0095000",
+    "mile": 95,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.947153,
+    "lon": -114.77355
+  },
+  {
+    "id": "pnt-main-mi0100000",
+    "mile": 100,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.943492,
+    "lon": -114.823807
+  },
+  {
+    "id": "pnt-main-mi0105000",
+    "mile": 105,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.968433,
+    "lon": -114.862135
+  },
+  {
+    "id": "pnt-main-mi0110000",
+    "mile": 110,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.980242,
+    "lon": -114.877502
+  },
+  {
+    "id": "pnt-main-mi0115000",
+    "mile": 115,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.946249,
+    "lon": -114.930868
+  },
+  {
+    "id": "pnt-main-mi0120000",
+    "mile": 120,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.904541,
+    "lon": -114.93899
+  },
+  {
+    "id": "pnt-main-mi0125000",
+    "mile": 125,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.890245,
+    "lon": -114.990829
+  },
+  {
+    "id": "pnt-main-mi0130000",
+    "mile": 130,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.882578,
+    "lon": -115.064789
+  },
+  {
+    "id": "pnt-main-mi0135000",
+    "mile": 135,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.89982,
+    "lon": -115.159646
+  },
+  {
+    "id": "pnt-main-mi0140000",
+    "mile": 140,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.858858,
+    "lon": -115.21797
+  },
+  {
+    "id": "pnt-main-mi0145000",
+    "mile": 145,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.821986,
+    "lon": -115.283904
+  },
+  {
+    "id": "pnt-main-mi0150000",
+    "mile": 150,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.81809,
+    "lon": -115.332131
+  },
+  {
+    "id": "pnt-main-mi0155000",
+    "mile": 155,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.824876,
+    "lon": -115.406491
+  },
+  {
+    "id": "pnt-main-mi0160000",
+    "mile": 160,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.837501,
+    "lon": -115.494301
+  },
+  {
+    "id": "pnt-main-mi0165000",
+    "mile": 165,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.877952,
+    "lon": -115.518051
+  },
+  {
+    "id": "pnt-main-mi0170000",
+    "mile": 170,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.870953,
+    "lon": -115.580684
+  },
+  {
+    "id": "pnt-main-mi0175000",
+    "mile": 175,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.902172,
+    "lon": -115.613597
+  },
+  {
+    "id": "pnt-main-mi0180000",
+    "mile": 180,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.910017,
+    "lon": -115.670978
+  },
+  {
+    "id": "pnt-main-mi0185000",
+    "mile": 185,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.92573,
+    "lon": -115.727292
+  },
+  {
+    "id": "pnt-main-mi0190000",
+    "mile": 190,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.932765,
+    "lon": -115.776289
+  },
+  {
+    "id": "pnt-main-mi0195000",
+    "mile": 195,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.952546,
+    "lon": -115.83397
+  },
+  {
+    "id": "pnt-main-mi0200000",
+    "mile": 200,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.945141,
+    "lon": -115.893828
+  },
+  {
+    "id": "pnt-main-mi0205000",
+    "mile": 205,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.909966,
+    "lon": -115.931171
+  },
+  {
+    "id": "pnt-main-mi0210000",
+    "mile": 210,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.933261,
+    "lon": -116.016583
+  },
+  {
+    "id": "pnt-main-mi0215000",
+    "mile": 215,
+    "section": "rocky-mountains",
+    "state": "MT",
+    "lat": 48.920957,
+    "lon": -116.078625
+  },
+  {
+    "id": "pnt-main-mi0220000",
+    "mile": 220,
+    "section": "rocky-mountains",
+    "state": "ID",
+    "lat": 48.897001,
+    "lon": -116.149612
+  },
+  {
+    "id": "pnt-main-mi0225000",
+    "mile": 225,
+    "section": "rocky-mountains",
+    "state": "ID",
+    "lat": 48.910218,
+    "lon": -116.189611
+  },
+  {
+    "id": "pnt-main-mi0230000",
+    "mile": 230,
+    "section": "rocky-mountains",
+    "state": "ID",
+    "lat": 48.895416,
+    "lon": -116.239307
+  },
+  {
+    "id": "pnt-main-mi0235000",
+    "mile": 235,
+    "section": "rocky-mountains",
+    "state": "ID",
+    "lat": 48.884527,
+    "lon": -116.292643
+  },
+  {
+    "id": "pnt-main-mi0240000",
+    "mile": 240,
+    "section": "rocky-mountains",
+    "state": "ID",
+    "lat": 48.900513,
+    "lon": -116.357774
+  },
+  {
+    "id": "pnt-main-mi0245000",
+    "mile": 245,
+    "section": "rocky-mountains",
+    "state": "ID",
+    "lat": 48.901708,
+    "lon": -116.434784
+  },
+  {
+    "id": "pnt-main-mi0250000",
+    "mile": 250,
+    "section": "rocky-mountains",
+    "state": "ID",
+    "lat": 48.916274,
+    "lon": -116.496686
+  },
+  {
+    "id": "pnt-main-mi0255000",
+    "mile": 255,
+    "section": "rocky-mountains",
+    "state": "ID",
+    "lat": 48.903873,
+    "lon": -116.548169
+  },
+  {
+    "id": "pnt-main-mi0260000",
+    "mile": 260,
+    "section": "rocky-mountains",
+    "state": "ID",
+    "lat": 48.857707,
+    "lon": -116.609237
+  },
+  {
+    "id": "pnt-main-mi0265000",
+    "mile": 265,
+    "section": "rocky-mountains",
+    "state": "ID",
+    "lat": 48.797565,
+    "lon": -116.614546
+  },
+  {
+    "id": "pnt-main-mi0270000",
+    "mile": 270,
+    "section": "rocky-mountains",
+    "state": "ID",
+    "lat": 48.764781,
+    "lon": -116.680685
+  },
+  {
+    "id": "pnt-main-mi0275000",
+    "mile": 275,
+    "section": "rocky-mountains",
+    "state": "ID",
+    "lat": 48.758366,
+    "lon": -116.758285
+  },
+  {
+    "id": "pnt-main-mi0280000",
+    "mile": 280,
+    "section": "rocky-mountains",
+    "state": "ID",
+    "lat": 48.771176,
+    "lon": -116.789682
+  },
+  {
+    "id": "pnt-main-mi0285000",
+    "mile": 285,
+    "section": "rocky-mountains",
+    "state": "ID",
+    "lat": 48.758398,
+    "lon": -116.844191
+  },
+  {
+    "id": "pnt-main-mi0290000",
+    "mile": 290,
+    "section": "rocky-mountains",
+    "state": "ID",
+    "lat": 48.794173,
+    "lon": -116.889705
+  },
+  {
+    "id": "pnt-main-mi0295000",
+    "mile": 295,
+    "section": "rocky-mountains",
+    "state": "ID",
+    "lat": 48.842299,
+    "lon": -116.953119
+  },
+  {
+    "id": "pnt-main-mi0300000",
+    "mile": 300,
+    "section": "rocky-mountains",
+    "state": "ID",
+    "lat": 48.902965,
+    "lon": -116.973972
+  },
+  {
+    "id": "pnt-main-mi0305000",
+    "mile": 305,
+    "section": "rocky-mountains",
+    "state": "ID",
+    "lat": 48.911938,
+    "lon": -117.006705
+  },
+  {
+    "id": "pnt-main-mi0310000",
+    "mile": 310,
+    "section": "rocky-mountains",
+    "state": "ID",
+    "lat": 48.946261,
+    "lon": -117.031571
+  },
+  {
+    "id": "pnt-main-mi0315000",
+    "mile": 315,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.908541,
+    "lon": -117.081927
+  },
+  {
+    "id": "pnt-main-mi0320000",
+    "mile": 320,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.918367,
+    "lon": -117.13889
+  },
+  {
+    "id": "pnt-main-mi0325000",
+    "mile": 325,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.906215,
+    "lon": -117.202953
+  },
+  {
+    "id": "pnt-main-mi0330000",
+    "mile": 330,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.914236,
+    "lon": -117.278448
+  },
+  {
+    "id": "pnt-main-mi0335000",
+    "mile": 335,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.947449,
+    "lon": -117.317238
+  },
+  {
+    "id": "pnt-main-mi0340000",
+    "mile": 340,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.989587,
+    "lon": -117.344936
+  },
+  {
+    "id": "pnt-main-mi0345000",
+    "mile": 345,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.944991,
+    "lon": -117.355987
+  },
+  {
+    "id": "pnt-main-mi0350000",
+    "mile": 350,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.905335,
+    "lon": -117.383992
+  },
+  {
+    "id": "pnt-main-mi0355000",
+    "mile": 355,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.913456,
+    "lon": -117.406825
+  },
+  {
+    "id": "pnt-main-mi0360000",
+    "mile": 360,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.927076,
+    "lon": -117.458927
+  },
+  {
+    "id": "pnt-main-mi0365000",
+    "mile": 365,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.917264,
+    "lon": -117.507714
+  },
+  {
+    "id": "pnt-main-mi0370000",
+    "mile": 370,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.90559,
+    "lon": -117.566236
+  },
+  {
+    "id": "pnt-main-mi0375000",
+    "mile": 375,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.931085,
+    "lon": -117.629404
+  },
+  {
+    "id": "pnt-main-mi0380000",
+    "mile": 380,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.891531,
+    "lon": -117.691879
+  },
+  {
+    "id": "pnt-main-mi0385000",
+    "mile": 385,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.915564,
+    "lon": -117.773232
+  },
+  {
+    "id": "pnt-main-mi0390000",
+    "mile": 390,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.949926,
+    "lon": -117.809247
+  },
+  {
+    "id": "pnt-main-mi0395000",
+    "mile": 395,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.951969,
+    "lon": -117.893749
+  },
+  {
+    "id": "pnt-main-mi0400000",
+    "mile": 400,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.952081,
+    "lon": -117.977762
+  },
+  {
+    "id": "pnt-main-mi0405000",
+    "mile": 405,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.929445,
+    "lon": -118.050518
+  },
+  {
+    "id": "pnt-main-mi0410000",
+    "mile": 410,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.926101,
+    "lon": -118.140933
+  },
+  {
+    "id": "pnt-main-mi0415000",
+    "mile": 415,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.904363,
+    "lon": -118.227802
+  },
+  {
+    "id": "pnt-main-mi0420000",
+    "mile": 420,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.918355,
+    "lon": -118.318263
+  },
+  {
+    "id": "pnt-main-mi0425000",
+    "mile": 425,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.91197,
+    "lon": -118.392137
+  },
+  {
+    "id": "pnt-main-mi0430000",
+    "mile": 430,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.869487,
+    "lon": -118.396513
+  },
+  {
+    "id": "pnt-main-mi0435000",
+    "mile": 435,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.82305,
+    "lon": -118.422659
+  },
+  {
+    "id": "pnt-main-mi0440000",
+    "mile": 440,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.780241,
+    "lon": -118.449977
+  },
+  {
+    "id": "pnt-main-mi0445000",
+    "mile": 445,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.736128,
+    "lon": -118.471768
+  },
+  {
+    "id": "pnt-main-mi0450000",
+    "mile": 450,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.67511,
+    "lon": -118.464562
+  },
+  {
+    "id": "pnt-main-mi0455000",
+    "mile": 455,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.633496,
+    "lon": -118.494779
+  },
+  {
+    "id": "pnt-main-mi0460000",
+    "mile": 460,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.598719,
+    "lon": -118.470614
+  },
+  {
+    "id": "pnt-main-mi0465000",
+    "mile": 465,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.554412,
+    "lon": -118.498131
+  },
+  {
+    "id": "pnt-main-mi0470000",
+    "mile": 470,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.540349,
+    "lon": -118.56605
+  },
+  {
+    "id": "pnt-main-mi0475000",
+    "mile": 475,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.501997,
+    "lon": -118.557315
+  },
+  {
+    "id": "pnt-main-mi0480000",
+    "mile": 480,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.507572,
+    "lon": -118.639351
+  },
+  {
+    "id": "pnt-main-mi0485000",
+    "mile": 485,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.498862,
+    "lon": -118.713462
+  },
+  {
+    "id": "pnt-main-mi0490000",
+    "mile": 490,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.511428,
+    "lon": -118.737832
+  },
+  {
+    "id": "pnt-main-mi0495000",
+    "mile": 495,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.517556,
+    "lon": -118.786274
+  },
+  {
+    "id": "pnt-main-mi0500000",
+    "mile": 500,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.528286,
+    "lon": -118.840468
+  },
+  {
+    "id": "pnt-main-mi0505000",
+    "mile": 505,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.546545,
+    "lon": -118.908355
+  },
+  {
+    "id": "pnt-main-mi0510000",
+    "mile": 510,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.610346,
+    "lon": -118.914687
+  },
+  {
+    "id": "pnt-main-mi0515000",
+    "mile": 515,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.660792,
+    "lon": -118.894668
+  },
+  {
+    "id": "pnt-main-mi0520000",
+    "mile": 520,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.715054,
+    "lon": -118.8795
+  },
+  {
+    "id": "pnt-main-mi0525000",
+    "mile": 525,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.756888,
+    "lon": -118.892504
+  },
+  {
+    "id": "pnt-main-mi0530000",
+    "mile": 530,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.773828,
+    "lon": -118.971584
+  },
+  {
+    "id": "pnt-main-mi0535000",
+    "mile": 535,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.793976,
+    "lon": -119.041186
+  },
+  {
+    "id": "pnt-main-mi0540000",
+    "mile": 540,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.796673,
+    "lon": -119.074728
+  },
+  {
+    "id": "pnt-main-mi0545000",
+    "mile": 545,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.795431,
+    "lon": -119.13219
+  },
+  {
+    "id": "pnt-main-mi0550000",
+    "mile": 550,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.810619,
+    "lon": -119.192738
+  },
+  {
+    "id": "pnt-main-mi0555000",
+    "mile": 555,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.838963,
+    "lon": -119.229443
+  },
+  {
+    "id": "pnt-main-mi0560000",
+    "mile": 560,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.879628,
+    "lon": -119.247538
+  },
+  {
+    "id": "pnt-main-mi0565000",
+    "mile": 565,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.872731,
+    "lon": -119.312802
+  },
+  {
+    "id": "pnt-main-mi0570000",
+    "mile": 570,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.878527,
+    "lon": -119.370888
+  },
+  {
+    "id": "pnt-main-mi0575000",
+    "mile": 575,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.911342,
+    "lon": -119.383474
+  },
+  {
+    "id": "pnt-main-mi0580000",
+    "mile": 580,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.919906,
+    "lon": -119.420524
+  },
+  {
+    "id": "pnt-main-mi0585000",
+    "mile": 585,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.965953,
+    "lon": -119.492354
+  },
+  {
+    "id": "pnt-main-mi0590000",
+    "mile": 590,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.986886,
+    "lon": -119.570217
+  },
+  {
+    "id": "pnt-main-mi0595000",
+    "mile": 595,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.960154,
+    "lon": -119.642547
+  },
+  {
+    "id": "pnt-main-mi0600000",
+    "mile": 600,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.908036,
+    "lon": -119.611622
+  },
+  {
+    "id": "pnt-main-mi0605000",
+    "mile": 605,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.850178,
+    "lon": -119.6475
+  },
+  {
+    "id": "pnt-main-mi0610000",
+    "mile": 610,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.884894,
+    "lon": -119.692571
+  },
+  {
+    "id": "pnt-main-mi0615000",
+    "mile": 615,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.922601,
+    "lon": -119.763112
+  },
+  {
+    "id": "pnt-main-mi0620000",
+    "mile": 620,
+    "section": "columbia-mountains",
+    "state": "WA",
+    "lat": 48.952288,
+    "lon": -119.840318
+  },
+  {
+    "id": "pnt-main-mi0625000",
+    "mile": 625,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.985891,
+    "lon": -119.90681
+  },
+  {
+    "id": "pnt-main-mi0630000",
+    "mile": 630,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.983859,
+    "lon": -119.993349
+  },
+  {
+    "id": "pnt-main-mi0635000",
+    "mile": 635,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.963893,
+    "lon": -120.059772
+  },
+  {
+    "id": "pnt-main-mi0640000",
+    "mile": 640,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.977381,
+    "lon": -120.12921
+  },
+  {
+    "id": "pnt-main-mi0645000",
+    "mile": 645,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.985631,
+    "lon": -120.193011
+  },
+  {
+    "id": "pnt-main-mi0650000",
+    "mile": 650,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.964466,
+    "lon": -120.261864
+  },
+  {
+    "id": "pnt-main-mi0655000",
+    "mile": 655,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.964528,
+    "lon": -120.315215
+  },
+  {
+    "id": "pnt-main-mi0660000",
+    "mile": 660,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.96274,
+    "lon": -120.376408
+  },
+  {
+    "id": "pnt-main-mi0665000",
+    "mile": 665,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.973388,
+    "lon": -120.435897
+  },
+  {
+    "id": "pnt-main-mi0670000",
+    "mile": 670,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.98161,
+    "lon": -120.518904
+  },
+  {
+    "id": "pnt-main-mi0675000",
+    "mile": 675,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.971336,
+    "lon": -120.583994
+  },
+  {
+    "id": "pnt-main-mi0680000",
+    "mile": 680,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.923358,
+    "lon": -120.631694
+  },
+  {
+    "id": "pnt-main-mi0685000",
+    "mile": 685,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.960974,
+    "lon": -120.704302
+  },
+  {
+    "id": "pnt-main-mi0690000",
+    "mile": 690,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.955096,
+    "lon": -120.779039
+  },
+  {
+    "id": "pnt-main-mi0695000",
+    "mile": 695,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.906465,
+    "lon": -120.777971
+  },
+  {
+    "id": "pnt-main-mi0700000",
+    "mile": 700,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.861978,
+    "lon": -120.741848
+  },
+  {
+    "id": "pnt-main-mi0705000",
+    "mile": 705,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.830507,
+    "lon": -120.767546
+  },
+  {
+    "id": "pnt-main-mi0710000",
+    "mile": 710,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.817667,
+    "lon": -120.848246
+  },
+  {
+    "id": "pnt-main-mi0715000",
+    "mile": 715,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.828447,
+    "lon": -120.932579
+  },
+  {
+    "id": "pnt-main-mi0720000",
+    "mile": 720,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.835888,
+    "lon": -121.013548
+  },
+  {
+    "id": "pnt-main-mi0725000",
+    "mile": 725,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.78454,
+    "lon": -121.026341
+  },
+  {
+    "id": "pnt-main-mi0730000",
+    "mile": 730,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.724337,
+    "lon": -121.007293
+  },
+  {
+    "id": "pnt-main-mi0735000",
+    "mile": 735,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.727191,
+    "lon": -121.027451
+  },
+  {
+    "id": "pnt-main-mi0740000",
+    "mile": 740,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.755153,
+    "lon": -121.035687
+  },
+  {
+    "id": "pnt-main-mi0745000",
+    "mile": 745,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.794286,
+    "lon": -121.092566
+  },
+  {
+    "id": "pnt-main-mi0750000",
+    "mile": 750,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.815868,
+    "lon": -121.185426
+  },
+  {
+    "id": "pnt-main-mi0755000",
+    "mile": 755,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.867468,
+    "lon": -121.246558
+  },
+  {
+    "id": "pnt-main-mi0760000",
+    "mile": 760,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.890429,
+    "lon": -121.296382
+  },
+  {
+    "id": "pnt-main-mi0765000",
+    "mile": 765,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.874943,
+    "lon": -121.36549
+  },
+  {
+    "id": "pnt-main-mi0770000",
+    "mile": 770,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.908231,
+    "lon": -121.423432
+  },
+  {
+    "id": "pnt-main-mi0775000",
+    "mile": 775,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.884305,
+    "lon": -121.500877
+  },
+  {
+    "id": "pnt-main-mi0780000",
+    "mile": 780,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.902361,
+    "lon": -121.57466
+  },
+  {
+    "id": "pnt-main-mi0785000",
+    "mile": 785,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.901561,
+    "lon": -121.669236
+  },
+  {
+    "id": "pnt-main-mi0790000",
+    "mile": 790,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.872,
+    "lon": -121.669473
+  },
+  {
+    "id": "pnt-main-mi0795000",
+    "mile": 795,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.855142,
+    "lon": -121.68198
+  },
+  {
+    "id": "pnt-main-mi0800000",
+    "mile": 800,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.826105,
+    "lon": -121.684229
+  },
+  {
+    "id": "pnt-main-mi0805000",
+    "mile": 805,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.76826,
+    "lon": -121.664095
+  },
+  {
+    "id": "pnt-main-mi0810000",
+    "mile": 810,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.734477,
+    "lon": -121.63129
+  },
+  {
+    "id": "pnt-main-mi0815000",
+    "mile": 815,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.752995,
+    "lon": -121.547654
+  },
+  {
+    "id": "pnt-main-mi0820000",
+    "mile": 820,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.719587,
+    "lon": -121.625352
+  },
+  {
+    "id": "pnt-main-mi0825000",
+    "mile": 825,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.668647,
+    "lon": -121.664375
+  },
+  {
+    "id": "pnt-main-mi0830000",
+    "mile": 830,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.66169,
+    "lon": -121.715645
+  },
+  {
+    "id": "pnt-main-mi0835000",
+    "mile": 835,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.6878,
+    "lon": -121.762578
+  },
+  {
+    "id": "pnt-main-mi0840000",
+    "mile": 840,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.71441,
+    "lon": -121.832812
+  },
+  {
+    "id": "pnt-main-mi0845000",
+    "mile": 845,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.70341,
+    "lon": -121.894633
+  },
+  {
+    "id": "pnt-main-mi0850000",
+    "mile": 850,
+    "section": "north-cascades",
+    "state": "WA",
+    "lat": 48.669871,
+    "lon": -121.889168
+  },
+  {
+    "id": "pnt-main-mi0855000",
+    "mile": 855,
+    "section": "puget-sound",
+    "state": "WA",
+    "lat": 48.609933,
+    "lon": -121.885588
+  },
+  {
+    "id": "pnt-main-mi0860000",
+    "mile": 860,
+    "section": "puget-sound",
+    "state": "WA",
+    "lat": 48.590641,
+    "lon": -121.912832
+  },
+  {
+    "id": "pnt-main-mi0865000",
+    "mile": 865,
+    "section": "puget-sound",
+    "state": "WA",
+    "lat": 48.587344,
+    "lon": -121.979837
+  },
+  {
+    "id": "pnt-main-mi0870000",
+    "mile": 870,
+    "section": "puget-sound",
+    "state": "WA",
+    "lat": 48.559597,
+    "lon": -122.015673
+  },
+  {
+    "id": "pnt-main-mi0875000",
+    "mile": 875,
+    "section": "puget-sound",
+    "state": "WA",
+    "lat": 48.550186,
+    "lon": -122.051598
+  },
+  {
+    "id": "pnt-main-mi0880000",
+    "mile": 880,
+    "section": "puget-sound",
+    "state": "WA",
+    "lat": 48.557651,
+    "lon": -122.115222
+  },
+  {
+    "id": "pnt-main-mi0885000",
+    "mile": 885,
+    "section": "puget-sound",
+    "state": "WA",
+    "lat": 48.599364,
+    "lon": -122.163415
+  },
+  {
+    "id": "pnt-main-mi0890000",
+    "mile": 890,
+    "section": "puget-sound",
+    "state": "WA",
+    "lat": 48.635999,
+    "lon": -122.186511
+  },
+  {
+    "id": "pnt-main-mi0895000",
+    "mile": 895,
+    "section": "puget-sound",
+    "state": "WA",
+    "lat": 48.651418,
+    "lon": -122.213488
+  },
+  {
+    "id": "pnt-main-mi0900000",
+    "mile": 900,
+    "section": "puget-sound",
+    "state": "WA",
+    "lat": 48.625899,
+    "lon": -122.24556
+  },
+  {
+    "id": "pnt-main-mi0905000",
+    "mile": 905,
+    "section": "puget-sound",
+    "state": "WA",
+    "lat": 48.640855,
+    "lon": -122.263606
+  },
+  {
+    "id": "pnt-main-mi0910000",
+    "mile": 910,
+    "section": "puget-sound",
+    "state": "WA",
+    "lat": 48.626521,
+    "lon": -122.321199
+  },
+  {
+    "id": "pnt-main-mi0915000",
+    "mile": 915,
+    "section": "puget-sound",
+    "state": "WA",
+    "lat": 48.647052,
+    "lon": -122.384487
+  },
+  {
+    "id": "pnt-main-mi0920000",
+    "mile": 920,
+    "section": "puget-sound",
+    "state": "WA",
+    "lat": 48.623413,
+    "lon": -122.409332
+  },
+  {
+    "id": "pnt-main-mi0925000",
+    "mile": 925,
+    "section": "puget-sound",
+    "state": "WA",
+    "lat": 48.604891,
+    "lon": -122.43171
+  },
+  {
+    "id": "pnt-main-mi0930000",
+    "mile": 930,
+    "section": "puget-sound",
+    "state": "WA",
+    "lat": 48.553881,
+    "lon": -122.457479
+  },
+  {
+    "id": "pnt-main-mi0935000",
+    "mile": 935,
+    "section": "puget-sound",
+    "state": "WA",
+    "lat": 48.49495,
+    "lon": -122.482221
+  },
+  {
+    "id": "pnt-main-mi0940000",
+    "mile": 940,
+    "section": "puget-sound",
+    "state": "WA",
+    "lat": 48.450554,
+    "lon": -122.487342
+  },
+  {
+    "id": "pnt-main-mi0945000",
+    "mile": 945,
+    "section": "puget-sound",
+    "state": "WA",
+    "lat": 48.496424,
+    "lon": -122.556713
+  },
+  {
+    "id": "pnt-main-mi0950000",
+    "mile": 950,
+    "section": "puget-sound",
+    "state": "WA",
+    "lat": 48.503716,
+    "lon": -122.608698
+  },
+  {
+    "id": "pnt-main-mi0955000",
+    "mile": 955,
+    "section": "puget-sound",
+    "state": "WA",
+    "lat": 48.466246,
+    "lon": -122.635227
+  },
+  {
+    "id": "pnt-main-mi0960000",
+    "mile": 960,
+    "section": "puget-sound",
+    "state": "WA",
+    "lat": 48.427112,
+    "lon": -122.642946
+  },
+  {
+    "id": "pnt-main-mi0965000",
+    "mile": 965,
+    "section": "puget-sound",
+    "state": "WA",
+    "lat": 48.404341,
+    "lon": -122.615248
+  },
+  {
+    "id": "pnt-main-mi0970000",
+    "mile": 970,
+    "section": "puget-sound",
+    "state": "WA",
+    "lat": 48.363764,
+    "lon": -122.593429
+  },
+  {
+    "id": "pnt-main-mi0975000",
+    "mile": 975,
+    "section": "puget-sound",
+    "state": "WA",
+    "lat": 48.326254,
+    "lon": -122.628758
+  },
+  {
+    "id": "pnt-main-mi0980000",
+    "mile": 980,
+    "section": "puget-sound",
+    "state": "WA",
+    "lat": 48.308539,
+    "lon": -122.707
+  },
+  {
+    "id": "pnt-main-mi0985000",
+    "mile": 985,
+    "section": "puget-sound",
+    "state": "WA",
+    "lat": 48.250659,
+    "lon": -122.757875
+  },
+  {
+    "id": "pnt-main-mi0990000",
+    "mile": 990,
+    "section": "puget-sound",
+    "state": "WA",
+    "lat": 48.199484,
+    "lon": -122.725303
+  },
+  {
+    "id": "pnt-main-mi0995000",
+    "mile": 995,
+    "section": "puget-sound",
+    "state": "WA",
+    "lat": 48.155372,
+    "lon": -122.67278
+  },
+  {
+    "id": "pnt-main-mi1000000",
+    "mile": 1000,
+    "section": "puget-sound",
+    "state": "WA",
+    "lat": 48.109544,
+    "lon": -122.754011
+  },
+  {
+    "id": "pnt-main-mi1005000",
+    "mile": 1005,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 48.088757,
+    "lon": -122.839378
+  },
+  {
+    "id": "pnt-main-mi1010000",
+    "mile": 1010,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 48.024102,
+    "lon": -122.828735
+  },
+  {
+    "id": "pnt-main-mi1015000",
+    "mile": 1015,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.986169,
+    "lon": -122.894855
+  },
+  {
+    "id": "pnt-main-mi1020000",
+    "mile": 1020,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.979779,
+    "lon": -122.973383
+  },
+  {
+    "id": "pnt-main-mi1025000",
+    "mile": 1025,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.990909,
+    "lon": -123.066161
+  },
+  {
+    "id": "pnt-main-mi1030000",
+    "mile": 1030,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.952181,
+    "lon": -123.103438
+  },
+  {
+    "id": "pnt-main-mi1035000",
+    "mile": 1035,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.903257,
+    "lon": -123.100099
+  },
+  {
+    "id": "pnt-main-mi1040000",
+    "mile": 1040,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.849943,
+    "lon": -123.102589
+  },
+  {
+    "id": "pnt-main-mi1045000",
+    "mile": 1045,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.814549,
+    "lon": -123.137931
+  },
+  {
+    "id": "pnt-main-mi1050000",
+    "mile": 1050,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.767632,
+    "lon": -123.167921
+  },
+  {
+    "id": "pnt-main-mi1055000",
+    "mile": 1055,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.75001,
+    "lon": -123.211964
+  },
+  {
+    "id": "pnt-main-mi1060000",
+    "mile": 1060,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.800078,
+    "lon": -123.267767
+  },
+  {
+    "id": "pnt-main-mi1065000",
+    "mile": 1065,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.792029,
+    "lon": -123.351866
+  },
+  {
+    "id": "pnt-main-mi1070000",
+    "mile": 1070,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.804111,
+    "lon": -123.398483
+  },
+  {
+    "id": "pnt-main-mi1075000",
+    "mile": 1075,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.813651,
+    "lon": -123.453835
+  },
+  {
+    "id": "pnt-main-mi1080000",
+    "mile": 1080,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.877436,
+    "lon": -123.469984
+  },
+  {
+    "id": "pnt-main-mi1085000",
+    "mile": 1085,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.930621,
+    "lon": -123.516673
+  },
+  {
+    "id": "pnt-main-mi1090000",
+    "mile": 1090,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.967102,
+    "lon": -123.581195
+  },
+  {
+    "id": "pnt-main-mi1095000",
+    "mile": 1095,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 48.00919,
+    "lon": -123.596981
+  },
+  {
+    "id": "pnt-main-mi1100000",
+    "mile": 1100,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.986195,
+    "lon": -123.647738
+  },
+  {
+    "id": "pnt-main-mi1105000",
+    "mile": 1105,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.958949,
+    "lon": -123.708111
+  },
+  {
+    "id": "pnt-main-mi1110000",
+    "mile": 1110,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.931263,
+    "lon": -123.744636
+  },
+  {
+    "id": "pnt-main-mi1115000",
+    "mile": 1115,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.904814,
+    "lon": -123.777221
+  },
+  {
+    "id": "pnt-main-mi1120000",
+    "mile": 1120,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.929978,
+    "lon": -123.831949
+  },
+  {
+    "id": "pnt-main-mi1125000",
+    "mile": 1125,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.926107,
+    "lon": -123.906908
+  },
+  {
+    "id": "pnt-main-mi1130000",
+    "mile": 1130,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.915887,
+    "lon": -123.988822
+  },
+  {
+    "id": "pnt-main-mi1135000",
+    "mile": 1135,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.888106,
+    "lon": -124.068898
+  },
+  {
+    "id": "pnt-main-mi1140000",
+    "mile": 1140,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.883,
+    "lon": -124.169642
+  },
+  {
+    "id": "pnt-main-mi1145000",
+    "mile": 1145,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.879729,
+    "lon": -124.269297
+  },
+  {
+    "id": "pnt-main-mi1150000",
+    "mile": 1150,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.894572,
+    "lon": -124.351575
+  },
+  {
+    "id": "pnt-main-mi1155000",
+    "mile": 1155,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.868978,
+    "lon": -124.410856
+  },
+  {
+    "id": "pnt-main-mi1160000",
+    "mile": 1160,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.832325,
+    "lon": -124.457632
+  },
+  {
+    "id": "pnt-main-mi1165000",
+    "mile": 1165,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.792575,
+    "lon": -124.399363
+  },
+  {
+    "id": "pnt-main-mi1170000",
+    "mile": 1170,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.755477,
+    "lon": -124.365572
+  },
+  {
+    "id": "pnt-main-mi1175000",
+    "mile": 1175,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.759528,
+    "lon": -124.450847
+  },
+  {
+    "id": "pnt-main-mi1180000",
+    "mile": 1180,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.818237,
+    "lon": -124.490325
+  },
+  {
+    "id": "pnt-main-mi1185000",
+    "mile": 1185,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.853393,
+    "lon": -124.558714
+  },
+  {
+    "id": "pnt-main-mi1190000",
+    "mile": 1190,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.898432,
+    "lon": -124.585064
+  },
+  {
+    "id": "pnt-main-mi1195000",
+    "mile": 1195,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.917601,
+    "lon": -124.579125
+  },
+  {
+    "id": "pnt-main-mi1200000",
+    "mile": 1200,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 47.946045,
+    "lon": -124.659133
+  },
+  {
+    "id": "pnt-main-mi1205000",
+    "mile": 1205,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 48.001486,
+    "lon": -124.679902
+  },
+  {
+    "id": "pnt-main-mi1210000",
+    "mile": 1210,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 48.067893,
+    "lon": -124.694665
+  },
+  {
+    "id": "pnt-main-mi1215000",
+    "mile": 1215,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 48.128334,
+    "lon": -124.707731
+  },
+  {
+    "id": "pnt-main-mi1217767",
+    "mile": 1217.767,
+    "section": "olympic-peninsula",
+    "state": "WA",
+    "lat": 48.161707,
+    "lon": -124.732828
+  }
+]

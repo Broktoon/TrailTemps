@@ -3,124 +3,387 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>National Scenic Trail Weather Planner — Pacific Northwest Trail — Coming Soon</title>
+  <title>National Scenic Trail Weather Planner — Pacific Northwest Trail</title>
+
   <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
   <style>
-    .coming-wrap { max-width: 900px; margin: 0 auto; padding: 24px 16px 40px; }
-    .coming-card { padding: 18px; border: 1px solid rgba(0,0,0,0.12); border-radius: 14px; background: rgba(255,255,255,0.9); }
-    .logo { width: 180px; height: 180px; object-fit: contain; display:block; margin: 10px auto 14px; }
-    .center { text-align: center; }
+    /* Pacific Northwest Trail: section info + mile input (trail-specific IDs) */
+    #pntSectionInfo {
+      font-size: 0.82rem;
+      color: #555;
+      font-style: italic;
+      margin: 2px 0 0 0;
+      min-height: 1.1em;
+    }
+
+    #pntMileInput {
+      width: 6rem;
+    }
   </style>
 </head>
 
 <body data-trail="pacific-northwest-trail">
-<script>window.SITE_BASE = "";</script>
-<script>
-  window.TRAIL_SLUG = "pacific-northwest-trail";
-</script>
-<script defer src="js/app.js"></script>
+
 <header class="site-header header-with-trail">
   <div class="header-inner">
 
     <div class="header-text">
       <div class="title-with-logo">
-        <img src="/images/pacific_northwest_trail_logo.webp"
-             alt="Pacific Northwest Trail logo"
+        <img src="/images/TrailTemps_Logo.png"
+             alt="TrailTemps logo"
              class="trail-page-logo">
 
         <div class="title-stack">
           <h1>Pacific Northwest Trail</h1>
           <div class="sub-brand"><em>TrailTemps</em> - National Scenic Trail Weather Planner</div>
         </div>
+
+        <img src="/images/pacific_northwest_trail_logo.webp"
+             alt="Pacific Northwest Trail logo"
+             class="trail-page-logo">
       </div>
 
       <p class="sub">
-        Coming soon — this page is reserved for the PNT version of the planner.
+        <br>
+        Time your Pacific Northwest Trail hike, find temperature extremes during that time, and get 5-day weather forecasts for any point along the trail. The two main tools are directly below, with various notes and other resources following at the bottom of the page.
       </p>
     </div>
 
     <div class="header-actions">
-      <details class="trail-selector">
-        <summary class="trail-selector-btn">Trail ▾</summary>
-
-        <nav class="trail-selector-menu" aria-label="Trail selector">
- <a class="trail-option" href="/trails/appalachian-trail/">
-            Appalachian Trail
-          </a>
-
-          <a class="trail-option current" href="/trails/florida-trail/" aria-current="page">
-            Florida Trail <span class="trail-status"></span>
-          </a>
-
-          <a class="trail-option" href="/trails/natchez-trace-trail/">
-            Natchez Trace Trail <span class="trail-status"></span>
-          </a>
-
-          <a class="trail-option" href="/trails/new-england-trail/">
-            New England Trail <span class="trail-status"></span>
-          </a>
-
-          <a class="trail-option" href="/trails/arizona-trail/">
-            Arizona Trail <span class="trail-status">(Coming Next)</span>
-          </a>
-
-          <a class="trail-option current" href="/trails/continental-divide-trail/" aria-current="page">
-            Continental Divide Trail <span class="trail-status">(Coming Soon)</span>
-          </a>
-
-          <a class="trail-option" href="/trails/ice-age-trail/">
-            Ice Age Trail <span class="trail-status">(Coming Soon)</span>
-          </a>
-
-          <a class="trail-option" href="/trails/north-country-trail/">
-            North Country Trail <span class="trail-status">(Coming Soon)</span>
-          </a>
-
-          <a class="trail-option" href="/trails/pacific-crest-trail/">
-            Pacific Crest Trail <span class="trail-status">(Coming Soon)</span>
-          </a>
-
-          <a class="trail-option current" href="/trails/pacific-northwest-trail/" aria-current="page">
-            Pacific Northwest Trail <span class="trail-status">Current - Coming Soon)</span>
-          </a>
-
-          <a class="trail-option" href="/trails/potomac-heritage-trail/">
-            Potomac Heritage Trail <span class="trail-status">(Coming Soon)</span>
-          </a>
-
-          <div class="trail-divider"></div>
-
-          <a class="trail-option" href="/index.html">
-            Trail Selector Hub
-          </a>
-        </nav>
-      </details>
+      <div id="trail-nav-mount"></div>
     </div>
 
   </div>
 </header>
 
-  <main class="coming-wrap">
-    <div class="coming-card center">
-      <img class="logo" src="/images/pacific_northwest_trail_logo.webp" alt="Pacific Northwest Trail logo">
-      <h2>Coming Soon</h2>
-      <p>This page is reserved for the PNT version of the planner.</p>
-      <p><a href="index.html">← Back to trail selector</a></p>
-    </div>
+  <main>
+
+    <!-- =====================================================
+         Card 1: Hike Duration / End Date Calculator
+         ===================================================== -->
+    <section class="controls" aria-label="Hike duration calculator">
+      <h2>Hike Duration (End Date) and Expected Weather Extremes</h2>
+      <p class="card-instructions">
+        Choose a direction, a start month/day, and your expected miles per day.
+        You will receive an estimated hike duration and end date, along with a map showing
+        where the expected highest and lowest temperatures will be encountered.
+        Note: the route includes a Puget Sound ferry crossing (Coupeville &rarr; Port Townsend,
+        ~30 min) that is not counted in hiking miles.
+      </p>
+
+      <div class="control-row">
+
+        <!-- Miles per Day -->
+        <div class="ft-select-col">
+          <label for="durMilesPerDay">Miles per Day:</label>
+          <input id="durMilesPerDay" type="number" inputmode="decimal" min="1" step="1" placeholder="e.g., 15" style="width:6rem;" />
+        </div>
+
+        <!-- Direction -->
+        <div class="ft-select-col">
+          <label for="durDirectionSelect">Direction:</label>
+          <select id="durDirectionSelect">
+            <option value="webo">Westbound &mdash; Chief Mountain, MT &rarr; Cape Alava, WA</option>
+            <option value="eabo">Eastbound &mdash; Cape Alava, WA &rarr; Chief Mountain, MT</option>
+          </select>
+        </div>
+
+        <!-- Start Date -->
+        <div class="ft-select-col">
+          <label>Start Date:</label>
+          <span style="display:flex; gap: 6px; align-items:center;">
+            <select id="durMonthSelect"></select>
+            <select id="durDaySelect"></select>
+          </span>
+        </div>
+
+      </div><!-- /.control-row -->
+
+      <div style="margin-top: 12px; width: 100%;">
+        <button id="durBtn" type="button" class="btn-primary">Estimate End Date and Weather Extremes</button>
+      </div>
+
+      <div id="durStatus" class="status" style="width:100%;"></div>
+      <div id="durResult" style="width:100%;"></div>
+
+      <!-- Temperature Extremes Results + Map -->
+      <div id="durExtremesWrap" style="display:none; margin-top:16px;">
+        <h2>Temperature Extremes During Your Hike</h2>
+        <div id="durExtremesMap"></div>
+
+        <p class="data-attribution map-attribution">
+          Mapping data provided by
+          <a href="https://www.openstreetmap.org/copyright"
+             target="_blank" rel="noopener">OpenStreetMap</a>
+          under the Open Database License.
+        </p>
+
+        <div id="durExtremesHot"></div>
+        <div id="durExtremesCold" style="margin-top:12px;"></div>
+      </div>
+    </section>
+
+    <hr class="card-sep" />
+
+    <!-- =====================================================
+         Card 2: Weather Planner
+         ===================================================== -->
+    <section class="controls" aria-label="Weather planner controls">
+      <div class="section-title-block">
+        <h2>Weather Planner</h2>
+        <p class="data-attribution">
+          Weather data provided by
+          <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a>
+          under the 4.0 International (CC BY 4.0) license.
+        </p>
+      </div>
+
+      <p class="card-instructions">
+        Select a geographic section, then enter a trail mile within that section's range.
+        Choose a planning date to receive current conditions, a 5-day forecast, and a 7-year
+        average for that date and location. Miles are measured from the eastern terminus
+        (Chief Mountain, MT) westward to Cape Alava, WA.
+      </p>
+
+      <div class="control-row">
+
+        <!-- Planning date -->
+        <div class="ft-select-col">
+          <label>Planning Date:</label>
+          <span style="display:flex; gap: 6px; align-items:center;">
+            <select id="monthSelect"></select>
+            <select id="daySelect"></select>
+          </span>
+        </div>
+
+        <!-- Section selector -->
+        <div class="ft-select-col">
+          <label for="sectionSelect">Section:</label>
+          <select id="sectionSelect">
+            <option value="rocky-mountains">Rocky Mountains (MT/ID)</option>
+            <option value="columbia-mountains">Columbia Mountains (WA)</option>
+            <option value="north-cascades">North Cascades (WA)</option>
+            <option value="puget-sound">Puget Sound (WA)</option>
+            <option value="olympic-peninsula">Olympic Peninsula (WA)</option>
+          </select>
+        </div>
+
+        <!-- Mile input + range indicator -->
+        <div class="ft-select-col">
+          <label for="pntMileInput">Trail Mile:</label>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <input id="pntMileInput" type="text" inputmode="numeric"
+                   pattern="[0-9]*" placeholder="e.g., 150" />
+            <p id="pntSectionInfo" style="margin:0; font-size:0.82rem; color:#555; font-style:italic; white-space:nowrap;"></p>
+          </div>
+        </div>
+
+        <!-- Get Weather button -->
+        <div style="width:100%; margin-top:6px;">
+          <button id="goBtn" type="button" class="btn-primary">Get Weather</button>
+        </div>
+
+      </div><!-- /.control-row -->
+
+      <div id="weatherStatus" class="status"></div>
+
+      <section class="map-wrap" id="weatherMapWrap" style="display:none;">
+        <div id="map" aria-label="Map showing selected Pacific Northwest Trail point"></div>
+
+        <p class="data-attribution map-attribution">
+          Mapping data provided by
+          <a href="https://www.openstreetmap.org/copyright"
+             target="_blank" rel="noopener">OpenStreetMap</a>
+          under the Open Database License.
+        </p>
+      </section>
+
+    </section>
+
+    <section class="grid">
+      <div id="planningSummaryBlock"></div>
+      <div id="currentBlock"></div>
+      <div id="forecastBlock"></div>
+    </section>
+
+    <hr class="card-sep" />
+
+    <!-- =====================================================
+         Weather Data Notes + Resources
+         ===================================================== -->
+    <section class="weather-data-notes" aria-labelledby="weather-data-notes-title">
+      <h2 id="weather-data-notes-title">Notes on Weather and Map Data</h2>
+
+      <div class="weather-data-notes__body">
+
+        <section class="weather-data-notes__subsection" aria-labelledby="notes-on-data-title">
+          <h3 id="notes-on-data-title">Notes on Weather Data</h3>
+          <div class="weather-data-notes__content">
+            <p>
+              The Pacific Northwest Trail traverses an extraordinary range of climates over its 1,200+ miles, from
+              the high alpine terrain of Glacier National Park in Montana to the temperate rainforests of the Olympic
+              Peninsula in Washington. A thru-hiker on this trail will encounter nearly every type of weather challenge
+              that exists in the continental United States.
+            </p>
+            <p>
+              In the Rocky Mountains and Columbia Mountains sections (eastern Montana and northern Idaho), summer
+              temperatures are generally moderate but afternoon thunderstorms are common, and nighttime temperatures
+              at elevation can be surprisingly cold even in July and August. The North Cascades section is among the
+              most remote and demanding stretches of any National Scenic Trail, with high passes subject to snow
+              well into summer and rapid weather changes.
+            </p>
+            <p>
+              The Puget Sound section offers a welcome respite at lower elevations and is the most accessible portion
+              of the trail, hikeable year-round in mild conditions. The Olympic Peninsula is dominated by the wettest
+              climate in the contiguous United States (the Hoh Rain Forest averages over 140 inches of rain per
+              year) and hikers should plan for persistent moisture and cool temperatures even in summer.
+            </p>
+            <p>
+              While there are signifciant elevation changes overall throughout the Trail's length, there are not the 
+              same type of abrupt changes, such as isolated summits and deep canyons, for which there may be significant
+              differences between the trail's location and the nearest weather station making forecasted unreliable.  
+              Since that is not a large problem we have not incorporated any extra factors for elevation (like those for the
+              Arizona and Pacific Crest Trails), though as always local conditions and microclimates can vary.
+            </p>
+          </div>
+        </section>
+
+        <section class="weather-data-notes__subsection" aria-labelledby="notes-on-map-data-title">
+          <h3 id="notes-on-map-data-title">Notes on Map Data</h3>
+          <div class="weather-data-notes__content">
+                The Pacific Northwest Trail runs approximately 1,218 miles from Chief
+                Mountain Customs at the US-Canada border in Glacier National Park, Montana, to Cape Alava on the
+                Olympic Peninsula; the westernmost point in the contiguous United States. The trail passes
+                through three states (MT, ID, WA), three national parks, seven national forests, and six wilderness
+                areas.
+            <ul class="weather-data-notes__links">
+                <li>
+                <strong>Puget Sound Ferry:</strong> The official PNT route crosses the Puget Sound via the
+                Washington State Ferries Keystone/Coupeville service from Coupeville on Whidbey Island to
+                Port Townsend on the Olympic Peninsula. The ferry crossing (~30 minutes) is the only saltwater
+                ferry crossing on any National Scenic Trail. It is shown on the map as a dashed line. The ferry
+                miles are <em>not</em> included in the trail mile count; the trail simply resumes at Port Townsend.
+                Hikers reach Whidbey Island via the Deception Pass Bridge (no additional ferry required).
+              </li>
+              <li>
+                <strong>Trail Data:</strong> The trail geometry was sourced from the USFS Region 6 Pacific Northwest
+                National Scenic Trail feature service. However, please note that while this is the official route
+                and looks very smooth on the map, this reamins a relatively new backcountry trail.  There are many 
+                places that are much more rugged, may not have consistent blazing, and may require occasional
+                bushwhacking to ensure you remain on course.  So please use these maps on this site for general planning purposes
+                while relying on maps from the Pacific Northwest Trail Association or FarOut for accurate day-to-day navigation.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="weather-data-notes__subsection" aria-labelledby="additional-resources-title">
+          <h3 id="additional-resources-title">Additional Resources</h3>
+          <div class="weather-data-notes__content">
+            <ul class="weather-data-notes__links">
+              <li>
+                <a href="https://www.pnt.org/" target="_blank" rel="noopener noreferrer">
+                  <strong>Pacific Northwest Trail Association (PNTA):</strong>
+                </a>
+                The primary stewardship organization for the PNT. Includes section guides, permit information,
+                trail conditions, resupply resources, and detailed maps for trip planning.
+              </li>
+
+              <li>
+                <a href="https://www.nps.gov/glac/planyourvisit/pnt.htm" target="_blank" rel="noopener noreferrer">
+                  <strong>Glacier National Park (PNT Information):</strong>
+                </a>
+                Permit requirements, trail conditions, and bear canister regulations for the Glacier NP
+                portion of the trail (the eastern terminus and Rocky Mountains section).
+              </li>
+                            <li>
+                <a href="https://ebird.org/region/US-WA" target="_blank" rel="noopener noreferrer">
+                  <strong>eBird Northwest:</strong>
+                </a>
+                Citizen science project for collecting bird observations in Washington State and nearby areas.
+                Using the app allows birdwatchers and interesed trail hikers to use their birdwatching time for good; find, identify,
+                and submit information on bird sightings to scientists working to understand and protect bird populations. 
+                The PNT passes through many important bird habitats, and the eBird data can be a valuable resource for 
+                conservationists interested in the region's avian diversity.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+      </div>
+    </section>
+
   </main>
 
-<!-- Donation block -->
-<div class="donation-block">
-  <p class="donation-text">
-    Thank you for visiting and trying these tools. They are a labor of love for me, and I make no money from this site. However, if you wish to help support the site please consider
-    <a href="https://www.buymeacoffee.com/ihrhzL0ZC5" target="_blank" rel="noopener noreferrer">Buying Me a Coffee</a> — donations of $1, $5, or even $20 are deeply appreciated. I promise every cent will go to the ongoing operations, maintenance, development, and expansion of the site.
-  </p>
-  <a class="bmc-button" href="https://www.buymeacoffee.com/ihrhzL0ZC5" target="_blank" rel="noopener noreferrer" aria-label="Buy Me a Coffee">Buy Me a Coffee</a>
-</div>
-
   <footer class="site-footer">
-    <div class="small">Informational only.</div>
+    <div class="small">
+      Informational only. Always verify conditions and heed local advisories.
+    </div>
   </footer>
-  
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>window.SITE_BASE = "";</script>
+  <script>window.TRAIL_SLUG = "pacific-northwest-trail";</script>
+
+  <!-- -------------------------------------------------------
+       Inline bootstrap: PNT section metadata for immediate
+       UI population before pnt_meta.json finishes loading.
+       ------------------------------------------------------- -->
+  <script>
+    window.PNT_SECTIONS_BOOTSTRAP = [
+      { id: "rocky-mountains",    name: "Rocky Mountains",    mile_start: 0,    mile_end: 310  },
+      { id: "columbia-mountains", name: "Columbia Mountains", mile_start: 310,  mile_end: 621  },
+      { id: "north-cascades",     name: "North Cascades",     mile_start: 621,  mile_end: 853  },
+      { id: "puget-sound",        name: "Puget Sound",        mile_start: 853,  mile_end: 1001 },
+      { id: "olympic-peninsula",  name: "Olympic Peninsula",  mile_start: 1001, mile_end: 1218 }
+    ];
+
+    function pntUpdateSectionInfo() {
+      const sectionId = document.getElementById("sectionSelect")?.value;
+      const infoEl    = document.getElementById("pntSectionInfo");
+      const mileInput = document.getElementById("pntMileInput");
+      if (!sectionId || !infoEl) return;
+
+      const sec = window.PNT_SECTIONS_BOOTSTRAP.find(s => s.id === sectionId);
+      if (!sec) return;
+
+      infoEl.textContent = `Section Range: ${sec.mile_start}\u2013${sec.mile_end} Miles`;
+
+      if (mileInput) {
+        mileInput.placeholder = `e.g., ${Math.round((sec.mile_start + sec.mile_end) / 2)}`;
+        const cur = Number(mileInput.value);
+        if (cur < sec.mile_start || cur > sec.mile_end) mileInput.value = "";
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const sectionSel = document.getElementById("sectionSelect");
+      if (sectionSel) {
+        pntUpdateSectionInfo();
+        sectionSel.addEventListener("change", pntUpdateSectionInfo);
+      }
+    });
+  </script>
+
+  <script defer src="/js/trail-nav.js"></script>
+  <script defer src="/js/shared-utils.js"></script>
+  <script defer src="js/app.js"></script>
+
+  <!-- Donation block -->
+  <div class="donation-block">
+    <p class="donation-text">
+      Thank you for visiting and trying these tools. They are a labor of love for me, and I make
+      no money from this site. However, if you wish to help support the site please consider
+      <a href="https://www.buymeacoffee.com/ihrhzL0ZC5" target="_blank" rel="noopener noreferrer">Buying Me a Coffee</a>
+      &mdash; donations of $1, $5, or even $20 are deeply appreciated. I promise every cent will go to
+      the ongoing operations, maintenance, development, and expansion of the site.
+    </p>
+    <a class="bmc-button" href="https://www.buymeacoffee.com/ihrhzL0ZC5"
+       target="_blank" rel="noopener noreferrer" aria-label="Buy Me a Coffee">Buy Me a Coffee</a>
+  </div>
+
 </body>
 </html>

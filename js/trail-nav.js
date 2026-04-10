@@ -16,13 +16,12 @@
     { slug: "florida-trail",            name: "Florida Trail",            badge: "" },
     { slug: "natchez-trace-trail",      name: "Natchez Trace Trail",      badge: "" },
     { slug: "new-england-trail",        name: "New England Trail",        badge: "" },
-    // Coming next
-    { slug: "ice-age-trail",            name: "Ice Age Trail",            badge: "(Coming Next)" },
+    { slug: "pacific-northwest-trail",  name: "Pacific Northwest Trail",  badge: "" },
     // Coming soon — alphabetical
+    { slug: "ice-age-trail",            name: "Ice Age Trail",            badge: "(Coming Soon)" },
     { slug: "continental-divide-trail", name: "Continental Divide Trail", badge: "(Coming Soon)" },
     { slug: "north-country-trail",      name: "North Country Trail",      badge: "(Coming Soon)" },
     { slug: "pacific-crest-trail",      name: "Pacific Crest Trail",      badge: "(Coming Soon)" },
-    { slug: "pacific-northwest-trail",  name: "Pacific Northwest Trail",  badge: "(Coming Soon)" },
     { slug: "potomac-heritage-trail",   name: "Potomac Heritage Trail",   badge: "(Coming Soon)" },
   ];
 
