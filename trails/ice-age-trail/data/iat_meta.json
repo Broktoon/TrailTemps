@@ -1,0 +1,1250 @@
+{
+  "trail": {
+    "name": "Ice Age Trail",
+    "total_trail_miles": 1315.6,
+    "map_center": [
+      44.5,
+      -90
+    ],
+    "map_zoom": 7,
+    "termini": {
+      "west": {
+        "name": "Interstate State Park",
+        "location": "St. Croix Falls, WI"
+      },
+      "east": {
+        "name": "Potawatomi State Park",
+        "location": "Sturgeon Bay, WI"
+      }
+    }
+  },
+  "regions": [
+    {
+      "id": "western",
+      "name": "Western"
+    },
+    {
+      "id": "central",
+      "name": "Central"
+    },
+    {
+      "id": "eastern",
+      "name": "Eastern"
+    }
+  ],
+  "sections": [
+    {
+      "id": "st-croix-falls",
+      "name": "St. Croix Falls",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 8.9,
+      "ui_mile_start": 0,
+      "ui_mile_end": 11
+    },
+    {
+      "id": "gandy-dancer",
+      "name": "Gandy Dancer",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 15.1,
+      "ui_mile_start": 11,
+      "ui_mile_end": 28.3
+    },
+    {
+      "id": "trade-river",
+      "name": "Trade River",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 4.3,
+      "ui_mile_start": 28.3,
+      "ui_mile_end": 32.7
+    },
+    {
+      "id": "straight-lake",
+      "name": "Straight Lake",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 3.6,
+      "ui_mile_start": 32.7,
+      "ui_mile_end": 36.6
+    },
+    {
+      "id": "straight-river",
+      "name": "Straight River",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 3.5,
+      "ui_mile_start": 36.6,
+      "ui_mile_end": 40.4
+    },
+    {
+      "id": "pine-lake",
+      "name": "Pine Lake",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 3,
+      "ui_mile_start": 40.4,
+      "ui_mile_end": 43.6
+    },
+    {
+      "id": "mckenzie-creek",
+      "name": "McKenzie Creek",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 9.4,
+      "ui_mile_start": 43.6,
+      "ui_mile_end": 55
+    },
+    {
+      "id": "indian-creek",
+      "name": "Indian Creek",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 5.4,
+      "ui_mile_start": 55,
+      "ui_mile_end": 63.9
+    },
+    {
+      "id": "sand-creek",
+      "name": "Sand Creek",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 5.7,
+      "ui_mile_start": 63.9,
+      "ui_mile_end": 71.4
+    },
+    {
+      "id": "timberland-hills",
+      "name": "Timberland Hills",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 10.9,
+      "ui_mile_start": 71.4,
+      "ui_mile_end": 83.3
+    },
+    {
+      "id": "grassy-lake",
+      "name": "Grassy Lake",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 8.5,
+      "ui_mile_start": 83.3,
+      "ui_mile_end": 92.8
+    },
+    {
+      "id": "bear-lake",
+      "name": "Bear Lake",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 5.3,
+      "ui_mile_start": 92.8,
+      "ui_mile_end": 100.4
+    },
+    {
+      "id": "tuscobia",
+      "name": "Tuscobia",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 11.2,
+      "ui_mile_start": 100.4,
+      "ui_mile_end": 117
+    },
+    {
+      "id": "hemlock-creek",
+      "name": "Hemlock Creek",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 7,
+      "ui_mile_start": 117,
+      "ui_mile_end": 129.3
+    },
+    {
+      "id": "northern-blue-hills",
+      "name": "Northern Blue Hills",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 9.6,
+      "ui_mile_start": 129.3,
+      "ui_mile_end": 141.6
+    },
+    {
+      "id": "southern-blue-hills",
+      "name": "Southern Blue Hills",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 7.3,
+      "ui_mile_start": 141.6,
+      "ui_mile_end": 156
+    },
+    {
+      "id": "chippewa-moraine",
+      "name": "Chippewa Moraine",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 7.9,
+      "ui_mile_start": 156,
+      "ui_mile_end": 170.5
+    },
+    {
+      "id": "harwood-lakes",
+      "name": "Harwood Lakes",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 6.5,
+      "ui_mile_start": 170.5,
+      "ui_mile_end": 177.5
+    },
+    {
+      "id": "firth-lake",
+      "name": "Firth Lake",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 5.9,
+      "ui_mile_start": 177.5,
+      "ui_mile_end": 185
+    },
+    {
+      "id": "chippewa-river",
+      "name": "Chippewa River",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 1.9,
+      "ui_mile_start": 185,
+      "ui_mile_end": 189.5
+    },
+    {
+      "id": "cornell",
+      "name": "Cornell",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 1.5,
+      "ui_mile_start": 189.5,
+      "ui_mile_end": 199
+    },
+    {
+      "id": "otter-lake",
+      "name": "Otter Lake",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 0.8,
+      "ui_mile_start": 199,
+      "ui_mile_end": 212.4
+    },
+    {
+      "id": "lake-eleven",
+      "name": "Lake Eleven",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 15.6,
+      "ui_mile_start": 212.4,
+      "ui_mile_end": 233.9
+    },
+    {
+      "id": "jerry-lake",
+      "name": "Jerry Lake",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 15.2,
+      "ui_mile_start": 233.9,
+      "ui_mile_end": 249.1
+    },
+    {
+      "id": "mondeaux-esker",
+      "name": "Mondeaux Esker",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 11.7,
+      "ui_mile_start": 249.1,
+      "ui_mile_end": 262.4
+    },
+    {
+      "id": "pine-line",
+      "name": "Pine Line",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 0.9,
+      "ui_mile_start": 262.4,
+      "ui_mile_end": 267.3
+    },
+    {
+      "id": "east-lake",
+      "name": "East Lake",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 6.9,
+      "ui_mile_start": 267.3,
+      "ui_mile_end": 278.6
+    },
+    {
+      "id": "rib-lake",
+      "name": "Rib Lake",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 7,
+      "ui_mile_start": 278.6,
+      "ui_mile_end": 287.7
+    },
+    {
+      "id": "wood-lake",
+      "name": "Wood Lake",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 13.4,
+      "ui_mile_start": 287.7,
+      "ui_mile_end": 301.1
+    },
+    {
+      "id": "timberland-wilderness",
+      "name": "Timberland Wilderness",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 3.9,
+      "ui_mile_start": 301.1,
+      "ui_mile_end": 306.5
+    },
+    {
+      "id": "camp-27",
+      "name": "Camp 27",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 2.9,
+      "ui_mile_start": 306.5,
+      "ui_mile_end": 311.7
+    },
+    {
+      "id": "new-wood",
+      "name": "New Wood",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 6.9,
+      "ui_mile_start": 311.7,
+      "ui_mile_end": 319.7
+    },
+    {
+      "id": "averill-kelly-creek-wilderness",
+      "name": "Averill-Kelly Creek Wilderness",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 4.6,
+      "ui_mile_start": 319.7,
+      "ui_mile_end": 324.6
+    },
+    {
+      "id": "turtle-rock",
+      "name": "Turtle Rock",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 5.1,
+      "ui_mile_start": 324.6,
+      "ui_mile_end": 331
+    },
+    {
+      "id": "grandfather-falls",
+      "name": "Grandfather Falls",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 4,
+      "ui_mile_start": 331,
+      "ui_mile_end": 340.1
+    },
+    {
+      "id": "underdown",
+      "name": "Underdown",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 6.3,
+      "ui_mile_start": 340.1,
+      "ui_mile_end": 350.5
+    },
+    {
+      "id": "alta-junction",
+      "name": "Alta Junction",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 1.2,
+      "ui_mile_start": 350.5,
+      "ui_mile_end": 352.1
+    },
+    {
+      "id": "harrison-hills",
+      "name": "Harrison Hills",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 14.4,
+      "ui_mile_start": 352.1,
+      "ui_mile_end": 366.5
+    },
+    {
+      "id": "parrish-hills",
+      "name": "Parrish Hills",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 12,
+      "ui_mile_start": 366.5,
+      "ui_mile_end": 378.6
+    },
+    {
+      "id": "highland-lakes",
+      "name": "Highland Lakes",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 11.7,
+      "ui_mile_start": 378.6,
+      "ui_mile_end": 390.3
+    },
+    {
+      "id": "summit-moraine",
+      "name": "Summit Moraine",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 12.3,
+      "ui_mile_start": 390.3,
+      "ui_mile_end": 402.6
+    },
+    {
+      "id": "lumbercamp",
+      "name": "Lumbercamp",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 12,
+      "ui_mile_start": 402.6,
+      "ui_mile_end": 414.6
+    },
+    {
+      "id": "kettlebowl",
+      "name": "Kettlebowl",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 10.2,
+      "ui_mile_start": 414.6,
+      "ui_mile_end": 426.4
+    },
+    {
+      "id": "antigo-heights",
+      "name": "Antigo Heights",
+      "region": "western",
+      "state": "WI",
+      "certified_miles": 6.1,
+      "ui_mile_start": 426.4,
+      "ui_mile_end": 439.6
+    },
+    {
+      "id": "plover-river",
+      "name": "Plover River",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 5.9,
+      "ui_mile_start": 439.6,
+      "ui_mile_end": 452.7
+    },
+    {
+      "id": "dells-of-the-eau-claire",
+      "name": "Dells of the Eau Claire",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 2.6,
+      "ui_mile_start": 452.7,
+      "ui_mile_end": 457.5
+    },
+    {
+      "id": "thornapple-creek",
+      "name": "Thornapple Creek",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 3,
+      "ui_mile_start": 457.5,
+      "ui_mile_end": 463.1
+    },
+    {
+      "id": "ringle",
+      "name": "Ringle",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 9.6,
+      "ui_mile_start": 463.1,
+      "ui_mile_end": 478.7
+    },
+    {
+      "id": "white-cedar",
+      "name": "White Cedar",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 0.6,
+      "ui_mile_start": 478.7,
+      "ui_mile_end": 492.2
+    },
+    {
+      "id": "new-hope",
+      "name": "New Hope",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 3.6,
+      "ui_mile_start": 492.2,
+      "ui_mile_end": 505
+    },
+    {
+      "id": "iola-ski-hill",
+      "name": "Iola Ski Hill",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 2.5,
+      "ui_mile_start": 505,
+      "ui_mile_end": 511.1
+    },
+    {
+      "id": "skunk-and-foster-lakes",
+      "name": "Skunk and Foster Lakes",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 3.9,
+      "ui_mile_start": 511.1,
+      "ui_mile_end": 519.2
+    },
+    {
+      "id": "waupaca-river",
+      "name": "Waupaca River",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 4.1,
+      "ui_mile_start": 519.2,
+      "ui_mile_end": 525.4
+    },
+    {
+      "id": "hartman-creek",
+      "name": "Hartman Creek",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 5.5,
+      "ui_mile_start": 525.4,
+      "ui_mile_end": 534.3
+    },
+    {
+      "id": "emmons-creek",
+      "name": "Emmons Creek",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 2.6,
+      "ui_mile_start": 534.3,
+      "ui_mile_end": 545
+    },
+    {
+      "id": "deerfield",
+      "name": "Deerfield",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 3.7,
+      "ui_mile_start": 545,
+      "ui_mile_end": 582.1
+    },
+    {
+      "id": "devils-lake",
+      "name": "Devil's Lake",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 7,
+      "ui_mile_start": 582.1,
+      "ui_mile_end": 617.2
+    },
+    {
+      "id": "baraboo",
+      "name": "Baraboo",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 4,
+      "ui_mile_start": 617.2,
+      "ui_mile_end": 640.5
+    },
+    {
+      "id": "chaffee-creek",
+      "name": "Chaffee Creek",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 6.6,
+      "ui_mile_start": 640.5,
+      "ui_mile_end": 665.6
+    },
+    {
+      "id": "wedde-creek",
+      "name": "Wedde Creek",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 1.2,
+      "ui_mile_start": 665.6,
+      "ui_mile_end": 668
+    },
+    {
+      "id": "mecan-river",
+      "name": "Mecan River",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 7.5,
+      "ui_mile_start": 668,
+      "ui_mile_end": 676.4
+    },
+    {
+      "id": "greenwood",
+      "name": "Greenwood",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 5.6,
+      "ui_mile_start": 676.4,
+      "ui_mile_end": 682.6
+    },
+    {
+      "id": "bohn-lake",
+      "name": "Bohn Lake",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 1.8,
+      "ui_mile_start": 682.6,
+      "ui_mile_end": 710.4
+    },
+    {
+      "id": "merrimac",
+      "name": "Merrimac",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 3.6,
+      "ui_mile_start": 710.4,
+      "ui_mile_end": 741.2
+    },
+    {
+      "id": "gibraltar-rock",
+      "name": "Gibraltar Rock",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 4.9,
+      "ui_mile_start": 741.2,
+      "ui_mile_end": 749.3
+    },
+    {
+      "id": "fern-glen",
+      "name": "Fern Glen",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 1.3,
+      "ui_mile_start": 749.3,
+      "ui_mile_end": 752.7
+    },
+    {
+      "id": "lodi",
+      "name": "Lodi",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 3,
+      "ui_mile_start": 752.7,
+      "ui_mile_end": 756.2
+    },
+    {
+      "id": "lodi-marsh",
+      "name": "Lodi Marsh",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 5.1,
+      "ui_mile_start": 756.2,
+      "ui_mile_end": 763.8
+    },
+    {
+      "id": "springfield-hill",
+      "name": "Springfield Hill",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 1.6,
+      "ui_mile_start": 763.8,
+      "ui_mile_end": 768.7
+    },
+    {
+      "id": "indian-lake",
+      "name": "Indian Lake",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 3.5,
+      "ui_mile_start": 768.7,
+      "ui_mile_end": 774.2
+    },
+    {
+      "id": "table-bluff",
+      "name": "Table Bluff",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 4.8,
+      "ui_mile_start": 774.2,
+      "ui_mile_end": 780.6
+    },
+    {
+      "id": "cross-plains",
+      "name": "Cross Plains",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 12,
+      "ui_mile_start": 780.6,
+      "ui_mile_end": 792.9
+    },
+    {
+      "id": "valley-view",
+      "name": "Valley View",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 3.7,
+      "ui_mile_start": 792.9,
+      "ui_mile_end": 797.2
+    },
+    {
+      "id": "madison",
+      "name": "Madison",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 3,
+      "ui_mile_start": 797.2,
+      "ui_mile_end": 800.9
+    },
+    {
+      "id": "verona",
+      "name": "Verona",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 6.3,
+      "ui_mile_start": 800.9,
+      "ui_mile_end": 808.3
+    },
+    {
+      "id": "montrose",
+      "name": "Montrose",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 7.5,
+      "ui_mile_start": 808.3,
+      "ui_mile_end": 816.8
+    },
+    {
+      "id": "brooklyn-wildlife",
+      "name": "Brooklyn Wildlife",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 3.3,
+      "ui_mile_start": 816.8,
+      "ui_mile_end": 821.6
+    },
+    {
+      "id": "monticello",
+      "name": "Monticello",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 6.6,
+      "ui_mile_start": 821.6,
+      "ui_mile_end": 829.6
+    },
+    {
+      "id": "albany",
+      "name": "Albany",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 9.3,
+      "ui_mile_start": 829.6,
+      "ui_mile_end": 842.5
+    },
+    {
+      "id": "evansville",
+      "name": "Evansville",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 2.7,
+      "ui_mile_start": 842.5,
+      "ui_mile_end": 851.9
+    },
+    {
+      "id": "gibbs-lake",
+      "name": "Gibbs Lake",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 1.3,
+      "ui_mile_start": 851.9,
+      "ui_mile_end": 859.7
+    },
+    {
+      "id": "arbor-ridge",
+      "name": "Arbor Ridge",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 2.1,
+      "ui_mile_start": 859.7,
+      "ui_mile_end": 865.4
+    },
+    {
+      "id": "devils-staircase",
+      "name": "Devil's Staircase",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 1.8,
+      "ui_mile_start": 865.4,
+      "ui_mile_end": 868.7
+    },
+    {
+      "id": "janesville",
+      "name": "Janesville",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 10.3,
+      "ui_mile_start": 868.7,
+      "ui_mile_end": 882.6
+    },
+    {
+      "id": "janesville-to-milton",
+      "name": "Janesville to Milton",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 1.7,
+      "ui_mile_start": 882.6,
+      "ui_mile_end": 886.3
+    },
+    {
+      "id": "milton",
+      "name": "Milton",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 4.3,
+      "ui_mile_start": 886.3,
+      "ui_mile_end": 890.6
+    },
+    {
+      "id": "storrs-lake",
+      "name": "Storrs Lake",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 1.8,
+      "ui_mile_start": 890.6,
+      "ui_mile_end": 895.8
+    },
+    {
+      "id": "clover-valley",
+      "name": "Clover Valley",
+      "region": "central",
+      "state": "WI",
+      "certified_miles": 1.6,
+      "ui_mile_start": 895.8,
+      "ui_mile_end": 903.7
+    },
+    {
+      "id": "whitewater-lake",
+      "name": "Whitewater Lake",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 4.6,
+      "ui_mile_start": 903.7,
+      "ui_mile_end": 912.7
+    },
+    {
+      "id": "blackhawk",
+      "name": "Blackhawk",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 10.6,
+      "ui_mile_start": 912.7,
+      "ui_mile_end": 926.5
+    },
+    {
+      "id": "blue-spring-lake",
+      "name": "Blue Spring Lake",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 7.3,
+      "ui_mile_start": 926.5,
+      "ui_mile_end": 935.6
+    },
+    {
+      "id": "stony-ridge",
+      "name": "Stony Ridge",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 3.1,
+      "ui_mile_start": 935.6,
+      "ui_mile_end": 940.2
+    },
+    {
+      "id": "eagle",
+      "name": "Eagle",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 5.6,
+      "ui_mile_start": 940.2,
+      "ui_mile_end": 949
+    },
+    {
+      "id": "scuppernong",
+      "name": "Scuppernong",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 6.6,
+      "ui_mile_start": 949,
+      "ui_mile_end": 958.9
+    },
+    {
+      "id": "lapham-peak",
+      "name": "Lapham Peak",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 6.1,
+      "ui_mile_start": 958.9,
+      "ui_mile_end": 973.5
+    },
+    {
+      "id": "holy-hill",
+      "name": "Holy Hill",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 6.8,
+      "ui_mile_start": 973.5,
+      "ui_mile_end": 995.4
+    },
+    {
+      "id": "delafield",
+      "name": "Delafield",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 3.2,
+      "ui_mile_start": 995.4,
+      "ui_mile_end": 1008.3
+    },
+    {
+      "id": "waterville",
+      "name": "Waterville",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 6.3,
+      "ui_mile_start": 1008.3,
+      "ui_mile_end": 1019.2
+    },
+    {
+      "id": "hartland",
+      "name": "Hartland",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 6.3,
+      "ui_mile_start": 1019.2,
+      "ui_mile_end": 1029.6
+    },
+    {
+      "id": "merton",
+      "name": "Merton",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 3,
+      "ui_mile_start": 1029.6,
+      "ui_mile_end": 1039.1
+    },
+    {
+      "id": "pike-lake",
+      "name": "Pike Lake",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 3.2,
+      "ui_mile_start": 1039.1,
+      "ui_mile_end": 1051.7
+    },
+    {
+      "id": "monches",
+      "name": "Monches",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 3.1,
+      "ui_mile_start": 1051.7,
+      "ui_mile_end": 1059.5
+    },
+    {
+      "id": "loew-lake",
+      "name": "Loew Lake",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 4.9,
+      "ui_mile_start": 1059.5,
+      "ui_mile_end": 1069.3
+    },
+    {
+      "id": "slinger",
+      "name": "Slinger",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 2.1,
+      "ui_mile_start": 1069.3,
+      "ui_mile_end": 1076
+    },
+    {
+      "id": "cedar-lakes",
+      "name": "Cedar Lakes",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 4.8,
+      "ui_mile_start": 1076,
+      "ui_mile_end": 1084.6
+    },
+    {
+      "id": "west-bend",
+      "name": "West Bend",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 6.1,
+      "ui_mile_start": 1084.6,
+      "ui_mile_end": 1095.6
+    },
+    {
+      "id": "kewaskum",
+      "name": "Kewaskum",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 5.1,
+      "ui_mile_start": 1095.6,
+      "ui_mile_end": 1111.1
+    },
+    {
+      "id": "greenbush",
+      "name": "Greenbush",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 8.5,
+      "ui_mile_start": 1111.1,
+      "ui_mile_end": 1131
+    },
+    {
+      "id": "parnell",
+      "name": "Parnell",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 13.9,
+      "ui_mile_start": 1131,
+      "ui_mile_end": 1149.5
+    },
+    {
+      "id": "milwaukee-river-washington-co",
+      "name": "Milwaukee River (Washington Co)",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 6.9,
+      "ui_mile_start": 1149.5,
+      "ui_mile_end": 1160
+    },
+    {
+      "id": "milwaukee-river-fond-du-lac-co",
+      "name": "Milwaukee River (Fond du Lac Co)",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 4.3,
+      "ui_mile_start": 1160,
+      "ui_mile_end": 1175.1
+    },
+    {
+      "id": "labudde-creek",
+      "name": "LaBudde Creek",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 4.6,
+      "ui_mile_start": 1175.1,
+      "ui_mile_end": 1190.1
+    },
+    {
+      "id": "walla-hi",
+      "name": "Walla Hi",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 2.3,
+      "ui_mile_start": 1190.1,
+      "ui_mile_end": 1202.7
+    },
+    {
+      "id": "manitowoc",
+      "name": "Manitowoc",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 7.5,
+      "ui_mile_start": 1202.7,
+      "ui_mile_end": 1220
+    },
+    {
+      "id": "dunes",
+      "name": "Dunes",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 2.7,
+      "ui_mile_start": 1220,
+      "ui_mile_end": 1224.5
+    },
+    {
+      "id": "two-rivers",
+      "name": "Two Rivers",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 3,
+      "ui_mile_start": 1224.5,
+      "ui_mile_end": 1228.4
+    },
+    {
+      "id": "point-beach",
+      "name": "Point Beach",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 9.8,
+      "ui_mile_start": 1228.4,
+      "ui_mile_end": 1240.7
+    },
+    {
+      "id": "mishicot",
+      "name": "Mishicot",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 2.9,
+      "ui_mile_start": 1240.7,
+      "ui_mile_end": 1246.4
+    },
+    {
+      "id": "east-twin-river",
+      "name": "East Twin River",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 1.4,
+      "ui_mile_start": 1246.4,
+      "ui_mile_end": 1249.8
+    },
+    {
+      "id": "tisch-mills",
+      "name": "Tisch Mills",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 2.6,
+      "ui_mile_start": 1249.8,
+      "ui_mile_end": 1259
+    },
+    {
+      "id": "kewaunee-river",
+      "name": "Kewaunee River",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 12.5,
+      "ui_mile_start": 1259,
+      "ui_mile_end": 1282.1
+    },
+    {
+      "id": "algoma",
+      "name": "Algoma",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 2.6,
+      "ui_mile_start": 1282.1,
+      "ui_mile_end": 1291.4
+    },
+    {
+      "id": "forestville",
+      "name": "Forestville",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 9.1,
+      "ui_mile_start": 1291.4,
+      "ui_mile_end": 1301.5
+    },
+    {
+      "id": "sturgeon-bay",
+      "name": "Sturgeon Bay",
+      "region": "eastern",
+      "state": "WI",
+      "certified_miles": 14,
+      "ui_mile_start": 1301.5,
+      "ui_mile_end": 1315.6
+    }
+  ],
+  "east_alt_sections": [
+    {
+      "id": "sauk-point",
+      "name": "Sauk Point",
+      "region": "central",
+      "state": "WI",
+      "alt_id": "east",
+      "certified_miles": 3.9,
+      "alt_mile_start": 3.9,
+      "alt_mile_end": 13.7
+    },
+    {
+      "id": "portage-canal",
+      "name": "Portage Canal",
+      "region": "central",
+      "state": "WI",
+      "alt_id": "east",
+      "certified_miles": 4.2,
+      "alt_mile_start": 19.7,
+      "alt_mile_end": 35.2
+    },
+    {
+      "id": "john-muir-park",
+      "name": "John Muir Park",
+      "region": "central",
+      "state": "WI",
+      "alt_id": "east",
+      "certified_miles": 1.8,
+      "alt_mile_start": 40.6,
+      "alt_mile_end": 51.7
+    },
+    {
+      "id": "montello",
+      "name": "Montello",
+      "region": "central",
+      "state": "WI",
+      "alt_id": "east",
+      "certified_miles": 2,
+      "alt_mile_start": 55.5,
+      "alt_mile_end": 69.5
+    },
+    {
+      "id": "karner-blue",
+      "name": "Karner Blue",
+      "region": "central",
+      "state": "WI",
+      "alt_id": "east",
+      "certified_miles": 1.2,
+      "alt_mile_start": 77.6,
+      "alt_mile_end": 86.9
+    }
+  ],
+  "alt_groups": [
+    {
+      "id": "dells-baraboo-portage",
+      "label": "Route through Baraboo Hills / Portage",
+      "branch_axis_mile": 617.2,
+      "rejoin_axis_mile": 640.5,
+      "west_alt": {
+        "id": "west",
+        "label": "Dells-Baraboo (West Alt.)",
+        "total_miles": 83.7,
+        "note": "Scenic route through the Baraboo Hills via the Baraboo segment and roadwalk",
+        "segments": [
+          "baraboo"
+        ]
+      },
+      "east_alt": {
+        "id": "east",
+        "label": "Portage (East Alt.)",
+        "total_miles": 71,
+        "delta_miles": -12.7,
+        "note": "Flatter route via Devil's Lake (north), Sauk Point, Portage Canal, John Muir Park, Montello, and Karner Blue",
+        "segments": [
+          "sauk-point",
+          "portage-canal",
+          "john-muir-park",
+          "montello",
+          "karner-blue"
+        ]
+      }
+    }
+  ],
+  "direction_options": [
+    {
+      "id": "west_to_east",
+      "label": "West to East — St. Croix Falls → Sturgeon Bay",
+      "total_miles": 1315.6,
+      "is_west_to_east": true
+    },
+    {
+      "id": "east_to_west",
+      "label": "East to West — Sturgeon Bay → St. Croix Falls",
+      "total_miles": 1315.6,
+      "is_west_to_east": false
+    }
+  ]
+}

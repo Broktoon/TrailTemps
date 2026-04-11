@@ -3,124 +3,412 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>National Scenic Trail Weather Planner — Ice Age Trail — Coming Soon</title>
+  <title>National Scenic Trail Weather Planner — Ice Age Trail</title>
+
   <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
   <style>
-    .coming-wrap { max-width: 900px; margin: 0 auto; padding: 24px 16px 40px; }
-    .coming-card { padding: 18px; border: 1px solid rgba(0,0,0,0.12); border-radius: 14px; background: rgba(255,255,255,0.9); }
-    .logo { width: 180px; height: 180px; object-fit: contain; display:block; margin: 10px auto 14px; }
-    .center { text-align: center; }
+    /* Ice Age Trail: segment info + mile input (trail-specific IDs) */
+    #iatSegmentInfo {
+      font-size: 0.82rem;
+      color: #555;
+      font-style: italic;
+      margin: 2px 0 0 0;
+      min-height: 1.1em;
+    }
+
+    #iatMileInput {
+      width: 6rem;
+    }
   </style>
 </head>
 
 <body data-trail="ice-age-trail">
-<script>window.SITE_BASE = "";</script>
-<script>
-  window.TRAIL_SLUG = "ice-age-trail";
-</script>
-<script defer src="js/app.js"></script>
+
 <header class="site-header header-with-trail">
   <div class="header-inner">
 
     <div class="header-text">
       <div class="title-with-logo">
-        <img src="/images/ice_age_trail_logo.jpg"
-             alt="Ice Age Trail logo"
+        <img src="/images/TrailTemps_Logo.png"
+             alt="TrailTemps logo"
              class="trail-page-logo">
 
         <div class="title-stack">
           <h1>Ice Age Trail</h1>
           <div class="sub-brand"><em>TrailTemps</em> - National Scenic Trail Weather Planner</div>
         </div>
+
+        <img src="/images/ice_age_trail_logo.jpg"
+             alt="Ice Age Trail logo"
+             class="trail-page-logo">
       </div>
 
       <p class="sub">
-        Coming soon — this page is reserved for the IAT version of the planner.
+        <br>
+        Time your Ice Age Trail hike, find temperature extremes during that time, and get 5-day
+        weather forecasts for any point along the trail. The two main tools are directly below,
+        with various notes and other resources following at the bottom of the page.
       </p>
     </div>
 
     <div class="header-actions">
-      <details class="trail-selector">
-        <summary class="trail-selector-btn">Trail ▾</summary>
-
-        <nav class="trail-selector-menu" aria-label="Trail selector">
-          <a class="trail-option current" href="/trails/appalachian-trail/" aria-current="page">
-            Appalachian Trail <span class="trail-status"></span>
-          </a>
-
-          <a class="trail-option" href="/trails/florida-trail/">
-            Florida Trail <span class="trail-status"></span>
-          </a>
-
-          <a class="trail-option" href="/trails/natchez-trace-trail/">
-            Natchez Trace Trail <span class="trail-status"></span>
-          </a>
-
-          <a class="trail-option" href="/trails/new-england-trail/">
-            New England Trail <span class="trail-status"></span>
-          </a>
-
-          <a class="trail-option" href="/trails/arizona-trail/">
-            Arizona Trail <span class="trail-status">(Coming Next)</span>
-          </a>
-
-          <a class="trail-option" href="/trails/continental-divide-trail/">
-            Continental Divide Trail <span class="trail-status">(Coming Soon)</span>
-          </a>
-
-          <a class="trail-option" href="/trails/north-country-trail/">
-            Ice Age Trail <span class="trail-status">(Current)</span>
-          </a>
-
-          <a class="trail-option" href="/trails/north-country-trail/">
-            North Country Trail <span class="trail-status">(Coming Soon)</span>
-          </a>
-
-          <a class="trail-option" href="/trails/pacific-crest-trail/">
-            Pacific Crest Trail <span class="trail-status">(Coming Soon)</span>
-          </a>
-
-          <a class="trail-option current" href="/trails/pacific-northwest-trail/" aria-current="page">
-            Pacific Northwest Trail <span class="trail-status">(Coming Soon)</span>
-          </a>
-
-          <a class="trail-option" href="/trails/potomac-heritage-trail/">
-            Potomac Heritage Trail <span class="trail-status">(Coming Soon)</span>
-          </a>
-
-          <div class="trail-divider"></div>
-
-          <a class="trail-option" href="/index.html">
-            Trail Selector Hub
-          </a>
-        </nav>
-      </details>
+      <div id="trail-nav-mount"></div>
     </div>
 
   </div>
 </header>
 
-  <main class="coming-wrap">
-    <div class="coming-card center">
-      <img class="logo" src="/images/ice_age_trail_logo.jpg" alt="Ice Age Trail logo">
-      <h2>Coming Soon</h2>
-      <p>This page is reserved for the IAT version of the planner.</p>
-      <p><a href="index.html">← Back to trail selector</a></p>
-    </div>
+  <main>
+
+    <!-- =====================================================
+         Card 1: Hike Duration / End Date Calculator
+         ===================================================== -->
+    <section class="controls" aria-label="Hike duration calculator">
+      <h2>Hike Duration (End Date) and Expected Weather Extremes</h2>
+      <p class="card-instructions">
+        Choose a direction, a start month/day, and your expected miles per day.
+        You will receive an estimated hike duration and end date, along with a map showing
+        where the expected highest and lowest temperatures will be encountered.
+      </p>
+
+      <div class="control-row">
+
+        <!-- Miles per Day -->
+        <div class="ft-select-col">
+          <label for="durMilesPerDay">Miles per Day:</label>
+          <input id="durMilesPerDay" type="text" inputmode="numeric" pattern="[0-9.]*"
+                 placeholder="e.g., 15" style="width:6rem;" />
+        </div>
+
+        <!-- Direction -->
+        <div class="ft-select-col">
+          <label for="durDirectionSelect">Direction:</label>
+          <select id="durDirectionSelect">
+            <option value="west_to_east">West to East &mdash; St. Croix Falls &rarr; Sturgeon Bay</option>
+            <option value="east_to_west">East to West &mdash; Sturgeon Bay &rarr; St. Croix Falls</option>
+          </select>
+        </div>
+
+        <!-- Start Date -->
+        <div class="ft-select-col">
+          <label>Start Date:</label>
+          <span style="display:flex; gap: 6px; align-items:center;">
+            <select id="durMonthSelect"></select>
+            <select id="durDaySelect"></select>
+          </span>
+        </div>
+
+      </div><!-- /.control-row -->
+
+      <!-- Route Alternate -->
+      <fieldset class="alt-group-block" style="margin-top:12px;">
+        <legend>Route through Baraboo Hills / Portage</legend>
+        <div class="alt-options">
+          <label>
+            <input type="radio" name="iatAlt" value="west" checked />
+            Dells-Baraboo (West Alt.)
+            <span class="alt-delta">83.7 mi &mdash; scenic route through the Baraboo Hills</span>
+          </label>
+          <label>
+            <input type="radio" name="iatAlt" value="east" />
+            Portage (East Alt.)
+            <span class="alt-delta">71 mi &mdash; flatter route via Karner Blue, Montello, John Muir Park, Portage Canal &amp; Sauk Point
+              <span class="alt-delta" style="color:#555;">(−12.7 mi vs West Alt.)</span>
+            </span>
+          </label>
+        </div>
+      </fieldset>
+
+      <div style="margin-top: 12px; width: 100%;">
+        <button id="durBtn" type="button" class="btn-primary">Estimate End Date and Weather Extremes</button>
+      </div>
+
+      <div id="durStatus" class="status" style="width:100%;"></div>
+      <div id="durResult" style="width:100%;"></div>
+
+      <!-- Temperature Extremes Results + Map -->
+      <div id="durExtremesWrap" style="display:none; margin-top:16px;">
+        <h2>Temperature Extremes During Your Hike</h2>
+        <div id="durExtremesMap"></div>
+
+        <p class="data-attribution map-attribution">
+          Mapping data provided by
+          <a href="https://www.openstreetmap.org/copyright"
+             target="_blank" rel="noopener">OpenStreetMap</a>
+          under the Open Database License.
+        </p>
+
+        <div id="durExtremesHot"></div>
+        <div id="durExtremesCold" style="margin-top:12px;"></div>
+      </div>
+    </section>
+
+    <hr class="card-sep" />
+
+    <!-- =====================================================
+         Card 2: Weather Planner
+         ===================================================== -->
+    <section class="controls" aria-label="Weather planner controls">
+      <div class="section-title-block">
+        <h2>Weather Planner</h2>
+        <p class="data-attribution">
+          Weather data provided by
+          <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a>
+          under the 4.0 International (CC BY 4.0) license.
+        </p>
+      </div>
+
+      <p class="card-instructions">
+        Select a region, then choose a named trail segment. Enter a mile within that segment's
+        range and a planning date to receive current conditions, a 5-day forecast, and a 7-year
+        average for that date and location.
+      </p>
+
+      <div class="control-row">
+
+        <!-- Planning date -->
+        <div class="ft-select-col">
+          <label>Planning Date:</label>
+          <span style="display:flex; gap: 6px; align-items:center;">
+            <select id="monthSelect"></select>
+            <select id="daySelect"></select>
+          </span>
+        </div>
+
+        <!-- Region selector -->
+        <div class="ft-select-col">
+          <label for="regionSelect">Region:</label>
+          <select id="regionSelect">
+            <option value="western">Western</option>
+            <option value="central">Central</option>
+            <option value="eastern">Eastern</option>
+          </select>
+        </div>
+
+        <!-- Segment selector (populated dynamically from region) -->
+        <div class="ft-select-col">
+          <label for="segmentSelect">Segment:</label>
+          <select id="segmentSelect"></select>
+        </div>
+
+        <!-- Mile input + range indicator -->
+        <div class="ft-select-col">
+          <label for="iatMileInput">Segment Mile:</label>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <input id="iatMileInput" type="text" inputmode="numeric"
+                   pattern="[0-9.]*" placeholder="e.g., 5" />
+            <p id="iatSegmentInfo" style="margin:0; font-size:0.82rem; color:#555; font-style:italic; white-space:nowrap;"></p>
+          </div>
+        </div>
+
+        <!-- Get Weather button -->
+        <div style="width:100%; margin-top:6px;">
+          <button id="goBtn" type="button" class="btn-primary">Get Weather</button>
+        </div>
+
+      </div><!-- /.control-row -->
+
+      <div id="weatherStatus" class="status"></div>
+
+      <section class="map-wrap" id="weatherMapWrap" style="display:none;">
+        <div id="map" aria-label="Map showing selected Ice Age Trail point"></div>
+
+        <p class="data-attribution map-attribution">
+          Mapping data provided by
+          <a href="https://www.openstreetmap.org/copyright"
+             target="_blank" rel="noopener">OpenStreetMap</a>
+          under the Open Database License.
+        </p>
+      </section>
+
+    </section>
+
+    <section class="grid">
+      <div id="planningSummaryBlock"></div>
+      <div id="currentBlock"></div>
+      <div id="forecastBlock"></div>
+    </section>
+
+    <hr class="card-sep" />
+
+    <!-- =====================================================
+         Weather Data Notes + Resources
+         ===================================================== -->
+    <section class="weather-data-notes" aria-labelledby="weather-data-notes-title">
+      <h2 id="weather-data-notes-title">Notes on Weather and Map Data</h2>
+
+      <div class="weather-data-notes__body">
+
+        <section class="weather-data-notes__subsection" aria-labelledby="notes-on-data-title">
+          <h3 id="notes-on-data-title">Notes on Weather Data</h3>
+          <div class="weather-data-notes__content">
+            <p>
+              The Ice Age Trail traverses Wisconsin from the St. Croix River in the west to
+              Sturgeon Bay in the east, covering a wide range of climates. The western sections
+              experience cold continental winters and warm, humid summers. The eastern shoreline
+              sections benefit from Lake Michigan's moderating influence, but also see significant
+              lake-effect snow and persistent cold winds in late fall and winter.
+            </p>
+            <p>
+              Both heat index and wind chill are incorporated into this planner using the
+              Steadman methodology. 
+              Temperature advisories fire when the apparent high reaches or exceeds 100&nbsp;&deg;F
+              (heat index threshold) or when the apparent low reaches or falls below 20&nbsp;&deg;F
+              (cold weather threshold). 20&nbsp;&deg;F is a common rating floor for sleeping bags
+              and insulating layers; conditions at or below this level push typical gear to uncomfortable levels.
+            </p>
+          </div>
+        </section>
+
+        <section class="weather-data-notes__subsection" aria-labelledby="notes-on-map-data-title">
+          <h3 id="notes-on-map-data-title">Notes on Map and Trail Data</h3>
+          <div class="weather-data-notes__content">
+            <ul class="weather-data-notes__links">
+              <li>
+                The Ice Age Trail consists of roughly 700 miles of certified hiking path connected by
+                approximately 500 miles of road walk connectors, for a total of over 1,200
+                planned trail miles. This planner uses an axis-mile system wherein each of the
+                124 named segments absorbs the road walk distance to its neighboring segments.
+                This means every axis mile maps to exactly one named segment with no gaps,
+                and road walk distances are not labeled separately in the planner.
+              </li>
+              <li>
+                The points used for weather lookups and the map line used to signify the trail were 
+                primarily sourced from the Wisconsin Department of Natural Resources (DNR) ArcGIS trail layer. 
+                This provided the best results when building the page, but there are some slight differences 
+                between the DNR data and maps published through the Ice Age Trail Atlas.  As the IAT is still 
+                a work in progress and as roadwalk sections are slowly turned into traditional hiking trails, 
+                it is difficult to obtain data that is simultaenously fully accurate, up-to-date, and easy-to-use.
+                So I feel these discrepancies are inevitable (and manageable).  But TrailTemps will continue to keep the site
+                updated as the trail continues to grow with new "official" hiking miles.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="weather-data-notes__subsection" aria-labelledby="additional-resources-title">
+          <h3 id="additional-resources-title">Additional Resources</h3>
+          <div class="weather-data-notes__content">
+            <ul class="weather-data-notes__links">
+              <li>
+                <a href="https://www.iceagetrail.org/" target="_blank" rel="noopener noreferrer">
+                  <strong>Ice Age Trail Alliance:</strong>
+                </a>
+                Official and extensive web site for the Ice Age Trail Alliance, the nonprofit organization
+                that builds, maintains, and promotes the Ice Age National Scenic Trail.
+                Includes detailed segment maps, trail conditions, volunteer opportunities,
+                and planning resources.
+              </li>
+              <li>
+                <a href="https://www.nps.gov/iatr/index.htm" target="_blank" rel="noopener noreferrer">
+                  <strong>Geology of the Ice Age National Scenic Trail:</strong>
+                </a>
+                Comprehensive guide to the IAT's natural historym and key resource for getting the most out of your adventure.
+                Learn about the glacial deposits you walk upon, with segment-by-segment guides to interpret what you see. Also includes 
+                lessons on the basics of how glaciers shape the land, as well as "Science Briefs" on a wide variety of geological interests.
+                At least for me, it's the perfect companion piece for obtaining a deep appreciation of the trail and its unique features.
+                Electronic versions as well as discounts for IATA members are also available.
+              </li>
+              <li>
+                <a href="https://www.nationalgeographic.com/travel/article/discovering-the-unexpected-ice-age-trail-during-coronavirus" target="_blank" rel="noopener noreferrer">
+                  <strong>National Geographic:</strong>
+                </a>
+                Magazine article of a writer first exploring the Ice Age Trail, with all the beautiful writing and photos you'd expect from NatGeo.
+            </ul>
+          </div>
+        </section>
+
+      </div>
+    </section>
+
   </main>
 
-<!-- Donation block -->
-<div class="donation-block">
-  <p class="donation-text">
-    Thank you for visiting and trying these tools. They are a labor of love for me, and I make no money from this site. However, if you wish to help support the site please consider
-    <a href="https://www.buymeacoffee.com/ihrhzL0ZC5" target="_blank" rel="noopener noreferrer">Buying Me a Coffee</a> — donations of $1, $5, or even $20 are deeply appreciated. I promise every cent will go to the ongoing operations, maintenance, development, and expansion of the site.
-  </p>
-  <a class="bmc-button" href="https://www.buymeacoffee.com/ihrhzL0ZC5" target="_blank" rel="noopener noreferrer" aria-label="Buy Me a Coffee">Buy Me a Coffee</a>
-</div>
-
   <footer class="site-footer">
-    <div class="small">Informational only.</div>
+    <div class="small">
+      Informational only. Always verify conditions and heed local advisories.
+    </div>
   </footer>
-  
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>window.SITE_BASE = "";</script>
+  <script>window.TRAIL_SLUG = "ice-age-trail";</script>
+
+  <!-- -------------------------------------------------------
+       Inline bootstrap: IAT segment metadata for immediate
+       UI population before iat_meta.json finishes loading.
+       s = ui_mile_start, e = ui_mile_end (rounded to 0.1)
+       ------------------------------------------------------- -->
+  <script>
+    window.IAT_SECTIONS_BOOTSTRAP = [{"id":"st-croix-falls","name":"St. Croix Falls","region":"western","s":0,"e":11},{"id":"gandy-dancer","name":"Gandy Dancer","region":"western","s":11,"e":28.3},{"id":"trade-river","name":"Trade River","region":"western","s":28.3,"e":32.7},{"id":"straight-lake","name":"Straight Lake","region":"western","s":32.7,"e":36.6},{"id":"straight-river","name":"Straight River","region":"western","s":36.6,"e":40.4},{"id":"pine-lake","name":"Pine Lake","region":"western","s":40.4,"e":43.6},{"id":"mckenzie-creek","name":"McKenzie Creek","region":"western","s":43.6,"e":55},{"id":"indian-creek","name":"Indian Creek","region":"western","s":55,"e":63.9},{"id":"sand-creek","name":"Sand Creek","region":"western","s":63.9,"e":71.4},{"id":"timberland-hills","name":"Timberland Hills","region":"western","s":71.4,"e":83.3},{"id":"grassy-lake","name":"Grassy Lake","region":"western","s":83.3,"e":92.8},{"id":"bear-lake","name":"Bear Lake","region":"western","s":92.8,"e":100.4},{"id":"tuscobia","name":"Tuscobia","region":"western","s":100.4,"e":117},{"id":"hemlock-creek","name":"Hemlock Creek","region":"western","s":117,"e":129.3},{"id":"northern-blue-hills","name":"Northern Blue Hills","region":"western","s":129.3,"e":141.6},{"id":"southern-blue-hills","name":"Southern Blue Hills","region":"western","s":141.6,"e":156},{"id":"chippewa-moraine","name":"Chippewa Moraine","region":"western","s":156,"e":170.5},{"id":"harwood-lakes","name":"Harwood Lakes","region":"western","s":170.5,"e":177.5},{"id":"firth-lake","name":"Firth Lake","region":"western","s":177.5,"e":185},{"id":"chippewa-river","name":"Chippewa River","region":"western","s":185,"e":189.5},{"id":"cornell","name":"Cornell","region":"western","s":189.5,"e":199},{"id":"otter-lake","name":"Otter Lake","region":"western","s":199,"e":212.4},{"id":"lake-eleven","name":"Lake Eleven","region":"western","s":212.4,"e":233.9},{"id":"jerry-lake","name":"Jerry Lake","region":"western","s":233.9,"e":249.1},{"id":"mondeaux-esker","name":"Mondeaux Esker","region":"western","s":249.1,"e":262.4},{"id":"pine-line","name":"Pine Line","region":"western","s":262.4,"e":267.3},{"id":"east-lake","name":"East Lake","region":"western","s":267.3,"e":278.6},{"id":"rib-lake","name":"Rib Lake","region":"western","s":278.6,"e":287.7},{"id":"wood-lake","name":"Wood Lake","region":"western","s":287.7,"e":301.1},{"id":"timberland-wilderness","name":"Timberland Wilderness","region":"western","s":301.1,"e":306.5},{"id":"camp-27","name":"Camp 27","region":"western","s":306.5,"e":311.7},{"id":"new-wood","name":"New Wood","region":"western","s":311.7,"e":319.7},{"id":"averill-kelly-creek-wilderness","name":"Averill-Kelly Creek Wilderness","region":"western","s":319.7,"e":324.6},{"id":"turtle-rock","name":"Turtle Rock","region":"western","s":324.6,"e":331},{"id":"grandfather-falls","name":"Grandfather Falls","region":"western","s":331,"e":340.1},{"id":"underdown","name":"Underdown","region":"western","s":340.1,"e":350.5},{"id":"alta-junction","name":"Alta Junction","region":"western","s":350.5,"e":352.1},{"id":"harrison-hills","name":"Harrison Hills","region":"western","s":352.1,"e":366.5},{"id":"parrish-hills","name":"Parrish Hills","region":"western","s":366.5,"e":378.6},{"id":"highland-lakes","name":"Highland Lakes","region":"western","s":378.6,"e":390.3},{"id":"summit-moraine","name":"Summit Moraine","region":"western","s":390.3,"e":402.6},{"id":"lumbercamp","name":"Lumbercamp","region":"western","s":402.6,"e":414.6},{"id":"kettlebowl","name":"Kettlebowl","region":"western","s":414.6,"e":426.4},{"id":"antigo-heights","name":"Antigo Heights","region":"western","s":426.4,"e":439.6},{"id":"plover-river","name":"Plover River","region":"central","s":439.6,"e":452.7},{"id":"dells-of-the-eau-claire","name":"Dells of the Eau Claire","region":"central","s":452.7,"e":457.5},{"id":"thornapple-creek","name":"Thornapple Creek","region":"central","s":457.5,"e":463.1},{"id":"ringle","name":"Ringle","region":"central","s":463.1,"e":478.7},{"id":"white-cedar","name":"White Cedar","region":"central","s":478.7,"e":492.2},{"id":"new-hope","name":"New Hope","region":"central","s":492.2,"e":505},{"id":"iola-ski-hill","name":"Iola Ski Hill","region":"central","s":505,"e":511.1},{"id":"skunk-and-foster-lakes","name":"Skunk and Foster Lakes","region":"central","s":511.1,"e":519.2},{"id":"waupaca-river","name":"Waupaca River","region":"central","s":519.2,"e":525.4},{"id":"hartman-creek","name":"Hartman Creek","region":"central","s":525.4,"e":534.3},{"id":"emmons-creek","name":"Emmons Creek","region":"central","s":534.3,"e":545},{"id":"deerfield","name":"Deerfield","region":"central","s":545,"e":582.1},{"id":"devils-lake","name":"Devil's Lake","region":"central","s":582.1,"e":617.2},{"id":"baraboo","name":"Baraboo","region":"central","s":617.2,"e":640.5},{"id":"chaffee-creek","name":"Chaffee Creek","region":"central","s":640.5,"e":665.6},{"id":"wedde-creek","name":"Wedde Creek","region":"central","s":665.6,"e":668},{"id":"mecan-river","name":"Mecan River","region":"central","s":668,"e":676.4},{"id":"greenwood","name":"Greenwood","region":"central","s":676.4,"e":682.6},{"id":"bohn-lake","name":"Bohn Lake","region":"central","s":682.6,"e":710.4},{"id":"merrimac","name":"Merrimac","region":"central","s":710.4,"e":741.2},{"id":"gibraltar-rock","name":"Gibraltar Rock","region":"central","s":741.2,"e":749.3},{"id":"fern-glen","name":"Fern Glen","region":"central","s":749.3,"e":752.7},{"id":"lodi","name":"Lodi","region":"central","s":752.7,"e":756.2},{"id":"lodi-marsh","name":"Lodi Marsh","region":"central","s":756.2,"e":763.8},{"id":"springfield-hill","name":"Springfield Hill","region":"central","s":763.8,"e":768.7},{"id":"indian-lake","name":"Indian Lake","region":"central","s":768.7,"e":774.2},{"id":"table-bluff","name":"Table Bluff","region":"central","s":774.2,"e":780.6},{"id":"cross-plains","name":"Cross Plains","region":"central","s":780.6,"e":792.9},{"id":"valley-view","name":"Valley View","region":"central","s":792.9,"e":797.2},{"id":"madison","name":"Madison","region":"central","s":797.2,"e":800.9},{"id":"verona","name":"Verona","region":"central","s":800.9,"e":808.3},{"id":"montrose","name":"Montrose","region":"central","s":808.3,"e":816.8},{"id":"brooklyn-wildlife","name":"Brooklyn Wildlife","region":"central","s":816.8,"e":821.6},{"id":"monticello","name":"Monticello","region":"central","s":821.6,"e":829.6},{"id":"albany","name":"Albany","region":"central","s":829.6,"e":842.5},{"id":"evansville","name":"Evansville","region":"central","s":842.5,"e":851.9},{"id":"gibbs-lake","name":"Gibbs Lake","region":"central","s":851.9,"e":859.7},{"id":"arbor-ridge","name":"Arbor Ridge","region":"central","s":859.7,"e":865.4},{"id":"devils-staircase","name":"Devil's Staircase","region":"central","s":865.4,"e":868.7},{"id":"janesville","name":"Janesville","region":"central","s":868.7,"e":882.6},{"id":"janesville-to-milton","name":"Janesville to Milton","region":"central","s":882.6,"e":886.3},{"id":"milton","name":"Milton","region":"central","s":886.3,"e":890.6},{"id":"storrs-lake","name":"Storrs Lake","region":"central","s":890.6,"e":895.8},{"id":"clover-valley","name":"Clover Valley","region":"central","s":895.8,"e":903.7},{"id":"whitewater-lake","name":"Whitewater Lake","region":"eastern","s":903.7,"e":912.7},{"id":"blackhawk","name":"Blackhawk","region":"eastern","s":912.7,"e":926.5},{"id":"blue-spring-lake","name":"Blue Spring Lake","region":"eastern","s":926.5,"e":935.6},{"id":"stony-ridge","name":"Stony Ridge","region":"eastern","s":935.6,"e":940.2},{"id":"eagle","name":"Eagle","region":"eastern","s":940.2,"e":949},{"id":"scuppernong","name":"Scuppernong","region":"eastern","s":949,"e":958.9},{"id":"lapham-peak","name":"Lapham Peak","region":"eastern","s":958.9,"e":973.5},{"id":"holy-hill","name":"Holy Hill","region":"eastern","s":973.5,"e":995.4},{"id":"delafield","name":"Delafield","region":"eastern","s":995.4,"e":1008.3},{"id":"waterville","name":"Waterville","region":"eastern","s":1008.3,"e":1019.2},{"id":"hartland","name":"Hartland","region":"eastern","s":1019.2,"e":1029.6},{"id":"merton","name":"Merton","region":"eastern","s":1029.6,"e":1039.1},{"id":"pike-lake","name":"Pike Lake","region":"eastern","s":1039.1,"e":1051.7},{"id":"monches","name":"Monches","region":"eastern","s":1051.7,"e":1059.5},{"id":"loew-lake","name":"Loew Lake","region":"eastern","s":1059.5,"e":1069.3},{"id":"slinger","name":"Slinger","region":"eastern","s":1069.3,"e":1076},{"id":"cedar-lakes","name":"Cedar Lakes","region":"eastern","s":1076,"e":1084.6},{"id":"west-bend","name":"West Bend","region":"eastern","s":1084.6,"e":1095.6},{"id":"kewaskum","name":"Kewaskum","region":"eastern","s":1095.6,"e":1111.1},{"id":"greenbush","name":"Greenbush","region":"eastern","s":1111.1,"e":1131},{"id":"parnell","name":"Parnell","region":"eastern","s":1131,"e":1149.5},{"id":"milwaukee-river-washington-co","name":"Milwaukee River (Washington Co)","region":"eastern","s":1149.5,"e":1160},{"id":"milwaukee-river-fond-du-lac-co","name":"Milwaukee River (Fond du Lac Co)","region":"eastern","s":1160,"e":1175.1},{"id":"labudde-creek","name":"LaBudde Creek","region":"eastern","s":1175.1,"e":1190.1},{"id":"walla-hi","name":"Walla Hi","region":"eastern","s":1190.1,"e":1202.7},{"id":"manitowoc","name":"Manitowoc","region":"eastern","s":1202.7,"e":1220},{"id":"dunes","name":"Dunes","region":"eastern","s":1220,"e":1224.5},{"id":"two-rivers","name":"Two Rivers","region":"eastern","s":1224.5,"e":1228.4},{"id":"point-beach","name":"Point Beach","region":"eastern","s":1228.4,"e":1240.7},{"id":"mishicot","name":"Mishicot","region":"eastern","s":1240.7,"e":1246.4},{"id":"east-twin-river","name":"East Twin River","region":"eastern","s":1246.4,"e":1249.8},{"id":"tisch-mills","name":"Tisch Mills","region":"eastern","s":1249.8,"e":1259},{"id":"kewaunee-river","name":"Kewaunee River","region":"eastern","s":1259,"e":1282.1},{"id":"algoma","name":"Algoma","region":"eastern","s":1282.1,"e":1291.4},{"id":"forestville","name":"Forestville","region":"eastern","s":1291.4,"e":1301.5},{"id":"sturgeon-bay","name":"Sturgeon Bay","region":"eastern","s":1301.5,"e":1315.6}];
+
+    function iatGetSections() {
+      return window.IAT_SECTIONS_BOOTSTRAP;
+    }
+
+    function iatPopulateSegments(regionId) {
+      const sel = document.getElementById("segmentSelect");
+      if (!sel) return;
+      const secs = iatGetSections().filter(s => s.region === regionId);
+      sel.innerHTML = secs.map(s =>
+        `<option value="${s.id}">${s.name}</option>`
+      ).join("");
+      iatUpdateSegmentInfo();
+    }
+
+    function iatUpdateSegmentInfo() {
+      const segId  = document.getElementById("segmentSelect")?.value;
+      const infoEl = document.getElementById("iatSegmentInfo");
+      const mileIn = document.getElementById("iatMileInput");
+      if (!segId || !infoEl) return;
+
+      const sec = iatGetSections().find(s => s.id === segId);
+      if (!sec) return;
+
+      const len = Math.round((sec.e - sec.s) * 10) / 10;
+      infoEl.textContent = `Segment Range: 0\u2013${len} Miles`;
+
+      if (mileIn) {
+        mileIn.min  = 0;
+        mileIn.max  = len;
+        mileIn.step = 0.5;
+        mileIn.placeholder = `e.g., ${Math.round(len / 2)}`;
+        const cur = Number(mileIn.value);
+        if (cur < 0 || cur > len) mileIn.value = "";
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const regionSel  = document.getElementById("regionSelect");
+      const segmentSel = document.getElementById("segmentSelect");
+      if (regionSel) {
+        iatPopulateSegments(regionSel.value);
+        regionSel.addEventListener("change", () => iatPopulateSegments(regionSel.value));
+      }
+      if (segmentSel) {
+        segmentSel.addEventListener("change", iatUpdateSegmentInfo);
+      }
+    });
+  </script>
+
+  <script defer src="/js/trail-nav.js"></script>
+  <script defer src="/js/shared-utils.js"></script>
+  <script defer src="js/app.js"></script>
+
+  <!-- Donation block -->
+  <div class="donation-block">
+    <p class="donation-text">
+      Thank you for visiting and trying these tools. They are a labor of love for me, and I make
+      no money from this site. However, if you wish to help support the site please consider
+      <a href="https://www.buymeacoffee.com/ihrhzL0ZC5" target="_blank" rel="noopener noreferrer">Buying Me a Coffee</a>
+      &mdash; donations of $1, $5, or even $20 are deeply appreciated. I promise every cent will go to
+      the ongoing operations, maintenance, development, and expansion of the site.
+    </p>
+    <a class="bmc-button" href="https://www.buymeacoffee.com/ihrhzL0ZC5"
+       target="_blank" rel="noopener noreferrer" aria-label="Buy Me a Coffee">Buy Me a Coffee</a>
+  </div>
+
 </body>
 </html>

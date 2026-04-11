@@ -13,7 +13,7 @@ This file provides guidance to Claude Code when working with code in this reposi
 3. Historical Temperature Extremes — pre-computed normals per waypoint (ERA5-Land, 2018–2024)
 4. Alternate route selection — mutually exclusive swap alternates (FT and AZT)
 5. Interactive Leaflet map display
-6. Multi-trail architecture — Appalachian Trail, Arizona Trail, Florida Trail, New England Trail, Natchez Trace Trail, and Pacific Northwest Trail all live
+6. Multi-trail architecture — Appalachian Trail, Arizona Trail, Florida Trail, Ice Age Trail, New England Trail, Natchez Trace Trail, and Pacific Northwest Trail all live
 
 **Design principles — non-negotiable:**
 - Pure static site: no build system, no framework, no backend
@@ -58,6 +58,8 @@ node trails/arizona-trail/tools/generate-normals-azt.js
 node trails/pacific-northwest-trail/tools/build-pnt-data.js
 node trails/pacific-northwest-trail/tools/fix-ferry-geometry.js
 node trails/pacific-northwest-trail/tools/generate-normals-pnt.js
+node trails/ice-age-trail/tools/build-points-iat.js
+node trails/ice-age-trail/tools/generate-normals-iat.js
 ```
 
 There are no tests, no linter, and no build step.
@@ -69,7 +71,7 @@ There are no tests, no linter, and no build step.
 ### File Structure
 
 ```
-index.html                          ← Landing page, 7-tile trail selector grid
+index.html                          ← Landing page, trail selector grid
 css/styles.css                      ← Shared styles (980px max-width via --maxw CSS var)
 js/
   shared-utils.js                   ← ~27 shared utility functions used by all trail app.js files
@@ -143,8 +145,18 @@ trails/
       build-pnt-data.js             ← Fetches USFS Region 6 ArcGIS, builds points.json + trail.geojson + pnt_meta.json
       fix-ferry-geometry.js         ← Splits Puget Sound section at water crossing; makes ferry a dashed feature
       generate-normals-pnt.js       ← Fetches ERA5-Land normals for all 245 points; resume-safe (~61 min)
-      import-alt-gpx.js             ← Fetches ATA GPX files for P11e and P33, appends to points.json
-      generate-normals-azt.js       ← Auto-resumes normals generation (skips already-done points)
+  ice-age-trail/
+    index.html
+    js/app.js
+    data/
+      points.json                   ← 2,687 main + 130 East Alt = 2,817 total points at 0.5-mile intervals
+      trail.geojson                 ← 124 certified-segment LineStrings (DNR source)
+      trail_roadwalk.geojson        ← 97 roadwalk connector features (IATA FeatureServer, display-only)
+      iat_meta.json
+      historical_weather.json       ← 469 normals points (451 main spine + 18 East Alt, ~5-mile intervals)
+    tools/
+      build-points-iat.js           ← Fetches WI DNR ArcGIS + IATA roadwalk; stitches, interpolates, writes all data files
+      generate-normals-iat.js       ← Fetches ERA5-Land normals; resume-safe; reuses nearby existing points to reduce API calls
 ```
 
 ### Shared JavaScript Files
@@ -555,10 +567,96 @@ The only saltwater ferry crossing on any National Scenic Trail. The trail crosse
 
 ---
 
-## Ice Age Trail (IAT) — Coming Soon
+## Ice Age Trail (IAT) — Live
 
-- **Status:** Placeholder page only. No data or tools yet.
-- **Trail selector:** Listed as "(Coming Soon)" in all trail nav menus and hub tile.
+- **Status:** Fully live as of April 2026.
+- **Point ID format:** `iat-{section-slug}-mi{4digits}` (main spine, tenths-mile precision); `iat-east-alt-mi{5digits}` (East Alt, hundredths-mile precision)
+- **Data files:** `points.json`, `iat_meta.json`, `trail.geojson`, `trail_roadwalk.geojson`, `historical_weather.json`
+- **Normals source:** Open-Meteo ERA5-Land archive (2018–2024)
+- **Points resolution:** 0.5-mile intervals (2,687 main + 130 East Alt = 2,817 total)
+- **Trail geometry source:** Wisconsin DNR ArcGIS MapServer (Layer 2); roadwalk from IATA FeatureServer
+- **Weather resolution:** ~5-mile intervals (469 normals points: 451 main + 18 East Alt)
+- **Segment selector:** Region (Western/Central/Eastern) → Segment → Segment Mile
+- **Trail color:** `#e06060` (same salmon/red as FT, NET, NTT, AZT)
+- **Axis-mile system:** Total ~1,315.6 miles (West Alt) / ~1,302.9 miles (East Alt). Each of 124 named segments absorbs the roadwalk distance to neighboring segments — every axis mile maps to exactly one segment with no gaps.
+
+### IAT Regions (3)
+
+| id | Name | Segments |
+|----|------|---------|
+| `western` | Western | 44 segments (St. Croix Falls → Antigo Heights) |
+| `central` | Central | 44 segments (Plover River → Clover Valley) |
+| `eastern` | Eastern | 36 segments (Whitewater Lake → Sturgeon Bay) |
+
+### IAT Alternate Group — LOCKED
+
+One route choice exists in the Baraboo Hills / Portage area:
+
+**Dells-Baraboo/Portage (`dells-baraboo-portage`):** branches mid-Devil's Lake segment at `branch_axis_mile: 617.2`, rejoins at Chaffee Creek (`rejoin_axis_mile: 640.5`).
+
+| Alt | Label | Miles (in alt zone) | Note |
+|-----|-------|---------------------|------|
+| `west` (default) | Dells-Baraboo (West Alt.) | 83.7 mi | Scenic route through Baraboo Hills; Baraboo segment is the only certified trail; remainder is roadwalk |
+| `east` | Portage (East Alt.) | 71 mi (−12.7 mi) | Devil's Lake north portion + Sauk Point → Portage Canal → John Muir Park → Montello → Karner Blue |
+
+The Devil's Lake segment (10.9 mi total) is **split at 7.0 mi** (`DL_MAIN_MILES`): the south 7 mi are on the main spine (shared); the north ~4 mi become the first leg of the East Alt. The West Alt (Baraboo + roadwalk) stays on the main spine axis_mile coordinate system. East Alt points have `alt_id: "east"` and `alt_mile` (0-based from branch) instead of `axis_mile`.
+
+**Do not change branch/rejoin miles without re-measuring from DNR geometry.**
+
+### IAT Data Coordinate Systems
+
+- **Main spine points:** `{ id, section, region, state, mile, axis_mile, lat, lon }` — axis_mile is cumulative from western terminus (0 at St. Croix Falls)
+- **East Alt points:** `{ id, section, region, state, mile, alt_mile, alt_id: "east", lat, lon }` — alt_mile is 0-based from the Devil's Lake branch point
+- **`buildHikePoints()`** is zone-aware: pre-branch → `getNearestPointByAxisMile()`; East Alt zone → `getNearestEastAltPoint(alt_mile)`; West Alt zone → proportional mapping onto branch→rejoin spine range; post-rejoin → `getNearestPointByAxisMile()`
+
+### IAT `iat_meta.json` Structure
+
+```json
+{
+  "trail": { "name", "total_trail_miles", "map_center", "map_zoom", "termini" },
+  "sections": [ { "id", "name", "region", "state", "certified_miles", "ui_mile_start", "ui_mile_end" } ],
+  "east_alt_sections": [ { "id", "name", "alt_mile_start", "alt_mile_end" } ],
+  "alt_groups": [ { "id", "label", "branch_axis_mile", "rejoin_axis_mile",
+                    "west_alt": { "id", "label", "total_miles", "segments" },
+                    "east_alt": { "id", "label", "total_miles", "delta_miles", "segments" } } ],
+  "direction_options": [ { "id", "label", "total_miles", "is_wte" } ]
+}
+```
+
+### IAT `index.html` Bootstrap
+
+`IAT_SECTIONS_BOOTSTRAP` is hardcoded in `index.html` as a JSON array matching `iat_meta.json` sections, with `{ id, name, region, s, e }` (s = ui_mile_start, e = ui_mile_end). **Must be regenerated whenever `build-points-iat.js` is re-run**, since axis_mile ranges shift when trail geometry changes. Generate with:
+```bash
+node -e "const m=require('./trails/ice-age-trail/data/iat_meta.json'); console.log(JSON.stringify(m.sections.map(s=>({id:s.id,name:s.name,region:s.region,s:Math.round(s.ui_mile_start*10)/10,e:Math.round(s.ui_mile_end*10)/10}))));"
+```
+
+### IAT Roadwalk Display
+
+`trail_roadwalk.geojson` (97 features) is fetched from the IATA ArcGIS FeatureServer and rendered as a **dotted line** on both maps (`dashArray: "1 9"`, opacity 0.65). Display-only — no weather data or points are generated for roadwalk geometry. Both the weather planner map and the duration extremes map load this overlay via `fetchRoadwalkGeojson()`.
+
+### IAT `historical_weather.json`
+
+Same 7-array schema as other trails (`hi`, `lo`, `hi_app`, `lo_app`, `rh_hi`, `rh_lo`, `ws`). Wrapped in `{ meta, points }` object (unlike flat arrays on older trails). 469 total normals:
+- 451 main spine points at ~5-mile axis_mile intervals — used for both main spine and West Alt lookups
+- 18 East Alt points at ~5-mile alt_mile intervals — used when hiker is in the East Alt zone
+- East Alt points fall back to nearest main-spine normal via lat/lon distance when no direct match (most East Alt points are geographically close to main-spine normals)
+
+### IAT Notable Features
+
+- **Roadwalk absorption** — the only trail where roadwalk distances are systematically absorbed into named segments rather than modeled as separate sections
+- **Stitching algorithm** — `build-points-iat.js` uses greedy nearest-endpoint stitching with `findTerminalHint()` to identify true chain endpoints before stitching (prevents mid-chain starts at junction points, e.g. Kewaunee River)
+- **Outlier path filtering** — `filterOutlierPaths()` drops DNR paths outside Wisconsin's bounding box and applies a statistical median-distance filter to handle bad-data segments
+- **East Alt stitching** — Devil's Lake split at 7.0 mi; north portion + Sauk Point → Portage Canal → John Muir Park → Montello → Karner Blue stitched in order into East Alt chain
+- **Normals reuse** — `generate-normals-iat.js` skips API calls when a new target point is within 1.0 mile of an existing normals entry (ERA5-Land grid resolution ~9 km ≈ 5.6 mi; nearby points return identical data)
+- **Heat index and wind chill** — both active; heat advisory ≥ 100 °F, cold advisory ≤ 20 °F
+- **Stale normals cleanup** — on resume, `generate-normals-iat.js` strips entries whose IDs are no longer in `points.json` (IDs shift when trail geometry changes)
+
+### IAT Tools
+
+Located in `trails/ice-age-trail/tools/`:
+
+- **`build-points-iat.js`** — Fetches all Wisconsin DNR features (2,620 paths, paginated), groups by segment name, stitches using `findTerminalHint()` + greedy nearest-endpoint, interpolates at 0.5-mile intervals, splits Devil's Lake for East Alt, fetches IATA roadwalk geometry. Writes `points.json`, `trail.geojson`, `trail_roadwalk.geojson`, and `iat_meta.json`. Re-run if trail geometry changes; then regenerate bootstrap in `index.html` and re-run `generate-normals-iat.js`.
+- **`generate-normals-iat.js`** — Selects target points at ~5-mile intervals (main spine by axis_mile, East Alt by alt_mile); strips stale entries; reuses nearby existing normals (within 1 mi) instead of re-fetching; fetches remaining from Open-Meteo archive; resume-safe (saves after each point); 15-second throttle.
 
 ---
 
@@ -567,9 +665,10 @@ The only saltwater ferry crossing on any National Scenic Trail. The trail crosse
 **`js/trail-nav.js`** is the single source of truth for trail ordering and status badges. The hub `index.html` must match. Order convention:
 
 1. **Live trails** — alphabetical
-2. **Coming Soon** — alphabetical
+2. **Coming Next** — one trail at a time
+3. **Coming Soon** — alphabetical
 
-Current order: AT, AZT, FT, NTT, NET, PNT → IAT, CDT, NCT, PCT, PHT (all Coming Soon)
+Current order: AT, AZT, FT, IAT, NTT, NET, PNT → PCT (Coming Next) → CDT, NCT, PHT (Coming Soon)
 
 When promoting a trail from Coming Next to live: remove the badge in `trail-nav.js`, update the tile in `index.html` (remove `coming` class and badge div, update description), and move it to its alphabetical position in both files.
 
