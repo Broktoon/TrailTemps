@@ -82,8 +82,8 @@
         <div class="ft-select-col">
           <label for="durDirectionSelect">Direction:</label>
           <select id="durDirectionSelect">
-            <option value="west_to_east">West to East &mdash; St. Croix Falls &rarr; Sturgeon Bay</option>
-            <option value="east_to_west">East to West &mdash; Sturgeon Bay &rarr; St. Croix Falls</option>
+            <option value="west_to_east">West to East: St. Croix Falls &rarr; Sturgeon Bay</option>
+            <option value="east_to_west">East to West: Sturgeon Bay &rarr; St. Croix Falls</option>
           </select>
         </div>
 
@@ -129,7 +129,10 @@
       <!-- Temperature Extremes Results + Map -->
       <div id="durExtremesWrap" style="display:none; margin-top:16px;">
         <h2>Temperature Extremes During Your Hike</h2>
-        <div id="durExtremesMap"></div>
+        <div id="durExtremesHot"></div>
+        <div id="durExtremesCold" style="margin-top:12px;"></div>
+
+        <div id="durExtremesMap" style="margin-top:16px;"></div>
 
         <p class="data-attribution map-attribution">
           Mapping data provided by
@@ -137,9 +140,6 @@
              target="_blank" rel="noopener">OpenStreetMap</a>
           under the Open Database License.
         </p>
-
-        <div id="durExtremesHot"></div>
-        <div id="durExtremesCold" style="margin-top:12px;"></div>
       </div>
     </section>
 

@@ -83,10 +83,10 @@
           <label for="durDirectionSelect">Direction:</label>
           <select id="durDirectionSelect">
             <optgroup label="Northbound">
-              <option value="nobo">Portkopinu, MS &#x2192; Highland Rim, TN (Northbound)</option>
+              <option value="nobo">Northbound: Portkopinu, MS &#x2192; Highland Rim, TN</option>
             </optgroup>
             <optgroup label="Southbound">
-              <option value="sobo">Highland Rim, TN &#x2192; Portkopinu, MS (Southbound)</option>
+              <option value="sobo">Southbound: Highland Rim, TN &#x2192; Portkopinu, MS</option>
             </optgroup>
           </select>
         </div>
@@ -114,7 +114,10 @@
       <!-- Temperature Extremes Results + Map -->
       <div id="durExtremesWrap" style="display:none; margin-top:16px;">
         <h2>Temperature Extremes During Your Hike</h2>
-        <div id="durExtremesMap"></div>
+        <div id="durExtremesHot"></div>
+        <div id="durExtremesCold" style="margin-top:12px;"></div>
+
+        <div id="durExtremesMap" style="margin-top:16px;"></div>
 
         <p class="data-attribution map-attribution">
           Mapping data provided by
@@ -122,9 +125,6 @@
              target="_blank" rel="noopener">OpenStreetMap</a>
           under the Open Database License.
         </p>
-
-        <div id="durExtremesHot"></div>
-        <div id="durExtremesCold" style="margin-top:12px;"></div>
       </div>
     </section>
 

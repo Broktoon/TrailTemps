@@ -78,8 +78,8 @@
         <div class="ft-select-col">
           <label for="durDirectionSelect">Direction:</label>
           <select id="durDirectionSelect">
-            <option value="nobo">Northbound &mdash; Campo (Mexican Border) &rarr; Manning Park (Canadian Border)</option>
-            <option value="sobo">Southbound &mdash; Manning Park (Canadian Border) &rarr; Campo (Mexican Border)</option>
+            <option value="nobo">Northbound: Campo (Mexican Border) &rarr; Manning Park (Canadian Border)</option>
+            <option value="sobo">Southbound: Manning Park (Canadian Border) &rarr; Campo (Mexican Border)</option>
           </select>
         </div>
 
@@ -94,17 +94,22 @@
 
       </div><!-- /.control-row -->
 
-      <div style="margin-top:12px; width:100%;">
+      <div class="control-grid-btn" style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
         <button id="durBtn" type="button" class="btn-primary">Estimate End Date and Weather Extremes</button>
+        <button id="bestStartBtn" type="button" class="btn-best-start"><em>BestStart!</em></button>
       </div>
 
       <div id="durStatus" class="status" style="width:100%;"></div>
       <div id="durResult" style="width:100%;"></div>
+      <div id="bestStartResult"></div>
 
       <!-- Temperature Extremes Results + Map -->
       <div id="durExtremesWrap" style="display:none; margin-top:16px;">
         <h2>Temperature Extremes During Your Hike</h2>
-        <div id="durExtremesMap"></div>
+        <div id="durExtremesHot"></div>
+        <div id="durExtremesCold" style="margin-top:12px;"></div>
+
+        <div id="durExtremesMap" style="margin-top:16px;"></div>
 
         <p class="data-attribution map-attribution">
           Mapping data provided by
@@ -112,9 +117,6 @@
              target="_blank" rel="noopener">OpenStreetMap</a>
           under the Open Database License.
         </p>
-
-        <div id="durExtremesHot"></div>
-        <div id="durExtremesCold" style="margin-top:12px;"></div>
       </div>
     </section>
 

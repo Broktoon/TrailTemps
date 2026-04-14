@@ -422,7 +422,7 @@ function renderDurExtremesBlocksShared(hottest, coldest, opts = {}) {
     `<td style="text-align:center; padding:5px 8px;">${utciCounts ? (utciCounts[c.key] ?? 0) : "\u2014"}</td>`
   ).join("");
   const utciHtml = `
-    <h3>Thermal Comfort Profile \u2014 Days on Trail</h3>
+    <h3>Thermal Stress and Comfort Profile: Days on Trail</h3>
     <div style="overflow-x:auto; margin-bottom:12px;">
       <table style="border-collapse:collapse; min-width:620px;">
         <tr>${headerCells}</tr>
