@@ -78,6 +78,7 @@
     #atMileInput {
       width: 6rem;
     }
+
   </style>
 </head>
 
@@ -104,7 +105,7 @@
 
       <p class="sub">
         <br>
-        Time your Appalachian Trail hike, find temperature extremes during that time, and get 5-day weather forecasts for any point along the trail. The two main tools are directly below, with various notes and other resources following at the bottom of the page.
+        Time your Appalachian Trail hike, find the <em>BestStart!</em> date to minimize hot and cold temperature stress, calculate your time of completion, identify temperature extremes during that time, and get 5-day weather forecasts for any point along the trail. The two main tools are directly below, with various notes and other resources following at the bottom of the page.
       </p>
     </div>
 
@@ -121,11 +122,9 @@
          Tool 1: Hike Duration / End Date Calculator
     ====================================================== -->
     <section class="controls" aria-label="Hike duration calculator" style="flex-direction:column; align-items:flex-start;">
-      <h2>Hike Duration (End Date) and Expected Weather Extremes</h2>
+      <h2>Hike Duration and <em>BestStart!</em> Temperature Management Calculator</h2>
       <p class="card-instructions">
-        Choose a start date and your expected miles per day, then select your direction.
-        You will receive an estimated hike duration and end date, along with a map showing
-        where the expected highest and lowest temperatures should be encountered along the trail.
+        Select your expected daily mileage and travel direction. For computing hike durations choose a start date as well; for a <em>BestStart!</em> estimation no start date is needed as one will be calculated for you. Both will then provide an estimated hike duration and end date, high and low temperature data, and a chart of expected temperature stress days with a map showing where the expected highest and lowest temperatures should be encountered along the trail.
       </p>
 
       <!-- FT-style 3-column control grid: Start Date | Miles per Day | Direction -->
@@ -159,17 +158,23 @@
 
       </div>
 
-      <div class="control-grid-btn">
+      <div class="control-grid-btn" style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
         <button id="durBtn" type="button" class="btn-primary">Estimate End Date and Weather Extremes</button>
+        <button id="bestStartBtn" type="button" class="btn-best-start"><em>BestStart!</em></button>
       </div>
 
       <div id="durStatus" class="status"></div>
       <div id="durResult"></div>
+      <div id="bestStartResult"></div>
 
       <!-- Temperature Extremes Results + Map -->
       <div id="durExtremesWrap" style="display:none; margin-top:16px;">
         <h2>Temperature Extremes During Your Hike</h2>
-        <div id="durExtremesMap"></div>
+
+        <div id="durExtremesHot"></div>
+        <div id="durExtremesCold" style="margin-top:12px;"></div>
+
+        <div id="durExtremesMap" style="margin-top:16px;"></div>
 
         <p class="data-attribution map-attribution">
           Mapping data provided by
@@ -180,9 +185,6 @@
           </a>
           under the Open Database License.
         </p>
-
-        <div id="durExtremesHot"></div>
-        <div id="durExtremesCold" style="margin-top:12px;"></div>
       </div>
     </section>
 
@@ -270,18 +272,20 @@
          Weather Data Notes + Resources
     ====================================================== -->
     <section class="weather-data-notes" aria-labelledby="weather-data-notes-title">
-      <h2 id="weather-data-notes-title">Weather Data Notes</h2>
+      <h2 id="weather-data-notes-title">Notes on Weather and Map Data</h2>
 
       <div class="weather-data-notes__body">
 
-        <section class="weather-data-notes__subsection" aria-labelledby="notes-on-data-title">
-          <h3 id="notes-on-data-title">Notes on Data</h3>
+        <section class="weather-data-notes__subsection" aria-labelledby="notes-on-weather-data-title">
+          <h3 id="notes-on-weather-data-title">Notes on Weather Data</h3>
 
-          <div class="weather-data-notes__content" id="notes-on-data-content">
+          <div class="weather-data-notes__content" id="notes-on-weather-data-content">
+
+            <h4>Temperature Adjustments</h4>
             <p>
               This site uses average daily maximum and minimum temperature data from the last seven years, along with <i>apparent</i> temperature data that addresses heat index and wind chill issues.
               This approach provides stability in planning values while also reflecting more recent shifts
-              in climate conditions.  We use the standard Steadman approach to these, and feel free to read more about them in the notes of the <a href="/trails/florida-trail/">Florida Trail</a> (for Heat Index) and <a href="/trails/new-england-trail/">New England Trail</a> (for Wind Chill) sites where I first incorporated each into the planning tool.
+              in climate conditions. We use the standard Steadman approach to these, and feel free to read more about them in the notes of the <a href="/trails/florida-trail/">Florida Trail</a> (for Heat Index) and <a href="/trails/new-england-trail/">New England Trail</a> (for Wind Chill) sites where I first incorporated each into the planning tool.
             </p>
             <p>
               All that being said, given that elevations do not change nearly as much on the
@@ -290,6 +294,63 @@
               algorithm to estimate changes based solely on elevation or for specific AT peaks. But those
               are in development for the Arizona Trail and (if successful) may be for the AT in future builds.
             </p>
+
+            <h4>Comfort Index and <em>BestStart!</em> Date</h4>
+            <p>
+              The <strong><em>BestStart!</em></strong> date tool uses a thermal comfort scoring system
+              modeled off of the
+              <a href="https://www.utci.org/" target="_blank" rel="noopener noreferrer">Universal Thermal Climate Index (UTCI)</a>,
+              a scientifically grounded measure of the human body's physiological response to outdoor
+              thermal conditions. Unlike a simple temperature reading, UTCI-based approaches account for
+              the combined effects of air temperature, humidity, wind, and solar radiation on perceived
+              comfort — making them far more meaningful for planning extended outdoor activity than raw
+              thermometer values alone.
+            </p>
+            <p>
+              Because our historical weather data does not include the solar radiation measurements
+              needed for a true UTCI calculation, we use the apparent temperature (the Steadman heat
+              index and wind chill already incorporated throughout this site) as a practical proxy.
+              Research has shown that apparent temperature correlates well with UTCI across many conditions and thus works well with the TrailTemps data sets. For more on the UTCI methodology, see the
+              foundational paper by
+              <a href="https://www.utci.org/resources/windsor_vers05.pdf" target="_blank" rel="noopener noreferrer">Bröde, et al. (2010)</a>
+              and the comparative analysis by
+              <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3337419/" target="_blank" rel="noopener noreferrer">Bröde, et al. (2012)</a>.
+            </p>
+            <p>
+              For scoring purposes, each day of your hike is assigned a thermal comfort tier based on
+              the apparent high and apparent low temperatures at that location and date. The five tiers are:
+            </p>
+            <ul>
+              <li><strong>Comfort Zone:</strong> Apparent high ≤ 79 °F and apparent low ≥ 48 °F. Ideal hiking conditions. Scores 10 points.</li>
+              <li><strong>Moderate Stress:</strong> Apparent high 80–90 °F or apparent low 32–47 °F. Manageable with preparation. Scores 8 points.</li>
+              <li><strong>Strong Stress:</strong> Apparent high 91–100 °F or apparent low 9–31 °F. Requires meaningful mitigation (extra water, insulation, adjusted schedule). Scores 5 points.</li>
+              <li><strong>Very Strong Stres:</strong> Apparent high 101–115 °F or apparent low −17–8 °F. Hazardous conditions for unprepared hikers. Scores 2 points.</li>
+              <li><strong>Extreme Stress:</strong> Apparent high above 115 °F or apparent low below −17 °F. Any start date producing even a single day at this level is automatically excluded from consideration.</li>
+            </ul>
+            <p>
+              Each day receives a combined score (the average of its heat and cold tier scores) and
+              those daily scores are summed across the entire hike. The start date with the highest
+              total score is recommended as the <strong><em>BestStart!</em></strong> date. When a day falls
+              outside the Comfort Zone, the tier displayed in the Thermal Comfort Profile reflects
+              whichever of the two stresses (heat or cold) is more extreme relative to its zone.
+            </p>
+            <p>
+              The scoring treats heat stress and cold stress symmetrically; a day scoring 5 points for
+              heat counts the same as a day scoring 5 points for cold. This is intentional. One might
+              expect cold stress to deserve less weight for hikers, since the exertion of hiking generates
+              significant body heat that partially offsets ambient cold. That logic has merit, but hikers
+              vary widely in pace, clothing, and planned schedule. Also, some hike early mornings or evenings
+              to beat the heat, some layer up aggressively, and others choose a lighter pack at the cost of
+              warmth. Any asymmetric weighting would embed assumptions about hiker behavior that are too
+              subjective and variable to be defensible as a general recommendation. The symmetric
+              approach lets you interpret the result and adjust for your own style.
+            </p>
+            <p>
+              Note that this tool uses historical planning averages, not a forecast. It identifies the
+              statistically most comfortable time of year to hike based on the past seven years of
+              weather data; actual conditions will always vary.
+            </p>
+
           </div>
         </section>
 
@@ -301,24 +362,35 @@
               <li>
                 <a href="https://appalachiantrail.org/experience/hike-the-trail/essential-skills/safety/weather-hazards/"
                    target="_blank" rel="noopener noreferrer">
-                  <strong>AT Weather Hazards</strong>
+                  <strong>AT Weather Hazards:</strong>
                 </a>
-                – Learn more about weather hazards along the AT from the Appalachian Trail Conservancy,
+                Learn more about weather hazards along the AT from the Appalachian Trail Conservancy,
                 including how to prepare for and respond to them.
               </li>
 
               <li>
                 <a href="https://www.atweather.org/" target="_blank" rel="noopener noreferrer">
-                  <strong>ATWeather</strong>
+                  <strong>ATWeather:</strong>
                 </a>
-                – Obtain current weather forecasts for individual camping and shelter sites.
+                Provides 7-day weather forecasts at specific sites (e.g., shelters and campgrounds) along the Appalachain
+                and Pacific Crest Trails.  Includes sunrise and sunset hours for timing daylight hikes.
               </li>
 
               <li>
                 <a href="https://www.mountain-forecast.com/" target="_blank" rel="noopener noreferrer">
-                  <strong>Mountain-Forecast</strong>
+                  <strong>Mountain-Forecast:</strong>
                 </a>
-                – Obtain precise weather forecasts at high elevation and other highly variable weather areas.
+                Obtain precise weather forecasts at high elevation and other highly variable weather areas.
+              </li>
+              
+              <li>
+                <a href="https://www.postholer.com/trail-animals/Appalachian-Trail/3" target="_blank" rel="noopener noreferrer">
+                  <strong>Wildlife of the AT:</strong>
+                </a>
+                Comprehensive guide to the diversity of animals you may encounter along the trail, a 
+                plentiful number given the diverse range of ecosystems the PCT traverses. Lists 
+                74 species of amphibians, 233 species of birds, 83 species of mammals and 45 species of reptiles, 
+                as well as the approximate area hikers may encounter them.
               </li>
             </ul>
           </div>

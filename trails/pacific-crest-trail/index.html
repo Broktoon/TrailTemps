@@ -3,40 +3,47 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>National Scenic Trail Weather Planner — Pacific Crest Trail — Coming Soon</title>
+  <title>National Scenic Trail Weather Planner — Pacific Crest Trail</title>
+
   <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
   <style>
-    .coming-wrap { max-width: 900px; margin: 0 auto; padding: 24px 16px 40px; }
-    .coming-card { padding: 18px; border: 1px solid rgba(0,0,0,0.12); border-radius: 14px; background: rgba(255,255,255,0.9); }
-    .logo { width: 180px; height: 180px; object-fit: contain; display:block; margin: 10px auto 14px; }
-    .center { text-align: center; }
+    #pctSectionInfo {
+      font-size: 0.82rem;
+      color: #555;
+      font-style: italic;
+      margin: 2px 0 0 0;
+      min-height: 1.1em;
+    }
+    #pctMileInput { width: 6rem; }
   </style>
 </head>
 
 <body data-trail="pacific-crest-trail">
-<script>window.SITE_BASE = "";</script>
-<script>
-  window.TRAIL_SLUG = "pacific-crest-trail";
-</script>
-<script defer src="/js/trail-nav.js"></script>
-<script defer src="js/app.js"></script>
+
 <header class="site-header header-with-trail">
   <div class="header-inner">
 
     <div class="header-text">
       <div class="title-with-logo">
-        <img src="/images/Pct-logo.svg.png"
-             alt="Pacific Crest Trail logo"
+        <img src="/images/TrailTemps_Logo.png"
+             alt="TrailTemps logo"
              class="trail-page-logo">
 
         <div class="title-stack">
           <h1>Pacific Crest Trail</h1>
           <div class="sub-brand"><em>TrailTemps</em> - National Scenic Trail Weather Planner</div>
         </div>
+
+        <img src="/images/Pct-logo.svg.png"
+             alt="Pacific Crest Trail logo"
+             class="trail-page-logo">
       </div>
 
       <p class="sub">
-        Coming soon — this page is reserved for the PCT version of the planner.
+        <br>
+        Time your Pacific Crest Trail hike, find the <em>BestStart!</em> date to minimize hot and cold temperature stress, calculate your time of completion, identify temperature extremes during that time, and get 5-day weather forecasts for any point along the trail. The two main tools are directly below, with various notes and other resources following at the bottom of the page.
       </p>
     </div>
 
@@ -47,27 +54,397 @@
   </div>
 </header>
 
-  <main class="coming-wrap">
-    <div class="coming-card center">
-      <img class="logo" src="/images/Pct-logo.svg.png" alt="Pacific Crest Trail logo">
-      <h2>Coming Soon</h2>
-      <p>This page is reserved for the PCT version of the planner.</p>
-      <p><a href="index.html">← Back to trail selector</a></p>
-    </div>
+  <main>
+
+    <!-- =====================================================
+         Card 1: Hike Duration / End Date Calculator
+         ===================================================== -->
+    <section class="controls" aria-label="Hike duration calculator">
+      <h2>Hike Duration and <em>BestStart!</em> Temperature Management Calculator</h2>
+      <p class="card-instructions">
+        Select your expected daily mileage and travel direction. For computing hike durations choose a start date as well; for a <em>BestStart!</em> estimation no start date is needed as one will be calculated for you. Both will then provide an estimated hike duration and end date, high and low temperature data, and a chart of expected temperature stress days with a map showing where the expected highest and lowest temperatures should be encountered along the trail.
+      </p>
+
+      <div class="control-row">
+
+        <!-- Miles per Day -->
+        <div class="ft-select-col">
+          <label for="durMilesPerDay">Miles per Day:</label>
+          <input id="durMilesPerDay" type="number" inputmode="decimal"
+                 min="1" step="1" placeholder="e.g., 20" style="width:6rem;" />
+        </div>
+
+        <!-- Direction -->
+        <div class="ft-select-col">
+          <label for="durDirectionSelect">Direction:</label>
+          <select id="durDirectionSelect">
+            <option value="nobo">Northbound &mdash; Campo (Mexican Border) &rarr; Manning Park (Canadian Border)</option>
+            <option value="sobo">Southbound &mdash; Manning Park (Canadian Border) &rarr; Campo (Mexican Border)</option>
+          </select>
+        </div>
+
+        <!-- Start Date -->
+        <div class="ft-select-col">
+          <label>Start Date:</label>
+          <span style="display:flex; gap:6px; align-items:center;">
+            <select id="durMonthSelect"></select>
+            <select id="durDaySelect"></select>
+          </span>
+        </div>
+
+      </div><!-- /.control-row -->
+
+      <div style="margin-top:12px; width:100%;">
+        <button id="durBtn" type="button" class="btn-primary">Estimate End Date and Weather Extremes</button>
+      </div>
+
+      <div id="durStatus" class="status" style="width:100%;"></div>
+      <div id="durResult" style="width:100%;"></div>
+
+      <!-- Temperature Extremes Results + Map -->
+      <div id="durExtremesWrap" style="display:none; margin-top:16px;">
+        <h2>Temperature Extremes During Your Hike</h2>
+        <div id="durExtremesMap"></div>
+
+        <p class="data-attribution map-attribution">
+          Mapping data provided by
+          <a href="https://www.openstreetmap.org/copyright"
+             target="_blank" rel="noopener">OpenStreetMap</a>
+          under the Open Database License.
+        </p>
+
+        <div id="durExtremesHot"></div>
+        <div id="durExtremesCold" style="margin-top:12px;"></div>
+      </div>
+    </section>
+
+    <hr class="card-sep" />
+
+    <!-- =====================================================
+         Card 2: Weather Planner
+         ===================================================== -->
+    <section class="controls" aria-label="Weather planner controls">
+      <div class="section-title-block">
+        <h2>Weather Planner</h2>
+        <p class="data-attribution">
+          Weather data provided by
+          <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a>
+          under the 4.0 International (CC BY 4.0) license.
+        </p>
+      </div>
+
+      <p class="card-instructions">
+        Select a geographic region, then enter a trail mile within that region's range.
+        Choose a planning date to receive current conditions, a 5-day forecast, and a 7-year
+        average for that date and location. Miles are measured from the southern terminus
+        (Campo, CA) northward to Manning Park, BC.
+      </p>
+
+      <div class="control-row">
+
+        <!-- Planning Date -->
+        <div class="ft-select-col">
+          <label>Planning Date:</label>
+          <span style="display:flex; gap:6px; align-items:center;">
+            <select id="monthSelect"></select>
+            <select id="daySelect"></select>
+          </span>
+        </div>
+
+        <!-- Section Selector -->
+        <div class="ft-select-col">
+          <label for="sectionSelect">Region:</label>
+          <select id="sectionSelect">
+            <option value="socal">Southern California (CA)</option>
+            <option value="central-cal">Central California (CA)</option>
+            <option value="norcal">Northern California (CA)</option>
+            <option value="oregon">Oregon (OR)</option>
+            <option value="washington">Washington (WA)</option>
+          </select>
+        </div>
+
+        <!-- Mile Input + Range Indicator -->
+        <div class="ft-select-col">
+          <label for="pctMileInput">Region Mile:</label>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <input id="pctMileInput" type="text" inputmode="numeric"
+                   pattern="[0-9]*" placeholder="e.g., 800" />
+            <p id="pctSectionInfo" style="margin:0; font-size:0.82rem; color:#555; font-style:italic; white-space:nowrap;"></p>
+          </div>
+        </div>
+
+        <!-- Get Weather Button -->
+        <div style="width:100%; margin-top:6px;">
+          <button id="goBtn" type="button" class="btn-primary">Get Weather</button>
+        </div>
+
+      </div><!-- /.control-row -->
+
+      <div id="weatherStatus" class="status"></div>
+
+      <section class="map-wrap" id="weatherMapWrap" style="display:none;">
+        <div id="map" aria-label="Map showing selected Pacific Crest Trail point"></div>
+
+        <p class="data-attribution map-attribution">
+          Mapping data provided by
+          <a href="https://www.openstreetmap.org/copyright"
+             target="_blank" rel="noopener">OpenStreetMap</a>
+          under the Open Database License.
+        </p>
+      </section>
+
+    </section>
+
+    <section class="grid">
+      <div id="planningSummaryBlock"></div>
+      <div id="currentBlock"></div>
+      <div id="forecastBlock"></div>
+    </section>
+
+    <hr class="card-sep" />
+
+    <!-- =====================================================
+         Notes and Resources
+         ===================================================== -->
+    <section class="weather-data-notes" aria-labelledby="weather-data-notes-title">
+      <h2 id="weather-data-notes-title">Notes on Weather and Map Data</h2>
+
+      <div class="weather-data-notes__body">
+
+        <section class="weather-data-notes__subsection" aria-labelledby="notes-section-conditions-title">
+          <h3 id="notes-section-conditions-title">Section Conditions</h3>
+          <div class="weather-data-notes__content">
+            <p>
+              The Pacific Crest Trail spans over 2,650 miles through five distinct climate zones,
+              from the Sonoran Desert scrub near the Mexican border to the volcanic peaks and
+              temperate rainforests of the North Cascades and Olympic-adjacent terrain in Washington.
+              No other National Scenic Trail presents such a wide range of weather challenges within
+              a single thru-hike.
+            </p>
+            <ul>
+              <li>
+                <strong>Southern California (miles 0&ndash;702):</strong> Heat and water are the
+                dominant concerns, particularly in the desert sections from Campo through the Mojave.
+                Apparent temperatures exceeding 100 &deg;F are common in May and June. Water sources
+                can be 20+ miles apart in dry years. Early-season hikers starting in late March or
+                April typically avoid the worst heat, but snowpack at higher elevations (San Jacinto,
+                San Bernardino Mountains, San Gabriel Mountains) can make some sections impassable
+                or dangerous in heavy snow years.
+              </li>
+              <li>
+                <strong>Central California / Sierra Nevada (miles 702&ndash;1,092):</strong> The
+                Sierra Nevada presents the most challenging weather on the entire trail. High passes
+                (Forester Pass at 13,153 ft, Glen Pass at 11,978 ft, Pinchot Pass at 12,130 ft,
+                Mather Pass at 12,100 ft, Muir Pass at 11,955 ft, and others) hold snow well into
+                July in average years and through August in heavy snow years. Afternoon thunderstorms
+                are frequent from July onward. Night temperatures at elevation can drop below freezing
+                any month of the year.
+              </li>
+              <li>
+                <strong>Northern California (miles 1,092&ndash;1,702):</strong> More forested and
+                moderate than the Sierra, but subject to late-season heat waves, drought, and
+                increasingly frequent wildfire smoke events. The Hat Creek Rim stretch (near mile
+                1,360) is notorious for its 30-mile exposed waterless section in full sun. Volcanic
+                terrain around Mt. Shasta and Mt. Lassen adds unique microclimate variability.
+              </li>
+              <li>
+                <strong>Oregon (miles 1,702&ndash;2,147):</strong> Generally the most forgiving
+                section weather-wise, with moderate summer temperatures and abundant water. The
+                Crater Lake Rim and the high plateau between the Cascades peaks can see sudden
+                afternoon storms. Snow lingers on North Sister and other high-elevation crossings
+                early in the season.
+              </li>
+              <li>
+                <strong>Washington (miles 2,147&ndash;2,653):</strong> The North Cascades demand
+                respect. High passes such as Glacier Pass and Hart&rsquo;s Pass can hold snow into
+                August. Rain and cloud cover are the norm even in summer. Hikers finishing in late
+                September or October face a real risk of early-season snowstorm closures at elevation.
+                The Canadian border crossing via the Monument 78 terminus adds a remote final section
+                requiring careful planning.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="weather-data-notes__subsection" aria-labelledby="notes-temp-comfort-title">
+          <h3 id="notes-temp-comfort-title">Temperature and Comfort</h3>
+          <div class="weather-data-notes__content">
+            <p>
+              This site reports both actual temperatures and apparent temperatures (heat index and
+              wind chill, calculated using the Steadman methodology). The apparent temperature
+              reflects how conditions actually feel to the body accounting for humidity and wind,
+              and is the basis for the thermal comfort tiers shown in the <em>BestStart!</em>
+              output. Detailed explanations of how heat index,
+              wind chill, and the thermal comfort scoring system work are provided on the
+              <a href="/trails/florida-trail/" target="_blank" rel="noopener noreferrer">Florida Trail</a>,
+              <a href="/trails/new-england-trail/" target="_blank" rel="noopener noreferrer">New England Trail</a>,
+              and
+              <a href="/trails/appalachian-trail/" target="_blank" rel="noopener noreferrer">Appalachian Trail</a>
+              pages, respectively.
+            </p>
+          </div>
+        </section>
+
+
+        <section class="weather-data-notes__subsection" aria-labelledby="notes-elevation-title">
+          <h3 id="notes-elevation-title">Elevation Correction</h3>
+          <div class="weather-data-notes__content">
+            <p>
+              Because the PCT crosses terrain with extreme elevation variation (from below 1,000 ft
+              in desert canyons to over 13,000 ft at Sierra passes), the Open-Meteo weather grid
+              cells used for historical planning averages may sit significantly above or below the
+              actual trail location. This tool applies an elevation correction to apparent temperature
+              estimates: approximately &minus;3.5 &deg;F per 1,000 ft when the trail is above the
+              grid, and +3.5 &deg;F per 1,000 ft when below, with a 300 ft minimum threshold before
+              any correction fires. Actual temperatures are not adjusted; only the apparent
+              (feels-like) temperature is corrected. These are discussed in greater detail on the <a href="/trails/arizona-trail/" target="_blank" rel="noopener noreferrer">Arizona Trail</a> page, where the same elevation correction is applied.
+            </p>
+          </div>
+        </section>
+
+        <section class="weather-data-notes__subsection" aria-labelledby="notes-on-map-data-title">
+          <h3 id="notes-on-map-data-title">Notes on Map Data</h3>
+          <div class="weather-data-notes__content">
+            <p>
+              The Pacific Crest Trail runs from the Mexican border at Campo, California,
+              to the Canadian border at Manning Park, British Columbia, passing through California,
+              Oregon, and Washington. Trail centerline geometry is provided by the
+              <strong>Pacific Crest Trail Association (PCTA)</strong> and used here under their
+              non-commercial data sharing terms. For authoritative navigation, always use PCTA
+              maps or the FarOut app &mdash; this map is intended for weather planning
+              purposes only.
+            </p>
+            <ul class="weather-data-notes__links">
+              <li>
+                <strong>Trail miles:</strong> Displayed mileage is measured from Campo, CA
+                (mile 0) northward to Manning Park, BC (mile 2,653). Mile markers correspond
+                to PCTA official mileposts where possible, with minor interpolation due to
+                the simplified trail geometry used for this planner.
+              </li>
+              <li>
+                <strong>Permits:</strong> Multiple permit systems apply to the PCT, including
+                a long-distance permit from the PCTA, a Mount Whitney Zone permit from
+                Inyo National Forest (if summiting), and a Wilderness Permit for entry into
+                Yosemite and other national parks. Washington and Oregon have additional
+                Cascades Volcanoes pass requirements. Check the PCTA website for current
+                requirements before your hike.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="weather-data-notes__subsection" aria-labelledby="additional-resources-title">
+          <h3 id="additional-resources-title">Additional Resources</h3>
+          <div class="weather-data-notes__content">
+            <ul class="weather-data-notes__links">
+              <li>
+                <a href="https://www.pcta.org/" target="_blank" rel="noopener noreferrer">
+                  <strong>Pacific Crest Trail Association (PCTA):</strong>
+                </a>
+                The primary stewardship and permitting organization for the PCT. Includes
+                permit applications, trail conditions, closures, water reports, resupply
+                resources, and detailed section guides.
+              </li>
+              <li>
+                <a href="https://www.pcta.org/discover-the-trail/maps/pct-data/"
+                   target="_blank" rel="noopener noreferrer">
+                  <strong>PCTA GIS Data:</strong>
+                </a>
+                Official PCT centerline data used for the trail map on this page.
+              </li>
+              <li>
+                <a href="https://www.postholer.com/trail-animals/Pacific-Crest-Trail/1" target="_blank" rel="noopener noreferrer">
+                  <strong>Wildlife of the PCT:</strong>
+                </a>
+                Comprehensive guide to the diversity of animals you may encounter along the trail, a 
+                plentiful number given the diverse range of ecosystems the PCT traverses. Lists 
+                50 species of amphibians, 315 species of birds, 175 species of mammals and 75 species of reptiles, 
+                as well as the approximate area hikers may encounter them.
+              </li>
+              <li>
+                <a href="https://www.atweather.org/"
+                   target="_blank" rel="noopener noreferrer">
+                  <strong>Appalachian and Pacific Crest Trail Weather:</strong>
+                </a>
+                Provides 7-day weather forecasts at specific sites (e.g., shelters and campgrounds) along the Appalachain
+                and Pacific Crest Trails.  Includes sunrise and sunset hours for timing daylight hikes.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+      </div>
+    </section>
+
   </main>
 
-<!-- Donation block -->
-<div class="donation-block">
-  <p class="donation-text">
-    Thank you for visiting and trying these tools. They are a labor of love for me, and I make no money from this site. However, if you wish to help support the site please consider
-    <a href="https://www.buymeacoffee.com/ihrhzL0ZC5" target="_blank" rel="noopener noreferrer">Buying Me a Coffee</a> — donations of $1, $5, or even $20 are deeply appreciated. I promise every cent will go to the ongoing operations, maintenance, development, and expansion of the site.
-  </p>
-  <a class="bmc-button" href="https://www.buymeacoffee.com/ihrhzL0ZC5" target="_blank" rel="noopener noreferrer" aria-label="Buy Me a Coffee">Buy Me a Coffee</a>
-</div>
-
   <footer class="site-footer">
-    <div class="small">Informational only.</div>
+    <div class="small">
+      Informational only. Always verify conditions and heed local advisories.
+    </div>
   </footer>
-  
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>window.SITE_BASE = "";</script>
+  <script>window.TRAIL_SLUG = "pacific-crest-trail";</script>
+
+  <!-- -------------------------------------------------------
+       Inline bootstrap: PCT section metadata for immediate
+       UI population before pct_meta.json finishes loading.
+       ------------------------------------------------------- -->
+  <script>
+    window.PCT_SECTIONS_BOOTSTRAP = [
+      { id: "socal",       name: "Southern California", mile_start:    0, mile_end:  702 },
+      { id: "central-cal", name: "Central California",  mile_start:  702, mile_end: 1092 },
+      { id: "norcal",      name: "Northern California", mile_start: 1092, mile_end: 1702 },
+      { id: "oregon",      name: "Oregon",              mile_start: 1702, mile_end: 2147 },
+      { id: "washington",  name: "Washington",          mile_start: 2147, mile_end: 2653 }
+    ];
+
+    function pctUpdateSectionInfo() {
+      const sectionId = document.getElementById("sectionSelect")?.value;
+      const infoEl    = document.getElementById("pctSectionInfo");
+      const mileInput = document.getElementById("pctMileInput");
+      if (!sectionId || !infoEl) return;
+
+      const sec = window.PCT_SECTIONS_BOOTSTRAP.find(s => s.id === sectionId);
+      if (!sec) return;
+
+      infoEl.textContent = "Region Range: " + sec.mile_start + "\u2013" + sec.mile_end + " Miles";
+
+      if (mileInput) {
+        mileInput.placeholder = "e.g., " + Math.round((sec.mile_start + sec.mile_end) / 2);
+        const cur = Number(mileInput.value);
+        if (cur < sec.mile_start || cur > sec.mile_end) mileInput.value = "";
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const sectionSel = document.getElementById("sectionSelect");
+      if (sectionSel) {
+        pctUpdateSectionInfo();
+        sectionSel.addEventListener("change", pctUpdateSectionInfo);
+      }
+    });
+  </script>
+
+  <script defer src="/js/trail-nav.js"></script>
+  <script defer src="/js/shared-utils.js"></script>
+  <script defer src="js/app.js"></script>
+
+  <!-- Donation block -->
+  <div class="donation-block">
+    <p class="donation-text">
+      Thank you for visiting and trying these tools. They are a labor of love for me, and I make
+      no money from this site. However, if you wish to help support the site please consider
+      <a href="https://www.buymeacoffee.com/ihrhzL0ZC5" target="_blank" rel="noopener noreferrer">Buying Me a Coffee</a>
+      &mdash; donations of $1, $5, or even $20 are deeply appreciated. I promise every cent will go to
+      the ongoing operations, maintenance, development, and expansion of the site.
+    </p>
+    <a class="bmc-button" href="https://www.buymeacoffee.com/ihrhzL0ZC5"
+       target="_blank" rel="noopener noreferrer" aria-label="Buy Me a Coffee">Buy Me a Coffee</a>
+  </div>
+
 </body>
 </html>

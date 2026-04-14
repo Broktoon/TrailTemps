@@ -47,7 +47,7 @@
 
       <p class="sub">
         <br>
-        Time your Pacific Northwest Trail hike, find temperature extremes during that time, and get 5-day weather forecasts for any point along the trail. The two main tools are directly below, with various notes and other resources following at the bottom of the page.
+        Time your Pacific Northwest Trail hike, find the <em>BestStart!</em> date to minimize hot and cold temperature stress, calculate your time of completion, identify temperature extremes during that time, and get 5-day weather forecasts for any point along the trail. The two main tools are directly below, with various notes and other resources following at the bottom of the page.
       </p>
     </div>
 
@@ -64,13 +64,10 @@
          Card 1: Hike Duration / End Date Calculator
          ===================================================== -->
     <section class="controls" aria-label="Hike duration calculator">
-      <h2>Hike Duration (End Date) and Expected Weather Extremes</h2>
+      <h2>Hike Duration and <em>BestStart!</em> Temperature Management Calculator</h2>
       <p class="card-instructions">
-        Choose a direction, a start month/day, and your expected miles per day.
-        You will receive an estimated hike duration and end date, along with a map showing
-        where the expected highest and lowest temperatures will be encountered.
-        Note: the route includes a Puget Sound ferry crossing (Coupeville &rarr; Port Townsend,
-        ~30 min) that is not counted in hiking miles.
+        Select your expected daily mileage and travel direction. For computing hike durations choose a start date as well; for a <em>BestStart!</em> estimation no start date is needed as one will be calculated for you. Both will then provide an estimated hike duration and end date, high and low temperature data, and a chart of expected temperature stress days with a map showing where the expected highest and lowest temperatures should be encountered along the trail.
+        Note: the route includes a Puget Sound ferry crossing (Coupeville &rarr; Port Townsend, ~30 min) that is not counted in hiking miles.
       </p>
 
       <div class="control-row">
@@ -103,10 +100,12 @@
 
       <div style="margin-top: 12px; width: 100%;">
         <button id="durBtn" type="button" class="btn-primary">Estimate End Date and Weather Extremes</button>
+        <button id="bestStartBtn" type="button" class="btn-best-start"><em>BestStart!</em></button>
       </div>
 
       <div id="durStatus" class="status" style="width:100%;"></div>
       <div id="durResult" style="width:100%;"></div>
+      <div id="bestStartResult"></div>
 
       <!-- Temperature Extremes Results + Map -->
       <div id="durExtremesWrap" style="display:none; margin-top:16px;">
@@ -241,9 +240,9 @@
               year) and hikers should plan for persistent moisture and cool temperatures even in summer.
             </p>
             <p>
-              While there are signifciant elevation changes overall throughout the Trail's length, there are not the 
+              While there are signifciant elevation changes overall throughout the Trail's length, there are not the
               same type of abrupt changes, such as isolated summits and deep canyons, for which there may be significant
-              differences between the trail's location and the nearest weather station making forecasted unreliable.  
+              differences between the trail's location and the nearest weather station making forecasted unreliable.
               Since that is not a large problem we have not incorporated any extra factors for elevation (like those for the
               Arizona and Pacific Crest Trails), though as always local conditions and microclimates can vary.
             </p>

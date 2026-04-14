@@ -1,0 +1,66 @@
+{
+  "trail": {
+    "name": "Pacific Crest Trail",
+    "total_trail_miles": 2653.0,
+    "map_center": [
+      40.5,
+      -120.0
+    ],
+    "map_zoom": 5,
+    "termini": {
+      "south": "Campo, CA (Mexican Border)",
+      "north": "Manning Park, BC (Canadian Border)"
+    }
+  },
+  "sections": [
+    {
+      "id": "socal",
+      "name": "Southern California",
+      "state": "CA",
+      "mile_start": 0,
+      "mile_end": 702
+    },
+    {
+      "id": "central-cal",
+      "name": "Central California",
+      "state": "CA",
+      "mile_start": 702,
+      "mile_end": 1092
+    },
+    {
+      "id": "norcal",
+      "name": "Northern California",
+      "state": "CA",
+      "mile_start": 1092,
+      "mile_end": 1702
+    },
+    {
+      "id": "oregon",
+      "name": "Oregon",
+      "state": "OR",
+      "mile_start": 1702,
+      "mile_end": 2147
+    },
+    {
+      "id": "washington",
+      "name": "Washington",
+      "state": "WA",
+      "mile_start": 2147,
+      "mile_end": 2653
+    }
+  ],
+  "direction_options": [
+    {
+      "id": "nobo",
+      "label": "Northbound — Campo (Mexican Border) → Manning Park (Canadian Border)",
+      "total_miles": 2653.0,
+      "is_nobo": true
+    },
+    {
+      "id": "sobo",
+      "label": "Southbound — Manning Park (Canadian Border) → Campo (Mexican Border)",
+      "total_miles": 2653.0,
+      "is_nobo": false
+    }
+  ]
+}

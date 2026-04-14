@@ -232,3 +232,283 @@ function getSelectedMonthDay(monthSelId, daySelId) {
   if (!m || !d) return null;
   return `${pad2(m)}-${pad2(d)}`;
 }
+
+/* -------------------------------------------------------
+   Day-of-year index helper
+   Maps "MM-DD" to 0–364 using fixed non-leap year 2021.
+   Used by all trail app.js files for normals lookups.
+------------------------------------------------------- */
+
+function dayIndexFromMonthDay(monthDay) {
+  const [mmStr, ddStr] = monthDay.split("-");
+  const mm = Number(mmStr), dd = Number(ddStr);
+  const dt    = new Date(2021, mm - 1, dd);
+  const start = new Date(2021, 0, 1);
+  return Math.max(0, Math.min(364, Math.round((dt - start) / 86400000)));
+}
+
+/* -------------------------------------------------------
+   UTCI thermal comfort scoring
+   Tier-based proxy for the Universal Thermal Climate Index.
+   All thresholds are in apparent °F.
+------------------------------------------------------- */
+
+function utciScoreHigh(appHigh) {
+  if (appHigh > 115) return 0;   // Extreme heat — eliminates start date
+  if (appHigh > 100) return 2;   // Very Strong heat
+  if (appHigh > 90)  return 5;   // Strong heat
+  if (appHigh > 79)  return 8;   // Moderate heat
+  return 10;                      // Comfort zone
+}
+
+function utciScoreLow(appLow) {
+  if (appLow < -17) return 0;   // Extreme cold — eliminates start date
+  if (appLow < 9)   return 2;   // Very Strong cold
+  if (appLow < 32)  return 5;   // Strong cold
+  if (appLow < 48)  return 8;   // Moderate cold
+  return 10;                     // Comfort zone
+}
+
+function utciHeatDepth(score, appHigh) {
+  if (score === 8) return (appHigh - 80) / 11;
+  if (score === 5) return (appHigh - 91) / 10;
+  if (score === 2) return (appHigh - 101) / 15;
+  return 0;
+}
+
+function utciColdDepth(score, appLow) {
+  if (score === 8) return (48 - appLow) / 16;
+  if (score === 5) return (32 - appLow) / 23;
+  if (score === 2) return (9  - appLow) / 26;
+  return 0;
+}
+
+function scoreToHeatCat(score) {
+  if (score === 8) return "moderate-heat";
+  if (score === 5) return "strong-heat";
+  if (score === 2) return "very-strong-heat";
+  return "extreme-heat";
+}
+
+function scoreToColdCat(score) {
+  if (score === 8) return "moderate-cold";
+  if (score === 5) return "strong-cold";
+  if (score === 2) return "very-strong-cold";
+  return "extreme-cold";
+}
+
+/**
+ * Assigns a hiking day to one of 9 UTCI thermal categories.
+ * Assumes extreme days (score 0) have already been filtered out by runBestStartShared.
+ */
+function utciCategoryDay(highScore, lowScore, appHigh, appLow) {
+  if (highScore === 10 && lowScore === 10) return "comfort";
+  if (highScore === 0) return "extreme-heat";
+  if (lowScore  === 0) return "extreme-cold";
+  if (highScore < lowScore) return scoreToHeatCat(highScore);
+  if (lowScore  < highScore) return scoreToColdCat(lowScore);
+  const hd = utciHeatDepth(highScore, appHigh);
+  const cd = utciColdDepth(lowScore,  appLow);
+  if (hd > cd) return scoreToHeatCat(highScore);
+  if (cd > hd) return scoreToColdCat(lowScore);
+  return scoreToHeatCat(highScore);  // true tie: assign heat
+}
+
+/**
+ * Count UTCI thermal comfort categories across all hike points.
+ * hikePoints  — [{date, point}, ...]
+ * getNormals  — (point) => {app_hi:[365], app_lo:[365], ...} | null
+ * Returns an object with day counts for each of the 9 UTCI categories.
+ */
+function computeUtciCounts(hikePoints, getNormals) {
+  const counts = {
+    "extreme-cold": 0, "very-strong-cold": 0, "strong-cold": 0, "moderate-cold": 0,
+    "comfort": 0,
+    "moderate-heat": 0, "strong-heat": 0, "very-strong-heat": 0, "extreme-heat": 0
+  };
+  for (const { date, point } of hikePoints) {
+    const normals = getNormals(point);
+    if (!normals?.app_hi?.length) continue;
+    const idx     = dayIndexFromMonthDay(toISODate(date).slice(5));
+    const appHigh = normals.app_hi[idx];
+    const appLow  = normals.app_lo[idx];
+    if (!Number.isFinite(appHigh) || !Number.isFinite(appLow)) continue;
+    const hs = utciScoreHigh(appHigh);
+    const ls = utciScoreLow(appLow);
+    counts[utciCategoryDay(hs, ls, appHigh, appLow)]++;
+  }
+  return counts;
+}
+
+/**
+ * Unified output renderer for the duration/BestStart calculator section.
+ * Replaces per-trail renderDurExtremesBlocks.
+ *
+ * hottest / coldest — rec objects: { date, point, avgHigh, avgLow, appHigh, appLow, rhHigh, rhLow }
+ * opts:
+ *   startDate      — Date or null
+ *   endDate        — Date or null
+ *   distanceMiles  — number or null
+ *   durationDays   — number or null
+ *   startDateLabel — string (default "Start Date"; may contain HTML e.g. "<em>BestStart!</em> Date")
+ *   utciCounts     — counts object or null (shows "—" when null)
+ *   formatLocation — (rec) => string  — trail-specific location label
+ *   durationNote   — optional HTML string shown below duration row (e.g. NTT travel days)
+ *   warningHtml    — optional HTML string shown below duration table (e.g. AT Katahdin warning)
+ */
+function renderDurExtremesBlocksShared(hottest, coldest, opts = {}) {
+  const {
+    startDate      = null,
+    endDate        = null,
+    distanceMiles  = null,
+    durationDays   = null,
+    startDateLabel = "Start Date",
+    utciCounts     = null,
+    formatLocation = (rec) => rec.point?.id || "Unknown",
+    durationNote   = "",
+    warningHtml    = ""
+  } = opts;
+
+  // Clear legacy divs
+  setHtmlIfExists("durExtremesCold", "");
+  if (el("durResult"))       el("durResult").innerHTML       = "";
+  if (el("bestStartResult")) el("bestStartResult").innerHTML = "";
+
+  if (!hottest || !coldest) {
+    setHtmlIfExists("durExtremesHot", "<p>Temperature extremes unavailable \u2014 historical normals not loaded.</p>");
+    return;
+  }
+
+  // 1. Duration summary table
+  const startStr = startDate
+    ? startDate.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" }) : "\u2014";
+  const endStr = endDate
+    ? endDate.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" }) : "\u2014";
+
+  const durHtml = `
+    <table style="width:100%; margin-bottom:4px;">
+      <tr>
+        <th style="width:25%;">${startDateLabel}</th>
+        <th style="width:25%;">Estimated End Date</th>
+        <th style="width:25%;">Distance</th>
+        <th style="width:25%;">Estimated Duration</th>
+      </tr>
+      <tr>
+        <td>${startStr}</td>
+        <td>${endStr}</td>
+        <td>${distanceMiles != null ? fmtMile(distanceMiles) + " miles" : "\u2014"}</td>
+        <td>${durationDays != null ? durationDays + " days" : "\u2014"}</td>
+      </tr>
+    </table>
+    ${durationNote ? `<p style="margin:2px 0 6px; font-size:0.88rem; color:#555;">${durationNote}</p>` : ""}
+    ${warningHtml}`;
+
+  // 2. UTCI thermal comfort profile
+  const UTCI_COLS = [
+    { key: "extreme-cold",     label: "Extreme Cold",     style: "background:#001e70;color:#fff;" },
+    { key: "very-strong-cold", label: "Very Strong Cold", style: "background:#0044cc;color:#fff;" },
+    { key: "strong-cold",      label: "Strong Cold",      style: "background:#3377ff;color:#fff;" },
+    { key: "moderate-cold",    label: "Moderate Cold",    style: "background:#99bbff;color:#000;" },
+    { key: "comfort",          label: "Comfort Zone",     style: "background:#2e7a2e;color:#fff;" },
+    { key: "moderate-heat",    label: "Moderate Heat",    style: "background:#ffcc66;color:#000;" },
+    { key: "strong-heat",      label: "Strong Heat",      style: "background:#ff8800;color:#fff;" },
+    { key: "very-strong-heat", label: "Very Strong Heat", style: "background:#cc2200;color:#fff;" },
+    { key: "extreme-heat",     label: "Extreme Heat",     style: "background:#660000;color:#fff;" },
+  ];
+  const headerCells = UTCI_COLS.map(c =>
+    `<th style="${c.style} padding:5px 8px; font-size:0.78rem; font-weight:600;">${c.label}</th>`
+  ).join("");
+  const dataCells = UTCI_COLS.map(c =>
+    `<td style="text-align:center; padding:5px 8px;">${utciCounts ? (utciCounts[c.key] ?? 0) : "\u2014"}</td>`
+  ).join("");
+  const utciHtml = `
+    <h3>Thermal Comfort Profile \u2014 Days on Trail</h3>
+    <div style="overflow-x:auto; margin-bottom:12px;">
+      <table style="border-collapse:collapse; min-width:620px;">
+        <tr>${headerCells}</tr>
+        <tr>${dataCells}</tr>
+      </table>
+    </div>`;
+
+  // 3. Side-by-side extremes
+  function extremeCols(rec) {
+    const niceDate = rec.date.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+    const location = formatLocation(rec);
+    return `
+      <tr><th>Date</th><td colspan="3">${niceDate}</td></tr>
+      <tr><th>Location</th><td colspan="3">${location}</td></tr>
+      <tr><th></th><th style="background:#f0f0f0;">Actual Temp</th><th style="background:#f0f0f0;">Apparent Temp</th><th style="background:#f0f0f0;">Rel. Humidity</th></tr>
+      <tr><th>Anticipated High</th><td>${fmtTemp(rec.avgHigh)}</td><td>${fmtTemp(rec.appHigh)}</td><td>${fmtRh(rec.rhHigh)}</td></tr>
+      <tr><th>Anticipated Low</th><td>${fmtTemp(rec.avgLow)}</td><td>${fmtTemp(rec.appLow)}</td><td>${fmtRh(rec.rhLow)}</td></tr>`;
+  }
+  const extremesHtml = `
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+      <div>
+        <h3>Hottest Day (Highest Apparent High)</h3>
+        <table>${extremeCols(hottest)}</table>
+      </div>
+      <div>
+        <h3>Coldest Night (Lowest Apparent Low)</h3>
+        <table>${extremeCols(coldest)}</table>
+      </div>
+    </div>`;
+
+  setHtmlIfExists("durExtremesHot", durHtml + utciHtml + extremesHtml);
+}
+
+/**
+ * Scan all 365 start dates and return the one with the highest UTCI thermal comfort score.
+ * Pure computation — no DOM access.
+ *
+ * config:
+ *   durationDays  — integer, hike length in days
+ *   getHikePoints — (startDate: Date) => [{date, point}, ...]
+ *   getNormals    — (point) => {app_hi:[365], app_lo:[365]} | null
+ *   eliminator    — optional (startDate: Date, endDate: Date) => bool  (true = skip this candidate)
+ *
+ * Returns { bestStartDate: Date | null, bestCounts: object | null }
+ */
+function runBestStartShared({ durationDays, getHikePoints, getNormals, eliminator = null }) {
+  const REF_YEAR = 2025;
+  let bestScore = -Infinity, bestStartDate = null, bestCounts = null;
+
+  for (let doy = 0; doy < 365; doy++) {
+    const startDate = new Date(REF_YEAR, 0, 1 + doy);
+    const endDate   = addDays(startDate, durationDays - 1);
+
+    if (eliminator && eliminator(startDate, endDate)) continue;
+
+    const hikePoints = getHikePoints(startDate);
+    if (!hikePoints || !hikePoints.length) continue;
+
+    let totalScore = 0, eliminated = false;
+    const counts = {
+      "extreme-cold": 0, "very-strong-cold": 0, "strong-cold": 0, "moderate-cold": 0,
+      "comfort": 0,
+      "moderate-heat": 0, "strong-heat": 0, "very-strong-heat": 0, "extreme-heat": 0
+    };
+
+    for (const { date, point } of hikePoints) {
+      const normals = getNormals(point);
+      if (!normals?.app_hi?.length) continue;
+      const idx     = dayIndexFromMonthDay(toISODate(date).slice(5));
+      const appHigh = normals.app_hi[idx];
+      const appLow  = normals.app_lo[idx];
+      if (!Number.isFinite(appHigh) || !Number.isFinite(appLow)) continue;
+      const hs = utciScoreHigh(appHigh);
+      const ls = utciScoreLow(appLow);
+      if (hs === 0 || ls === 0) { eliminated = true; break; }
+      totalScore += (hs + ls) / 2;
+      counts[utciCategoryDay(hs, ls, appHigh, appLow)]++;
+    }
+
+    if (eliminated) continue;
+    if (totalScore > bestScore) {
+      bestScore     = totalScore;
+      bestStartDate = new Date(startDate);
+      bestCounts    = { ...counts };
+    }
+  }
+
+  return { bestStartDate, bestCounts };
+}

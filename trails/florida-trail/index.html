@@ -67,7 +67,7 @@
 
       <p class="sub">
         <br>
-        Time your Florida Trail hike, find temperature extremes during that time, and get 5-day weather forecasts for any point along the trail. The two main tools are directly below, with various notes and other resources following at the bottom of the page.
+        Time your Florida Trail hike, find the <em>BestStart!</em> date to minimize hot and cold temperature stress, calculate your time of completion, identify temperature extremes during that time, and get 5-day weather forecasts for any point along the trail. The two main tools are directly below, with various notes and other resources following at the bottom of the page.
       </p>
     </div>
 
@@ -84,12 +84,10 @@
          Card 1: Hike Duration / End Date Calculator
          ===================================================== -->
     <section class="controls" aria-label="Hike duration calculator">
-      <h2>Hike Duration (End Date) and Expected Weather Extremes</h2>
+      <h2>Hike Duration and <em>BestStart!</em> Temperature Management Calculator</h2>
       <p class="card-instructions">
-        Choose a direction and northern terminus, a start month/day, and your expected miles per day.
-        If you plan to take an alternate route instead of the primary path, select it below — the total
-        mileage will adjust automatically. You will receive an estimated hike duration and end date,
-        along with a map showing where the expected highest and lowest temperatures will be encountered.
+        Select your expected daily mileage and travel direction. For computing hike durations choose a start date as well; for a <em>BestStart!</em> estimation no start date is needed as one will be calculated for you. Both will then provide an estimated hike duration and end date, high and low temperature data, and a chart of expected temperature stress days with a map showing where the expected highest and lowest temperatures should be encountered along the trail.
+        If you plan to take an alternate route instead of the primary path, select it below — the total mileage will adjust automatically.
       </p>
 
       <div class="control-row">
@@ -175,10 +173,12 @@
 
       <div style="margin-top: 12px; width: 100%;">
         <button id="durBtn" type="button" class="btn-primary">Estimate End Date and Weather Extremes</button>
+        <button id="bestStartBtn" type="button" class="btn-best-start"><em>BestStart!</em></button>
       </div>
 
       <div id="durStatus" class="status" style="width:100%;"></div>
       <div id="durResult" style="width:100%;"></div>
+      <div id="bestStartResult"></div>
 
       <!-- Temperature Extremes Results + Map (Duration Tool) -->
       <div id="durExtremesWrap" style="display:none; margin-top:16px;">

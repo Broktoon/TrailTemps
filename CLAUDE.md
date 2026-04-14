@@ -13,7 +13,8 @@ This file provides guidance to Claude Code when working with code in this reposi
 3. Historical Temperature Extremes — pre-computed normals per waypoint (ERA5-Land, 2018–2024)
 4. Alternate route selection — mutually exclusive swap alternates (FT and AZT)
 5. Interactive Leaflet map display
-6. Multi-trail architecture — Appalachian Trail, Arizona Trail, Florida Trail, Ice Age Trail, New England Trail, Natchez Trace Trail, and Pacific Northwest Trail all live
+6. Multi-trail architecture — Appalachian Trail, Arizona Trail, Florida Trail, Ice Age Trail, Natchez Trace Trail, New England Trail, Pacific Crest Trail, and Pacific Northwest Trail all live
+7. BestStart! calculator — scans all 365 possible start dates and recommends the one with the best UTCI thermal comfort score across the full hike
 
 **Design principles — non-negotiable:**
 - Pure static site: no build system, no framework, no backend
@@ -55,6 +56,9 @@ node trails/arizona-trail/tools/fetch-geojson-azt.js
 node trails/arizona-trail/tools/fetch-points-azt.js
 node trails/arizona-trail/tools/import-alt-gpx.js
 node trails/arizona-trail/tools/generate-normals-azt.js
+node trails/pacific-crest-trail/tools/build-geojson-pct.js
+node trails/pacific-crest-trail/tools/build-points-pct.js
+node trails/pacific-crest-trail/tools/generate-normals-pct.js
 node trails/pacific-northwest-trail/tools/build-pnt-data.js
 node trails/pacific-northwest-trail/tools/fix-ferry-geometry.js
 node trails/pacific-northwest-trail/tools/generate-normals-pnt.js
@@ -74,7 +78,7 @@ There are no tests, no linter, and no build step.
 index.html                          ← Landing page, trail selector grid
 css/styles.css                      ← Shared styles (980px max-width via --maxw CSS var)
 js/
-  shared-utils.js                   ← ~27 shared utility functions used by all trail app.js files
+  shared-utils.js                   ← Shared utility functions used by all trail app.js files (see section below)
   trail-nav.js                      ← Injects trail selector <details> dropdown into #trail-nav-mount
 scripts/                            ← Node utilities for AT data normalization
 trails/
@@ -132,6 +136,18 @@ trails/
     tools/
       fetch-geojson-azt.js          ← Fetches ArcGIS Layer 3, writes trail.geojson
       fetch-points-azt.js           ← Fetches ArcGIS polyline, interpolates at 0.5mi, writes points.json
+  pacific-crest-trail/
+    index.html
+    js/app.js
+    data/
+      points.json                   ← 532 points at 5-mile intervals (miles 0–2,653)
+      trail.geojson
+      pct_meta.json
+      historical_weather.json       ← 384 normals points at ~5-mile intervals; wrapped in { meta, points }
+    tools/
+      build-geojson-pct.js          ← Fetches USFS/PCTA geometry, writes trail.geojson
+      build-points-pct.js           ← Builds points.json at 5-mile intervals with SRTM elevation
+      generate-normals-pct.js       ← Fetches ERA5-Land normals for all 384 points; resume-safe
   pacific-northwest-trail/
     index.html
     js/app.js
@@ -170,6 +186,7 @@ trails/
 - Formatting: `fmtMile`, `fmtTemp` (uses `Number.isFinite` guard), `fmtRh`, `feelsLikeNote`, `numVal`
 - Weather math: `windChill`, `heatIndex`
 - Map helpers: `boundsFromPoints`, `makeColoredPinIcon`
+- **BestStart! / UTCI functions** (see BestStart! section below): `dayIndexFromMonthDay`, UTCI scoring helpers (`utciScoreHigh`, `utciScoreLow`, `utciHeatDepth`, `utciColdDepth`, `scoreToHeatCat`, `scoreToColdCat`, `utciCategoryDay`), `computeUtciCounts`, `renderDurExtremesBlocksShared`, `runBestStartShared`
 
 **`js/trail-nav.js`** — Loaded via `<script defer src="/js/trail-nav.js">` on all 11 trail pages. Contains a single `TRAILS` array (the canonical trail list) and injects the `<details class="trail-selector">` dropdown into `<div id="trail-nav-mount">` on page load. Automatically marks the current page using `window.TRAIL_SLUG` or `data-trail` attribute. Badge logic: current "Coming" pages show `(Current — Coming Soon)`.
 
@@ -222,7 +239,10 @@ Large `historical_weather.json` files (AT ~28 MB, and similarly large FT/NET fil
 - **Current Conditions box:** show wind speed only — no wind direction
 - **Temperature advisories:** heat index advisory at apparent high ≥ 100 °F; wind chill advisory at apparent low ≤ 20 °F (20 °F chosen as typical gear rating floor for sleeping bags/insulation)
 - **Apparent temperature** uses Steadman methodology (built into Open-Meteo `apparent_temperature_*` fields)
-- **Extremes output table format (all trails):** single Date/Location header row spanning all columns, then column headers Actual Temp / Apparent Temp / Relative Humidity, then two rows labelled **"Anticipated High"** and **"Anticipated Low"**. Helpers: `fmtTemp()`, `fmtRh()`, inner `extremeTable()` inside `renderDurExtremesBlocks()`
+- **Extremes output format (all trails):** the unified `renderDurExtremesBlocksShared` renderer outputs three blocks inside `durExtremesHot`: (1) a 4-column duration summary table (Start Date / End Date / Distance / Duration), (2) a UTCI Thermal Comfort Profile table (9 category columns showing day counts), (3) side-by-side Hottest Day / Coldest Night extremes tables with Date, Location, Actual Temp, Apparent Temp, Relative Humidity rows. `durExtremesCold` is cleared (legacy div kept for compatibility). Each trail's `renderDurExtremesBlocks` is a thin wrapper calling `renderDurExtremesBlocksShared` with a `formatLocation` callback.
+- **BestStart! button:** `<button id="bestStartBtn" type="button" class="btn-best-start"><em>BestStart!</em></button>` placed immediately after `durBtn` inside the same wrapper div. CSS class `.btn-best-start` defined in `css/styles.css` (green #2e7a2e/#235823).
+- **BestStart! result div:** `<div id="bestStartResult"></div>` placed after `durResult`. `renderDurExtremesBlocksShared` clears it on every render.
+- **`bestStartBtn` wiring:** `el("bestStartBtn")?.addEventListener("click", runBestStart)` in `initDurationUI()`.
 - **Mile inputs:** always use `type="text" inputmode="numeric" pattern="[0-9]*"` (or `[0-9.]*` for decimal miles). Never `type="number"` — number inputs enforce browser spinner constraints and block free text entry. JS handles range validation.
 - **Trail nav:** every trail page uses `<div id="trail-nav-mount"></div>` in `.header-actions` — never inline the `<details>` nav HTML. The canonical trail list lives only in `js/trail-nav.js`.
 - **Shared CSS:** `.control-row`, `.ft-select-col`, `.btn-primary`, `.feels-hotter`, `.feels-cooler`, `.alt-group-block`, `.alt-options`, `.alt-delta` are defined in `css/styles.css`. Do not redeclare them inline. Trail-specific ID rules (e.g. `#atMileInput`, `#nttSectionInfo`) stay inline in the trail's `index.html`.
@@ -230,6 +250,70 @@ Large `historical_weather.json` files (AT ~28 MB, and similarly large FT/NET fil
 - **`getSelectedAlts()`** — trails with radio-based alternates implement this function to return a plain object keyed by alt group id. `calcTotalMiles()` takes both direction and selectedAlts. `buildHikePoints()` and `getNearestPoint()` also take selectedAlts.
 - **Alt passage points** use `passage_mile` (0-based within the passage) rather than spine `mile`. `getNearestPoint()` must convert accordingly when selecting alt segment points.
 - **Normals load status message:** "Historical weather data loaded (...)" — not "planning normals" or "precomputed normals".
+
+---
+
+## BestStart! Feature
+
+All 8 active trail pages include the green *BestStart!* button. It scans all 365 possible start dates and recommends the one producing the highest cumulative UTCI thermal comfort score across the full hike.
+
+### Shared Utility Functions (in `js/shared-utils.js`)
+
+**`runBestStartShared({ durationDays, getHikePoints, getNormals, eliminator = null })`**
+- Iterates all 365 start dates (REF_YEAR = 2025 fixed non-leap year)
+- Calls `getHikePoints(startDate)` → `[{date, point}, ...]` per candidate
+- Calls `getNormals(point)` → `{ app_hi:[365], app_lo:[365] }` per point
+- Scores each day via UTCI tier; any day scoring 0 (Extreme stress) eliminates the candidate
+- Optional `eliminator(startDate, endDate)` callback skips candidates (used for AT Katahdin snow season)
+- Returns `{ bestStartDate: Date|null, bestCounts: object|null }`
+
+**`renderDurExtremesBlocksShared(hottest, coldest, opts = {})`**
+- `opts`: `{ startDate, endDate, distanceMiles, durationDays, startDateLabel="Start Date", utciCounts, formatLocation, durationNote, warningHtml }`
+- Renders into `durExtremesHot`: duration table + UTCI profile + side-by-side extremes
+- Clears `durResult` and `bestStartResult` on every call
+
+**`computeUtciCounts(hikePoints, getNormals)`**
+- `hikePoints`: `[{date, point}, ...]`; `getNormals`: `(point) => {app_hi, app_lo}|null`
+- Returns counts object with 9 category keys
+
+**`dayIndexFromMonthDay(monthDay)`** — maps `"MM-DD"` to 0–364 index using fixed non-leap year 2021
+
+### UTCI Scoring Tiers
+
+| Category | Apparent High | Apparent Low | Score |
+|----------|--------------|-------------|-------|
+| Extreme Heat | > 115 °F | — | 0 (eliminates) |
+| Very Strong Heat | 101–115 °F | — | 2 |
+| Strong Heat | 91–100 °F | — | 5 |
+| Moderate Heat | 80–90 °F | — | 8 |
+| Comfort Zone | ≤ 79 °F | ≥ 48 °F | 10 |
+| Moderate Cold | — | 32–47 °F | 8 |
+| Strong Cold | — | 9–31 °F | 5 |
+| Very Strong Cold | — | −17–8 °F | 2 |
+| Extreme Cold | — | < −17 °F | 0 (eliminates) |
+
+Each day's score is `(heat score + cold score) / 2`. Scoring is symmetric — heat and cold stress are weighted equally. The combined per-day score is summed across the hike; highest total wins.
+
+### Per-Trail Implementation Pattern
+
+Each trail's `app.js` has:
+1. **`renderDurExtremesBlocks(hottest, coldest, opts = {})`** — thin wrapper calling `renderDurExtremesBlocksShared` with a `formatLocation` callback specific to that trail's point label format
+2. **`computeAndRenderDurationExtremes(params)`** — computes `utciCounts = computeUtciCounts(hikePoints, getNearestNormals)` and `endDate`, then passes all to `renderDurExtremesBlocks`
+3. **`runBestStart()`** — reads inputs (mpd, direction, alts), calls `runBestStartShared`, then calls `computeAndRenderDurationExtremes` with `startDateLabel: "<em>BestStart!</em> Date"`
+
+### Normals Key Convention
+
+All trails normalize normals to `app_hi` / `app_lo` at load time. **Exception:** AT `historical_weather.json` stores keys as `hi_app` / `lo_app`. AT's `runBestStart()` includes a `getAtNormals` wrapper that remaps them before passing to `runBestStartShared`.
+
+### Alternate Route Bug — Critical Notes
+
+**FT `ALT_GROUP_DEFAULTS`:** The fallback constant (used before `ft_meta.json` loads) must include `section_id` fields matching the radio button values (`"eastern_corridor"`, `"western_corridor"`, `"okeechobee_west"`, `"okee_east"`). Without these, `calcTotalMiles` falls through to the default option regardless of the user's selection on first page load.
+
+**IAT `buildHikePoints` / `calcTotalMiles`:** Both use hardcoded fallback values for branch/rejoin miles (`branch_axis_mile: 617.2`, `rejoin_axis_mile: 640.5`) via `?? 617.2` / `?? 640.5`. These ensure correct alt routing even before `iat_meta.json` loads. Do not change these values without re-measuring from DNR geometry. `calcTotalMiles` applies the East Alt delta (`ag?.east_alt?.delta_miles ?? -12.7`) unconditionally — no early return for missing meta.
+
+### NTT Special Case
+
+NTT `runBestStart` uses `calcNttDuration(mpd).totalDays` for `durationDays` (not `Math.ceil(totalMiles / mpd)`), because NTT duration includes 4 travel days between disconnected sections. `buildHikePoints` takes `{directionId, startDate, milesPerDay}` — no `totalMiles` param.
 
 ---
 
@@ -567,6 +651,66 @@ The only saltwater ferry crossing on any National Scenic Trail. The trail crosse
 
 ---
 
+## Pacific Crest Trail (PCT) — Live
+
+- **Status:** Fully live as of April 2026.
+- **Point ID format:** `pct-main-mi0000000` (thousandth-mile precision, zero-padded to 7 digits)
+- **Data files:** `points.json`, `pct_meta.json`, `trail.geojson`, `historical_weather.json`
+- **Normals source:** Open-Meteo ERA5-Land archive (2018–2024)
+- **Weather resolution:** 5-mile intervals (532 points, miles 0–2,653)
+- **Normals count:** 384 points at ~7-mile intervals; wrapped in `{ meta, points }` object
+- **Trail geometry source:** USFS / PCTA geometry
+- **Trail color:** `#e06060` (same salmon/red as FT, NET, NTT, AZT, IAT)
+- **Direction convention:** NOBO (northbound, Campo → Manning Park) / SOBO (southbound); uses `is_nobo` flag
+- **Elevation source:** `trail_elev` per point from SRTM via OpenTopoData (feet); `grid_elev` from `historical_weather.json` (Open-Meteo ERA5-Land, stored in feet)
+
+### PCT Geographic Sections (5)
+
+| id | Name | State | Mile range |
+|----|------|-------|-----------|
+| `socal` | Southern California | CA | 0–702 |
+| `central-cal` | Central California | CA | 702–1,092 |
+| `norcal` | Northern California | CA | 1,092–1,702 |
+| `oregon` | Oregon | OR | 1,702–2,147 |
+| `washington` | Washington | WA | 2,147–2,653 |
+
+### PCT Direction Options (2)
+
+| id | Label | Total miles |
+|----|-------|------------|
+| `nobo` | Northbound — Campo (Mexican Border) → Manning Park (Canadian Border) | 2,653.0 |
+| `sobo` | Southbound — Manning Park (Canadian Border) → Campo (Mexican Border) | 2,653.0 |
+
+### PCT Elevation Correction
+
+Same logic as AZT (applied to apparent temperatures only):
+
+- Trail above grid (diff > +300 ft): apparent high **−3.5 °F per 1000 ft**, apparent low **−2.0 °F per 1000 ft**
+- Trail below grid (diff < −300 ft): apparent high **+3.5 °F per 1000 ft only** (no change to low)
+- `ELEV_THRESHOLD_FT = 300` — deadband before any correction fires
+- `trail_elev` from `points.json` (SRTM via OpenTopoData, in feet — do NOT re-multiply)
+- `grid_elev` from `historical_weather.json` normals entries (stored in feet, already converted from Open-Meteo meters)
+- Applied in both the hike duration extremes and the weather planner point lookup
+
+### PCT Notable Features
+
+- **No alternates** — single continuous spine; no `getSelectedAlts()` needed
+- **BestStart!** — includes the standard BestStart! button and `runBestStart()` implementation
+- **`NORMALS_CACHE_VERSION`:** `"v1"` — bump whenever `historical_weather.json` is rebuilt
+- **`{ meta, points }` wrapper** — same structure as IAT; `historical_weather.json` is not a flat array
+- **Katahdin-style eliminator not used** — unlike AT, no seasonal snow-closure eliminator is applied; BestStart! relies on UTCI scoring alone
+
+### PCT Tools
+
+Located in `trails/pacific-crest-trail/tools/`:
+
+- **`build-geojson-pct.js`** — Fetches USFS/PCTA geometry, writes `trail.geojson` (5 section `LineString` features). Re-run if trail geometry changes.
+- **`build-points-pct.js`** — Interpolates points at 5-mile intervals, fetches SRTM elevation via OpenTopoData for each point (stored as `trail_elev` in feet), writes `points.json`. Re-run if geometry changes.
+- **`generate-normals-pct.js`** — Fetches ERA5-Land normals for all 384 target points; resume-safe (saves after each point); 15-second throttle. Stores `grid_elev` (feet) alongside normals for elevation correction. Outputs `{ meta, points }` wrapped `historical_weather.json`.
+- **`check-normals-pct.js`** — Utility script to verify coverage and completeness of `historical_weather.json` without fetching new data.
+
+---
+
 ## Ice Age Trail (IAT) — Live
 
 - **Status:** Fully live as of April 2026.
@@ -668,7 +812,7 @@ Located in `trails/ice-age-trail/tools/`:
 2. **Coming Next** — one trail at a time
 3. **Coming Soon** — alphabetical
 
-Current order: AT, AZT, FT, IAT, NTT, NET, PNT → PCT (Coming Next) → CDT, NCT, PHT (Coming Soon)
+Current order: AT, AZT, FT, IAT, NTT, NET, PCT, PNT → NCT (Coming Next) → CDT, PHT (Coming Soon)
 
 When promoting a trail from Coming Next to live: remove the badge in `trail-nav.js`, update the tile in `index.html` (remove `coming` class and badge div, update description), and move it to its alphabetical position in both files.
 

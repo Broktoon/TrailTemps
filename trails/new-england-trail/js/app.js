@@ -824,29 +824,11 @@ function computeExtremesFromHikePoints(hikePoints) {
   return { hottest, coldest };
 }
 
-function renderDurExtremesBlocks(hottest, coldest) {
-  if (!hottest || !coldest) {
-    setHtmlIfExists("durExtremesHot",  "<p>Temperature extremes unavailable \u2014 historical normals not loaded. Run <code>node scripts/generate-normals-net.js</code> to generate them.</p>");
-    setHtmlIfExists("durExtremesCold", "");
-    return;
-  }
-
-  function extremeTable(rec, label) {
-    const niceDate = rec.date.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
-    return `
-      <h3>${label}</h3>
-      <table>
-        <tr><th>Date / Location</th><td colspan="3">${niceDate} \u2014 ${netPointLabel(rec.point)}</td></tr>
-        <tr><th></th><th style="background:#f0f0f0;">Actual Temp</th><th style="background:#f0f0f0;">Apparent Temp</th><th style="background:#f0f0f0;">Relative Humidity</th></tr>
-        <tr><th>Anticipated High</th><td>${fmtTemp(rec.avgHigh)}</td><td>${fmtTemp(rec.appHigh)}</td><td>${fmtRh(rec.rhHigh)}</td></tr>
-        <tr><th>Anticipated Low</th><td>${fmtTemp(rec.avgLow)}</td><td>${fmtTemp(rec.appLow)}</td><td>${fmtRh(rec.rhLow)}</td></tr>
-      </table>`;
-  }
-
-  setHtmlIfExists("durExtremesHot",
-    extremeTable(hottest, "Hottest Day (Highest Apparent High)"));
-  setHtmlIfExists("durExtremesCold",
-    extremeTable(coldest, "Coldest Night (Lowest Apparent Low)"));
+function renderDurExtremesBlocks(hottest, coldest, opts = {}) {
+  renderDurExtremesBlocksShared(hottest, coldest, {
+    formatLocation: (rec) => netPointLabel(rec.point),
+    ...opts
+  });
 }
 
 function renderDurExtremesMap(hottest, coldest) {
@@ -890,9 +872,11 @@ function renderDurExtremesMap(hottest, coldest) {
 }
 
 async function computeAndRenderDurationExtremes(params) {
+  const { startDateLabel } = params;
   setDisplayIfExists("durExtremesWrap", "none");
   setHtmlIfExists("durExtremesHot",  "");
   setHtmlIfExists("durExtremesCold", "");
+  setHtmlIfExists("bestStartResult", "");
 
   if (!normalsByPointId.size) {
     setDurStatus("Temperature extremes unavailable \u2014 historical_weather.json not loaded.");
@@ -910,31 +894,19 @@ async function computeAndRenderDurationExtremes(params) {
   }
 
   const { hottest, coldest } = computeExtremesFromHikePoints(hikePoints);
+  const utciCounts = computeUtciCounts(hikePoints, getNearestNormals);
+  const endDate = addDays(params.startDate, params.durationDays - 1);
 
   setDisplayIfExists("durExtremesWrap", "block");
-  renderDurExtremesBlocks(hottest, coldest);
+  renderDurExtremesBlocks(hottest, coldest, {
+    startDate: params.startDate,
+    endDate,
+    distanceMiles: params.totalMiles,
+    durationDays: params.durationDays,
+    startDateLabel,
+    utciCounts
+  });
   renderDurExtremesMap(hottest, coldest);
-
-  const durResult = el("durResult");
-  if (!durResult) return;
-
-  // Heat index advisory (apparent high ≥ 100 °F)
-  const peakHeat = hottest?.appHigh ?? hottest?.avgHigh;
-  if (peakHeat != null && peakHeat >= 100) {
-    const warn = document.createElement("p");
-    warn.style.cssText = "color:#9a4000; font-weight:600; margin-top:0.75rem;";
-    warn.textContent = `\u26a0 Heat advisory: the hottest day on your hike has an estimated heat index of ${Math.round(peakHeat)} \u00b0F \u2014 at or above the 100 \u00b0F National Weather Service Heat Advisory threshold. Plan for early morning starts, ample hydration, and extra rest during peak heat.`;
-    durResult.appendChild(warn);
-  }
-
-  // Wind chill advisory (apparent low ≤ 20 °F)
-  const peakChill = coldest?.appLow ?? coldest?.avgLow;
-  if (peakChill != null && peakChill <= 20) {
-    const warn = document.createElement("p");
-    warn.style.cssText = "color:#003388; font-weight:600; margin-top:0.75rem;";
-    warn.textContent = `\u26a0 Cold weather advisory: the coldest night on your hike is expected to be at or below 20 \u00b0F. Conditions at this level may be hazardous without proper preparation and equipment. See the weather notes at the bottom of the page for details, and check local NWS forecasts before your hike.`;
-    durResult.appendChild(warn);
-  }
 }
 
 function runDurationCalculator() {
@@ -975,6 +947,58 @@ function runDurationCalculator() {
   }
 }
 
+function runBestStart() {
+  setDurStatus("");
+  setHtmlIfExists("durResult", "");
+  setHtmlIfExists("bestStartResult", "");
+  setDisplayIfExists("durExtremesWrap", "none");
+
+  const mpd = numVal("durMilesPerDay");
+  if (mpd == null || mpd <= 0) { setDurStatus("Please enter miles per day."); return; }
+  if (mpd < 5) { setDurStatus("For this planner, hikes must average at least 5 miles per day."); return; }
+
+  const directionId = el("durDirectionSelect")?.value || "nobo_main";
+  const totalMiles  = calcTotalMiles(directionId);
+  const durationDays = Math.ceil(totalMiles / mpd);
+
+  if (durationDays > 365) {
+    setDurStatus("Estimated duration exceeds one year. Please increase miles per day.");
+    return;
+  }
+
+  if (!normalsByPointId.size || !allPoints.length) {
+    setDurStatus("Historical data not yet loaded \u2014 please wait and try again.");
+    return;
+  }
+
+  setHtmlIfExists("bestStartResult", "<p style='color:#555;font-style:italic;'>Scanning all start dates\u2026</p>");
+
+  setTimeout(() => {
+    const { bestStartDate, bestCounts } = runBestStartShared({
+      durationDays,
+      getHikePoints: (startDate) => buildHikePoints({ directionId, startDate, milesPerDay: mpd, totalMiles }),
+      getNormals: getNearestNormals
+    });
+
+    if (!bestStartDate) {
+      setHtmlIfExists("bestStartResult", "<p style='color:#b00000;'>No suitable start date found.</p>");
+      return;
+    }
+
+    computeAndRenderDurationExtremes({
+      directionId,
+      startDate: bestStartDate,
+      milesPerDay: mpd,
+      totalMiles,
+      durationDays,
+      startDateLabel: "<em>BestStart!</em> Date"
+    }).catch(err => {
+      console.error("[NET] BestStart extremes error:", err);
+      setDurStatus(`Error computing extremes: ${err.message}`);
+    });
+  }, 0);
+}
+
 /* ============================================================
    23. UI INITIALIZATION
    ============================================================ */
@@ -982,6 +1006,7 @@ function runDurationCalculator() {
 function initDurationUI() {
   initMonthDayPickerGeneric("durMonthSelect", "durDaySelect");
   el("durBtn")?.addEventListener("click", runDurationCalculator);
+  el("bestStartBtn")?.addEventListener("click", runBestStart);
   const mpdEl = el("durMilesPerDay");
   if (mpdEl && mpdEl.value === "") mpdEl.value = "12";
 }

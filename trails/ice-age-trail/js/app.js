@@ -148,9 +148,7 @@ function calcTotalMiles(directionId, selectedAlt) {
   const ag         = iatMeta?.alt_groups?.[0];
   const altId      = selectedAlt || getSelectedAlt();
 
-  if (!ag) return spineTotal;
-
-  const delta = altId === "east" ? (ag.east_alt?.delta_miles ?? -12.7) : 0;
+  const delta = altId === "east" ? (ag?.east_alt?.delta_miles ?? -12.7) : 0;
   return Math.round((spineTotal + delta) * 10) / 10;
 }
 
@@ -754,25 +752,17 @@ function buildHikePoints({ directionId, startDate, milesPerDay, totalMiles, sele
   const ag           = iatMeta?.alt_groups?.[0];
   const altId        = selectedAlt || "west";
 
-  const branchAxis   = ag?.branch_axis_mile ?? null;
-  const rejoinAxis   = ag?.rejoin_axis_mile ?? null;
+  const branchAxis   = ag?.branch_axis_mile ?? 617.2;
+  const rejoinAxis   = ag?.rejoin_axis_mile ?? 640.5;
   const westAltMiles = ag?.west_alt?.total_miles || WEST_ALT_TOTAL_MILES;
   const eastAltMiles = ag?.east_alt?.total_miles || EAST_ALT_TOTAL_MILES;
   const altMiles     = altId === "east" ? eastAltMiles : westAltMiles;
 
   // Miles from trail start to branch point (WTE: 0→branch; ETW: 0→(total−branch))
-  const preBranchMiles = branchAxis !== null
-    ? (isWTE ? branchAxis : (spineTotal - branchAxis))
-    : null;
+  const preBranchMiles = isWTE ? branchAxis : (spineTotal - branchAxis);
 
   function getPoint(cumMile) {
     const capped = Math.min(cumMile, totalMiles);
-
-    // No alt data available — fall back to simple spine lookup
-    if (preBranchMiles === null || branchAxis === null || rejoinAxis === null) {
-      const axis = isWTE ? Math.min(capped, spineTotal) : Math.max(spineTotal - capped, 0);
-      return getNearestPointByAxisMile(axis);
-    }
 
     if (capped <= preBranchMiles) {
       // Pre-branch: direct spine lookup
@@ -854,27 +844,11 @@ function computeExtremesFromHikePoints(hikePoints) {
   return { hottest, coldest };
 }
 
-function renderDurExtremesBlocks(hottest, coldest) {
-  if (!hottest || !coldest) {
-    setHtmlIfExists("durExtremesHot",  "<p>Temperature extremes unavailable \u2014 historical normals not loaded.</p>");
-    setHtmlIfExists("durExtremesCold", "");
-    return;
-  }
-
-  function extremeTable(rec, label) {
-    const niceDate = rec.date.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
-    return `
-      <h3>${label}</h3>
-      <table>
-        <tr><th>Date / Location</th><td colspan="3">${niceDate} \u2014 ${iatPointLabel(rec.point)}</td></tr>
-        <tr><th></th><th style="background:#f0f0f0;">Actual Temp</th><th style="background:#f0f0f0;">Apparent Temp</th><th style="background:#f0f0f0;">Relative Humidity</th></tr>
-        <tr><th>Anticipated High</th><td>${fmtTemp(rec.avgHigh)}</td><td>${fmtTemp(rec.appHigh)}</td><td>${fmtRh(rec.rhHigh)}</td></tr>
-        <tr><th>Anticipated Low</th><td>${fmtTemp(rec.avgLow)}</td><td>${fmtTemp(rec.appLow)}</td><td>${fmtRh(rec.rhLow)}</td></tr>
-      </table>`;
-  }
-
-  setHtmlIfExists("durExtremesHot",  extremeTable(hottest, "Hottest Day (Highest Apparent High)"));
-  setHtmlIfExists("durExtremesCold", extremeTable(coldest, "Coldest Night (Lowest Apparent Low)"));
+function renderDurExtremesBlocks(hottest, coldest, opts = {}) {
+  renderDurExtremesBlocksShared(hottest, coldest, {
+    formatLocation: (rec) => iatPointLabel(rec.point),
+    ...opts
+  });
 }
 
 function renderDurExtremesMap(hottest, coldest) {
@@ -919,9 +893,11 @@ function renderDurExtremesMap(hottest, coldest) {
 }
 
 async function computeAndRenderDurationExtremes(params) {
+  const { startDate, durationDays, totalMiles, startDateLabel = "Start Date" } = params;
   setDisplayIfExists("durExtremesWrap", "none");
   setHtmlIfExists("durExtremesHot",  "");
   setHtmlIfExists("durExtremesCold", "");
+  if (el("bestStartResult")) el("bestStartResult").innerHTML = "";
 
   if (!normalsByPointId.size) {
     setDurStatus("Temperature extremes unavailable \u2014 historical_weather.json not loaded.");
@@ -939,9 +915,13 @@ async function computeAndRenderDurationExtremes(params) {
   }
 
   const { hottest, coldest } = computeExtremesFromHikePoints(hikePoints);
+  const utciCounts = computeUtciCounts(hikePoints, getNearestNormals);
+  const endDate = startDate ? addDays(startDate, durationDays - 1) : null;
 
   setDisplayIfExists("durExtremesWrap", "block");
-  renderDurExtremesBlocks(hottest, coldest);
+  renderDurExtremesBlocks(hottest, coldest, {
+    startDate, endDate, distanceMiles: totalMiles, durationDays, startDateLabel, utciCounts
+  });
   renderDurExtremesMap(hottest, coldest);
 
   const durResult = el("durResult");
@@ -1009,9 +989,47 @@ function runDurationCalculator() {
    23. UI INITIALIZATION
    ============================================================ */
 
+function runBestStart() {
+  setDurStatus("");
+  if (el("bestStartResult")) el("bestStartResult").innerHTML = "";
+  if (el("durResult")) el("durResult").innerHTML = "";
+  setDisplayIfExists("durExtremesWrap", "none");
+
+  const directionId  = el("durDirectionSelect")?.value || "west_to_east";
+  const selectedAlt  = getSelectedAlt();
+  const mpd          = numVal("durMilesPerDay");
+
+  if (mpd == null || mpd <= 0) { setDurStatus("Please enter Miles per Day."); return; }
+  if (mpd < 5) { setDurStatus("For this planner, hikes must average at least 5 miles per day."); return; }
+  if (!normalsByPointId.size) { setDurStatus("Historical weather data is still loading. Please try again."); return; }
+  if (!allPoints.length) { setDurStatus("Trail data is still loading. Please try again."); return; }
+
+  const totalMiles   = calcTotalMiles(directionId, selectedAlt);
+  const durationDays = Math.ceil(totalMiles / mpd);
+  if (durationDays > 365) { setDurStatus("For this planner, hikes cannot exceed one year. Please adjust Miles per Day."); return; }
+
+  const { bestStartDate } = runBestStartShared({
+    durationDays,
+    getHikePoints: (startDate) => buildHikePoints({ directionId, startDate, milesPerDay: mpd, totalMiles, selectedAlt }),
+    getNormals: (point) => getNearestNormals(point),
+  });
+
+  if (!bestStartDate) {
+    setHtmlIfExists("bestStartResult",
+      `<p style="color:#b00000; font-weight:600; margin-top:0.75rem;">No valid start date found \u2014 every possible start date includes at least one day of extreme heat or cold stress. Try adjusting miles per day.</p>`);
+    return;
+  }
+
+  computeAndRenderDurationExtremes({
+    directionId, startDate: bestStartDate, milesPerDay: mpd, totalMiles, durationDays, selectedAlt,
+    startDateLabel: "<em>BestStart!</em> Date"
+  }).catch(err => { console.error(err); setDurStatus(`Error: ${err.message}`); });
+}
+
 function initDurationUI() {
   initMonthDayPickerGeneric("durMonthSelect", "durDaySelect");
   el("durBtn")?.addEventListener("click", runDurationCalculator);
+  el("bestStartBtn")?.addEventListener("click", runBestStart);
   const mpdEl = el("durMilesPerDay");
   if (mpdEl && mpdEl.value === "") mpdEl.value = "15";
 }

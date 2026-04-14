@@ -76,9 +76,16 @@ button { cursor: pointer; }
 #map,
 #durExtremesMap {
   width: 100%;
-  max-width: var(--mapw);   /* keeps both maps same width */
   height: clamp(280px, 35vh, 420px);
   display: block;
+}
+
+#map {
+  max-width: var(--mapw);
+}
+
+#durExtremesMap {
+  max-width: var(--maxw);
 }
 
 #durExtremesMap {
@@ -101,7 +108,7 @@ button { cursor: pointer; }
 /* Content blocks */
 .grid { margin-top: 18px; }
 
-/* Headings: main sections (h2) vs subsections (h3) */
+/* Headings: main sections (h2) vs subsections (h3) vs content headers (h4) */
 h2 {
   font-size: 18px;
   margin: 22px 0 10px;
@@ -110,6 +117,13 @@ h2 {
 h3 {
   font-size: 14px;
   margin: 14px 0 6px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+h4 {
+  font-size: 13px;
+  margin: 12px 0 5px;
   color: var(--muted);
   font-weight: 700;
 }
@@ -139,9 +153,8 @@ th {
   text-align: left;
 }
 
-/* Force BOTH maps to the same centered width */
-#map,
-#durExtremesMap {
+/* Weather planner map width */
+#map {
   max-width: var(--mapw);
 }
 
@@ -554,4 +567,19 @@ hr.card-sep {
 }
 .btn-primary:hover {
   background: #1d56a0;
+}
+
+.btn-best-start {
+  padding: 10px 22px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: none;
+  background: #2e7a2e;
+  color: #fff;
+  cursor: pointer;
+  transition: background 120ms ease;
+}
+.btn-best-start:hover {
+  background: #235823;
 }

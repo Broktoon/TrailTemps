@@ -142,7 +142,7 @@ function isKatahdinSnowSeason(dateObj) {
   return false;
 }
 
-function renderDurationResult({ direction, startDate, endDate, distanceMiles, milesPerDay, durationDays }) {
+function renderDurationResult({ direction, startDate, endDate, distanceMiles, milesPerDay, durationDays, startDateLabel = "Start Date" }) {
   // Katahdin is reached at the END for NOBO and at the START for SOBO (given full-trail assumption)
   const katahdinDate = (direction === "SOBO") ? startDate : endDate;
   const warningNeeded = isKatahdinSnowSeason(katahdinDate);
@@ -161,13 +161,19 @@ function renderDurationResult({ direction, startDate, endDate, distanceMiles, mi
     : "";
 
   el("durResult").innerHTML = `
-    <table>
-      <tr><th>Direction</th><td>${directionLabel}</td></tr>
-      <tr><th>Start Date</th><td>${startStr}</td></tr>
-      <tr><th>Distance</th><td>${fmtMile(distanceMiles)} miles</td></tr>
-      <tr><th>Miles per Day</th><td>${fmtMile(milesPerDay)}</td></tr>
-      <tr><th>Estimated Duration</th><td>${durationDays} days</td></tr>
-      <tr><th>Estimated End Date</th><td>${endStr}</td></tr>
+    <table style="width:100%;">
+      <tr>
+        <th style="width:20%;">${startDateLabel}</th>
+        <td style="width:30%;">${startStr}</td>
+        <th style="width:20%;">Distance</th>
+        <td style="width:30%;">${fmtMile(distanceMiles)} miles</td>
+      </tr>
+      <tr>
+        <th>Estimated End Date</th>
+        <td>${endStr}</td>
+        <th>Estimated Duration</th>
+        <td>${durationDays} days</td>
+      </tr>
     </table>
     ${warningHtml}
   `;
@@ -179,23 +185,17 @@ function initDurationUI() {
   const btn = el("durBtn");
   if (btn) btn.addEventListener("click", runDurationCalculator);
 
+  const bsBtn = el("bestStartBtn");
+  if (bsBtn) bsBtn.addEventListener("click", runBestStart);
+
   const mpdEl = el("durMilesPerDay");
   if (mpdEl && mpdEl.value === "") mpdEl.value = "15";
 }
 
 /* ---------------------------
    Option B: Duration extremes using precomputed normals
+   dayIndexFromMonthDay() is provided by shared-utils.js
 ---------------------------- */
-function dayIndexInNonLeapYearFromMonthDay(monthDay) {
-  // monthDay: "MM-DD" mapped to a fixed non-leap year (2021)
-  const [mmStr, ddStr] = monthDay.split("-");
-  const mm = Number(mmStr);
-  const dd = Number(ddStr);
-  const dt = new Date(2021, mm - 1, dd);
-  const start = new Date(2021, 0, 1);
-  const diffDays = Math.round((dt - start) / (24 * 60 * 60 * 1000));
-  return Math.max(0, Math.min(364, diffDays));
-}
 
 function getNearestPointByMile(targetMile) {
   const arr = allPointsSortedByMile;
@@ -220,28 +220,18 @@ function getNearestPointByMile(targetMile) {
   return Math.abs(getPointMile(a) - targetMile) <= Math.abs(getPointMile(b) - targetMile) ? a : b;
 }
 
-function renderDurExtremesBlocks(hottest, coldest) {
-  if (!hottest || !coldest) {
-    setHtmlIfExists("durExtremesHot", "<p>Temperature extremes unavailable \u2014 historical normals not loaded.</p>");
-    setHtmlIfExists("durExtremesCold", "");
-    return;
-  }
+function renderDurExtremesBlocks(hottest, coldest, { startDate, endDate, distanceMiles, durationDays, startDateLabel = "Start Date", utciCounts } = {}) {
+  // AT-specific: Katahdin snow season warning
+  const katahdinWarning = (startDate && endDate && isKatahdinSnowSeason(endDate))
+    ? `<p style="color:#b00000; font-weight:600; margin-top:0.5rem;">
+        Hiking on Mt. Katahdin, Maine during the October\u2013May snow season is often closed or restricted based on local conditions.
+       </p>` : "";
 
-  function extremeTable(rec, label) {
-    const niceDate = rec.date.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
-    const location = `${STATE_NAME[rec.point.state] || rec.point.state} \u2014 Mile ~${fmtMile(rec.targetMile)}`;
-    return `
-      <h3>${label}</h3>
-      <table>
-        <tr><th>Date / Location</th><td colspan="3">${niceDate} \u2014 ${location}</td></tr>
-        <tr><th></th><th style="background:#f0f0f0;">Actual Temp</th><th style="background:#f0f0f0;">Apparent Temp</th><th style="background:#f0f0f0;">Relative Humidity</th></tr>
-        <tr><th>Anticipated High</th><td>${fmtTemp(rec.avgHigh)}</td><td>${fmtTemp(rec.appHigh)}</td><td>${fmtRh(rec.rhHigh)}</td></tr>
-        <tr><th>Anticipated Low</th><td>${fmtTemp(rec.avgLow)}</td><td>${fmtTemp(rec.appLow)}</td><td>${fmtRh(rec.rhLow)}</td></tr>
-      </table>`;
-  }
-
-  setHtmlIfExists("durExtremesHot",  extremeTable(hottest, "Hottest Day (Highest Apparent High)"));
-  setHtmlIfExists("durExtremesCold", extremeTable(coldest, "Coldest Night (Lowest Apparent Low)"));
+  renderDurExtremesBlocksShared(hottest, coldest, {
+    startDate, endDate, distanceMiles, durationDays, startDateLabel, utciCounts,
+    warningHtml: katahdinWarning,
+    formatLocation: (rec) => `${STATE_NAME[rec.point.state] || rec.point.state} \u2014 Mile ~${fmtMile(rec.point.mile)}`
+  });
 }
 
 function renderDurExtremesMap(hottest, coldest) {
@@ -294,7 +284,7 @@ function renderDurExtremesMap(hottest, coldest) {
   setTimeout(invalidate, 0);
 }
 
-async function computeAndRenderDurationExtremes({ direction, startDate, milesPerDay, durationDays }) {
+async function computeAndRenderDurationExtremes({ direction, startDate, milesPerDay, durationDays, distanceMiles, startDateLabel = "Start Date" }) {
   setDisplayIfExists("durExtremesWrap", "none");
   setHtmlIfExists("durExtremesHot", "");
   setHtmlIfExists("durExtremesCold", "");
@@ -315,6 +305,12 @@ async function computeAndRenderDurationExtremes({ direction, startDate, milesPer
   let hottest = null;
   let coldest = null;
 
+  const utciCounts = {
+    "extreme-cold": 0, "very-strong-cold": 0, "strong-cold": 0, "moderate-cold": 0,
+    "comfort": 0,
+    "moderate-heat": 0, "strong-heat": 0, "very-strong-heat": 0, "extreme-heat": 0
+  };
+
   for (let i = 0; i < durationDays; i++) {
     const date = addDays(startDate, i);
     let targetMile = startMile + sign * (milesPerDay * i);
@@ -331,7 +327,7 @@ const normals =
 if (!normals || !Array.isArray(normals.hi) || !Array.isArray(normals.lo)) continue;
 
     const monthDay = toISODate(date).slice(5); // MM-DD
-    const idx = dayIndexInNonLeapYearFromMonthDay(monthDay);
+    const idx = dayIndexFromMonthDay(monthDay);
 
     const avgHigh = normals.hi[idx];
     const avgLow  = normals.lo[idx];
@@ -355,6 +351,11 @@ if (!normals || !Array.isArray(normals.hi) || !Array.isArray(normals.lo)) contin
 
     if (!hottest || rec.appHigh > hottest.appHigh) hottest = rec;
     if (!coldest || rec.appLow  < coldest.appLow)  coldest = rec;
+
+    // UTCI thermal comfort categorization
+    const highScore = utciScoreHigh(appHigh);
+    const lowScore  = utciScoreLow(appLow);
+    utciCounts[utciCategoryDay(highScore, lowScore, appHigh, appLow)]++;
   }
 
   // Advisories
@@ -370,14 +371,24 @@ if (!normals || !Array.isArray(normals.hi) || !Array.isArray(normals.lo)) contin
     durStatusEl.textContent = advisories.join(" ");
   }
 
+  const endDate = addDays(startDate, durationDays - 1);
+
   setDisplayIfExists("durExtremesWrap", "block");
-  renderDurExtremesBlocks(hottest, coldest);
+  renderDurExtremesBlocks(hottest, coldest, {
+    startDate,
+    endDate,
+    distanceMiles,
+    durationDays,
+    startDateLabel,
+    utciCounts
+  });
   renderDurExtremesMap(hottest, coldest);
 }
 
 function runDurationCalculator() {
   setDurStatus("");
   if (el("durResult")) el("durResult").innerHTML = "";
+  if (el("bestStartResult")) el("bestStartResult").innerHTML = "";
   setDisplayIfExists("durExtremesWrap", "none");
 
   const direction = el("durDirectionSelect")?.value || "NOBO";
@@ -413,22 +424,14 @@ function runDurationCalculator() {
   // End date should be the LAST hiking day: start + (durationDays - 1)
   const endDate = addDays(startDate, durationDays - 1);
 
-  renderDurationResult({
-    direction,
-    startDate,
-    endDate,
-    distanceMiles: distance,
-    milesPerDay: mpd,
-    durationDays
-  });
-
   // Compute extremes synchronously (no network) once normals are loaded.
   if (normalsByPointId && normalsByPointId.size > 0) {
     computeAndRenderDurationExtremes({
       direction,
       startDate,
       milesPerDay: mpd,
-      durationDays
+      durationDays,
+      distanceMiles: distance
     }).catch(err => {
       console.error(err);
       setDurStatus(`Error computing temperature extremes: ${err.message}`);
@@ -436,6 +439,103 @@ function runDurationCalculator() {
   } else {
     setDurStatus("Temperature extremes will appear once historical_weather.json is available.");
   }
+}
+
+/* ---------------------------
+   BestStart: UTCI thermal comfort scoring
+   UTCI scoring functions now live in shared-utils.js.
+   This thin wrapper handles AT-specific logic (Katahdin eliminator).
+---------------------------- */
+
+function runBestStart() {
+  setDurStatus("");
+  if (el("bestStartResult")) el("bestStartResult").innerHTML = "";
+  if (el("durResult")) el("durResult").innerHTML = "";
+  setDisplayIfExists("durExtremesWrap", "none");
+
+  const direction = el("durDirectionSelect")?.value || "NOBO";
+  const mpd = numVal("durMilesPerDay");
+
+  if (mpd == null || mpd <= 0) {
+    setDurStatus("Please enter Miles per Day.");
+    return;
+  }
+  if (mpd < 7) {
+    setDurStatus("For this planner, hikes must average at least 7 miles per day.");
+    return;
+  }
+  if (!Number.isFinite(trailTotalMiles)) {
+    setDurStatus("Trail data is still loading. Please try again in a moment.");
+    return;
+  }
+  if (!normalsByPointId || normalsByPointId.size === 0) {
+    setDurStatus("Historical weather data is still loading. Please try again in a moment.");
+    return;
+  }
+
+  const durationDays = Math.ceil(trailTotalMiles / mpd);
+  if (durationDays > 365) {
+    setDurStatus("For this planner, hikes cannot exceed one year (365 days). Please adjust Miles per Day.");
+    return;
+  }
+
+  const startMile = direction === "SOBO" ? trailMaxMiles : trailMinMiles;
+  const sign      = direction === "SOBO" ? -1 : 1;
+
+  // AT normals use hi_app/lo_app keys directly (not normalized to app_hi/app_lo at load time)
+  // so we build a compatible getNormals wrapper
+  function getAtNormals(point) {
+    const raw = normalsByPointId.get(point.id)
+      || (point.legacy_id ? normalsByPointId.get(point.legacy_id) : null);
+    if (!raw) return null;
+    return {
+      app_hi: raw.hi_app || raw.hi || [],
+      app_lo: raw.lo_app || raw.lo || [],
+    };
+  }
+
+  const { bestStartDate } = runBestStartShared({
+    durationDays,
+    getHikePoints: (startDate) => {
+      const pts = [];
+      for (let i = 0; i < durationDays; i++) {
+        const date = addDays(startDate, i);
+        let targetMile = startMile + sign * (mpd * i);
+        if (targetMile < trailMinMiles) targetMile = trailMinMiles;
+        if (targetMile > trailMaxMiles) targetMile = trailMaxMiles;
+        const point = getNearestPointByMile(targetMile);
+        if (point) pts.push({ date, point });
+      }
+      return pts;
+    },
+    getNormals: getAtNormals,
+    // AT-specific: Katahdin is end-of-hike for NOBO, start-of-hike for SOBO
+    eliminator: (startDate, endDate) => {
+      const katahdinDate = direction === "SOBO" ? startDate : endDate;
+      return isKatahdinSnowSeason(katahdinDate);
+    }
+  });
+
+  if (!bestStartDate) {
+    setHtmlIfExists("bestStartResult",
+      `<p style="color:#b00000; font-weight:600; margin-top:0.75rem;">
+        No valid start date found \u2014 every possible start date includes at least one day of
+        extreme heat or cold stress. Try adjusting miles per day.
+       </p>`);
+    return;
+  }
+
+  computeAndRenderDurationExtremes({
+    direction,
+    startDate: bestStartDate,
+    milesPerDay: mpd,
+    durationDays,
+    distanceMiles: trailTotalMiles,
+    startDateLabel: "<em>BestStart!</em> Date"
+  }).catch(err => {
+    console.error(err);
+    setDurStatus(`Error computing temperature extremes: ${err.message}`);
+  });
 }
 
 // Northbound order (GA -> ME)
@@ -1053,7 +1153,7 @@ async function runWeather() {
     const nearestNormals = normalsByPointId.get(point.id)
       || (point.legacy_id ? normalsByPointId.get(point.legacy_id) : null);
     if (nearestNormals) {
-      const idx = dayIndexInNonLeapYearFromMonthDay(monthDay);
+      const idx = dayIndexFromMonthDay(monthDay);
       if (nearestNormals.hi_app && Number.isFinite(nearestNormals.hi_app[idx])) appHigh = nearestNormals.hi_app[idx];
       if (nearestNormals.lo_app && Number.isFinite(nearestNormals.lo_app[idx])) appLow  = nearestNormals.lo_app[idx];
     }
@@ -1115,9 +1215,10 @@ if (map) {
     // Load precomputed normals (best-effort)
     try {
       await loadPrecomputedNormals();
-      if (normalsMeta?.source) {
-        setDurStatus(`Historical weather data loaded (${normalsMeta.source}).`);
-      }
+      const count = normalsByPointId.size;
+      const years = normalsMeta?.normals_range || normalsMeta?.source || "";
+      setDurStatus(`Historical weather data loaded (${count} points, ${years}).`);
+      setTimeout(() => setDurStatus(""), 4000);
     } catch (e) {
       console.warn(e);
       setDurStatus(`Precomputed planning normals not found. Add /trails/${trailSlug}/data/historical_weather.json to enable temperature extremes.`);
