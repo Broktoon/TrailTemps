@@ -3,21 +3,23 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>National Scenic Trail Weather Planner — Potomac Heritage Trail — Coming Next</title>
+  <title>National Scenic Trail Weather Planner — Potomac Heritage Trail</title>
+
   <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
   <style>
-    .coming-wrap { max-width: 900px; margin: 0 auto; padding: 24px 16px 40px; }
-    .coming-card { padding: 18px; border: 1px solid rgba(0,0,0,0.12); border-radius: 14px; background: rgba(255,255,255,0.9); }
-    .logo { width: 180px; height: 180px; object-fit: contain; display:block; margin: 10px auto 14px; }
-    .center { text-align: center; }
+    #phtSectionInfo {
+      font-size: 0.82rem;
+      color: #555;
+      font-style: italic;
+      margin: 2px 0 0 0;
+      min-height: 1.1em;
+    }
+    #phtMileInput { width: 6rem; }
+    #durMilesPerDay { width: 6rem; }
   </style>
 </head>
-
-<script>
-  window.TRAIL_SLUG = "potomac-heritage-trail";
-</script>
-<script defer src="/js/trail-nav.js"></script>
-<script defer src="/js/app.js"></script>
 
 <body data-trail="potomac-heritage-trail">
 
@@ -26,8 +28,8 @@
 
     <div class="header-text">
       <div class="title-with-logo">
-        <img src="/images/potomac_trail_logo.png"
-             alt="Potomac Heritage Trail logo"
+        <img src="/images/TrailTemps_Logo.png"
+             alt="TrailTemps logo"
              class="trail-page-logo">
 
         <div class="title-stack">
@@ -37,7 +39,8 @@
       </div>
 
       <p class="sub">
-        Coming soon — this page is reserved for the PHT version of the planner.
+        <br>
+        Time your Potomac Heritage Trail through-hike, find the <em>BestStart!</em> date to minimize hot and cold temperature stress, calculate your time of completion, identify temperature extremes during that time, and get 5-day weather forecasts for any point along the trail, including the Virginia and Eastern Continental Divide sections available only in the Weather Planner.
       </p>
     </div>
 
@@ -48,26 +51,476 @@
   </div>
 </header>
 
-  <main class="coming-wrap">
-    <div class="coming-card center">
-      <img class="logo" src="/images/potomac_trail_logo.png" alt="Potomac Heritage Trail logo">
-      <h2>Coming Next</h2>
-      <p>This page is reserved for the PHT version of the planner.</p>
-      <p><a href="index.html">← Back to trail selector</a></p>
-    </div>
+  <main>
+
+    <!-- =====================================================
+         Card 1: Hike Duration / End Date Calculator
+         ===================================================== -->
+    <section class="controls" aria-label="Hike duration calculator">
+      <h2>Hike Duration and <em>BestStart!</em> Temperature Management Calculator</h2>
+      <p class="card-instructions">
+        Select your expected daily mileage, travel direction, and D.C. route option. For computing hike durations choose a start date as well; for a <em>BestStart!</em> estimation no start date is needed as one will be calculated for you. Both will then provide an estimated hike duration and end date, high and low temperature data, and a chart of expected temperature stress days with a map showing where the expected highest and lowest temperatures should be encountered along the trail.
+      </p>
+
+      <div class="control-row">
+
+        <!-- Miles per Day -->
+        <div class="ft-select-col">
+          <label for="durMilesPerDay">Miles per Day:</label>
+          <input id="durMilesPerDay" type="text" inputmode="numeric"
+                 pattern="[0-9.]*" placeholder="e.g., 20" style="width:6rem;" />
+        </div>
+
+        <!-- Direction -->
+        <div class="ft-select-col">
+          <label for="durDirectionSelect">Direction:</label>
+          <select id="durDirectionSelect">
+            <option value="westbound">Westbound: Point Lookout, MD &rarr; Laurel Ridge, PA</option>
+            <option value="eastbound">Eastbound: Laurel Ridge, PA &rarr; Point Lookout, MD</option>
+          </select>
+        </div>
+
+        <!-- Start Date -->
+        <div class="ft-select-col">
+          <label>Start Date:</label>
+          <span style="display:flex; gap:6px; align-items:center;">
+            <select id="durMonthSelect"></select>
+            <select id="durDaySelect"></select>
+          </span>
+        </div>
+
+      </div><!-- /.control-row -->
+
+      <!-- D.C. Route Alternate -->
+      <fieldset class="alt-group-block" style="margin-top:10px;">
+        <legend>Washington D.C. Route</legend>
+        <div class="alt-options">
+          <label>
+            <input type="radio" name="dcRoute" value="river-trail" checked />
+            DC River Trail (Main)
+            <span class="alt-delta">12.3 mi &mdash; Anacostia Riverwalk &rarr; Potomac River Trail &rarr; Georgetown</span>
+          </label>
+          <label>
+            <input type="radio" name="dcRoute" value="city-park-trail" />
+            DC City Park Trail
+            <span class="alt-delta">29.0 mi (+16.7 mi) &mdash; Civil War Defenses of Washington &rarr; Fort Circle &rarr; Georgetown</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="control-grid-btn" style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:10px;">
+        <button id="durBtn" type="button" class="btn-primary">Estimate End Date and Weather Extremes</button>
+        <button id="bestStartBtn" type="button" class="btn-best-start"><em>BestStart!</em></button>
+      </div>
+
+      <div id="durStatus" class="status" style="width:100%;"></div>
+      <div id="durResult" style="width:100%;"></div>
+      <div id="bestStartResult"></div>
+
+      <!-- Temperature Extremes Results + Map -->
+      <div id="durExtremesWrap" style="display:none; margin-top:16px;">
+        <h2>Temperature Extremes During Your Hike</h2>
+        <div id="durExtremesHot"></div>
+        <div id="durExtremesCold" style="margin-top:12px;"></div>
+
+        <div id="durExtremesMap" style="margin-top:16px;"></div>
+
+        <p class="data-attribution map-attribution">
+          Mapping data provided by
+          <a href="https://www.openstreetmap.org/copyright"
+             target="_blank" rel="noopener">OpenStreetMap</a>
+          under the Open Database License.
+        </p>
+      </div>
+    </section>
+
+    <hr class="card-sep" />
+
+    <!-- =====================================================
+         Card 2: Weather Planner
+         ===================================================== -->
+    <section class="controls" aria-label="Weather planner controls">
+      <div class="section-title-block">
+        <h2>Weather Planner</h2>
+        <p class="data-attribution">
+          Weather data provided by
+          <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a>
+          under the 4.0 International (CC BY 4.0) license.
+        </p>
+      </div>
+
+      <p class="card-instructions">
+        Select a region, then a named section within that region, and enter a section mile.
+        Choose a planning date to receive current conditions, a 5-day forecast, and a 7-year
+        average for that date and location. All Virginia and Eastern Continental Divide sections
+        are available here for weather planning, even though they are not part of the through-hike route.
+      </p>
+
+      <div class="control-row">
+
+        <!-- Planning Date -->
+        <div class="ft-select-col">
+          <label>Planning Date:</label>
+          <span style="display:flex; gap:6px; align-items:center;">
+            <select id="monthSelect"></select>
+            <select id="daySelect"></select>
+          </span>
+        </div>
+
+        <!-- Region Selector -->
+        <div class="ft-select-col">
+          <label for="phtRegionSelect">Region:</label>
+          <select id="phtRegionSelect">
+            <option value="southern-maryland">Southern Maryland</option>
+            <option value="washington-dc">Washington D.C.</option>
+            <option value="co-canal-nhp">C&amp;O Canal</option>
+            <option value="great-allegheny-passage">Great Allegheny Passage</option>
+            <option value="laurel-highlands">Laurel Highlands</option>
+            <option value="northern-virginia">Northern Virginia</option>
+            <option value="northern-neck-virginia">Northern Neck of Virginia</option>
+            <option value="eastern-continental-divide">Eastern Continental Divide</option>
+          </select>
+        </div>
+
+        <!-- Section Selector -->
+        <div class="ft-select-col">
+          <label for="phtSectionSelect">Section:</label>
+          <select id="phtSectionSelect">
+            <!-- Populated dynamically by app.js based on region selection -->
+            <option value="southern-maryland">Southern Maryland</option>
+          </select>
+        </div>
+
+        <!-- Mile Input + Range Indicator -->
+        <div class="ft-select-col">
+          <label for="phtMileInput">Section Mile:</label>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <input id="phtMileInput" type="text" inputmode="numeric"
+                   pattern="[0-9.]*" placeholder="e.g., 100" />
+            <p id="phtSectionInfo" style="margin:0; font-size:0.82rem; color:#555; font-style:italic; white-space:nowrap;"></p>
+          </div>
+        </div>
+
+        <!-- Get Weather Button -->
+        <div style="width:100%; margin-top:6px;">
+          <button id="goBtn" type="button" class="btn-primary">Get Weather</button>
+        </div>
+
+      </div><!-- /.control-row -->
+
+      <div id="weatherStatus" class="status"></div>
+
+      <section class="map-wrap" id="weatherMapWrap" style="display:none;">
+        <div id="map" aria-label="Map showing selected Potomac Heritage Trail point"></div>
+
+        <p class="data-attribution map-attribution">
+          Mapping data provided by
+          <a href="https://www.openstreetmap.org/copyright"
+             target="_blank" rel="noopener">OpenStreetMap</a>
+          under the Open Database License.
+        </p>
+      </section>
+
+    </section>
+
+    <section class="grid">
+      <div id="planningSummaryBlock"></div>
+      <div id="currentBlock"></div>
+      <div id="forecastBlock"></div>
+    </section>
+
+    <hr class="card-sep" />
+
+    <!-- =====================================================
+         Notes and Resources
+         ===================================================== -->
+    <section class="weather-data-notes" aria-labelledby="weather-data-notes-title">
+      <h2 id="weather-data-notes-title">Notes on Weather and Map Data</h2>
+
+      <div class="weather-data-notes__body">
+
+        <section class="weather-data-notes__subsection" aria-labelledby="notes-section-conditions-title">
+          <h3 id="notes-section-conditions-title">Weather Notes</h3>
+          <div class="weather-data-notes__content">
+            <p>
+              This site reports both actual temperatures and apparent temperatures (heat index and
+              wind chill, calculated using the Steadman methodology). The apparent temperature
+              reflects how conditions actually feel to the body accounting for humidity and wind,
+              and is the basis for the thermal comfort tiers shown in the <em>BestStart!</em>
+              output. Detailed explanations of how heat index,
+              wind chill, and the thermal comfort scoring system work are provided on the
+              <a href="/trails/florida-trail/" target="_blank" rel="noopener noreferrer">Florida Trail</a>,
+              <a href="/trails/new-england-trail/" target="_blank" rel="noopener noreferrer">New England Trail</a>,
+              and
+              <a href="/trails/appalachian-trail/" target="_blank" rel="noopener noreferrer">Appalachian Trail</a>
+              pages, respectively.
+            </p>
+           <p>Specific issues on the various sections of the trail include:</p>
+            <ul>
+              <li>
+                <strong>Southern Maryland (miles 0&ndash;217):</strong> Low elevation, high humidity coastal
+                plain. Heat and humidity are the primary warm-season concerns; the region regularly sees
+                apparent temperatures above 100&nbsp;&deg;F in July and August. Winters are mild but damp.
+                Much of this section is on paved roads.
+              </li>
+              <li>
+                <strong>Washington D.C. (miles 217&ndash;229 or 245):</strong> Urban environment with an
+                urban heat island effect; apparent temperatures in summer can exceed the surrounding countryside.
+                The DC River Trail runs close to the Potomac and Anacostia rivers, which moderate temperatures
+                somewhat. The City Park Trail passes through the wooded Fort Circle parks, which offer more
+                shade but more elevation change.
+              </li>
+              <li>
+                <strong>C&amp;O Canal Towpath (miles 229&ndash;414):</strong> Flat to gently rolling trail
+                along the Potomac River floodplain. Hot and humid in summer, particularly in the lower
+                sections near DC. The Paw Paw Tunnel area and upper sections near Cumberland, MD can see
+                cooler temperatures and more variable conditions.
+              </li>
+              <li>
+                <strong>Great Allegheny Passage (miles 414&ndash;486):</strong> Follows the Casselman River
+                and the Youghiogheny River gorge. More moderate temperatures than the lowland sections;
+                the gorge can trap cool air in morning and evening. Fall foliage is spectacular here in
+                October.
+              </li>
+              <li>
+                <strong>Laurel Highlands Hiking Trail (miles 486&ndash;553):</strong> The most rugged section
+                of the PHT, crossing the Laurel Ridge at elevations approaching 3,000 feet. Temperatures
+                are noticeably cooler than the lowland sections; snow is possible from November through
+                March. Spring runoff can make stream crossings difficult in late winter and early spring.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        
+        <section class="weather-data-notes__subsection" aria-labelledby="notes-on-map-data-title">
+          <h3 id="notes-on-map-data-title">Notes on Map Data</h3>
+          <div class="weather-data-notes__content">
+            <p>
+              The Potomac Heritage National Scenic Trail (PHT) stretches from the Chesapeake
+              Bay (Maryland and Virginia) to Laurel Ridge, Pennsylvania, following the Potomac River corridor
+              through southern Maryland, Washington D.C., the C&amp;O Canal, and into the Appalachian highlands.
+              Like some other National Scenic Trails the PHT is definitely a work in progress, with multiple
+              routes on both Maryland and Virginia sides of the Potomac, and no "official" through-hike corridor.
+              So it is less of a single continuous footpath than a network of existing trails, greenways, and
+              road connections assembled into a through-hike route.
+            </p>
+            <p>All that being said, as a hiker myself living less than a mile from the PHT, the idea of through-hiking it appeals
+              to me.  And there is a clean, continuous route from Point Lookout, MD and along the Maryland side of the 
+              Trail that connects directly to the Pennsylvania sections and eventual Laurel Highlands terminus. So
+              TrailTemps models this route as the "Main" backbone and ignores the other sections for through-hike 
+              purposes, while still retaining them for weather planning purposes.
+            </p>
+            <p>
+              Trail centerline geometry is provided by the
+              <strong>National Park Service</strong> via the Federal Trail Data Standards (FTDS) ArcGIS
+              Feature Service for the Potomac Heritage National Scenic Trail. On-spine sections are shown
+              as solid lines; Virginia and Eastern Continental Divide sections available only in the
+              Weather Planner are shown as lighter, semi-transparent lines. For authoritative navigation,
+              always consult the NPS and the Potomac Heritage Trail Association.
+            </p>
+            <ul class="weather-data-notes__links">
+              <li>
+                <strong>Trail miles:</strong> Section miles within each named section are measured from the
+                section&rsquo;s eastern starting terminus (mile 0) to its western end. For through-hike planning, miles
+                accumulate from Point Lookout, MD (mile 0) westward to Laurel Ridge, PA (mile ~553 or ~570
+                depending on the D.C. route chosen).
+              </li>
+              <li>
+                <strong>Road segments (Southern Maryland):</strong> The Southern Maryland section is largely
+                an on-road bicycle route (the Tidewater Potomac On-Road Bicycle Route), following paved roads
+                and shared-use paths from Point Lookout northward to the Washington D.C. area. These road
+                segments are part of the official designated trail and are shown on the map as a solid line
+                using the same color as the off-road sections. Hikers planning this section should be aware
+                of road conditions, traffic, and shoulder availability, which can vary significantly. Always
+                consult current trail conditions before setting out.
+              </li>
+              <li>
+                <strong>Virginia and Eastern Continental Divide sections:</strong> The PHT network includes
+                sections in Northern Virginia, the Northern Neck of Virginia, and an Eastern Continental
+                Divide Loop near the Pennsylvania border. These sections are shown on the map (at reduced
+                opacity) and are available in the Weather Planner tool, but they are not part of the
+                continuous through-hike spine used by the Duration Calculator and <em>BestStart!</em> tool.
+                Many of these Virginia sections are still under development and may be disconnected from the
+                main trail corridor. Hikers interested in these sections should consult the National Park
+                Service and local trail associations for current conditions and connectivity.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="weather-data-notes__subsection" aria-labelledby="notes-trail-overview-title">
+          <div class="weather-data-notes__content">
+          </div>
+        </section>
+
+        <section class="weather-data-notes__subsection" aria-labelledby="additional-resources-title">
+          <h3 id="additional-resources-title">Additional Resources</h3>
+          <div class="weather-data-notes__content">
+            <ul class="weather-data-notes__links">
+              <li>
+                <a href="https://www.nps.gov/pohe/index.htm" target="_blank" rel="noopener noreferrer">
+                  <strong>Potomac Heritage National Scenic Trail (NPS):</strong>
+                </a>
+                Official NPS page with trail maps, section guides, conditions, and planning resources.
+              </li>
+              <li>
+                <a href="https://www.nps.gov/choh/index.htm" target="_blank" rel="noopener noreferrer">
+                  <strong>C&amp;O Canal National Historical Park (NPS):</strong>
+                </a>
+                The 184.5-mile C&amp;O Canal Towpath forms the longest single segment of the PHT.
+                The NPS page includes current trail conditions, campsite reservations, and flood closure
+                information.
+              </li>
+              <li>
+                <a href="https://www.atatrail.org/" target="_blank" rel="noopener noreferrer">
+                  <strong>Allegheny Trail Alliance (GAP Trail):</strong>
+                </a>
+                Manages the Great Allegheny Passage from Cumberland, MD to Pittsburgh, PA. Provides
+                current conditions, trailhead locations, and shuttle information.
+              </li>
+              <li>
+                <a href="https://www.laurelhighlands.org/outdoor-adventures/laurel-highlands-hiking-trail/"
+                   target="_blank" rel="noopener noreferrer">
+                  <strong>Laurel Highlands Hiking Trail:</strong>
+                </a>
+                The 70-mile Laurel Highlands Hiking Trail through southwestern Pennsylvania forms the western
+                end of the PHT through-hike.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+      </div>
+    </section>
+
   </main>
 
-<!-- Donation block -->
-<div class="donation-block">
-  <p class="donation-text">
-    Thank you for visiting and trying these tools. They are a labor of love for me, and I make no money from this site. However, if you wish to help support the site please consider
-    <a href="https://www.buymeacoffee.com/ihrhzL0ZC5" target="_blank" rel="noopener noreferrer">Buying Me a Coffee</a> — donations of $1, $5, or even $20 are deeply appreciated. I promise every cent will go to the ongoing operations, maintenance, development, and expansion of the site.
-  </p>
-  <a class="bmc-button" href="https://www.buymeacoffee.com/ihrhzL0ZC5n" target="_blank" rel="noopener noreferrer" aria-label="Buy Me a Coffee">Buy Me a Coffee</a>
-</div>
-
   <footer class="site-footer">
-    <div class="small">Informational only.</div>
+    <div class="small">
+      Informational only. Always verify conditions and heed local advisories.
+    </div>
   </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>window.SITE_BASE = "";</script>
+  <script>window.TRAIL_SLUG = "potomac-heritage-trail";</script>
+
+  <!-- -------------------------------------------------------
+       Inline bootstrap: PHT sections and regions for immediate
+       UI population before pht_meta.json finishes loading.
+       ------------------------------------------------------- -->
+  <script>
+    window.PHT_REGIONS_BOOTSTRAP = [
+      { id: "southern-maryland",         name: "Southern Maryland",         on_spine: true  },
+      { id: "washington-dc",             name: "Washington D.C.",           on_spine: true  },
+      { id: "co-canal-nhp",              name: "C\u0026O Canal",            on_spine: true  },
+      { id: "great-allegheny-passage",   name: "Great Allegheny Passage",   on_spine: true  },
+      { id: "laurel-highlands",          name: "Laurel Highlands",          on_spine: true  },
+      { id: "northern-virginia",         name: "Northern Virginia",         on_spine: false },
+      { id: "northern-neck-virginia",    name: "Northern Neck of Virginia", on_spine: false },
+      { id: "eastern-continental-divide",name: "Eastern Continental Divide",on_spine: false }
+    ];
+
+    window.PHT_SECTIONS_BOOTSTRAP = [
+      // Spine sections
+      { id: "southern-maryland",         name: "Southern Maryland",           region: "southern-maryland",         on_spine: true,  mile_start: 0,      mile_end: 216.6   },
+      { id: "dc-river-trail",            name: "DC River Trail",              region: "washington-dc",             on_spine: true,  mile_start: 0,      mile_end: 12.3,   alt_id: "river-trail"     },
+      { id: "dc-city-park-trail",        name: "DC City Park Trail",          region: "washington-dc",             on_spine: true,  mile_start: 0,      mile_end: 29.0,   alt_id: "city-park-trail" },
+      { id: "co-canal",                  name: "C\u0026O Canal Towpath",      region: "co-canal-nhp",              on_spine: true,  mile_start: 0,      mile_end: 184.6   },
+      { id: "great-allegheny-passage",   name: "Great Allegheny Passage",     region: "great-allegheny-passage",   on_spine: true,  mile_start: 0,      mile_end: 72.0    },
+      { id: "laurel-highlands",          name: "Laurel Highlands Trail",      region: "laurel-highlands",          on_spine: true,  mile_start: 0,      mile_end: 67.4    },
+      // WP-only — Northern Neck of Virginia
+      { id: "northern-neck",             name: "Northern Neck of Virginia",   region: "northern-neck-virginia",    on_spine: false, mile_start: 0,      mile_end: 94.8    },
+      // WP-only — Northern Virginia (subset of sections; full list from pht_meta.json)
+      { id: "mount-vernon-trail",        name: "Mount Vernon Trail",          region: "northern-virginia",         on_spine: false, mile_start: 0,      mile_end: 18.7    },
+      { id: "washington-and-old-dominion-trail", name: "Washington and Old Dominion Trail", region: "northern-virginia", on_spine: false, mile_start: 0, mile_end: 5.5   },
+      { id: "neabsco-creek-boardwalk",   name: "Neabsco Creek Boardwalk",     region: "northern-virginia",         on_spine: false, mile_start: 0,      mile_end: 1.3     },
+      { id: "mason-neck-heritage-trail", name: "Mason Neck Heritage Trail",   region: "northern-virginia",         on_spine: false, mile_start: 0,      mile_end: 3.1     },
+      { id: "north-valley-trail",        name: "North Valley Trail",          region: "northern-virginia",         on_spine: false, mile_start: 0,      mile_end: 4.6     },
+      { id: "east-coast-greenway",       name: "East Coast Greenway",         region: "northern-virginia",         on_spine: false, mile_start: 0,      mile_end: 2.6     },
+      { id: "belmont-ferry-farm-trail",  name: "Belmont Ferry Farm Trail",    region: "northern-virginia",         on_spine: false, mile_start: 0,      mile_end: 2.8     },
+      { id: "rappahannock-river-heritage-trail", name: "Rappahannock River Heritage Trail", region: "northern-virginia", on_spine: false, mile_start: 0, mile_end: 0.8   },
+      { id: "brooke-rd",                 name: "Brooke Rd",                   region: "northern-virginia",         on_spine: false, mile_start: 0,      mile_end: 5.8     },
+      { id: "northern-virginia-unnamed", name: "Northern Virginia (Mixed)",   region: "northern-virginia",         on_spine: false, mile_start: 0,      mile_end: 79.8    },
+      // WP-only — Eastern Continental Divide
+      { id: "eastern-continental-divide-loop", name: "Eastern Continental Divide Loop", region: "eastern-continental-divide", on_spine: false, mile_start: 0, mile_end: 59.7 }
+    ];
+
+    // Populate section select from bootstrap on region change
+    (function () {
+      var PHT_SECTION_DISPLAY_NAMES = {
+        "ent-to-red-rock-wilderness-overlook-regional-park": "Red Rock Wilderness Overlook",
+        "belmont-ferry-farm-trail-to-rappahannock-river-heritage-trail-connector": "Belmont Ferry to Rappahannock Trail"
+      };
+      var PHT_SECTION_UI_HIDDEN = { "northern-virginia-unnamed": true };
+
+      function phtPopulateSections(regionId) {
+        const secSel = document.getElementById("phtSectionSelect");
+        if (!secSel) return;
+        const sections = (window.PHT_SECTIONS_BOOTSTRAP || []).filter(s => s.region === regionId && !PHT_SECTION_UI_HIDDEN[s.id]);
+        secSel.innerHTML = "";
+        for (const sec of sections) {
+          const opt = document.createElement("option");
+          opt.value = sec.id;
+          opt.textContent = PHT_SECTION_DISPLAY_NAMES[sec.id] || sec.name;
+          secSel.appendChild(opt);
+        }
+        phtUpdateSectionInfo();
+      }
+
+      function phtUpdateSectionInfo() {
+        const sectionId = document.getElementById("phtSectionSelect")?.value;
+        const infoEl    = document.getElementById("phtSectionInfo");
+        const mileInput = document.getElementById("phtMileInput");
+        if (!sectionId || !infoEl) return;
+
+        const sec = (window.PHT_SECTIONS_BOOTSTRAP || []).find(s => s.id === sectionId);
+        if (!sec) return;
+
+        infoEl.textContent = "Section Range: 0\u2013" + sec.mile_end.toFixed(1) + " Miles";
+
+        if (mileInput) {
+          mileInput.placeholder = "e.g., " + Math.round(sec.mile_end / 2);
+          const cur = Number(mileInput.value);
+          if (cur < 0 || cur > sec.mile_end) mileInput.value = "";
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const regionSel  = document.getElementById("phtRegionSelect");
+        const sectionSel = document.getElementById("phtSectionSelect");
+
+        if (regionSel) {
+          phtPopulateSections(regionSel.value);
+          regionSel.addEventListener("change", function () {
+            phtPopulateSections(this.value);
+          });
+        }
+        if (sectionSel) {
+          sectionSel.addEventListener("change", phtUpdateSectionInfo);
+        }
+      });
+    })();
+  </script>
+
+  <script defer src="/js/trail-nav.js"></script>
+  <script defer src="/js/shared-utils.js"></script>
+  <script defer src="js/app.js"></script>
+
+  <!-- Donation block -->
+  <div class="donation-block">
+    <p class="donation-text">
+      Thank you for visiting and trying these tools. They are a labor of love for me, and I make
+      no money from this site. However, if you wish to help support the site please consider
+      <a href="https://www.buymeacoffee.com/ihrhzL0ZC5" target="_blank" rel="noopener noreferrer">Buying Me a Coffee</a>
+      &mdash; donations of $1, $5, or even $20 are deeply appreciated. I promise every cent will go to
+      the ongoing operations, maintenance, development, and expansion of the site.
+    </p>
+    <a class="bmc-button" href="https://www.buymeacoffee.com/ihrhzL0ZC5"
+       target="_blank" rel="noopener noreferrer" aria-label="Buy Me a Coffee">Buy Me a Coffee</a>
+  </div>
+
 </body>
 </html>

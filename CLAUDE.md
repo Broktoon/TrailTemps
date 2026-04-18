@@ -192,7 +192,7 @@ trails/
       generate-normals-nct.js       ← Fetches ERA5-Land normals for all 977 points; resume-safe (~82 min at 5-sec delay)
   potomac-heritage-trail/
     index.html
-    js/app.js                       ← Full client app (Coming Next — not yet live)
+    js/app.js                       ← Single-file client app
     data/
       points.json                   ← 8,888 total points at 0.1-mile intervals (5,410 spine + DC alts + 3,064 WP-only)
       trail.geojson                 ← NPS FTDS ArcGIS features; spine solid, WP-only semi-transparent
@@ -932,7 +932,7 @@ Located in `trails/north-country-trail/tools/`:
 
 ## Potomac Heritage Trail (PHT) — Coming Soon
 
-- **Status:** Coming Next (April 2026). `app.js`, `index.html`, and `historical_weather.json` all complete. Not yet live — do not promote without explicit user instruction.
+- **Status:** Live (April 2026). `app.js`, `index.html`, and `historical_weather.json` all complete.
 - **Point ID format:** `pht-{section_id}-mi{8digits}` (e.g. `pht-southern-maryland-mi00000000`); DC alt points include alt_id in ID (e.g. `pht-dc-river-trail-river-trail-mi02165860`)
 - **Data files:** `points.json`, `pht_meta.json`, `trail.geojson`, `historical_weather.json`, `_raw_pht.json`
 - **Normals source:** Open-Meteo ERA5-Land archive (2018–2024)
@@ -1087,9 +1087,9 @@ Located in `trails/potomac-heritage-trail/tools/`:
 2. **Coming Next** — one trail at a time
 3. **Coming Soon** — alphabetical
 
-Current order: AT, AZT, FT, IAT, NTT, NET, NCT, PCT, PNT → PHT (Coming Next) → CDT (Coming Soon)
+Current order: AT, AZT, FT, IAT, NTT, NET, NCT, PCT, PNT, PHT → CDT (Coming Soon)
 
-**PHT is Coming Next — do not promote to live without explicit user instruction.**
+**CDT is Coming Soon — do not promote to live without explicit user instruction.**
 
 When promoting a trail from Coming Next to live: remove the badge in `trail-nav.js`, update the tile in `index.html` (remove `coming` class and badge div, update description), and move it to its alphabetical position in both files.
 

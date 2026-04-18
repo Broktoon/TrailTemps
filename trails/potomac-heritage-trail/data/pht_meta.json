@@ -1,0 +1,480 @@
+{
+  "trail": {
+    "name": "Potomac Heritage National Scenic Trail",
+    "spine_miles": 552.96,
+    "map_center": [
+      39.22,
+      -77.91
+    ],
+    "map_zoom": 7,
+    "termini": {
+      "east": "Point Lookout, MD",
+      "west": "Laurel Ridge, PA"
+    }
+  },
+  "regions": [
+    {
+      "id": "southern-maryland",
+      "name": "Southern Maryland",
+      "on_spine": true
+    },
+    {
+      "id": "washington-dc",
+      "name": "Washington D.C.",
+      "on_spine": true
+    },
+    {
+      "id": "co-canal-nhp",
+      "name": "Chesapeake and Ohio Canal",
+      "on_spine": true
+    },
+    {
+      "id": "great-allegheny-passage",
+      "name": "Great Allegheny Passage",
+      "on_spine": true
+    },
+    {
+      "id": "laurel-highlands",
+      "name": "Laurel Highlands",
+      "on_spine": true
+    },
+    {
+      "id": "northern-virginia",
+      "name": "Northern Virginia",
+      "on_spine": false
+    },
+    {
+      "id": "northern-neck-virginia",
+      "name": "Northern Neck of Virginia",
+      "on_spine": false
+    },
+    {
+      "id": "eastern-continental-divide",
+      "name": "Eastern Continental Divide",
+      "on_spine": false
+    }
+  ],
+  "sections": [
+    {
+      "id": "southern-maryland",
+      "name": "Southern Maryland",
+      "region": "southern-maryland",
+      "on_spine": true,
+      "mile_start": 0,
+      "mile_end": 216.586
+    },
+    {
+      "id": "dc-river-trail",
+      "name": "DC River Trail",
+      "region": "washington-dc",
+      "on_spine": true,
+      "mile_start": 216.586,
+      "mile_end": 228.914,
+      "alt_id": "river-trail"
+    },
+    {
+      "id": "dc-city-park-trail",
+      "name": "DC City Park Trail",
+      "region": "washington-dc",
+      "on_spine": true,
+      "mile_start": 216.586,
+      "mile_end": 245.629,
+      "alt_id": "city-park-trail"
+    },
+    {
+      "id": "co-canal",
+      "name": "C&O Canal Towpath",
+      "region": "co-canal-nhp",
+      "on_spine": true,
+      "mile_start": 228.914,
+      "mile_end": 413.555
+    },
+    {
+      "id": "great-allegheny-passage",
+      "name": "Great Allegheny Passage",
+      "region": "great-allegheny-passage",
+      "on_spine": true,
+      "mile_start": 413.555,
+      "mile_end": 485.597
+    },
+    {
+      "id": "laurel-highlands",
+      "name": "Laurel Highlands Trail",
+      "region": "laurel-highlands",
+      "on_spine": true,
+      "mile_start": 485.597,
+      "mile_end": 552.957
+    },
+    {
+      "id": "northern-neck",
+      "name": "Northern Neck of Virginia",
+      "region": "northern-neck-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 94.79
+    },
+    {
+      "id": "scenic-dr",
+      "name": "Scenic Dr",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 3.84
+    },
+    {
+      "id": "mount-vernon-trail",
+      "name": "Mount Vernon Trail",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 18.65
+    },
+    {
+      "id": "northern-virginia-unnamed",
+      "name": "northern-virginia-unnamed",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 79.77
+    },
+    {
+      "id": "rippon-blvd",
+      "name": "Rippon Blvd",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 1.55
+    },
+    {
+      "id": "mason-neck-heritage-trail",
+      "name": "Mason Neck Heritage Trail",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 3.07
+    },
+    {
+      "id": "featherstone-rd",
+      "name": "Featherstone Rd",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 0.79
+    },
+    {
+      "id": "taylor-point-rd",
+      "name": "Taylor Point Rd",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 0.88
+    },
+    {
+      "id": "river-creek-pkwy",
+      "name": "River Creek Pkwy",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 0.63
+    },
+    {
+      "id": "youngs-cliff-rd",
+      "name": "Youngs Cliff Rd",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 2.87
+    },
+    {
+      "id": "washington-and-old-dominion-trail",
+      "name": "Washington and Old Dominion Trail",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 5.48
+    },
+    {
+      "id": "park-entrance-rd",
+      "name": "Park Entrance Rd",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 0.5
+    },
+    {
+      "id": "riverside-pkwy",
+      "name": "Riverside Pkwy",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 0.8
+    },
+    {
+      "id": "burma-rd",
+      "name": "Burma Rd",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 0.55
+    },
+    {
+      "id": "north-river-trail",
+      "name": "North River Trail",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 0.25
+    },
+    {
+      "id": "difficult-run-trail",
+      "name": "Difficult Run Trail",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 0.74
+    },
+    {
+      "id": "patowmack-canal-trail",
+      "name": "Patowmack Canal Trail",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 1.29
+    },
+    {
+      "id": "parking-lot-connector-trail",
+      "name": "Parking Lot Connector Trail",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 0.5
+    },
+    {
+      "id": "ent-to-scotts-run-nature-preserve",
+      "name": "Ent to Scotts Run Nature Preserve",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 0.14
+    },
+    {
+      "id": "high-point-trail",
+      "name": "High Point Trail",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 3
+    },
+    {
+      "id": "white-trail",
+      "name": "White Trail",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 1.32
+    },
+    {
+      "id": "ent-to-red-rock-wilderness-overlook-regional-park",
+      "name": "Ent to Red Rock Wilderness Overlook Regional Park",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 0.08
+    },
+    {
+      "id": "neabsco-creek-boardwalk",
+      "name": "Neabsco Creek Boardwalk",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 1.32
+    },
+    {
+      "id": "farm-creek-dr",
+      "name": "Farm Creek Dr",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 0.16
+    },
+    {
+      "id": "ridge-trail",
+      "name": "Ridge Trail",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 0.55
+    },
+    {
+      "id": "belmont-bay-dr",
+      "name": "Belmont Bay Dr",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 0.53
+    },
+    {
+      "id": "express-dr",
+      "name": "Express Dr",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 0.22
+    },
+    {
+      "id": "belmont-ferry-farm-trail",
+      "name": "Belmont Ferry Farm Trail",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 2.83
+    },
+    {
+      "id": "brooke-rd",
+      "name": "Brooke Rd",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 5.79
+    },
+    {
+      "id": "canal-path-trail",
+      "name": "Canal Path Trail",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 0.42
+    },
+    {
+      "id": "east-coast-greenway",
+      "name": "East Coast Greenway",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 2.59
+    },
+    {
+      "id": "hanson-ave",
+      "name": "Hanson Ave",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 0.07
+    },
+    {
+      "id": "woodford-st",
+      "name": "Woodford St",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 0.06
+    },
+    {
+      "id": "rappahannock-river-heritage-trail",
+      "name": "Rappahannock River Heritage Trail",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 0.8
+    },
+    {
+      "id": "washington-ave",
+      "name": "Washington Ave",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 0.8
+    },
+    {
+      "id": "lewis-st",
+      "name": "Lewis St",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 0.03
+    },
+    {
+      "id": "wiliam-st",
+      "name": "Wiliam St",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 0.47
+    },
+    {
+      "id": "belmont-ferry-farm-trail-to-rappahannock-river-heritage-trail-connector",
+      "name": "Belmont Ferry Farm Trail to Rappahannock River Heritage Trail Connector",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 0.5
+    },
+    {
+      "id": "edwards-ferry-rd",
+      "name": "Edwards Ferry Rd",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 0.01
+    },
+    {
+      "id": "north-valley-trail",
+      "name": "North Valley Trail",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 4.56
+    },
+    {
+      "id": "river-trail",
+      "name": "River Trail",
+      "region": "northern-virginia",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 1.31
+    },
+    {
+      "id": "eastern-continental-divide-loop",
+      "name": "Eastern Continental Divide Loop",
+      "region": "eastern-continental-divide",
+      "on_spine": false,
+      "mile_start": 0,
+      "mile_end": 59.69
+    }
+  ],
+  "alt_groups": [
+    {
+      "id": "dc-route",
+      "label": "Washington D.C. Route",
+      "branch_mile": 216.586,
+      "rejoin_mile": 228.914,
+      "main": {
+        "id": "river-trail",
+        "label": "DC River Trail",
+        "total_miles": 12.33,
+        "note": "Anacostia Riverwalk → Potomac River Trail → Georgetown waterfront"
+      },
+      "alt": {
+        "id": "city-park-trail",
+        "label": "DC City Park Trail",
+        "total_miles": 29.04,
+        "delta_miles": 16.71,
+        "note": "Civil War Defenses of Washington → Fort Circle → Georgetown"
+      }
+    }
+  ],
+  "direction_options": [
+    {
+      "id": "westbound",
+      "label": "Westbound — Point Lookout, MD → Laurel Ridge, PA",
+      "total_miles": 552.96,
+      "is_westbound": true
+    },
+    {
+      "id": "eastbound",
+      "label": "Eastbound — Laurel Ridge, PA → Point Lookout, MD",
+      "total_miles": 552.96,
+      "is_westbound": false
+    }
+  ]
+}

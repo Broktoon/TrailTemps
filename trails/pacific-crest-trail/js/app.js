@@ -281,6 +281,7 @@ async function loadPrecomputedNormals() {
 
   console.log("[PCT] normals loaded:", normalsByPointId.size, "points");
   setDurStatus("Historical weather data loaded (" + normalsByPointId.size + " points).");
+  setTimeout(() => setDurStatus(""), 4000);
 }
 
 /* ============================================================

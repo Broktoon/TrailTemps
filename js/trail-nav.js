@@ -20,8 +20,7 @@
     { slug: "north-country-trail",      name: "North Country Trail",      badge: "" },
     { slug: "pacific-crest-trail",      name: "Pacific Crest Trail",      badge: "" },
     { slug: "pacific-northwest-trail",  name: "Pacific Northwest Trail",  badge: "" },
-    // Coming next
-    { slug: "potomac-heritage-trail",   name: "Potomac Heritage Trail",   badge: "(Coming Next)" },
+    { slug: "potomac-heritage-trail",   name: "Potomac Heritage Trail",   badge: "" },
     // Coming soon — alphabetical
     { slug: "continental-divide-trail", name: "Continental Divide Trail", badge: "(Coming Soon)" },
   ];
