@@ -1,0 +1,87 @@
+{
+  "trail": {
+    "name": "North Country Trail",
+    "total_trail_miles": 4877.03,
+    "map_center": [
+      43.39,
+      -87.15
+    ],
+    "map_zoom": 5,
+    "termini": {
+      "east": "Crown Point, NY (Lake Champlain) / Vermont",
+      "west": "Lake Sakakawea State Park, ND"
+    }
+  },
+  "sections": [
+    {
+      "id": "vt",
+      "name": "Vermont",
+      "state": "VT",
+      "axis_start": 0,
+      "axis_end": 70.583
+    },
+    {
+      "id": "ny",
+      "name": "New York",
+      "state": "NY",
+      "axis_start": 70.583,
+      "axis_end": 775.202
+    },
+    {
+      "id": "pa",
+      "name": "Pennsylvania",
+      "state": "PA",
+      "axis_start": 775.202,
+      "axis_end": 1059.746
+    },
+    {
+      "id": "oh",
+      "name": "Ohio",
+      "state": "OH",
+      "axis_start": 1059.746,
+      "axis_end": 2132.692
+    },
+    {
+      "id": "mi",
+      "name": "Michigan",
+      "state": "MI",
+      "axis_start": 2132.692,
+      "axis_end": 3318.58
+    },
+    {
+      "id": "wi",
+      "name": "Wisconsin",
+      "state": "WI",
+      "axis_start": 3318.58,
+      "axis_end": 3533.803
+    },
+    {
+      "id": "mn",
+      "name": "Minnesota",
+      "state": "MN",
+      "axis_start": 3533.803,
+      "axis_end": 4410.87
+    },
+    {
+      "id": "nd",
+      "name": "North Dakota",
+      "state": "ND",
+      "axis_start": 4410.87,
+      "axis_end": 4877.027
+    }
+  ],
+  "direction_options": [
+    {
+      "id": "webo",
+      "label": "Westbound — Crown Point, NY / Vermont → Lake Sakakawea, ND",
+      "total_miles": 4877.03,
+      "is_webo": true
+    },
+    {
+      "id": "eabo",
+      "label": "Eastbound — Lake Sakakawea, ND → Crown Point, NY / Vermont",
+      "total_miles": 4877.03,
+      "is_webo": false
+    }
+  ]
+}

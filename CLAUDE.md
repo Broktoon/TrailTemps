@@ -13,7 +13,7 @@ This file provides guidance to Claude Code when working with code in this reposi
 3. Historical Temperature Extremes — pre-computed normals per waypoint (ERA5-Land, 2018–2024)
 4. Alternate route selection — mutually exclusive swap alternates (FT and AZT)
 5. Interactive Leaflet map display
-6. Multi-trail architecture — Appalachian Trail, Arizona Trail, Florida Trail, Ice Age Trail, Natchez Trace Trail, New England Trail, Pacific Crest Trail, and Pacific Northwest Trail all live
+6. Multi-trail architecture — Appalachian Trail, Arizona Trail, Florida Trail, Ice Age Trail, Natchez Trace Trail, New England Trail, Pacific Crest Trail, and Pacific Northwest Trail all live; North Country Trail data pipeline complete (Coming Next); Potomac Heritage Trail data pipeline + app.js + index.html complete (Coming Soon)
 7. BestStart! calculator — scans all 365 possible start dates and recommends the one with the best UTCI thermal comfort score across the full hike
 
 **Design principles — non-negotiable:**
@@ -64,6 +64,10 @@ node trails/pacific-northwest-trail/tools/fix-ferry-geometry.js
 node trails/pacific-northwest-trail/tools/generate-normals-pnt.js
 node trails/ice-age-trail/tools/build-points-iat.js
 node trails/ice-age-trail/tools/generate-normals-iat.js
+node trails/north-country-trail/tools/build-points-nct.js
+node trails/north-country-trail/tools/generate-normals-nct.js
+node trails/potomac-heritage-trail/tools/build-points-pht.js
+node trails/potomac-heritage-trail/tools/generate-normals-pht.js
 ```
 
 There are no tests, no linter, and no build step.
@@ -173,6 +177,31 @@ trails/
     tools/
       build-points-iat.js           ← Fetches WI DNR ArcGIS + IATA roadwalk; stitches, interpolates, writes all data files
       generate-normals-iat.js       ← Fetches ERA5-Land normals; resume-safe; reuses nearby existing points to reduce API calls
+  north-country-trail/
+    index.html
+    js/app.js                       ← Single-file client app
+    data/
+      points.json                   ← 977 points at 5-mile intervals (miles 0–4,877.03, WEBO)
+      trail.geojson                 ← 1,324 features (NCTA ArcGIS Layer 2; off-road solid, roadwalk dashed)
+      nct_meta.json
+      historical_weather.json       ← (not yet generated; ~977 normals points when complete, ~60 MB)
+      _raw_nct.json                 ← cached NCTA ArcGIS source geometry (used by build-points-nct.js)
+      _raw_sht.json                 ← cached OSM SHT ways (480 ways, relation 1612587)
+    tools/
+      build-points-nct.js           ← Fetches NCTA ArcGIS + OSM SHT; stitches, interpolates, writes all data files
+      generate-normals-nct.js       ← Fetches ERA5-Land normals for all 977 points; resume-safe (~82 min at 5-sec delay)
+  potomac-heritage-trail/
+    index.html
+    js/app.js                       ← Full client app (Coming Next — not yet live)
+    data/
+      points.json                   ← 8,888 total points at 0.1-mile intervals (5,410 spine + DC alts + 3,064 WP-only)
+      trail.geojson                 ← NPS FTDS ArcGIS features; spine solid, WP-only semi-transparent
+      pht_meta.json
+      historical_weather.json       ← { meta, points } wrapped; normals at ~5-mile intervals per section
+      _raw_pht.json                 ← cached NPS ArcGIS source geometry (used by build-points-pht.js)
+    tools/
+      build-points-pht.js           ← Fetches NPS FTDS ArcGIS, stitches chains, interpolates at 0.1-mile intervals, writes all data files
+      generate-normals-pht.js       ← Fetches ERA5-Land normals per (section_id, alt_id) group; resume-safe; { meta, points } output
 ```
 
 ### Shared JavaScript Files
@@ -239,7 +268,8 @@ Large `historical_weather.json` files (AT ~28 MB, and similarly large FT/NET fil
 - **Current Conditions box:** show wind speed only — no wind direction
 - **Temperature advisories:** heat index advisory at apparent high ≥ 100 °F; wind chill advisory at apparent low ≤ 20 °F (20 °F chosen as typical gear rating floor for sleeping bags/insulation)
 - **Apparent temperature** uses Steadman methodology (built into Open-Meteo `apparent_temperature_*` fields)
-- **Extremes output format (all trails):** the unified `renderDurExtremesBlocksShared` renderer outputs three blocks inside `durExtremesHot`: (1) a 4-column duration summary table (Start Date / End Date / Distance / Duration), (2) a UTCI Thermal Comfort Profile table (9 category columns showing day counts), (3) side-by-side Hottest Day / Coldest Night extremes tables with Date, Location, Actual Temp, Apparent Temp, Relative Humidity rows. `durExtremesCold` is cleared (legacy div kept for compatibility). Each trail's `renderDurExtremesBlocks` is a thin wrapper calling `renderDurExtremesBlocksShared` with a `formatLocation` callback.
+- **Extremes output format (all trails):** the unified `renderDurExtremesBlocksShared` renderer outputs three blocks inside `durExtremesHot`: (1) a 4-column duration summary table (Start Date / End Date / Distance / Duration), (2) a **Thermal Stress and Comfort Profile: Days on Trail** table (9 category columns showing day counts), (3) side-by-side Hottest Day / Coldest Night extremes tables with Date, Location, Actual Temp, Apparent Temp, Relative Humidity rows. `durExtremesCold` is cleared (legacy div kept for compatibility). Each trail's `renderDurExtremesBlocks` is a thin wrapper calling `renderDurExtremesBlocksShared` with a `formatLocation` callback.
+- **`durExtremesMap` placement (all trails):** `<div id="durExtremesMap" style="margin-top:16px;"></div>` must appear AFTER `durExtremesHot` and `durExtremesCold` inside `durExtremesWrap`, followed by the map attribution `<p>`. The map is the last visible output, not the first. All trail `index.html` files follow this order: data tables → map div → attribution.
 - **BestStart! button:** `<button id="bestStartBtn" type="button" class="btn-best-start"><em>BestStart!</em></button>` placed immediately after `durBtn` inside the same wrapper div. CSS class `.btn-best-start` defined in `css/styles.css` (green #2e7a2e/#235823).
 - **BestStart! result div:** `<div id="bestStartResult"></div>` placed after `durResult`. `renderDurExtremesBlocksShared` clears it on every render.
 - **`bestStartBtn` wiring:** `el("bestStartBtn")?.addEventListener("click", runBestStart)` in `initDurationUI()`.
@@ -303,7 +333,7 @@ Each trail's `app.js` has:
 
 ### Normals Key Convention
 
-All trails normalize normals to `app_hi` / `app_lo` at load time. **Exception:** AT `historical_weather.json` stores keys as `hi_app` / `lo_app`. AT's `runBestStart()` includes a `getAtNormals` wrapper that remaps them before passing to `runBestStartShared`.
+All trails normalize normals to `app_hi` / `app_lo` at load time. **Exception:** AT and PHT `historical_weather.json` store keys as `hi_app` / `lo_app`. AT uses a `getAtNormals` wrapper; PHT's `loadPrecomputedNormals()` remaps `hi_app`/`lo_app` → `app_hi`/`app_lo` directly on load.
 
 ### Alternate Route Bug — Critical Notes
 
@@ -695,10 +725,11 @@ Same logic as AZT (applied to apparent temperatures only):
 ### PCT Notable Features
 
 - **No alternates** — single continuous spine; no `getSelectedAlts()` needed
-- **BestStart!** — includes the standard BestStart! button and `runBestStart()` implementation
+- **BestStart!** — fully implemented: button, `bestStartResult` div, `runBestStart()`, `bestStartBtn` wired in `initDurationUI()`
 - **`NORMALS_CACHE_VERSION`:** `"v1"` — bump whenever `historical_weather.json` is rebuilt
 - **`{ meta, points }` wrapper** — same structure as IAT; `historical_weather.json` is not a flat array
 - **Katahdin-style eliminator not used** — unlike AT, no seasonal snow-closure eliminator is applied; BestStart! relies on UTCI scoring alone
+- **Heat/cold advisories via `warningHtml`:** PCT's `computeAndRenderDurationExtremes` builds advisory HTML strings (heat index ≥ 100 °F; wind chill ≤ 20 °F) and passes them as `warningHtml` to `renderDurExtremesBlocks`. Do not append advisories to `durResult` directly — `renderDurExtremesBlocksShared` clears it on every call.
 
 ### PCT Tools
 
@@ -804,6 +835,250 @@ Located in `trails/ice-age-trail/tools/`:
 
 ---
 
+## North Country Trail (NCT) — Coming Next
+
+- **Status:** Live (April 2026). `historical_weather.json` generation in progress (normals run underway).
+- **Point ID format:** `nct-{state_id}-mi{7digits}` (thousandth-mile precision, zero-padded to 7 digits; state_id is lowercase, e.g. `nct-mn-mi3533803`)
+- **Data files:** `points.json`, `nct_meta.json`, `trail.geojson`, `historical_weather.json` (pending), `_raw_nct.json`, `_raw_sht.json`
+- **Normals source:** Open-Meteo ERA5-Land archive (2018–2024), via `generate-normals-nct.js` (not yet run)
+- **Weather resolution:** 5-mile intervals (977 points, miles 0–4,877.03, WEBO order)
+- **Trail geometry sources:**
+  - NCTA ArcGIS FeatureServer Layer 2 — main source for all 8 states
+  - OSM Overpass API — Superior Hiking Trail (relation 1612587, 480 ways) injected for northeastern MN (Duluth → Silver Bay corridor, ~100 miles omitted from NCTA FeatureServer)
+- **Trail color:** `#e06060` (same salmon/red as FT, NET, NTT, AZT, IAT, PCT)
+- **Direction convention:** WEBO (westbound, Crown Point NY/Vermont → Lake Sakakawea ND) / EABO (eastbound); uses `is_webo` flag in meta
+- **Cache files:** `_raw_nct.json` (NCTA ArcGIS, cached to avoid repeated fetches); `_raw_sht.json` (OSM SHT ways, cached similarly). Delete either to force a fresh fetch on next build run.
+
+### NCT Geographic Sections (8 States)
+
+| State | Name | Axis start | Axis end | Miles |
+|-------|------|-----------|---------|-------|
+| `vt` | Vermont | 0 | 70.583 | 70.6 |
+| `ny` | New York | 70.583 | 775.202 | 704.6 |
+| `pa` | Pennsylvania | 775.202 | 1,059.746 | 284.5 |
+| `oh` | Ohio | 1,059.746 | 2,132.692 | 1,072.9 |
+| `mi` | Michigan | 2,132.692 | 3,318.58 | 1,185.9 |
+| `wi` | Wisconsin | 3,318.58 | 3,533.803 | 215.2 |
+| `mn` | Minnesota | 3,533.803 | 4,410.87 | 877.1 |
+| `nd` | North Dakota | 4,410.87 | 4,877.027 | 466.2 |
+
+**Total trail miles: 4,877.03** (as built from NCTA ArcGIS + SHT injection)
+
+These values are the `NCT_STATES_BOOTSTRAP` in `index.html` and must match `nct_meta.json`. **Re-run `build-points-nct.js` and update both places whenever geometry changes.**
+
+### NCT Direction Options (2)
+
+| id | Label | Total miles |
+|----|-------|------------|
+| `webo` | Westbound — Crown Point, NY / Vermont → Lake Sakakawea, ND | 4,877.03 |
+| `eabo` | Eastbound — Lake Sakakawea, ND → Crown Point, NY / Vermont | 4,877.03 |
+
+### NCT `nct_meta.json` Structure
+
+```json
+{
+  "trail": { "name", "total_trail_miles", "map_center", "map_zoom", "termini" },
+  "states": [ { "id", "name", "axis_start", "axis_end" } ],
+  "direction_options": [ { "id", "label", "total_miles", "is_webo" } ]
+}
+```
+
+### NCT `index.html` Bootstrap
+
+`NCT_STATES_BOOTSTRAP` is hardcoded in `index.html` for immediate UI population before `nct_meta.json` loads. It is a JS array with `{ state, name, axis_start, axis_end }` per state. **Must be updated after every `build-points-nct.js` run** — the script prints exact values to the console. The UI uses this to compute each state's max mile (`axis_end - axis_start`) and set the mile input placeholder.
+
+### NCT Build Pipeline — Key Parameters
+
+The `build-points-nct.js` script has several non-obvious parameters that were tuned during the initial build. Do not change without re-measuring:
+
+- **`MAX_STEP_MI = 8.0`** — Drops any NCTA feature whose coordinates include a single step > 8 miles (filters teleporting ArcGIS artifacts). Raised from 3.0 after legitimate rural roadwalk features in MN (Red River Valley, Cr-88, 4.7 mi step) and ND (New Rockford → Lake Ashtabula, 6.94 mi step) were incorrectly excluded. Bad ArcGIS artifacts are 50–300 miles; real steps are ≤ 7 miles.
+- **`MAX_MERGE_GAP_MI = 2.0`** — Adjacent same-`trail_stat` segments within 2 miles of each other are merged into one run. Unchanged from initial value.
+- **`chainStateFeatures()`** — Greedy nearest-endpoint stitching: for each state, visits ~4,000 features by always connecting to the feature whose nearest endpoint is closest to the current chain tail.
+- **`reorderToWesternTerminus(runs)`** — Post-processing step applied after greedy stitching. Identifies the run with the westernmost endpoint as the true terminus, moves any "orphan" runs that ended up appended after it to just before it. Prevents greedy orphans from displacing the western terminus.
+- **`interpolateAtAcrossRuns(runs, targetDist)`** — Replaces a previous `interpolateAt(flatCoords, ...)` approach. Iterates each run independently and teleports across inter-run gaps (rather than counting gap distance toward the target). This is critical: the old approach caused 5-mile interpolation points to be placed at wrong (eastern) locations whenever large gaps existed between stitched runs.
+- **`stateMiles`** — Computed as `runs.reduce((sum, r) => sum + pathLen(r.coords), 0)` — excludes inter-run bridge/gap distances. Must match the denominator used by `interpolateAtAcrossRuns`.
+
+### NCT SHT Injection (northeastern Minnesota)
+
+The NCTA ArcGIS FeatureServer omits the lower Superior Hiking Trail (SHT) corridor through northeastern Minnesota (roughly Duluth to Silver Bay, ~100 miles along the Lake Superior North Shore). This section is co-managed by the Superior Hiking Trail Association (SHTA).
+
+`build-points-nct.js` fetches the SHT geometry separately from the OSM Overpass API:
+- **Relation:** OSM relation 1612587 (Superior Hiking Trail)
+- **Request method:** POST to `https://overpass-api.de/api/interpreter` with URL-encoded `data=` body
+- **Cache:** `data/_raw_sht.json` (480 ways). Delete to force a fresh fetch.
+- The SHT features are injected into the Minnesota feature set alongside the NCTA features before stitching.
+
+If the Overpass API returns an HTML error (transient overload), simply re-run the script — `_raw_sht.json` will be re-fetched.
+
+### NCT Notable Features
+
+- **Longest National Scenic Trail** — ~4,877 miles across 8 states (Vermont through North Dakota)
+- **No alternates** — single-spine trail; no `getSelectedAlts()` needed
+- **Large `historical_weather.json`** (~55–60 MB when complete) — will exceed localStorage quota; browser HTTP cache handles reuse, same as AT
+- **Significant roadwalk sections** — roughly half of Ohio and parts of New York are on-road; shown as dashed lines on the map (`trail_stat: "Roadwalk"` or similar NCTA classification). The NCT `index.html` notes section explains this.
+- **Ohio heat concern** — Ohio and parts of New York are the primary heat stress states (low elevation, high humidity, roadwalk)
+- **MN/ND cold concern** — Western MN and ND can see very cold nights into May and again in September
+- **Weather Planner UI:** State selector → State Mile typed input (0 to state's max mile, computed from `NCT_STATES_BOOTSTRAP`)
+- **BestStart!** — to be implemented in `app.js` following the same `runBestStartShared` pattern as other trails
+
+### NCT Tools
+
+Located in `trails/north-country-trail/tools/`:
+
+- **`build-points-nct.js`** — Fetches all NCTA ArcGIS Layer 2 features (paginated), fetches SHT OSM ways (Overpass API, cached), stitches per-state feature chains using greedy nearest-endpoint algorithm, applies `reorderToWesternTerminus`, interpolates at 5-mile intervals using `interpolateAtAcrossRuns`, writes `points.json`, `trail.geojson`, and `nct_meta.json`. Caches raw source data in `_raw_nct.json` and `_raw_sht.json`. Re-run if NCTA geometry changes; always update `NCT_STATES_BOOTSTRAP` in `index.html` afterward.
+- **`generate-normals-nct.js`** — Fetches ERA5-Land normals for all 977 target points at 5-mile intervals; resume-safe (saves after each point); 5-second throttle (change to 15000 if using Open-Meteo free tier); full run ~82 minutes. Output is a `{ meta, points }` wrapped `historical_weather.json` (same schema as IAT/PCT).
+
+---
+
+## Potomac Heritage Trail (PHT) — Coming Soon
+
+- **Status:** Coming Next (April 2026). `app.js`, `index.html`, and `historical_weather.json` all complete. Not yet live — do not promote without explicit user instruction.
+- **Point ID format:** `pht-{section_id}-mi{8digits}` (e.g. `pht-southern-maryland-mi00000000`); DC alt points include alt_id in ID (e.g. `pht-dc-river-trail-river-trail-mi02165860`)
+- **Data files:** `points.json`, `pht_meta.json`, `trail.geojson`, `historical_weather.json`, `_raw_pht.json`
+- **Normals source:** Open-Meteo ERA5-Land archive (2018–2024)
+- **Points resolution:** 0.1-mile intervals (8,888 total: 5,410 spine + DC alt points + 3,064 WP-only)
+- **Weather resolution:** ~5-mile intervals per (section_id, alt_id) group
+- **Trail geometry source:** NPS Federal Trail Data Standards (FTDS) ArcGIS FeatureServer
+- **Trail color:** `#e06060` (same salmon/red as all other active trails)
+- **Direction convention:** Westbound (Point Lookout, MD → Laurel Ridge, PA) / Eastbound; uses `is_westbound` flag
+
+### PHT Dual-Mode Architecture
+
+The PHT has two distinct modes that share the same data files:
+
+**Through-hike spine** (Duration Calculator + BestStart! + Extremes):
+- Southern Maryland (Tidewater Potomac On-Road Bicycle Route) → DC alternate → C&O Canal Towpath → Great Allegheny Passage → Laurel Highlands Hiking Trail
+- `on_spine: true` points and GeoJSON features only
+- Total: ~553 miles (River Trail) or ~570 miles (City Park Trail)
+
+**Weather Planner only** (not on through-hike):
+- Northern Virginia (Mount Vernon Trail, W&OD Trail, Mason Neck Heritage Trail, Neabsco Creek Boardwalk, and ~40 other named segments)
+- Northern Neck of Virginia (Dahlgren Railroad Heritage Trail + roads, ~95 miles)
+- Eastern Continental Divide Loop (~60 miles)
+- `on_spine: false` in both points.json and trail.geojson; shown at reduced opacity on maps
+
+### PHT Through-Hike Spine Sections
+
+| id | Name | Region | Spine miles |
+|----|------|--------|------------|
+| `southern-maryland` | Southern Maryland | southern-maryland | 0–216.6 |
+| `dc-river-trail` | DC River Trail | washington-dc | 216.6–228.9 (12.3 mi section) |
+| `dc-city-park-trail` | DC City Park Trail | washington-dc | 216.6–245.6 (29.0 mi section) |
+| `co-canal` | C&O Canal Towpath | co-canal-nhp | 228.9–413.6 (184.6 mi section) |
+| `great-allegheny-passage` | Great Allegheny Passage | great-allegheny-passage | 413.6–485.6 (72.0 mi section) |
+| `laurel-highlands` | Laurel Highlands Trail | laurel-highlands | 485.6–553.0 (67.4 mi section) |
+
+### PHT DC Alternate Group — LOCKED
+
+One route choice through Washington D.C.:
+
+**DC Route (`dc-route`):** branch at spine mile 216.586 (Anacostia/South Capitol St Bridge), rejoin at 228.914 (Georgetown / C&O Canal mile 0).
+
+| Alt | id | Section length | Delta |
+|-----|-----|---------------|-------|
+| DC River Trail (main) | `river-trail` | 12.3 mi | 0 |
+| DC City Park Trail | `city-park-trail` | 29.0 mi | +16.71 mi |
+
+- DC River Trail: Anacostia Riverwalk Trail → Half St SW → V St SW → 2nd St SW → P St SW → Waterfront Park → Maine Ave SW → L'Enfant Prom SW → Francis Case Memorial Bridge → Buckeye Dr SW Sidewalk → Potomac River Trail
+- DC City Park Trail: Civil War Defenses of Washington → Fort Circle Hiker-Biker Trail → Georgetown
+
+**Do not change branch/rejoin miles without re-measuring from NPS geometry.**
+
+### PHT `buildHikePoints` DC Routing Logic — Critical
+
+The DC alt zone uses hike-mile `h` (cumulative distance from start):
+
+**Westbound:**
+- `h < DC_BRANCH_MILE (216.586)`: Southern Maryland — `spineMile = h`
+- `h ∈ [216.586, 216.586 + dcAltLen]`: DC zone — `secMile = h - 216.586`; look up by section_id + secMile
+- `h > DC exit`: C&O/GAP/LHHT — `spineMile = h - altDelta`
+
+**Eastbound:**
+- `h < BASE_SPINE_MILES - DC_REJOIN_MILE (≈324.046)`: LHHT/GAP/C&O — `spineMile = BASE_SPINE_MILES - h`
+- `h ∈ [324.046, 324.046 + dcAltLen]`: DC zone — `secMile = dcAltLen - (h - 324.046)` (traversed backwards)
+- `h > DC exit`: Southern Maryland — `spineMile = totalMiles - h`
+
+Key constants: `DC_BRANCH_MILE = 216.586`, `DC_REJOIN_MILE = 228.914`, `PHT_BASE_SPINE_MILES = 552.96`, `DC_RIVER_LEN = 12.328`, `DC_CITY_PARK_LEN = 29.043`, `DC_CITY_PARK_DELTA = 16.71`.
+
+### PHT `pht_meta.json` Structure
+
+```json
+{
+  "trail": { "name", "spine_miles", "map_center", "map_zoom", "termini" },
+  "regions": [ { "id", "name", "on_spine" } ],
+  "sections": [ { "id", "name", "region", "on_spine", "mile_start", "mile_end", "alt_id"(optional) } ],
+  "alt_groups": [ { "id", "label", "branch_mile", "rejoin_mile",
+                    "main": { "id", "label", "total_miles", "note" },
+                    "alt":  { "id", "label", "total_miles", "delta_miles", "note" } } ],
+  "direction_options": [ { "id", "label", "total_miles", "is_westbound" } ]
+}
+```
+
+**Important:** `mile_start` and `mile_end` in sections are **spine-absolute positions**, not section-relative. Section length = `mile_end - mile_start`. `getSectionLength(sec)` in app.js computes this. The Weather Planner displays section miles from 0 to `getSectionLength(sec)`.
+
+### PHT `points.json` Schema
+
+Spine points:
+```json
+{ "id": "pht-southern-maryland-mi00000000", "mile": 0, "lat": ..., "lon": ...,
+  "region": "southern-maryland", "section_id": "southern-maryland", "section_mile": 0 }
+```
+
+DC alt points:
+```json
+{ "id": "pht-dc-river-trail-river-trail-mi02165860", "mile": 216.586, "lat": ..., "lon": ...,
+  "region": "washington-dc", "section_id": "dc-river-trail", "section_mile": 0, "alt_id": "river-trail" }
+```
+
+WP-only points (no `mile` field):
+```json
+{ "id": "pht-mount-vernon-trail-mi00000000", "lat": ..., "lon": ...,
+  "region": "northern-virginia", "section_id": "mount-vernon-trail", "section_mile": 0, "on_spine": false }
+```
+
+### PHT `historical_weather.json`
+
+`{ meta, points }` wrapped (same as IAT/PCT). Keys: `hi`, `lo`, `hi_app`, `lo_app`, `rh_hi`, `rh_lo`, `ws` — note `hi_app`/`lo_app` (AT-style), not `app_hi`/`app_lo`. `loadPrecomputedNormals()` in app.js remaps them on load. Normals entries include `section_id`, `alt_id`, `section_mile`, `on_spine` but no global `mile`. Normals are looked up by `normalsBySectionMile` (Map of section_id → [{id, section_mile}] sorted).
+
+### PHT Weather Planner UI
+
+Two-level selector: Region → Section → Section Mile. Regions correspond to `pht_meta.json` regions. The section select is populated dynamically by `populateSectionSelect(regionId)` using `phtMeta?.sections` (or `PHT_SECTIONS_BOOTSTRAP` before meta loads).
+
+**UI-only overrides** (data files unchanged):
+- `SECTION_DISPLAY_NAMES` map in app.js overrides long section names for display
+- `SECTION_UI_HIDDEN` set in app.js hides sections from the selector (data still accessible for lookups)
+- Current overrides:
+  - `"ent-to-red-rock-wilderness-overlook-regional-park"` → `"Red Rock Wilderness Overlook"`
+  - `"belmont-ferry-farm-trail-to-rappahannock-river-heritage-trail-connector"` → `"Belmont Ferry to Rappahannock Trail"`
+  - `"northern-virginia-unnamed"` — hidden from UI
+  - Region `"co-canal-nhp"` displays as `"C&O Canal"` (hardcoded in `<select>` option and bootstrap)
+
+Both the app.js overrides and their matching bootstrap equivalents (`PHT_SECTION_DISPLAY_NAMES`, `PHT_SECTION_UI_HIDDEN`) in index.html must be kept in sync when adding new overrides.
+
+### PHT Trail Overlay
+
+`applyTrailOverlay()` reads `feature.properties.on_spine`:
+- `on_spine: true` → `TRAIL_STYLE` (`#e06060`, weight 3.25, opacity 0.85)
+- `on_spine: false` (VA/ECD sections) → `TRAIL_STYLE_WP` (`#e06060`, weight 2, opacity 0.45)
+
+### PHT Notable Features
+
+- **Highest point resolution** — 0.1-mile intervals (vs. 0.5 mi for IAT, 5 mi for most others); higher resolution for potential secondary application use
+- **Dual-mode sections** — same points.json and trail.geojson serve both the through-hike tools and the VA/ECD Weather Planner sections
+- **Road segments in Southern Maryland** — the Tidewater Potomac On-Road Bicycle Route is on-road; shown as solid trail color (not dashed) with a map note explaining this
+- **No elevation correction** — PHT is a low-elevation trail; no `applyElevationCorrection()` logic
+- **`NORMALS_CACHE_VERSION`:** `"v1"` — bump whenever `historical_weather.json` is rebuilt
+- **`{ meta, points }` wrapper** — same structure as IAT/PCT
+
+### PHT Tools
+
+Located in `trails/potomac-heritage-trail/tools/`:
+
+- **`build-points-pht.js`** — Fetches NPS FTDS ArcGIS features (614 features), classifies by REGION/MAPLABEL, assigns unclassified DC features spatially, stitches chains with greedy nearest-endpoint algorithm (per-call `maxGap` parameter: `DC_MAX_GAP_MI = 0.02` for DC chains to prevent straight-line artifacts, `MAX_MERGE_GAP_MI = 1.0` for others), interpolates at 0.1-mile intervals, writes `points.json`, `trail.geojson`, `pht_meta.json`. DC River Trail seeds: Anacostia Riverwalk Trail, Half St SW, V St SW, 2nd St SW, P St SW, Waterfront Park, Maine Ave SW, L'Enfant Prom SW, Francis Case Memorial Bridge, Buckeye Dr SW Sidewalk, Potomac River Trail.
+- **`generate-normals-pht.js`** — Selects target points at ~5-mile intervals per (section_id, alt_id) group; fetches ERA5-Land normals; resume-safe; 15-second throttle; `{ meta, points }` output with `hi_app`/`lo_app` keys.
+
+---
+
 ## Trail Hub and Nav Ordering
 
 **`js/trail-nav.js`** is the single source of truth for trail ordering and status badges. The hub `index.html` must match. Order convention:
@@ -812,7 +1087,9 @@ Located in `trails/ice-age-trail/tools/`:
 2. **Coming Next** — one trail at a time
 3. **Coming Soon** — alphabetical
 
-Current order: AT, AZT, FT, IAT, NTT, NET, PCT, PNT → NCT (Coming Next) → CDT, PHT (Coming Soon)
+Current order: AT, AZT, FT, IAT, NTT, NET, NCT, PCT, PNT → PHT (Coming Next) → CDT (Coming Soon)
+
+**PHT is Coming Next — do not promote to live without explicit user instruction.**
 
 When promoting a trail from Coming Next to live: remove the badge in `trail-nav.js`, update the tile in `index.html` (remove `coming` class and badge div, update description), and move it to its alphabetical position in both files.
 
