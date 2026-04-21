@@ -3,21 +3,26 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>National Scenic Trail Weather Planner — Continental Divide Trail — Coming Soon</title>
+  <title>National Scenic Trail Weather Planner &mdash; Continental Divide Trail</title>
+
   <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
   <style>
-    .coming-wrap { max-width: 900px; margin: 0 auto; padding: 24px 16px 40px; }
-    .coming-card { padding: 18px; border: 1px solid rgba(0,0,0,0.12); border-radius: 14px; background: rgba(255,255,255,0.9); }
-    .logo { width: 180px; height: 180px; object-fit: contain; display:block; margin: 10px auto 14px; }
-    .center { text-align: center; }
+    /* CDT: state info + mile input (trail-specific IDs) */
+    #cdtStateInfo {
+      font-size: 0.82rem;
+      color: #555;
+      font-style: italic;
+      margin: 2px 0 0 0;
+      min-height: 1.1em;
+    }
+
+    #cdtMileInput {
+      width: 6rem;
+    }
   </style>
 </head>
-
-<script>
-  window.TRAIL_SLUG = "continental-divide-trail";
-</script>
-<script defer src="/js/trail-nav.js"></script>
-<script defer src="/js/app.js"></script>
 
 <body data-trail="continental-divide-trail">
 
@@ -26,18 +31,23 @@
 
     <div class="header-text">
       <div class="title-with-logo">
-        <img src="/images/ContinentalDivideTrailLogo.png"
-             alt="Continental Divide Trail logo"
+        <img src="/images/TrailTemps_Logo.png"
+             alt="TrailTemps logo"
              class="trail-page-logo">
 
         <div class="title-stack">
           <h1>Continental Divide Trail</h1>
           <div class="sub-brand"><em>TrailTemps</em> - National Scenic Trail Weather Planner</div>
         </div>
+
+        <img src="/images/ContinentalDivideTrailLogo.png"
+             alt="Continental Divide Trail logo"
+             class="trail-page-logo">
       </div>
 
       <p class="sub">
-        Coming soon — this page is reserved for the CDT version of the planner.
+        <br>
+        Time your Continental Divide Trail hike, find the <em>BestStart!</em> date to minimize hot and cold temperature stress, calculate your time of completion, identify temperature extremes during that time, and get 5-day weather forecasts for any point along the trail. The two main tools are directly below, with various notes and other resources following at the bottom of the page.
       </p>
     </div>
 
@@ -48,26 +58,467 @@
   </div>
 </header>
 
-  <main class="coming-wrap">
-    <div class="coming-card center">
-      <img class="logo" src="/images/ContinentalDivideTrailLogo.png" alt="Continental Divide Trail logo">
-      <h2>Coming Soon</h2>
-      <p>This page is reserved for the CDT version of the planner.</p>
-      <p><a href="index.html">← Back to trail selector</a></p>
-    </div>
+  <main>
+
+    <!-- =====================================================
+         Card 1: Hike Duration / End Date Calculator
+         ===================================================== -->
+    <section class="controls" aria-label="Hike duration calculator">
+      <h2>Hike Duration and <em>BestStart!</em> Temperature Management Calculator</h2>
+      <p class="card-instructions">
+        Select your expected daily mileage, direction, route options, and start date. For computing hike durations choose a start date as well; for a <em>BestStart!</em> estimation no start date is needed as one will be calculated for you. Both will then provide an estimated hike duration and end date, high and low temperature data, and a chart of expected temperature stress days with a map showing where the expected highest and lowest temperatures should be encountered along the trail.
+      </p>
+      <p class="card-instructions" style="color:#7a5200; background:#fff8e6; border-left:3px solid #e0a030; padding:6px 10px; border-radius:3px; font-size:0.9rem;">
+        Note: The Continental Divide Trail weather data file is large (~23 MB). Initial load may take a
+        moment depending on your connection. Subsequent visits load instantly from your browser cache.
+      </p>
+
+      <div class="control-row">
+
+        <!-- Miles per Day -->
+        <div class="ft-select-col">
+          <label for="durMilesPerDay">Miles per Day:</label>
+          <input id="durMilesPerDay" type="text" inputmode="numeric" pattern="[0-9.]*"
+                 placeholder="e.g., 20" style="width:6rem;" />
+        </div>
+
+        <!-- Direction -->
+        <div class="ft-select-col">
+          <label for="durDirectionSelect">Direction / Terminus:</label>
+          <select id="durDirectionSelect">
+            <option value="nobo_waterton">Northbound &mdash; Antelope Wells &rarr; Waterton Lake</option>
+            <option value="nobo_chief_mtn">Northbound &mdash; Antelope Wells &rarr; Chief Mountain (&minus;8 mi)</option>
+            <option value="sobo_waterton">Southbound &mdash; Waterton Lake &rarr; Antelope Wells</option>
+            <option value="sobo_chief_mtn">Southbound &mdash; Chief Mountain &rarr; Antelope Wells (&minus;8 mi)</option>
+          </select>
+        </div>
+
+        <!-- Start Date -->
+        <div class="ft-select-col">
+          <label>Start Date:</label>
+          <span style="display:flex; gap: 6px; align-items:center;">
+            <select id="durMonthSelect"></select>
+            <select id="durDaySelect"></select>
+          </span>
+        </div>
+
+      </div><!-- /.control-row -->
+
+      <!-- Alternate Route Options -->
+      <div style="margin-top: 14px;">
+
+        <fieldset class="alt-group-block">
+          <legend>Gila River Route (New Mexico)</legend>
+          <div class="alt-options">
+            <label>
+              <input type="radio" name="alt-gila" value="main" checked />
+              CDT Main Route through New Mexico
+            </label>
+            <label>
+              <input type="radio" name="alt-gila" value="gila" />
+              Gila River Route
+              <span class="alt-delta">&minus;75 mi</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="alt-group-block">
+          <legend>Rocky Mountain National Park &mdash; RMNP (Colorado)</legend>
+          <div class="alt-options">
+            <label>
+              <input type="radio" name="alt-rmnp" value="rmnp" checked />
+              CDT Main Route &mdash; RMNP Loop (North Inlet / Tonahutu Creek)
+            </label>
+            <label>
+              <input type="radio" name="alt-rmnp" value="main" />
+              Western Bypass &mdash; Never Summer Wilderness
+              <span class="alt-delta">&minus;25 mi</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="alt-group-block">
+          <legend>Anaconda Cutoff (Montana)</legend>
+          <div class="alt-options">
+            <label>
+              <input type="radio" name="alt-anaconda" value="main" checked />
+              CDT Main Route through Anaconda area
+            </label>
+            <label>
+              <input type="radio" name="alt-anaconda" value="anaconda" />
+              Anaconda Cutoff
+              <span class="alt-delta">&minus;77 mi</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="alt-group-block">
+          <legend>Spotted Bear Route (Montana)</legend>
+          <div class="alt-options">
+            <label>
+              <input type="radio" name="alt-spotted-bear" value="main" checked />
+              CDT Main Route
+            </label>
+            <label>
+              <input type="radio" name="alt-spotted-bear" value="spotted-bear" />
+              Spotted Bear Route
+              <span class="alt-delta">+20.5 mi</span>
+            </label>
+          </div>
+        </fieldset>
+
+      </div>
+
+      <div style="margin-top: 12px; width: 100%;">
+        <button id="durBtn" type="button" class="btn-primary">Estimate End Date and Weather Extremes</button>
+        <button id="bestStartBtn" type="button" class="btn-best-start"><em>BestStart!</em></button>
+      </div>
+
+      <div id="durStatus" class="status" style="width:100%;"></div>
+      <div id="durResult" style="width:100%;"></div>
+      <div id="bestStartResult"></div>
+
+      <!-- Temperature Extremes Results + Map -->
+      <div id="durExtremesWrap" style="display:none; margin-top:16px;">
+        <h2>Temperature Extremes During Your Hike</h2>
+        <div id="durExtremesHot"></div>
+        <div id="durExtremesCold" style="margin-top:12px;"></div>
+
+        <div id="durExtremesMap" style="margin-top:16px;"></div>
+
+        <p class="data-attribution map-attribution">
+          Mapping data provided by
+          <a href="https://www.openstreetmap.org/copyright"
+             target="_blank" rel="noopener">OpenStreetMap</a>
+          under the Open Database License.
+        </p>
+      </div>
+    </section>
+
+    <hr class="card-sep" />
+
+    <!-- =====================================================
+         Card 2: Weather Planner
+         ===================================================== -->
+    <section class="controls" aria-label="Weather planner controls">
+      <div class="section-title-block">
+        <h2>Weather Planner</h2>
+        <p class="data-attribution">
+          Weather data provided by
+          <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a>
+          under the 4.0 International (CC BY 4.0) license.
+        </p>
+      </div>
+
+      <p class="card-instructions">
+        Select a state, then enter a trail mile within that state (measured from that state's
+        southern entry point going northward). Choose a planning date to receive current conditions, a 5-day
+        forecast, and a 7-year average for that date and location.
+      </p>
+
+      <div class="control-row">
+
+        <!-- Planning date -->
+        <div class="ft-select-col">
+          <label>Planning Date:</label>
+          <span style="display:flex; gap: 6px; align-items:center;">
+            <select id="monthSelect"></select>
+            <select id="daySelect"></select>
+          </span>
+        </div>
+
+        <!-- State selector -->
+        <div class="ft-select-col">
+          <label for="cdtStateSelect">State:</label>
+          <select id="cdtStateSelect">
+            <option value="NM">New Mexico</option>
+            <option value="CO">Colorado</option>
+            <option value="WY">Wyoming</option>
+            <option value="MT">Montana</option>
+          </select>
+        </div>
+
+        <!-- Mile input + range indicator -->
+        <div class="ft-select-col">
+          <label for="cdtMileInput">State Mile:</label>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <input id="cdtMileInput" type="text" inputmode="numeric"
+                   pattern="[0-9]*" placeholder="e.g., 100" />
+            <p id="cdtStateInfo" style="margin:0; font-size:0.82rem; color:#555; font-style:italic; white-space:nowrap;"></p>
+          </div>
+        </div>
+
+        <!-- Get Weather button -->
+        <div style="width:100%; margin-top:6px;">
+          <button id="goBtn" type="button" class="btn-primary">Get Weather</button>
+        </div>
+
+      </div><!-- /.control-row -->
+
+      <div id="weatherStatus" class="status"></div>
+
+      <section class="map-wrap" id="weatherMapWrap" style="display:none;">
+        <div id="map" aria-label="Map showing selected Continental Divide Trail point"></div>
+
+        <p class="data-attribution map-attribution">
+          Mapping data provided by
+          <a href="https://www.openstreetmap.org/copyright"
+             target="_blank" rel="noopener">OpenStreetMap</a>
+          under the Open Database License.
+        </p>
+      </section>
+
+    </section>
+
+    <section class="grid">
+      <div id="planningSummaryBlock"></div>
+      <div id="currentBlock"></div>
+      <div id="forecastBlock"></div>
+    </section>
+
+    <hr class="card-sep" />
+
+    <!-- =====================================================
+         Weather Data Notes + Resources
+         ===================================================== -->
+    <section class="weather-data-notes" aria-labelledby="weather-data-notes-title">
+      <h2 id="weather-data-notes-title">Notes on Weather and Map Data</h2>
+
+      <div class="weather-data-notes__body">
+
+        <section class="weather-data-notes__subsection" aria-labelledby="notes-on-data-title">
+          <h3 id="notes-on-data-title">Notes on Weather Data</h3>
+          <div class="weather-data-notes__content">
+            <p>
+              At approximately 3,100 miles, the Continental Divide Trail is one of the longest and most
+              challenging National Scenic Trails in the United States. Running from Antelope Wells, New Mexico
+              to Waterton Lake on the U.S.-Canada border in Montana, it traverses five states and crosses
+              some of the highest terrain of any long trail in the country, including numerous passes above
+              12,000 feet in Colorado.
+            </p>
+            <p>Specific weather issues by state include:</p>
+            <ul>
+              <li>
+                <strong>New Mexico (miles 0&ndash;795):</strong> The hottest and driest section of the CDT,
+                with July and August bringing monsoon rains and dangerous afternoon lightning at elevation.
+                The Gila River Route alternate traverses lower terrain and is generally cooler in summer
+                but wetter during monsoon season.
+              </li>
+              <li>
+                <strong>Colorado (miles 800&ndash;1,525):</strong> The most technically challenging state,
+                with the most miles above treeline. Afternoon thunderstorms are a near-daily occurrence in
+                July and August. Snow can fall in any month of the year at the highest passes.
+              </li>
+              <li>
+                <strong>Wyoming (miles 1,530&ndash;2,300):</strong> Includes both the remote Wind River
+                Range and the broad, arid Great Divide Basin. The Basin is hot and dry in summer with
+                little shade or water. The Wind Rivers offer spectacular alpine terrain with significant
+                snow risk in early season.
+              </li>
+              <li>
+                <strong>Montana (miles 2,305&ndash;3,025):</strong> The coldest state and the one presenting
+                the greatest risk of early-season snow at the northern end of the trail. The Anaconda Cutoff
+                saves approximately 77 miles by bypassing the Anaconda Range; the Spotted Bear Route adds
+                approximately 20 miles for a scenic detour through the Bob Marshall Wilderness.
+              </li>
+            </ul>
+            <p>
+              <strong>Elevation correction:</strong> The CDT&rsquo;s extreme elevation changes can differ
+              significantly from the ERA5-Land climate grid resolution (~9 km). Temperature normals on this
+              site apply an elevation correction to apparent temperatures: if the trail is more than 300 feet
+              above the ERA5 grid point, apparent high temperatures are adjusted &minus;3.5&deg;F per 1,000 feet
+              of difference, and apparent lows &minus;2.0&deg;F per 1,000 feet. This correction is most
+              significant in Colorado, where grid elevation discrepancies of 2,000&ndash;4,000 feet are common
+              on high passes.
+            </p>
+          </div>
+        </section>
+
+        <section class="weather-data-notes__subsection" aria-labelledby="notes-on-alts-title">
+          <h3 id="notes-on-alts-title">Notes on Alternate Routes</h3>
+          <div class="weather-data-notes__content">
+            <p>
+              Four alternate route options are modeled in this planner. All are at least 10 miles in length
+              with meaningfully different weather profiles.
+            </p>
+            <ul class="weather-data-notes__links">
+              <li>
+                <strong>Gila River Route (New Mexico, &minus;75 mi):</strong> The classic CDT alternate
+                through the Gila Wilderness and Gila River canyon. Lower elevation than the main route;
+                popular among hikers who want to experience the Gila&rsquo;s unique riparian environment.
+                Multiple river crossings make it impassable during high water.
+              </li>
+              <li>
+                <strong>Anaconda Cutoff (Montana, &minus;77 mi):</strong> The most significant shortcut
+                on the CDT, bypassing the Anaconda-Pintler Wilderness via a more direct route. Very
+                popular among thru-hikers looking to save time; somewhat less scenic than the main route
+                but still passes through beautiful Montana terrain.
+              </li>
+              <li>
+                <strong>Spotted Bear Route (Montana, +20.5 mi):</strong> A scenic alternate through the
+                Bob Marshall Wilderness via the South Fork of the Flathead River. Adds approximately
+                20 miles compared to the main CDT corridor; taken for the scenery and wilderness
+                experience, not to save time or distance.
+              </li>
+              <li>
+                <strong>Rocky Mountain National Park &mdash; CDT Main Route (Colorado):</strong>
+                The standard CDT route through Colorado passes through Rocky Mountain National Park via
+                the North Inlet Trail and Tonahutu Creek Trail, meeting at Flattop Mountain (~12,324 ft)
+                on the Continental Divide; approximately 40 miles of above-treeline hiking. 
+                The <strong>Western Bypass through Never Summer Wilderness (&minus;25 mi)</strong> is the
+                shorter alternate, staying on the main CDT spine and rejoining after RMNP. It avoids the
+                park permit requirement and is a fine route in its own right, but misses the spectacular
+                alpine scenery of the park. It should be noted that some sources differ on which is the 
+                "official" main route and which is the alternate, though for our purposes we used the  
+                designation provided on the <a href="https://www.arcgis.com/home/item.html?id=a3c39d7218a74c5a84a18d219d1da7e2" target="_blank" rel="noopener noreferrer">US Forest Service map</a>.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="weather-data-notes__subsection" aria-labelledby="notes-on-map-data-title">
+          <h3 id="notes-on-map-data-title">Notes on Map Data</h3>
+          <div class="weather-data-notes__content">
+            <p>
+              The trail centerline shown on this map is sourced from the USDA Forest Service official public
+              ArcGIS feature service and OpenStreetMap (for the Gila, RMNP Loop, Anaconda, and Spotted Bear alternates).
+              The northern terminus options (Waterton Lake and Chief Mountain) are both modeled; the direction
+              selector above controls which terminus is used for duration calculations.
+            </p>
+            <ul class="weather-data-notes__links">
+              <li>
+                <strong>Chief Mountain Terminus:</strong> The Chief Mountain border crossing at the eastern
+                edge of Glacier National Park is approximately 8 miles shorter than the official Waterton
+                Lake terminus and avoids the international border crossing. It is a legal U.S.-only terminus
+                option and popular among hikers who wish to avoid the Canadian entry process.
+              </li>
+              <li>
+                <strong>Idaho:</strong> The CDT technically passes briefly through Idaho near Yellowstone.
+                For weather planning purposes, these miles are grouped with Wyoming, as the terrain and
+                climate are essentially continuous.
+              </li>
+              <li>
+                <strong>Current Conditions:</strong> Always consult the
+                <a href="https://continentaldividetrail.org/" target="_blank" rel="noopener noreferrer">Continental Divide Trail Coalition (CDTC)</a>
+                and <a href="https://faroutguides.com/" target="_blank" rel="noopener noreferrer">FarOut</a>
+                for current trail conditions, closures, and recent reroutes before your hike.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="weather-data-notes__subsection" aria-labelledby="additional-resources-title">
+          <h3 id="additional-resources-title">Additional Resources</h3>
+          <div class="weather-data-notes__content">
+            <ul class="weather-data-notes__links">
+              <li>
+                <a href="https://continentaldividetrail.org/" target="_blank" rel="noopener noreferrer">
+                  <strong>Continental Divide Trail Coalition (CDTC):</strong>
+                </a>
+                The primary stewardship organization for the CDT. Includes section guides, permit
+                information, trail conditions, resupply resources, and detailed maps for trip planning.
+              </li>
+              <li>
+                <a href="https://avalanche.state.co.us/" target="_blank" rel="noopener noreferrer">
+                  <strong>Colorado Avalanche Information Center:</strong>
+                </a>
+                State government source of avalanche and snowpack information for Colorado, which has the
+                highest and most snow-prone terrain on the CDT. 
+              </li>
+              <li>
+                <a href="https://www.nps.gov/cdst/index.htm" target="_blank" rel="noopener noreferrer">
+                  <strong>NPS Continental Divide National Scenic Trail:</strong>
+                </a>
+                The National Park Service page for the trail, with overview information, maps,
+                and management contacts.
+              </li>
+              <li>
+                <a href="https://www.fs.usda.gov/visit/national-forests-and-grasslands" target="_blank" rel="noopener noreferrer">
+                  <strong>USDA Forest Service:</strong>
+                </a>
+                Most of the CDT passes through National Forest lands. The Forest Service manages permits,
+                fire restrictions, and closures for these sections.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+      </div>
+    </section>
+
   </main>
 
-<!-- Donation block -->
-<div class="donation-block">
-  <p class="donation-text">
-    Thank you for visiting and trying these tools. They are a labor of love for me, and I make no money from this site. However, if you wish to help support the site please consider
-    <a href="https://www.buymeacoffee.com/ihrhzL0ZC5" target="_blank" rel="noopener noreferrer">Buying Me a Coffee</a> — donations of $1, $5, or even $20 are deeply appreciated. I promise every cent will go to the ongoing operations, maintenance, development, and expansion of the site.
-  </p>
-  <a class="bmc-button" href="https://www.buymeacoffee.com/ihrhzL0ZC5n" target="_blank" rel="noopener noreferrer" aria-label="Buy Me a Coffee">Buy Me a Coffee</a>
-</div>
-
   <footer class="site-footer">
-    <div class="small">Informational only.</div>
+    <div class="small">
+      Informational only. Always verify conditions and heed local advisories.
+    </div>
   </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>window.SITE_BASE = "";</script>
+  <script>window.TRAIL_SLUG = "continental-divide-trail";</script>
+
+  <!-- -------------------------------------------------------
+       Inline bootstrap: CDT state metadata for immediate
+       UI population before cdt_meta.json finishes loading.
+
+       UPDATE axis_start / axis_end values after running:
+         node trails/continental-divide-trail/tools/build-points-cdt.js
+       The script prints the exact values to copy here.
+       ------------------------------------------------------- -->
+  <script>
+    window.CDT_STATES_BOOTSTRAP = [
+      { state: "NM", name: "New Mexico", axis_start: 0,      axis_end: 795    },
+      { state: "CO", name: "Colorado",   axis_start: 800,    axis_end: 1525   },
+      { state: "WY", name: "Wyoming",    axis_start: 1530,   axis_end: 2300   },
+      { state: "MT", name: "Montana",    axis_start: 2305,   axis_end: 3025.1 }
+    ];
+
+    function cdtUpdateStateInfo() {
+      const stateId   = document.getElementById("cdtStateSelect")?.value;
+      const infoEl    = document.getElementById("cdtStateInfo");
+      const mileInput = document.getElementById("cdtMileInput");
+      if (!stateId || !infoEl) return;
+
+      const sec = window.CDT_STATES_BOOTSTRAP.find(s => s.state === stateId);
+      if (!sec) return;
+
+      const maxMile = Math.round(sec.axis_end - sec.axis_start);
+      infoEl.textContent = "State Range: 0\u2013" + maxMile + " Miles";
+
+      if (mileInput) {
+        mileInput.placeholder = "e.g., " + Math.round(maxMile / 2);
+        const cur = Number(mileInput.value);
+        if (cur < 0 || cur > maxMile) mileInput.value = "";
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const stateSel = document.getElementById("cdtStateSelect");
+      if (stateSel) {
+        cdtUpdateStateInfo();
+        stateSel.addEventListener("change", cdtUpdateStateInfo);
+      }
+    });
+  </script>
+
+  <script defer src="/js/trail-nav.js"></script>
+  <script defer src="/js/shared-utils.js"></script>
+  <script defer src="js/app.js"></script>
+
+  <!-- Donation block -->
+  <div class="donation-block">
+    <p class="donation-text">
+      Thank you for visiting and trying these tools. They are a labor of love for me, and I make
+      no money from this site. However, if you wish to help support the site please consider
+      <a href="https://www.buymeacoffee.com/ihrhzL0ZC5" target="_blank" rel="noopener noreferrer">Buying Me a Coffee</a>
+      &mdash; donations of $1, $5, or even $20 are deeply appreciated. I promise every cent will go to
+      the ongoing operations, maintenance, development, and expansion of the site.
+    </p>
+    <a class="bmc-button" href="https://www.buymeacoffee.com/ihrhzL0ZC5"
+       target="_blank" rel="noopener noreferrer" aria-label="Buy Me a Coffee">Buy Me a Coffee</a>
+  </div>
+
 </body>
 </html>

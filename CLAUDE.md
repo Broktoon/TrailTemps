@@ -13,7 +13,7 @@ This file provides guidance to Claude Code when working with code in this reposi
 3. Historical Temperature Extremes — pre-computed normals per waypoint (ERA5-Land, 2018–2024)
 4. Alternate route selection — mutually exclusive swap alternates (FT and AZT)
 5. Interactive Leaflet map display
-6. Multi-trail architecture — Appalachian Trail, Arizona Trail, Florida Trail, Ice Age Trail, Natchez Trace Trail, New England Trail, Pacific Crest Trail, and Pacific Northwest Trail all live; North Country Trail data pipeline complete (Coming Next); Potomac Heritage Trail data pipeline + app.js + index.html complete (Coming Soon)
+6. Multi-trail architecture — All eleven National Scenic Trails fully live: Appalachian, Arizona, Continental Divide, Florida, Ice Age, Natchez Trace, New England, North Country, Pacific Crest, Pacific Northwest, and Potomac Heritage.
 7. BestStart! calculator — scans all 365 possible start dates and recommends the one with the best UTCI thermal comfort score across the full hike
 
 **Design principles — non-negotiable:**
@@ -68,9 +68,13 @@ node trails/north-country-trail/tools/build-points-nct.js
 node trails/north-country-trail/tools/generate-normals-nct.js
 node trails/potomac-heritage-trail/tools/build-points-pht.js
 node trails/potomac-heritage-trail/tools/generate-normals-pht.js
+node trails/continental-divide-trail/tools/build-points-cdt.js
+node trails/continental-divide-trail/tools/generate-normals-cdt.js
 ```
 
 There are no tests, no linter, and no build step.
+
+**Open-Meteo Professional API** — NCT, PHT, and CDT `generate-normals-*.js` scripts use the Professional subscription endpoint (`customer-archive-api.open-meteo.com/v1/archive`) with `apikey=TTyLPYLitRdmWqlF` and a 2-second throttle. Other trails' normals scripts still use the standard endpoint with 15-second throttle. Do not change NCT/PHT/CDT back to the standard endpoint.
 
 ---
 
@@ -184,7 +188,7 @@ trails/
       points.json                   ← 977 points at 5-mile intervals (miles 0–4,877.03, WEBO)
       trail.geojson                 ← 1,324 features (NCTA ArcGIS Layer 2; off-road solid, roadwalk dashed)
       nct_meta.json
-      historical_weather.json       ← (not yet generated; ~977 normals points when complete, ~60 MB)
+      historical_weather.json       ← (~977 normals points when complete, ~60 MB; generation in progress)
       _raw_nct.json                 ← cached NCTA ArcGIS source geometry (used by build-points-nct.js)
       _raw_sht.json                 ← cached OSM SHT ways (480 ways, relation 1612587)
     tools/
@@ -217,7 +221,7 @@ trails/
 - Map helpers: `boundsFromPoints`, `makeColoredPinIcon`
 - **BestStart! / UTCI functions** (see BestStart! section below): `dayIndexFromMonthDay`, UTCI scoring helpers (`utciScoreHigh`, `utciScoreLow`, `utciHeatDepth`, `utciColdDepth`, `scoreToHeatCat`, `scoreToColdCat`, `utciCategoryDay`), `computeUtciCounts`, `renderDurExtremesBlocksShared`, `runBestStartShared`
 
-**`js/trail-nav.js`** — Loaded via `<script defer src="/js/trail-nav.js">` on all 11 trail pages. Contains a single `TRAILS` array (the canonical trail list) and injects the `<details class="trail-selector">` dropdown into `<div id="trail-nav-mount">` on page load. Automatically marks the current page using `window.TRAIL_SLUG` or `data-trail` attribute. Badge logic: current "Coming" pages show `(Current — Coming Soon)`.
+**`js/trail-nav.js`** — Loaded via `<script defer src="/js/trail-nav.js">` on all 11 trail pages. Contains a single `TRAILS` array (the canonical trail list) and injects the `<details class="trail-selector">` dropdown into `<div id="trail-nav-mount">` on page load. Automatically marks the current page using `window.TRAIL_SLUG` or `data-trail` attribute. Badge logic: trails with a non-empty `badge` string show it in the nav; current "Coming" pages show `(Current — Coming Soon)`.
 
 Every trail `index.html` includes these two script tags (plus `window.TRAIL_SLUG` inline) before the trail-specific `app.js`:
 ```html
@@ -266,7 +270,7 @@ Large `historical_weather.json` files (AT ~28 MB, and similarly large FT/NET fil
 - **Two status divs per page:** `durStatus` (Duration Calculator errors only) and `weatherStatus` (Weather Planner errors only) — never share them
 - **`durResult` and `durStatus`** must have `style="width:100%"` to prevent flex indentation inside `.controls`
 - **Current Conditions box:** show wind speed only — no wind direction
-- **Temperature advisories:** heat index advisory at apparent high ≥ 100 °F; wind chill advisory at apparent low ≤ 20 °F (20 °F chosen as typical gear rating floor for sleeping bags/insulation)
+- **Temperature advisories:** heat index advisory at apparent high ≥ 100 °F; wind chill advisory at apparent low ≤ 20 °F (20 °F chosen as typical gear rating floor for sleeping bags/insulation). These fire **only in the Weather Planner** (via `el("weatherStatus").innerHTML` — **not** `setWeatherStatus`, which uses `textContent` and strips HTML). In `computeAndRenderDurationExtremes`, `warningHtml` is set to `""` — no advisory logic runs in the Duration Calculator.
 - **Apparent temperature** uses Steadman methodology (built into Open-Meteo `apparent_temperature_*` fields)
 - **Extremes output format (all trails):** the unified `renderDurExtremesBlocksShared` renderer outputs three blocks inside `durExtremesHot`: (1) a 4-column duration summary table (Start Date / End Date / Distance / Duration), (2) a **Thermal Stress and Comfort Profile: Days on Trail** table (9 category columns showing day counts), (3) side-by-side Hottest Day / Coldest Night extremes tables with Date, Location, Actual Temp, Apparent Temp, Relative Humidity rows. `durExtremesCold` is cleared (legacy div kept for compatibility). Each trail's `renderDurExtremesBlocks` is a thin wrapper calling `renderDurExtremesBlocksShared` with a `formatLocation` callback.
 - **`durExtremesMap` placement (all trails):** `<div id="durExtremesMap" style="margin-top:16px;"></div>` must appear AFTER `durExtremesHot` and `durExtremesCold` inside `durExtremesWrap`, followed by the map attribution `<p>`. The map is the last visible output, not the first. All trail `index.html` files follow this order: data tables → map div → attribution.
@@ -279,13 +283,14 @@ Large `historical_weather.json` files (AT ~28 MB, and similarly large FT/NET fil
 - **Alternate route UI pattern:** Use `<fieldset class="alt-group-block">` with `<legend>`, `<div class="alt-options">`, radio `<input>` labels, and `<span class="alt-delta">` for the mileage note. The delta should show segment miles only (not cumulative totals), plus the differential vs. main. See FT or AZT as reference. Direction dropdown contains only direction (NOBO/SOBO); alternates are separate fieldsets below.
 - **`getSelectedAlts()`** — trails with radio-based alternates implement this function to return a plain object keyed by alt group id. `calcTotalMiles()` takes both direction and selectedAlts. `buildHikePoints()` and `getNearestPoint()` also take selectedAlts.
 - **Alt passage points** use `passage_mile` (0-based within the passage) rather than spine `mile`. `getNearestPoint()` must convert accordingly when selecting alt segment points.
-- **Normals load status message:** "Historical weather data loaded (...)" — not "planning normals" or "precomputed normals".
+- **Normals load status message:** "Historical weather data loaded (...)" — not "planning normals" or "precomputed normals". On AT, IAT, PCT, and PHT, a `setTimeout(() => setDurStatus(""), 4000)` clears this message after 4 seconds.
+- **Weather Planner cold advisory injection point:** In every trail's `runWeather`, after `renderPlanningSummary(...)` and before `} catch (err)`, check `forecastData.daily?.apparent_temperature_min` and `avgs.avgAppLow` (or `appLow` for AT) against ≤ 20 °F and set `el("weatherStatus").innerHTML` with a styled `<p>` tag. AT uses `appLow` (local variable from precomputed normals); all other trails use `avgs.avgAppLow`.
 
 ---
 
 ## BestStart! Feature
 
-All 8 active trail pages include the green *BestStart!* button. It scans all 365 possible start dates and recommends the one producing the highest cumulative UTCI thermal comfort score across the full hike.
+All active trail pages except NCT include the green *BestStart!* button. It scans all 365 possible start dates and recommends the one producing the highest cumulative UTCI thermal comfort score across the full hike. NCT BestStart! is not yet implemented.
 
 ### Shared Utility Functions (in `js/shared-utils.js`)
 
@@ -835,12 +840,12 @@ Located in `trails/ice-age-trail/tools/`:
 
 ---
 
-## North Country Trail (NCT) — Coming Next
+## North Country Trail (NCT) — Live
 
-- **Status:** Live (April 2026). `historical_weather.json` generation in progress (normals run underway).
+- **Status:** Live (April 2026). `historical_weather.json` normals generation underway (resume-safe; use Open-Meteo Professional API).
 - **Point ID format:** `nct-{state_id}-mi{7digits}` (thousandth-mile precision, zero-padded to 7 digits; state_id is lowercase, e.g. `nct-mn-mi3533803`)
-- **Data files:** `points.json`, `nct_meta.json`, `trail.geojson`, `historical_weather.json` (pending), `_raw_nct.json`, `_raw_sht.json`
-- **Normals source:** Open-Meteo ERA5-Land archive (2018–2024), via `generate-normals-nct.js` (not yet run)
+- **Data files:** `points.json`, `nct_meta.json`, `trail.geojson`, `historical_weather.json` (in progress), `_raw_nct.json`, `_raw_sht.json`
+- **Normals source:** Open-Meteo ERA5-Land archive (2018–2024), via `generate-normals-nct.js`; uses Professional API (`customer-archive-api.open-meteo.com`, 2-second throttle)
 - **Weather resolution:** 5-mile intervals (977 points, miles 0–4,877.03, WEBO order)
 - **Trail geometry sources:**
   - NCTA ArcGIS FeatureServer Layer 2 — main source for all 8 states
@@ -919,20 +924,20 @@ If the Overpass API returns an HTML error (transient overload), simply re-run th
 - **Ohio heat concern** — Ohio and parts of New York are the primary heat stress states (low elevation, high humidity, roadwalk)
 - **MN/ND cold concern** — Western MN and ND can see very cold nights into May and again in September
 - **Weather Planner UI:** State selector → State Mile typed input (0 to state's max mile, computed from `NCT_STATES_BOOTSTRAP`)
-- **BestStart!** — to be implemented in `app.js` following the same `runBestStartShared` pattern as other trails
+- **BestStart!** — not yet implemented; to be added to `app.js` following the same `runBestStartShared` pattern as other trails
 
 ### NCT Tools
 
 Located in `trails/north-country-trail/tools/`:
 
 - **`build-points-nct.js`** — Fetches all NCTA ArcGIS Layer 2 features (paginated), fetches SHT OSM ways (Overpass API, cached), stitches per-state feature chains using greedy nearest-endpoint algorithm, applies `reorderToWesternTerminus`, interpolates at 5-mile intervals using `interpolateAtAcrossRuns`, writes `points.json`, `trail.geojson`, and `nct_meta.json`. Caches raw source data in `_raw_nct.json` and `_raw_sht.json`. Re-run if NCTA geometry changes; always update `NCT_STATES_BOOTSTRAP` in `index.html` afterward.
-- **`generate-normals-nct.js`** — Fetches ERA5-Land normals for all 977 target points at 5-mile intervals; resume-safe (saves after each point); 5-second throttle (change to 15000 if using Open-Meteo free tier); full run ~82 minutes. Output is a `{ meta, points }` wrapped `historical_weather.json` (same schema as IAT/PCT).
+- **`generate-normals-nct.js`** — Fetches ERA5-Land normals for all 977 target points at 5-mile intervals; resume-safe (saves after each point); 2-second throttle (Open-Meteo Professional subscription — `customer-archive-api.open-meteo.com`, `apikey=TTyLPYLitRdmWqlF`); full run ~82 minutes at 2-second delay. Output is a `{ meta, points }` wrapped `historical_weather.json` (same schema as IAT/PCT).
 
 ---
 
-## Potomac Heritage Trail (PHT) — Coming Soon
+## Potomac Heritage Trail (PHT) — Live
 
-- **Status:** Live (April 2026). `app.js`, `index.html`, and `historical_weather.json` all complete.
+- **Status:** Fully live (April 2026). `app.js`, `index.html`, and `historical_weather.json` all complete.
 - **Point ID format:** `pht-{section_id}-mi{8digits}` (e.g. `pht-southern-maryland-mi00000000`); DC alt points include alt_id in ID (e.g. `pht-dc-river-trail-river-trail-mi02165860`)
 - **Data files:** `points.json`, `pht_meta.json`, `trail.geojson`, `historical_weather.json`, `_raw_pht.json`
 - **Normals source:** Open-Meteo ERA5-Land archive (2018–2024)
@@ -1075,7 +1080,130 @@ Both the app.js overrides and their matching bootstrap equivalents (`PHT_SECTION
 Located in `trails/potomac-heritage-trail/tools/`:
 
 - **`build-points-pht.js`** — Fetches NPS FTDS ArcGIS features (614 features), classifies by REGION/MAPLABEL, assigns unclassified DC features spatially, stitches chains with greedy nearest-endpoint algorithm (per-call `maxGap` parameter: `DC_MAX_GAP_MI = 0.02` for DC chains to prevent straight-line artifacts, `MAX_MERGE_GAP_MI = 1.0` for others), interpolates at 0.1-mile intervals, writes `points.json`, `trail.geojson`, `pht_meta.json`. DC River Trail seeds: Anacostia Riverwalk Trail, Half St SW, V St SW, 2nd St SW, P St SW, Waterfront Park, Maine Ave SW, L'Enfant Prom SW, Francis Case Memorial Bridge, Buckeye Dr SW Sidewalk, Potomac River Trail.
-- **`generate-normals-pht.js`** — Selects target points at ~5-mile intervals per (section_id, alt_id) group; fetches ERA5-Land normals; resume-safe; 15-second throttle; `{ meta, points }` output with `hi_app`/`lo_app` keys.
+- **`generate-normals-pht.js`** — Selects target points at ~5-mile intervals per (section_id, alt_id) group; fetches ERA5-Land normals; resume-safe; 2-second throttle (Open-Meteo Professional — `customer-archive-api.open-meteo.com`, `apikey=TTyLPYLitRdmWqlF`); `{ meta, points }` output with `hi_app`/`lo_app` keys.
+
+---
+
+## Continental Divide Trail (CDT) — Live
+
+- **Status:** Live (April 2026). All data complete; fully functional weather planner with BestStart!, duration extremes, elevation correction, and 4 alternate routes.
+- **Point ID format:** `cdt-main-mi{7digits}` (main spine, thousandth-mile precision); `cdt-{alt_id}-mi{7digits}` (alt points, e.g. `cdt-gila-mi0000000`)
+- **Data files:** `points.json` (657 total: spine + alt points), `cdt_meta.json`, `trail.geojson`, `historical_weather.json`, `_raw_arcgis.json`, `_raw_osm_gila.json`, `_raw_osm_rmnp.json`, `_raw_osm_anaconda.json`, `_raw_osm_spotted-bear.json`
+- **Normals source:** Open-Meteo ERA5-Land archive (2018–2024), via `generate-normals-cdt.js`; uses Professional API (`customer-archive-api.open-meteo.com`, 2-second throttle, ~24 min for ~700 points)
+- **Weather resolution:** 5-mile intervals (main spine)
+- **Trail geometry sources:**
+  - USFS ArcGIS FeatureServer (`services1.arcgis.com/gGHDlz6USftL5Pau/.../ContinentalDivideNST/FeatureServer/0`) — main route, RMNP Loop ArcGIS variant, Chief Mountain alternate. Label field: `CDT Primary Route`, `Rocky Mountain National Park Loop Alternate`, `Chief Mountain Border Crossing Alternate`
+  - OSM Overpass API — Gila River Route (relation 7917427), RMNP Loop / North Inlet / Tonahutu Creek (relation 6747529), Anaconda Cutoff (relation 8107272), Spotted Bear Route (relation 8034122)
+- **Trail color:** `#e06060` (same salmon/red as all other active trails)
+- **Direction convention:** NOBO (Antelope Wells, NM → Waterton Lake or Chief Mountain, MT) / SOBO; `is_nobo` flag; terminus variant controls northern end
+- **Elevation correction:** same logic as AZT/PCT (`ELEV_THRESHOLD_FT = 300`; `trail_elev` from OpenTopoData SRTM, `grid_elev` from ERA5-Land stored in feet)
+
+### CDT Geographic Sections (4 States)
+
+Idaho (near Yellowstone) is absorbed into Wyoming for weather-planner purposes.
+
+| State | Name | Axis start | Axis end | Miles |
+|-------|------|-----------|---------|-------|
+| `NM` | New Mexico | 0 | 795 | ~795 |
+| `CO` | Colorado | 800 | 1,525 | ~725 |
+| `WY` | Wyoming | 1,530 | 2,300 | ~770 |
+| `MT` | Montana | 2,305 | 3,025.1 | ~720 |
+
+**Total trail miles: 3,025.1** (Antelope Wells → Waterton Lake). Chief Mountain variant: 3,012.15 mi (−8 mi for alternate northern terminus).
+
+State assignment is by latitude: NM < 37°, CO < 41°, WY < 45°, MT otherwise.
+
+### CDT Direction Options (4)
+
+| id | Label | Total miles |
+|----|-------|------------|
+| `nobo_waterton` | Northbound — Antelope Wells → Waterton Lake | 3,025.1 |
+| `nobo_chief_mtn` | Northbound — Antelope Wells → Chief Mountain | 3,012.15 |
+| `sobo_waterton` | Southbound — Waterton Lake → Antelope Wells | 3,025.1 |
+| `sobo_chief_mtn` | Southbound — Chief Mountain → Antelope Wells | 3,012.15 |
+
+### CDT Alternate Groups — Current State
+
+**Gila River Route (`gila`):** branch 175, rejoin 355. OSM relation 7917427, `maxGapMi=1.0`. Alternate: 104.9 mi (delta −75.1 mi). Chain confirmed clean; branch and rejoin are correct.
+
+**RMNP Loop — North Inlet / Tonahutu Creek (`rmnp`):** branch 1,355, rejoin 1,370. OSM relation 6747529, `maxGapMi=2.0`, `splitStepMi=0.5`. OSM coverage is partial (3 segments totaling 40.0 mi, delta +27.9 mi). The two artifact straight lines (1.6 mi and 1.2 mi) were removed by splitting at steps > 0.5 mi — each valid segment is written as a separate GeoJSON Feature. The ArcGIS data contains only the short western bypass connector (~4.2 mi, labeled `Rocky Mountain National Park Loop Alternate`); the main CDT route goes through the park interior via the longer south/east/north legs. OSM gaps in the map are expected; see "Notes on Map Data" in index.html. Do not change `maxGapMi` or `splitStepMi` without re-verifying the step distance distribution.
+
+**Anaconda Cutoff (`anaconda`):** branch 2,475, rejoin 2,610. OSM relation 8107272, `maxGapMi=5.0`. Alternate: 57.6 mi (delta −77.4 mi). `maxGapMi=5.0` needed because the relation has a legitimate internal gap of ~4.5 mi.
+
+**Spotted Bear Route (`spotted-bear`):** branch 2,845, rejoin 2,860. OSM relation 8034122, `maxGapMi=10.0`, `splitStepMi=0.5`. 2 segments totaling 26.6 mi (delta +20.5 mi, scenic detour). `maxGapMi=10.0` needed to stitch across the internal OSM gap; `splitStepMi=0.5` then removes the resulting 8.875 mi artifact straight line, preserving both legitimate segments.
+
+### CDT Build Script — Key Parameters
+
+`build-points-cdt.js` has several non-obvious parameters:
+
+- **`chainPaths(allPaths, maxGapMi)`** — greedy nearest-endpoint stitching with gap cutoff. Stops when the next way endpoint is farther than `maxGapMi`. Without this, errant distant OSM ways create straight-line artifacts or cause loops.
+- **`longestContinuousSegment(chain, maxStepMi)`** — splits the chain at any step > `maxStepMi`, returns only the longest piece. Used when you want to discard all but the primary segment.
+- **`splitContinuousSegments(chain, maxStepMi)`** — splits the chain at any step > `maxStepMi`, returns ALL valid segments. Used for RMNP where legitimate trail segments exist on both sides of a coverage gap. Each segment is written as a separate GeoJSON Feature with identical properties; Leaflet renders them all as the same dotted line. Set via `splitStepMi` in `OSM_ALTS`.
+- **`OSM_ALTS`** — per-alternate config array. Current values:
+  ```javascript
+  { id: 'gila',         relation: 7917427, state: 'NM', maxGapMi: 1.0,  trimStepMi: null, splitStepMi: null }
+  { id: 'rmnp',         relation: 6747529, state: 'CO', maxGapMi: 2.0,  trimStepMi: null, splitStepMi: 0.5  }
+  { id: 'anaconda',     relation: 8107272, state: 'MT', maxGapMi: 5.0,  trimStepMi: null, splitStepMi: null }
+  { id: 'spotted-bear', relation: 8034122, state: 'MT', maxGapMi: 10.0, trimStepMi: null, splitStepMi: 0.5  }
+  ```
+- **State assignment by latitude:** ANTELOPE_WELLS (31.335°N) orients the main chain S→N; states split at 37°, 41°, 45°.
+- **Cache files:** `_raw_arcgis.json` (USFS), `_raw_osm_*.json` (OSM per-alternate). Delete to force a fresh fetch.
+
+### CDT `CDT_STATES_BOOTSTRAP`
+
+Hardcoded in `index.html` for immediate UI population. **Must be updated after every `build-points-cdt.js` run** — the script prints exact values to the console.
+
+```javascript
+window.CDT_STATES_BOOTSTRAP = [
+  { state: "NM", name: "New Mexico", axis_start: 0,      axis_end: 795    },
+  { state: "CO", name: "Colorado",   axis_start: 800,    axis_end: 1525   },
+  { state: "WY", name: "Wyoming",    axis_start: 1530,   axis_end: 2300   },
+  { state: "MT", name: "Montana",    axis_start: 2305,   axis_end: 3025.1 }
+];
+```
+
+### CDT `cdt_meta.json` Structure
+
+```json
+{
+  "trail": { "name", "total_trail_miles", "map_center", "map_zoom", "termini" },
+  "sections": [ { "id", "name", "state", "axis_start", "axis_end" } ],
+  "alt_groups": [ { "id", "label", "branch_mile", "rejoin_mile",
+                    "main": { "id", "label", "total_miles" },
+                    "alt":  { "id", "label", "total_miles", "delta_miles" } } ],
+  "direction_options": [ { "id", "label", "total_miles", "is_nobo", "terminus" } ]
+}
+```
+
+### CDT `points.json` Schema
+
+Main spine points:
+```json
+{ "id": "cdt-main-mi0000000", "mile": 0, "lat": ..., "lon": ..., "state": "NM", "trail_elev": 4531 }
+```
+
+Alt points:
+```json
+{ "id": "cdt-gila-mi0000000", "alt_id": "gila", "mile": 0, "lat": ..., "lon": ..., "state": "NM", "trail_elev": 4200 }
+```
+
+### CDT Notable Features
+
+- **Longest continuous National Scenic Trail** at 3,025 miles
+- **BestStart!** — fully implemented: button, `bestStartResult` div, `runBestStart()`, `bestStartBtn` wired in `initDurationUI()`
+- **No advisory logic in Duration Calculator** — `warningHtml = ""` in `computeAndRenderDurationExtremes`; advisories only in Weather Planner
+- **`NORMALS_CACHE_VERSION`:** `"v1"` — bump whenever `historical_weather.json` is rebuilt
+- **`{ meta, points }` wrapper** — same structure as IAT/PCT/PHT
+- **`historical_weather.json` complete** — 657 points (607 spine + 21 Gila + 12 Anaconda + 8 Spotted Bear + 9 RMNP); generated April 2026 via Professional API
+- **Chief Mountain alternate terminus** — 13 miles shorter than Waterton Lake terminus; both NOBO and SOBO have dual terminus options
+- **RMNP loop pending** — do not change RMNP modeling without consulting session history and analyzing ArcGIS vs. OSM routing
+
+### CDT Tools
+
+Located in `trails/continental-divide-trail/tools/`:
+
+- **`build-points-cdt.js`** — Fetches USFS ArcGIS features (main route, RMNP ArcGIS variant, Chief Mountain alternate), fetches OSM Overpass ways for Gila/RMNP/Anaconda/Spotted Bear alternates (cached per-alternate in `_raw_osm_*.json`), stitches chains with greedy nearest-endpoint algorithm + `maxGapMi` cutoff, fetches SRTM elevation via OpenTopoData for all points, writes `points.json`, `trail.geojson` (main spine thinned to 20m), `trail_hires.geojson` (full ArcGIS resolution, for future use), and `cdt_meta.json`. Re-run if trail geometry changes; update `CDT_STATES_BOOTSTRAP` in `index.html` afterward.
+- **`generate-normals-cdt.js`** — Fetches ERA5-Land normals for all ~700 points (main spine + alt points); resume-safe (saves after each point); 2-second throttle (Open-Meteo Professional — `customer-archive-api.open-meteo.com`, `apikey=TTyLPYLitRdmWqlF`); `{ meta, points }` output. Estimated ~24 minutes for full run. Stores `grid_elev` (feet) for elevation correction.
 
 ---
 
@@ -1084,12 +1212,12 @@ Located in `trails/potomac-heritage-trail/tools/`:
 **`js/trail-nav.js`** is the single source of truth for trail ordering and status badges. The hub `index.html` must match. Order convention:
 
 1. **Live trails** — alphabetical
-2. **Coming Next** — one trail at a time
-3. **Coming Soon** — alphabetical
+2. **Coming Next** — one trail at a time (currently none)
+3. **Coming Soon** — alphabetical (currently none)
 
-Current order: AT, AZT, FT, IAT, NTT, NET, NCT, PCT, PNT, PHT → CDT (Coming Soon)
+Current order: AT, AZT, CDT, FT, IAT, NTT, NET, NCT, PCT, PNT, PHT
 
-**CDT is Coming Soon — do not promote to live without explicit user instruction.**
+All eleven trails are fully live. No Coming Next or Coming Soon trails currently.
 
 When promoting a trail from Coming Next to live: remove the badge in `trail-nav.js`, update the tile in `index.html` (remove `coming` class and badge div, update description), and move it to its alphabetical position in both files.
 

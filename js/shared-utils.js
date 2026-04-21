@@ -66,10 +66,11 @@ function toISODate(d) {
  */
 function resolveStartDate(monthDay) {
   const [mm, dd] = monthDay.split("-").map(Number);
-  const today = new Date();
-  const base  = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-  let candidate = new Date(base.getFullYear(), mm - 1, dd);
-  if (candidate < base) candidate = new Date(base.getFullYear() + 1, mm - 1, dd);
+  const today    = new Date();
+  const baseYear = Math.max(2026, today.getFullYear());
+  const base     = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  let candidate  = new Date(baseYear, mm - 1, dd);
+  if (candidate < base) candidate = new Date(baseYear + 1, mm - 1, dd);
   return candidate;
 }
 
@@ -469,7 +470,7 @@ function renderDurExtremesBlocksShared(hottest, coldest, opts = {}) {
  * Returns { bestStartDate: Date | null, bestCounts: object | null }
  */
 function runBestStartShared({ durationDays, getHikePoints, getNormals, eliminator = null }) {
-  const REF_YEAR = 2025;
+  const REF_YEAR = 2026;
   let bestScore = -Infinity, bestStartDate = null, bestCounts = null;
 
   for (let doy = 0; doy < 365; doy++) {

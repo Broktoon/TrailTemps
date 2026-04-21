@@ -13,6 +13,7 @@
     // Live — alphabetical
     { slug: "appalachian-trail",        name: "Appalachian Trail",        badge: "" },
     { slug: "arizona-trail",            name: "Arizona Trail",            badge: "" },
+    { slug: "continental-divide-trail", name: "Continental Divide Trail", badge: "" },
     { slug: "florida-trail",            name: "Florida Trail",            badge: "" },
     { slug: "ice-age-trail",            name: "Ice Age Trail",            badge: "" },
     { slug: "natchez-trace-trail",      name: "Natchez Trace Trail",      badge: "" },
@@ -21,8 +22,6 @@
     { slug: "pacific-crest-trail",      name: "Pacific Crest Trail",      badge: "" },
     { slug: "pacific-northwest-trail",  name: "Pacific Northwest Trail",  badge: "" },
     { slug: "potomac-heritage-trail",   name: "Potomac Heritage Trail",   badge: "" },
-    // Coming soon — alphabetical
-    { slug: "continental-divide-trail", name: "Continental Divide Trail", badge: "(Coming Soon)" },
   ];
 
   function inject() {

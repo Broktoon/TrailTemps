@@ -1,0 +1,5258 @@
+[
+  {
+    "id": "cdt-main-mi0000000",
+    "mile": 0,
+    "lat": 31.497064,
+    "lon": -108.208509,
+    "state": "NM",
+    "trail_elev": 4298
+  },
+  {
+    "id": "cdt-main-mi0005000",
+    "mile": 5,
+    "lat": 31.5238,
+    "lon": -108.279645,
+    "state": "NM",
+    "trail_elev": 4596
+  },
+  {
+    "id": "cdt-main-mi0010000",
+    "mile": 10,
+    "lat": 31.572216,
+    "lon": -108.32893,
+    "state": "NM",
+    "trail_elev": 5266
+  },
+  {
+    "id": "cdt-main-mi0015000",
+    "mile": 15,
+    "lat": 31.618225,
+    "lon": -108.322297,
+    "state": "NM",
+    "trail_elev": 4879
+  },
+  {
+    "id": "cdt-main-mi0020000",
+    "mile": 20,
+    "lat": 31.66796,
+    "lon": -108.364439,
+    "state": "NM",
+    "trail_elev": 4744
+  },
+  {
+    "id": "cdt-main-mi0025000",
+    "mile": 25,
+    "lat": 31.721145,
+    "lon": -108.409984,
+    "state": "NM",
+    "trail_elev": 4308
+  },
+  {
+    "id": "cdt-main-mi0030000",
+    "mile": 30,
+    "lat": 31.787347,
+    "lon": -108.426555,
+    "state": "NM",
+    "trail_elev": 4708
+  },
+  {
+    "id": "cdt-main-mi0035000",
+    "mile": 35,
+    "lat": 31.84298,
+    "lon": -108.417799,
+    "state": "NM",
+    "trail_elev": 4774
+  },
+  {
+    "id": "cdt-main-mi0040000",
+    "mile": 40,
+    "lat": 31.909197,
+    "lon": -108.413209,
+    "state": "NM",
+    "trail_elev": 4724
+  },
+  {
+    "id": "cdt-main-mi0045000",
+    "mile": 45,
+    "lat": 31.958829,
+    "lon": -108.439549,
+    "state": "NM",
+    "trail_elev": 4770
+  },
+  {
+    "id": "cdt-main-mi0050000",
+    "mile": 50,
+    "lat": 32.005907,
+    "lon": -108.468607,
+    "state": "NM",
+    "trail_elev": 4764
+  },
+  {
+    "id": "cdt-main-mi0055000",
+    "mile": 55,
+    "lat": 32.042954,
+    "lon": -108.526223,
+    "state": "NM",
+    "trail_elev": 4583
+  },
+  {
+    "id": "cdt-main-mi0060000",
+    "mile": 60,
+    "lat": 32.102064,
+    "lon": -108.563993,
+    "state": "NM",
+    "trail_elev": 4521
+  },
+  {
+    "id": "cdt-main-mi0065000",
+    "mile": 65,
+    "lat": 32.146147,
+    "lon": -108.619881,
+    "state": "NM",
+    "trail_elev": 4488
+  },
+  {
+    "id": "cdt-main-mi0070000",
+    "mile": 70,
+    "lat": 32.202398,
+    "lon": -108.658115,
+    "state": "NM",
+    "trail_elev": 4534
+  },
+  {
+    "id": "cdt-main-mi0075000",
+    "mile": 75,
+    "lat": 32.225432,
+    "lon": -108.720691,
+    "state": "NM",
+    "trail_elev": 4806
+  },
+  {
+    "id": "cdt-main-mi0080000",
+    "mile": 80,
+    "lat": 32.282277,
+    "lon": -108.753733,
+    "state": "NM",
+    "trail_elev": 4715
+  },
+  {
+    "id": "cdt-main-mi0085000",
+    "mile": 85,
+    "lat": 32.341116,
+    "lon": -108.714252,
+    "state": "NM",
+    "trail_elev": 4324
+  },
+  {
+    "id": "cdt-main-mi0090000",
+    "mile": 90,
+    "lat": 32.396759,
+    "lon": -108.680302,
+    "state": "NM",
+    "trail_elev": 4298
+  },
+  {
+    "id": "cdt-main-mi0095000",
+    "mile": 95,
+    "lat": 32.397304,
+    "lon": -108.601093,
+    "state": "NM",
+    "trail_elev": 4744
+  },
+  {
+    "id": "cdt-main-mi0100000",
+    "mile": 100,
+    "lat": 32.416522,
+    "lon": -108.52687,
+    "state": "NM",
+    "trail_elev": 5778
+  },
+  {
+    "id": "cdt-main-mi0105000",
+    "mile": 105,
+    "lat": 32.45664,
+    "lon": -108.500183,
+    "state": "NM",
+    "trail_elev": 6581
+  },
+  {
+    "id": "cdt-main-mi0110000",
+    "mile": 110,
+    "lat": 32.506569,
+    "lon": -108.484473,
+    "state": "NM",
+    "trail_elev": 6237
+  },
+  {
+    "id": "cdt-main-mi0115000",
+    "mile": 115,
+    "lat": 32.542012,
+    "lon": -108.445911,
+    "state": "NM",
+    "trail_elev": 6424
+  },
+  {
+    "id": "cdt-main-mi0120000",
+    "mile": 120,
+    "lat": 32.57765,
+    "lon": -108.429484,
+    "state": "NM",
+    "trail_elev": 7667
+  },
+  {
+    "id": "cdt-main-mi0125000",
+    "mile": 125,
+    "lat": 32.620399,
+    "lon": -108.446214,
+    "state": "NM",
+    "trail_elev": 6778
+  },
+  {
+    "id": "cdt-main-mi0130000",
+    "mile": 130,
+    "lat": 32.642483,
+    "lon": -108.491382,
+    "state": "NM",
+    "trail_elev": 6522
+  },
+  {
+    "id": "cdt-main-mi0135000",
+    "mile": 135,
+    "lat": 32.687612,
+    "lon": -108.519537,
+    "state": "NM",
+    "trail_elev": 6486
+  },
+  {
+    "id": "cdt-main-mi0140000",
+    "mile": 140,
+    "lat": 32.725101,
+    "lon": -108.545774,
+    "state": "NM",
+    "trail_elev": 6191
+  },
+  {
+    "id": "cdt-main-mi0145000",
+    "mile": 145,
+    "lat": 32.763141,
+    "lon": -108.513134,
+    "state": "NM",
+    "trail_elev": 5233
+  },
+  {
+    "id": "cdt-main-mi0150000",
+    "mile": 150,
+    "lat": 32.77954,
+    "lon": -108.458603,
+    "state": "NM",
+    "trail_elev": 5115
+  },
+  {
+    "id": "cdt-main-mi0155000",
+    "mile": 155,
+    "lat": 32.759602,
+    "lon": -108.37858,
+    "state": "NM",
+    "trail_elev": 5817
+  },
+  {
+    "id": "cdt-main-mi0160000",
+    "mile": 160,
+    "lat": 32.764607,
+    "lon": -108.301051,
+    "state": "NM",
+    "trail_elev": 6138
+  },
+  {
+    "id": "cdt-main-mi0165000",
+    "mile": 165,
+    "lat": 32.819089,
+    "lon": -108.305442,
+    "state": "NM",
+    "trail_elev": 6175
+  },
+  {
+    "id": "cdt-main-mi0170000",
+    "mile": 170,
+    "lat": 32.839296,
+    "lon": -108.321543,
+    "state": "NM",
+    "trail_elev": 6719
+  },
+  {
+    "id": "cdt-main-mi0175000",
+    "mile": 175,
+    "lat": 32.876695,
+    "lon": -108.294845,
+    "state": "NM",
+    "trail_elev": 6604
+  },
+  {
+    "id": "cdt-main-mi0180000",
+    "mile": 180,
+    "lat": 32.881662,
+    "lon": -108.24746,
+    "state": "NM",
+    "trail_elev": 6926
+  },
+  {
+    "id": "cdt-main-mi0185000",
+    "mile": 185,
+    "lat": 32.88268,
+    "lon": -108.202589,
+    "state": "NM",
+    "trail_elev": 7585
+  },
+  {
+    "id": "cdt-main-mi0190000",
+    "mile": 190,
+    "lat": 32.914776,
+    "lon": -108.164526,
+    "state": "NM",
+    "trail_elev": 8747
+  },
+  {
+    "id": "cdt-main-mi0195000",
+    "mile": 195,
+    "lat": 32.934557,
+    "lon": -108.13862,
+    "state": "NM",
+    "trail_elev": 7982
+  },
+  {
+    "id": "cdt-main-mi0200000",
+    "mile": 200,
+    "lat": 32.983959,
+    "lon": -108.138698,
+    "state": "NM",
+    "trail_elev": 7201
+  },
+  {
+    "id": "cdt-main-mi0205000",
+    "mile": 205,
+    "lat": 33.026921,
+    "lon": -108.110656,
+    "state": "NM",
+    "trail_elev": 6270
+  },
+  {
+    "id": "cdt-main-mi0210000",
+    "mile": 210,
+    "lat": 33.076318,
+    "lon": -108.073108,
+    "state": "NM",
+    "trail_elev": 6929
+  },
+  {
+    "id": "cdt-main-mi0215000",
+    "mile": 215,
+    "lat": 33.106404,
+    "lon": -108.021077,
+    "state": "NM",
+    "trail_elev": 7854
+  },
+  {
+    "id": "cdt-main-mi0220000",
+    "mile": 220,
+    "lat": 33.12361,
+    "lon": -107.975908,
+    "state": "NM",
+    "trail_elev": 8615
+  },
+  {
+    "id": "cdt-main-mi0225000",
+    "mile": 225,
+    "lat": 33.107339,
+    "lon": -107.927032,
+    "state": "NM",
+    "trail_elev": 8678
+  },
+  {
+    "id": "cdt-main-mi0230000",
+    "mile": 230,
+    "lat": 33.135498,
+    "lon": -107.879524,
+    "state": "NM",
+    "trail_elev": 9488
+  },
+  {
+    "id": "cdt-main-mi0235000",
+    "mile": 235,
+    "lat": 33.175664,
+    "lon": -107.850592,
+    "state": "NM",
+    "trail_elev": 8852
+  },
+  {
+    "id": "cdt-main-mi0240000",
+    "mile": 240,
+    "lat": 33.224067,
+    "lon": -107.849901,
+    "state": "NM",
+    "trail_elev": 9560
+  },
+  {
+    "id": "cdt-main-mi0245000",
+    "mile": 245,
+    "lat": 33.270615,
+    "lon": -107.827301,
+    "state": "NM",
+    "trail_elev": 9134
+  },
+  {
+    "id": "cdt-main-mi0250000",
+    "mile": 250,
+    "lat": 33.315141,
+    "lon": -107.828801,
+    "state": "NM",
+    "trail_elev": 8091
+  },
+  {
+    "id": "cdt-main-mi0255000",
+    "mile": 255,
+    "lat": 33.354833,
+    "lon": -107.83328,
+    "state": "NM",
+    "trail_elev": 8297
+  },
+  {
+    "id": "cdt-main-mi0260000",
+    "mile": 260,
+    "lat": 33.384173,
+    "lon": -107.846922,
+    "state": "NM",
+    "trail_elev": 8314
+  },
+  {
+    "id": "cdt-main-mi0265000",
+    "mile": 265,
+    "lat": 33.424528,
+    "lon": -107.862042,
+    "state": "NM",
+    "trail_elev": 8169
+  },
+  {
+    "id": "cdt-main-mi0270000",
+    "mile": 270,
+    "lat": 33.472732,
+    "lon": -107.848261,
+    "state": "NM",
+    "trail_elev": 7841
+  },
+  {
+    "id": "cdt-main-mi0275000",
+    "mile": 275,
+    "lat": 33.522234,
+    "lon": -107.812018,
+    "state": "NM",
+    "trail_elev": 8163
+  },
+  {
+    "id": "cdt-main-mi0280000",
+    "mile": 280,
+    "lat": 33.567987,
+    "lon": -107.809688,
+    "state": "NM",
+    "trail_elev": 8031
+  },
+  {
+    "id": "cdt-main-mi0285000",
+    "mile": 285,
+    "lat": 33.613732,
+    "lon": -107.809349,
+    "state": "NM",
+    "trail_elev": 8005
+  },
+  {
+    "id": "cdt-main-mi0290000",
+    "mile": 290,
+    "lat": 33.663597,
+    "lon": -107.817768,
+    "state": "NM",
+    "trail_elev": 7805
+  },
+  {
+    "id": "cdt-main-mi0295000",
+    "mile": 295,
+    "lat": 33.690147,
+    "lon": -107.885706,
+    "state": "NM",
+    "trail_elev": 7795
+  },
+  {
+    "id": "cdt-main-mi0300000",
+    "mile": 300,
+    "lat": 33.698174,
+    "lon": -107.96497,
+    "state": "NM",
+    "trail_elev": 7566
+  },
+  {
+    "id": "cdt-main-mi0305000",
+    "mile": 305,
+    "lat": 33.679263,
+    "lon": -108.037384,
+    "state": "NM",
+    "trail_elev": 7841
+  },
+  {
+    "id": "cdt-main-mi0310000",
+    "mile": 310,
+    "lat": 33.6747,
+    "lon": -108.112898,
+    "state": "NM",
+    "trail_elev": 8839
+  },
+  {
+    "id": "cdt-main-mi0315000",
+    "mile": 315,
+    "lat": 33.690559,
+    "lon": -108.189395,
+    "state": "NM",
+    "trail_elev": 7802
+  },
+  {
+    "id": "cdt-main-mi0320000",
+    "mile": 320,
+    "lat": 33.695023,
+    "lon": -108.239036,
+    "state": "NM",
+    "trail_elev": 7218
+  },
+  {
+    "id": "cdt-main-mi0325000",
+    "mile": 325,
+    "lat": 33.652386,
+    "lon": -108.27212,
+    "state": "NM",
+    "trail_elev": 7644
+  },
+  {
+    "id": "cdt-main-mi0330000",
+    "mile": 330,
+    "lat": 33.604613,
+    "lon": -108.31931,
+    "state": "NM",
+    "trail_elev": 9009
+  },
+  {
+    "id": "cdt-main-mi0335000",
+    "mile": 335,
+    "lat": 33.606561,
+    "lon": -108.382705,
+    "state": "NM",
+    "trail_elev": 7890
+  },
+  {
+    "id": "cdt-main-mi0340000",
+    "mile": 340,
+    "lat": 33.653634,
+    "lon": -108.436952,
+    "state": "NM",
+    "trail_elev": 7785
+  },
+  {
+    "id": "cdt-main-mi0345000",
+    "mile": 345,
+    "lat": 33.690519,
+    "lon": -108.488623,
+    "state": "NM",
+    "trail_elev": 8625
+  },
+  {
+    "id": "cdt-main-mi0350000",
+    "mile": 350,
+    "lat": 33.739685,
+    "lon": -108.440467,
+    "state": "NM",
+    "trail_elev": 9318
+  },
+  {
+    "id": "cdt-main-mi0355000",
+    "mile": 355,
+    "lat": 33.763227,
+    "lon": -108.478992,
+    "state": "NM",
+    "trail_elev": 8773
+  },
+  {
+    "id": "cdt-main-mi0360000",
+    "mile": 360,
+    "lat": 33.809964,
+    "lon": -108.474386,
+    "state": "NM",
+    "trail_elev": 8304
+  },
+  {
+    "id": "cdt-main-mi0365000",
+    "mile": 365,
+    "lat": 33.838368,
+    "lon": -108.428336,
+    "state": "NM",
+    "trail_elev": 8560
+  },
+  {
+    "id": "cdt-main-mi0370000",
+    "mile": 370,
+    "lat": 33.881559,
+    "lon": -108.458257,
+    "state": "NM",
+    "trail_elev": 7441
+  },
+  {
+    "id": "cdt-main-mi0375000",
+    "mile": 375,
+    "lat": 33.92322,
+    "lon": -108.42956,
+    "state": "NM",
+    "trail_elev": 7139
+  },
+  {
+    "id": "cdt-main-mi0380000",
+    "mile": 380,
+    "lat": 33.984863,
+    "lon": -108.416893,
+    "state": "NM",
+    "trail_elev": 7913
+  },
+  {
+    "id": "cdt-main-mi0385000",
+    "mile": 385,
+    "lat": 34.023079,
+    "lon": -108.38205,
+    "state": "NM",
+    "trail_elev": 8533
+  },
+  {
+    "id": "cdt-main-mi0390000",
+    "mile": 390,
+    "lat": 34.058094,
+    "lon": -108.377042,
+    "state": "NM",
+    "trail_elev": 8622
+  },
+  {
+    "id": "cdt-main-mi0395000",
+    "mile": 395,
+    "lat": 34.120095,
+    "lon": -108.366005,
+    "state": "NM",
+    "trail_elev": 7736
+  },
+  {
+    "id": "cdt-main-mi0400000",
+    "mile": 400,
+    "lat": 34.173714,
+    "lon": -108.375409,
+    "state": "NM",
+    "trail_elev": 7674
+  },
+  {
+    "id": "cdt-main-mi0405000",
+    "mile": 405,
+    "lat": 34.231164,
+    "lon": -108.388666,
+    "state": "NM",
+    "trail_elev": 7448
+  },
+  {
+    "id": "cdt-main-mi0410000",
+    "mile": 410,
+    "lat": 34.29818,
+    "lon": -108.37054,
+    "state": "NM",
+    "trail_elev": 7162
+  },
+  {
+    "id": "cdt-main-mi0415000",
+    "mile": 415,
+    "lat": 34.314165,
+    "lon": -108.303397,
+    "state": "NM",
+    "trail_elev": 7215
+  },
+  {
+    "id": "cdt-main-mi0420000",
+    "mile": 420,
+    "lat": 34.306395,
+    "lon": -108.216984,
+    "state": "NM",
+    "trail_elev": 7379
+  },
+  {
+    "id": "cdt-main-mi0425000",
+    "mile": 425,
+    "lat": 34.307291,
+    "lon": -108.139927,
+    "state": "NM",
+    "trail_elev": 7644
+  },
+  {
+    "id": "cdt-main-mi0430000",
+    "mile": 430,
+    "lat": 34.367089,
+    "lon": -108.112221,
+    "state": "NM",
+    "trail_elev": 7579
+  },
+  {
+    "id": "cdt-main-mi0435000",
+    "mile": 435,
+    "lat": 34.42829,
+    "lon": -108.078304,
+    "state": "NM",
+    "trail_elev": 7382
+  },
+  {
+    "id": "cdt-main-mi0440000",
+    "mile": 440,
+    "lat": 34.479564,
+    "lon": -108.019961,
+    "state": "NM",
+    "trail_elev": 7549
+  },
+  {
+    "id": "cdt-main-mi0445000",
+    "mile": 445,
+    "lat": 34.550841,
+    "lon": -108.00953,
+    "state": "NM",
+    "trail_elev": 7434
+  },
+  {
+    "id": "cdt-main-mi0450000",
+    "mile": 450,
+    "lat": 34.621798,
+    "lon": -108.003854,
+    "state": "NM",
+    "trail_elev": 7188
+  },
+  {
+    "id": "cdt-main-mi0455000",
+    "mile": 455,
+    "lat": 34.693217,
+    "lon": -107.99148,
+    "state": "NM",
+    "trail_elev": 7087
+  },
+  {
+    "id": "cdt-main-mi0460000",
+    "mile": 460,
+    "lat": 34.721892,
+    "lon": -108.029978,
+    "state": "NM",
+    "trail_elev": 7083
+  },
+  {
+    "id": "cdt-main-mi0465000",
+    "mile": 465,
+    "lat": 34.748303,
+    "lon": -108.100513,
+    "state": "NM",
+    "trail_elev": 7221
+  },
+  {
+    "id": "cdt-main-mi0470000",
+    "mile": 470,
+    "lat": 34.754613,
+    "lon": -108.177445,
+    "state": "NM",
+    "trail_elev": 7385
+  },
+  {
+    "id": "cdt-main-mi0475000",
+    "mile": 475,
+    "lat": 34.802426,
+    "lon": -108.216691,
+    "state": "NM",
+    "trail_elev": 7674
+  },
+  {
+    "id": "cdt-main-mi0480000",
+    "mile": 480,
+    "lat": 34.867775,
+    "lon": -108.217524,
+    "state": "NM",
+    "trail_elev": 7772
+  },
+  {
+    "id": "cdt-main-mi0485000",
+    "mile": 485,
+    "lat": 34.917574,
+    "lon": -108.184468,
+    "state": "NM",
+    "trail_elev": 7648
+  },
+  {
+    "id": "cdt-main-mi0490000",
+    "mile": 490,
+    "lat": 34.965035,
+    "lon": -108.139641,
+    "state": "NM",
+    "trail_elev": 7713
+  },
+  {
+    "id": "cdt-main-mi0495000",
+    "mile": 495,
+    "lat": 35.005482,
+    "lon": -108.086636,
+    "state": "NM",
+    "trail_elev": 7867
+  },
+  {
+    "id": "cdt-main-mi0500000",
+    "mile": 500,
+    "lat": 34.980942,
+    "lon": -108.021985,
+    "state": "NM",
+    "trail_elev": 7434
+  },
+  {
+    "id": "cdt-main-mi0505000",
+    "mile": 505,
+    "lat": 34.945612,
+    "lon": -107.960267,
+    "state": "NM",
+    "trail_elev": 7047
+  },
+  {
+    "id": "cdt-main-mi0510000",
+    "mile": 510,
+    "lat": 34.934758,
+    "lon": -107.893783,
+    "state": "NM",
+    "trail_elev": 6831
+  },
+  {
+    "id": "cdt-main-mi0515000",
+    "mile": 515,
+    "lat": 34.910629,
+    "lon": -107.852195,
+    "state": "NM",
+    "trail_elev": 6844
+  },
+  {
+    "id": "cdt-main-mi0520000",
+    "mile": 520,
+    "lat": 34.970647,
+    "lon": -107.811766,
+    "state": "NM",
+    "trail_elev": 6667
+  },
+  {
+    "id": "cdt-main-mi0525000",
+    "mile": 525,
+    "lat": 35.039062,
+    "lon": -107.80864,
+    "state": "NM",
+    "trail_elev": 6529
+  },
+  {
+    "id": "cdt-main-mi0530000",
+    "mile": 530,
+    "lat": 35.098313,
+    "lon": -107.774105,
+    "state": "NM",
+    "trail_elev": 6332
+  },
+  {
+    "id": "cdt-main-mi0535000",
+    "mile": 535,
+    "lat": 35.145096,
+    "lon": -107.838945,
+    "state": "NM",
+    "trail_elev": 6427
+  },
+  {
+    "id": "cdt-main-mi0540000",
+    "mile": 540,
+    "lat": 35.185946,
+    "lon": -107.791769,
+    "state": "NM",
+    "trail_elev": 6696
+  },
+  {
+    "id": "cdt-main-mi0545000",
+    "mile": 545,
+    "lat": 35.177447,
+    "lon": -107.740891,
+    "state": "NM",
+    "trail_elev": 8028
+  },
+  {
+    "id": "cdt-main-mi0550000",
+    "mile": 550,
+    "lat": 35.199037,
+    "lon": -107.67041,
+    "state": "NM",
+    "trail_elev": 8484
+  },
+  {
+    "id": "cdt-main-mi0555000",
+    "mile": 555,
+    "lat": 35.242119,
+    "lon": -107.640892,
+    "state": "NM",
+    "trail_elev": 9731
+  },
+  {
+    "id": "cdt-main-mi0560000",
+    "mile": 560,
+    "lat": 35.277963,
+    "lon": -107.606249,
+    "state": "NM",
+    "trail_elev": 9203
+  },
+  {
+    "id": "cdt-main-mi0565000",
+    "mile": 565,
+    "lat": 35.315984,
+    "lon": -107.575809,
+    "state": "NM",
+    "trail_elev": 8547
+  },
+  {
+    "id": "cdt-main-mi0570000",
+    "mile": 570,
+    "lat": 35.371448,
+    "lon": -107.543417,
+    "state": "NM",
+    "trail_elev": 8219
+  },
+  {
+    "id": "cdt-main-mi0575000",
+    "mile": 575,
+    "lat": 35.421982,
+    "lon": -107.485896,
+    "state": "NM",
+    "trail_elev": 8494
+  },
+  {
+    "id": "cdt-main-mi0580000",
+    "mile": 580,
+    "lat": 35.460988,
+    "lon": -107.423222,
+    "state": "NM",
+    "trail_elev": 8297
+  },
+  {
+    "id": "cdt-main-mi0585000",
+    "mile": 585,
+    "lat": 35.515297,
+    "lon": -107.38457,
+    "state": "NM",
+    "trail_elev": 7953
+  },
+  {
+    "id": "cdt-main-mi0590000",
+    "mile": 590,
+    "lat": 35.550861,
+    "lon": -107.328477,
+    "state": "NM",
+    "trail_elev": 8074
+  },
+  {
+    "id": "cdt-main-mi0595000",
+    "mile": 595,
+    "lat": 35.573581,
+    "lon": -107.263777,
+    "state": "NM",
+    "trail_elev": 7927
+  },
+  {
+    "id": "cdt-main-mi0600000",
+    "mile": 600,
+    "lat": 35.611439,
+    "lon": -107.214745,
+    "state": "NM",
+    "trail_elev": 5997
+  },
+  {
+    "id": "cdt-main-mi0605000",
+    "mile": 605,
+    "lat": 35.66841,
+    "lon": -107.183069,
+    "state": "NM",
+    "trail_elev": 6407
+  },
+  {
+    "id": "cdt-main-mi0610000",
+    "mile": 610,
+    "lat": 35.697279,
+    "lon": -107.122291,
+    "state": "NM",
+    "trail_elev": 6670
+  },
+  {
+    "id": "cdt-main-mi0615000",
+    "mile": 615,
+    "lat": 35.734476,
+    "lon": -107.075269,
+    "state": "NM",
+    "trail_elev": 6575
+  },
+  {
+    "id": "cdt-main-mi0620000",
+    "mile": 620,
+    "lat": 35.781454,
+    "lon": -107.043329,
+    "state": "NM",
+    "trail_elev": 6870
+  },
+  {
+    "id": "cdt-main-mi0625000",
+    "mile": 625,
+    "lat": 35.830969,
+    "lon": -107.013221,
+    "state": "NM",
+    "trail_elev": 7060
+  },
+  {
+    "id": "cdt-main-mi0630000",
+    "mile": 630,
+    "lat": 35.882717,
+    "lon": -107.037518,
+    "state": "NM",
+    "trail_elev": 6975
+  },
+  {
+    "id": "cdt-main-mi0635000",
+    "mile": 635,
+    "lat": 35.934683,
+    "lon": -107.019365,
+    "state": "NM",
+    "trail_elev": 6906
+  },
+  {
+    "id": "cdt-main-mi0640000",
+    "mile": 640,
+    "lat": 35.990591,
+    "lon": -106.987248,
+    "state": "NM",
+    "trail_elev": 6821
+  },
+  {
+    "id": "cdt-main-mi0645000",
+    "mile": 645,
+    "lat": 36.004839,
+    "lon": -106.947936,
+    "state": "NM",
+    "trail_elev": 7008
+  },
+  {
+    "id": "cdt-main-mi0650000",
+    "mile": 650,
+    "lat": 36.01241,
+    "lon": -106.888999,
+    "state": "NM",
+    "trail_elev": 8442
+  },
+  {
+    "id": "cdt-main-mi0655000",
+    "mile": 655,
+    "lat": 36.043839,
+    "lon": -106.846121,
+    "state": "NM",
+    "trail_elev": 9498
+  },
+  {
+    "id": "cdt-main-mi0660000",
+    "mile": 660,
+    "lat": 36.095159,
+    "lon": -106.819642,
+    "state": "NM",
+    "trail_elev": 10262
+  },
+  {
+    "id": "cdt-main-mi0665000",
+    "mile": 665,
+    "lat": 36.150347,
+    "lon": -106.810592,
+    "state": "NM",
+    "trail_elev": 9990
+  },
+  {
+    "id": "cdt-main-mi0670000",
+    "mile": 670,
+    "lat": 36.190465,
+    "lon": -106.784309,
+    "state": "NM",
+    "trail_elev": 8261
+  },
+  {
+    "id": "cdt-main-mi0675000",
+    "mile": 675,
+    "lat": 36.206571,
+    "lon": -106.716051,
+    "state": "NM",
+    "trail_elev": 7444
+  },
+  {
+    "id": "cdt-main-mi0680000",
+    "mile": 680,
+    "lat": 36.24624,
+    "lon": -106.688447,
+    "state": "NM",
+    "trail_elev": 8461
+  },
+  {
+    "id": "cdt-main-mi0685000",
+    "mile": 685,
+    "lat": 36.293168,
+    "lon": -106.675096,
+    "state": "NM",
+    "trail_elev": 6949
+  },
+  {
+    "id": "cdt-main-mi0690000",
+    "mile": 690,
+    "lat": 36.334642,
+    "lon": -106.617751,
+    "state": "NM",
+    "trail_elev": 6726
+  },
+  {
+    "id": "cdt-main-mi0695000",
+    "mile": 695,
+    "lat": 36.334337,
+    "lon": -106.578798,
+    "state": "NM",
+    "trail_elev": 8094
+  },
+  {
+    "id": "cdt-main-mi0700000",
+    "mile": 700,
+    "lat": 36.37541,
+    "lon": -106.535075,
+    "state": "NM",
+    "trail_elev": 7907
+  },
+  {
+    "id": "cdt-main-mi0705000",
+    "mile": 705,
+    "lat": 36.399728,
+    "lon": -106.486486,
+    "state": "NM",
+    "trail_elev": 7195
+  },
+  {
+    "id": "cdt-main-mi0710000",
+    "mile": 710,
+    "lat": 36.400855,
+    "lon": -106.414639,
+    "state": "NM",
+    "trail_elev": 7677
+  },
+  {
+    "id": "cdt-main-mi0715000",
+    "mile": 715,
+    "lat": 36.429709,
+    "lon": -106.359359,
+    "state": "NM",
+    "trail_elev": 8494
+  },
+  {
+    "id": "cdt-main-mi0720000",
+    "mile": 720,
+    "lat": 36.457259,
+    "lon": -106.322147,
+    "state": "NM",
+    "trail_elev": 9357
+  },
+  {
+    "id": "cdt-main-mi0725000",
+    "mile": 725,
+    "lat": 36.500267,
+    "lon": -106.302749,
+    "state": "NM",
+    "trail_elev": 9498
+  },
+  {
+    "id": "cdt-main-mi0730000",
+    "mile": 730,
+    "lat": 36.561006,
+    "lon": -106.321278,
+    "state": "NM",
+    "trail_elev": 9964
+  },
+  {
+    "id": "cdt-main-mi0735000",
+    "mile": 735,
+    "lat": 36.606625,
+    "lon": -106.315181,
+    "state": "NM",
+    "trail_elev": 10394
+  },
+  {
+    "id": "cdt-main-mi0740000",
+    "mile": 740,
+    "lat": 36.614197,
+    "lon": -106.253059,
+    "state": "NM",
+    "trail_elev": 9554
+  },
+  {
+    "id": "cdt-main-mi0745000",
+    "mile": 745,
+    "lat": 36.630217,
+    "lon": -106.189082,
+    "state": "NM",
+    "trail_elev": 9078
+  },
+  {
+    "id": "cdt-main-mi0750000",
+    "mile": 750,
+    "lat": 36.674389,
+    "lon": -106.197125,
+    "state": "NM",
+    "trail_elev": 9774
+  },
+  {
+    "id": "cdt-main-mi0755000",
+    "mile": 755,
+    "lat": 36.705122,
+    "lon": -106.234002,
+    "state": "NM",
+    "trail_elev": 9757
+  },
+  {
+    "id": "cdt-main-mi0760000",
+    "mile": 760,
+    "lat": 36.757449,
+    "lon": -106.268596,
+    "state": "NM",
+    "trail_elev": 10495
+  },
+  {
+    "id": "cdt-main-mi0765000",
+    "mile": 765,
+    "lat": 36.811006,
+    "lon": -106.256801,
+    "state": "NM",
+    "trail_elev": 10167
+  },
+  {
+    "id": "cdt-main-mi0770000",
+    "mile": 770,
+    "lat": 36.850125,
+    "lon": -106.281705,
+    "state": "NM",
+    "trail_elev": 9865
+  },
+  {
+    "id": "cdt-main-mi0775000",
+    "mile": 775,
+    "lat": 36.888616,
+    "lon": -106.328245,
+    "state": "NM",
+    "trail_elev": 10659
+  },
+  {
+    "id": "cdt-main-mi0780000",
+    "mile": 780,
+    "lat": 36.924343,
+    "lon": -106.358267,
+    "state": "NM",
+    "trail_elev": 10774
+  },
+  {
+    "id": "cdt-main-mi0785000",
+    "mile": 785,
+    "lat": 36.96507,
+    "lon": -106.380045,
+    "state": "NM",
+    "trail_elev": 10525
+  },
+  {
+    "id": "cdt-main-mi0790000",
+    "mile": 790,
+    "lat": 36.968249,
+    "lon": -106.439982,
+    "state": "NM",
+    "trail_elev": 10955
+  },
+  {
+    "id": "cdt-main-mi0795000",
+    "mile": 795,
+    "lat": 36.9997,
+    "lon": -106.453259,
+    "state": "NM",
+    "trail_elev": 10338
+  },
+  {
+    "id": "cdt-main-mi0800000",
+    "mile": 800,
+    "lat": 37.027491,
+    "lon": -106.479167,
+    "state": "CO",
+    "trail_elev": 10230
+  },
+  {
+    "id": "cdt-main-mi0805000",
+    "mile": 805,
+    "lat": 37.049907,
+    "lon": -106.505798,
+    "state": "CO",
+    "trail_elev": 11453
+  },
+  {
+    "id": "cdt-main-mi0810000",
+    "mile": 810,
+    "lat": 37.113561,
+    "lon": -106.520461,
+    "state": "CO",
+    "trail_elev": 11778
+  },
+  {
+    "id": "cdt-main-mi0815000",
+    "mile": 815,
+    "lat": 37.135134,
+    "lon": -106.57859,
+    "state": "CO",
+    "trail_elev": 11949
+  },
+  {
+    "id": "cdt-main-mi0820000",
+    "mile": 820,
+    "lat": 37.198045,
+    "lon": -106.592697,
+    "state": "CO",
+    "trail_elev": 11877
+  },
+  {
+    "id": "cdt-main-mi0825000",
+    "mile": 825,
+    "lat": 37.243667,
+    "lon": -106.633475,
+    "state": "CO",
+    "trail_elev": 11604
+  },
+  {
+    "id": "cdt-main-mi0830000",
+    "mile": 830,
+    "lat": 37.272449,
+    "lon": -106.677298,
+    "state": "CO",
+    "trail_elev": 11358
+  },
+  {
+    "id": "cdt-main-mi0835000",
+    "mile": 835,
+    "lat": 37.308203,
+    "lon": -106.666722,
+    "state": "CO",
+    "trail_elev": 11854
+  },
+  {
+    "id": "cdt-main-mi0840000",
+    "mile": 840,
+    "lat": 37.336549,
+    "lon": -106.70442,
+    "state": "CO",
+    "trail_elev": 12165
+  },
+  {
+    "id": "cdt-main-mi0845000",
+    "mile": 845,
+    "lat": 37.383593,
+    "lon": -106.67685,
+    "state": "CO",
+    "trail_elev": 12467
+  },
+  {
+    "id": "cdt-main-mi0850000",
+    "mile": 850,
+    "lat": 37.418903,
+    "lon": -106.650294,
+    "state": "CO",
+    "trail_elev": 11831
+  },
+  {
+    "id": "cdt-main-mi0855000",
+    "mile": 855,
+    "lat": 37.44159,
+    "lon": -106.711336,
+    "state": "CO",
+    "trail_elev": 11480
+  },
+  {
+    "id": "cdt-main-mi0860000",
+    "mile": 860,
+    "lat": 37.461057,
+    "lon": -106.754275,
+    "state": "CO",
+    "trail_elev": 10935
+  },
+  {
+    "id": "cdt-main-mi0865000",
+    "mile": 865,
+    "lat": 37.470548,
+    "lon": -106.805949,
+    "state": "CO",
+    "trail_elev": 11526
+  },
+  {
+    "id": "cdt-main-mi0870000",
+    "mile": 870,
+    "lat": 37.501,
+    "lon": -106.83531,
+    "state": "CO",
+    "trail_elev": 11257
+  },
+  {
+    "id": "cdt-main-mi0875000",
+    "mile": 875,
+    "lat": 37.520424,
+    "lon": -106.876849,
+    "state": "CO",
+    "trail_elev": 11795
+  },
+  {
+    "id": "cdt-main-mi0880000",
+    "mile": 880,
+    "lat": 37.563991,
+    "lon": -106.894717,
+    "state": "CO",
+    "trail_elev": 12083
+  },
+  {
+    "id": "cdt-main-mi0885000",
+    "mile": 885,
+    "lat": 37.565484,
+    "lon": -106.967416,
+    "state": "CO",
+    "trail_elev": 12749
+  },
+  {
+    "id": "cdt-main-mi0890000",
+    "mile": 890,
+    "lat": 37.562691,
+    "lon": -107.027333,
+    "state": "CO",
+    "trail_elev": 11581
+  },
+  {
+    "id": "cdt-main-mi0895000",
+    "mile": 895,
+    "lat": 37.579982,
+    "lon": -107.093394,
+    "state": "CO",
+    "trail_elev": 11654
+  },
+  {
+    "id": "cdt-main-mi0900000",
+    "mile": 900,
+    "lat": 37.60726,
+    "lon": -107.140789,
+    "state": "CO",
+    "trail_elev": 11831
+  },
+  {
+    "id": "cdt-main-mi0905000",
+    "mile": 905,
+    "lat": 37.632216,
+    "lon": -107.172877,
+    "state": "CO",
+    "trail_elev": 12290
+  },
+  {
+    "id": "cdt-main-mi0910000",
+    "mile": 910,
+    "lat": 37.599171,
+    "lon": -107.223791,
+    "state": "CO",
+    "trail_elev": 11572
+  },
+  {
+    "id": "cdt-main-mi0915000",
+    "mile": 915,
+    "lat": 37.635346,
+    "lon": -107.268503,
+    "state": "CO",
+    "trail_elev": 12326
+  },
+  {
+    "id": "cdt-main-mi0920000",
+    "mile": 920,
+    "lat": 37.676783,
+    "lon": -107.303184,
+    "state": "CO",
+    "trail_elev": 11470
+  },
+  {
+    "id": "cdt-main-mi0925000",
+    "mile": 925,
+    "lat": 37.676002,
+    "lon": -107.368223,
+    "state": "CO",
+    "trail_elev": 11827
+  },
+  {
+    "id": "cdt-main-mi0930000",
+    "mile": 930,
+    "lat": 37.639363,
+    "lon": -107.426159,
+    "state": "CO",
+    "trail_elev": 12411
+  },
+  {
+    "id": "cdt-main-mi0935000",
+    "mile": 935,
+    "lat": 37.654863,
+    "lon": -107.47693,
+    "state": "CO",
+    "trail_elev": 12100
+  },
+  {
+    "id": "cdt-main-mi0940000",
+    "mile": 940,
+    "lat": 37.687551,
+    "lon": -107.520369,
+    "state": "CO",
+    "trail_elev": 11568
+  },
+  {
+    "id": "cdt-main-mi0945000",
+    "mile": 945,
+    "lat": 37.733032,
+    "lon": -107.544724,
+    "state": "CO",
+    "trail_elev": 12556
+  },
+  {
+    "id": "cdt-main-mi0950000",
+    "mile": 950,
+    "lat": 37.788248,
+    "lon": -107.547888,
+    "state": "CO",
+    "trail_elev": 12467
+  },
+  {
+    "id": "cdt-main-mi0955000",
+    "mile": 955,
+    "lat": 37.828292,
+    "lon": -107.519547,
+    "state": "CO",
+    "trail_elev": 12740
+  },
+  {
+    "id": "cdt-main-mi0960000",
+    "mile": 960,
+    "lat": 37.846464,
+    "lon": -107.458059,
+    "state": "CO",
+    "trail_elev": 12382
+  },
+  {
+    "id": "cdt-main-mi0965000",
+    "mile": 965,
+    "lat": 37.848714,
+    "lon": -107.381959,
+    "state": "CO",
+    "trail_elev": 11969
+  },
+  {
+    "id": "cdt-main-mi0970000",
+    "mile": 970,
+    "lat": 37.875473,
+    "lon": -107.332838,
+    "state": "CO",
+    "trail_elev": 12979
+  },
+  {
+    "id": "cdt-main-mi0975000",
+    "mile": 975,
+    "lat": 37.914025,
+    "lon": -107.284469,
+    "state": "CO",
+    "trail_elev": 11791
+  },
+  {
+    "id": "cdt-main-mi0980000",
+    "mile": 980,
+    "lat": 37.93031,
+    "lon": -107.21274,
+    "state": "CO",
+    "trail_elev": 11775
+  },
+  {
+    "id": "cdt-main-mi0985000",
+    "mile": 985,
+    "lat": 37.934276,
+    "lon": -107.134352,
+    "state": "CO",
+    "trail_elev": 12051
+  },
+  {
+    "id": "cdt-main-mi0990000",
+    "mile": 990,
+    "lat": 37.95605,
+    "lon": -107.065681,
+    "state": "CO",
+    "trail_elev": 12615
+  },
+  {
+    "id": "cdt-main-mi0995000",
+    "mile": 995,
+    "lat": 37.96318,
+    "lon": -107.006698,
+    "state": "CO",
+    "trail_elev": 11778
+  },
+  {
+    "id": "cdt-main-mi1000000",
+    "mile": 1000,
+    "lat": 37.961557,
+    "lon": -106.940734,
+    "state": "CO",
+    "trail_elev": 12129
+  },
+  {
+    "id": "cdt-main-mi1005000",
+    "mile": 1005,
+    "lat": 37.977853,
+    "lon": -106.87224,
+    "state": "CO",
+    "trail_elev": 11142
+  },
+  {
+    "id": "cdt-main-mi1010000",
+    "mile": 1010,
+    "lat": 38.021781,
+    "lon": -106.83667,
+    "state": "CO",
+    "trail_elev": 10420
+  },
+  {
+    "id": "cdt-main-mi1015000",
+    "mile": 1015,
+    "lat": 38.075915,
+    "lon": -106.792304,
+    "state": "CO",
+    "trail_elev": 9931
+  },
+  {
+    "id": "cdt-main-mi1020000",
+    "mile": 1020,
+    "lat": 38.113788,
+    "lon": -106.755058,
+    "state": "CO",
+    "trail_elev": 9915
+  },
+  {
+    "id": "cdt-main-mi1025000",
+    "mile": 1025,
+    "lat": 38.142333,
+    "lon": -106.691002,
+    "state": "CO",
+    "trail_elev": 9386
+  },
+  {
+    "id": "cdt-main-mi1030000",
+    "mile": 1030,
+    "lat": 38.15469,
+    "lon": -106.619394,
+    "state": "CO",
+    "trail_elev": 9718
+  },
+  {
+    "id": "cdt-main-mi1035000",
+    "mile": 1035,
+    "lat": 38.2084,
+    "lon": -106.604682,
+    "state": "CO",
+    "trail_elev": 10020
+  },
+  {
+    "id": "cdt-main-mi1040000",
+    "mile": 1040,
+    "lat": 38.240613,
+    "lon": -106.560167,
+    "state": "CO",
+    "trail_elev": 10361
+  },
+  {
+    "id": "cdt-main-mi1045000",
+    "mile": 1045,
+    "lat": 38.281476,
+    "lon": -106.52461,
+    "state": "CO",
+    "trail_elev": 11201
+  },
+  {
+    "id": "cdt-main-mi1050000",
+    "mile": 1050,
+    "lat": 38.316224,
+    "lon": -106.480857,
+    "state": "CO",
+    "trail_elev": 11637
+  },
+  {
+    "id": "cdt-main-mi1055000",
+    "mile": 1055,
+    "lat": 38.27972,
+    "lon": -106.419869,
+    "state": "CO",
+    "trail_elev": 11391
+  },
+  {
+    "id": "cdt-main-mi1060000",
+    "mile": 1060,
+    "lat": 38.305152,
+    "lon": -106.350288,
+    "state": "CO",
+    "trail_elev": 10853
+  },
+  {
+    "id": "cdt-main-mi1065000",
+    "mile": 1065,
+    "lat": 38.343866,
+    "lon": -106.296333,
+    "state": "CO",
+    "trail_elev": 10636
+  },
+  {
+    "id": "cdt-main-mi1070000",
+    "mile": 1070,
+    "lat": 38.368907,
+    "lon": -106.237131,
+    "state": "CO",
+    "trail_elev": 11152
+  },
+  {
+    "id": "cdt-main-mi1075000",
+    "mile": 1075,
+    "lat": 38.424674,
+    "lon": -106.253936,
+    "state": "CO",
+    "trail_elev": 11781
+  },
+  {
+    "id": "cdt-main-mi1080000",
+    "mile": 1080,
+    "lat": 38.472122,
+    "lon": -106.293082,
+    "state": "CO",
+    "trail_elev": 11913
+  },
+  {
+    "id": "cdt-main-mi1085000",
+    "mile": 1085,
+    "lat": 38.500858,
+    "lon": -106.337129,
+    "state": "CO",
+    "trail_elev": 11417
+  },
+  {
+    "id": "cdt-main-mi1090000",
+    "mile": 1090,
+    "lat": 38.554977,
+    "lon": -106.35196,
+    "state": "CO",
+    "trail_elev": 12461
+  },
+  {
+    "id": "cdt-main-mi1095000",
+    "mile": 1095,
+    "lat": 38.571586,
+    "lon": -106.327406,
+    "state": "CO",
+    "trail_elev": 10928
+  },
+  {
+    "id": "cdt-main-mi1100000",
+    "mile": 1100,
+    "lat": 38.629332,
+    "lon": -106.358965,
+    "state": "CO",
+    "trail_elev": 11362
+  },
+  {
+    "id": "cdt-main-mi1105000",
+    "mile": 1105,
+    "lat": 38.656832,
+    "lon": -106.420081,
+    "state": "CO",
+    "trail_elev": 12175
+  },
+  {
+    "id": "cdt-main-mi1110000",
+    "mile": 1110,
+    "lat": 38.698099,
+    "lon": -106.414398,
+    "state": "CO",
+    "trail_elev": 11775
+  },
+  {
+    "id": "cdt-main-mi1115000",
+    "mile": 1115,
+    "lat": 38.73758,
+    "lon": -106.40796,
+    "state": "CO",
+    "trail_elev": 12549
+  },
+  {
+    "id": "cdt-main-mi1120000",
+    "mile": 1120,
+    "lat": 38.784511,
+    "lon": -106.42022,
+    "state": "CO",
+    "trail_elev": 12201
+  },
+  {
+    "id": "cdt-main-mi1125000",
+    "mile": 1125,
+    "lat": 38.827746,
+    "lon": -106.404484,
+    "state": "CO",
+    "trail_elev": 12156
+  },
+  {
+    "id": "cdt-main-mi1130000",
+    "mile": 1130,
+    "lat": 38.878058,
+    "lon": -106.397518,
+    "state": "CO",
+    "trail_elev": 10207
+  },
+  {
+    "id": "cdt-main-mi1135000",
+    "mile": 1135,
+    "lat": 38.884826,
+    "lon": -106.454378,
+    "state": "CO",
+    "trail_elev": 11453
+  },
+  {
+    "id": "cdt-main-mi1140000",
+    "mile": 1140,
+    "lat": 38.907744,
+    "lon": -106.470919,
+    "state": "CO",
+    "trail_elev": 12064
+  },
+  {
+    "id": "cdt-main-mi1145000",
+    "mile": 1145,
+    "lat": 38.959135,
+    "lon": -106.466332,
+    "state": "CO",
+    "trail_elev": 10719
+  },
+  {
+    "id": "cdt-main-mi1150000",
+    "mile": 1150,
+    "lat": 38.996332,
+    "lon": -106.409646,
+    "state": "CO",
+    "trail_elev": 10141
+  },
+  {
+    "id": "cdt-main-mi1155000",
+    "mile": 1155,
+    "lat": 39.044394,
+    "lon": -106.390085,
+    "state": "CO",
+    "trail_elev": 10883
+  },
+  {
+    "id": "cdt-main-mi1160000",
+    "mile": 1160,
+    "lat": 39.075779,
+    "lon": -106.335733,
+    "state": "CO",
+    "trail_elev": 9272
+  },
+  {
+    "id": "cdt-main-mi1165000",
+    "mile": 1165,
+    "lat": 39.095049,
+    "lon": -106.343663,
+    "state": "CO",
+    "trail_elev": 9275
+  },
+  {
+    "id": "cdt-main-mi1170000",
+    "mile": 1170,
+    "lat": 39.119069,
+    "lon": -106.389231,
+    "state": "CO",
+    "trail_elev": 10610
+  },
+  {
+    "id": "cdt-main-mi1175000",
+    "mile": 1175,
+    "lat": 39.16087,
+    "lon": -106.412154,
+    "state": "CO",
+    "trail_elev": 10735
+  },
+  {
+    "id": "cdt-main-mi1180000",
+    "mile": 1180,
+    "lat": 39.217219,
+    "lon": -106.424683,
+    "state": "CO",
+    "trail_elev": 10636
+  },
+  {
+    "id": "cdt-main-mi1185000",
+    "mile": 1185,
+    "lat": 39.268274,
+    "lon": -106.432984,
+    "state": "CO",
+    "trail_elev": 10548
+  },
+  {
+    "id": "cdt-main-mi1190000",
+    "mile": 1190,
+    "lat": 39.300939,
+    "lon": -106.415616,
+    "state": "CO",
+    "trail_elev": 11217
+  },
+  {
+    "id": "cdt-main-mi1195000",
+    "mile": 1195,
+    "lat": 39.340891,
+    "lon": -106.382174,
+    "state": "CO",
+    "trail_elev": 10840
+  },
+  {
+    "id": "cdt-main-mi1200000",
+    "mile": 1200,
+    "lat": 39.363233,
+    "lon": -106.311875,
+    "state": "CO",
+    "trail_elev": 10453
+  },
+  {
+    "id": "cdt-main-mi1205000",
+    "mile": 1205,
+    "lat": 39.408131,
+    "lon": -106.315549,
+    "state": "CO",
+    "trail_elev": 9813
+  },
+  {
+    "id": "cdt-main-mi1210000",
+    "mile": 1210,
+    "lat": 39.431293,
+    "lon": -106.259622,
+    "state": "CO",
+    "trail_elev": 10764
+  },
+  {
+    "id": "cdt-main-mi1215000",
+    "mile": 1215,
+    "lat": 39.450657,
+    "lon": -106.23035,
+    "state": "CO",
+    "trail_elev": 12083
+  },
+  {
+    "id": "cdt-main-mi1220000",
+    "mile": 1220,
+    "lat": 39.487735,
+    "lon": -106.190971,
+    "state": "CO",
+    "trail_elev": 10531
+  },
+  {
+    "id": "cdt-main-mi1225000",
+    "mile": 1225,
+    "lat": 39.497124,
+    "lon": -106.134594,
+    "state": "CO",
+    "trail_elev": 9826
+  },
+  {
+    "id": "cdt-main-mi1230000",
+    "mile": 1230,
+    "lat": 39.511573,
+    "lon": -106.110709,
+    "state": "CO",
+    "trail_elev": 12077
+  },
+  {
+    "id": "cdt-main-mi1235000",
+    "mile": 1235,
+    "lat": 39.538017,
+    "lon": -106.068917,
+    "state": "CO",
+    "trail_elev": 10299
+  },
+  {
+    "id": "cdt-main-mi1240000",
+    "mile": 1240,
+    "lat": 39.539961,
+    "lon": -106.015223,
+    "state": "CO",
+    "trail_elev": 9741
+  },
+  {
+    "id": "cdt-main-mi1245000",
+    "mile": 1245,
+    "lat": 39.54822,
+    "lon": -105.96468,
+    "state": "CO",
+    "trail_elev": 10528
+  },
+  {
+    "id": "cdt-main-mi1250000",
+    "mile": 1250,
+    "lat": 39.518561,
+    "lon": -105.937824,
+    "state": "CO",
+    "trail_elev": 10098
+  },
+  {
+    "id": "cdt-main-mi1255000",
+    "mile": 1255,
+    "lat": 39.484238,
+    "lon": -105.914908,
+    "state": "CO",
+    "trail_elev": 11381
+  },
+  {
+    "id": "cdt-main-mi1260000",
+    "mile": 1260,
+    "lat": 39.484954,
+    "lon": -105.880017,
+    "state": "CO",
+    "trail_elev": 12782
+  },
+  {
+    "id": "cdt-main-mi1265000",
+    "mile": 1265,
+    "lat": 39.526152,
+    "lon": -105.848115,
+    "state": "CO",
+    "trail_elev": 12362
+  },
+  {
+    "id": "cdt-main-mi1270000",
+    "mile": 1270,
+    "lat": 39.567448,
+    "lon": -105.833324,
+    "state": "CO",
+    "trail_elev": 12930
+  },
+  {
+    "id": "cdt-main-mi1275000",
+    "mile": 1275,
+    "lat": 39.601655,
+    "lon": -105.822961,
+    "state": "CO",
+    "trail_elev": 10807
+  },
+  {
+    "id": "cdt-main-mi1280000",
+    "mile": 1280,
+    "lat": 39.635033,
+    "lon": -105.791764,
+    "state": "CO",
+    "trail_elev": 13642
+  },
+  {
+    "id": "cdt-main-mi1285000",
+    "mile": 1285,
+    "lat": 39.655355,
+    "lon": -105.7877,
+    "state": "CO",
+    "trail_elev": 11572
+  },
+  {
+    "id": "cdt-main-mi1290000",
+    "mile": 1290,
+    "lat": 39.695427,
+    "lon": -105.832048,
+    "state": "CO",
+    "trail_elev": 10098
+  },
+  {
+    "id": "cdt-main-mi1295000",
+    "mile": 1295,
+    "lat": 39.721981,
+    "lon": -105.887359,
+    "state": "CO",
+    "trail_elev": 11736
+  },
+  {
+    "id": "cdt-main-mi1300000",
+    "mile": 1300,
+    "lat": 39.765873,
+    "lon": -105.886321,
+    "state": "CO",
+    "trail_elev": 12500
+  },
+  {
+    "id": "cdt-main-mi1305000",
+    "mile": 1305,
+    "lat": 39.789945,
+    "lon": -105.858869,
+    "state": "CO",
+    "trail_elev": 11936
+  },
+  {
+    "id": "cdt-main-mi1310000",
+    "mile": 1310,
+    "lat": 39.796155,
+    "lon": -105.809416,
+    "state": "CO",
+    "trail_elev": 12310
+  },
+  {
+    "id": "cdt-main-mi1315000",
+    "mile": 1315,
+    "lat": 39.801703,
+    "lon": -105.748274,
+    "state": "CO",
+    "trail_elev": 12749
+  },
+  {
+    "id": "cdt-main-mi1320000",
+    "mile": 1320,
+    "lat": 39.810039,
+    "lon": -105.692118,
+    "state": "CO",
+    "trail_elev": 11526
+  },
+  {
+    "id": "cdt-main-mi1325000",
+    "mile": 1325,
+    "lat": 39.842829,
+    "lon": -105.671494,
+    "state": "CO",
+    "trail_elev": 11765
+  },
+  {
+    "id": "cdt-main-mi1330000",
+    "mile": 1330,
+    "lat": 39.892652,
+    "lon": -105.699107,
+    "state": "CO",
+    "trail_elev": 11952
+  },
+  {
+    "id": "cdt-main-mi1335000",
+    "mile": 1335,
+    "lat": 39.950687,
+    "lon": -105.696312,
+    "state": "CO",
+    "trail_elev": 12090
+  },
+  {
+    "id": "cdt-main-mi1340000",
+    "mile": 1340,
+    "lat": 39.988843,
+    "lon": -105.732312,
+    "state": "CO",
+    "trail_elev": 9836
+  },
+  {
+    "id": "cdt-main-mi1345000",
+    "mile": 1345,
+    "lat": 40.040063,
+    "lon": -105.732874,
+    "state": "CO",
+    "trail_elev": 10161
+  },
+  {
+    "id": "cdt-main-mi1350000",
+    "mile": 1350,
+    "lat": 40.091239,
+    "lon": -105.73751,
+    "state": "CO",
+    "trail_elev": 9245
+  },
+  {
+    "id": "cdt-main-mi1355000",
+    "mile": 1355,
+    "lat": 40.131922,
+    "lon": -105.769239,
+    "state": "CO",
+    "trail_elev": 8327
+  },
+  {
+    "id": "cdt-main-mi1360000",
+    "mile": 1360,
+    "lat": 40.163417,
+    "lon": -105.822299,
+    "state": "CO",
+    "trail_elev": 8396
+  },
+  {
+    "id": "cdt-main-mi1365000",
+    "mile": 1365,
+    "lat": 40.217059,
+    "lon": -105.831206,
+    "state": "CO",
+    "trail_elev": 8465
+  },
+  {
+    "id": "cdt-main-mi1370000",
+    "mile": 1370,
+    "lat": 40.258415,
+    "lon": -105.798531,
+    "state": "CO",
+    "trail_elev": 8547
+  },
+  {
+    "id": "cdt-main-mi1375000",
+    "mile": 1375,
+    "lat": 40.286826,
+    "lon": -105.74318,
+    "state": "CO",
+    "trail_elev": 9288
+  },
+  {
+    "id": "cdt-main-mi1380000",
+    "mile": 1380,
+    "lat": 40.288438,
+    "lon": -105.694423,
+    "state": "CO",
+    "trail_elev": 11745
+  },
+  {
+    "id": "cdt-main-mi1385000",
+    "mile": 1385,
+    "lat": 40.332609,
+    "lon": -105.738529,
+    "state": "CO",
+    "trail_elev": 11017
+  },
+  {
+    "id": "cdt-main-mi1390000",
+    "mile": 1390,
+    "lat": 40.322941,
+    "lon": -105.805513,
+    "state": "CO",
+    "trail_elev": 9485
+  },
+  {
+    "id": "cdt-main-mi1395000",
+    "mile": 1395,
+    "lat": 40.328017,
+    "lon": -105.856105,
+    "state": "CO",
+    "trail_elev": 8783
+  },
+  {
+    "id": "cdt-main-mi1400000",
+    "mile": 1400,
+    "lat": 40.343407,
+    "lon": -105.931898,
+    "state": "CO",
+    "trail_elev": 10282
+  },
+  {
+    "id": "cdt-main-mi1405000",
+    "mile": 1405,
+    "lat": 40.362975,
+    "lon": -105.974741,
+    "state": "CO",
+    "trail_elev": 11017
+  },
+  {
+    "id": "cdt-main-mi1410000",
+    "mile": 1410,
+    "lat": 40.345459,
+    "lon": -106.036708,
+    "state": "CO",
+    "trail_elev": 9249
+  },
+  {
+    "id": "cdt-main-mi1415000",
+    "mile": 1415,
+    "lat": 40.354389,
+    "lon": -106.093733,
+    "state": "CO",
+    "trail_elev": 9888
+  },
+  {
+    "id": "cdt-main-mi1420000",
+    "mile": 1420,
+    "lat": 40.332372,
+    "lon": -106.149482,
+    "state": "CO",
+    "trail_elev": 11444
+  },
+  {
+    "id": "cdt-main-mi1425000",
+    "mile": 1425,
+    "lat": 40.323069,
+    "lon": -106.198375,
+    "state": "CO",
+    "trail_elev": 10230
+  },
+  {
+    "id": "cdt-main-mi1430000",
+    "mile": 1430,
+    "lat": 40.349043,
+    "lon": -106.253208,
+    "state": "CO",
+    "trail_elev": 10925
+  },
+  {
+    "id": "cdt-main-mi1435000",
+    "mile": 1435,
+    "lat": 40.345239,
+    "lon": -106.3081,
+    "state": "CO",
+    "trail_elev": 10495
+  },
+  {
+    "id": "cdt-main-mi1440000",
+    "mile": 1440,
+    "lat": 40.351311,
+    "lon": -106.348105,
+    "state": "CO",
+    "trail_elev": 10906
+  },
+  {
+    "id": "cdt-main-mi1445000",
+    "mile": 1445,
+    "lat": 40.347101,
+    "lon": -106.408291,
+    "state": "CO",
+    "trail_elev": 10072
+  },
+  {
+    "id": "cdt-main-mi1450000",
+    "mile": 1450,
+    "lat": 40.384725,
+    "lon": -106.45222,
+    "state": "CO",
+    "trail_elev": 8865
+  },
+  {
+    "id": "cdt-main-mi1455000",
+    "mile": 1455,
+    "lat": 40.436718,
+    "lon": -106.451302,
+    "state": "CO",
+    "trail_elev": 8402
+  },
+  {
+    "id": "cdt-main-mi1460000",
+    "mile": 1460,
+    "lat": 40.417424,
+    "lon": -106.532313,
+    "state": "CO",
+    "trail_elev": 8468
+  },
+  {
+    "id": "cdt-main-mi1465000",
+    "mile": 1465,
+    "lat": 40.388333,
+    "lon": -106.596675,
+    "state": "CO",
+    "trail_elev": 8976
+  },
+  {
+    "id": "cdt-main-mi1470000",
+    "mile": 1470,
+    "lat": 40.41882,
+    "lon": -106.649862,
+    "state": "CO",
+    "trail_elev": 9944
+  },
+  {
+    "id": "cdt-main-mi1475000",
+    "mile": 1475,
+    "lat": 40.46878,
+    "lon": -106.664224,
+    "state": "CO",
+    "trail_elev": 10141
+  },
+  {
+    "id": "cdt-main-mi1480000",
+    "mile": 1480,
+    "lat": 40.520521,
+    "lon": -106.672508,
+    "state": "CO",
+    "trail_elev": 10476
+  },
+  {
+    "id": "cdt-main-mi1485000",
+    "mile": 1485,
+    "lat": 40.5726,
+    "lon": -106.696923,
+    "state": "CO",
+    "trail_elev": 10679
+  },
+  {
+    "id": "cdt-main-mi1490000",
+    "mile": 1490,
+    "lat": 40.626121,
+    "lon": -106.69941,
+    "state": "CO",
+    "trail_elev": 11158
+  },
+  {
+    "id": "cdt-main-mi1495000",
+    "mile": 1495,
+    "lat": 40.687244,
+    "lon": -106.673549,
+    "state": "CO",
+    "trail_elev": 11732
+  },
+  {
+    "id": "cdt-main-mi1500000",
+    "mile": 1500,
+    "lat": 40.727342,
+    "lon": -106.70307,
+    "state": "CO",
+    "trail_elev": 9993
+  },
+  {
+    "id": "cdt-main-mi1505000",
+    "mile": 1505,
+    "lat": 40.767585,
+    "lon": -106.746656,
+    "state": "CO",
+    "trail_elev": 8599
+  },
+  {
+    "id": "cdt-main-mi1510000",
+    "mile": 1510,
+    "lat": 40.808684,
+    "lon": -106.77305,
+    "state": "CO",
+    "trail_elev": 8435
+  },
+  {
+    "id": "cdt-main-mi1515000",
+    "mile": 1515,
+    "lat": 40.866574,
+    "lon": -106.79374,
+    "state": "CO",
+    "trail_elev": 9472
+  },
+  {
+    "id": "cdt-main-mi1520000",
+    "mile": 1520,
+    "lat": 40.924909,
+    "lon": -106.824518,
+    "state": "CO",
+    "trail_elev": 9944
+  },
+  {
+    "id": "cdt-main-mi1525000",
+    "mile": 1525,
+    "lat": 40.966749,
+    "lon": -106.872253,
+    "state": "CO",
+    "trail_elev": 9698
+  },
+  {
+    "id": "cdt-main-mi1530000",
+    "mile": 1530,
+    "lat": 41.008356,
+    "lon": -106.882359,
+    "state": "WY",
+    "trail_elev": 9446
+  },
+  {
+    "id": "cdt-main-mi1535000",
+    "mile": 1535,
+    "lat": 41.036028,
+    "lon": -106.926085,
+    "state": "WY",
+    "trail_elev": 9383
+  },
+  {
+    "id": "cdt-main-mi1540000",
+    "mile": 1540,
+    "lat": 41.080817,
+    "lon": -106.894103,
+    "state": "WY",
+    "trail_elev": 10384
+  },
+  {
+    "id": "cdt-main-mi1545000",
+    "mile": 1545,
+    "lat": 41.106739,
+    "lon": -106.96711,
+    "state": "WY",
+    "trail_elev": 10262
+  },
+  {
+    "id": "cdt-main-mi1550000",
+    "mile": 1550,
+    "lat": 41.160901,
+    "lon": -106.983384,
+    "state": "WY",
+    "trail_elev": 9843
+  },
+  {
+    "id": "cdt-main-mi1555000",
+    "mile": 1555,
+    "lat": 41.188597,
+    "lon": -107.050935,
+    "state": "WY",
+    "trail_elev": 10856
+  },
+  {
+    "id": "cdt-main-mi1560000",
+    "mile": 1560,
+    "lat": 41.228028,
+    "lon": -107.109643,
+    "state": "WY",
+    "trail_elev": 9760
+  },
+  {
+    "id": "cdt-main-mi1565000",
+    "mile": 1565,
+    "lat": 41.281267,
+    "lon": -107.141266,
+    "state": "WY",
+    "trail_elev": 8904
+  },
+  {
+    "id": "cdt-main-mi1570000",
+    "mile": 1570,
+    "lat": 41.306337,
+    "lon": -107.21283,
+    "state": "WY",
+    "trail_elev": 8278
+  },
+  {
+    "id": "cdt-main-mi1575000",
+    "mile": 1575,
+    "lat": 41.334313,
+    "lon": -107.25112,
+    "state": "WY",
+    "trail_elev": 7769
+  },
+  {
+    "id": "cdt-main-mi1580000",
+    "mile": 1580,
+    "lat": 41.377558,
+    "lon": -107.280179,
+    "state": "WY",
+    "trail_elev": 8002
+  },
+  {
+    "id": "cdt-main-mi1585000",
+    "mile": 1585,
+    "lat": 41.401341,
+    "lon": -107.350626,
+    "state": "WY",
+    "trail_elev": 8123
+  },
+  {
+    "id": "cdt-main-mi1590000",
+    "mile": 1590,
+    "lat": 41.402551,
+    "lon": -107.417533,
+    "state": "WY",
+    "trail_elev": 7680
+  },
+  {
+    "id": "cdt-main-mi1595000",
+    "mile": 1595,
+    "lat": 41.428988,
+    "lon": -107.447575,
+    "state": "WY",
+    "trail_elev": 7365
+  },
+  {
+    "id": "cdt-main-mi1600000",
+    "mile": 1600,
+    "lat": 41.478725,
+    "lon": -107.485798,
+    "state": "WY",
+    "trail_elev": 7244
+  },
+  {
+    "id": "cdt-main-mi1605000",
+    "mile": 1605,
+    "lat": 41.540874,
+    "lon": -107.449932,
+    "state": "WY",
+    "trail_elev": 7546
+  },
+  {
+    "id": "cdt-main-mi1610000",
+    "mile": 1610,
+    "lat": 41.583315,
+    "lon": -107.376204,
+    "state": "WY",
+    "trail_elev": 7267
+  },
+  {
+    "id": "cdt-main-mi1615000",
+    "mile": 1615,
+    "lat": 41.608393,
+    "lon": -107.29341,
+    "state": "WY",
+    "trail_elev": 7195
+  },
+  {
+    "id": "cdt-main-mi1620000",
+    "mile": 1620,
+    "lat": 41.662392,
+    "lon": -107.29558,
+    "state": "WY",
+    "trail_elev": 7221
+  },
+  {
+    "id": "cdt-main-mi1625000",
+    "mile": 1625,
+    "lat": 41.725019,
+    "lon": -107.293805,
+    "state": "WY",
+    "trail_elev": 7188
+  },
+  {
+    "id": "cdt-main-mi1630000",
+    "mile": 1630,
+    "lat": 41.778404,
+    "lon": -107.252474,
+    "state": "WY",
+    "trail_elev": 6788
+  },
+  {
+    "id": "cdt-main-mi1635000",
+    "mile": 1635,
+    "lat": 41.821579,
+    "lon": -107.234602,
+    "state": "WY",
+    "trail_elev": 6873
+  },
+  {
+    "id": "cdt-main-mi1640000",
+    "mile": 1640,
+    "lat": 41.873829,
+    "lon": -107.2845,
+    "state": "WY",
+    "trail_elev": 7080
+  },
+  {
+    "id": "cdt-main-mi1645000",
+    "mile": 1645,
+    "lat": 41.931949,
+    "lon": -107.330222,
+    "state": "WY",
+    "trail_elev": 7149
+  },
+  {
+    "id": "cdt-main-mi1650000",
+    "mile": 1650,
+    "lat": 41.984814,
+    "lon": -107.384749,
+    "state": "WY",
+    "trail_elev": 6529
+  },
+  {
+    "id": "cdt-main-mi1655000",
+    "mile": 1655,
+    "lat": 42.035295,
+    "lon": -107.453007,
+    "state": "WY",
+    "trail_elev": 6627
+  },
+  {
+    "id": "cdt-main-mi1660000",
+    "mile": 1660,
+    "lat": 42.071215,
+    "lon": -107.524885,
+    "state": "WY",
+    "trail_elev": 6788
+  },
+  {
+    "id": "cdt-main-mi1665000",
+    "mile": 1665,
+    "lat": 42.125393,
+    "lon": -107.586429,
+    "state": "WY",
+    "trail_elev": 7119
+  },
+  {
+    "id": "cdt-main-mi1670000",
+    "mile": 1670,
+    "lat": 42.177543,
+    "lon": -107.653112,
+    "state": "WY",
+    "trail_elev": 7523
+  },
+  {
+    "id": "cdt-main-mi1675000",
+    "mile": 1675,
+    "lat": 42.233628,
+    "lon": -107.7063,
+    "state": "WY",
+    "trail_elev": 7451
+  },
+  {
+    "id": "cdt-main-mi1680000",
+    "mile": 1680,
+    "lat": 42.28323,
+    "lon": -107.772733,
+    "state": "WY",
+    "trail_elev": 7283
+  },
+  {
+    "id": "cdt-main-mi1685000",
+    "mile": 1685,
+    "lat": 42.315915,
+    "lon": -107.851803,
+    "state": "WY",
+    "trail_elev": 6929
+  },
+  {
+    "id": "cdt-main-mi1690000",
+    "mile": 1690,
+    "lat": 42.347676,
+    "lon": -107.908685,
+    "state": "WY",
+    "trail_elev": 7090
+  },
+  {
+    "id": "cdt-main-mi1695000",
+    "mile": 1695,
+    "lat": 42.385574,
+    "lon": -107.958483,
+    "state": "WY",
+    "trail_elev": 7904
+  },
+  {
+    "id": "cdt-main-mi1700000",
+    "mile": 1700,
+    "lat": 42.389812,
+    "lon": -108.036128,
+    "state": "WY",
+    "trail_elev": 7549
+  },
+  {
+    "id": "cdt-main-mi1705000",
+    "mile": 1705,
+    "lat": 42.406546,
+    "lon": -108.105445,
+    "state": "WY",
+    "trail_elev": 7352
+  },
+  {
+    "id": "cdt-main-mi1710000",
+    "mile": 1710,
+    "lat": 42.403744,
+    "lon": -108.181483,
+    "state": "WY",
+    "trail_elev": 7014
+  },
+  {
+    "id": "cdt-main-mi1715000",
+    "mile": 1715,
+    "lat": 42.376396,
+    "lon": -108.262426,
+    "state": "WY",
+    "trail_elev": 6886
+  },
+  {
+    "id": "cdt-main-mi1720000",
+    "mile": 1720,
+    "lat": 42.382108,
+    "lon": -108.347111,
+    "state": "WY",
+    "trail_elev": 7241
+  },
+  {
+    "id": "cdt-main-mi1725000",
+    "mile": 1725,
+    "lat": 42.38925,
+    "lon": -108.436626,
+    "state": "WY",
+    "trail_elev": 7467
+  },
+  {
+    "id": "cdt-main-mi1730000",
+    "mile": 1730,
+    "lat": 42.374086,
+    "lon": -108.525631,
+    "state": "WY",
+    "trail_elev": 7513
+  },
+  {
+    "id": "cdt-main-mi1735000",
+    "mile": 1735,
+    "lat": 42.389793,
+    "lon": -108.616975,
+    "state": "WY",
+    "trail_elev": 7264
+  },
+  {
+    "id": "cdt-main-mi1740000",
+    "mile": 1740,
+    "lat": 42.436882,
+    "lon": -108.657992,
+    "state": "WY",
+    "trail_elev": 7441
+  },
+  {
+    "id": "cdt-main-mi1745000",
+    "mile": 1745,
+    "lat": 42.485469,
+    "lon": -108.726093,
+    "state": "WY",
+    "trail_elev": 7999
+  },
+  {
+    "id": "cdt-main-mi1750000",
+    "mile": 1750,
+    "lat": 42.46838,
+    "lon": -108.800058,
+    "state": "WY",
+    "trail_elev": 7822
+  },
+  {
+    "id": "cdt-main-mi1755000",
+    "mile": 1755,
+    "lat": 42.480208,
+    "lon": -108.86393,
+    "state": "WY",
+    "trail_elev": 8291
+  },
+  {
+    "id": "cdt-main-mi1760000",
+    "mile": 1760,
+    "lat": 42.530922,
+    "lon": -108.902097,
+    "state": "WY",
+    "trail_elev": 9111
+  },
+  {
+    "id": "cdt-main-mi1765000",
+    "mile": 1765,
+    "lat": 42.527703,
+    "lon": -108.971828,
+    "state": "WY",
+    "trail_elev": 8386
+  },
+  {
+    "id": "cdt-main-mi1770000",
+    "mile": 1770,
+    "lat": 42.537753,
+    "lon": -109.035813,
+    "state": "WY",
+    "trail_elev": 8612
+  },
+  {
+    "id": "cdt-main-mi1775000",
+    "mile": 1775,
+    "lat": 42.576009,
+    "lon": -109.082266,
+    "state": "WY",
+    "trail_elev": 8704
+  },
+  {
+    "id": "cdt-main-mi1780000",
+    "mile": 1780,
+    "lat": 42.619892,
+    "lon": -109.124017,
+    "state": "WY",
+    "trail_elev": 9744
+  },
+  {
+    "id": "cdt-main-mi1785000",
+    "mile": 1785,
+    "lat": 42.611865,
+    "lon": -109.182417,
+    "state": "WY",
+    "trail_elev": 9055
+  },
+  {
+    "id": "cdt-main-mi1790000",
+    "mile": 1790,
+    "lat": 42.648278,
+    "lon": -109.225637,
+    "state": "WY",
+    "trail_elev": 9646
+  },
+  {
+    "id": "cdt-main-mi1795000",
+    "mile": 1795,
+    "lat": 42.69316,
+    "lon": -109.263743,
+    "state": "WY",
+    "trail_elev": 9203
+  },
+  {
+    "id": "cdt-main-mi1800000",
+    "mile": 1800,
+    "lat": 42.751812,
+    "lon": -109.284815,
+    "state": "WY",
+    "trail_elev": 9875
+  },
+  {
+    "id": "cdt-main-mi1805000",
+    "mile": 1805,
+    "lat": 42.80013,
+    "lon": -109.320187,
+    "state": "WY",
+    "trail_elev": 10213
+  },
+  {
+    "id": "cdt-main-mi1810000",
+    "mile": 1810,
+    "lat": 42.840655,
+    "lon": -109.38493,
+    "state": "WY",
+    "trail_elev": 10118
+  },
+  {
+    "id": "cdt-main-mi1815000",
+    "mile": 1815,
+    "lat": 42.886688,
+    "lon": -109.434595,
+    "state": "WY",
+    "trail_elev": 9879
+  },
+  {
+    "id": "cdt-main-mi1820000",
+    "mile": 1820,
+    "lat": 42.928973,
+    "lon": -109.492298,
+    "state": "WY",
+    "trail_elev": 9951
+  },
+  {
+    "id": "cdt-main-mi1825000",
+    "mile": 1825,
+    "lat": 42.965623,
+    "lon": -109.54564,
+    "state": "WY",
+    "trail_elev": 10446
+  },
+  {
+    "id": "cdt-main-mi1830000",
+    "mile": 1830,
+    "lat": 43.015143,
+    "lon": -109.588069,
+    "state": "WY",
+    "trail_elev": 10456
+  },
+  {
+    "id": "cdt-main-mi1835000",
+    "mile": 1835,
+    "lat": 43.060858,
+    "lon": -109.640358,
+    "state": "WY",
+    "trail_elev": 10551
+  },
+  {
+    "id": "cdt-main-mi1840000",
+    "mile": 1840,
+    "lat": 43.109683,
+    "lon": -109.672065,
+    "state": "WY",
+    "trail_elev": 10728
+  },
+  {
+    "id": "cdt-main-mi1845000",
+    "mile": 1845,
+    "lat": 43.119874,
+    "lon": -109.723461,
+    "state": "WY",
+    "trail_elev": 10646
+  },
+  {
+    "id": "cdt-main-mi1850000",
+    "mile": 1850,
+    "lat": 43.167285,
+    "lon": -109.741636,
+    "state": "WY",
+    "trail_elev": 9711
+  },
+  {
+    "id": "cdt-main-mi1855000",
+    "mile": 1855,
+    "lat": 43.213633,
+    "lon": -109.756381,
+    "state": "WY",
+    "trail_elev": 8182
+  },
+  {
+    "id": "cdt-main-mi1860000",
+    "mile": 1860,
+    "lat": 43.256927,
+    "lon": -109.815269,
+    "state": "WY",
+    "trail_elev": 8018
+  },
+  {
+    "id": "cdt-main-mi1865000",
+    "mile": 1865,
+    "lat": 43.311552,
+    "lon": -109.851875,
+    "state": "WY",
+    "trail_elev": 7999
+  },
+  {
+    "id": "cdt-main-mi1870000",
+    "mile": 1870,
+    "lat": 43.367268,
+    "lon": -109.83475,
+    "state": "WY",
+    "trail_elev": 8960
+  },
+  {
+    "id": "cdt-main-mi1875000",
+    "mile": 1875,
+    "lat": 43.403571,
+    "lon": -109.875371,
+    "state": "WY",
+    "trail_elev": 9459
+  },
+  {
+    "id": "cdt-main-mi1880000",
+    "mile": 1880,
+    "lat": 43.457098,
+    "lon": -109.900011,
+    "state": "WY",
+    "trail_elev": 8996
+  },
+  {
+    "id": "cdt-main-mi1885000",
+    "mile": 1885,
+    "lat": 43.485631,
+    "lon": -109.923992,
+    "state": "WY",
+    "trail_elev": 9035
+  },
+  {
+    "id": "cdt-main-mi1890000",
+    "mile": 1890,
+    "lat": 43.527106,
+    "lon": -109.974213,
+    "state": "WY",
+    "trail_elev": 9222
+  },
+  {
+    "id": "cdt-main-mi1895000",
+    "mile": 1895,
+    "lat": 43.566079,
+    "lon": -110.022648,
+    "state": "WY",
+    "trail_elev": 9659
+  },
+  {
+    "id": "cdt-main-mi1900000",
+    "mile": 1900,
+    "lat": 43.607173,
+    "lon": -110.050913,
+    "state": "WY",
+    "trail_elev": 9416
+  },
+  {
+    "id": "cdt-main-mi1905000",
+    "mile": 1905,
+    "lat": 43.628394,
+    "lon": -110.092716,
+    "state": "WY",
+    "trail_elev": 8402
+  },
+  {
+    "id": "cdt-main-mi1910000",
+    "mile": 1910,
+    "lat": 43.663936,
+    "lon": -110.155103,
+    "state": "WY",
+    "trail_elev": 8186
+  },
+  {
+    "id": "cdt-main-mi1915000",
+    "mile": 1915,
+    "lat": 43.716684,
+    "lon": -110.150115,
+    "state": "WY",
+    "trail_elev": 9390
+  },
+  {
+    "id": "cdt-main-mi1920000",
+    "mile": 1920,
+    "lat": 43.750303,
+    "lon": -110.103602,
+    "state": "WY",
+    "trail_elev": 9423
+  },
+  {
+    "id": "cdt-main-mi1925000",
+    "mile": 1925,
+    "lat": 43.752433,
+    "lon": -110.042363,
+    "state": "WY",
+    "trail_elev": 10059
+  },
+  {
+    "id": "cdt-main-mi1930000",
+    "mile": 1930,
+    "lat": 43.793995,
+    "lon": -110.012616,
+    "state": "WY",
+    "trail_elev": 9167
+  },
+  {
+    "id": "cdt-main-mi1935000",
+    "mile": 1935,
+    "lat": 43.84187,
+    "lon": -110.039998,
+    "state": "WY",
+    "trail_elev": 8783
+  },
+  {
+    "id": "cdt-main-mi1940000",
+    "mile": 1940,
+    "lat": 43.863401,
+    "lon": -110.076318,
+    "state": "WY",
+    "trail_elev": 7831
+  },
+  {
+    "id": "cdt-main-mi1945000",
+    "mile": 1945,
+    "lat": 43.905199,
+    "lon": -110.114314,
+    "state": "WY",
+    "trail_elev": 8028
+  },
+  {
+    "id": "cdt-main-mi1950000",
+    "mile": 1950,
+    "lat": 43.913134,
+    "lon": -110.203949,
+    "state": "WY",
+    "trail_elev": 7402
+  },
+  {
+    "id": "cdt-main-mi1955000",
+    "mile": 1955,
+    "lat": 43.973831,
+    "lon": -110.1934,
+    "state": "WY",
+    "trail_elev": 7815
+  },
+  {
+    "id": "cdt-main-mi1960000",
+    "mile": 1960,
+    "lat": 44.032503,
+    "lon": -110.171446,
+    "state": "WY",
+    "trail_elev": 8140
+  },
+  {
+    "id": "cdt-main-mi1965000",
+    "mile": 1965,
+    "lat": 44.076579,
+    "lon": -110.196942,
+    "state": "WY",
+    "trail_elev": 10003
+  },
+  {
+    "id": "cdt-main-mi1970000",
+    "mile": 1970,
+    "lat": 44.108249,
+    "lon": -110.260131,
+    "state": "WY",
+    "trail_elev": 8717
+  },
+  {
+    "id": "cdt-main-mi1975000",
+    "mile": 1975,
+    "lat": 44.148316,
+    "lon": -110.321958,
+    "state": "WY",
+    "trail_elev": 8173
+  },
+  {
+    "id": "cdt-main-mi1980000",
+    "mile": 1980,
+    "lat": 44.18224,
+    "lon": -110.397871,
+    "state": "WY",
+    "trail_elev": 7789
+  },
+  {
+    "id": "cdt-main-mi1985000",
+    "mile": 1985,
+    "lat": 44.22115,
+    "lon": -110.463975,
+    "state": "WY",
+    "trail_elev": 7287
+  },
+  {
+    "id": "cdt-main-mi1990000",
+    "mile": 1990,
+    "lat": 44.278652,
+    "lon": -110.45626,
+    "state": "WY",
+    "trail_elev": 7546
+  },
+  {
+    "id": "cdt-main-mi1995000",
+    "mile": 1995,
+    "lat": 44.307659,
+    "lon": -110.523663,
+    "state": "WY",
+    "trail_elev": 7949
+  },
+  {
+    "id": "cdt-main-mi2000000",
+    "mile": 2000,
+    "lat": 44.317669,
+    "lon": -110.59759,
+    "state": "WY",
+    "trail_elev": 7815
+  },
+  {
+    "id": "cdt-main-mi2005000",
+    "mile": 2005,
+    "lat": 44.358712,
+    "lon": -110.661584,
+    "state": "WY",
+    "trail_elev": 7841
+  },
+  {
+    "id": "cdt-main-mi2010000",
+    "mile": 2010,
+    "lat": 44.331214,
+    "lon": -110.732163,
+    "state": "WY",
+    "trail_elev": 7979
+  },
+  {
+    "id": "cdt-main-mi2015000",
+    "mile": 2015,
+    "lat": 44.357712,
+    "lon": -110.795094,
+    "state": "WY",
+    "trail_elev": 7838
+  },
+  {
+    "id": "cdt-main-mi2020000",
+    "mile": 2020,
+    "lat": 44.409173,
+    "lon": -110.822815,
+    "state": "WY",
+    "trail_elev": 7749
+  },
+  {
+    "id": "cdt-main-mi2025000",
+    "mile": 2025,
+    "lat": 44.459945,
+    "lon": -110.830044,
+    "state": "WY",
+    "trail_elev": 7369
+  },
+  {
+    "id": "cdt-main-mi2030000",
+    "mile": 2030,
+    "lat": 44.469066,
+    "lon": -110.88397,
+    "state": "WY",
+    "trail_elev": 8123
+  },
+  {
+    "id": "cdt-main-mi2035000",
+    "mile": 2035,
+    "lat": 44.414377,
+    "lon": -110.937488,
+    "state": "WY",
+    "trail_elev": 8570
+  },
+  {
+    "id": "cdt-main-mi2040000",
+    "mile": 2040,
+    "lat": 44.408733,
+    "lon": -111.035532,
+    "state": "WY",
+    "trail_elev": 8448
+  },
+  {
+    "id": "cdt-main-mi2045000",
+    "mile": 2045,
+    "lat": 44.422086,
+    "lon": -111.097617,
+    "state": "WY",
+    "trail_elev": 8291
+  },
+  {
+    "id": "cdt-main-mi2050000",
+    "mile": 2050,
+    "lat": 44.46387,
+    "lon": -111.100021,
+    "state": "WY",
+    "trail_elev": 7949
+  },
+  {
+    "id": "cdt-main-mi2055000",
+    "mile": 2055,
+    "lat": 44.514044,
+    "lon": -111.155885,
+    "state": "WY",
+    "trail_elev": 8048
+  },
+  {
+    "id": "cdt-main-mi2060000",
+    "mile": 2060,
+    "lat": 44.546281,
+    "lon": -111.226659,
+    "state": "WY",
+    "trail_elev": 7149
+  },
+  {
+    "id": "cdt-main-mi2065000",
+    "mile": 2065,
+    "lat": 44.575875,
+    "lon": -111.21319,
+    "state": "WY",
+    "trail_elev": 7306
+  },
+  {
+    "id": "cdt-main-mi2070000",
+    "mile": 2070,
+    "lat": 44.620759,
+    "lon": -111.220966,
+    "state": "WY",
+    "trail_elev": 7907
+  },
+  {
+    "id": "cdt-main-mi2075000",
+    "mile": 2075,
+    "lat": 44.661089,
+    "lon": -111.262524,
+    "state": "WY",
+    "trail_elev": 7595
+  },
+  {
+    "id": "cdt-main-mi2080000",
+    "mile": 2080,
+    "lat": 44.700959,
+    "lon": -111.297214,
+    "state": "WY",
+    "trail_elev": 8051
+  },
+  {
+    "id": "cdt-main-mi2085000",
+    "mile": 2085,
+    "lat": 44.732187,
+    "lon": -111.341181,
+    "state": "WY",
+    "trail_elev": 9222
+  },
+  {
+    "id": "cdt-main-mi2090000",
+    "mile": 2090,
+    "lat": 44.727985,
+    "lon": -111.393732,
+    "state": "WY",
+    "trail_elev": 9757
+  },
+  {
+    "id": "cdt-main-mi2095000",
+    "mile": 2095,
+    "lat": 44.729997,
+    "lon": -111.418576,
+    "state": "WY",
+    "trail_elev": 7913
+  },
+  {
+    "id": "cdt-main-mi2100000",
+    "mile": 2100,
+    "lat": 44.718295,
+    "lon": -111.455838,
+    "state": "WY",
+    "trail_elev": 7215
+  },
+  {
+    "id": "cdt-main-mi2105000",
+    "mile": 2105,
+    "lat": 44.666666,
+    "lon": -111.482789,
+    "state": "WY",
+    "trail_elev": 7789
+  },
+  {
+    "id": "cdt-main-mi2110000",
+    "mile": 2110,
+    "lat": 44.609327,
+    "lon": -111.52125,
+    "state": "WY",
+    "trail_elev": 7359
+  },
+  {
+    "id": "cdt-main-mi2115000",
+    "mile": 2115,
+    "lat": 44.582939,
+    "lon": -111.562202,
+    "state": "WY",
+    "trail_elev": 7224
+  },
+  {
+    "id": "cdt-main-mi2120000",
+    "mile": 2120,
+    "lat": 44.558716,
+    "lon": -111.570673,
+    "state": "WY",
+    "trail_elev": 8501
+  },
+  {
+    "id": "cdt-main-mi2125000",
+    "mile": 2125,
+    "lat": 44.546505,
+    "lon": -111.636245,
+    "state": "WY",
+    "trail_elev": 8632
+  },
+  {
+    "id": "cdt-main-mi2130000",
+    "mile": 2130,
+    "lat": 44.554903,
+    "lon": -111.706852,
+    "state": "WY",
+    "trail_elev": 8934
+  },
+  {
+    "id": "cdt-main-mi2135000",
+    "mile": 2135,
+    "lat": 44.532855,
+    "lon": -111.758515,
+    "state": "WY",
+    "trail_elev": 8202
+  },
+  {
+    "id": "cdt-main-mi2140000",
+    "mile": 2140,
+    "lat": 44.506584,
+    "lon": -111.827124,
+    "state": "WY",
+    "trail_elev": 7461
+  },
+  {
+    "id": "cdt-main-mi2145000",
+    "mile": 2145,
+    "lat": 44.526303,
+    "lon": -111.880887,
+    "state": "WY",
+    "trail_elev": 7749
+  },
+  {
+    "id": "cdt-main-mi2150000",
+    "mile": 2150,
+    "lat": 44.555733,
+    "lon": -111.916752,
+    "state": "WY",
+    "trail_elev": 8238
+  },
+  {
+    "id": "cdt-main-mi2155000",
+    "mile": 2155,
+    "lat": 44.537093,
+    "lon": -111.986044,
+    "state": "WY",
+    "trail_elev": 9026
+  },
+  {
+    "id": "cdt-main-mi2160000",
+    "mile": 2160,
+    "lat": 44.535397,
+    "lon": -112.064937,
+    "state": "WY",
+    "trail_elev": 8117
+  },
+  {
+    "id": "cdt-main-mi2165000",
+    "mile": 2165,
+    "lat": 44.537502,
+    "lon": -112.132711,
+    "state": "WY",
+    "trail_elev": 8205
+  },
+  {
+    "id": "cdt-main-mi2170000",
+    "mile": 2170,
+    "lat": 44.52799,
+    "lon": -112.210895,
+    "state": "WY",
+    "trail_elev": 7159
+  },
+  {
+    "id": "cdt-main-mi2175000",
+    "mile": 2175,
+    "lat": 44.54279,
+    "lon": -112.288684,
+    "state": "WY",
+    "trail_elev": 6749
+  },
+  {
+    "id": "cdt-main-mi2180000",
+    "mile": 2180,
+    "lat": 44.497669,
+    "lon": -112.352493,
+    "state": "WY",
+    "trail_elev": 7238
+  },
+  {
+    "id": "cdt-main-mi2185000",
+    "mile": 2185,
+    "lat": 44.451895,
+    "lon": -112.394642,
+    "state": "WY",
+    "trail_elev": 8629
+  },
+  {
+    "id": "cdt-main-mi2190000",
+    "mile": 2190,
+    "lat": 44.475027,
+    "lon": -112.460226,
+    "state": "WY",
+    "trail_elev": 8399
+  },
+  {
+    "id": "cdt-main-mi2195000",
+    "mile": 2195,
+    "lat": 44.501863,
+    "lon": -112.503437,
+    "state": "WY",
+    "trail_elev": 7569
+  },
+  {
+    "id": "cdt-main-mi2200000",
+    "mile": 2200,
+    "lat": 44.498342,
+    "lon": -112.585627,
+    "state": "WY",
+    "trail_elev": 8822
+  },
+  {
+    "id": "cdt-main-mi2205000",
+    "mile": 2205,
+    "lat": 44.50426,
+    "lon": -112.651949,
+    "state": "WY",
+    "trail_elev": 7861
+  },
+  {
+    "id": "cdt-main-mi2210000",
+    "mile": 2210,
+    "lat": 44.502137,
+    "lon": -112.730383,
+    "state": "WY",
+    "trail_elev": 8442
+  },
+  {
+    "id": "cdt-main-mi2215000",
+    "mile": 2215,
+    "lat": 44.468308,
+    "lon": -112.794949,
+    "state": "WY",
+    "trail_elev": 7874
+  },
+  {
+    "id": "cdt-main-mi2220000",
+    "mile": 2220,
+    "lat": 44.442162,
+    "lon": -112.845916,
+    "state": "WY",
+    "trail_elev": 8619
+  },
+  {
+    "id": "cdt-main-mi2225000",
+    "mile": 2225,
+    "lat": 44.439067,
+    "lon": -112.887784,
+    "state": "WY",
+    "trail_elev": 8609
+  },
+  {
+    "id": "cdt-main-mi2230000",
+    "mile": 2230,
+    "lat": 44.450564,
+    "lon": -112.913065,
+    "state": "WY",
+    "trail_elev": 7759
+  },
+  {
+    "id": "cdt-main-mi2235000",
+    "mile": 2235,
+    "lat": 44.475834,
+    "lon": -112.969793,
+    "state": "WY",
+    "trail_elev": 8583
+  },
+  {
+    "id": "cdt-main-mi2240000",
+    "mile": 2240,
+    "lat": 44.50314,
+    "lon": -113.017989,
+    "state": "WY",
+    "trail_elev": 9639
+  },
+  {
+    "id": "cdt-main-mi2245000",
+    "mile": 2245,
+    "lat": 44.554156,
+    "lon": -113.018154,
+    "state": "WY",
+    "trail_elev": 8825
+  },
+  {
+    "id": "cdt-main-mi2250000",
+    "mile": 2250,
+    "lat": 44.591597,
+    "lon": -113.031437,
+    "state": "WY",
+    "trail_elev": 8468
+  },
+  {
+    "id": "cdt-main-mi2255000",
+    "mile": 2255,
+    "lat": 44.652434,
+    "lon": -113.064576,
+    "state": "WY",
+    "trail_elev": 9419
+  },
+  {
+    "id": "cdt-main-mi2260000",
+    "mile": 2260,
+    "lat": 44.70887,
+    "lon": -113.100765,
+    "state": "WY",
+    "trail_elev": 9134
+  },
+  {
+    "id": "cdt-main-mi2265000",
+    "mile": 2265,
+    "lat": 44.758483,
+    "lon": -113.138726,
+    "state": "WY",
+    "trail_elev": 10023
+  },
+  {
+    "id": "cdt-main-mi2270000",
+    "mile": 2270,
+    "lat": 44.793932,
+    "lon": -113.183911,
+    "state": "WY",
+    "trail_elev": 8343
+  },
+  {
+    "id": "cdt-main-mi2275000",
+    "mile": 2275,
+    "lat": 44.815914,
+    "lon": -113.264345,
+    "state": "WY",
+    "trail_elev": 7753
+  },
+  {
+    "id": "cdt-main-mi2280000",
+    "mile": 2280,
+    "lat": 44.786962,
+    "lon": -113.342525,
+    "state": "WY",
+    "trail_elev": 8944
+  },
+  {
+    "id": "cdt-main-mi2285000",
+    "mile": 2285,
+    "lat": 44.830907,
+    "lon": -113.37806,
+    "state": "WY",
+    "trail_elev": 8789
+  },
+  {
+    "id": "cdt-main-mi2290000",
+    "mile": 2290,
+    "lat": 44.86047,
+    "lon": -113.44462,
+    "state": "WY",
+    "trail_elev": 9065
+  },
+  {
+    "id": "cdt-main-mi2295000",
+    "mile": 2295,
+    "lat": 44.915121,
+    "lon": -113.479949,
+    "state": "WY",
+    "trail_elev": 8940
+  },
+  {
+    "id": "cdt-main-mi2300000",
+    "mile": 2300,
+    "lat": 44.951172,
+    "lon": -113.461529,
+    "state": "WY",
+    "trail_elev": 7434
+  },
+  {
+    "id": "cdt-main-mi2305000",
+    "mile": 2305,
+    "lat": 45.006974,
+    "lon": -113.437799,
+    "state": "MT",
+    "trail_elev": 8586
+  },
+  {
+    "id": "cdt-main-mi2310000",
+    "mile": 2310,
+    "lat": 45.064704,
+    "lon": -113.461059,
+    "state": "MT",
+    "trail_elev": 8389
+  },
+  {
+    "id": "cdt-main-mi2315000",
+    "mile": 2315,
+    "lat": 45.097152,
+    "lon": -113.513516,
+    "state": "MT",
+    "trail_elev": 8514
+  },
+  {
+    "id": "cdt-main-mi2320000",
+    "mile": 2320,
+    "lat": 45.124416,
+    "lon": -113.568284,
+    "state": "MT",
+    "trail_elev": 9573
+  },
+  {
+    "id": "cdt-main-mi2325000",
+    "mile": 2325,
+    "lat": 45.172011,
+    "lon": -113.594303,
+    "state": "MT",
+    "trail_elev": 9413
+  },
+  {
+    "id": "cdt-main-mi2330000",
+    "mile": 2330,
+    "lat": 45.201075,
+    "lon": -113.562864,
+    "state": "MT",
+    "trail_elev": 8104
+  },
+  {
+    "id": "cdt-main-mi2335000",
+    "mile": 2335,
+    "lat": 45.228647,
+    "lon": -113.519206,
+    "state": "MT",
+    "trail_elev": 7293
+  },
+  {
+    "id": "cdt-main-mi2340000",
+    "mile": 2340,
+    "lat": 45.259102,
+    "lon": -113.570919,
+    "state": "MT",
+    "trail_elev": 7851
+  },
+  {
+    "id": "cdt-main-mi2345000",
+    "mile": 2345,
+    "lat": 45.289537,
+    "lon": -113.617183,
+    "state": "MT",
+    "trail_elev": 7612
+  },
+  {
+    "id": "cdt-main-mi2350000",
+    "mile": 2350,
+    "lat": 45.300156,
+    "lon": -113.689957,
+    "state": "MT",
+    "trail_elev": 8743
+  },
+  {
+    "id": "cdt-main-mi2355000",
+    "mile": 2355,
+    "lat": 45.339905,
+    "lon": -113.71697,
+    "state": "MT",
+    "trail_elev": 7999
+  },
+  {
+    "id": "cdt-main-mi2360000",
+    "mile": 2360,
+    "lat": 45.36558,
+    "lon": -113.727158,
+    "state": "MT",
+    "trail_elev": 9006
+  },
+  {
+    "id": "cdt-main-mi2365000",
+    "mile": 2365,
+    "lat": 45.407793,
+    "lon": -113.74518,
+    "state": "MT",
+    "trail_elev": 8560
+  },
+  {
+    "id": "cdt-main-mi2370000",
+    "mile": 2370,
+    "lat": 45.439107,
+    "lon": -113.78922,
+    "state": "MT",
+    "trail_elev": 8281
+  },
+  {
+    "id": "cdt-main-mi2375000",
+    "mile": 2375,
+    "lat": 45.483732,
+    "lon": -113.827054,
+    "state": "MT",
+    "trail_elev": 6155
+  },
+  {
+    "id": "cdt-main-mi2380000",
+    "mile": 2380,
+    "lat": 45.53702,
+    "lon": -113.82756,
+    "state": "MT",
+    "trail_elev": 7218
+  },
+  {
+    "id": "cdt-main-mi2385000",
+    "mile": 2385,
+    "lat": 45.594714,
+    "lon": -113.805021,
+    "state": "MT",
+    "trail_elev": 7933
+  },
+  {
+    "id": "cdt-main-mi2390000",
+    "mile": 2390,
+    "lat": 45.620042,
+    "lon": -113.87529,
+    "state": "MT",
+    "trail_elev": 7211
+  },
+  {
+    "id": "cdt-main-mi2395000",
+    "mile": 2395,
+    "lat": 45.656846,
+    "lon": -113.916324,
+    "state": "MT",
+    "trail_elev": 7316
+  },
+  {
+    "id": "cdt-main-mi2400000",
+    "mile": 2400,
+    "lat": 45.698209,
+    "lon": -113.913176,
+    "state": "MT",
+    "trail_elev": 7323
+  },
+  {
+    "id": "cdt-main-mi2405000",
+    "mile": 2405,
+    "lat": 45.751868,
+    "lon": -113.91029,
+    "state": "MT",
+    "trail_elev": 7014
+  },
+  {
+    "id": "cdt-main-mi2410000",
+    "mile": 2410,
+    "lat": 45.76433,
+    "lon": -113.851352,
+    "state": "MT",
+    "trail_elev": 7503
+  },
+  {
+    "id": "cdt-main-mi2415000",
+    "mile": 2415,
+    "lat": 45.774381,
+    "lon": -113.793771,
+    "state": "MT",
+    "trail_elev": 7762
+  },
+  {
+    "id": "cdt-main-mi2420000",
+    "mile": 2420,
+    "lat": 45.813047,
+    "lon": -113.744692,
+    "state": "MT",
+    "trail_elev": 8704
+  },
+  {
+    "id": "cdt-main-mi2425000",
+    "mile": 2425,
+    "lat": 45.840713,
+    "lon": -113.693972,
+    "state": "MT",
+    "trail_elev": 8402
+  },
+  {
+    "id": "cdt-main-mi2430000",
+    "mile": 2430,
+    "lat": 45.842305,
+    "lon": -113.635413,
+    "state": "MT",
+    "trail_elev": 7933
+  },
+  {
+    "id": "cdt-main-mi2435000",
+    "mile": 2435,
+    "lat": 45.872307,
+    "lon": -113.568191,
+    "state": "MT",
+    "trail_elev": 8304
+  },
+  {
+    "id": "cdt-main-mi2440000",
+    "mile": 2440,
+    "lat": 45.920603,
+    "lon": -113.527362,
+    "state": "MT",
+    "trail_elev": 8698
+  },
+  {
+    "id": "cdt-main-mi2445000",
+    "mile": 2445,
+    "lat": 45.939977,
+    "lon": -113.486028,
+    "state": "MT",
+    "trail_elev": 8533
+  },
+  {
+    "id": "cdt-main-mi2450000",
+    "mile": 2450,
+    "lat": 45.957244,
+    "lon": -113.456427,
+    "state": "MT",
+    "trail_elev": 8392
+  },
+  {
+    "id": "cdt-main-mi2455000",
+    "mile": 2455,
+    "lat": 45.966336,
+    "lon": -113.414439,
+    "state": "MT",
+    "trail_elev": 8143
+  },
+  {
+    "id": "cdt-main-mi2460000",
+    "mile": 2460,
+    "lat": 46.003955,
+    "lon": -113.374906,
+    "state": "MT",
+    "trail_elev": 8222
+  },
+  {
+    "id": "cdt-main-mi2465000",
+    "mile": 2465,
+    "lat": 46.030145,
+    "lon": -113.331064,
+    "state": "MT",
+    "trail_elev": 8150
+  },
+  {
+    "id": "cdt-main-mi2470000",
+    "mile": 2470,
+    "lat": 46.04561,
+    "lon": -113.29827,
+    "state": "MT",
+    "trail_elev": 8363
+  },
+  {
+    "id": "cdt-main-mi2475000",
+    "mile": 2475,
+    "lat": 46.035424,
+    "lon": -113.256976,
+    "state": "MT",
+    "trail_elev": 7959
+  },
+  {
+    "id": "cdt-main-mi2480000",
+    "mile": 2480,
+    "lat": 45.998719,
+    "lon": -113.187416,
+    "state": "MT",
+    "trail_elev": 6962
+  },
+  {
+    "id": "cdt-main-mi2485000",
+    "mile": 2485,
+    "lat": 45.938987,
+    "lon": -113.144759,
+    "state": "MT",
+    "trail_elev": 6247
+  },
+  {
+    "id": "cdt-main-mi2490000",
+    "mile": 2490,
+    "lat": 45.949288,
+    "lon": -113.075139,
+    "state": "MT",
+    "trail_elev": 6129
+  },
+  {
+    "id": "cdt-main-mi2495000",
+    "mile": 2495,
+    "lat": 45.987175,
+    "lon": -113.024566,
+    "state": "MT",
+    "trail_elev": 6476
+  },
+  {
+    "id": "cdt-main-mi2500000",
+    "mile": 2500,
+    "lat": 45.952978,
+    "lon": -112.960214,
+    "state": "MT",
+    "trail_elev": 7133
+  },
+  {
+    "id": "cdt-main-mi2505000",
+    "mile": 2505,
+    "lat": 45.924419,
+    "lon": -112.908702,
+    "state": "MT",
+    "trail_elev": 8330
+  },
+  {
+    "id": "cdt-main-mi2510000",
+    "mile": 2510,
+    "lat": 45.931628,
+    "lon": -112.842038,
+    "state": "MT",
+    "trail_elev": 8199
+  },
+  {
+    "id": "cdt-main-mi2515000",
+    "mile": 2515,
+    "lat": 45.923216,
+    "lon": -112.785026,
+    "state": "MT",
+    "trail_elev": 6699
+  },
+  {
+    "id": "cdt-main-mi2520000",
+    "mile": 2520,
+    "lat": 45.895334,
+    "lon": -112.74106,
+    "state": "MT",
+    "trail_elev": 6791
+  },
+  {
+    "id": "cdt-main-mi2525000",
+    "mile": 2525,
+    "lat": 45.861957,
+    "lon": -112.674181,
+    "state": "MT",
+    "trail_elev": 5705
+  },
+  {
+    "id": "cdt-main-mi2530000",
+    "mile": 2530,
+    "lat": 45.821606,
+    "lon": -112.61464,
+    "state": "MT",
+    "trail_elev": 7014
+  },
+  {
+    "id": "cdt-main-mi2535000",
+    "mile": 2535,
+    "lat": 45.811372,
+    "lon": -112.555709,
+    "state": "MT",
+    "trail_elev": 7457
+  },
+  {
+    "id": "cdt-main-mi2540000",
+    "mile": 2540,
+    "lat": 45.798203,
+    "lon": -112.513003,
+    "state": "MT",
+    "trail_elev": 7546
+  },
+  {
+    "id": "cdt-main-mi2545000",
+    "mile": 2545,
+    "lat": 45.814408,
+    "lon": -112.474563,
+    "state": "MT",
+    "trail_elev": 7667
+  },
+  {
+    "id": "cdt-main-mi2550000",
+    "mile": 2550,
+    "lat": 45.855621,
+    "lon": -112.449151,
+    "state": "MT",
+    "trail_elev": 6788
+  },
+  {
+    "id": "cdt-main-mi2555000",
+    "mile": 2555,
+    "lat": 45.885542,
+    "lon": -112.40815,
+    "state": "MT",
+    "trail_elev": 7123
+  },
+  {
+    "id": "cdt-main-mi2560000",
+    "mile": 2560,
+    "lat": 45.92386,
+    "lon": -112.413404,
+    "state": "MT",
+    "trail_elev": 6345
+  },
+  {
+    "id": "cdt-main-mi2565000",
+    "mile": 2565,
+    "lat": 45.950792,
+    "lon": -112.438718,
+    "state": "MT",
+    "trail_elev": 7431
+  },
+  {
+    "id": "cdt-main-mi2570000",
+    "mile": 2570,
+    "lat": 45.981878,
+    "lon": -112.439789,
+    "state": "MT",
+    "trail_elev": 7677
+  },
+  {
+    "id": "cdt-main-mi2575000",
+    "mile": 2575,
+    "lat": 46.010416,
+    "lon": -112.405099,
+    "state": "MT",
+    "trail_elev": 7323
+  },
+  {
+    "id": "cdt-main-mi2580000",
+    "mile": 2580,
+    "lat": 46.039883,
+    "lon": -112.376679,
+    "state": "MT",
+    "trail_elev": 8383
+  },
+  {
+    "id": "cdt-main-mi2585000",
+    "mile": 2585,
+    "lat": 46.079931,
+    "lon": -112.36109,
+    "state": "MT",
+    "trail_elev": 7159
+  },
+  {
+    "id": "cdt-main-mi2590000",
+    "mile": 2590,
+    "lat": 46.101672,
+    "lon": -112.414157,
+    "state": "MT",
+    "trail_elev": 6293
+  },
+  {
+    "id": "cdt-main-mi2595000",
+    "mile": 2595,
+    "lat": 46.122155,
+    "lon": -112.48645,
+    "state": "MT",
+    "trail_elev": 7110
+  },
+  {
+    "id": "cdt-main-mi2600000",
+    "mile": 2600,
+    "lat": 46.147091,
+    "lon": -112.515323,
+    "state": "MT",
+    "trail_elev": 7297
+  },
+  {
+    "id": "cdt-main-mi2605000",
+    "mile": 2605,
+    "lat": 46.182669,
+    "lon": -112.534028,
+    "state": "MT",
+    "trail_elev": 7385
+  },
+  {
+    "id": "cdt-main-mi2610000",
+    "mile": 2610,
+    "lat": 46.202168,
+    "lon": -112.58264,
+    "state": "MT",
+    "trail_elev": 7077
+  },
+  {
+    "id": "cdt-main-mi2615000",
+    "mile": 2615,
+    "lat": 46.240034,
+    "lon": -112.583793,
+    "state": "MT",
+    "trail_elev": 7044
+  },
+  {
+    "id": "cdt-main-mi2620000",
+    "mile": 2620,
+    "lat": 46.287769,
+    "lon": -112.56324,
+    "state": "MT",
+    "trail_elev": 7405
+  },
+  {
+    "id": "cdt-main-mi2625000",
+    "mile": 2625,
+    "lat": 46.327071,
+    "lon": -112.535292,
+    "state": "MT",
+    "trail_elev": 7835
+  },
+  {
+    "id": "cdt-main-mi2630000",
+    "mile": 2630,
+    "lat": 46.333492,
+    "lon": -112.478896,
+    "state": "MT",
+    "trail_elev": 7382
+  },
+  {
+    "id": "cdt-main-mi2635000",
+    "mile": 2635,
+    "lat": 46.347826,
+    "lon": -112.45157,
+    "state": "MT",
+    "trail_elev": 7539
+  },
+  {
+    "id": "cdt-main-mi2640000",
+    "mile": 2640,
+    "lat": 46.388462,
+    "lon": -112.397555,
+    "state": "MT",
+    "trail_elev": 7592
+  },
+  {
+    "id": "cdt-main-mi2645000",
+    "mile": 2645,
+    "lat": 46.402218,
+    "lon": -112.3384,
+    "state": "MT",
+    "trail_elev": 7467
+  },
+  {
+    "id": "cdt-main-mi2650000",
+    "mile": 2650,
+    "lat": 46.447337,
+    "lon": -112.313167,
+    "state": "MT",
+    "trail_elev": 6932
+  },
+  {
+    "id": "cdt-main-mi2655000",
+    "mile": 2655,
+    "lat": 46.504135,
+    "lon": -112.304266,
+    "state": "MT",
+    "trail_elev": 6608
+  },
+  {
+    "id": "cdt-main-mi2660000",
+    "mile": 2660,
+    "lat": 46.556933,
+    "lon": -112.310211,
+    "state": "MT",
+    "trail_elev": 6398
+  },
+  {
+    "id": "cdt-main-mi2665000",
+    "mile": 2665,
+    "lat": 46.608462,
+    "lon": -112.296919,
+    "state": "MT",
+    "trail_elev": 6693
+  },
+  {
+    "id": "cdt-main-mi2670000",
+    "mile": 2670,
+    "lat": 46.664772,
+    "lon": -112.322151,
+    "state": "MT",
+    "trail_elev": 6024
+  },
+  {
+    "id": "cdt-main-mi2675000",
+    "mile": 2675,
+    "lat": 46.715305,
+    "lon": -112.312957,
+    "state": "MT",
+    "trail_elev": 6588
+  },
+  {
+    "id": "cdt-main-mi2680000",
+    "mile": 2680,
+    "lat": 46.722296,
+    "lon": -112.390044,
+    "state": "MT",
+    "trail_elev": 6476
+  },
+  {
+    "id": "cdt-main-mi2685000",
+    "mile": 2685,
+    "lat": 46.729217,
+    "lon": -112.478263,
+    "state": "MT",
+    "trail_elev": 7106
+  },
+  {
+    "id": "cdt-main-mi2690000",
+    "mile": 2690,
+    "lat": 46.768463,
+    "lon": -112.535537,
+    "state": "MT",
+    "trail_elev": 7792
+  },
+  {
+    "id": "cdt-main-mi2695000",
+    "mile": 2695,
+    "lat": 46.824919,
+    "lon": -112.51778,
+    "state": "MT",
+    "trail_elev": 6824
+  },
+  {
+    "id": "cdt-main-mi2700000",
+    "mile": 2700,
+    "lat": 46.864228,
+    "lon": -112.468856,
+    "state": "MT",
+    "trail_elev": 7425
+  },
+  {
+    "id": "cdt-main-mi2705000",
+    "mile": 2705,
+    "lat": 46.905501,
+    "lon": -112.487986,
+    "state": "MT",
+    "trail_elev": 6522
+  },
+  {
+    "id": "cdt-main-mi2710000",
+    "mile": 2710,
+    "lat": 46.950856,
+    "lon": -112.442841,
+    "state": "MT",
+    "trail_elev": 6903
+  },
+  {
+    "id": "cdt-main-mi2715000",
+    "mile": 2715,
+    "lat": 46.968365,
+    "lon": -112.362737,
+    "state": "MT",
+    "trail_elev": 6280
+  },
+  {
+    "id": "cdt-main-mi2720000",
+    "mile": 2720,
+    "lat": 47.004629,
+    "lon": -112.32806,
+    "state": "MT",
+    "trail_elev": 7195
+  },
+  {
+    "id": "cdt-main-mi2725000",
+    "mile": 2725,
+    "lat": 47.057799,
+    "lon": -112.325319,
+    "state": "MT",
+    "trail_elev": 6837
+  },
+  {
+    "id": "cdt-main-mi2730000",
+    "mile": 2730,
+    "lat": 47.079277,
+    "lon": -112.374934,
+    "state": "MT",
+    "trail_elev": 6024
+  },
+  {
+    "id": "cdt-main-mi2735000",
+    "mile": 2735,
+    "lat": 47.116509,
+    "lon": -112.419789,
+    "state": "MT",
+    "trail_elev": 6555
+  },
+  {
+    "id": "cdt-main-mi2740000",
+    "mile": 2740,
+    "lat": 47.163241,
+    "lon": -112.450738,
+    "state": "MT",
+    "trail_elev": 7070
+  },
+  {
+    "id": "cdt-main-mi2745000",
+    "mile": 2745,
+    "lat": 47.169074,
+    "lon": -112.539126,
+    "state": "MT",
+    "trail_elev": 7779
+  },
+  {
+    "id": "cdt-main-mi2750000",
+    "mile": 2750,
+    "lat": 47.195671,
+    "lon": -112.59906,
+    "state": "MT",
+    "trail_elev": 8235
+  },
+  {
+    "id": "cdt-main-mi2755000",
+    "mile": 2755,
+    "lat": 47.235414,
+    "lon": -112.642871,
+    "state": "MT",
+    "trail_elev": 6877
+  },
+  {
+    "id": "cdt-main-mi2760000",
+    "mile": 2760,
+    "lat": 47.267514,
+    "lon": -112.64564,
+    "state": "MT",
+    "trail_elev": 5420
+  },
+  {
+    "id": "cdt-main-mi2765000",
+    "mile": 2765,
+    "lat": 47.318047,
+    "lon": -112.713417,
+    "state": "MT",
+    "trail_elev": 5781
+  },
+  {
+    "id": "cdt-main-mi2770000",
+    "mile": 2770,
+    "lat": 47.355408,
+    "lon": -112.769145,
+    "state": "MT",
+    "trail_elev": 6506
+  },
+  {
+    "id": "cdt-main-mi2775000",
+    "mile": 2775,
+    "lat": 47.395926,
+    "lon": -112.843264,
+    "state": "MT",
+    "trail_elev": 5846
+  },
+  {
+    "id": "cdt-main-mi2780000",
+    "mile": 2780,
+    "lat": 47.427611,
+    "lon": -112.899623,
+    "state": "MT",
+    "trail_elev": 5755
+  },
+  {
+    "id": "cdt-main-mi2785000",
+    "mile": 2785,
+    "lat": 47.488121,
+    "lon": -112.918298,
+    "state": "MT",
+    "trail_elev": 5436
+  },
+  {
+    "id": "cdt-main-mi2790000",
+    "mile": 2790,
+    "lat": 47.540262,
+    "lon": -112.921933,
+    "state": "MT",
+    "trail_elev": 5325
+  },
+  {
+    "id": "cdt-main-mi2795000",
+    "mile": 2795,
+    "lat": 47.555351,
+    "lon": -113.009033,
+    "state": "MT",
+    "trail_elev": 5226
+  },
+  {
+    "id": "cdt-main-mi2800000",
+    "mile": 2800,
+    "lat": 47.600936,
+    "lon": -113.066583,
+    "state": "MT",
+    "trail_elev": 5784
+  },
+  {
+    "id": "cdt-main-mi2805000",
+    "mile": 2805,
+    "lat": 47.649664,
+    "lon": -113.106941,
+    "state": "MT",
+    "trail_elev": 6516
+  },
+  {
+    "id": "cdt-main-mi2810000",
+    "mile": 2810,
+    "lat": 47.694556,
+    "lon": -113.147467,
+    "state": "MT",
+    "trail_elev": 7106
+  },
+  {
+    "id": "cdt-main-mi2815000",
+    "mile": 2815,
+    "lat": 47.742192,
+    "lon": -113.137215,
+    "state": "MT",
+    "trail_elev": 7395
+  },
+  {
+    "id": "cdt-main-mi2820000",
+    "mile": 2820,
+    "lat": 47.731462,
+    "lon": -113.058301,
+    "state": "MT",
+    "trail_elev": 5846
+  },
+  {
+    "id": "cdt-main-mi2825000",
+    "mile": 2825,
+    "lat": 47.769531,
+    "lon": -112.978324,
+    "state": "MT",
+    "trail_elev": 5679
+  },
+  {
+    "id": "cdt-main-mi2830000",
+    "mile": 2830,
+    "lat": 47.800348,
+    "lon": -113.004442,
+    "state": "MT",
+    "trail_elev": 5965
+  },
+  {
+    "id": "cdt-main-mi2835000",
+    "mile": 2835,
+    "lat": 47.812412,
+    "lon": -113.053641,
+    "state": "MT",
+    "trail_elev": 7021
+  },
+  {
+    "id": "cdt-main-mi2840000",
+    "mile": 2840,
+    "lat": 47.863785,
+    "lon": -113.050945,
+    "state": "MT",
+    "trail_elev": 6693
+  },
+  {
+    "id": "cdt-main-mi2845000",
+    "mile": 2845,
+    "lat": 47.903412,
+    "lon": -113.069856,
+    "state": "MT",
+    "trail_elev": 6385
+  },
+  {
+    "id": "cdt-main-mi2850000",
+    "mile": 2850,
+    "lat": 47.911795,
+    "lon": -112.978704,
+    "state": "MT",
+    "trail_elev": 5830
+  },
+  {
+    "id": "cdt-main-mi2855000",
+    "mile": 2855,
+    "lat": 47.96763,
+    "lon": -112.995461,
+    "state": "MT",
+    "trail_elev": 5807
+  },
+  {
+    "id": "cdt-main-mi2860000",
+    "mile": 2860,
+    "lat": 48.00419,
+    "lon": -113.041284,
+    "state": "MT",
+    "trail_elev": 5413
+  },
+  {
+    "id": "cdt-main-mi2865000",
+    "mile": 2865,
+    "lat": 48.060375,
+    "lon": -113.028813,
+    "state": "MT",
+    "trail_elev": 5702
+  },
+  {
+    "id": "cdt-main-mi2870000",
+    "mile": 2870,
+    "lat": 48.12275,
+    "lon": -113.028727,
+    "state": "MT",
+    "trail_elev": 6263
+  },
+  {
+    "id": "cdt-main-mi2875000",
+    "mile": 2875,
+    "lat": 48.152476,
+    "lon": -113.091877,
+    "state": "MT",
+    "trail_elev": 5945
+  },
+  {
+    "id": "cdt-main-mi2880000",
+    "mile": 2880,
+    "lat": 48.192729,
+    "lon": -113.163654,
+    "state": "MT",
+    "trail_elev": 6053
+  },
+  {
+    "id": "cdt-main-mi2885000",
+    "mile": 2885,
+    "lat": 48.220789,
+    "lon": -113.206095,
+    "state": "MT",
+    "trail_elev": 6824
+  },
+  {
+    "id": "cdt-main-mi2890000",
+    "mile": 2890,
+    "lat": 48.253905,
+    "lon": -113.158444,
+    "state": "MT",
+    "trail_elev": 5945
+  },
+  {
+    "id": "cdt-main-mi2895000",
+    "mile": 2895,
+    "lat": 48.28725,
+    "lon": -113.207864,
+    "state": "MT",
+    "trail_elev": 5604
+  },
+  {
+    "id": "cdt-main-mi2900000",
+    "mile": 2900,
+    "lat": 48.294152,
+    "lon": -113.278479,
+    "state": "MT",
+    "trail_elev": 5856
+  },
+  {
+    "id": "cdt-main-mi2905000",
+    "mile": 2905,
+    "lat": 48.324192,
+    "lon": -113.329092,
+    "state": "MT",
+    "trail_elev": 5502
+  },
+  {
+    "id": "cdt-main-mi2910000",
+    "mile": 2910,
+    "lat": 48.347746,
+    "lon": -113.346314,
+    "state": "MT",
+    "trail_elev": 5850
+  },
+  {
+    "id": "cdt-main-mi2915000",
+    "mile": 2915,
+    "lat": 48.401246,
+    "lon": -113.304441,
+    "state": "MT",
+    "trail_elev": 5541
+  },
+  {
+    "id": "cdt-main-mi2920000",
+    "mile": 2920,
+    "lat": 48.444099,
+    "lon": -113.243964,
+    "state": "MT",
+    "trail_elev": 4964
+  },
+  {
+    "id": "cdt-main-mi2925000",
+    "mile": 2925,
+    "lat": 48.469551,
+    "lon": -113.2821,
+    "state": "MT",
+    "trail_elev": 5728
+  },
+  {
+    "id": "cdt-main-mi2930000",
+    "mile": 2930,
+    "lat": 48.476807,
+    "lon": -113.341705,
+    "state": "MT",
+    "trail_elev": 6273
+  },
+  {
+    "id": "cdt-main-mi2935000",
+    "mile": 2935,
+    "lat": 48.514121,
+    "lon": -113.377924,
+    "state": "MT",
+    "trail_elev": 5528
+  },
+  {
+    "id": "cdt-main-mi2940000",
+    "mile": 2940,
+    "lat": 48.517611,
+    "lon": -113.458287,
+    "state": "MT",
+    "trail_elev": 7313
+  },
+  {
+    "id": "cdt-main-mi2945000",
+    "mile": 2945,
+    "lat": 48.562984,
+    "lon": -113.45471,
+    "state": "MT",
+    "trail_elev": 5446
+  },
+  {
+    "id": "cdt-main-mi2950000",
+    "mile": 2950,
+    "lat": 48.577355,
+    "lon": -113.518317,
+    "state": "MT",
+    "trail_elev": 6814
+  },
+  {
+    "id": "cdt-main-mi2955000",
+    "mile": 2955,
+    "lat": 48.633437,
+    "lon": -113.528207,
+    "state": "MT",
+    "trail_elev": 4957
+  },
+  {
+    "id": "cdt-main-mi2960000",
+    "mile": 2960,
+    "lat": 48.678723,
+    "lon": -113.482373,
+    "state": "MT",
+    "trail_elev": 4642
+  },
+  {
+    "id": "cdt-main-mi2965000",
+    "mile": 2965,
+    "lat": 48.677691,
+    "lon": -113.547541,
+    "state": "MT",
+    "trail_elev": 4573
+  },
+  {
+    "id": "cdt-main-mi2970000",
+    "mile": 2970,
+    "lat": 48.670508,
+    "lon": -113.612444,
+    "state": "MT",
+    "trail_elev": 4610
+  },
+  {
+    "id": "cdt-main-mi2975000",
+    "mile": 2975,
+    "lat": 48.707481,
+    "lon": -113.655381,
+    "state": "MT",
+    "trail_elev": 6926
+  },
+  {
+    "id": "cdt-main-mi2980000",
+    "mile": 2980,
+    "lat": 48.738332,
+    "lon": -113.696087,
+    "state": "MT",
+    "trail_elev": 5633
+  },
+  {
+    "id": "cdt-main-mi2985000",
+    "mile": 2985,
+    "lat": 48.791179,
+    "lon": -113.656633,
+    "state": "MT",
+    "trail_elev": 4977
+  },
+  {
+    "id": "cdt-main-mi2990000",
+    "mile": 2990,
+    "lat": 48.787949,
+    "lon": -113.736081,
+    "state": "MT",
+    "trail_elev": 5233
+  },
+  {
+    "id": "cdt-main-mi2995000",
+    "mile": 2995,
+    "lat": 48.779034,
+    "lon": -113.77426,
+    "state": "MT",
+    "trail_elev": 6785
+  },
+  {
+    "id": "cdt-main-mi3000000",
+    "mile": 3000,
+    "lat": 48.820372,
+    "lon": -113.799069,
+    "state": "MT",
+    "trail_elev": 6473
+  },
+  {
+    "id": "cdt-main-mi3005000",
+    "mile": 3005,
+    "lat": 48.853433,
+    "lon": -113.848395,
+    "state": "MT",
+    "trail_elev": 7405
+  },
+  {
+    "id": "cdt-main-mi3010000",
+    "mile": 3010,
+    "lat": 48.882922,
+    "lon": -113.907625,
+    "state": "MT",
+    "trail_elev": 4938
+  },
+  {
+    "id": "cdt-main-mi3015000",
+    "mile": 3015,
+    "lat": 48.938956,
+    "lon": -113.890816,
+    "state": "MT",
+    "trail_elev": 4413
+  },
+  {
+    "id": "cdt-main-mi3020000",
+    "mile": 3020,
+    "lat": 48.990062,
+    "lon": -113.907249,
+    "state": "MT",
+    "trail_elev": 4236
+  },
+  {
+    "id": "cdt-main-mi3025000",
+    "mile": 3025,
+    "lat": 49.045681,
+    "lon": -113.917243,
+    "state": "MT",
+    "trail_elev": 4304
+  },
+  {
+    "id": "cdt-main-mi3025103",
+    "mile": 3025.103,
+    "lat": 49.046817,
+    "lon": -113.916812,
+    "state": "MT",
+    "trail_elev": 4255
+  },
+  {
+    "id": "cdt-gila-mi0000000",
+    "alt_id": "gila",
+    "alt_mile": 0,
+    "lat": 32.872404,
+    "lon": -108.316216,
+    "trail_elev": 6332
+  },
+  {
+    "id": "cdt-gila-mi0005000",
+    "alt_id": "gila",
+    "alt_mile": 5,
+    "lat": 32.90476,
+    "lon": -108.295475,
+    "trail_elev": 6070
+  },
+  {
+    "id": "cdt-gila-mi0010000",
+    "alt_id": "gila",
+    "alt_mile": 10,
+    "lat": 32.94907,
+    "lon": -108.281935,
+    "trail_elev": 6873
+  },
+  {
+    "id": "cdt-gila-mi0015000",
+    "alt_id": "gila",
+    "alt_mile": 15,
+    "lat": 32.989211,
+    "lon": -108.310311,
+    "trail_elev": 7008
+  },
+  {
+    "id": "cdt-gila-mi0020000",
+    "alt_id": "gila",
+    "alt_mile": 20,
+    "lat": 33.048782,
+    "lon": -108.306609,
+    "trail_elev": 5207
+  },
+  {
+    "id": "cdt-gila-mi0025000",
+    "alt_id": "gila",
+    "alt_mile": 25,
+    "lat": 33.097776,
+    "lon": -108.281092,
+    "trail_elev": 5374
+  },
+  {
+    "id": "cdt-gila-mi0030000",
+    "alt_id": "gila",
+    "alt_mile": 30,
+    "lat": 33.14064,
+    "lon": -108.240031,
+    "trail_elev": 5502
+  },
+  {
+    "id": "cdt-gila-mi0035000",
+    "alt_id": "gila",
+    "alt_mile": 35,
+    "lat": 33.181518,
+    "lon": -108.206645,
+    "trail_elev": 5591
+  },
+  {
+    "id": "cdt-gila-mi0040000",
+    "alt_id": "gila",
+    "alt_mile": 40,
+    "lat": 33.227245,
+    "lon": -108.237833,
+    "trail_elev": 5705
+  },
+  {
+    "id": "cdt-gila-mi0045000",
+    "alt_id": "gila",
+    "alt_mile": 45,
+    "lat": 33.272789,
+    "lon": -108.25272,
+    "trail_elev": 5951
+  },
+  {
+    "id": "cdt-gila-mi0050000",
+    "alt_id": "gila",
+    "alt_mile": 50,
+    "lat": 33.296899,
+    "lon": -108.285763,
+    "trail_elev": 6302
+  },
+  {
+    "id": "cdt-gila-mi0055000",
+    "alt_id": "gila",
+    "alt_mile": 55,
+    "lat": 33.311865,
+    "lon": -108.334091,
+    "trail_elev": 6444
+  },
+  {
+    "id": "cdt-gila-mi0060000",
+    "alt_id": "gila",
+    "alt_mile": 60,
+    "lat": 33.339162,
+    "lon": -108.370136,
+    "trail_elev": 6690
+  },
+  {
+    "id": "cdt-gila-mi0065000",
+    "alt_id": "gila",
+    "alt_mile": 65,
+    "lat": 33.364542,
+    "lon": -108.407535,
+    "trail_elev": 6903
+  },
+  {
+    "id": "cdt-gila-mi0070000",
+    "alt_id": "gila",
+    "alt_mile": 70,
+    "lat": 33.382491,
+    "lon": -108.469057,
+    "trail_elev": 7073
+  },
+  {
+    "id": "cdt-gila-mi0075000",
+    "alt_id": "gila",
+    "alt_mile": 75,
+    "lat": 33.424302,
+    "lon": -108.500013,
+    "trail_elev": 7379
+  },
+  {
+    "id": "cdt-gila-mi0080000",
+    "alt_id": "gila",
+    "alt_mile": 80,
+    "lat": 33.476684,
+    "lon": -108.480339,
+    "trail_elev": 7700
+  },
+  {
+    "id": "cdt-gila-mi0085000",
+    "alt_id": "gila",
+    "alt_mile": 85,
+    "lat": 33.522006,
+    "lon": -108.487707,
+    "trail_elev": 8051
+  },
+  {
+    "id": "cdt-gila-mi0090000",
+    "alt_id": "gila",
+    "alt_mile": 90,
+    "lat": 33.583319,
+    "lon": -108.485175,
+    "trail_elev": 8209
+  },
+  {
+    "id": "cdt-gila-mi0095000",
+    "alt_id": "gila",
+    "alt_mile": 95,
+    "lat": 33.638673,
+    "lon": -108.46506,
+    "trail_elev": 7484
+  },
+  {
+    "id": "cdt-gila-mi0100000",
+    "alt_id": "gila",
+    "alt_mile": 100,
+    "lat": 33.693108,
+    "lon": -108.495526,
+    "trail_elev": 7956
+  },
+  {
+    "id": "cdt-rmnp-mi0000000",
+    "alt_id": "rmnp",
+    "alt_mile": 0,
+    "lat": 40.13006,
+    "lon": -105.766047,
+    "trail_elev": 8323
+  },
+  {
+    "id": "cdt-rmnp-mi0005000",
+    "alt_id": "rmnp",
+    "alt_mile": 5,
+    "lat": 40.163648,
+    "lon": -105.82194,
+    "trail_elev": 8415
+  },
+  {
+    "id": "cdt-rmnp-mi0010000",
+    "alt_id": "rmnp",
+    "alt_mile": 10,
+    "lat": 40.21602,
+    "lon": -105.839419,
+    "trail_elev": 8435
+  },
+  {
+    "id": "cdt-rmnp-mi0015000",
+    "alt_id": "rmnp",
+    "alt_mile": 15,
+    "lat": 40.275129,
+    "lon": -105.816645,
+    "trail_elev": 9085
+  },
+  {
+    "id": "cdt-rmnp-mi0020000",
+    "alt_id": "rmnp",
+    "alt_mile": 20,
+    "lat": 40.314552,
+    "lon": -105.842398,
+    "trail_elev": 8868
+  },
+  {
+    "id": "cdt-rmnp-mi0025000",
+    "alt_id": "rmnp",
+    "alt_mile": 25,
+    "lat": 40.321136,
+    "lon": -105.767887,
+    "trail_elev": 9954
+  },
+  {
+    "id": "cdt-rmnp-mi0030000",
+    "alt_id": "rmnp",
+    "alt_mile": 30,
+    "lat": 40.312622,
+    "lon": -105.70421,
+    "trail_elev": 12218
+  },
+  {
+    "id": "cdt-rmnp-mi0035000",
+    "alt_id": "rmnp",
+    "alt_mile": 35,
+    "lat": 40.281045,
+    "lon": -105.715515,
+    "trail_elev": 9977
+  },
+  {
+    "id": "cdt-rmnp-mi0040000",
+    "alt_id": "rmnp",
+    "alt_mile": 40,
+    "lat": 40.269424,
+    "lon": -105.772278,
+    "trail_elev": 8747
+  },
+  {
+    "id": "cdt-anaconda-mi0000000",
+    "alt_id": "anaconda",
+    "alt_mile": 0,
+    "lat": 46.090894,
+    "lon": -113.208257,
+    "trail_elev": 7484
+  },
+  {
+    "id": "cdt-anaconda-mi0005000",
+    "alt_id": "anaconda",
+    "alt_mile": 5,
+    "lat": 46.074021,
+    "lon": -113.264981,
+    "trail_elev": 8215
+  },
+  {
+    "id": "cdt-anaconda-mi0010000",
+    "alt_id": "anaconda",
+    "alt_mile": 10,
+    "lat": 46.062685,
+    "lon": -113.256348,
+    "trail_elev": 8497
+  },
+  {
+    "id": "cdt-anaconda-mi0015000",
+    "alt_id": "anaconda",
+    "alt_mile": 15,
+    "lat": 46.115274,
+    "lon": -113.216481,
+    "trail_elev": 7110
+  },
+  {
+    "id": "cdt-anaconda-mi0020000",
+    "alt_id": "anaconda",
+    "alt_mile": 20,
+    "lat": 46.166493,
+    "lon": -113.164208,
+    "trail_elev": 6122
+  },
+  {
+    "id": "cdt-anaconda-mi0025000",
+    "alt_id": "anaconda",
+    "alt_mile": 25,
+    "lat": 46.164177,
+    "lon": -113.072381,
+    "trail_elev": 5692
+  },
+  {
+    "id": "cdt-anaconda-mi0030000",
+    "alt_id": "anaconda",
+    "alt_mile": 30,
+    "lat": 46.13656,
+    "lon": -112.985908,
+    "trail_elev": 5397
+  },
+  {
+    "id": "cdt-anaconda-mi0035000",
+    "alt_id": "anaconda",
+    "alt_mile": 35,
+    "lat": 46.128977,
+    "lon": -112.893599,
+    "trail_elev": 5108
+  },
+  {
+    "id": "cdt-anaconda-mi0040000",
+    "alt_id": "anaconda",
+    "alt_mile": 40,
+    "lat": 46.167055,
+    "lon": -112.806679,
+    "trail_elev": 4862
+  },
+  {
+    "id": "cdt-anaconda-mi0045000",
+    "alt_id": "anaconda",
+    "alt_mile": 45,
+    "lat": 46.215133,
+    "lon": -112.754381,
+    "trail_elev": 4780
+  },
+  {
+    "id": "cdt-anaconda-mi0050000",
+    "alt_id": "anaconda",
+    "alt_mile": 50,
+    "lat": 46.222761,
+    "lon": -112.695907,
+    "trail_elev": 5187
+  },
+  {
+    "id": "cdt-anaconda-mi0055000",
+    "alt_id": "anaconda",
+    "alt_mile": 55,
+    "lat": 46.213396,
+    "lon": -112.615832,
+    "trail_elev": 6480
+  },
+  {
+    "id": "cdt-spotted-bear-mi0000000",
+    "alt_id": "spotted-bear",
+    "alt_mile": 0,
+    "lat": 47.867732,
+    "lon": -113.153182,
+    "trail_elev": 4879
+  },
+  {
+    "id": "cdt-spotted-bear-mi0005000",
+    "alt_id": "spotted-bear",
+    "alt_mile": 5,
+    "lat": 47.811248,
+    "lon": -113.112658,
+    "trail_elev": 5384
+  },
+  {
+    "id": "cdt-spotted-bear-mi0010000",
+    "alt_id": "spotted-bear",
+    "alt_mile": 10,
+    "lat": 47.743896,
+    "lon": -113.115766,
+    "trail_elev": 6644
+  },
+  {
+    "id": "cdt-spotted-bear-mi0015000",
+    "alt_id": "spotted-bear",
+    "alt_mile": 15,
+    "lat": 47.80747,
+    "lon": -113.137314,
+    "trail_elev": 7123
+  },
+  {
+    "id": "cdt-spotted-bear-mi0020000",
+    "alt_id": "spotted-bear",
+    "alt_mile": 20,
+    "lat": 47.87634,
+    "lon": -113.145222,
+    "trail_elev": 5121
+  },
+  {
+    "id": "cdt-spotted-bear-mi0025000",
+    "alt_id": "spotted-bear",
+    "alt_mile": 25,
+    "lat": 47.907621,
+    "lon": -113.10603,
+    "trail_elev": 7598
+  },
+  {
+    "id": "cdt-spotted-bear-mi0030000",
+    "alt_id": "spotted-bear",
+    "alt_mile": 30,
+    "lat": 47.95579,
+    "lon": -113.131116,
+    "trail_elev": 6529
+  },
+  {
+    "id": "cdt-spotted-bear-mi0035000",
+    "alt_id": "spotted-bear",
+    "alt_mile": 35,
+    "lat": 47.999857,
+    "lon": -113.083938,
+    "trail_elev": 5315
+  }
+]

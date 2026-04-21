@@ -4,3 +4,4 @@ Thumbs.db
 *.log
 .vscode/
 .env
+trails/continental-divide-trail/data/trail_hires.geojson

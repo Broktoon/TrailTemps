@@ -1,0 +1,151 @@
+{
+  "trail": {
+    "name": "Continental Divide Trail",
+    "total_trail_miles": 3050.1,
+    "map_center": [
+      40,
+      -109.5
+    ],
+    "map_zoom": 5,
+    "termini": {
+      "south": "Antelope Wells, NM (US/Mexico Border)",
+      "north_waterton": "Waterton Lake, MT/AB (US/Canada Border)",
+      "north_chief_mtn": "Chief Mountain, MT (US/Canada Border)"
+    }
+  },
+  "sections": [
+    {
+      "id": "nm",
+      "name": "New Mexico",
+      "state": "NM",
+      "axis_start": 0,
+      "axis_end": 795
+    },
+    {
+      "id": "co",
+      "name": "Colorado",
+      "state": "CO",
+      "axis_start": 800,
+      "axis_end": 1525
+    },
+    {
+      "id": "wy",
+      "name": "Wyoming",
+      "state": "WY",
+      "axis_start": 1530,
+      "axis_end": 2300
+    },
+    {
+      "id": "mt",
+      "name": "Montana",
+      "state": "MT",
+      "axis_start": 2305,
+      "axis_end": 3025.1
+    }
+  ],
+  "alt_groups": [
+    {
+      "id": "gila",
+      "label": "Gila River Route",
+      "delta_miles": -75.1,
+      "branch_mile": 175,
+      "rejoin_mile": 355,
+      "main": {
+        "id": "main",
+        "label": "Main CDT Route",
+        "total_miles": 180
+      },
+      "alt": {
+        "id": "gila",
+        "label": "Gila River Route",
+        "total_miles": 104.9,
+        "delta_miles": -75.1
+      }
+    },
+    {
+      "id": "rmnp",
+      "label": "Rocky Mountain National Park (Colorado)",
+      "default_id": "rmnp",
+      "delta_miles": -25.0,
+      "branch_mile": 1355,
+      "rejoin_mile": 1370,
+      "main": {
+        "id": "main",
+        "label": "Western Bypass \u2014 Never Summer Wilderness",
+        "total_miles": 15
+      },
+      "alt": {
+        "id": "rmnp",
+        "label": "CDT Main Route \u2014 RMNP Loop (North Inlet / Tonahutu Cr)",
+        "total_miles": 40.0,
+        "delta_miles": 25.0
+      }
+    },
+    {
+      "id": "anaconda",
+      "label": "Anaconda Cutoff",
+      "delta_miles": -77.4,
+      "branch_mile": 2475,
+      "rejoin_mile": 2610,
+      "main": {
+        "id": "main",
+        "label": "Main CDT Route",
+        "total_miles": 135
+      },
+      "alt": {
+        "id": "anaconda",
+        "label": "Anaconda Cutoff",
+        "total_miles": 57.6,
+        "delta_miles": -77.4
+      }
+    },
+    {
+      "id": "spotted-bear",
+      "label": "Spotted Bear Route",
+      "delta_miles": 20.5,
+      "branch_mile": 2845,
+      "rejoin_mile": 2860,
+      "main": {
+        "id": "main",
+        "label": "Main CDT Route",
+        "total_miles": 15
+      },
+      "alt": {
+        "id": "spotted-bear",
+        "label": "Spotted Bear Route",
+        "total_miles": 35.5,
+        "delta_miles": 20.5
+      }
+    }
+  ],
+  "direction_options": [
+    {
+      "id": "nobo_waterton",
+      "label": "Northbound \u2014 Antelope Wells \u2192 Waterton Lake",
+      "total_miles": 3050.1,
+      "is_nobo": true,
+      "terminus": "waterton"
+    },
+    {
+      "id": "nobo_chief_mtn",
+      "label": "Northbound \u2014 Antelope Wells \u2192 Chief Mountain (\u22128 mi)",
+      "total_miles": 3037.15,
+      "is_nobo": true,
+      "terminus": "chief_mtn"
+    },
+    {
+      "id": "sobo_waterton",
+      "label": "Southbound \u2014 Waterton Lake \u2192 Antelope Wells",
+      "total_miles": 3050.1,
+      "is_nobo": false,
+      "terminus": "waterton"
+    },
+    {
+      "id": "sobo_chief_mtn",
+      "label": "Southbound \u2014 Chief Mountain \u2192 Antelope Wells (\u22128 mi)",
+      "total_miles": 3037.15,
+      "is_nobo": false,
+      "terminus": "chief_mtn"
+    }
+  ]
+}
