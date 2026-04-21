@@ -625,6 +625,13 @@ async function runWeather() {
     const avgs = computePlanningAverages(daily, monthDay, TYPICAL_WINDOW_DAYS);
     renderPlanningSummary(point, monthDay, range, avgs);
 
+    const forecastAppLows = forecastData.daily?.apparent_temperature_min || [];
+    if (forecastAppLows.some(v => Number.isFinite(v) && v <= 20) ||
+        (Number.isFinite(avgs.avgAppLow) && avgs.avgAppLow <= 20)) {
+      const s = el("weatherStatus");
+      if (s) s.innerHTML = '<p style="color:#003388; font-weight:600; margin:0.5rem 0 0;">&#9888; Cold Advisory: Apparent low temperatures at or below 20&nbsp;&deg;F are indicated for this location and date. Conditions at this level may be hazardous without proper cold-weather gear. Check local NWS forecasts before setting out.</p>';
+    }
+
   } catch (err) {
     console.error("[NCT] runWeather error:", err);
     setHtmlIfExists("currentBlock", `<p style="color:#900">Weather data unavailable: ${err.message}</p>`);
@@ -750,24 +757,7 @@ async function computeAndRenderDurationExtremes(params) {
   const utciCounts = computeUtciCounts(hikePoints, getNearestNormals);
   const endDate    = addDays(params.startDate, params.durationDays - 1);
 
-  // Build heat/cold advisories (prepend any caller-supplied note)
-  let warningHtml = extraNote || "";
-  for (const { point } of hikePoints) {
-    const n = getNearestNormals(point);
-    if (!n) continue;
-    if (n.app_hi?.some(v => isFinite(v) && v >= 100)) {
-      warningHtml += `<p class="advisory advisory-heat">\u26a0\ufe0f <strong>Heat Advisory:</strong> Apparent high temperatures may reach or exceed 100 \u00b0F along this route. Plan around midday heat, carry extra water, and consider adjusting your schedule in Ohio and low-elevation summer sections.</p>`;
-      break;
-    }
-  }
-  for (const { point } of hikePoints) {
-    const n = getNearestNormals(point);
-    if (!n) continue;
-    if (n.app_lo?.some(v => isFinite(v) && v <= 20)) {
-      warningHtml += `<p class="advisory advisory-cold">\u26a0\ufe0f <strong>Cold Advisory:</strong> Apparent low temperatures may drop to 20 \u00b0F or below along this route. Ensure cold-weather sleeping and insulation gear is rated for these conditions.</p>`;
-      break;
-    }
-  }
+  const warningHtml = extraNote || "";
 
   setDisplayIfExists("durExtremesWrap", "block");
   renderDurExtremesBlocks(null, null, {

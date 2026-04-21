@@ -808,6 +808,13 @@ async function runWeather() {
     const avgs = computePlanningAverages(daily, monthDay, TYPICAL_WINDOW_DAYS);
     renderPlanningSummary(point, monthDay, range, avgs);
 
+    const forecastAppLows = forecastData.daily?.apparent_temperature_min || [];
+    if (forecastAppLows.some(v => Number.isFinite(v) && v <= 20) ||
+        (Number.isFinite(avgs.avgAppLow) && avgs.avgAppLow <= 20)) {
+      const s = el("weatherStatus");
+      if (s) s.innerHTML = '<p style="color:#003388; font-weight:600; margin:0.5rem 0 0;">&#9888; Cold Advisory: Apparent low temperatures at or below 20&nbsp;&deg;F are indicated for this location and date. Conditions at this level may be hazardous without proper cold-weather gear. Check local NWS forecasts before setting out.</p>';
+    }
+
   } catch (err) {
     console.error("[AZT] runWeather error:", err);
     setHtmlIfExists("currentBlock", `<p style="color:#900">Weather data unavailable: ${err.message}</p>`);

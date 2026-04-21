@@ -1160,6 +1160,13 @@ async function runWeather() {
 
     renderPlanningSummary(point, monthDay, range, planning.avgHigh, planning.avgLow, appHigh, appLow);
 
+    const forecastAppLows = forecastData.daily?.apparent_temperature_min || [];
+    if (forecastAppLows.some(v => Number.isFinite(v) && v <= 20) ||
+        (Number.isFinite(appLow) && appLow <= 20)) {
+      const s = el("weatherStatus");
+      if (s) s.innerHTML = '<p style="color:#003388; font-weight:600; margin:0.5rem 0 0;">&#9888; Cold Advisory: Apparent low temperatures at or below 20&nbsp;&deg;F are indicated for this location and date. Conditions at this level may be hazardous without proper cold-weather gear. Check local NWS forecasts before setting out.</p>';
+    }
+
   } catch (err) {
     console.error(err);
   } finally {

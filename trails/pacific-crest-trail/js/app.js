@@ -691,6 +691,13 @@ async function runWeather() {
     const avgs = computePlanningAverages(daily, monthDay, TYPICAL_WINDOW_DAYS);
     renderPlanningSummary(point, monthDay, range, avgs);
 
+    const forecastAppLows = forecastData.daily?.apparent_temperature_min || [];
+    if (forecastAppLows.some(v => Number.isFinite(v) && v <= 20) ||
+        (Number.isFinite(avgs.avgAppLow) && avgs.avgAppLow <= 20)) {
+      const s = el("weatherStatus");
+      if (s) s.innerHTML = '<p style="color:#003388; font-weight:600; margin:0.5rem 0 0;">&#9888; Cold Advisory: Apparent low temperatures at or below 20&nbsp;&deg;F are indicated for this location and date. Conditions at this level may be hazardous without proper cold-weather gear. Check local NWS forecasts before setting out.</p>';
+    }
+
   } catch (err) {
     console.error("[PCT] runWeather error:", err);
     setHtmlIfExists("currentBlock", `<p style="color:#900">Weather data unavailable: ${err.message}</p>`);
@@ -881,16 +888,7 @@ async function computeAndRenderDurationExtremes(params) {
   const utciCounts = computeUtciCounts(hikePoints, getNearestNormals);
   const endDate = addDays(params.startDate, params.durationDays - 1);
 
-  // Build advisory HTML to pass into the shared renderer
-  let warningHtml = "";
-  const peakHeat  = hottest?.appHigh ?? hottest?.avgHigh;
-  const peakChill = coldest?.appLow  ?? coldest?.avgLow;
-  if (peakHeat != null && peakHeat >= 100) {
-    warningHtml += `<p style="color:#9a4000; font-weight:600; margin-top:0.75rem;">\u26a0 Heat advisory: the hottest day on your hike has an estimated heat index of ${Math.round(peakHeat)}\u00a0\u00b0F \u2014 at or above the 100\u00a0\u00b0F National Weather Service Heat Advisory threshold. Plan for early morning starts, ample hydration, and extra rest during peak heat.</p>`;
-  }
-  if (peakChill != null && peakChill <= 20) {
-    warningHtml += `<p style="color:#003388; font-weight:600; margin-top:0.75rem;">\u26a0 Cold weather advisory: the coldest night on your hike is expected to be at or below 20\u00a0\u00b0F. Conditions at this level may be hazardous without proper preparation and equipment. Check local NWS forecasts before your hike.</p>`;
-  }
+  const warningHtml = "";
 
   setDisplayIfExists("durExtremesWrap", "block");
   renderDurExtremesBlocks(hottest, coldest, {
