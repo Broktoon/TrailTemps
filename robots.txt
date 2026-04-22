@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://trailtemps.com/sitemap.xml
