@@ -220,9 +220,10 @@ function getNearestPointByMile(targetMile) {
   return Math.abs(getPointMile(a) - targetMile) <= Math.abs(getPointMile(b) - targetMile) ? a : b;
 }
 
-function renderDurExtremesBlocks(hottest, coldest, { startDate, endDate, distanceMiles, durationDays, startDateLabel = "Start Date", utciCounts } = {}) {
-  // AT-specific: Katahdin snow season warning
-  const katahdinWarning = (startDate && endDate && isKatahdinSnowSeason(endDate))
+function renderDurExtremesBlocks(hottest, coldest, { startDate, endDate, distanceMiles, durationDays, startDateLabel = "Start Date", utciCounts, direction = "NOBO" } = {}) {
+  // AT-specific: Katahdin snow season warning (NOBO reaches Katahdin at end; SOBO starts there)
+  const katahdinDate = direction === "SOBO" ? startDate : endDate;
+  const katahdinWarning = (startDate && endDate && isKatahdinSnowSeason(katahdinDate))
     ? `<p style="color:#b00000; font-weight:600; margin-top:0.5rem;">
         Hiking on Mt. Katahdin, Maine during the October\u2013May snow season is often closed or restricted based on local conditions.
        </p>` : "";
@@ -358,19 +359,6 @@ if (!normals || !Array.isArray(normals.hi) || !Array.isArray(normals.lo)) contin
     utciCounts[utciCategoryDay(highScore, lowScore, appHigh, appLow)]++;
   }
 
-  // Advisories
-  const durStatusEl = el("durStatus");
-  if (durStatusEl) {
-    const advisories = [];
-    if (hottest && hottest.appHigh >= 100) {
-      advisories.push("⚠ Heat advisory: the hottest day on your hike has an apparent high at or above 100 °F. Plan around midday heat, carry extra water, and check local NWS forecasts before your hike.");
-    }
-    if (coldest && coldest.appLow <= 20) {
-      advisories.push("⚠ Cold weather advisory: the coldest night on your hike is expected to be at or below 20 °F. Conditions at this level may be hazardous without proper preparation and equipment. See the weather notes at the bottom of the page for details, and check local NWS forecasts before your hike.");
-    }
-    durStatusEl.textContent = advisories.join(" ");
-  }
-
   const endDate = addDays(startDate, durationDays - 1);
 
   setDisplayIfExists("durExtremesWrap", "block");
@@ -380,7 +368,8 @@ if (!normals || !Array.isArray(normals.hi) || !Array.isArray(normals.lo)) contin
     distanceMiles,
     durationDays,
     startDateLabel,
-    utciCounts
+    utciCounts,
+    direction
   });
   renderDurExtremesMap(hottest, coldest);
 }
