@@ -221,9 +221,10 @@ function getNearestPointByMile(targetMile) {
 }
 
 function renderDurExtremesBlocks(hottest, coldest, { startDate, endDate, distanceMiles, durationDays, startDateLabel = "Start Date", utciCounts, direction = "NOBO" } = {}) {
-  // AT-specific: Katahdin snow season warning (NOBO reaches Katahdin at end; SOBO starts there)
-  const katahdinDate = direction === "SOBO" ? startDate : endDate;
-  const katahdinWarning = (startDate && endDate && isKatahdinSnowSeason(katahdinDate))
+  // AT-specific: Katahdin snow season warning — NOBO only. NOBO hikers may not realize their pace
+  // brings them to Katahdin during the Oct–May closure season. SOBO hikers choose their Katahdin
+  // start date explicitly; BestStart! already excludes snow season starts for SOBO.
+  const katahdinWarning = (direction !== "SOBO" && startDate && endDate && isKatahdinSnowSeason(endDate))
     ? `<p style="color:#b00000; font-weight:600; margin-top:0.5rem;">
         Hiking on Mt. Katahdin, Maine during the October\u2013May snow season is often closed or restricted based on local conditions.
        </p>` : "";

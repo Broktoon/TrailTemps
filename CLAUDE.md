@@ -6,7 +6,7 @@ This file provides guidance to Claude Code when working with code in this reposi
 
 ## Project Overview
 
-**TrailTemps** (trailtemps.info) is a web-based weather planning platform for long-distance hikers. It provides:
+**TrailTemps** (trailtemps.com) is a web-based weather planning platform for long-distance hikers. It provides:
 
 1. Weather Planner — lookup by section/mile + date, with live 5-day forecast and 7-year planning average
 2. Hike Duration Planner — start date → projected end date with temperature extremes map
@@ -27,9 +27,18 @@ This file provides guidance to Claude Code when working with code in this reposi
 ## Deployment
 
 - GitHub Pages (static hosting)
-- Cloudflare DNS → trailtemps.com / trailtemps.info
+- Primary domain: **trailtemps.com** — Cloudflare DNS → GitHub Pages (4 A records + www CNAME proxied; SSL/TLS mode: Full)
+- **trailtemps.info** and **trailtemps.org** both redirect to trailtemps.com via Cloudflare redirect rules (dynamic 301, path-preserving)
+- Cloudflare cache bypass rule active for `*.js` and `*.css` — JS/CSS changes deploy immediately without manual cache purge
 - Frontend: HTML + CSS + Vanilla JS + Leaflet.js (CDN, v1.9.4)
 - Open-Meteo attribution is required and implemented in the page header (not footer)
+
+### SEO / Meta
+
+- `robots.txt` at root — allows all crawlers, references sitemap
+- `sitemap.xml` at root — all 12 pages (hub + 11 trails), submitted to Google Search Console
+- All 12 pages have `<link rel="canonical">` self-referencing their canonical URL
+- All 12 pages have JSON-LD structured data: homepage has `WebSite` + `WebApplication`; trail pages have `BreadcrumbList` + `WebApplication`
 
 ---
 
@@ -270,7 +279,7 @@ Large `historical_weather.json` files (AT ~28 MB, and similarly large FT/NET fil
 - **Two status divs per page:** `durStatus` (Duration Calculator errors only) and `weatherStatus` (Weather Planner errors only) — never share them
 - **`durResult` and `durStatus`** must have `style="width:100%"` to prevent flex indentation inside `.controls`
 - **Current Conditions box:** show wind speed only — no wind direction
-- **Temperature advisories:** heat index advisory at apparent high ≥ 100 °F; wind chill advisory at apparent low ≤ 20 °F (20 °F chosen as typical gear rating floor for sleeping bags/insulation). These fire **only in the Weather Planner** (via `el("weatherStatus").innerHTML` — **not** `setWeatherStatus`, which uses `textContent` and strips HTML). In `computeAndRenderDurationExtremes`, `warningHtml` is set to `""` — no advisory logic runs in the Duration Calculator.
+- **Temperature advisories:** heat index advisory at apparent high ≥ 100 °F; wind chill advisory at apparent low ≤ 20 °F (20 °F chosen as typical gear rating floor for sleeping bags/insulation). These fire **only in the Weather Planner** (via `el("weatherStatus").innerHTML` — **not** `setWeatherStatus`, which uses `textContent` and strips HTML). In `computeAndRenderDurationExtremes`, `warningHtml` is set to `""` — no advisory logic runs in the Duration Calculator. **This is a global rule for all trails — never add advisory logic inside `computeAndRenderDurationExtremes`.** The AT previously had an advisory block there that was incorrectly firing during BestStart!; it was removed.
 - **Apparent temperature** uses Steadman methodology (built into Open-Meteo `apparent_temperature_*` fields)
 - **Extremes output format (all trails):** the unified `renderDurExtremesBlocksShared` renderer outputs three blocks inside `durExtremesHot`: (1) a 4-column duration summary table (Start Date / End Date / Distance / Duration), (2) a **Thermal Stress and Comfort Profile: Days on Trail** table (9 category columns showing day counts), (3) side-by-side Hottest Day / Coldest Night extremes tables with Date, Location, Actual Temp, Apparent Temp, Relative Humidity rows. `durExtremesCold` is cleared (legacy div kept for compatibility). Each trail's `renderDurExtremesBlocks` is a thin wrapper calling `renderDurExtremesBlocksShared` with a `formatLocation` callback.
 - **`durExtremesMap` placement (all trails):** `<div id="durExtremesMap" style="margin-top:16px;"></div>` must appear AFTER `durExtremesHot` and `durExtremesCold` inside `durExtremesWrap`, followed by the map attribution `<p>`. The map is the last visible output, not the first. All trail `index.html` files follow this order: data tables → map div → attribution.
@@ -327,6 +336,8 @@ All active trail pages except NCT include the green *BestStart!* button. It scan
 | Very Strong Cold | — | −17–8 °F | 2 |
 | Extreme Cold | — | < −17 °F | 0 (eliminates) |
 
+The UTCI column headers in the output table display each category's Fahrenheit range on a second line below the category label (e.g. "Moderate Cold / low 32–47°F"). This is rendered in `renderDurExtremesBlocksShared` in `js/shared-utils.js` via the `range` field on each `UTCI_COLS` entry.
+
 Each day's score is `(heat score + cold score) / 2`. Scoring is symmetric — heat and cold stress are weighted equally. The combined per-day score is summed across the hike; highest total wins.
 
 ### Per-Trail Implementation Pattern
@@ -366,7 +377,8 @@ NTT `runBestStart` uses `calcNttDuration(mpd).totalDays` for `durationDays` (not
 - **Weather Planner UI:** Planning Date → State (with mile ranges in labels) → Northbound Mile typed input (0–2190, validated against selected state's range)
   - Replaced old State + Mile dropdown with typed mile input
   - Functions: `getStateMileRange()`, `getSelectedPointFromMileInput()`
-- **Apparent temperature:** full support — `hi_app`/`lo_app` shown in forecast table, planning summary, and duration extremes; heat index advisory (≥ 100 °F) and wind chill advisory (≤ 20 °F) both active
+- **Apparent temperature:** full support — `hi_app`/`lo_app` shown in forecast table, planning summary, and duration extremes; heat index advisory (≥ 100 °F) and wind chill advisory (≤ 20 °F) active in Weather Planner only
+- **Katahdin snow season warning** (`renderDurExtremesBlocks`): **NOBO only** — fires when `endDate` (Katahdin arrival) is in the Oct 15–May 15 snow season. Never fires for SOBO: SOBO hikers explicitly choose their Katahdin start date, and BestStart! already excludes snow season dates for SOBO via the eliminator. Always pass `direction` from `computeAndRenderDurationExtremes`; the function defaults to `"NOBO"` if omitted.
 - **`historical_weather.json`:** rebuilt with 7 arrays per point: `hi`, `lo`, `hi_app`, `lo_app`, `rh_hi`, `rh_lo`, `ws` (365 values each); file is ~28 MB — too large for localStorage; uses HTTP cache instead (see localStorage / HTTP caching note below)
 - **`NORMALS_CACHE_VERSION`:** `"v3"` — bump whenever `historical_weather.json` is rebuilt
 - **Extremes output format:** matches FT — single Date/Location header row spanning all columns, then Actual Temp / Apparent Temp / Relative Humidity column headers, then High and Low rows. Helpers: `fmtTemp()`, `fmtRh()`, inner `extremeTable()` function inside `renderDurExtremesBlocks()`
