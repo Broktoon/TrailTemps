@@ -266,7 +266,7 @@ async function loadPrecomputedNormals() {
   for (const [, arr] of normalsAltByMile) arr.sort((a, b) => a.alt_mile - b.alt_mile);
 
   console.log("[CDT] normals loaded:", normalsByPointId.size, "points");
-  setDurStatus("");
+  setTimeout(() => setDurStatus(""), 4000);
 }
 
 /* ============================================================
