@@ -406,18 +406,18 @@ function renderDurExtremesBlocksShared(hottest, coldest, opts = {}) {
 
   // 2. UTCI thermal comfort profile
   const UTCI_COLS = [
-    { key: "extreme-cold",     label: "Extreme Cold",     style: "background:#001e70;color:#fff;" },
-    { key: "very-strong-cold", label: "Very Strong Cold", style: "background:#0044cc;color:#fff;" },
-    { key: "strong-cold",      label: "Strong Cold",      style: "background:#3377ff;color:#fff;" },
-    { key: "moderate-cold",    label: "Moderate Cold",    style: "background:#99bbff;color:#000;" },
-    { key: "comfort",          label: "Comfort Zone",     style: "background:#2e7a2e;color:#fff;" },
-    { key: "moderate-heat",    label: "Moderate Heat",    style: "background:#ffcc66;color:#000;" },
-    { key: "strong-heat",      label: "Strong Heat",      style: "background:#ff8800;color:#fff;" },
-    { key: "very-strong-heat", label: "Very Strong Heat", style: "background:#cc2200;color:#fff;" },
-    { key: "extreme-heat",     label: "Extreme Heat",     style: "background:#660000;color:#fff;" },
+    { key: "extreme-cold",     label: "Extreme Cold",     range: "low < −17°F",      style: "background:#001e70;color:#fff;" },
+    { key: "very-strong-cold", label: "Very Strong Cold", range: "low −17–8°F",  style: "background:#0044cc;color:#fff;" },
+    { key: "strong-cold",      label: "Strong Cold",      range: "low 9–31°F",        style: "background:#3377ff;color:#fff;" },
+    { key: "moderate-cold",    label: "Moderate Cold",    range: "low 32–47°F",       style: "background:#99bbff;color:#000;" },
+    { key: "comfort",          label: "Comfort Zone",     range: "hi ≤79, lo ≥48°F", style: "background:#2e7a2e;color:#fff;" },
+    { key: "moderate-heat",    label: "Moderate Heat",    range: "high 80–90°F",      style: "background:#ffcc66;color:#000;" },
+    { key: "strong-heat",      label: "Strong Heat",      range: "high 91–100°F",     style: "background:#ff8800;color:#fff;" },
+    { key: "very-strong-heat", label: "Very Strong Heat", range: "high 101–115°F",    style: "background:#cc2200;color:#fff;" },
+    { key: "extreme-heat",     label: "Extreme Heat",     range: "high > 115°F",           style: "background:#660000;color:#fff;" },
   ];
   const headerCells = UTCI_COLS.map(c =>
-    `<th style="${c.style} padding:5px 8px; font-size:0.78rem; font-weight:600;">${c.label}</th>`
+    `<th style="${c.style} padding:5px 8px; font-size:0.78rem; font-weight:600;">${c.label}<br><span style="font-size:0.68rem; font-weight:400; opacity:0.85;">${c.range}</span></th>`
   ).join("");
   const dataCells = UTCI_COLS.map(c =>
     `<td style="text-align:center; padding:5px 8px;">${utciCounts ? (utciCounts[c.key] ?? 0) : "\u2014"}</td>`
