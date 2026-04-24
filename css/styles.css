@@ -195,6 +195,19 @@ th {
 
 .small { margin-top: 6px; font-size: 12px; color: var(--muted); }
 
+.disclaimer-line {
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.copyright-line {
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
 .section-title-block {
   width: 100%;
 }
@@ -431,6 +444,15 @@ hr.card-sep {
   height: 1px;
   background: rgba(0,0,0,0.12);
   margin: 6px 0;
+}
+.contact-line {
+  text-align: center;
+  margin: 1.5rem 0 0.5rem;
+  font-size: 0.95rem;
+  color: #444;
+}
+.contact-line a {
+  color: #2e7a2e;
 }
 .donation-block {
   display: flex;

@@ -40,6 +40,20 @@ This file provides guidance to Claude Code when working with code in this reposi
 - All 12 pages have `<link rel="canonical">` self-referencing their canonical URL
 - All 12 pages have JSON-LD structured data: homepage has `WebSite` + `WebApplication`; trail pages have `BreadcrumbList` + `WebApplication`
 
+#### Title, H1, and Sub-brand Conventions
+
+**Trail pages (all 11):**
+- `<title>`: `[Trail Name] Weather Planner | TrailTemps` — trail name leads, brand follows the pipe
+- `<h1>`: `[Trail Name] Weather Planner` — descriptive, not just the trail name alone
+- Sub-brand div: `<div class="sub-brand"><em>TrailTemps</em> - Finding The Best Start Dates for You</div>`
+
+**Hub (`index.html`):**
+- `<title>`: `TrailTemps: Weather Planner for All 11 National Scenic Trails`
+- `<h1>`: `National Scenic Trail Weather Planner — All 11 Trails`
+- Sub line (`<p class="sub">`): `<em>TrailTemps</em> - Finding The Best Start Dates for You`
+
+When adding a new trail, follow the trail page pattern above. Never use just the trail name alone as the `<h1>` — always append "Weather Planner".
+
 ---
 
 ## Running Data Utility Scripts
@@ -288,7 +302,14 @@ Large `historical_weather.json` files (AT ~28 MB, and similarly large FT/NET fil
 - **`bestStartBtn` wiring:** `el("bestStartBtn")?.addEventListener("click", runBestStart)` in `initDurationUI()`.
 - **Mile inputs:** always use `type="text" inputmode="numeric" pattern="[0-9]*"` (or `[0-9.]*` for decimal miles). Never `type="number"` — number inputs enforce browser spinner constraints and block free text entry. JS handles range validation.
 - **Trail nav:** every trail page uses `<div id="trail-nav-mount"></div>` in `.header-actions` — never inline the `<details>` nav HTML. The canonical trail list lives only in `js/trail-nav.js`.
-- **Shared CSS:** `.control-row`, `.ft-select-col`, `.btn-primary`, `.feels-hotter`, `.feels-cooler`, `.alt-group-block`, `.alt-options`, `.alt-delta` are defined in `css/styles.css`. Do not redeclare them inline. Trail-specific ID rules (e.g. `#atMileInput`, `#nttSectionInfo`) stay inline in the trail's `index.html`.
+- **Shared CSS:** `.control-row`, `.ft-select-col`, `.btn-primary`, `.feels-hotter`, `.feels-cooler`, `.alt-group-block`, `.alt-options`, `.alt-delta`, `.contact-line`, `.disclaimer-line`, `.copyright-line` are defined in `css/styles.css`. Do not redeclare them inline. Trail-specific ID rules (e.g. `#atMileInput`, `#nttSectionInfo`) stay inline in the trail's `index.html`.
+- **Page-bottom structure (all trail pages):** The bottom of every trail `index.html` follows this fixed order after `</main>`:
+  1. `<p class="contact-line">` — feedback/support email (`Hiker@TrailTemps.com`), links to `mailto:`
+  2. `<div class="donation-block">` — Buy Me a Coffee text + button
+  3. `<p class="copyright-line">` — "Copyright 2026 by TrailTemps. All rights reserved." (left-justified, small, muted)
+  There is **no** `<footer class="site-footer">` on trail pages — it was removed when the disclaimer was relocated.
+- **Disclaimer placement (all trail pages):** `<p class="disclaimer-line">Informational only. Always verify conditions and heed local advisories.</p>` appears **twice** on each trail page — immediately before each `<hr class="card-sep" />` separator (once after the Duration Calculator results area, once after the Weather Planner results grid). It does **not** appear in a footer.
+- **Hub page footer:** `<div class="landing-footer">` contains the feedback/support contact line (same text as `.contact-line` on trail pages). The old "Tip: Bookmark…" line was replaced. The hub uses `<footer class="site-footer">` with `<div class="small">` for the copyright — this pattern differs from trail pages.
 - **Alternate route UI pattern:** Use `<fieldset class="alt-group-block">` with `<legend>`, `<div class="alt-options">`, radio `<input>` labels, and `<span class="alt-delta">` for the mileage note. The delta should show segment miles only (not cumulative totals), plus the differential vs. main. See FT or AZT as reference. Direction dropdown contains only direction (NOBO/SOBO); alternates are separate fieldsets below.
 - **`getSelectedAlts()`** — trails with radio-based alternates implement this function to return a plain object keyed by alt group id. `calcTotalMiles()` takes both direction and selectedAlts. `buildHikePoints()` and `getNearestPoint()` also take selectedAlts.
 - **Alt passage points** use `passage_mile` (0-based within the passage) rather than spine `mile`. `getNearestPoint()` must convert accordingly when selecting alt segment points.
