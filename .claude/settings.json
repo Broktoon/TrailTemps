@@ -9,7 +9,8 @@
       "WebFetch(domain:wiki.openstreetmap.org)",
       "WebFetch(domain:www.trailforks.com)",
       "WebFetch(domain:nominatim.openstreetmap.org)",
-      "WebFetch(domain:api.openstreetmap.org)"
+      "WebFetch(domain:api.openstreetmap.org)",
+      "Bash(Move-Item \"c:\\\\Users\\\\dcurren\\\\OneDrive - Associated Universities Inc\\\\Documents\\\\Personal - Dave\\\\TrailTemps\\\\TrailTemps Version - Git\\\\favicon.svg\" \"c:\\\\Users\\\\dcurren\\\\OneDrive - Associated Universities Inc\\\\Documents\\\\Personal - Dave\\\\TrailTemps\\\\TrailTemps Version - Git\\\\images\\\\favicon.svg\")"
     ]
   }
 }
