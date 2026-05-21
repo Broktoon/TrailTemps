@@ -605,3 +605,6 @@ hr.card-sep {
 .btn-best-start:hover {
   background: #235823;
 }
+
+/* TEMP: donation block hidden — remove this rule to re-enable Buy Me a Coffee */
+.donation-block { display: none; }
