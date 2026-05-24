@@ -75,6 +75,9 @@ const NORMALS_TTL_MS  = 30 * 24 * 60 * 60 * 1000;  // 30 days
 // Bump this whenever you rebuild or change historical_weather.json format/content
 const NORMALS_CACHE_VERSION = "v3";
 
+const HF_MILE = 1012;          // Harpers Ferry, WV approximate NOBO mile
+const FLIP_FLOP_TRAVEL_DAYS = 2;
+
 let allPoints = [];
 let allPointsSortedByMile = [];
 let pointsByState = new Map();
@@ -140,6 +143,97 @@ function isKatahdinSnowSeason(dateObj) {
   if (m === 5 && d <= 15) return true;
 
   return false;
+}
+
+function isFlipFlop(direction) {
+  return direction === "ff_nobo_sobo" || direction === "ff_hf_nobo_sobo" || direction === "ff_hf_sobo_nobo";
+}
+
+// Returns [{date, point}, ...] for a complete hike (one or two legs).
+// For flip-flop modes the two legs are concatenated; dates skip FLIP_FLOP_TRAVEL_DAYS between them.
+function buildHikePoints(startDate, direction, milesPerDay) {
+  const pts = [];
+
+  if (direction === "NOBO" || direction === "SOBO") {
+    const startMile = direction === "SOBO" ? trailMaxMiles : trailMinMiles;
+    const sign = direction === "SOBO" ? -1 : 1;
+    const numDays = Math.ceil(trailTotalMiles / milesPerDay);
+    for (let i = 0; i < numDays; i++) {
+      const date = addDays(startDate, i);
+      let mile = startMile + sign * milesPerDay * i;
+      mile = Math.max(trailMinMiles, Math.min(trailMaxMiles, mile));
+      const point = getNearestPointByMile(mile);
+      if (point) pts.push({ date, point });
+    }
+    return pts;
+  }
+
+  if (!isFlipFlop(direction)) return pts;
+
+  const southDist = HF_MILE - trailMinMiles; // Springer → HF
+  const northDist = trailMaxMiles - HF_MILE;  // HF → Katahdin
+
+  let leg1StartMile, leg1Sign, leg1Dist;
+  let leg2StartMile, leg2Sign, leg2Dist;
+
+  if (direction === "ff_nobo_sobo") {
+    leg1StartMile = trailMinMiles; leg1Sign =  1; leg1Dist = southDist; // Springer NOBO → HF
+    leg2StartMile = trailMaxMiles; leg2Sign = -1; leg2Dist = northDist; // Katahdin SOBO → HF
+  } else if (direction === "ff_hf_nobo_sobo") {
+    leg1StartMile = HF_MILE;       leg1Sign =  1; leg1Dist = northDist; // HF NOBO → Katahdin
+    leg2StartMile = HF_MILE;       leg2Sign = -1; leg2Dist = southDist; // HF SOBO → Springer
+  } else {
+    // ff_hf_sobo_nobo
+    leg1StartMile = HF_MILE;       leg1Sign = -1; leg1Dist = southDist; // HF SOBO → Springer
+    leg2StartMile = trailMaxMiles; leg2Sign = -1; leg2Dist = northDist; // Katahdin SOBO → HF
+  }
+
+  const leg1Days = Math.ceil(leg1Dist / milesPerDay);
+  const leg2Days = Math.ceil(leg2Dist / milesPerDay);
+
+  for (let i = 0; i < leg1Days; i++) {
+    const date = addDays(startDate, i);
+    let mile = leg1StartMile + leg1Sign * milesPerDay * i;
+    mile = Math.max(trailMinMiles, Math.min(trailMaxMiles, mile));
+    const point = getNearestPointByMile(mile);
+    if (point) pts.push({ date, point });
+  }
+
+  const leg2Offset = leg1Days + FLIP_FLOP_TRAVEL_DAYS;
+  for (let i = 0; i < leg2Days; i++) {
+    const date = addDays(startDate, leg2Offset + i);
+    let mile = leg2StartMile + leg2Sign * milesPerDay * i;
+    mile = Math.max(trailMinMiles, Math.min(trailMaxMiles, mile));
+    const point = getNearestPointByMile(mile);
+    if (point) pts.push({ date, point });
+  }
+
+  return pts;
+}
+
+// Returns the date the hiker is at Katahdin for any flip-flop direction.
+function flipFlopKatahdinDate(startDate, direction, milesPerDay) {
+  const southDist = HF_MILE - trailMinMiles;
+  const northDist = trailMaxMiles - HF_MILE;
+  if (direction === "ff_hf_nobo_sobo") {
+    // Katahdin is at the END of Leg 1 (HF → Katahdin)
+    return addDays(startDate, Math.ceil(northDist / milesPerDay) - 1);
+  }
+  // ff_nobo_sobo and ff_hf_sobo_nobo: Katahdin is at the START of Leg 2
+  return addDays(startDate, Math.ceil(southDist / milesPerDay) + FLIP_FLOP_TRAVEL_DAYS);
+}
+
+// Returns {leg1Days, leg2Days, totalDays} for any flip-flop direction.
+function calcFlipFlopDays(direction, milesPerDay) {
+  const southDist = HF_MILE - trailMinMiles;
+  const northDist = trailMaxMiles - HF_MILE;
+  const leg1Days = direction === "ff_hf_nobo_sobo"
+    ? Math.ceil(northDist / milesPerDay)
+    : Math.ceil(southDist / milesPerDay);
+  const leg2Days = direction === "ff_hf_nobo_sobo"
+    ? Math.ceil(southDist / milesPerDay)
+    : Math.ceil(northDist / milesPerDay);
+  return { leg1Days, leg2Days, totalDays: leg1Days + FLIP_FLOP_TRAVEL_DAYS + leg2Days };
 }
 
 function renderDurationResult({ direction, startDate, endDate, distanceMiles, milesPerDay, durationDays, startDateLabel = "Start Date" }) {
@@ -220,19 +314,27 @@ function getNearestPointByMile(targetMile) {
   return Math.abs(getPointMile(a) - targetMile) <= Math.abs(getPointMile(b) - targetMile) ? a : b;
 }
 
-function renderDurExtremesBlocks(hottest, coldest, { startDate, endDate, distanceMiles, durationDays, startDateLabel = "Start Date", utciCounts, direction = "NOBO" } = {}) {
-  // AT-specific: Katahdin snow season warning — NOBO only. NOBO hikers may not realize their pace
-  // brings them to Katahdin during the Oct–May closure season. SOBO hikers choose their Katahdin
-  // start date explicitly; BestStart! already excludes snow season starts for SOBO.
-  const katahdinWarning = (direction !== "SOBO" && startDate && endDate && isKatahdinSnowSeason(endDate))
-    ? `<p style="color:#b00000; font-weight:600; margin-top:0.5rem;">
-        Hiking on Mt. Katahdin, Maine during the October\u2013May snow season is often closed or restricted based on local conditions.
-       </p>` : "";
+function renderDurExtremesBlocks(hottest, coldest, { startDate, endDate, distanceMiles, durationDays, startDateLabel = "Start Date", utciCounts, direction = "NOBO", durationNote, katahdinDate } = {}) {
+  // AT-specific: Katahdin snow season warning.
+  // NOBO: warn if end date falls in the Oct–May closure season.
+  // Flip-flop: warn if the computed Katahdin date falls in the closure season.
+  // SOBO: no warning — hikers choose their Katahdin start explicitly; BestStart! eliminates snow season starts.
+  let katahdinWarning = "";
+  if (direction === "NOBO" && endDate && isKatahdinSnowSeason(endDate)) {
+    katahdinWarning = `<p style="color:#b00000; font-weight:600; margin-top:0.5rem;">
+        Hiking on Mt. Katahdin, Maine during the October–May snow season is often closed or restricted based on local conditions.
+       </p>`;
+  } else if (isFlipFlop(direction) && katahdinDate && isKatahdinSnowSeason(katahdinDate)) {
+    katahdinWarning = `<p style="color:#b00000; font-weight:600; margin-top:0.5rem;">
+        Your flip-flop itinerary places you at Mt. Katahdin, Maine during the October–May snow season. Baxter State Park often closes the summit trail during this period based on local conditions.
+       </p>`;
+  }
 
   renderDurExtremesBlocksShared(hottest, coldest, {
     startDate, endDate, distanceMiles, durationDays, startDateLabel, utciCounts,
     warningHtml: katahdinWarning,
-    formatLocation: (rec) => `${STATE_NAME[rec.point.state] || rec.point.state} \u2014 Mile ~${fmtMile(rec.point.mile)}`
+    durationNote,
+    formatLocation: (rec) => `${STATE_NAME[rec.point.state] || rec.point.state} — Mile ~${fmtMile(rec.point.mile)}`
   });
 }
 
@@ -301,8 +403,7 @@ async function computeAndRenderDurationExtremes({ direction, startDate, milesPer
     return;
   }
 
-  const startMile = direction === "SOBO" ? trailMaxMiles : trailMinMiles;
-  const sign = direction === "SOBO" ? -1 : 1;
+  const hikePoints = buildHikePoints(startDate, direction, milesPerDay);
 
   let hottest = null;
   let coldest = null;
@@ -313,20 +414,12 @@ async function computeAndRenderDurationExtremes({ direction, startDate, milesPer
     "moderate-heat": 0, "strong-heat": 0, "very-strong-heat": 0, "extreme-heat": 0
   };
 
-  for (let i = 0; i < durationDays; i++) {
-    const date = addDays(startDate, i);
-    let targetMile = startMile + sign * (milesPerDay * i);
-    if (targetMile < trailMinMiles) targetMile = trailMinMiles;
-    if (targetMile > trailMaxMiles) targetMile = trailMaxMiles;
+  for (const { date, point } of hikePoints) {
+    const normals =
+      normalsByPointId.get(point.id) ||
+      (point.legacy_id ? normalsByPointId.get(point.legacy_id) : null);
 
-    const point = getNearestPointByMile(targetMile);
-if (!point) continue;
-
-const normals =
-  normalsByPointId.get(point.id) ||
-  (point.legacy_id ? normalsByPointId.get(point.legacy_id) : null);
-
-if (!normals || !Array.isArray(normals.hi) || !Array.isArray(normals.lo)) continue;
+    if (!normals || !Array.isArray(normals.hi) || !Array.isArray(normals.lo)) continue;
 
     const monthDay = toISODate(date).slice(5); // MM-DD
     const idx = dayIndexFromMonthDay(monthDay);
@@ -336,7 +429,6 @@ if (!normals || !Array.isArray(normals.hi) || !Array.isArray(normals.lo)) contin
 
     if (!Number.isFinite(avgHigh) || !Number.isFinite(avgLow)) continue;
 
-    // Apparent temps — use normals if available, otherwise fall back to NWS formulas
     const appHigh = (normals.hi_app && Number.isFinite(normals.hi_app[idx]))
       ? normals.hi_app[idx]
       : (normals.rh_hi ? (heatIndex(avgHigh, normals.rh_hi[idx]) ?? avgHigh) : avgHigh);
@@ -349,28 +441,43 @@ if (!normals || !Array.isArray(normals.hi) || !Array.isArray(normals.lo)) contin
     const rhHigh = (normals.rh_hi && Number.isFinite(normals.rh_hi[idx])) ? normals.rh_hi[idx] : null;
     const rhLow  = (normals.rh_lo && Number.isFinite(normals.rh_lo[idx])) ? normals.rh_lo[idx] : null;
 
-    const rec = { date, targetMile, point, avgHigh, avgLow, appHigh, appLow, rhHigh, rhLow };
+    const rec = { date, targetMile: point.mile, point, avgHigh, avgLow, appHigh, appLow, rhHigh, rhLow };
 
     if (!hottest || rec.appHigh > hottest.appHigh) hottest = rec;
     if (!coldest || rec.appLow  < coldest.appLow)  coldest = rec;
 
-    // UTCI thermal comfort categorization
     const highScore = utciScoreHigh(appHigh);
     const lowScore  = utciScoreLow(appLow);
     utciCounts[utciCategoryDay(highScore, lowScore, appHigh, appLow)]++;
   }
 
-  const endDate = addDays(startDate, durationDays - 1);
+  const endDate = hikePoints.length > 0
+    ? hikePoints[hikePoints.length - 1].date
+    : addDays(startDate, (durationDays || 0) - 1);
+
+  const totalCalendarDays = (hikePoints.length > 0 && startDate)
+    ? Math.round((endDate - startDate) / 86400000) + 1
+    : (durationDays || 0);
+
+  const durationNote = isFlipFlop(direction)
+    ? `Includes ${FLIP_FLOP_TRAVEL_DAYS} travel days between legs at Harpers Ferry, WV (~mile 1,012)`
+    : undefined;
+
+  const katahdinDate = isFlipFlop(direction)
+    ? flipFlopKatahdinDate(startDate, direction, milesPerDay)
+    : undefined;
 
   setDisplayIfExists("durExtremesWrap", "block");
   renderDurExtremesBlocks(hottest, coldest, {
     startDate,
     endDate,
     distanceMiles,
-    durationDays,
+    durationDays: totalCalendarDays,
     startDateLabel,
     utciCounts,
-    direction
+    direction,
+    durationNote,
+    katahdinDate
   });
   renderDurExtremesMap(hottest, coldest);
 }
@@ -404,17 +511,20 @@ function runDurationCalculator() {
 
   const startDate = resolveStartDate(monthDay);
   const distance = trailTotalMiles;
-  const durationDays = Math.ceil(distance / mpd);
+
+  let durationDays;
+  if (isFlipFlop(direction)) {
+    const { totalDays } = calcFlipFlopDays(direction, mpd);
+    durationDays = totalDays;
+  } else {
+    durationDays = Math.ceil(distance / mpd);
+  }
 
   if (durationDays > 365) {
     setDurStatus("For this planner, hikes cannot exceed one year (365 days). Please adjust Miles per Day.");
     return;
   }
 
-  // End date should be the LAST hiking day: start + (durationDays - 1)
-  const endDate = addDays(startDate, durationDays - 1);
-
-  // Compute extremes synchronously (no network) once normals are loaded.
   if (normalsByPointId && normalsByPointId.size > 0) {
     computeAndRenderDurationExtremes({
       direction,
@@ -436,7 +546,6 @@ function runDurationCalculator() {
    UTCI scoring functions now live in shared-utils.js.
    This thin wrapper handles AT-specific logic (Katahdin eliminator).
 ---------------------------- */
-
 function runBestStart() {
   setDurStatus("");
   if (el("bestStartResult")) el("bestStartResult").innerHTML = "";
@@ -463,17 +572,19 @@ function runBestStart() {
     return;
   }
 
-  const durationDays = Math.ceil(trailTotalMiles / mpd);
+  let durationDays;
+  if (isFlipFlop(direction)) {
+    const { totalDays } = calcFlipFlopDays(direction, mpd);
+    durationDays = totalDays;
+  } else {
+    durationDays = Math.ceil(trailTotalMiles / mpd);
+  }
+
   if (durationDays > 365) {
     setDurStatus("For this planner, hikes cannot exceed one year (365 days). Please adjust Miles per Day.");
     return;
   }
 
-  const startMile = direction === "SOBO" ? trailMaxMiles : trailMinMiles;
-  const sign      = direction === "SOBO" ? -1 : 1;
-
-  // AT normals use hi_app/lo_app keys directly (not normalized to app_hi/app_lo at load time)
-  // so we build a compatible getNormals wrapper
   function getAtNormals(point) {
     const raw = normalsByPointId.get(point.id)
       || (point.legacy_id ? normalsByPointId.get(point.legacy_id) : null);
@@ -486,30 +597,20 @@ function runBestStart() {
 
   const { bestStartDate } = runBestStartShared({
     durationDays,
-    getHikePoints: (startDate) => {
-      const pts = [];
-      for (let i = 0; i < durationDays; i++) {
-        const date = addDays(startDate, i);
-        let targetMile = startMile + sign * (mpd * i);
-        if (targetMile < trailMinMiles) targetMile = trailMinMiles;
-        if (targetMile > trailMaxMiles) targetMile = trailMaxMiles;
-        const point = getNearestPointByMile(targetMile);
-        if (point) pts.push({ date, point });
-      }
-      return pts;
-    },
+    getHikePoints: (startDate) => buildHikePoints(startDate, direction, mpd),
     getNormals: getAtNormals,
-    // AT-specific: Katahdin is end-of-hike for NOBO, start-of-hike for SOBO
     eliminator: (startDate, endDate) => {
-      const katahdinDate = direction === "SOBO" ? startDate : endDate;
-      return isKatahdinSnowSeason(katahdinDate);
+      if (direction === "SOBO") return isKatahdinSnowSeason(startDate);
+      if (direction === "NOBO") return isKatahdinSnowSeason(endDate);
+      if (isFlipFlop(direction)) return isKatahdinSnowSeason(flipFlopKatahdinDate(startDate, direction, mpd));
+      return false;
     }
   });
 
   if (!bestStartDate) {
     setHtmlIfExists("bestStartResult",
       `<p style="color:#b00000; font-weight:600; margin-top:0.75rem;">
-        No valid start date found \u2014 every possible start date includes at least one day of
+        No valid start date found — every possible start date includes at least one day of
         extreme heat or cold stress. Try adjusting miles per day.
        </p>`);
     return;
