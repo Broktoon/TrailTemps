@@ -399,10 +399,35 @@ NTT `runBestStart` uses `calcNttDuration(mpd).totalDays` for `durationDays` (not
   - Replaced old State + Mile dropdown with typed mile input
   - Functions: `getStateMileRange()`, `getSelectedPointFromMileInput()`
 - **Apparent temperature:** full support — `hi_app`/`lo_app` shown in forecast table, planning summary, and duration extremes; heat index advisory (≥ 100 °F) and wind chill advisory (≤ 20 °F) active in Weather Planner only
-- **Katahdin snow season warning** (`renderDurExtremesBlocks`): **NOBO only** — fires when `endDate` (Katahdin arrival) is in the Oct 15–May 15 snow season. Never fires for SOBO: SOBO hikers explicitly choose their Katahdin start date, and BestStart! already excludes snow season dates for SOBO via the eliminator. Always pass `direction` from `computeAndRenderDurationExtremes`; the function defaults to `"NOBO"` if omitted.
+- **Katahdin snow season warning** (`renderDurExtremesBlocks`): fires for NOBO (end date in snow season) and all three flip-flop directions (computed Katahdin date in snow season). Never fires for SOBO. The `katahdinDate` param is computed by `flipFlopKatahdinDate()` and passed from `computeAndRenderDurationExtremes`. Always pass `direction`; the function defaults to `"NOBO"` if omitted.
 - **`historical_weather.json`:** rebuilt with 7 arrays per point: `hi`, `lo`, `hi_app`, `lo_app`, `rh_hi`, `rh_lo`, `ws` (365 values each); file is ~28 MB — too large for localStorage; uses HTTP cache instead (see localStorage / HTTP caching note below)
 - **`NORMALS_CACHE_VERSION`:** `"v3"` — bump whenever `historical_weather.json` is rebuilt
 - **Extremes output format:** matches FT — single Date/Location header row spanning all columns, then Actual Temp / Apparent Temp / Relative Humidity column headers, then High and Low rows. Helpers: `fmtTemp()`, `fmtRh()`, inner `extremeTable()` function inside `renderDurExtremesBlocks()`
+
+### AT Flip-Flop Directions
+
+Three flip-flop direction values are supported in addition to `NOBO` and `SOBO`. All use **Harpers Ferry, WV (~mile 1,012 NOBO)** as the fixed pivot point and add **2 travel days** between legs.
+
+| Direction value | Leg 1 | Leg 2 |
+|-----------------|-------|-------|
+| `ff_nobo_sobo` | Georgia (mile 0) NOBO → Harpers Ferry | Maine (mile 2190) SOBO → Harpers Ferry |
+| `ff_hf_sobo_nobo` | Harpers Ferry SOBO → Georgia | Maine (mile 2190) SOBO → Harpers Ferry |
+| `ff_hf_nobo_sobo` | Harpers Ferry NOBO → Maine | Harpers Ferry SOBO → Georgia |
+
+**Constants:** `HF_MILE = 1012`, `FLIP_FLOP_TRAVEL_DAYS = 2`
+
+**Key functions in `app.js`:**
+
+- **`isFlipFlop(direction)`** — returns `true` for any of the three `ff_*` values
+- **`buildHikePoints(startDate, direction, milesPerDay)`** — unified hike point builder for all five direction modes; for flip-flop, concatenates both legs with dates skipping the 2 travel days between them. Used by both `computeAndRenderDurationExtremes` and `runBestStart`'s `getHikePoints` callback
+- **`flipFlopKatahdinDate(startDate, direction, milesPerDay)`** — returns the calendar date the hiker is at Katahdin: end of Leg 1 for `ff_hf_nobo_sobo`; start of Leg 2 for the other two
+- **`calcFlipFlopDays(direction, milesPerDay)`** — returns `{ leg1Days, leg2Days, totalDays }` where `totalDays = leg1Days + 2 + leg2Days`; used by `runDurationCalculator` and `runBestStart` to compute total calendar duration
+
+**Duration display:** `durationNote` is passed as `"Includes 2 travel days between legs at Harpers Ferry, WV (~mile 1,012)"` for all flip-flop directions; rendered by `renderDurExtremesBlocksShared`.
+
+**BestStart! eliminator:** rejects any start date where `flipFlopKatahdinDate()` falls in the Oct 15–May 15 Katahdin snow season.
+
+**Total distance** for all flip-flop options is always `trailTotalMiles` (2,190 miles — the full AT).
 
 ### AT Tools
 
