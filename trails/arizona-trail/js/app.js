@@ -231,13 +231,13 @@ function getSelectedAlts() {
 function calcTotalMiles(directionId, selectedAlts) {
   // Alt group definitions: delta_miles is the change vs. the main route segment
   const ALT_GROUPS = (aztMeta?.alt_groups?.length ? aztMeta.alt_groups : null) || [
-    { id: "pusch",     main: "p11",  alt: "p11e", delta_miles: -1.4  },
-    { id: "flagstaff", main: "p32",  alt: "p33",  delta_miles: -12.6 },
+    { id: "pusch",     main_passage: "p11",  alt_passage: "p11e", delta_miles: -1.4  },
+    { id: "flagstaff", main_passage: "p32",  alt_passage: "p33",  delta_miles: -12.6 },
   ];
 
   let total = AZT_SPINE_MAX; // 882.5 mi main route
   for (const group of ALT_GROUPS) {
-    if (selectedAlts[group.id] === group.alt) {
+    if (selectedAlts[group.id] === group.alt_passage) {
       total += group.delta_miles;
     }
   }
@@ -267,14 +267,17 @@ async function loadPoints() {
   if (!r.ok) throw new Error(`points.json fetch failed (${r.status})`);
   const data = await r.json();
 
+  // points.json field is section_id (canonical schema); mapped back onto
+  // passage_id, the name the rest of this file already expects.
   allPoints = data.filter(p =>
     isFinite(Number(p.lat)) && isFinite(Number(p.lon))
   ).map(p => ({
     ...p,
-    lat:  Number(p.lat),
-    lon:  Number(p.lon),
-    mile: Number(p.mile),
-    id:   String(p.id),
+    lat:        Number(p.lat),
+    lon:        Number(p.lon),
+    mile:       Number(p.mile),
+    id:         String(p.id),
+    passage_id: p.section_id,
   }));
 
   pointsByMile = new Map();

@@ -148,21 +148,41 @@ function saveOutput(byId, meta) {
 /* ---------- select normals points from points.json ------------------------- */
 function selectNormalsPoints(allPoints) {
   // Pick one point per NORMALS_INTERVAL_MI — the one closest to each
-  // N-mile mark (0, 5, 10, …)
-  const selected = [];
-  let nextTarget = 0;
-
+  // N-mile mark (0, 5, 10, …). The main spine is walked as ONE continuous
+  // thread (same as always — every regular passage shares the "main" key,
+  // so nextTarget keeps advancing across passage boundaries exactly like
+  // before). Alt-route points (11e, 33) deliberately share the same mile
+  // numbers as the main passage they parallel, so they get their own
+  // separate group each, walked independently by their own sec_mile —
+  // otherwise a shared global walk can never select them: at any mile
+  // mark shared with the main spine it always picks whichever point comes
+  // first (always the main one), and the alt's own miles never advance a
+  // threshold the main spine already passed.
+  const byRoute = new Map();
   for (const pt of allPoints) {
-    if (pt.mile >= nextTarget) {
-      selected.push(pt);
-      nextTarget = Math.floor(pt.mile / NORMALS_INTERVAL_MI) * NORMALS_INTERVAL_MI
-                  + NORMALS_INTERVAL_MI;
-    }
+    const key = pt.alt_of ? (pt.route_id ?? pt.passage_id) : "main";
+    if (!byRoute.has(key)) byRoute.set(key, []);
+    byRoute.get(key).push(pt);
   }
 
-  // Always include the final point if not already captured
-  const last = allPoints[allPoints.length - 1];
-  if (selected[selected.length - 1]?.id !== last.id) selected.push(last);
+  const selected = [];
+  for (const routePts of byRoute.values()) {
+    // `mile` (not sec_mile) even for isolated alt groups: sec_mile resets
+    // per passage, which would break the "main" group's continuity across
+    // passage boundaries — mile is globally monotonic within any one group,
+    // even though its numbers happen to overlap with unrelated groups.
+    const sorted = [...routePts].sort((a, b) => a.mile - b.mile);
+    let nextTarget = 0;
+    for (const pt of sorted) {
+      if (pt.mile >= nextTarget) {
+        selected.push(pt);
+        nextTarget = Math.floor(pt.mile / NORMALS_INTERVAL_MI) * NORMALS_INTERVAL_MI
+                    + NORMALS_INTERVAL_MI;
+      }
+    }
+    const last = sorted[sorted.length - 1];
+    if (selected[selected.length - 1]?.id !== last.id) selected.push(last);
+  }
 
   return selected;
 }
@@ -225,7 +245,7 @@ async function main() {
         lat:        pt.lat,
         lon:        pt.lon,
         mile:       pt.mile,
-        passage_id: pt.passage_id,
+        passage_id: pt.section_id,
         ...normals,
       };
       if (gridElevFt        != null) record.grid_elev  = gridElevFt;
