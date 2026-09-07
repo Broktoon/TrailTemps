@@ -96,7 +96,7 @@ const NTT_TRAVEL_DAYS       = 4;    // one between each consecutive section pair
 // Section definitions (NOBO order). These mirror ntt_meta.json / bootstrap.
 // axis_start/axis_end are cumulative trail miles measured from NPS GIS data.
 const NTT_SECTIONS_DEF = [
-  { id: "portkopinu",        name: "Portkopinu",        axis_start:  0.00, axis_end:  3.44, len:  3.44 },
+  { id: "potkopinu",         name: "Potkopinu",         axis_start:  0.00, axis_end:  3.44, len:  3.44 },
   { id: "rocky-springs",     name: "Rocky Springs",     axis_start:  3.44, axis_end: 12.43, len:  8.99 },
   { id: "yockanookany",      name: "Yockanookany",      axis_start: 12.43, axis_end: 38.16, len: 25.73 },
   { id: "blackland-prairie", name: "Blackland Prairie", axis_start: 38.16, axis_end: 44.27, len:  6.11 },
@@ -185,6 +185,9 @@ async function loadPoints() {
   if (!r.ok) throw new Error(`points.json fetch failed (${r.status})`);
   const data = await r.json();
 
+  // points.json fields: mile is cumulative through real trail (was axis_mile),
+  // sec_mile is section-relative (was mile), section_id is the section slug
+  // (was section). Mapped back onto the names the rest of this file expects.
   allPoints = data.filter(p =>
     isFinite(Number(p.lat)) && isFinite(Number(p.lon))
   ).map(p => ({
@@ -192,8 +195,9 @@ async function loadPoints() {
     lat:       Number(p.lat),
     lon:       Number(p.lon),
     id:        String(p.id),
-    mile:      Number(p.mile),
-    axis_mile: Number(p.axis_mile),
+    mile:      Number(p.sec_mile),
+    axis_mile: Number(p.mile),
+    section:   p.section_id,
   }));
 
   pointsBySection = new Map();
@@ -729,7 +733,7 @@ function getNearestNormals(point) {
  * NTT is discontinuous: walk each section in order, add a travel day between sections.
  * Travel days use the endpoint of the section just completed (temperature still recorded).
  *
- * NOBO: Portkopinu → Rocky Springs → Yockanookany → Blackland Prairie → Highland Rim
+ * NOBO: Potkopinu → Rocky Springs → Yockanookany → Blackland Prairie → Highland Rim
  * SOBO: reverse order
  */
 function buildHikePoints({ directionId, startDate, milesPerDay }) {

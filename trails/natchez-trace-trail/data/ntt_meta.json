@@ -6,14 +6,14 @@
     "map_center": [33.5, -89.5],
     "map_zoom": 7,
     "termini": {
-      "south": "Portkopinu, MS",
+      "south": "Potkopinu, MS",
       "north": "Highland Rim, TN"
     }
   },
   "sections": [
     {
-      "id": "portkopinu",
-      "name": "Portkopinu",
+      "id": "potkopinu",
+      "name": "Potkopinu",
       "state": "MS",
       "mile_start": 0,
       "mile_end": 3.44,
@@ -60,13 +60,13 @@
   "direction_options": [
     {
       "id": "nobo",
-      "label": "Northbound \u2014 Portkopinu, MS \u2192 Highland Rim, TN",
+      "label": "Northbound \u2014 Potkopinu, MS \u2192 Highland Rim, TN",
       "total_miles": 68.89,
       "is_nobo": true
     },
     {
       "id": "sobo",
-      "label": "Southbound \u2014 Highland Rim, TN \u2192 Portkopinu, MS",
+      "label": "Southbound \u2014 Highland Rim, TN \u2192 Potkopinu, MS",
       "total_miles": 68.89,
       "is_nobo": false
     }

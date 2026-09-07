@@ -116,10 +116,10 @@
           <label for="durDirectionSelect">Direction:</label>
           <select id="durDirectionSelect">
             <optgroup label="Northbound">
-              <option value="nobo">Northbound: Portkopinu, MS &#x2192; Highland Rim, TN</option>
+              <option value="nobo">Northbound: Potkopinu, MS &#x2192; Highland Rim, TN</option>
             </optgroup>
             <optgroup label="Southbound">
-              <option value="sobo">Southbound: Highland Rim, TN &#x2192; Portkopinu, MS</option>
+              <option value="sobo">Southbound: Highland Rim, TN &#x2192; Potkopinu, MS</option>
             </optgroup>
           </select>
         </div>
@@ -199,7 +199,7 @@
         <div class="ft-select-col">
           <label for="nttSectionSelect">Section:</label>
           <select id="nttSectionSelect">
-            <option value="portkopinu">Portkopinu</option>
+            <option value="potkopinu">Potkopinu</option>
             <option value="rocky-springs">Rocky Springs</option>
             <option value="yockanookany">Yockanookany</option>
             <option value="blackland-prairie">Blackland Prairie</option>
@@ -264,7 +264,7 @@
               Unlike most National Scenic Trails, the Natchez Trace Trail is not a single continuous
               footpath. Instead, it consists of five separate hiking sections spaced along the
               ~444-mile Natchez Trace Parkway corridor between southwest Mississippi and central
-              Tennessee. The sections — Portkopinu, Rocky Springs, Yockanookany, Blackland Prairie,
+              Tennessee. The sections — Potkopinu, Rocky Springs, Yockanookany, Blackland Prairie,
               and Highland Rim — total approximately 59 miles of actual trail.
               All mileage inputs in this tool are <strong>section miles</strong> — the distance from
               the start of a given section, numbered from zero. The weather extremes map and duration
@@ -289,7 +289,7 @@
               The Natchez Trace corridor runs through the Deep South and lower mid-South, where
               summer heat and humidity are the dominant weather concerns. Heat index values can
               exceed 100&nbsp;&deg;F during summer months, particularly in the lower Mississippi
-              sections (Portkopinu, Rocky Springs, and Yockanookany). A
+              sections (Potkopinu, Rocky Springs, and Yockanookany). A
               <strong>heat index advisory</strong> is shown whenever the apparent high temperature
               during your hike is expected to reach or exceed 100&nbsp;&deg;F.
             </p>
@@ -344,10 +344,10 @@
   <script>
     /* Section mileages sourced from NPS Natchez Trace Parkway trail data.
        Axis miles are cumulative trail miles (0-59) across all five sections
-       in NOBO order (Portkopinu → Highland Rim). Per-section miles always
+       in NOBO order (Potkopinu → Highland Rim). Per-section miles always
        start at 0. */
     window.NTT_SECTIONS_BOOTSTRAP = [
-      { id: "portkopinu",        name: "Portkopinu",        state: "MS", mile_start: 0, mile_end:  3.44, axis_start:  0.00, axis_end:  3.44 },
+      { id: "potkopinu",        name: "Potkopinu",        state: "MS", mile_start: 0, mile_end:  3.44, axis_start:  0.00, axis_end:  3.44 },
       { id: "rocky-springs",     name: "Rocky Springs",     state: "MS", mile_start: 0, mile_end:  8.99, axis_start:  3.44, axis_end: 12.43 },
       { id: "yockanookany",      name: "Yockanookany",      state: "MS", mile_start: 0, mile_end: 25.73, axis_start: 12.43, axis_end: 38.16 },
       { id: "blackland-prairie", name: "Blackland Prairie", state: "MS", mile_start: 0, mile_end:  6.11, axis_start: 38.16, axis_end: 44.27 },
@@ -355,8 +355,8 @@
     ];
 
     window.NTT_DIRECTION_OPTIONS_BOOTSTRAP = [
-      { id: "nobo", label: "Northbound \u2014 Portkopinu, MS \u2192 Highland Rim, TN", total_miles: 68.89, is_nobo: true  },
-      { id: "sobo", label: "Southbound \u2014 Highland Rim, TN \u2192 Portkopinu, MS", total_miles: 68.89, is_nobo: false },
+      { id: "nobo", label: "Northbound \u2014 Potkopinu, MS \u2192 Highland Rim, TN", total_miles: 68.89, is_nobo: true  },
+      { id: "sobo", label: "Southbound \u2014 Highland Rim, TN \u2192 Potkopinu, MS", total_miles: 68.89, is_nobo: false },
     ];
   </script>
 

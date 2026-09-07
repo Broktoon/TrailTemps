@@ -60,7 +60,7 @@ const DAILY_VARS = [
 // ends, and at ~3–5 mile intervals within each section.
 //
 // Section lengths:
-//   Portkopinu:        3.5 mi  → select axis miles 0.0, 3.5           (2 pts)
+//   Potkopinu:        3.5 mi  → select axis miles 0.0, 3.5           (2 pts)
 //   Rocky Springs:     6.5 mi  → select axis miles 3.5, 7.0, 10.0     (3 pts)
 //   Yockanookany:     23.0 mi  → select axis miles 10, 15, 20, 25, 30, 33 (6 pts)
 //   Blackland Prairie: 6.0 mi  → select axis miles 33, 36, 39          (3 pts)
@@ -69,7 +69,7 @@ const DAILY_VARS = [
 // Total: ~19 points
 
 const TARGET_AXIS_MILES = new Set([
-  // Portkopinu
+  // Potkopinu
   0.0, 3.5,
   // Rocky Springs
   7.0, 10.0,

@@ -19,7 +19,7 @@
  * "axis_mile" = cumulative trail mile across all five sections (NOBO order)
  *
  * Section NOBO order and axis offsets:
- *   Portkopinu        axis 0.0  → ~3.5
+ *   Potkopinu        axis 0.0  → ~3.5
  *   Rocky Springs     axis 3.5  → ~10.0
  *   Yockanookany      axis 10.0 → ~33.0
  *   Blackland Prairie axis 33.0 → ~39.0
@@ -54,8 +54,8 @@ const NPS_BASE = "https://mapservices.nps.gov/arcgis/rest/services/NationalDatas
 
 const SECTIONS = [
   {
-    id:        "portkopinu",
-    name:      "Portkopinu",
+    id:        "potkopinu",
+    name:      "Potkopinu",
     state:     "MS",
     axisOffset: 0.0,
     // NA National Scenic Trail (Potkopinu) — single segment, S→N
@@ -68,7 +68,7 @@ const SECTIONS = [
     id:        "rocky-springs",
     name:      "Rocky Springs",
     state:     "MS",
-    axisOffset: null,  // computed from Portkopinu actual length
+    axisOffset: null,  // computed from Potkopinu actual length
     // Multiple PG segments, S→N along trail
     // 29079: Owens Creek S terminus → MP ~54
     // 30146: continues N
@@ -306,7 +306,7 @@ async function main() {
 
   // Collect actual section lengths so axis offsets can be computed cumulatively
   const sectionLengths = [];
-  const FIXED_AXIS_OFFSETS = [0.0, null, null, null, null]; // only Portkopinu is known a priori
+  const FIXED_AXIS_OFFSETS = [0.0, null, null, null, null]; // only Potkopinu is known a priori
 
   for (let si = 0; si < SECTIONS.length; si++) {
     const sec = SECTIONS[si];
