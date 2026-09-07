@@ -87,6 +87,7 @@ let trailTotalMiles = null;
 
 // Precomputed normals
 let normalsByPointId = new Map(); // pointId -> { hi:[365], lo:[365] }
+let normalsByMile = [];           // [{mile, id}] sorted — nearest-mile fallback
 let normalsMeta = null;
 
 // Leaflet globals (Weather map)
@@ -415,9 +416,7 @@ async function computeAndRenderDurationExtremes({ direction, startDate, milesPer
   };
 
   for (const { date, point } of hikePoints) {
-    const normals =
-      normalsByPointId.get(point.id) ||
-      (point.legacy_id ? normalsByPointId.get(point.legacy_id) : null);
+    const normals = normalsFor(point);
 
     if (!normals || !Array.isArray(normals.hi) || !Array.isArray(normals.lo)) continue;
 
@@ -586,8 +585,7 @@ function runBestStart() {
   }
 
   function getAtNormals(point) {
-    const raw = normalsByPointId.get(point.id)
-      || (point.legacy_id ? normalsByPointId.get(point.legacy_id) : null);
+    const raw = normalsFor(point);
     if (!raw) return null;
     return {
       app_hi: raw.hi_app || raw.hi || [],
@@ -636,6 +634,9 @@ const STATE_ORDER = [
 
 const STATE_NAME = {
   GA: "Georgia",
+  // The AT crosses the NC/TN line ~200 times over ~200 miles, so points there
+  // are labelled with a combined code rather than a near-arbitrary NC or TN.
+  "NC-TN": "North Carolina / Tennessee",
   NC: "North Carolina",
   TN: "Tennessee",
   VA: "Virginia",
@@ -780,7 +781,7 @@ function updateMap(point) {
 async function loadTrailOverlay() {
   if (!map) return;
 
-  const CACHE_KEY = `trail_geojson_${trailSlug}_v1`;
+  const CACHE_KEY = `trail_geojson_${trailSlug}_v2`;
   const cached = cacheGet(CACHE_KEY, AT_TTL_MS);
 
   try {
@@ -832,7 +833,7 @@ async function loadTrailOverlay() {
 async function loadTrailOverlayForDurMap() {
   if (!durMap) return;
 
-  const CACHE_KEY = `trail_geojson_${trailSlug}_v1`;
+  const CACHE_KEY = `trail_geojson_${trailSlug}_v2`;
   const cached = cacheGet(CACHE_KEY, AT_TTL_MS);
 
   try {
@@ -953,6 +954,52 @@ async function loadPrecomputedNormals() {
       ws:     Array.isArray(p.ws)     ? p.ws     : null,
     });
   }
+
+  // Sorted mile index, so a point without its own normals record can fall
+  // back to the nearest one. points.json is far denser than the weather
+  // samples (which sit ~5 miles apart, matching ERA5-Land's ~9km grid), so
+  // most points will never have an exact id match.
+  //
+  // historical_weather.json records carry no `mile` field — only id/lat/lon —
+  // so the mile is read out of the id, which is generated as
+  // `at-main-mi<mile*1000>` (verified: all 439 parse and agree with points.json).
+  const mileOf = (p) => {
+    if (Number.isFinite(Number(p.mile))) return Number(p.mile);
+    const m = /^at-main-mi(\d+)$/.exec(String(p.id || ""));
+    return m ? Number(m[1]) / 1000 : NaN;
+  };
+  normalsByMile = pts
+    .filter(p => p && p.id && normalsByPointId.has(String(p.id)) && Number.isFinite(mileOf(p)))
+    .map(p => ({ mile: mileOf(p), id: String(p.id) }))
+    .sort((a, b) => a.mile - b.mile);
+}
+
+/**
+ * Normals for a point: exact id, then legacy id, then nearest by mile.
+ * The nearest-mile fallback is what lets points.json change resolution
+ * independently of historical_weather.json.
+ */
+function normalsFor(point) {
+  if (!point) return null;
+  const direct = normalsByPointId.get(point.id)
+    || (point.legacy_id ? normalsByPointId.get(point.legacy_id) : null);
+  if (direct) return direct;
+
+  if (!normalsByMile.length) return null;
+  const mile = getPointMile(point);
+  if (!Number.isFinite(mile)) return null;
+
+  let lo = 0, hi = normalsByMile.length - 1;
+  while (lo <= hi) {
+    const mid = (lo + hi) >> 1;
+    if (normalsByMile[mid].mile === mile) { lo = mid; break; }
+    if (normalsByMile[mid].mile < mile) lo = mid + 1; else hi = mid - 1;
+  }
+  const a = normalsByMile[Math.max(0, Math.min(normalsByMile.length - 1, hi))];
+  const b = normalsByMile[Math.max(0, Math.min(normalsByMile.length - 1, lo))];
+  const best = !a ? b : !b ? a
+    : (Math.abs(a.mile - mile) <= Math.abs(b.mile - mile) ? a : b);
+  return best ? normalsByPointId.get(best.id) || null : null;
 }
 
 /* ---------------------------
@@ -1241,8 +1288,7 @@ async function runWeather() {
     // Apparent temps from precomputed normals (if available for this point)
     let appHigh = null;
     let appLow  = null;
-    const nearestNormals = normalsByPointId.get(point.id)
-      || (point.legacy_id ? normalsByPointId.get(point.legacy_id) : null);
+    const nearestNormals = normalsFor(point);
     if (nearestNormals) {
       const idx = dayIndexFromMonthDay(monthDay);
       if (nearestNormals.hi_app && Number.isFinite(nearestNormals.hi_app[idx])) appHigh = nearestNormals.hi_app[idx];
