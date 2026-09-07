@@ -362,7 +362,7 @@ function applyTrailOverlay(targetMap, haloRef, layerRef, onDone) {
       if (layerRef.current) { try { targetMap.removeLayer(layerRef.current); } catch {} }
 
       layerRef.current = L.geoJSON(clean, {
-        style: { color: "#4466cc", weight: 3.25, opacity: 0.85, lineCap: "round", lineJoin: "round" },
+        style: { color: "#e06060", weight: 3.25, opacity: 0.85, lineCap: "round", lineJoin: "round" },
         interactive: false
       }).addTo(targetMap);
 
