@@ -222,7 +222,7 @@
     },
     {
       "id": "green_swamp_west",
-      "name": "Richloam \u2013 Green Swamp West",
+      "name": "Richloam – Green Swamp West",
       "region_id": "central",
       "order": 17,
       "mile_start": null,
@@ -259,7 +259,7 @@
     },
     {
       "id": "rice_eton_gold",
-      "name": "Rice Creek \u2013 Etoniah \u2013 Gold Head",
+      "name": "Rice Creek – Etoniah – Gold Head",
       "region_id": "northern",
       "order": 21,
       "mile_start": 485,
@@ -434,17 +434,17 @@
       "sections": [
         {
           "section_id": "okeechobee_west",
-          "name": "Okeechobee West \u2014 Main Spine",
+          "name": "Okeechobee West — Main Spine",
           "delta_miles": 0,
           "is_default": true,
           "display_miles": 56
         },
         {
           "section_id": "okee_east",
-          "name": "Okeechobee East \u2014 Alternate",
-          "delta_miles": 64,
+          "name": "Okeechobee East — Alternate",
+          "delta_miles": 7.7,
           "is_default": false,
-          "display_miles": 120
+          "display_miles": 63.7
         }
       ]
     },
@@ -457,7 +457,7 @@
       "sections": [
         {
           "section_id": "eastern_corridor",
-          "name": "Eastern Corridor \u2014 Main Spine",
+          "name": "Eastern Corridor — Main Spine",
           "delta_miles": 0,
           "is_default": true,
           "display_miles_approx": 193,
@@ -472,7 +472,7 @@
         },
         {
           "section_id": "western_corridor",
-          "name": "Western Corridor \u2014 Alternate",
+          "name": "Western Corridor — Alternate",
           "delta_miles": -36,
           "is_default": false,
           "display_miles_approx": 157,

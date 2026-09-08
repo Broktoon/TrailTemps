@@ -110,7 +110,7 @@ const ALT_GROUP_DEFAULTS = [
     rejoin_mile: 150,
     sections: [
       { section_id: "okeechobee_west", section_ids: ["okeechobee_west"], delta_miles: 0,   is_default: true  },
-      { section_id: "okee_east",       section_ids: ["okee_east"],       delta_miles: 64,  is_default: false },
+      { section_id: "okee_east",       section_ids: ["okee_east"],       delta_miles: 7.7, is_default: false },
     ],
   },
   {
