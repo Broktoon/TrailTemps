@@ -36,10 +36,11 @@ function getTrailMeta() {
     slug,
     pageDir: pageDir.href,
     dataDir: dataDir.href,
-    pointsUrl:       new URL("points.json",            dataDir).href,
-    trailGeojsonUrl: new URL("trail.geojson",          dataDir).href,
-    normalsUrl:      new URL("historical_weather.json", dataDir).href,
-    nttMetaUrl:      new URL("ntt_meta.json",           dataDir).href,
+    pointsUrl:          new URL("points.json",             dataDir).href,
+    trailGeojsonUrl:    new URL("trail.geojson",           dataDir).href,
+    roadwalkGeojsonUrl: new URL("trail_roadwalk.geojson",  dataDir).href,
+    normalsUrl:         new URL("historical_weather.json", dataDir).href,
+    nttMetaUrl:         new URL("ntt_meta.json",           dataDir).href,
     defaultMapCenter: [33.5, -89.5],
     defaultZoom:      7,
   };
@@ -263,12 +264,25 @@ async function fetchTrailGeojson() {
   return gj;
 }
 
-const weatherHaloRef  = { current: null };
-const weatherLayerRef = { current: null };
-const durHaloRef      = { current: null };
-const durLayerRef     = { current: null };
+async function fetchRoadwalkGeojson() {
+  const key = `roadwalk_geojson_${trailSlug}_v1`;
+  const cached = cacheGet(key, TRAIL_TTL_MS);
+  if (cached) return cached;
+  const r = await fetch(META.roadwalkGeojsonUrl, { cache: "no-store" });
+  if (!r.ok) throw new Error(`trail_roadwalk.geojson fetch failed (${r.status})`);
+  const gj = await r.json();
+  cacheSet(key, gj);
+  return gj;
+}
 
-function applyTrailOverlay(targetMap, haloRef, layerRef, onDone) {
+const weatherHaloRef     = { current: null };
+const weatherLayerRef    = { current: null };
+const weatherRoadwalkRef = { current: null };
+const durHaloRef         = { current: null };
+const durLayerRef        = { current: null };
+const durRoadwalkRef     = { current: null };
+
+function applyTrailOverlay(targetMap, haloRef, layerRef, roadwalkRef, onDone) {
   fetchTrailGeojson()
     .then(geojson => {
       const clean = {
@@ -292,16 +306,30 @@ function applyTrailOverlay(targetMap, haloRef, layerRef, onDone) {
       if (onDone) onDone();
     })
     .catch(e => console.warn("[NTT] trail overlay failed:", e));
+
+  // Parkway gaps between the 5 real trail sections — dotted line, display-only.
+  // These miles are deliberately NOT part of NTT_TOTAL_TRAIL_MILES: the parkway
+  // is a highway with no pedestrian shoulder, not a route anyone walks.
+  fetchRoadwalkGeojson()
+    .then(geojson => {
+      if (roadwalkRef.current) { try { targetMap.removeLayer(roadwalkRef.current); } catch {} }
+      roadwalkRef.current = L.geoJSON(geojson, {
+        style: { color: "#e06060", weight: 3, opacity: 0.65, lineCap: "round", dashArray: "1 9" },
+        interactive: false
+      }).addTo(targetMap);
+      if (roadwalkRef.current.bringToBack) roadwalkRef.current.bringToBack();
+    })
+    .catch(e => console.warn("[NTT] roadwalk overlay failed (non-critical):", e));
 }
 
 function loadTrailOverlay() {
   if (!map) return;
-  applyTrailOverlay(map, weatherHaloRef, weatherLayerRef, refreshMapSize);
+  applyTrailOverlay(map, weatherHaloRef, weatherLayerRef, weatherRoadwalkRef, refreshMapSize);
 }
 
 function loadTrailOverlayForDurMap() {
   if (!durMap) return;
-  applyTrailOverlay(durMap, durHaloRef, durLayerRef, () => {
+  applyTrailOverlay(durMap, durHaloRef, durLayerRef, durRoadwalkRef, () => {
     try { durMap.invalidateSize(); } catch {}
   });
 }
