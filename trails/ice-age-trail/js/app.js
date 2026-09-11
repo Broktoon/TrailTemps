@@ -35,7 +35,6 @@ function getTrailMeta() {
     dataDir: dataDir.href,
     pointsUrl:          new URL("points.json",             dataDir).href,
     trailGeojsonUrl:    new URL("trail.geojson",           dataDir).href,
-    roadwalkGeojsonUrl: new URL("trail_roadwalk.geojson",  dataDir).href,
     normalsUrl:         new URL("historical_weather.json",  dataDir).href,
     iatMetaUrl:         new URL("iat_meta.json",            dataDir).href,
     defaultMapCenter: [44.5, -90.0],
@@ -93,13 +92,13 @@ const IAT_TOTAL_MILES = 1315.6;  // total axis miles incl. absorbed roadwalk (We
    ============================================================ */
 
 let allPoints        = [];
-let pointsByAxisMile = [];   // sorted by axis_mile — main spine + West Alt points only
-let eastAltPoints    = [];   // sorted by alt_mile — East Alt points only
+let pointsByAxisMile = [];   // sorted by canonical `mile` — main spine + West Alt points only
+let eastAltPoints    = [];   // sorted by cumulative `mile` — East Alt points only
 let iatMeta          = null;
 
 // Precomputed normals
 let normalsByPointId  = new Map();
-let normalsSortedAxis = [];   // [{ id, axis_mile }] sorted — nearest-neighbour
+let normalsSortedAxis = [];   // [{ id, mile }] sorted — nearest-neighbour
 let normalsMeta       = null;
 
 // Leaflet — Weather map
@@ -125,10 +124,10 @@ function refreshMapSize() {
    ============================================================ */
 
 function iatPointLabel(point) {
-  const segName = point.section
-    ? point.section.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase())
+  const segName = point.section_id
+    ? point.section_id.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase())
     : "Unknown Segment";
-  return `${segName} \u2014 Mile ${fmtMile(point.mile)}`;
+  return `${segName} \u2014 Mile ${fmtMile(point.sec_mile)}`;
 }
 
 /* ============================================================
@@ -182,16 +181,18 @@ async function loadPoints() {
     lat:  Number(p.lat),
     lon:  Number(p.lon),
     id:   String(p.id),
-    mile: Number(p.mile),
+    mile: Number(p.mile),          // cumulative trail mile (canonical)
+    sec_mile: Number(p.sec_mile),  // mile from the start of this section
   }));
 
-  // Separate main spine (has axis_mile) from East Alt (has alt_mile + alt_id)
-  allPoints     = parsed.filter(p => !p.alt_id).map(p => ({ ...p, axis_mile: Number(p.axis_mile) }));
-  eastAltPoints = parsed.filter(p => p.alt_id === "east")
-                        .map(p => ({ ...p, alt_mile: Number(p.alt_mile) }))
-                        .sort((a, b) => a.alt_mile - b.alt_mile);
+  // Separate main spine from East Alt by canonical route_id. Both are ordered
+  // by cumulative `mile`. sec_mile is section-local on every trail, so it
+  // restarts at each alt section and cannot order the alternate as a whole.
+  allPoints     = parsed.filter(p => p.route_id !== "east-alt");
+  eastAltPoints = parsed.filter(p => p.route_id === "east-alt")
+                        .sort((a, b) => a.mile - b.mile);
 
-  pointsByAxisMile = [...allPoints].sort((a, b) => a.axis_mile - b.axis_mile);
+  pointsByAxisMile = [...allPoints].sort((a, b) => a.mile - b.mile);
 
   console.log("[IAT] points loaded:", allPoints.length, "main +", eastAltPoints.length, "East Alt");
 }
@@ -218,11 +219,11 @@ async function loadPrecomputedNormals() {
     });
   }
 
-  // Build nearest-neighbour axis_mile index over main-spine points that have normals.
+  // Build nearest-neighbour mile index over main-spine points that have normals.
   // East Alt points fall back to nearest main-spine normal via getNearestNormals().
   normalsSortedAxis = pointsByAxisMile
     .filter(p => normalsByPointId.has(p.id))
-    .map(p => ({ id: p.id, axis_mile: p.axis_mile }));
+    .map(p => ({ id: p.id, mile: p.mile }));
 
   console.log("[IAT] normals loaded:", normalsByPointId.size, "points");
   if (normalsMeta) {
@@ -237,22 +238,11 @@ async function loadPrecomputedNormals() {
    ============================================================ */
 
 async function fetchTrailGeojson() {
-  const key = `trail_geojson_${trailSlug}_v1`;
+  const key = `trail_geojson_${trailSlug}_v2`;
   const cached = cacheGet(key, TRAIL_TTL_MS);
   if (cached) return cached;
   const r = await fetch(META.trailGeojsonUrl, { cache: "no-store" });
   if (!r.ok) throw new Error(`trail.geojson fetch failed (${r.status})`);
-  const gj = await r.json();
-  cacheSet(key, gj);
-  return gj;
-}
-
-async function fetchRoadwalkGeojson() {
-  const key = `roadwalk_geojson_${trailSlug}_v1`;
-  const cached = cacheGet(key, TRAIL_TTL_MS);
-  if (cached) return cached;
-  const r = await fetch(META.roadwalkGeojsonUrl, { cache: "no-store" });
-  if (!r.ok) throw new Error(`trail_roadwalk.geojson fetch failed (${r.status})`);
   const gj = await r.json();
   cacheSet(key, gj);
   return gj;
@@ -268,39 +258,38 @@ const durRoadwalkRef       = { current: null };
 function applyTrailOverlay(targetMap, haloRef, layerRef, roadwalkRef, onDone) {
   fetchTrailGeojson()
     .then(geojson => {
-      const clean = {
+      const all = geojson.features || [];
+      // Certified tread renders solid; connecting routes (route_type "roadwalk")
+      // render dotted. Both live in trail.geojson — the connecting-route geometry
+      // is derived from points.json, so the dotted line follows the same path the
+      // mileage axis does. Those miles DO count toward IAT_TOTAL_MILES: unlike
+      // Natchez's parkway, hikers actually walk them.
+      const pick = (isRoadwalk) => ({
         type: "FeatureCollection",
-        features: (geojson.features || []).map(f => ({
-          type: "Feature",
-          properties: {},
-          geometry: f.geometry
-        }))
-      };
+        features: all
+          .filter(f => (((f.properties || {}).route_type === "roadwalk")) === isRoadwalk)
+          .map(f => ({ type: "Feature", properties: {}, geometry: f.geometry }))
+      });
 
-      if (haloRef.current)  { try { targetMap.removeLayer(haloRef.current);  } catch {} }
-      if (layerRef.current) { try { targetMap.removeLayer(layerRef.current); } catch {} }
+      if (haloRef.current)     { try { targetMap.removeLayer(haloRef.current); } catch {} }
+      if (layerRef.current)    { try { targetMap.removeLayer(layerRef.current); } catch {} }
+      if (roadwalkRef.current) { try { targetMap.removeLayer(roadwalkRef.current); } catch {} }
 
-      layerRef.current = L.geoJSON(clean, {
+      layerRef.current = L.geoJSON(pick(false), {
         style: { color: "#e06060", weight: 3.25, opacity: 0.85, lineCap: "round", lineJoin: "round" },
         interactive: false
       }).addTo(targetMap);
 
+      roadwalkRef.current = L.geoJSON(pick(true), {
+        style: { color: "#e06060", weight: 3, opacity: 0.65, lineCap: "round", dashArray: "1 9" },
+        interactive: false
+      }).addTo(targetMap);
+
+      if (roadwalkRef.current.bringToBack) roadwalkRef.current.bringToBack();
       if (layerRef.current.bringToBack) layerRef.current.bringToBack();
       if (onDone) onDone();
     })
     .catch(e => console.warn("[IAT] trail overlay failed:", e));
-
-  // Roadwalk (connecting route) — dotted line, display-only, best-effort
-  fetchRoadwalkGeojson()
-    .then(geojson => {
-      if (roadwalkRef.current) { try { targetMap.removeLayer(roadwalkRef.current); } catch {} }
-      roadwalkRef.current = L.geoJSON(geojson, {
-        style: { color: "#e06060", weight: 3, opacity: 0.65, lineCap: "round", dashArray: "1 9" },
-        interactive: false
-      }).addTo(targetMap);
-      if (roadwalkRef.current.bringToBack) roadwalkRef.current.bringToBack();
-    })
-    .catch(e => console.warn("[IAT] roadwalk overlay failed (non-critical):", e));
 }
 
 function loadTrailOverlay() {
@@ -371,14 +360,27 @@ function binaryNearest(sortedArr, target, keyFn) {
   );
 }
 
-/** Find the main-spine point whose axis_mile is nearest to the target. */
+/** Find the main-spine point whose cumulative mile is nearest to the target. */
 function getNearestPointByAxisMile(axisMile) {
-  return binaryNearest(pointsByAxisMile, axisMile, p => p.axis_mile);
+  return binaryNearest(pointsByAxisMile, axisMile, p => p.mile);
 }
 
-/** Find the East Alt point whose alt_mile is nearest to the target. */
+/**
+ * Find the East Alt point nearest a given distance from the branch point.
+ * The alternate's points are laid onto the main mile axis by linear
+ * interpolation between branch and rejoin, so apply that same map to the
+ * requested distance and search there. Note the divisor is the alternate's
+ * own axis length (max alt_mile_end, ~86.9) — NOT east_alt.total_miles (71),
+ * which does not reconcile with it; using 71 here would shift every lookup.
+ */
 function getNearestEastAltPoint(altMile) {
-  return binaryNearest(eastAltPoints, altMile, p => p.alt_mile);
+  const ag     = iatMeta?.alt_groups?.[0];
+  const branch = ag?.branch_axis_mile ?? 617.2;
+  const rejoin = ag?.rejoin_axis_mile ?? 640.5;
+  const altLen = Math.max(0, ...(iatMeta?.east_alt_sections || []).map(s => s.alt_mile_end))
+                 || EAST_ALT_AXIS_MILES;
+  const target = branch + (altMile / altLen) * (rejoin - branch);
+  return binaryNearest(eastAltPoints, target, p => p.mile);
 }
 
 /* ============================================================
@@ -623,7 +625,7 @@ async function runWeather() {
     return;
   }
 
-  // Find segment to compute axis_mile
+  // Find segment to compute the cumulative mile
   const sections = window.IAT_SECTIONS_BOOTSTRAP || [];
   const sec = sections.find(s => s.id === segId);
   if (!sec) { setWeatherStatus("Segment data not found."); return; }
@@ -721,9 +723,9 @@ function getNearestNormals(point) {
   const direct = normalsByPointId.get(point.id);
   if (direct?.hi?.length) return direct;
 
-  // For East Alt points (no axis_mile), find nearest by lat/lon distance
-  // to a normals point. For main-spine points, use binary search on axis_mile.
-  if (point.alt_id === "east") {
+  // East Alt points carry only an interpolated cumulative mile, so resolve them
+  // by lat/lon proximity to a normals point. Main-spine points binary-search on mile.
+  if (point.route_id === "east-alt") {
     let bestId = null, bestDist = Infinity;
     for (const { id } of normalsSortedAxis) {
       const np = allPoints.find(p => p.id === id);
@@ -735,20 +737,20 @@ function getNearestNormals(point) {
     return bestId ? (normalsByPointId.get(bestId) || null) : null;
   }
 
-  const best = binaryNearest(normalsSortedAxis, point.axis_mile, e => e.axis_mile);
+  const best = binaryNearest(normalsSortedAxis, point.mile, e => e.mile);
   return best ? (normalsByPointId.get(best.id) || null) : null;
 }
 
 /**
  * Build the ordered sequence of points for a hike, one per day.
  *
- * Main spine axis_miles cover the West Alt (Baraboo + roadwalk).
- * East Alt points have alt_mile (0-based from branch) instead of axis_mile.
+ * Main spine miles cover the West Alt (Baraboo + roadwalk).
+ * East Alt points are ordered by cumulative mile; sec_mile is section-local.
  *
  * For each day's cumulative mile:
  *   - Pre-branch  → getNearestPointByAxisMile (main spine)
  *   - In alt zone, West Alt → getNearestPointByAxisMile (Baraboo on main spine)
- *   - In alt zone, East Alt → getNearestEastAltPoint (alt_mile lookup)
+ *   - In alt zone, East Alt → getNearestEastAltPoint (miles from branch)
  *   - Post-rejoin → getNearestPointByAxisMile (main spine)
  */
 function buildHikePoints({ directionId, startDate, milesPerDay, totalMiles, selectedAlt }) {
@@ -781,11 +783,11 @@ function buildHikePoints({ directionId, startDate, milesPerDay, totalMiles, sele
       const altProgress = capped - preBranchMiles;  // miles from branch
 
       if (altId === "east") {
-        // East Alt: look up by alt_mile
+        // East Alt: look up by distance from the branch
         return getNearestEastAltPoint(altProgress);
       } else {
         // West Alt: Baraboo is on the main spine; map proportionally onto
-        // the branch→rejoin axis_mile range
+        // the branch→rejoin mile range
         const spineAltLen = rejoinAxis - branchAxis;
         const t           = spineAltLen > 0 ? altProgress / westAltMiles : 0;
         const axis        = isWTE
@@ -816,6 +818,9 @@ function buildHikePoints({ directionId, startDate, milesPerDay, totalMiles, sele
 // Expose alt segment miles constants (miles within the alt zone only, not full trail)
 const WEST_ALT_TOTAL_MILES = 83.7;
 const EAST_ALT_TOTAL_MILES = 71.0;
+// Length of the East Alternate's own 0-based mile axis (max alt_mile_end in
+// iat_meta.json). Distinct from EAST_ALT_TOTAL_MILES above, which disagrees.
+const EAST_ALT_AXIS_MILES  = 86.9;
 
 function computeExtremesFromHikePoints(hikePoints) {
   if (!hikePoints.length) return { hottest: null, coldest: null };
