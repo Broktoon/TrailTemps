@@ -38,7 +38,6 @@ function getTrailMeta() {
     dataDir: dataDir.href,
     pointsUrl:          new URL("points.json",             dataDir).href,
     trailGeojsonUrl:    new URL("trail.geojson",           dataDir).href,
-    roadwalkGeojsonUrl: new URL("trail_roadwalk.geojson",  dataDir).href,
     normalsUrl:         new URL("historical_weather.json", dataDir).href,
     nttMetaUrl:         new URL("ntt_meta.json",           dataDir).href,
     defaultMapCenter: [33.5, -89.5],
@@ -264,17 +263,6 @@ async function fetchTrailGeojson() {
   return gj;
 }
 
-async function fetchRoadwalkGeojson() {
-  const key = `roadwalk_geojson_${trailSlug}_v1`;
-  const cached = cacheGet(key, TRAIL_TTL_MS);
-  if (cached) return cached;
-  const r = await fetch(META.roadwalkGeojsonUrl, { cache: "no-store" });
-  if (!r.ok) throw new Error(`trail_roadwalk.geojson fetch failed (${r.status})`);
-  const gj = await r.json();
-  cacheSet(key, gj);
-  return gj;
-}
-
 const weatherHaloRef     = { current: null };
 const weatherLayerRef    = { current: null };
 const weatherRoadwalkRef = { current: null };
@@ -285,41 +273,38 @@ const durRoadwalkRef     = { current: null };
 function applyTrailOverlay(targetMap, haloRef, layerRef, roadwalkRef, onDone) {
   fetchTrailGeojson()
     .then(geojson => {
-      const clean = {
+      const all = geojson.features || [];
+      // trail.geojson carries the 4 Natchez Trace Parkway connectors alongside
+      // the 5 real trail sections. They're what makes the route look continuous,
+      // but the parkway is a highway with no pedestrian shoulder — nobody walks
+      // it, and its miles are deliberately outside NTT_TOTAL_TRAIL_MILES. Draw
+      // it dotted so the map doesn't imply 444 miles of hikeable trail.
+      const pick = (isRoadwalk) => ({
         type: "FeatureCollection",
-        features: (geojson.features || []).map(f => ({
-          type: "Feature",
-          properties: {},
-          geometry: f.geometry
-        }))
-      };
+        features: all
+          .filter(f => ((f.properties || {}).route_id === "roadwalk") === isRoadwalk)
+          .map(f => ({ type: "Feature", properties: {}, geometry: f.geometry }))
+      });
 
       if (haloRef.current) { try { targetMap.removeLayer(haloRef.current); } catch {} }
       if (layerRef.current) { try { targetMap.removeLayer(layerRef.current); } catch {} }
+      if (roadwalkRef.current) { try { targetMap.removeLayer(roadwalkRef.current); } catch {} }
 
-      layerRef.current = L.geoJSON(clean, {
+      layerRef.current = L.geoJSON(pick(false), {
         style: { color: "#e06060", weight: 3.25, opacity: 0.85, lineCap: "round", lineJoin: "round" },
         interactive: false
       }).addTo(targetMap);
 
+      roadwalkRef.current = L.geoJSON(pick(true), {
+        style: { color: "#e06060", weight: 3, opacity: 0.65, lineCap: "round", dashArray: "1 9" },
+        interactive: false
+      }).addTo(targetMap);
+
+      if (roadwalkRef.current.bringToBack) roadwalkRef.current.bringToBack();
       if (layerRef.current.bringToBack) layerRef.current.bringToBack();
       if (onDone) onDone();
     })
     .catch(e => console.warn("[NTT] trail overlay failed:", e));
-
-  // Parkway gaps between the 5 real trail sections — dotted line, display-only.
-  // These miles are deliberately NOT part of NTT_TOTAL_TRAIL_MILES: the parkway
-  // is a highway with no pedestrian shoulder, not a route anyone walks.
-  fetchRoadwalkGeojson()
-    .then(geojson => {
-      if (roadwalkRef.current) { try { targetMap.removeLayer(roadwalkRef.current); } catch {} }
-      roadwalkRef.current = L.geoJSON(geojson, {
-        style: { color: "#e06060", weight: 3, opacity: 0.65, lineCap: "round", dashArray: "1 9" },
-        interactive: false
-      }).addTo(targetMap);
-      if (roadwalkRef.current.bringToBack) roadwalkRef.current.bringToBack();
-    })
-    .catch(e => console.warn("[NTT] roadwalk overlay failed (non-critical):", e));
 }
 
 function loadTrailOverlay() {
