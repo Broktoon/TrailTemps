@@ -828,18 +828,79 @@ Located in `trails/pacific-crest-trail/tools/`:
 
 ### IAT Alternate Group — LOCKED
 
-One route choice exists in the Baraboo Hills / Portage area:
+Rebuilt 2026-09-12 from IATA's official layer. **The main spine now follows the
+EAST bifurcation** (Sauk Point → Portage Canal → John Muir Park → Montello →
+Karner Blue); Baraboo is the alternate. This is the reverse of the old model.
 
-**Dells-Baraboo/Portage (`dells-baraboo-portage`):** branches mid-Devil's Lake segment at `branch_axis_mile: 617.2`, rejoins at Chaffee Creek (`rejoin_axis_mile: 640.5`).
+**Baraboo West (`baraboo-west`):** branches at `branch_axis_mile: 589.72`,
+rejoins at `rejoin_axis_mile: 673.93`.
 
-| Alt | Label | Miles (in alt zone) | Note |
-|-----|-------|---------------------|------|
-| `west` (default) | Dells-Baraboo (West Alt.) | 83.7 mi | Scenic route through Baraboo Hills; Baraboo segment is the only certified trail; remainder is roadwalk |
-| `east` | Portage (East Alt.) | 71 mi (−12.7 mi) | Devil's Lake north portion + Sauk Point → Portage Canal → John Muir Park → Montello → Karner Blue |
+| Route | Miles | Note |
+|---|---|---|
+| East (main spine, default) | 84.2 mi | the branch→rejoin leg of the spine; the more popular route |
+| `west` alternate | 80.6 mi (−3.6) | scenic route through the Baraboo Hills; Baraboo is the only certified trail on it |
 
-The Devil's Lake segment (10.9 mi total) is **split at 7.0 mi** (`DL_MAIN_MILES`): the south 7 mi are on the main spine (shared); the north ~4 mi become the first leg of the East Alt. The West Alt (Baraboo + roadwalk) stays on the main spine axis_mile coordinate system. East Alt points have `alt_id: "east"` and `alt_mile` (0-based from branch) instead of `axis_mile`.
+Both figures are measured from IATA geometry and agree with the published
+"both routes about 80 miles". The old metadata's "east 71 / west 83.7 /
+delta −12.7" was wrong in both magnitude and sign — it came from the
+chord-compressed alt geometry that has since been replaced.
 
-**Do not change branch/rejoin miles without re-measuring from DNR geometry.**
+Points on the alternate carry `route_id: "west-alt"` + `alt_of: "main-spine"`,
+`sec_mile` section-local from 0, and a `mile` interpolated across the
+branch→rejoin window. Everything else is `route_id: "main-spine"`.
+
+**Invariant:** `getNearestWestAltPoint()` and `buildHikePoints()` must divide by
+the same number (`west_alt.total_miles`). When they disagreed, an itinerary
+covered only part of the alternate and then jumped to the rejoin.
+
+**Do not change branch/rejoin miles without re-deriving them from the IATA
+layer** — see the source note below.
+
+### IAT Geometry Source — IATA official
+
+`https://services.arcgis.com/EeCmkqXss9GYEKIZ/arcgis/rest/services/IAT_Segments_CR/FeatureServer/0/query`
+
+Owner `tstram_iat` (Ice Age Trail Alliance), public, no auth. One layer, 256
+features, 219,161 vertices, `maxRecordCount` 1000 so a single request returns
+everything: `?where=1=1&outFields=*&outSR=4326&returnGeometry=true&f=geojson`.
+
+Fields: `Segment` (name; 129 distinct, `NA` on 61 unnamed connectors),
+`length_mi` (IATA's own mileage), `Status` (`Ice Age Trail` = certified tread vs
+`Connecting Route` = road walk), `Shape__Length`.
+
+| Status | n | length_mi | measured |
+|---|---|---|---|
+| Ice Age Trail | 158 | 712.4 | 711.9 |
+| Connecting Route | 98 | 528.6 | 528.0 |
+| **Total (both bifurcations)** | 256 | **1241.0** | 1239.8 |
+
+`length_mi` agrees with the geometry to within 0.1%. Our east through-route
+measures 1153.1mi against IATA's implied 1157.3 (both branches minus the west),
+a 0.4% difference, and the published figure for both branches is ~1234.
+
+**Build pipeline** (scripts kept in the session scratchpad, not the repo):
+1. Pull the layer as GeoJSON.
+2. **Node the network** — split features where another feature's endpoint meets
+   their interior. The trail branches mid-segment (the west bifurcation leaves
+   partway along Devil's Lake), so an endpoints-only graph turns those junctions
+   into dead ends and silently drops whole branches. Without this step the west
+   branch, Portage Canal, Chaffee Creek and Table Bluff all fall off the route.
+3. Dijkstra from the St Croix Falls terminus to the Sturgeon Bay terminus,
+   forced through John Muir Park (which exists only on the east branch).
+   Do not enumerate simple paths — with 244 junctions, DFS exhausts its budget
+   inside one branch and never reaches the other.
+4. Group features into sections: a section is its named segment plus the
+   connecting route that follows it, up to the next named segment.
+5. Resample each section at exact 0.5mi steps of `sec_mile` from 0.
+
+**Section identity:** 128 of IATA's 129 named segments map onto our existing
+section ids by name, all confirmed within 1.0mi spatially. Two exceptions:
+IATA's `Ice Override` (0.8mi) is a reroute belonging to `plover-river`, and our
+old `alta-junction` has been absorbed into IATA's `Underdown`.
+
+**Superseded:** `tools/build-points-iat.js` and `tools/generate-normals-iat.js`
+build the old WI-DNR-based points and still assume East is the alternate. They
+do not produce the current files.
 
 ### IAT Data Coordinate Systems
 
@@ -870,14 +931,27 @@ node -e "const m=require('./trails/ice-age-trail/data/iat_meta.json'); console.l
 
 ### IAT Roadwalk Display
 
-`trail_roadwalk.geojson` (97 features) is fetched from the IATA ArcGIS FeatureServer and rendered as a **dotted line** on both maps (`dashArray: "1 9"`, opacity 0.65). Display-only — no weather data or points are generated for roadwalk geometry. Both the weather planner map and the duration extremes map load this overlay via `fetchRoadwalkGeojson()`.
+Roadwalk (connecting-route) geometry lives **inside `trail.geojson`**, tagged `route_type: "roadwalk"` on the feature. `applyTrailOverlay()` splits the one file by that tag into a solid layer (certified tread) and a **dotted** layer (`dashArray: "1 9"`, opacity 0.65), on both the weather planner map and the duration extremes map.
+
+These miles **count** toward `IAT_TOTAL_MILES` — IAT connecting routes are designated, hikeable trail, unlike the Natchez Trace parkway gaps, which are tagged `route_id: "roadwalk"` and excluded. Points are generated for them and they carry weather data like any other stretch.
+
+The old `trail_roadwalk.geojson` (97 features from the IATA ArcGIS FeatureServer) has been **deleted**. It never matched the real connecting-route path — median 0.51mi off — and `fetchRoadwalkGeojson()` is gone with it.
 
 ### IAT `historical_weather.json`
 
-Same 7-array schema as other trails (`hi`, `lo`, `hi_app`, `lo_app`, `rh_hi`, `rh_lo`, `ws`). Wrapped in `{ meta, points }` object (unlike flat arrays on older trails). 469 total normals:
-- 451 main spine points at ~5-mile axis_mile intervals — used for both main spine and West Alt lookups
-- 18 East Alt points at ~5-mile alt_mile intervals — used when hiker is in the East Alt zone
-- East Alt points fall back to nearest main-spine normal via lat/lon distance when no direct match (most East Alt points are geographically close to main-spine normals)
+Same 7-array schema as other trails (`hi`, `lo`, `hi_app`, `lo_app`, `rh_hi`,
+`rh_lo`, `ws`), 365 values each, wrapped in `{ meta, points }` and keyed by
+point id.
+
+**427 normals** after the 2026-09 rebuild (was 469). The rebuild moved the mile
+axis, so ids were re-pointed at the nearest rebuilt point rather than
+regenerated: median move 0.16mi, p90 1.52mi. Values are untouched — all 427
+records match an original byte for byte. 42 normals merged onto a shared point
+and 13 were dropped for landing more than 5.6mi away (the ERA5-Land cell size),
+which is the old mis-drawn East Alternate and a few spurs.
+
+Re-key rather than refetch whenever the axis changes: ERA5-Land is a ~5.6mi
+grid, so any point within a couple of miles reads the same cell.
 
 ### IAT Notable Features
 

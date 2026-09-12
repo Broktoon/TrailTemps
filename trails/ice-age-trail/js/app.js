@@ -85,7 +85,7 @@ const HIST_TTL_MS           = 24 * 60 * 60 * 1000;
 const TRAIL_TTL_MS          = 30 * 24 * 60 * 60 * 1000;
 const NORMALS_CACHE_VERSION = "v1";
 
-const IAT_TOTAL_MILES = 1315.6;  // total axis miles incl. absorbed roadwalk (West Alt); East Alt ≈ 1303
+const IAT_TOTAL_MILES = 1153.1;  // IATA official geometry, east bifurcation as the main spine
 
 /* ============================================================
    4. MODULE-LEVEL STATE
@@ -93,7 +93,7 @@ const IAT_TOTAL_MILES = 1315.6;  // total axis miles incl. absorbed roadwalk (We
 
 let allPoints        = [];
 let pointsByAxisMile = [];   // sorted by canonical `mile` — main spine + West Alt points only
-let eastAltPoints    = [];   // sorted by cumulative `mile` — East Alt points only
+let westAltPoints    = [];   // sorted by cumulative `mile` — West Alt points only
 let iatMeta          = null;
 
 // Precomputed normals
@@ -134,21 +134,24 @@ function iatPointLabel(point) {
    9. MILEAGE CALCULATION
    ============================================================ */
 
-/** Returns "west" or "east" based on the selected radio button. */
+/** Returns "east" or "west" based on the selected radio button. */
 function getSelectedAlt() {
   const checked = document.querySelector('input[name="iatAlt"]:checked');
-  return checked ? checked.value : "west";
+  return checked ? checked.value : "east";
 }
 
 function calcTotalMiles(directionId, selectedAlt) {
-  // Main spine total_trail_miles already represents the West Alt route.
-  // East Alt applies delta_miles.
+  // The main spine now follows the EAST bifurcation, so total_trail_miles is
+  // the east route and needs no adjustment. Choosing West swaps the branch:
+  // subtract the spine miles between branch and rejoin, add the alternate's.
   const spineTotal = iatMeta?.trail?.total_trail_miles || IAT_TOTAL_MILES;
   const ag         = iatMeta?.alt_groups?.[0];
   const altId      = selectedAlt || getSelectedAlt();
+  if (altId !== "west" || !ag) return Math.round(spineTotal * 10) / 10;
 
-  const delta = altId === "east" ? (ag?.east_alt?.delta_miles ?? -12.7) : 0;
-  return Math.round((spineTotal + delta) * 10) / 10;
+  const spineLeg = (ag.rejoin_axis_mile ?? 0) - (ag.branch_axis_mile ?? 0);
+  const westLeg  = ag.west_alt?.total_miles ?? WEST_ALT_TOTAL_MILES;
+  return Math.round((spineTotal - spineLeg + westLeg) * 10) / 10;
 }
 
 /* ============================================================
@@ -185,16 +188,16 @@ async function loadPoints() {
     sec_mile: Number(p.sec_mile),  // mile from the start of this section
   }));
 
-  // Separate main spine from East Alt by canonical route_id. Both are ordered
-  // by cumulative `mile`. sec_mile is section-local on every trail, so it
-  // restarts at each alt section and cannot order the alternate as a whole.
-  allPoints     = parsed.filter(p => p.route_id !== "east-alt");
-  eastAltPoints = parsed.filter(p => p.route_id === "east-alt")
+  // Separate main spine from the West Alternate by canonical route_id. Both are
+  // ordered by cumulative `mile`. sec_mile is section-local on every trail, so
+  // it restarts at each alt section and cannot order the alternate as a whole.
+  allPoints     = parsed.filter(p => p.route_id !== "west-alt");
+  westAltPoints = parsed.filter(p => p.route_id === "west-alt")
                         .sort((a, b) => a.mile - b.mile);
 
   pointsByAxisMile = [...allPoints].sort((a, b) => a.mile - b.mile);
 
-  console.log("[IAT] points loaded:", allPoints.length, "main +", eastAltPoints.length, "East Alt");
+  console.log("[IAT] points loaded:", allPoints.length, "main +", westAltPoints.length, "West Alt");
 }
 
 async function loadPrecomputedNormals() {
@@ -220,7 +223,7 @@ async function loadPrecomputedNormals() {
   }
 
   // Build nearest-neighbour mile index over main-spine points that have normals.
-  // East Alt points fall back to nearest main-spine normal via getNearestNormals().
+  // West Alt points fall back to nearest main-spine normal via getNearestNormals().
   normalsSortedAxis = pointsByAxisMile
     .filter(p => normalsByPointId.has(p.id))
     .map(p => ({ id: p.id, mile: p.mile }));
@@ -366,21 +369,22 @@ function getNearestPointByAxisMile(axisMile) {
 }
 
 /**
- * Find the East Alt point nearest a given distance from the branch point.
+ * Find the West Alt point nearest a given distance from the branch point.
  * The alternate's points are laid onto the main mile axis by linear
  * interpolation between branch and rejoin, so apply that same map to the
- * requested distance and search there. Note the divisor is the alternate's
- * own axis length (max alt_mile_end, ~86.9) — NOT east_alt.total_miles (71),
- * which does not reconcile with it; using 71 here would shift every lookup.
+ * requested distance and search there.
+ *
+ * The divisor MUST be the same number buildHikePoints() uses to size the alt
+ * zone (west_alt.total_miles), or an itinerary walks part of the alternate and
+ * then jumps to the rejoin.
  */
-function getNearestEastAltPoint(altMile) {
+function getNearestWestAltPoint(altMile) {
   const ag     = iatMeta?.alt_groups?.[0];
-  const branch = ag?.branch_axis_mile ?? 617.2;
-  const rejoin = ag?.rejoin_axis_mile ?? 640.5;
-  const altLen = Math.max(0, ...(iatMeta?.east_alt_sections || []).map(s => s.alt_mile_end))
-                 || EAST_ALT_AXIS_MILES;
+  const branch = ag?.branch_axis_mile ?? 589.72;
+  const rejoin = ag?.rejoin_axis_mile ?? 673.93;
+  const altLen = ag?.west_alt?.total_miles || WEST_ALT_TOTAL_MILES;
   const target = branch + (altMile / altLen) * (rejoin - branch);
-  return binaryNearest(eastAltPoints, target, p => p.mile);
+  return binaryNearest(westAltPoints, target, p => p.mile);
 }
 
 /* ============================================================
@@ -692,7 +696,7 @@ function renderDurationResult({ directionId, startDate, endDate, totalMiles, mil
   const ag        = iatMeta?.alt_groups?.[0];
   const altId     = getSelectedAlt();
   const altLabel  = ag
-    ? (altId === "east" ? ag.east_alt?.label : ag.west_alt?.label) || ""
+    ? (altId === "west" ? ag.west_alt?.label : "Portage (East route, main)") || ""
     : "";
 
   el("durResult").innerHTML = `
@@ -723,9 +727,9 @@ function getNearestNormals(point) {
   const direct = normalsByPointId.get(point.id);
   if (direct?.hi?.length) return direct;
 
-  // East Alt points carry only an interpolated cumulative mile, so resolve them
+  // West Alt points carry only an interpolated cumulative mile, so resolve them
   // by lat/lon proximity to a normals point. Main-spine points binary-search on mile.
-  if (point.route_id === "east-alt") {
+  if (point.route_id === "west-alt") {
     let bestId = null, bestDist = Infinity;
     for (const { id } of normalsSortedAxis) {
       const np = allPoints.find(p => p.id === id);
@@ -744,13 +748,14 @@ function getNearestNormals(point) {
 /**
  * Build the ordered sequence of points for a hike, one per day.
  *
- * Main spine miles cover the West Alt (Baraboo + roadwalk).
- * East Alt points are ordered by cumulative mile; sec_mile is section-local.
+ * Main spine miles cover the EAST route (Sauk Point, Portage Canal, John Muir
+ * Park, Montello, Karner Blue). West Alt points are ordered by cumulative mile;
+ * sec_mile is section-local.
  *
  * For each day's cumulative mile:
  *   - Pre-branch  → getNearestPointByAxisMile (main spine)
- *   - In alt zone, West Alt → getNearestPointByAxisMile (Baraboo on main spine)
- *   - In alt zone, East Alt → getNearestEastAltPoint (miles from branch)
+ *   - In alt zone, East route → getNearestPointByAxisMile (it is the spine)
+ *   - In alt zone, West Alt   → getNearestWestAltPoint (miles from branch)
  *   - Post-rejoin → getNearestPointByAxisMile (main spine)
  */
 function buildHikePoints({ directionId, startDate, milesPerDay, totalMiles, selectedAlt }) {
@@ -759,13 +764,13 @@ function buildHikePoints({ directionId, startDate, milesPerDay, totalMiles, sele
   const isWTE        = directionId === "west_to_east";
   const spineTotal   = iatMeta?.trail?.total_trail_miles || IAT_TOTAL_MILES;
   const ag           = iatMeta?.alt_groups?.[0];
-  const altId        = selectedAlt || "west";
+  const altId        = selectedAlt || "east";
 
-  const branchAxis   = ag?.branch_axis_mile ?? 617.2;
-  const rejoinAxis   = ag?.rejoin_axis_mile ?? 640.5;
+  const branchAxis   = ag?.branch_axis_mile ?? 589.72;
+  const rejoinAxis   = ag?.rejoin_axis_mile ?? 673.93;
   const westAltMiles = ag?.west_alt?.total_miles || WEST_ALT_TOTAL_MILES;
-  const eastAltMiles = ag?.east_alt?.total_miles || EAST_ALT_TOTAL_MILES;
-  const altMiles     = altId === "east" ? eastAltMiles : westAltMiles;
+  // The east route is the spine, so its "alt zone" is just the spine leg.
+  const altMiles     = altId === "west" ? westAltMiles : (rejoinAxis - branchAxis);
 
   // Miles from trail start to branch point (WTE: 0→branch; ETW: 0→(total−branch))
   const preBranchMiles = isWTE ? branchAxis : (spineTotal - branchAxis);
@@ -782,12 +787,11 @@ function buildHikePoints({ directionId, startDate, milesPerDay, totalMiles, sele
       // In the alt zone
       const altProgress = capped - preBranchMiles;  // miles from branch
 
-      if (altId === "east") {
-        // East Alt: look up by distance from the branch
-        return getNearestEastAltPoint(altProgress);
+      if (altId === "west") {
+        // West Alt: off-spine branch, look up by distance from the branch
+        return getNearestWestAltPoint(altProgress);
       } else {
-        // West Alt: Baraboo is on the main spine; map proportionally onto
-        // the branch→rejoin mile range
+        // East route is the spine itself; walk straight along the axis
         const spineAltLen = rejoinAxis - branchAxis;
         const t           = spineAltLen > 0 ? altProgress / westAltMiles : 0;
         const axis        = isWTE
@@ -816,11 +820,7 @@ function buildHikePoints({ directionId, startDate, milesPerDay, totalMiles, sele
 }
 
 // Expose alt segment miles constants (miles within the alt zone only, not full trail)
-const WEST_ALT_TOTAL_MILES = 83.7;
-const EAST_ALT_TOTAL_MILES = 71.0;
-// Length of the East Alternate's own 0-based mile axis (max alt_mile_end in
-// iat_meta.json). Distinct from EAST_ALT_TOTAL_MILES above, which disagrees.
-const EAST_ALT_AXIS_MILES  = 86.9;
+const WEST_ALT_TOTAL_MILES = 80.6;   // measured from IATA geometry (was recorded 83.7)
 
 function computeExtremesFromHikePoints(hikePoints) {
   if (!hikePoints.length) return { hottest: null, coldest: null };
