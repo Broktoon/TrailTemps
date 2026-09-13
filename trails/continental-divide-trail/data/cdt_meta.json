@@ -1,149 +1,1428 @@
 {
   "trail": {
     "name": "Continental Divide Trail",
-    "total_trail_miles": 3050.1,
+    "total_miles": 3039.979,
+    "point_spacing_miles": 0.5,
     "map_center": [
       40,
       -109.5
     ],
     "map_zoom": 5,
     "termini": {
-      "south": "Antelope Wells, NM (US/Mexico Border)",
-      "north_waterton": "Waterton Lake, MT/AB (US/Canada Border)",
-      "north_chief_mtn": "Chief Mountain, MT (US/Canada Border)"
+      "south": "Crazy Cook Monument, NM (US/Mexico border)",
+      "north": "Waterton Lake, MT/AB (US/Canada border)",
+      "north_alternate": "Chief Mountain, MT (US/Canada border)"
+    },
+    "source": {
+      "axis": "CDTC Half_Mile_Markers (Mile_Markers/FeatureServer/0), Label \"CDT Primary Route\"",
+      "sections": "CDTC 2026_CDT_Trail_Sections_view/FeatureServer/0",
+      "geometry": "CDTC Continental_Divide_Trail_2/FeatureServer/0",
+      "org": "https://services8.arcgis.com/WyuHwdftppQLa5KO/arcgis/rest/services",
+      "fetched": "2026-09-13"
     }
   },
-  "sections": [
+  "regions": [
     {
-      "id": "nm",
+      "id": "new-mexico",
       "name": "New Mexico",
-      "state": "NM",
-      "axis_start": 0,
-      "axis_end": 795
+      "mile_start": 0,
+      "mile_end": 794.5,
+      "sections": 31
     },
     {
-      "id": "co",
+      "id": "colorado",
       "name": "Colorado",
-      "state": "CO",
-      "axis_start": 800,
-      "axis_end": 1525
+      "mile_start": 794.5,
+      "mile_end": 1535,
+      "sections": 43
     },
     {
-      "id": "wy",
+      "id": "wyoming",
       "name": "Wyoming",
-      "state": "WY",
-      "axis_start": 1530,
-      "axis_end": 2300
+      "mile_start": 1535,
+      "mile_end": 2047,
+      "sections": 22
     },
     {
-      "id": "mt",
+      "id": "montana-idaho",
+      "name": "Montana/Idaho",
+      "mile_start": 2047,
+      "mile_end": 2406,
+      "sections": 12
+    },
+    {
+      "id": "montana",
       "name": "Montana",
-      "state": "MT",
-      "axis_start": 2305,
-      "axis_end": 3025.1
+      "mile_start": 2406,
+      "mile_end": 3039.979,
+      "sections": 18
     }
   ],
-  "alt_groups": [
+  "sections": [
     {
-      "id": "gila",
-      "label": "Gila River Route",
-      "delta_miles": -75.1,
-      "branch_mile": 175,
-      "rejoin_mile": 355,
-      "main": {
-        "id": "main",
-        "label": "Main CDT Route",
-        "total_miles": 180
-      },
-      "alt": {
-        "id": "gila",
-        "label": "Gila River Route",
-        "total_miles": 104.9,
-        "delta_miles": -75.1
-      }
+      "id": "001",
+      "name": "Mexico Border to NM State Hwy 81",
+      "display_name": "The Bootheel",
+      "region_id": "new-mexico",
+      "state1": "New Mexico",
+      "mile_start": 0,
+      "mile_end": 26,
+      "route_id": "main"
     },
     {
-      "id": "rmnp",
-      "label": "Rocky Mountain National Park (Colorado)",
-      "default_id": "rmnp",
-      "delta_miles": -25.0,
-      "branch_mile": 1355,
-      "rejoin_mile": 1370,
-      "main": {
-        "id": "main",
-        "label": "Western Bypass \u2014 Never Summer Wilderness",
-        "total_miles": 15
-      },
-      "alt": {
-        "id": "rmnp",
-        "label": "CDT Main Route \u2014 RMNP Loop (North Inlet / Tonahutu Cr)",
-        "total_miles": 40.0,
-        "delta_miles": 25.0
-      }
+      "id": "002",
+      "name": "NM Hwy 81 to NM Hwy 9",
+      "display_name": null,
+      "region_id": "new-mexico",
+      "state1": "New Mexico",
+      "mile_start": 26,
+      "mile_end": 46,
+      "route_id": "main"
+    },
+    {
+      "id": "003",
+      "name": "NM Hwy 9 to NM Hwy 113",
+      "display_name": null,
+      "region_id": "new-mexico",
+      "state1": "New Mexico",
+      "mile_start": 46,
+      "mile_end": 58.5,
+      "route_id": "main"
+    },
+    {
+      "id": "004",
+      "name": "NM Hwy 113 to NM Hwy 494",
+      "display_name": null,
+      "region_id": "new-mexico",
+      "state1": "New Mexico",
+      "mile_start": 58.5,
+      "mile_end": 84,
+      "route_id": "main"
+    },
+    {
+      "id": "005",
+      "name": "NM Hwy Hwy 494 to Burro Peak TH",
+      "display_name": null,
+      "region_id": "new-mexico",
+      "state1": "New Mexico",
+      "mile_start": 84,
+      "mile_end": 116.5,
+      "route_id": "main"
+    },
+    {
+      "id": "006",
+      "name": "Burro Peak TH to US Hwy 180",
+      "display_name": null,
+      "region_id": "new-mexico",
+      "state1": "New Mexico",
+      "mile_start": 116.5,
+      "mile_end": 161.5,
+      "route_id": "main"
+    },
+    {
+      "id": "007",
+      "name": "US Hwy 180 to US Hwy 15",
+      "display_name": null,
+      "region_id": "new-mexico",
+      "state1": "New Mexico",
+      "mile_start": 161.5,
+      "mile_end": 182.5,
+      "route_id": "main"
+    },
+    {
+      "id": "008",
+      "name": "NM Hwy 15 to NM Hwy 35",
+      "display_name": null,
+      "region_id": "new-mexico",
+      "state1": "New Mexico",
+      "mile_start": 182.5,
+      "mile_end": 204.5,
+      "route_id": "main"
+    },
+    {
+      "id": "009",
+      "name": "NM Hwy 35 to Rocky Point (FR 150)",
+      "display_name": null,
+      "region_id": "new-mexico",
+      "state1": "New Mexico",
+      "mile_start": 204.5,
+      "mile_end": 217.5,
+      "route_id": "main"
+    },
+    {
+      "id": "010",
+      "name": "Rocky Point (FR 150) to FR 226",
+      "display_name": null,
+      "region_id": "new-mexico",
+      "state1": "New Mexico",
+      "mile_start": 217.5,
+      "mile_end": 252,
+      "route_id": "main"
+    },
+    {
+      "id": "011",
+      "name": "FR 226 to NM Hwy 59 TH",
+      "display_name": null,
+      "region_id": "new-mexico",
+      "state1": "New Mexico",
+      "mile_start": 252,
+      "mile_end": 266.5,
+      "route_id": "main"
+    },
+    {
+      "id": "012",
+      "name": "NM Hwy 59 to NM Hwy 163",
+      "display_name": null,
+      "region_id": "new-mexico",
+      "state1": "New Mexico",
+      "mile_start": 266.5,
+      "mile_end": 292,
+      "route_id": "main"
+    },
+    {
+      "id": "013",
+      "name": "NM Hwy 163 to Coyote Stock Tank (CR 16)",
+      "display_name": null,
+      "region_id": "new-mexico",
+      "state1": "New Mexico",
+      "mile_start": 292,
+      "mile_end": 324.5,
+      "route_id": "main"
+    },
+    {
+      "id": "014",
+      "name": "Coyote Stock Tank (CR 16) to FR 3070",
+      "display_name": null,
+      "region_id": "new-mexico",
+      "state1": "New Mexico",
+      "mile_start": 324.5,
+      "mile_end": 351.5,
+      "route_id": "main"
+    },
+    {
+      "id": "015",
+      "name": "FR 3070 to NM Hwy 12 TH",
+      "display_name": null,
+      "region_id": "new-mexico",
+      "state1": "New Mexico",
+      "mile_start": 351.5,
+      "mile_end": 375,
+      "route_id": "main"
+    },
+    {
+      "id": "016",
+      "name": "NM Hwy 12 to US Hwy 60",
+      "display_name": null,
+      "region_id": "new-mexico",
+      "state1": "New Mexico",
+      "mile_start": 375,
+      "mile_end": 411,
+      "route_id": "main"
+    },
+    {
+      "id": "017",
+      "name": "US Hwy 60 to York Ranch Rd",
+      "display_name": null,
+      "region_id": "new-mexico",
+      "state1": "New Mexico",
+      "mile_start": 411,
+      "mile_end": 426.5,
+      "route_id": "main"
+    },
+    {
+      "id": "018",
+      "name": "York Ranch Rd to NM Hwy 117 AP",
+      "display_name": null,
+      "region_id": "new-mexico",
+      "state1": "New Mexico",
+      "mile_start": 426.5,
+      "mile_end": 457,
+      "route_id": "main"
+    },
+    {
+      "id": "019",
+      "name": "NM Hwy 117 AP to Zuni-Acoma TH",
+      "display_name": "El Malpais National Monument",
+      "region_id": "new-mexico",
+      "state1": "New Mexico",
+      "mile_start": 457,
+      "mile_end": 513,
+      "route_id": "main"
+    },
+    {
+      "id": "020",
+      "name": "Zuni-Acoma TH (NM Hwy 117) to Mt Taylor TH",
+      "display_name": null,
+      "region_id": "new-mexico",
+      "state1": "New Mexico",
+      "mile_start": 513,
+      "mile_end": 540,
+      "route_id": "main"
+    },
+    {
+      "id": "021",
+      "name": "Mt Taylor TH to FR 239 AP",
+      "display_name": null,
+      "region_id": "new-mexico",
+      "state1": "New Mexico",
+      "mile_start": 540,
+      "mile_end": 566.5,
+      "route_id": "main"
+    },
+    {
+      "id": "022",
+      "name": "FR 239 AP to FR 293A TH",
+      "display_name": null,
+      "region_id": "new-mexico",
+      "state1": "New Mexico",
+      "mile_start": 566.5,
+      "mile_end": 584.5,
+      "route_id": "main"
+    },
+    {
+      "id": "023",
+      "name": "FR 239A TH to Cerro Colorado AP",
+      "display_name": null,
+      "region_id": "new-mexico",
+      "state1": "New Mexico",
+      "mile_start": 584.5,
+      "mile_end": 614.5,
+      "route_id": "main"
+    },
+    {
+      "id": "024",
+      "name": "Cerro Colorado AP to San Gregorio TH",
+      "display_name": null,
+      "region_id": "new-mexico",
+      "state1": "New Mexico",
+      "mile_start": 614.5,
+      "mile_end": 654.5,
+      "route_id": "main"
+    },
+    {
+      "id": "025",
+      "name": "San Gregorio TH to NM Hwy 96 AP",
+      "display_name": null,
+      "region_id": "new-mexico",
+      "state1": "New Mexico",
+      "mile_start": 654.5,
+      "mile_end": 675.5,
+      "route_id": "main"
+    },
+    {
+      "id": "026",
+      "name": "NM Hwy 96 AP to Skull Bridge TH",
+      "display_name": null,
+      "region_id": "new-mexico",
+      "state1": "New Mexico",
+      "mile_start": 675.5,
+      "mile_end": 689.5,
+      "route_id": "main"
+    },
+    {
+      "id": "027",
+      "name": "Skull Bridge TH to US Hwy 84 AP",
+      "display_name": null,
+      "region_id": "new-mexico",
+      "state1": "New Mexico",
+      "mile_start": 689.5,
+      "mile_end": 704,
+      "route_id": "main"
+    },
+    {
+      "id": "028",
+      "name": "US Hwy 84 AP to NM Hwy 110 AP",
+      "display_name": null,
+      "region_id": "new-mexico",
+      "state1": "New Mexico",
+      "mile_start": 704,
+      "mile_end": 727.5,
+      "route_id": "main"
+    },
+    {
+      "id": "029",
+      "name": "NM Hwy 110 AP to Hopewell Lake AP",
+      "display_name": null,
+      "region_id": "new-mexico",
+      "state1": "New Mexico",
+      "mile_start": 727.5,
+      "mile_end": 755.5,
+      "route_id": "main"
+    },
+    {
+      "id": "030",
+      "name": "Hopewell Lake AP to Lagunitas CG AP",
+      "display_name": null,
+      "region_id": "new-mexico",
+      "state1": "New Mexico",
+      "mile_start": 755.5,
+      "mile_end": 773.5,
+      "route_id": "main"
+    },
+    {
+      "id": "031",
+      "name": "Lagunitas CG AP to New Mexico Border",
+      "display_name": null,
+      "region_id": "new-mexico",
+      "state1": "New Mexico",
+      "mile_start": 773.5,
+      "mile_end": 794.5,
+      "route_id": "main"
+    },
+    {
+      "id": "032",
+      "name": "New Mexico Border to Blue Lake",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 794.5,
+      "mile_end": 825,
+      "route_id": "main"
+    },
+    {
+      "id": "033",
+      "name": "Blue Lake to Elwood Pass",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 825,
+      "mile_end": 849.5,
+      "route_id": "main"
+    },
+    {
+      "id": "034",
+      "name": "Elwood Pass to Wolf Creek Pass",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 849.5,
+      "mile_end": 867,
+      "route_id": "main"
+    },
+    {
+      "id": "035",
+      "name": "Wolf Creek Pass to South River Peak",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 867,
+      "mile_end": 886.5,
+      "route_id": "main"
+    },
+    {
+      "id": "036",
+      "name": "South River Peak to Squaw Pass",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 886.5,
+      "mile_end": 910,
+      "route_id": "main"
+    },
+    {
+      "id": "037",
+      "name": "Squaw Pass to Weminuche Pass",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 910,
+      "mile_end": 922.5,
+      "route_id": "main"
+    },
+    {
+      "id": "038",
+      "name": "Weminuche Pass to Twin Lakes",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 922.5,
+      "mile_end": 933.5,
+      "route_id": "main"
+    },
+    {
+      "id": "039",
+      "name": "Twin Lakes to Beartown",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 933.5,
+      "mile_end": 943.5,
+      "route_id": "main"
+    },
+    {
+      "id": "040",
+      "name": "Beartown to Stony Pass",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 943.5,
+      "mile_end": 951,
+      "route_id": "main"
+    },
+    {
+      "id": "041",
+      "name": "Stony Pass to Carson Saddle",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 951,
+      "mile_end": 967,
+      "route_id": "main"
+    },
+    {
+      "id": "042",
+      "name": "Carson Saddle to Spring Creek Pass",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 967,
+      "mile_end": 984,
+      "route_id": "main"
+    },
+    {
+      "id": "043",
+      "name": "Spring Creek Pass to San Luis Pass",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 984,
+      "mile_end": 998.5,
+      "route_id": "main"
+    },
+    {
+      "id": "044",
+      "name": "San Luis Pass to Eddiesville",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 998.5,
+      "mile_end": 1011,
+      "route_id": "main"
+    },
+    {
+      "id": "045",
+      "name": "Eddiesville to Saguache Park Road",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 1011,
+      "mile_end": 1024.5,
+      "route_id": "main"
+    },
+    {
+      "id": "046",
+      "name": "Saguache Park Road to Highway 114",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 1024.5,
+      "mile_end": 1038,
+      "route_id": "main"
+    },
+    {
+      "id": "047",
+      "name": "Highway 114 to Sargents Mesa",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 1038,
+      "mile_end": 1058.5,
+      "route_id": "main"
+    },
+    {
+      "id": "048",
+      "name": "Sargents Mesa to Marshall Pass",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 1058.5,
+      "mile_end": 1073,
+      "route_id": "main"
+    },
+    {
+      "id": "049",
+      "name": "Marshall Pass to Monarch Pass",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 1073,
+      "mile_end": 1084.5,
+      "route_id": "main"
+    },
+    {
+      "id": "050",
+      "name": "Monarch Pass to Hancock",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 1084.5,
+      "mile_end": 1104.5,
+      "route_id": "main"
+    },
+    {
+      "id": "051",
+      "name": "Hancock to Tincup Pass Rd",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 1104.5,
+      "mile_end": 1112.5,
+      "route_id": "main"
+    },
+    {
+      "id": "052",
+      "name": "Tincup Pass Rd to Cottonwood Pass Rd",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 1112.5,
+      "mile_end": 1128,
+      "route_id": "main"
+    },
+    {
+      "id": "053",
+      "name": "Cottonwood Pass Rd to Sheep Gulch",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 1128,
+      "mile_end": 1152,
+      "route_id": "main"
+    },
+    {
+      "id": "054",
+      "name": "Sheep Gulch to Halfmoon Creek",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 1152,
+      "mile_end": 1175.5,
+      "route_id": "main"
+    },
+    {
+      "id": "055",
+      "name": "Halfmoon Creek to Timberline Lake",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 1175.5,
+      "mile_end": 1188.5,
+      "route_id": "main"
+    },
+    {
+      "id": "056",
+      "name": "Timberline Lake to Tennessee Pass",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 1188.5,
+      "mile_end": 1201.5,
+      "route_id": "main"
+    },
+    {
+      "id": "057",
+      "name": "Tennessee Pass to Copper Mountain",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 1201.5,
+      "mile_end": 1226.5,
+      "route_id": "main"
+    },
+    {
+      "id": "058",
+      "name": "Copper Mountain to Gold Hill",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 1226.5,
+      "mile_end": 1241,
+      "route_id": "main"
+    },
+    {
+      "id": "059",
+      "name": "Gold Hill to Georgia Pass",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 1241,
+      "mile_end": 1261,
+      "route_id": "main"
+    },
+    {
+      "id": "060",
+      "name": "Georgia Pass to Argentine Pass",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 1261,
+      "mile_end": 1281,
+      "route_id": "main"
+    },
+    {
+      "id": "061",
+      "name": "Argentine Pass to Herman Gulch",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 1281,
+      "mile_end": 1298,
+      "route_id": "main"
+    },
+    {
+      "id": "062",
+      "name": "Herman Gulch to Berthoud Pass",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 1298,
+      "mile_end": 1318.5,
+      "route_id": "main"
+    },
+    {
+      "id": "063",
+      "name": "Berthoud Pass to Rainbow Road",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 1318.5,
+      "mile_end": 1328,
+      "route_id": "main"
+    },
+    {
+      "id": "064",
+      "name": "Rainbow Road to Rollins Pass",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 1328,
+      "mile_end": 1339,
+      "route_id": "main"
+    },
+    {
+      "id": "065",
+      "name": "Rollins Pass to Monarch Lake",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 1339,
+      "mile_end": 1358.5,
+      "route_id": "main"
+    },
+    {
+      "id": "066",
+      "name": "Monarch Lake to Grand Lake",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 1358.5,
+      "mile_end": 1372.5,
+      "route_id": "main"
+    },
+    {
+      "id": "067",
+      "name": "Grand Lake to Bowen Gulch",
+      "display_name": "Rocky Mountain National Park",
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 1372.5,
+      "mile_end": 1401.5,
+      "route_id": "main"
+    },
+    {
+      "id": "069",
+      "name": "Bowen Gulch to Willow Creek Pass",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 1401.5,
+      "mile_end": 1421,
+      "route_id": "main"
+    },
+    {
+      "id": "070",
+      "name": "Willow Creek Pass to Troublesome Pass",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 1421,
+      "mile_end": 1432.5,
+      "route_id": "main"
+    },
+    {
+      "id": "071",
+      "name": "Troublesome Pass to FR 104",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 1432.5,
+      "mile_end": 1444,
+      "route_id": "main"
+    },
+    {
+      "id": "072",
+      "name": "FR 104 to Rabbit Ears Pass",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 1444,
+      "mile_end": 1473.5,
+      "route_id": "main"
+    },
+    {
+      "id": "073",
+      "name": "Rabbit Ears Pass to Buffalo Pass",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 1473.5,
+      "mile_end": 1489,
+      "route_id": "main"
+    },
+    {
+      "id": "074",
+      "name": "Buffalo Pass to North Lake",
+      "display_name": "Mount Zirkel Wilderness",
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 1489,
+      "mile_end": 1509.5,
+      "route_id": "main"
+    },
+    {
+      "id": "075",
+      "name": "North Lake to Wyoming Border",
+      "display_name": null,
+      "region_id": "colorado",
+      "state1": "Colorado",
+      "mile_start": 1509.5,
+      "mile_end": 1535,
+      "route_id": "main"
+    },
+    {
+      "id": "076",
+      "name": "Colorado Border to Battle Pass TH",
+      "display_name": null,
+      "region_id": "wyoming",
+      "state1": "Wyoming",
+      "mile_start": 1535,
+      "mile_end": 1556,
+      "route_id": "main"
+    },
+    {
+      "id": "077",
+      "name": "Battle Pass TH to CR 401",
+      "display_name": null,
+      "region_id": "wyoming",
+      "state1": "Wyoming",
+      "mile_start": 1556,
+      "mile_end": 1579.5,
+      "route_id": "main"
+    },
+    {
+      "id": "078",
+      "name": "CR 401 to BLM 3328",
+      "display_name": null,
+      "region_id": "wyoming",
+      "state1": "Wyoming",
+      "mile_start": 1579.5,
+      "mile_end": 1586,
+      "route_id": "main"
+    },
+    {
+      "id": "079",
+      "name": "BLM 3328 to Bridger Pass Road Access",
+      "display_name": null,
+      "region_id": "wyoming",
+      "state1": "Wyoming",
+      "mile_start": 1586,
+      "mile_end": 1622.5,
+      "route_id": "main"
+    },
+    {
+      "id": "080",
+      "name": "Bridger Pass Road Access to US 287",
+      "display_name": null,
+      "region_id": "wyoming",
+      "state1": "Wyoming",
+      "mile_start": 1622.5,
+      "mile_end": 1640.5,
+      "route_id": "main"
+    },
+    {
+      "id": "081",
+      "name": "US 287 to CR 63",
+      "display_name": null,
+      "region_id": "wyoming",
+      "state1": "Wyoming",
+      "mile_start": 1640.5,
+      "mile_end": 1659,
+      "route_id": "main"
+    },
+    {
+      "id": "082",
+      "name": "CR 63 to CR 22 AP",
+      "display_name": null,
+      "region_id": "wyoming",
+      "state1": "Wyoming",
+      "mile_start": 1659,
+      "mile_end": 1680.5,
+      "route_id": "main"
+    },
+    {
+      "id": "083",
+      "name": "CR 22 AP to Bison Basin Rd",
+      "display_name": null,
+      "region_id": "wyoming",
+      "state1": "Wyoming",
+      "mile_start": 1680.5,
+      "mile_end": 1716,
+      "route_id": "main"
+    },
+    {
+      "id": "084",
+      "name": "Bison Basin Rd to Sweetwater Bridge",
+      "display_name": null,
+      "region_id": "wyoming",
+      "state1": "Wyoming",
+      "mile_start": 1716,
+      "mile_end": 1741.5,
+      "route_id": "main"
+    },
+    {
+      "id": "085",
+      "name": "Sweetwater Bridge to South Pass City",
+      "display_name": null,
+      "region_id": "wyoming",
+      "state1": "Wyoming",
+      "mile_start": 1741.5,
+      "mile_end": 1756,
+      "route_id": "main"
+    },
+    {
+      "id": "086",
+      "name": "South Pass City to Sweetwater Guard Station",
+      "display_name": null,
+      "region_id": "wyoming",
+      "state1": "Wyoming",
+      "mile_start": 1756,
+      "mile_end": 1779,
+      "route_id": "main"
+    },
+    {
+      "id": "087",
+      "name": "Sweetwater Guard Station to Big Sandy",
+      "display_name": null,
+      "region_id": "wyoming",
+      "state1": "Wyoming",
+      "mile_start": 1779,
+      "mile_end": 1801.5,
+      "route_id": "main"
+    },
+    {
+      "id": "088",
+      "name": "Big Sandy to North Fork Lake",
+      "display_name": null,
+      "region_id": "wyoming",
+      "state1": "Wyoming",
+      "mile_start": 1801.5,
+      "mile_end": 1827,
+      "route_id": "main"
+    },
+    {
+      "id": "089",
+      "name": "North Fork Lake to Summit Lake",
+      "display_name": null,
+      "region_id": "wyoming",
+      "state1": "Wyoming",
+      "mile_start": 1827,
+      "mile_end": 1853.5,
+      "route_id": "main"
+    },
+    {
+      "id": "090",
+      "name": "Summit Lake to Union Pass",
+      "display_name": null,
+      "region_id": "wyoming",
+      "state1": "Wyoming",
+      "mile_start": 1853.5,
+      "mile_end": 1887.5,
+      "route_id": "main"
+    },
+    {
+      "id": "091",
+      "name": "Union Pass to Sheridan Pass",
+      "display_name": null,
+      "region_id": "wyoming",
+      "state1": "Wyoming",
+      "mile_start": 1887.5,
+      "mile_end": 1907.5,
+      "route_id": "main"
+    },
+    {
+      "id": "092",
+      "name": "Sheridan Pass to Brooks Lake TH",
+      "display_name": null,
+      "region_id": "wyoming",
+      "state1": "Wyoming",
+      "mile_start": 1907.5,
+      "mile_end": 1934,
+      "route_id": "main"
+    },
+    {
+      "id": "093",
+      "name": "Brooks Lake TH to North Fork Buffalo River",
+      "display_name": null,
+      "region_id": "wyoming",
+      "state1": "Wyoming",
+      "mile_start": 1934,
+      "mile_end": 1956,
+      "route_id": "main"
+    },
+    {
+      "id": "094",
+      "name": "North Fork Buffalo River to Fox Park",
+      "display_name": null,
+      "region_id": "wyoming",
+      "state1": "Wyoming",
+      "mile_start": 1956,
+      "mile_end": 1979,
+      "route_id": "main"
+    },
+    {
+      "id": "095",
+      "name": "Fox Park to Heart Lake TH (Hwy 287)",
+      "display_name": null,
+      "region_id": "wyoming",
+      "state1": "Wyoming",
+      "mile_start": 1979,
+      "mile_end": 2006,
+      "route_id": "main"
+    },
+    {
+      "id": "096",
+      "name": "Heart Lake TH (Hwy 287) to Howard Eaton TH",
+      "display_name": null,
+      "region_id": "wyoming",
+      "state1": "Wyoming",
+      "mile_start": 2006,
+      "mile_end": 2030,
+      "route_id": "main"
+    },
+    {
+      "id": "097",
+      "name": "Howard Eaton TH to Idaho Border",
+      "display_name": "West Yellowstone National Park",
+      "region_id": "wyoming",
+      "state1": "Wyoming",
+      "mile_start": 2030,
+      "mile_end": 2047,
+      "route_id": "main"
+    },
+    {
+      "id": "098",
+      "name": "Idaho Border to Targhee Pass",
+      "display_name": null,
+      "region_id": "montana-idaho",
+      "state1": "Montana/Idaho",
+      "mile_start": 2047,
+      "mile_end": 2083,
+      "route_id": "main"
+    },
+    {
+      "id": "099",
+      "name": "Targhee Pass to Red Rocks Pass",
+      "display_name": null,
+      "region_id": "montana-idaho",
+      "state1": "Montana/Idaho",
+      "mile_start": 2083,
+      "mile_end": 2117,
+      "route_id": "main"
+    },
+    {
+      "id": "100",
+      "name": "Red Rocks Pass to Aldous Lake TH",
+      "display_name": null,
+      "region_id": "montana-idaho",
+      "state1": "Montana/Idaho",
+      "mile_start": 2117,
+      "mile_end": 2147.5,
+      "route_id": "main"
+    },
+    {
+      "id": "101",
+      "name": "Aldous Lake TH to Interstate 15",
+      "display_name": null,
+      "region_id": "montana-idaho",
+      "state1": "Montana/Idaho",
+      "mile_start": 2147.5,
+      "mile_end": 2179,
+      "route_id": "main"
+    },
+    {
+      "id": "102",
+      "name": "Interstate 15 to Bannack Pass",
+      "display_name": null,
+      "region_id": "montana-idaho",
+      "state1": "Montana/Idaho",
+      "mile_start": 2179,
+      "mile_end": 2220.5,
+      "route_id": "main"
+    },
+    {
+      "id": "103",
+      "name": "Bannack Pass to Morrison Lake",
+      "display_name": null,
+      "region_id": "montana-idaho",
+      "state1": "Montana/Idaho",
+      "mile_start": 2220.5,
+      "mile_end": 2257,
+      "route_id": "main"
+    },
+    {
+      "id": "104",
+      "name": "Morrison Lake to Bannock Pass",
+      "display_name": null,
+      "region_id": "montana-idaho",
+      "state1": "Montana/Idaho",
+      "mile_start": 2257,
+      "mile_end": 2283.5,
+      "route_id": "main"
+    },
+    {
+      "id": "105",
+      "name": "Bannock Pass to Lemhi Pass",
+      "display_name": null,
+      "region_id": "montana-idaho",
+      "state1": "Montana/Idaho",
+      "mile_start": 2283.5,
+      "mile_end": 2310.5,
+      "route_id": "main"
+    },
+    {
+      "id": "106",
+      "name": "Lemhi Pass to Goldstone Pass",
+      "display_name": null,
+      "region_id": "montana-idaho",
+      "state1": "Montana/Idaho",
+      "mile_start": 2310.5,
+      "mile_end": 2330,
+      "route_id": "main"
+    },
+    {
+      "id": "107",
+      "name": "Goldstone Pass to Miner Lakes TH",
+      "display_name": null,
+      "region_id": "montana-idaho",
+      "state1": "Montana/Idaho",
+      "mile_start": 2330,
+      "mile_end": 2354,
+      "route_id": "main"
+    },
+    {
+      "id": "108",
+      "name": "Miner Lake TH to Big Hole Pass",
+      "display_name": null,
+      "region_id": "montana-idaho",
+      "state1": "Montana/Idaho",
+      "mile_start": 2354,
+      "mile_end": 2389.5,
+      "route_id": "main"
+    },
+    {
+      "id": "109",
+      "name": "Big Hole Pass to Chief Joseph Pass",
+      "display_name": null,
+      "region_id": "montana-idaho",
+      "state1": "Montana/Idaho",
+      "mile_start": 2389.5,
+      "mile_end": 2406,
+      "route_id": "main"
+    },
+    {
+      "id": "110",
+      "name": "Chief Joseph Pass to Schultz Saddle",
+      "display_name": null,
+      "region_id": "montana",
+      "state1": "Montana",
+      "mile_start": 2406,
+      "mile_end": 2424,
+      "route_id": "main"
+    },
+    {
+      "id": "111",
+      "name": "Schultz Saddle to Johnson Lake",
+      "display_name": null,
+      "region_id": "montana",
+      "state1": "Montana",
+      "mile_start": 2424,
+      "mile_end": 2455.5,
+      "route_id": "main"
+    },
+    {
+      "id": "112",
+      "name": "Johnson Lake to Lower Seymour Lake",
+      "display_name": null,
+      "region_id": "montana",
+      "state1": "Montana",
+      "mile_start": 2455.5,
+      "mile_end": 2489,
+      "route_id": "main"
+    },
+    {
+      "id": "113",
+      "name": "Lower Seymour Lake to Interstate 15",
+      "display_name": null,
+      "region_id": "montana",
+      "state1": "Montana",
+      "mile_start": 2489,
+      "mile_end": 2541,
+      "route_id": "main"
+    },
+    {
+      "id": "114",
+      "name": "Interstate 15 to Homestake Pass",
+      "display_name": null,
+      "region_id": "montana",
+      "state1": "Montana",
+      "mile_start": 2541,
+      "mile_end": 2577,
+      "route_id": "main"
+    },
+    {
+      "id": "115",
+      "name": "Homestake Pass to 1-15/Elk Pass",
+      "display_name": null,
+      "region_id": "montana",
+      "state1": "Montana",
+      "mile_start": 2577,
+      "mile_end": 2607.5,
+      "route_id": "main"
+    },
+    {
+      "id": "116",
+      "name": "I-15/Elk Pass to MacDonald Pass",
+      "display_name": null,
+      "region_id": "montana",
+      "state1": "Montana",
+      "mile_start": 2607.5,
+      "mile_end": 2678,
+      "route_id": "main"
+    },
+    {
+      "id": "117",
+      "name": "MacDonald Pass to Dana Spring",
+      "display_name": null,
+      "region_id": "montana",
+      "state1": "Montana",
+      "mile_start": 2678,
+      "mile_end": 2701.5,
+      "route_id": "main"
+    },
+    {
+      "id": "118",
+      "name": "Dana Spring to Stemple Pass",
+      "display_name": null,
+      "region_id": "montana",
+      "state1": "Montana",
+      "mile_start": 2701.5,
+      "mile_end": 2721,
+      "route_id": "main"
+    },
+    {
+      "id": "119",
+      "name": "Stemple Pass to Rogers Pass",
+      "display_name": null,
+      "region_id": "montana",
+      "state1": "Montana",
+      "mile_start": 2721,
+      "mile_end": 2747,
+      "route_id": "main"
+    },
+    {
+      "id": "120",
+      "name": "Rogers Pass to Benchmark",
+      "display_name": null,
+      "region_id": "montana",
+      "state1": "Montana",
+      "mile_start": 2747,
+      "mile_end": 2805,
+      "route_id": "main"
+    },
+    {
+      "id": "121",
+      "name": "Benchmark to Badger Pass",
+      "display_name": "Bob Marshall Wilderness",
+      "region_id": "montana",
+      "state1": "Montana",
+      "mile_start": 2805,
+      "mile_end": 2889,
+      "route_id": "main"
+    },
+    {
+      "id": "122",
+      "name": "Badger Pass to Marias Pass",
+      "display_name": null,
+      "region_id": "montana",
+      "state1": "Montana",
+      "mile_start": 2889,
+      "mile_end": 2924,
+      "route_id": "main"
+    },
+    {
+      "id": "123",
+      "name": "Marias Pass to East Glacier",
+      "display_name": null,
+      "region_id": "montana",
+      "state1": "Montana",
+      "mile_start": 2924,
+      "mile_end": 2940,
+      "route_id": "main"
+    },
+    {
+      "id": "124",
+      "name": "East Glacier to Two Medicine CG",
+      "display_name": null,
+      "region_id": "montana",
+      "state1": "Montana",
+      "mile_start": 2940,
+      "mile_end": 2950.5,
+      "route_id": "main"
+    },
+    {
+      "id": "125",
+      "name": "Two Medicine CG to Going-to-the-Sun Rd",
+      "display_name": null,
+      "region_id": "montana",
+      "state1": "Montana",
+      "mile_start": 2950.5,
+      "mile_end": 2990.5,
+      "route_id": "main"
+    },
+    {
+      "id": "126",
+      "name": "Going-to-the-Sun Rd to Many Glacier",
+      "display_name": null,
+      "region_id": "montana",
+      "state1": "Montana",
+      "mile_start": 2990.5,
+      "mile_end": 3004,
+      "route_id": "main"
+    },
+    {
+      "id": "127",
+      "name": "Many Glacier to Waterton",
+      "display_name": null,
+      "region_id": "montana",
+      "state1": "Montana",
+      "mile_start": 3004,
+      "mile_end": 3039.979,
+      "route_id": "main"
+    }
+  ],
+  "alternates": [
+    {
+      "id": "tonahutu",
+      "name": "Tonahutu Creek Route",
+      "official": true,
+      "source": "CDTC section 068",
+      "section_id": "068",
+      "section_name": "Grand Lake to Big Meadows",
+      "branch_mile": 1374.5,
+      "rejoin_mile": 1396.5,
+      "alt_miles": 4.4,
+      "main_miles": 22,
+      "delta_miles": -17.6,
+      "segments": 1,
+      "points": 10
+    },
+    {
+      "id": "chief-mtn",
+      "name": "Chief Mountain Border Crossing",
+      "official": true,
+      "source": "CDTC section 128",
+      "section_id": "128",
+      "section_name": "Many Glacier to Chief Mountain Border Crossing",
+      "branch_mile": 3003.5,
+      "rejoin_mile": null,
+      "alt_miles": 27.2,
+      "main_miles": null,
+      "delta_miles": null,
+      "segments": 1,
+      "points": 56
+    },
+    {
+      "id": "gila",
+      "name": "Gila River Route",
+      "official": false,
+      "source": "OSM relation 7917427",
+      "section_id": "alt-gila",
+      "section_name": "Gila River Route",
+      "branch_mile": 173,
+      "rejoin_mile": 351.5,
+      "alt_miles": 106.7,
+      "main_miles": 178.5,
+      "delta_miles": -71.8,
+      "segments": 1,
+      "points": 215
     },
     {
       "id": "anaconda",
-      "label": "Anaconda Cutoff",
-      "delta_miles": -77.4,
-      "branch_mile": 2475,
-      "rejoin_mile": 2610,
-      "main": {
-        "id": "main",
-        "label": "Main CDT Route",
-        "total_miles": 135
-      },
-      "alt": {
-        "id": "anaconda",
-        "label": "Anaconda Cutoff",
-        "total_miles": 57.6,
-        "delta_miles": -77.4
-      }
+      "name": "Anaconda Cutoff",
+      "official": false,
+      "source": "OSM relation 8107272",
+      "section_id": "alt-anaconda",
+      "section_name": "Anaconda Cutoff",
+      "branch_mile": 2480,
+      "rejoin_mile": 2628.5,
+      "alt_miles": 53.1,
+      "main_miles": 148.5,
+      "delta_miles": -95.4,
+      "segments": 1,
+      "points": 108
     },
     {
       "id": "spotted-bear",
-      "label": "Spotted Bear Route",
-      "delta_miles": 20.5,
-      "branch_mile": 2845,
-      "rejoin_mile": 2860,
-      "main": {
-        "id": "main",
-        "label": "Main CDT Route",
-        "total_miles": 15
-      },
-      "alt": {
-        "id": "spotted-bear",
-        "label": "Spotted Bear Route",
-        "total_miles": 35.5,
-        "delta_miles": 20.5
-      }
+      "name": "Spotted Bear Route",
+      "official": false,
+      "source": "OSM relation 8034122",
+      "section_id": "alt-spotted-bear",
+      "section_name": "Spotted Bear Route",
+      "branch_mile": 2833.5,
+      "rejoin_mile": 2877,
+      "alt_miles": 26.6,
+      "main_miles": 43.5,
+      "delta_miles": -16.9,
+      "segments": 1,
+      "points": 55
     }
   ],
   "direction_options": [
     {
       "id": "nobo_waterton",
-      "label": "Northbound \u2014 Antelope Wells \u2192 Waterton Lake",
-      "total_miles": 3050.1,
+      "label": "Northbound — Crazy Cook → Waterton Lake",
+      "total_miles": 3039.979,
       "is_nobo": true,
       "terminus": "waterton"
     },
     {
       "id": "nobo_chief_mtn",
-      "label": "Northbound \u2014 Antelope Wells \u2192 Chief Mountain (\u22128 mi)",
-      "total_miles": 3037.15,
+      "label": "Northbound — Crazy Cook → Chief Mountain",
+      "total_miles": 3030.7,
       "is_nobo": true,
       "terminus": "chief_mtn"
     },
     {
       "id": "sobo_waterton",
-      "label": "Southbound \u2014 Waterton Lake \u2192 Antelope Wells",
-      "total_miles": 3050.1,
+      "label": "Southbound — Waterton Lake → Crazy Cook",
+      "total_miles": 3039.979,
       "is_nobo": false,
       "terminus": "waterton"
     },
     {
       "id": "sobo_chief_mtn",
-      "label": "Southbound \u2014 Chief Mountain \u2192 Antelope Wells (\u22128 mi)",
-      "total_miles": 3037.15,
+      "label": "Southbound — Chief Mountain → Crazy Cook",
+      "total_miles": 3030.7,
       "is_nobo": false,
       "terminus": "chief_mtn"
     }

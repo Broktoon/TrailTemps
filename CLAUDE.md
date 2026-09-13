@@ -91,8 +91,10 @@ node trails/north-country-trail/tools/build-points-nct.js
 node trails/north-country-trail/tools/generate-normals-nct.js
 node trails/potomac-heritage-trail/tools/build-points-pht.js
 node trails/potomac-heritage-trail/tools/generate-normals-pht.js
-node trails/continental-divide-trail/tools/build-points-cdt.js
+node trails/continental-divide-trail/tools/migrate-cdt-canonical.js
 node trails/continental-divide-trail/tools/generate-normals-cdt.js
+# build-points-cdt.js is superseded and refuses to run; the CDT is rebuilt
+# in SectionsHiked via scripts/build-cdt-data.js
 ```
 
 There are no tests, no linter, and no build step.
@@ -1295,124 +1297,221 @@ Located in `trails/potomac-heritage-trail/tools/`:
 
 ## Continental Divide Trail (CDT) — Live
 
-- **Status:** Live (April 2026). All data complete; fully functional weather planner with BestStart!, duration extremes, elevation correction, and 4 alternate routes.
-- **Point ID format:** `cdt-main-mi{7digits}` (main spine, thousandth-mile precision); `cdt-{alt_id}-mi{7digits}` (alt points, e.g. `cdt-gila-mi0000000`)
-- **Data files:** `points.json` (657 total: spine + alt points), `cdt_meta.json`, `trail.geojson`, `historical_weather.json`, `_raw_arcgis.json`, `_raw_osm_gila.json`, `_raw_osm_rmnp.json`, `_raw_osm_anaconda.json`, `_raw_osm_spotted-bear.json`
-- **Normals source:** Open-Meteo ERA5-Land archive (2018–2024), via `generate-normals-cdt.js`; uses Professional API (`customer-archive-api.open-meteo.com`, 2-second throttle, ~24 min for ~700 points)
-- **Weather resolution:** 5-mile intervals (main spine)
-- **Trail geometry sources:**
-  - USFS ArcGIS FeatureServer (`services1.arcgis.com/gGHDlz6USftL5Pau/.../ContinentalDivideNST/FeatureServer/0`) — main route, RMNP Loop ArcGIS variant, Chief Mountain alternate. Label field: `CDT Primary Route`, `Rocky Mountain National Park Loop Alternate`, `Chief Mountain Border Crossing Alternate`
-  - OSM Overpass API — Gila River Route (relation 7917427), RMNP Loop / North Inlet / Tonahutu Creek (relation 6747529), Anaconda Cutoff (relation 8107272), Spotted Bear Route (relation 8034122)
-- **Trail color:** `#e06060` (same salmon/red as all other active trails)
-- **Direction convention:** NOBO (Antelope Wells, NM → Waterton Lake or Chief Mountain, MT) / SOBO; `is_nobo` flag; terminus variant controls northern end
-- **Elevation correction:** same logic as AZT/PCT (`ELEV_THRESHOLD_FT = 300`; `trail_elev` from OpenTopoData SRTM, `grid_elev` from ERA5-Land stored in feet)
+Rebuilt 2026-09 onto the canonical schema from CDTC's own GIS. Mirrors
+SectionsHiked's `scripts/build-cdt-data.js`; see that repo's CLAUDE.md for the
+build itself. `build-points-cdt.js` here is **superseded and guarded** — it
+refuses to run.
 
-### CDT Geographic Sections (4 States)
+- **Status:** Live. Weather planner with BestStart!, duration extremes, elevation correction, and 4 selectable alternates plus a second northern terminus.
+- **Point ID format:** `cdt-main-mi{7digits}` (spine, thousandth-mile precision); `cdt-{route_id}-mi{7digits}` for alternates, keyed on `sec_mile` (e.g. `cdt-gila-mi0000000`)
+- **Data files:** `points.json` (6,523: 6,079 spine + 444 alternate), `cdt_meta.json`, `trail.geojson`, `historical_weather.json`, `weather_id_remap.json`
+- **Normals source:** Open-Meteo ERA5-Land archive (2018–2024), via `generate-normals-cdt.js`; Professional API (`customer-archive-api.open-meteo.com`, 2-second throttle)
+- **Weather resolution:** still 5-mile. The points are now at 0.5mi but the normals were **not** refetched or densified — ERA5-Land's grid is ~9km, so a finer sample returns the same cell. `app.js` falls back to nearest-by-mile for points with no normals of their own.
+- **Trail color:** `#e06060`
+- **Direction convention:** NOBO (Crazy Cook Monument, NM → Waterton Lake or Chief Mountain, MT) / SOBO
+- **Elevation correction:** same logic as AZT/PCT (`ELEV_THRESHOLD_FT = 300`)
 
-Idaho (near Yellowstone) is absorbed into Wyoming for weather-planner purposes.
+### CDT geometry source
 
-| State | Name | Axis start | Axis end | Miles |
-|-------|------|-----------|---------|-------|
-| `NM` | New Mexico | 0 | 795 | ~795 |
-| `CO` | Colorado | 800 | 1,525 | ~725 |
-| `WY` | Wyoming | 1,530 | 2,300 | ~770 |
-| `MT` | Montana | 2,305 | 3,025.1 | ~720 |
+CDTC's ArcGIS Online org, `services8.arcgis.com/WyuHwdftppQLa5KO`, fetched 2026-09-13:
 
-**Total trail miles: 3,025.1** (Antelope Wells → Waterton Lake). Chief Mountain variant: 3,012.15 mi (−8 mi for alternate northern terminus).
+| layer | what it gives |
+|---|---|
+| `Mile_Markers/0` | 6,155 half-mile markers, `Label`-separated per route. The Primary Route's 6,079 run 0.000–3,039.979 with no duplicates and no step other than 0.5 (plus a 1.479 tail into the terminus). **This is the mile axis.** |
+| `2026_CDT_Trail_Sections_view/0` | 128 official sections — 126 Primary Route plus Tonahutu (068) and Chief Mountain (128). Every one carries a "X to Y" `Sec_Desc`, used as `section_name`, and a `State_1` giving the five regions. |
+| `Continental_Divide_Trail_2/0` | CDTC centerline, 7 features. Rendering geometry for `trail.geojson`. |
 
-State assignment is by latitude: NM < 37°, CO < 41°, WY < 45°, MT otherwise.
+Section boundaries come from snapping each marker to the nearest section
+geometry, **not** from accumulating the section layer's `Mileage` field — those
+sum to 3,042.96 against a 3,039.979 marker axis, and by Montana the drift is
+~30mi. Snapping keeps every boundary on one axis. Same rule as the PCT build.
 
-### CDT Direction Options (4)
+### What the 2019 USFS build got wrong
+
+The previous data came from `ContinentalDivideNST/FeatureServer/0`, a snapshot
+labelled `CNDST_20190415`. Three separate problems, all fixed by the rebuild:
+
+1. **No section structure.** "Sections" were four latitude bands the old builder
+   invented (NM <37°, CO <41°, WY <45°, MT). The trail runs the Idaho/Montana
+   border ridge well south of 45°, so **260 miles of axis (old miles 2045–2300)
+   were labelled `state: "WY"` while sitting in Idaho and Montana**, and `ID`
+   never appeared in `points.json` at all.
+2. **The RMNP inversion.** The 2019 layer carried only the short western bypass
+   connector, so the mile axis ran along the bypass and the real route through
+   the park was modelled as a 40-mile alternate with `default_id: "rmnp"`.
+   CDTC has it the other way round: the Primary Route goes through the park
+   (its section 067, "Rocky Mountain National Park", 28.7mi) and the 4.4-mile
+   Tonahutu Creek Route is the alternate.
+3. **`cdt_meta.json` had drifted from its builder.** It was hand-edited after its
+   last build to add `default_id`, a top-level `delta_miles` that `app.js`
+   depended on, and the "Western Bypass" label — none of which
+   `build-points-cdt.js` emits. Re-running it would have silently dropped all
+   three.
+
+The old axis was **not** rescaled, unlike the PCT's — it was measured off the
+source geometry. It was replaced because the source was stale and structureless,
+not because the arithmetic was wrong.
+
+### CDT regions (5) and sections (126)
+
+CDTC's five `State_1` groups, in trail order. "Montana/Idaho" is CDTC's own
+label for the border-ridge stretch and is kept verbatim rather than resolved to
+one state, because there the trail *is* the state line.
+
+| id | Name | mile_start | mile_end | Miles | Sections |
+|----|------|-----------|---------|-------|----------|
+| `new-mexico` | New Mexico | 0 | 794.5 | 794.5 | 31 |
+| `colorado` | Colorado | 794.5 | 1,535 | 740.5 | 43 |
+| `wyoming` | Wyoming | 1,535 | 2,047 | 512 | 22 |
+| `montana-idaho` | Montana/Idaho | 2,047 | 2,406 | 359 | 12 |
+| `montana` | Montana | 2,406 | 3,039.979 | 634 | 18 |
+
+**Total: 3,039.979 mi** (Crazy Cook → Waterton Lake). Chief Mountain variant:
+3,030.7 mi.
+
+Per-point `state` is computed **independently**, by polygon test against Census
+TIGERweb boundaries — never inferred from `State_1`, because the trail crosses
+between Idaho and Montana repeatedly along that ridge. TIGERweb rather than the
+shared coarse `us_states.geojson`: on a border that follows the divide itself, a
+generalised polygon is not good enough. Resulting counts: MT 1,870, NM 1,804,
+CO 1,492, WY 1,023, **ID 333**, and one point (the northern terminus, on the
+Canadian border) with no state.
+
+### CDT direction options (4)
 
 | id | Label | Total miles |
 |----|-------|------------|
-| `nobo_waterton` | Northbound — Antelope Wells → Waterton Lake | 3,025.1 |
-| `nobo_chief_mtn` | Northbound — Antelope Wells → Chief Mountain | 3,012.15 |
-| `sobo_waterton` | Southbound — Waterton Lake → Antelope Wells | 3,025.1 |
-| `sobo_chief_mtn` | Southbound — Chief Mountain → Antelope Wells | 3,012.15 |
+| `nobo_waterton` | Northbound — Crazy Cook → Waterton Lake | 3,039.979 |
+| `nobo_chief_mtn` | Northbound — Crazy Cook → Chief Mountain | 3,030.7 |
+| `sobo_waterton` | Southbound — Waterton Lake → Crazy Cook | 3,039.979 |
+| `sobo_chief_mtn` | Southbound — Chief Mountain → Crazy Cook | 3,030.7 |
 
-### CDT Alternate Groups — Current State
+Chief Mountain is 3,003.5 of spine plus its own 27.2mi leg. `buildNoboSegments`
+now appends that leg explicitly; the old code just stopped the spine 8 miles
+early and lost the crossing's 27 miles entirely.
 
-**Gila River Route (`gila`):** branch 175, rejoin 355. OSM relation 7917427, `maxGapMi=1.0`. Alternate: 104.9 mi (delta −75.1 mi). Chain confirmed clean; branch and rejoin are correct.
+### CDT alternates (5)
 
-**RMNP Loop — North Inlet / Tonahutu Creek (`rmnp`):** branch 1,355, rejoin 1,370. OSM relation 6747529, `maxGapMi=2.0`, `splitStepMi=0.5`. OSM coverage is partial (3 segments totaling 40.0 mi, delta +27.9 mi). The two artifact straight lines (1.6 mi and 1.2 mi) were removed by splitting at steps > 0.5 mi — each valid segment is written as a separate GeoJSON Feature. The ArcGIS data contains only the short western bypass connector (~4.2 mi, labeled `Rocky Mountain National Park Loop Alternate`); the main CDT route goes through the park interior via the longer south/east/north legs. OSM gaps in the map are expected; see "Notes on Map Data" in index.html. Do not change `maxGapMi` or `splitStepMi` without re-verifying the step distance distribution.
+Two are official, from CDTC's section layer. Three are carried forward from the
+previous build's cached OSM relations and are tagged `official: false`.
 
-**Anaconda Cutoff (`anaconda`):** branch 2,475, rejoin 2,610. OSM relation 8107272, `maxGapMi=5.0`. Alternate: 57.6 mi (delta −77.4 mi). `maxGapMi=5.0` needed because the relation has a legitimate internal gap of ~4.5 mi.
+| id | Source | branch | rejoin | Alt mi | Delta | Official |
+|----|--------|--------|--------|--------|-------|----------|
+| `gila` | OSM 7917427 | 173 | 351.5 | 106.7 | −71.8 | no |
+| `tonahutu` | CDTC section 068 | 1,374.5 | 1,396.5 | 4.4 | −17.6 | yes |
+| `anaconda` | OSM 8107272 | 2,480 | 2,628.5 | 53.1 | −95.4 | no |
+| `spotted-bear` | OSM 8034122 | 2,833.5 | 2,877 | 26.6 | −16.9 | no |
+| `chief-mtn` | CDTC section 128 | 3,003.5 | — | 27.2 | — | yes |
 
-**Spotted Bear Route (`spotted-bear`):** branch 2,845, rejoin 2,860. OSM relation 8034122, `maxGapMi=10.0`, `splitStepMi=0.5`. 2 segments totaling 26.6 mi (delta +20.5 mi, scenic detour). `maxGapMi=10.0` needed to stitch across the internal OSM gap; `splitStepMi=0.5` then removes the resulting 8.875 mi artifact straight line, preserving both legitimate segments.
+`chief-mtn` has no `rejoin_mile`: it ends at a different border crossing. UI code
+must filter it out of the toggleable list — `selectableAlternates()` in `app.js`
+does exactly that, since it is offered through `direction_options` instead.
 
-### CDT Build Script — Key Parameters
+The old build's fourth OSM alternate, relation 6747529 ("RMNP Loop"), is
+**deliberately dropped**: under CDTC's routing that geometry is the main spine.
+Keeping it would have re-created the inversion.
 
-`build-points-cdt.js` has several non-obvious parameters:
+#### The OSM alternates' mileages moved, and one is still doubtful
 
-- **`chainPaths(allPaths, maxGapMi)`** — greedy nearest-endpoint stitching with gap cutoff. Stops when the next way endpoint is farther than `maxGapMi`. Without this, errant distant OSM ways create straight-line artifacts or cause loops.
-- **`longestContinuousSegment(chain, maxStepMi)`** — splits the chain at any step > `maxStepMi`, returns only the longest piece. Used when you want to discard all but the primary segment.
-- **`splitContinuousSegments(chain, maxStepMi)`** — splits the chain at any step > `maxStepMi`, returns ALL valid segments. Used for RMNP where legitimate trail segments exist on both sides of a coverage gap. Each segment is written as a separate GeoJSON Feature with identical properties; Leaflet renders them all as the same dotted line. Set via `splitStepMi` in `OSM_ALTS`.
-- **`OSM_ALTS`** — per-alternate config array. Current values:
-  ```javascript
-  { id: 'gila',         relation: 7917427, state: 'NM', maxGapMi: 1.0,  trimStepMi: null, splitStepMi: null }
-  { id: 'rmnp',         relation: 6747529, state: 'CO', maxGapMi: 2.0,  trimStepMi: null, splitStepMi: 0.5  }
-  { id: 'anaconda',     relation: 8107272, state: 'MT', maxGapMi: 5.0,  trimStepMi: null, splitStepMi: null }
-  { id: 'spotted-bear', relation: 8034122, state: 'MT', maxGapMi: 10.0, trimStepMi: null, splitStepMi: 0.5  }
-  ```
-- **State assignment by latitude:** ANTELOPE_WELLS (31.335°N) orients the main chain S→N; states split at 37°, 41°, 45°.
-- **Cache files:** `_raw_arcgis.json` (USFS), `_raw_osm_*.json` (OSM per-alternate). Delete to force a fresh fetch.
+The old chainer only appended to the tail of the growing chain, so whichever OSM
+way sorted first became the seed and everything upstream was stranded. Anaconda
+and Spotted Bear each came out as two pieces joined by a straight line across
+open country, and that line was counted as tread. Chaining from **both** ends
+gives one continuous chain per route, longest step 0.86mi.
 
-### CDT `CDT_STATES_BOOTSTRAP`
+| route | old | now | note |
+|---|---|---|---|
+| Gila River | 104.9 | 106.7 | 8 of 61 ways still unstitched (5.1mi of side paths), reported at build time |
+| Anaconda | 57.6 | 53.1 | 4.5mi of the old figure was the phantom straight line |
+| Spotted Bear | 35.5 | 26.6 | 8.9mi was phantom — and note this doc already recorded 26.6mi of real tread while `cdt_meta.json` said 35.5 |
 
-Hardcoded in `index.html` for immediate UI population. **Must be updated after every `build-points-cdt.js` run** — the script prints exact values to the console.
+**Spotted Bear is the one to distrust.** It now computes as 16.9mi *shorter* than
+the spine stretch it replaces, but it is normally described as a longer scenic
+detour through the Bob Marshall. Either relation 8034122 covers only part of the
+route, or its branch point is wrong — its rejoin end snaps 1.21mi from the
+spine, far looser than every other alternate's endpoints (all under 0.15mi).
+`index.html` therefore quotes **no** mileage delta for it. Resolve against a real
+CDT guide or CDTC's `Reroutes_view` layer before relying on that number.
+
+### CDT `CDT_REGIONS_BOOTSTRAP`
+
+Hardcoded in `index.html` for immediate UI population, mirroring
+`cdt_meta.json`'s `regions`. **Must be updated after every
+`scripts/build-cdt-data.js` run** (in SectionsHiked) — copy from the
+`regions` array of the `cdt_meta.json` it writes.
 
 ```javascript
-window.CDT_STATES_BOOTSTRAP = [
-  { state: "NM", name: "New Mexico", axis_start: 0,      axis_end: 795    },
-  { state: "CO", name: "Colorado",   axis_start: 800,    axis_end: 1525   },
-  { state: "WY", name: "Wyoming",    axis_start: 1530,   axis_end: 2300   },
-  { state: "MT", name: "Montana",    axis_start: 2305,   axis_end: 3025.1 }
+window.CDT_REGIONS_BOOTSTRAP = [
+  { id: "new-mexico",    name: "New Mexico",    mile_start: 0,      mile_end: 794.5    },
+  { id: "colorado",      name: "Colorado",      mile_start: 794.5,  mile_end: 1535     },
+  { id: "wyoming",       name: "Wyoming",       mile_start: 1535,   mile_end: 2047     },
+  { id: "montana-idaho", name: "Montana/Idaho", mile_start: 2047,   mile_end: 2406     },
+  { id: "montana",       name: "Montana",       mile_start: 2406,   mile_end: 3039.979 }
 ];
 ```
 
-### CDT `cdt_meta.json` Structure
+### CDT `cdt_meta.json` structure
 
 ```json
 {
-  "trail": { "name", "total_trail_miles", "map_center", "map_zoom", "termini" },
-  "sections": [ { "id", "name", "state", "axis_start", "axis_end" } ],
-  "alt_groups": [ { "id", "label", "branch_mile", "rejoin_mile",
-                    "main": { "id", "label", "total_miles" },
-                    "alt":  { "id", "label", "total_miles", "delta_miles" } } ],
+  "trail": { "name", "total_miles", "point_spacing_miles", "map_center", "map_zoom",
+             "termini", "source": { "axis", "sections", "geometry", "org", "fetched" } },
+  "regions":  [ { "id", "name", "mile_start", "mile_end", "sections" } ],
+  "sections": [ { "id", "name", "display_name", "region_id", "state1",
+                  "mile_start", "mile_end", "route_id" } ],
+  "alternates": [ { "id", "name", "official", "source", "section_id", "section_name",
+                    "branch_mile", "rejoin_mile", "alt_miles", "main_miles",
+                    "delta_miles", "segments", "points" } ],
   "direction_options": [ { "id", "label", "total_miles", "is_nobo", "terminus" } ]
 }
 ```
 
-### CDT `points.json` Schema
+Renamed from the old shape: `total_trail_miles` → `total_miles`, `alt_groups` →
+`alternates`, `sections[].axis_start/axis_end` → `mile_start/mile_end`, and
+`default_id` is gone (no alternate is the default any more). The old
+`trail.spine_miles` that `app.js` read never existed in the file at all — it
+always fell through to a hardcoded 3100.
 
-Main spine points:
+### CDT `points.json` schema
+
+Canonical. Spine:
 ```json
-{ "id": "cdt-main-mi0000000", "mile": 0, "lat": ..., "lon": ..., "state": "NM", "trail_elev": 4531 }
+{ "id": "cdt-main-mi0000000", "lat": 31.497064, "lon": -108.208509, "mile": 0,
+  "region_id": "new-mexico", "region_name": "New Mexico",
+  "section_id": "001", "section_name": "Mexico Border to NM State Hwy 81",
+  "sec_mile": 0, "route_id": "main", "state": "NM", "trail_elev": 4298 }
 ```
 
-Alt points:
+Alternate — note `alt_of`, and that `mile` sits on the **main** axis:
 ```json
-{ "id": "cdt-gila-mi0000000", "alt_id": "gila", "mile": 0, "lat": ..., "lon": ..., "state": "NM", "trail_elev": 4200 }
+{ "id": "cdt-gila-mi0000000", "lat": ..., "lon": ..., "mile": 173,
+  "region_id": "new-mexico", "region_name": "New Mexico",
+  "section_id": "alt-gila", "section_name": "Gila River Route",
+  "sec_mile": 0, "route_id": "gila", "state": "NM",
+  "trail_elev": ..., "alt_of": "main" }
 ```
 
-### CDT Notable Features
+`alt_id` and `alt_mile` are **gone**. An alternate's `mile` is interpolated
+across the branch→rejoin span so it stays strictly increasing and sortable;
+`sec_mile` is distance along the alternate itself and is what the UI labels
+points with. Every one of the 131 sections starts at `sec_mile` 0.
 
-- **Longest continuous National Scenic Trail** at 3,025 miles
-- **BestStart!** — fully implemented: button, `bestStartResult` div, `runBestStart()`, `bestStartBtn` wired in `initDurationUI()`
-- **No advisory logic in Duration Calculator** — `warningHtml = ""` in `computeAndRenderDurationExtremes`; advisories only in Weather Planner
-- **`NORMALS_CACHE_VERSION`:** `"v1"` — bump whenever `historical_weather.json` is rebuilt
+### CDT notable features
+
+- **BestStart!** — fully implemented
+- **No advisory logic in Duration Calculator** — `warningHtml = ""`; advisories only in Weather Planner
+- **`NORMALS_CACHE_VERSION`:** bump whenever `historical_weather.json` is rebuilt
 - **`{ meta, points }` wrapper** — same structure as IAT/PCT/PHT
-- **`historical_weather.json` complete** — 657 points (607 spine + 21 Gila + 12 Anaconda + 8 Spotted Bear + 9 RMNP); generated April 2026 via Professional API
-- **Chief Mountain alternate terminus** — 13 miles shorter than Waterton Lake terminus; both NOBO and SOBO have dual terminus options
-- **RMNP loop pending** — do not change RMNP modeling without consulting session history and analyzing ArcGIS vs. OSM routing
+- **`historical_weather.json`** — 653 records, re-keyed by location from the old 657 (4 dropped as duplicates). Median move 0.119mi, 95th 0.232mi, max 5.795mi. The three that moved over 3mi sit where CDTC's 2026 route and the 2019 line genuinely differ, plus the northern terminus, which CDTC places 3.3mi from where the old axis ended — all well inside ERA5-Land's ~9km cell. `weather_id_remap.json` is the audit record.
+- The 9 old `rmnp` normals records re-keyed onto the main spine (7) and Tonahutu (1), with 1 dropped. Correct, not a loss — that route is the spine now.
 
-### CDT Tools
+### CDT tools
 
 Located in `trails/continental-divide-trail/tools/`:
 
-- **`build-points-cdt.js`** — Fetches USFS ArcGIS features (main route, RMNP ArcGIS variant, Chief Mountain alternate), fetches OSM Overpass ways for Gila/RMNP/Anaconda/Spotted Bear alternates (cached per-alternate in `_raw_osm_*.json`), stitches chains with greedy nearest-endpoint algorithm + `maxGapMi` cutoff, fetches SRTM elevation via OpenTopoData for all points, writes `points.json`, `trail.geojson` (main spine thinned to 20m), `trail_hires.geojson` (full ArcGIS resolution, for future use), and `cdt_meta.json`. Re-run if trail geometry changes; update `CDT_STATES_BOOTSTRAP` in `index.html` afterward.
-- **`generate-normals-cdt.js`** — Fetches ERA5-Land normals for all ~700 points (main spine + alt points); resume-safe (saves after each point); 2-second throttle (Open-Meteo Professional — `customer-archive-api.open-meteo.com`, `apikey=TTyLPYLitRdmWqlF`); `{ meta, points }` output. Estimated ~24 minutes for full run. Stores `grid_elev` (feet) for elevation correction.
+- **`build-points-cdt.js`** — **SUPERSEDED, guarded, refuses to run.** Implementation kept intact underneath as a record of how the pre-2026-09 files were made.
+- **`migrate-cdt-canonical.js`** — re-keys `historical_weather.json` onto the rebuilt points by nearest lat/lon, drops the retired `alt_id`/`alt_mile` fields, and writes `weather_id_remap.json`. Requires `historical_weather_backup.json`. Re-run after any `build-cdt-data.js` run that moves the axis.
+- **`generate-normals-cdt.js`** — unchanged. Only needed for a genuine refetch, which the rebuild did not require.
 
 ---
 

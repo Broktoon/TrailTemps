@@ -156,16 +156,16 @@
         </fieldset>
 
         <fieldset class="alt-group-block">
-          <legend>Rocky Mountain National Park &mdash; RMNP (Colorado)</legend>
+          <legend>Tonahutu Creek Route (Colorado)</legend>
           <div class="alt-options">
             <label>
-              <input type="radio" name="alt-rmnp" value="rmnp" checked />
-              CDT Main Route &mdash; RMNP Loop (North Inlet / Tonahutu Creek)
+              <input type="radio" name="alt-tonahutu" value="main" checked />
+              CDT Primary Route &mdash; through Rocky Mountain National Park
             </label>
             <label>
-              <input type="radio" name="alt-rmnp" value="main" />
-              Western Bypass &mdash; Never Summer Wilderness
-              <span class="alt-delta">&minus;25 mi</span>
+              <input type="radio" name="alt-tonahutu" value="tonahutu" />
+              Tonahutu Creek Route &mdash; Grand Lake to Big Meadows
+              <span class="alt-delta">&minus;17.6 mi</span>
             </label>
           </div>
         </fieldset>
@@ -246,7 +246,7 @@
       </div>
 
       <p class="card-instructions">
-        Select a state, then enter a trail mile within that state (measured from that state's
+        Select a region, then enter a trail mile within that region (measured from that region's
         southern entry point going northward). Choose a planning date to receive current conditions, a 5-day
         forecast, and a 7-year average for that date and location.
       </p>
@@ -264,18 +264,19 @@
 
         <!-- State selector -->
         <div class="ft-select-col">
-          <label for="cdtStateSelect">State:</label>
+          <label for="cdtStateSelect">Region:</label>
           <select id="cdtStateSelect">
-            <option value="NM">New Mexico</option>
-            <option value="CO">Colorado</option>
-            <option value="WY">Wyoming</option>
-            <option value="MT">Montana</option>
+            <option value="new-mexico">New Mexico</option>
+            <option value="colorado">Colorado</option>
+            <option value="wyoming">Wyoming</option>
+            <option value="montana-idaho">Montana/Idaho</option>
+            <option value="montana">Montana</option>
           </select>
         </div>
 
         <!-- Mile input + range indicator -->
         <div class="ft-select-col">
-          <label for="cdtMileInput">State Mile:</label>
+          <label for="cdtMileInput">Region Mile:</label>
           <div style="display:flex; align-items:center; gap:8px;">
             <input id="cdtMileInput" type="text" inputmode="numeric"
                    pattern="[0-9]*" placeholder="e.g., 100" />
@@ -327,36 +328,43 @@
           <h3 id="notes-on-data-title">Notes on Weather Data</h3>
           <div class="weather-data-notes__content">
             <p>
-              At approximately 3,100 miles, the Continental Divide Trail is one of the longest and most
-              challenging National Scenic Trails in the United States. Running from Antelope Wells, New Mexico
+              At 3,040 miles by the Continental Divide Trail Coalition&rsquo;s own mile markers, the
+              Continental Divide Trail is one of the longest and most challenging National Scenic Trails in
+              the United States. Running from the Crazy Cook Monument on the New Mexico&ndash;Mexico border
               to Waterton Lake on the U.S.-Canada border in Montana, it traverses five states and crosses
               some of the highest terrain of any long trail in the country, including numerous passes above
               12,000 feet in Colorado.
             </p>
-            <p>Specific weather issues by state include:</p>
+            <p>Specific weather issues by region include:</p>
             <ul>
               <li>
-                <strong>New Mexico (miles 0&ndash;795):</strong> The hottest and driest section of the CDT,
+                <strong>New Mexico (miles 0&ndash;794):</strong> The hottest and driest section of the CDT,
                 with July and August bringing monsoon rains and dangerous afternoon lightning at elevation.
                 The Gila River Route alternate traverses lower terrain and is generally cooler in summer
                 but wetter during monsoon season.
               </li>
               <li>
-                <strong>Colorado (miles 800&ndash;1,525):</strong> The most technically challenging state,
+                <strong>Colorado (miles 794&ndash;1,535):</strong> The most technically challenging region,
                 with the most miles above treeline. Afternoon thunderstorms are a near-daily occurrence in
                 July and August. Snow can fall in any month of the year at the highest passes.
               </li>
               <li>
-                <strong>Wyoming (miles 1,530&ndash;2,300):</strong> Includes both the remote Wind River
+                <strong>Wyoming (miles 1,535&ndash;2,047):</strong> Includes both the remote Wind River
                 Range and the broad, arid Great Divide Basin. The Basin is hot and dry in summer with
                 little shade or water. The Wind Rivers offer spectacular alpine terrain with significant
                 snow risk in early season.
               </li>
               <li>
-                <strong>Montana (miles 2,305&ndash;3,025):</strong> The coldest state and the one presenting
-                the greatest risk of early-season snow at the northern end of the trail. The Anaconda Cutoff
-                saves approximately 77 miles by bypassing the Anaconda Range; the Spotted Bear Route adds
-                approximately 20 miles for a scenic detour through the Bob Marshall Wilderness.
+                <strong>Montana/Idaho (miles 2,047&ndash;2,406):</strong> The stretch where the trail runs
+                the divide itself as the Idaho&ndash;Montana state line, west and north of Yellowstone.
+                Exposed ridge walking with long dry stretches, and CDTC treats it as its own region rather
+                than assigning it to either state.
+              </li>
+              <li>
+                <strong>Montana (miles 2,406&ndash;3,040):</strong> The coldest region and the one presenting
+                the greatest risk of early-season snow at the northern end of the trail, through the Bob
+                Marshall Wilderness and Glacier National Park. The Anaconda Cutoff and the Spotted Bear
+                Route both leave the main trail here.
               </li>
             </ul>
             <p>
@@ -380,34 +388,34 @@
             </p>
             <ul class="weather-data-notes__links">
               <li>
-                <strong>Gila River Route (New Mexico, &minus;75 mi):</strong> The classic CDT alternate
+                <strong>Gila River Route (New Mexico, about &minus;72 mi):</strong> The classic CDT alternate
                 through the Gila Wilderness and Gila River canyon. Lower elevation than the main route;
                 popular among hikers who want to experience the Gila&rsquo;s unique riparian environment.
                 Multiple river crossings make it impassable during high water.
               </li>
               <li>
-                <strong>Anaconda Cutoff (Montana, &minus;77 mi):</strong> The most significant shortcut
+                <strong>Anaconda Cutoff (Montana, about &minus;95 mi):</strong> The most significant shortcut
                 on the CDT, bypassing the Anaconda-Pintler Wilderness via a more direct route. Very
                 popular among thru-hikers looking to save time; somewhat less scenic than the main route
                 but still passes through beautiful Montana terrain.
               </li>
               <li>
-                <strong>Spotted Bear Route (Montana, +20.5 mi):</strong> A scenic alternate through the
-                Bob Marshall Wilderness via the South Fork of the Flathead River. Adds approximately
-                20 miles compared to the main CDT corridor; taken for the scenery and wilderness
-                experience, not to save time or distance.
+                <strong>Spotted Bear Route (Montana):</strong> A scenic alternate through the
+                Bob Marshall Wilderness via the South Fork of the Flathead River, taken for the scenery
+                and wilderness experience. Its length here is measured from OpenStreetMap coverage that
+                may be incomplete, so no mileage difference is quoted &mdash; treat the drawn route as
+                indicative and check CDTC or a current guide before planning around it.
               </li>
               <li>
-                <strong>Rocky Mountain National Park &mdash; CDT Main Route (Colorado):</strong>
-                The standard CDT route through Colorado passes through Rocky Mountain National Park via
-                the North Inlet Trail and Tonahutu Creek Trail, meeting at Flattop Mountain (~12,324 ft)
-                on the Continental Divide; approximately 40 miles of above-treeline hiking. 
-                The <strong>Western Bypass through Never Summer Wilderness (&minus;25 mi)</strong> is the
-                shorter alternate, staying on the main CDT spine and rejoining after RMNP. It avoids the
-                park permit requirement and is a fine route in its own right, but misses the spectacular
-                alpine scenery of the park. It should be noted that some sources differ on which is the 
-                "official" main route and which is the alternate, though for our purposes we used the  
-                designation provided on the <a href="https://www.arcgis.com/home/item.html?id=a3c39d7218a74c5a84a18d219d1da7e2" target="_blank" rel="noopener noreferrer">US Forest Service map</a>.
+                <strong>Rocky Mountain National Park &mdash; Tonahutu Creek Route (Colorado, &minus;17.6 mi):</strong>
+                The main CDT runs through Rocky Mountain National Park, over Flattop Mountain
+                (~12,324 ft) on the Continental Divide, with a long stretch above treeline. The
+                Tonahutu Creek Route is a shorter variant between Grand Lake and Big Meadows.
+                Sources have differed on which line through this area is the main route: an older
+                Forest Service layer carried only a western bypass connector, which made the bypass look
+                like the spine and the park itself like a 40-mile alternate. This map now follows
+                <a href="https://continentaldividetrail.org/" target="_blank" rel="noopener noreferrer">CDTC</a>&rsquo;s
+                own routing, which puts the Primary Route through the park.
               </li>
             </ul>
           </div>
@@ -417,22 +425,27 @@
           <h3 id="notes-on-map-data-title">Notes on Map Data</h3>
           <div class="weather-data-notes__content">
             <p>
-              The trail centerline shown on this map is sourced from the USDA Forest Service official public
-              ArcGIS feature service and OpenStreetMap (for the Gila, RMNP Loop, Anaconda, and Spotted Bear alternates).
+              The trail centerline, its mile markers and its 126 sections are sourced from the Continental
+              Divide Trail Coalition&rsquo;s own published GIS. The Gila River, Anaconda Cutoff and Spotted
+              Bear alternates are not carried in CDTC&rsquo;s data and come from OpenStreetMap, so their
+              geometry and mileage are less reliable than the main trail&rsquo;s.
               The northern terminus options (Waterton Lake and Chief Mountain) are both modeled; the direction
               selector above controls which terminus is used for duration calculations.
             </p>
             <ul class="weather-data-notes__links">
               <li>
                 <strong>Chief Mountain Terminus:</strong> The Chief Mountain border crossing at the eastern
-                edge of Glacier National Park is approximately 8 miles shorter than the official Waterton
+                edge of Glacier National Park leaves the main trail near Many Glacier and runs 27 miles to
+                the border, about 9 miles shorter overall than the official Waterton
                 Lake terminus and avoids the international border crossing. It is a legal U.S.-only terminus
                 option and popular among hikers who wish to avoid the Canadian entry process.
               </li>
               <li>
-                <strong>Idaho:</strong> The CDT technically passes briefly through Idaho near Yellowstone.
-                For weather planning purposes, these miles are grouped with Wyoming, as the terrain and
-                climate are essentially continuous.
+                <strong>Idaho:</strong> For roughly 360 miles west and north of Yellowstone the trail
+                follows the divide where it is also the Idaho&ndash;Montana state line, crossing between the
+                two repeatedly. CDTC groups these miles as a single &ldquo;Montana/Idaho&rdquo; region and
+                this map follows that; each individual trail point is still labelled with the state it
+                actually falls in.
               </li>
               <li>
                 <strong>Current Conditions:</strong> Always consult the
@@ -492,19 +505,20 @@
   <script>window.TRAIL_SLUG = "continental-divide-trail";</script>
 
   <!-- -------------------------------------------------------
-       Inline bootstrap: CDT state metadata for immediate
+       Inline bootstrap: CDT region metadata for immediate
        UI population before cdt_meta.json finishes loading.
 
-       UPDATE axis_start / axis_end values after running:
-         node trails/continental-divide-trail/tools/build-points-cdt.js
-       The script prints the exact values to copy here.
+       UPDATE mile_start / mile_end values after running, in SectionsHiked:
+         node scripts/build-cdt-data.js
+       Copy them from the `regions` array of the cdt_meta.json it writes.
        ------------------------------------------------------- -->
   <script>
-    window.CDT_STATES_BOOTSTRAP = [
-      { state: "NM", name: "New Mexico", axis_start: 0,      axis_end: 795    },
-      { state: "CO", name: "Colorado",   axis_start: 800,    axis_end: 1525   },
-      { state: "WY", name: "Wyoming",    axis_start: 1530,   axis_end: 2300   },
-      { state: "MT", name: "Montana",    axis_start: 2305,   axis_end: 3025.1 }
+    window.CDT_REGIONS_BOOTSTRAP = [
+      { id: "new-mexico",    name: "New Mexico",    mile_start: 0,      mile_end: 794.5    },
+      { id: "colorado",      name: "Colorado",      mile_start: 794.5,  mile_end: 1535     },
+      { id: "wyoming",       name: "Wyoming",       mile_start: 1535,   mile_end: 2047     },
+      { id: "montana-idaho", name: "Montana/Idaho", mile_start: 2047,   mile_end: 2406     },
+      { id: "montana",       name: "Montana",       mile_start: 2406,   mile_end: 3039.979 }
     ];
 
     function cdtUpdateStateInfo() {
@@ -513,11 +527,11 @@
       const mileInput = document.getElementById("cdtMileInput");
       if (!stateId || !infoEl) return;
 
-      const sec = window.CDT_STATES_BOOTSTRAP.find(s => s.state === stateId);
+      const sec = window.CDT_REGIONS_BOOTSTRAP.find(s => s.id === stateId);
       if (!sec) return;
 
-      const maxMile = Math.round(sec.axis_end - sec.axis_start);
-      infoEl.textContent = "State Range: 0\u2013" + maxMile + " Miles";
+      const maxMile = Math.round(sec.mile_end - sec.mile_start);
+      infoEl.textContent = "Range: 0\u2013" + maxMile + " Miles";
 
       if (mileInput) {
         mileInput.placeholder = "e.g., " + Math.round(maxMile / 2);

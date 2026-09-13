@@ -1,4 +1,34 @@
 #!/usr/bin/env node
+//
+// SUPERSEDED -- DO NOT RUN.
+//
+// This tool built points.json, trail.geojson and cdt_meta.json from a USFS
+// ArcGIS snapshot dated 2019-04-15. Three things were wrong with the result:
+//
+//   * "Sections" were four latitude bands it invented (NM <37, CO <41, WY <45,
+//     MT). The trail runs the Idaho/Montana border ridge well south of 45, so
+//     260 miles of axis were labelled state "WY" while sitting in Idaho and
+//     Montana, and "ID" never appeared in points.json at all.
+//   * The 2019 layer carried only the short western bypass connector around
+//     Rocky Mountain National Park, so the mile axis ran along the bypass and
+//     the real route through the park was modelled as a 40-mile alternate.
+//   * Its OSM chainer only appended to the tail of the growing chain, so the
+//     Anaconda and Spotted Bear routes each came out as two pieces joined by a
+//     straight line across open country, counted as tread.
+//
+// cdt_meta.json was also hand-edited afterwards, so this script can no longer
+// reproduce it: running it drops default_id, the top-level delta_miles app.js
+// reads, and the "Western Bypass" label. The guard below stops that. The
+// original implementation is kept intact underneath as a record of how the
+// pre-2026-09 files were made.
+//
+// Current pipeline:
+//   SectionsHiked  scripts/build-cdt-data.js         (points.json, trail.geojson, cdt_meta.json)
+//   TrailTemps     tools/migrate-cdt-canonical.js    (weather remap)
+//
+console.error('build-points-cdt.js: SUPERSEDED, refusing to run. See the header comment.');
+process.exit(1);
+
 /**
  * build-points-cdt.js
  *

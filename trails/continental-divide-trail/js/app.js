@@ -95,13 +95,13 @@ const ELEV_THRESHOLD_FT     = 300;
 let allPoints    = [];
 let pointsSorted = [];  // spine points sorted by mile
 
-let altPointsByAltId = new Map();  // alt_id → [{...point}] sorted by alt_mile
+let altPointsByRoute = new Map();  // route_id → [{...point}] sorted by sec_mile
 
 let cdtMeta = null;
 
 let normalsByPointId  = new Map();  // id → { hi, lo, app_hi, app_lo, rh_hi, rh_lo, ws, grid_elev }
 let normalsByMile     = [];         // [{id, mile, grid_elev}] spine, sorted
-let normalsAltByMile  = new Map();  // alt_id → [{id, alt_mile, grid_elev}] sorted
+let normalsAltByMile  = new Map();  // route_id → [{id, sec_mile, grid_elev}] sorted
 
 let map           = null;
 let mapMarker     = null;
@@ -119,8 +119,14 @@ function refreshMapSize() {
 }
 
 function cdtPointLabel(point) {
-  if (point.alt_id) {
-    return `${point.alt_id} Alt Mile ${fmtMile(point.alt_mile)}`;
+  // Alternate points carry a `mile` on the main axis so they sort correctly,
+  // but it is an interpolation across the stretch they replace, not a distance
+  // anyone walks. Label them by `sec_mile`, which is distance along the
+  // alternate itself.
+  if (point.route_id && point.route_id !== "main") {
+    const name = cdtMeta?.alternates?.find(a => a.id === point.route_id)?.name
+      ?? point.route_id;
+    return `${name} Mile ${fmtMile(point.sec_mile)}`;
   }
   return `Mile ${fmtMile(point.mile)} (${point.state})`;
 }
@@ -154,21 +160,32 @@ function applyElevationCorrection(normals, trailElevFt, gridElevFt) {
 function getSelectedAlts() {
   return {
     gila:           document.querySelector('input[name="alt-gila"]:checked')?.value          ?? "main",
-    rmnp:           document.querySelector('input[name="alt-rmnp"]:checked')?.value          ?? "main",
+    tonahutu:       document.querySelector('input[name="alt-tonahutu"]:checked')?.value      ?? "main",
     anaconda:       document.querySelector('input[name="alt-anaconda"]:checked')?.value      ?? "main",
     "spotted-bear": document.querySelector('input[name="alt-spotted-bear"]:checked')?.value ?? "main",
   };
 }
 
+// Alternates the hiker can switch on or off along one continuous route. Chief
+// Mountain is excluded: it does not rejoin the spine, it is a different
+// northern terminus, and it is already offered through direction_options.
+function selectableAlternates() {
+  return (cdtMeta?.alternates || [])
+    .filter(a => a.rejoin_mile != null)
+    .slice()
+    .sort((a, b) => a.branch_mile - b.branch_mile);
+}
+
 function calcTotalMiles(directionId, selectedAlts) {
   const opts = cdtMeta?.direction_options || [];
   const opt  = opts.find(o => o.id === directionId);
-  let miles  = opt?.total_miles ?? 3100;
+  let miles  = opt?.total_miles ?? cdtMeta?.trail?.total_miles ?? 3040;
 
-  for (const ag of (cdtMeta?.alt_groups || [])) {
-    const defaultSel = ag.default_id ?? "main";
-    const sel        = selectedAlts?.[ag.id] ?? defaultSel;
-    if (sel !== defaultSel) miles += (ag.delta_miles ?? 0);
+  // Every alternate now deviates from the main spine. The old meta had an
+  // inverted case — RMNP carried default_id "rmnp", because the old axis ran
+  // along the western bypass — which CDTC's routing removes.
+  for (const ag of selectableAlternates()) {
+    if ((selectedAlts?.[ag.id] ?? "main") !== "main") miles += (ag.delta_miles ?? 0);
   }
   return miles;
 }
@@ -188,7 +205,8 @@ async function loadCdtMeta() {
     cacheSet(key, payload);
   }
   cdtMeta = payload;
-  console.log("[CDT] cdt_meta loaded:", cdtMeta.alt_groups?.length, "alt groups");
+  console.log("[CDT] cdt_meta loaded:", cdtMeta.regions?.length, "regions,",
+    cdtMeta.sections?.length, "sections,", cdtMeta.alternates?.length, "alternates");
 }
 
 async function loadPoints() {
@@ -204,23 +222,23 @@ async function loadPoints() {
     lon:       Number(p.lon),
     id:        String(p.id),
     mile:      p.mile       != null ? Number(p.mile)      : undefined,
-    alt_mile:  p.alt_mile   != null ? Number(p.alt_mile)  : undefined,
+    sec_mile:  p.sec_mile   != null ? Number(p.sec_mile)  : undefined,
     trail_elev: p.trail_elev != null ? Number(p.trail_elev) : undefined,
   }));
 
   // Spine points sorted by mile
   pointsSorted = allPoints
-    .filter(p => Number.isFinite(p.mile) && !p.alt_id)
+    .filter(p => Number.isFinite(p.mile) && p.route_id === "main")
     .sort((a, b) => a.mile - b.mile);
 
-  // Alt points indexed by alt_id
-  altPointsByAltId = new Map();
+  // Alt points indexed by route_id, ordered along the alternate itself.
+  altPointsByRoute = new Map();
   for (const p of allPoints) {
-    if (!p.alt_id || !Number.isFinite(p.alt_mile)) continue;
-    if (!altPointsByAltId.has(p.alt_id)) altPointsByAltId.set(p.alt_id, []);
-    altPointsByAltId.get(p.alt_id).push(p);
+    if (!p.route_id || p.route_id === "main" || !Number.isFinite(p.sec_mile)) continue;
+    if (!altPointsByRoute.has(p.route_id)) altPointsByRoute.set(p.route_id, []);
+    altPointsByRoute.get(p.route_id).push(p);
   }
-  for (const [, arr] of altPointsByAltId) arr.sort((a, b) => a.alt_mile - b.alt_mile);
+  for (const [, arr] of altPointsByRoute) arr.sort((a, b) => a.sec_mile - b.sec_mile);
 
   console.log("[CDT] points loaded:", allPoints.length,
     "(spine:", pointsSorted.length,
@@ -252,18 +270,20 @@ async function loadPrecomputedNormals() {
     .filter(p => normalsByPointId.has(p.id))
     .map(p => ({ id: p.id, mile: p.mile, grid_elev: normalsByPointId.get(p.id).grid_elev }));
 
-  // Alt normals index (by alt_id + alt_mile)
+  // Alt normals index (by route_id + sec_mile). The normals file carries only
+  // route_id, so sec_mile is read back off the matching point.
+  const secMileById = new Map(allPoints.map(p => [p.id, p.sec_mile]));
   normalsAltByMile = new Map();
   for (const p of (payload.points || [])) {
-    if (!p?.alt_id || !p.id) continue;
-    if (!normalsAltByMile.has(p.alt_id)) normalsAltByMile.set(p.alt_id, []);
-    normalsAltByMile.get(p.alt_id).push({
+    if (!p?.id || !p.route_id || p.route_id === "main") continue;
+    if (!normalsAltByMile.has(p.route_id)) normalsAltByMile.set(p.route_id, []);
+    normalsAltByMile.get(p.route_id).push({
       id:       p.id,
-      alt_mile: Number(p.alt_mile),
+      sec_mile: Number(secMileById.get(String(p.id)) ?? 0),
       grid_elev: p.grid_elev != null ? Number(p.grid_elev) : null,
     });
   }
-  for (const [, arr] of normalsAltByMile) arr.sort((a, b) => a.alt_mile - b.alt_mile);
+  for (const [, arr] of normalsAltByMile) arr.sort((a, b) => a.sec_mile - b.sec_mile);
 
   console.log("[CDT] normals loaded:", normalsByPointId.size, "points");
   setTimeout(() => setDurStatus(""), 4000);
@@ -383,10 +403,10 @@ function getNearestPoint(mile) {
   return binaryNearest(pointsSorted, mile, p => p.mile);
 }
 
-function getNearestAltPoint(altId, altMile) {
-  const arr = altPointsByAltId.get(altId) || [];
+function getNearestAltPoint(routeId, altMile) {
+  const arr = altPointsByRoute.get(routeId) || [];
   if (!arr.length) return null;
-  return binaryNearest(arr, altMile, p => p.alt_mile);
+  return binaryNearest(arr, altMile, p => p.sec_mile);
 }
 
 /* ============================================================
@@ -397,14 +417,14 @@ function getNearestNormals(point) {
   let entry    = null;
   let gridElev = null;
 
-  if (point.alt_id) {
+  if (point.route_id && point.route_id !== "main") {
     const direct = normalsByPointId.get(point.id);
     if (direct?.hi?.length) {
       entry    = direct;
       gridElev = direct.grid_elev;
     } else {
-      const arr     = normalsAltByMile.get(point.alt_id) || [];
-      const nearest = binaryNearest(arr, point.alt_mile ?? 0, e => e.alt_mile);
+      const arr     = normalsAltByMile.get(point.route_id) || [];
+      const nearest = binaryNearest(arr, point.sec_mile ?? 0, e => e.sec_mile);
       if (nearest) {
         entry    = normalsByPointId.get(nearest.id) || null;
         gridElev = nearest.grid_elev;
@@ -634,18 +654,25 @@ function renderForecastTable(forecastData) {
    16. WEATHER TOOL STATE INFO
    ============================================================ */
 
+// The selector lists CDTC's five regions rather than four states: CDTC splits
+// Montana into the Idaho border ridge and Montana proper, and the old
+// latitude-banded "Wyoming" swallowed 260 miles of that ridge.
+function cdtRegion(id) {
+  const regions = cdtMeta?.regions || window.CDT_REGIONS_BOOTSTRAP || [];
+  return regions.find(r => r.id === id);
+}
+
 function updateStateInfo() {
   const stateId   = el("cdtStateSelect")?.value;
   const infoEl    = el("cdtStateInfo");
   const mileInput = el("cdtMileInput");
   if (!stateId || !infoEl) return;
 
-  const sections = cdtMeta?.sections || window.CDT_STATES_BOOTSTRAP || [];
-  const sec = sections.find(s => s.state === stateId || s.id === stateId);
+  const sec = cdtRegion(stateId);
   if (!sec) return;
 
-  const maxMile = Math.round((sec.axis_end ?? sec.e) - (sec.axis_start ?? sec.s));
-  infoEl.textContent = `State Range: 0\u2013${maxMile} Miles`;
+  const maxMile = Math.round(sec.mile_end - sec.mile_start);
+  infoEl.textContent = `Range: 0\u2013${maxMile} Miles`;
 
   if (mileInput) {
     mileInput.placeholder = `e.g., ${Math.round(maxMile / 2)}`;
@@ -674,17 +701,16 @@ async function runWeather() {
     return;
   }
 
-  const sections = cdtMeta?.sections || window.CDT_STATES_BOOTSTRAP || [];
-  const sec = sections.find(s => s.state === stateId || s.id === stateId);
+  const sec = cdtRegion(stateId);
   if (sec) {
-    const maxMile = (sec.axis_end ?? sec.e) - (sec.axis_start ?? sec.s);
+    const maxMile = sec.mile_end - sec.mile_start;
     if (stateMile > maxMile) {
       setWeatherStatus(`Please enter a mile between 0 and ${Math.round(maxMile)} for ${sec.name}.`);
       return;
     }
   }
 
-  const axisStart = sec ? (sec.axis_start ?? sec.s ?? 0) : 0;
+  const axisStart = sec ? (sec.mile_start ?? 0) : 0;
   const spineMile = axisStart + stateMile;
   const point     = getNearestPoint(spineMile);
   if (!point) {
@@ -736,8 +762,12 @@ async function runWeather() {
    ============================================================ */
 
 function buildNoboSegments(altGroups, selectedAlts, isChiefMtn) {
-  const spineTotal   = cdtMeta?.trail?.spine_miles ?? 3100;
-  const chiefMtnMile = cdtMeta?.trail?.chief_mtn_spine_mile ?? (spineTotal - 8);
+  const spineTotal = cdtMeta?.trail?.total_miles ?? 3040;
+  // Chief Mountain leaves the spine at its own branch_mile and runs to a
+  // different border crossing, so a Chief Mountain hike walks the spine only as
+  // far as that branch.
+  const chiefMtn     = (cdtMeta?.alternates || []).find(a => a.id === "chief-mtn");
+  const chiefMtnMile = chiefMtn?.branch_mile ?? spineTotal;
   const endMile      = isChiefMtn ? chiefMtnMile : spineTotal;
 
   const segments = [];
@@ -746,11 +776,8 @@ function buildNoboSegments(altGroups, selectedAlts, isChiefMtn) {
   for (const ag of altGroups) {
     if (ag.branch_mile >= endMile) break;
 
-    const defaultSel = ag.default_id ?? "main";
-    const sel        = selectedAlts?.[ag.id] ?? defaultSel;
-    const useAlt     = sel !== "main";
-    const mainLen    = ag.rejoin_mile - ag.branch_mile;
-    const altLen     = mainLen + (ag.alt?.delta_miles ?? 0);
+    const useAlt  = (selectedAlts?.[ag.id] ?? "main") !== "main";
+    const altLen  = ag.alt_miles ?? 0;
     const rejoin  = Math.min(ag.rejoin_mile, endMile);
 
     if (ag.branch_mile > spinePos) {
@@ -768,6 +795,13 @@ function buildNoboSegments(altGroups, selectedAlts, isChiefMtn) {
 
   if (spinePos < endMile) {
     segments.push({ type: "spine", from: spinePos, to: endMile });
+  }
+
+  // Then the Chief Mountain leg itself, which is trail the hiker walks but is
+  // not on the spine axis. The old code never added it: it stopped the spine
+  // 8 miles early and lost the crossing's own 27 miles entirely.
+  if (isChiefMtn && chiefMtn) {
+    segments.push({ type: "alt", altId: "chief-mtn", altLen: chiefMtn.alt_miles ?? 0 });
   }
 
   let cum = 0;
@@ -815,9 +849,7 @@ function buildHikePoints({ directionId, startDate, milesPerDay, totalMiles, sele
   const isNobo     = directionId.startsWith("nobo");
   const isChiefMtn = directionId.endsWith("chief_mtn");
 
-  const altGroups = (cdtMeta?.alt_groups || [])
-    .slice()
-    .sort((a, b) => a.branch_mile - b.branch_mile);
+  const altGroups = selectableAlternates();
 
   const noboSegs = buildNoboSegments(altGroups, selectedAlts, isChiefMtn);
   const segments = isNobo ? noboSegs : buildSoboSegments(noboSegs);
@@ -958,13 +990,11 @@ function renderDurationResult({ directionId, startDate, endDate, totalMiles, mil
   const opts     = cdtMeta?.direction_options || [];
   const dirLabel = opts.find(o => o.id === directionId)?.label || directionId;
 
-  const altRows = (cdtMeta?.alt_groups || []).map(ag => {
-    const defaultSel = ag.default_id ?? "main";
-    const sel        = selectedAlts?.[ag.id] ?? defaultSel;
-    const using      = sel === "main"
-      ? (ag.main?.label ?? "Main Route")
-      : (ag.alt?.label  ?? ag.label);
-    return `<tr><th>${ag.label ?? ag.id}</th><td>${using}</td></tr>`;
+  const altRows = selectableAlternates().map(ag => {
+    const using = (selectedAlts?.[ag.id] ?? "main") === "main"
+      ? "Main CDT Route"
+      : ag.name;
+    return `<tr><th>${ag.name ?? ag.id}</th><td>${using}</td></tr>`;
   }).join("");
 
   el("durResult").innerHTML = `
