@@ -470,30 +470,63 @@ Region → Section → Point
 - **Data files:** `points.json`, `net_meta.json`, `trail.geojson`, `historical_weather.json`
 - **Normals source:** Open-Meteo ERA5-Land archive (2018–2024), generated via `tools/generate-normals-net.js`
 - **Weather resolution:** 5-mile intervals (50 points: 43 main + 7 spur)
-- **Total spine:** 208.3 miles (Guilford, CT → Royalston Falls, MA); CT/MA border between miles 109–110
+- **Total spine:** 200.68 miles (Guilford, CT → Royalston Falls, MA); CT/MA border at mile 103.6
+- **Point spacing:** 0.1 mile (2,357 points: 2,007 main + 350 spur)
+
+### NET Geometry Source
+
+Rebuilt 2026-09 from the **NPS authoritative centerline**, `NEEN_BND_NationalScenicTrailCenterline_ln`
+(owner `JEFARRELL@nps.gov_nps`, updated 2023-04-07), which combines CFPA and AMC survey data:
+
+```
+https://services1.arcgis.com/fBc8EJBxQRMcHlei/arcgis/rest/services/NEEN_BND_NationalScenicTrailCenterline_ln/FeatureServer/0
+```
+
+One MultiLineString, 14 parts, 103,732 vertices, **235.65mi = 200.68 spine + 34.97 spur** — the official
+"235 miles" *includes* the spur. Built by `SectionsHiked/scripts/build-net-data.js --tt-points`, which
+writes this repo's `points.json`, `net_meta.json`, `trail.geojson` and re-keys `historical_weather.json`
+(normals are location-based, so they were remapped onto the nearest new point rather than re-fetched;
+worst displacement 248ft, all 50 matched). The prior geometry was a 6,918-vertex decimation that measured
+only 184mi and whose miles 17–22 ran along the spur rather than the spine.
+
+**Two real gaps** in the centerline, excluded from mileage and never drawn across: ~2.98mi after mile
+16.41 (Guilford section to the Mattabesett) and ~1.49mi after mile 127.07 (Connecticut River, not
+crossable on foot).
 
 ### NET Sections (3)
 
 | id | Name | mile_type | Range |
 |----|------|-----------|-------|
-| `ct_guilford` | Connecticut — Main Spine | spine | 1–109 |
-| `ct_middletown` | Connecticut — Middletown Spur | spur | 0–28 |
-| `ma` | Massachusetts — Main Spine | spine | 110–208 |
+| `ct-guilford` | Connecticut — Main Spine | spine | 0–103.6 |
+| `ct-middletown` | Connecticut — Middletown Spur | spur | 0–34.97 |
+| `ma` | Massachusetts — Main Spine | spine | 103.6–200.68 |
+
+Section ids are hyphenated, matching SectionsHiked's canonical schema. `app.js` tests for
+`"ct-middletown"` to decide spur vs. spine lookup — keep those in sync.
 
 ### NET Spur
 
-The Middletown Connector spur (28 miles) runs from Middletown, CT and joins the main spine at **mile 38**. It is an alternate southern start, not an alternate through-route. It is not included in the official 208.3-mile distance.
+The Middletown Connector spur (34.97 miles) joins the main spine at **mile 16.41** and dead-ends at
+Middletown, CT. It is an alternate southern start, not an alternate through-route.
+
+**`spur_mile` 0 is the JUNCTION, not Middletown** — the spur is stored running outward from the trail,
+so the alt directions (which start at Middletown) walk it in reverse. Because the junction sits only
+16.41mi up from Guilford, starting at Middletown makes the hike **longer**, not shorter.
 
 ### NET Direction Options
 
 | id | Label | Miles | Uses spur |
 |----|-------|-------|-----------|
-| `nobo_main` | Northbound — Guilford → Royalston Falls (Main) | 208.3 | No |
-| `nobo_alt` | Northbound — Middletown → Royalston Falls (Alt.) | 198.3 | Yes |
-| `sobo_main` | Southbound — Royalston Falls → Guilford (Main) | 208.3 | No |
-| `sobo_alt` | Southbound — Royalston Falls → Middletown (Alt.) | 198.3 | Yes |
+| `nobo_main` | Northbound — Guilford → Royalston Falls (Main) | 200.68 | No |
+| `nobo_alt` | Northbound — Middletown → Royalston Falls (Alt.) | 219.24 | Yes |
+| `sobo_main` | Southbound — Royalston Falls → Guilford (Main) | 200.68 | No |
+| `sobo_alt` | Southbound — Royalston Falls → Middletown (Alt.) | 219.24 | Yes |
 
-Alt mileage: 28 (spur) + (208.3 − 38) = 198.3 miles
+Alt mileage: 34.97 (spur) + (200.68 − 16.41) = 219.24 miles
+
+`NET_SPINE_MIN/MAX/FULL`, `NET_SPUR_LEN` and `NET_JUNCTION` in `app.js` are **fallbacks only** —
+`loadNetMeta()` overwrites them from `net_meta.json`. They drifted from the data once (junction was
+hardcoded 38 against a real 16.41), so net_meta is the single source of truth.
 
 ### NET `net_meta.json` Structure
 
@@ -508,14 +541,25 @@ Alt mileage: 28 (spur) + (208.3 − 38) = 198.3 miles
 
 ### NET `points.json` Schema
 
+Canonical schema (shared with SectionsHiked) plus the legacy `spur`/`spur_mile` fields this
+site's `app.js` reads. Ids encode mile × 1000 for the spine, sec_mile × 1000 for the spur.
+
 Main spine points:
 ```json
-{ "id": "net-main-mi0050000", "mile": 50, "lat": ..., "lon": ..., "state": "CT" }
+{ "id": "net-main-mi0050000", "lat": ..., "lon": ..., "mile": 50,
+  "region_id": "ct", "region_name": "Connecticut",
+  "section_id": "ct-guilford", "section_name": "Connecticut — Guilford Terminus",
+  "sec_mile": 50, "route_id": "main-spine", "state": "CT" }
 ```
 
-Spur points:
+Spur points — `mile` is appended past the spine (200.68→235.65) so the axis covers every
+official mile exactly once; `sec_mile`/`spur_mile` are the true distance from the junction:
 ```json
-{ "id": "net-spur-mi0015000", "spur_mile": 15, "lat": ..., "lon": ..., "state": "CT", "spur": true }
+{ "id": "net-spur-mi0015000", "lat": ..., "lon": ..., "mile": 215.68,
+  "region_id": "ct", "region_name": "Connecticut",
+  "section_id": "ct-middletown", "section_name": "Connecticut — Middletown Terminus",
+  "sec_mile": 15, "route_id": "middletown-spur", "alt_of": "main-spine",
+  "state": "CT", "spur": true, "spur_mile": 15 }
 ```
 
 ### NET `historical_weather.json` Schema (per point)

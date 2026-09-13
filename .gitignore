@@ -5,3 +5,9 @@ Thumbs.db
 .vscode/
 .env
 trails/continental-divide-trail/data/trail_hires.geojson
+
+# Pre-rebuild NET data — kept locally, not served. The originals are also in
+# git history at 4b743f5 (the commit before the NPS centerline rebuild).
+trails/new-england-trail/data/points_backup.json
+trails/new-england-trail/data/trail_backup.geojson
+trails/new-england-trail/data/historical_weather_backup.json

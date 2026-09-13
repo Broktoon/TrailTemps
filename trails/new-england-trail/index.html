@@ -201,8 +201,8 @@
         <div class="ft-select-col">
           <label for="sectionSelect">Section:</label>
           <select id="sectionSelect">
-            <option value="ct_guilford">Connecticut &mdash; Main Spine</option>
-            <option value="ct_middletown">Connecticut &mdash; Middletown Spur</option>
+            <option value="ct-guilford">Connecticut &mdash; Main Spine</option>
+            <option value="ct-middletown">Connecticut &mdash; Middletown Spur</option>
             <option value="ma">Massachusetts &mdash; Main Spine</option>
           </select>
         </div>
@@ -280,14 +280,15 @@
           <div class="weather-data-notes__content">
             <ul class="weather-data-notes__links">
               <li>
-                <strong>Trail Route:</strong> As one of the shorter National Scenic Trails, the New England Trail runs 200+ miles from Guilford,
-                CT on Long Island Sound to Royalston Falls, MA. It is also one of the newer scenic trails that has been built by connecting a number of existing trails into a single unit. 
-                One of the main components is the Metacomet trail which has one end at the Massachusetts border but the other end near Middletown, CT. The main NET reaches down to the southern shore, but it separates from the Metacomet at appsimately the NET 38 mile marker. 
-                This leaves an option spur to the NET which is not included in the "official" distance, but which is offered here as an alternate trail for those who wish to start/end in Middletown instead. 
+                <strong>Trail Route:</strong> As one of the shorter National Scenic Trails, the New England Trail runs about 200 miles from Guilford,
+                CT on Long Island Sound to Royalston Falls, MA. It is also one of the newer scenic trails that has been built by connecting a number of existing trails into a single unit.
+                One of the main components is the Metacomet trail which has one end at the Massachusetts border but the other end near Middletown, CT. The main NET reaches down to the southern shore, but it separates from the Metacomet at approximately the NET 16 mile marker.
+                This leaves an optional spur to the NET, offered here as an alternate trail for those who wish to start/end in Middletown instead. Because the spur leaves the main trail only 16 miles up from Guilford, starting at Middletown makes for a <em>longer</em> hike (about 219 miles), not a shorter one.
+                Mileages on this page come from the National Park Service's official NET centerline, which combines Connecticut Forest &amp; Park Association and Appalachian Mountain Club survey data; it measures 235.7 miles in total, counting the Middletown spur.
               </li>
               <li>
                 <strong>Roadway Gaps:</strong> The NET is also one of the newer trails in the scenic trail system, having only been formally designated by law in 2009. It is still a work in progress, and while there are many miles of traditional hiking paths the trail utilizes, there are also portions that require walking along roads and sections with significant gaps. There are all stitched together as single map,
-                and the mileage is calculated as if there are no breaks.  But please note your experience on hiking day may not be as seamless as it appears on these maps. For example, crossing the Connecticut River on foot around mile 220 is not possible, you will need to either arrange a shuttle ride (by car or boat) across, or take a 10-mile detour to an acceptable pedestrian crossing. The Westfield River has similar issues.
+                and the mileage is calculated as if there are no breaks.  But please note your experience on hiking day may not be as seamless as it appears on these maps. The official centerline itself has two real breaks in it: about 3 miles between the Guilford section and the Mattabesett around mile 16, and about 1.5 miles at the Connecticut River near mile 127. Crossing the Connecticut River on foot is not possible &mdash; you will need to either arrange a shuttle ride (by car or boat) across, or take a 10-mile detour to an acceptable pedestrian crossing. The Westfield River has similar issues.
                 <br>
                 There are also areas (such as the "Plainville Gap") where there are significant road sections hikers must contend with. This mileage is also included on the map like any other normal part of the trail. Though thankfully State and local governments are working to improve these sections in ways that balacne the needs of hikers and impacted neighbors.    
 
@@ -340,9 +341,9 @@
        ------------------------------------------------------- -->
   <script>
     window.NET_SECTIONS_BOOTSTRAP = [
-      { id: "ct_guilford",   name: "Connecticut \u2014 Main Spine",      mile_type: "spine", mile_start: 1,   mile_end: 109 },
-      { id: "ct_middletown", name: "Connecticut \u2014 Middletown Spur", mile_type: "spur",  mile_start: 0,   mile_end: 28  },
-      { id: "ma",            name: "Massachusetts \u2014 Main Spine",    mile_type: "spine", mile_start: 110, mile_end: 208 }
+      { id: "ct-guilford",   name: "Connecticut \u2014 Main Spine",      mile_type: "spine", mile_start: 0,     mile_end: 103.6  },
+      { id: "ct-middletown", name: "Connecticut \u2014 Middletown Spur", mile_type: "spur",  mile_start: 0,     mile_end: 34.97 },
+      { id: "ma",            name: "Massachusetts \u2014 Main Spine",    mile_type: "spine", mile_start: 103.6, mile_end: 200.68 }
     ];
 
     function netUpdateSectionInfo() {

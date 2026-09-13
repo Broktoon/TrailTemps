@@ -87,12 +87,15 @@ const TRAIL_TTL_MS          = 30 * 24 * 60 * 60 * 1000; // 30 days
 const NORMALS_TTL_MS        = 30 * 24 * 60 * 60 * 1000; // 30 days
 const NORMALS_CACHE_VERSION = "v1";
 
-// NET spine constants
-const NET_SPINE_MIN  = 1;    // first whole-mile point
-const NET_SPINE_MAX  = 208;  // last whole-mile point
-const NET_SPINE_FULL = 208.3;
-const NET_SPUR_LEN   = 28;   // miles on Middletown spur
-const NET_JUNCTION   = 38;   // spine mile where spur meets main trail
+// NET spine constants. These are fallbacks only — loadNetMeta() overwrites them
+// from net_meta.json, which is generated from the NPS centerline. They drifted
+// out of sync with the data once already (junction was 38 against a real 16.41),
+// so net_meta is the single source of truth and these just cover a failed fetch.
+let NET_SPINE_MIN  = 0;       // first point on the spine
+let NET_SPINE_MAX  = 200.68;  // last point on the spine
+let NET_SPINE_FULL = 200.68;  // Guilford -> Royalston Falls
+let NET_SPUR_LEN   = 34.97;   // miles on the Middletown spur
+let NET_JUNCTION   = 16.41;   // spine mile where the spur meets the main trail
 
 /* ============================================================
    4. MODULE-LEVEL STATE
@@ -153,7 +156,9 @@ function calcTotalMiles(directionId) {
   const opt = opts.find(o => o.id === directionId);
   if (opt) return opt.total_miles;
   // Fallback
-  return (directionId === "nobo_alt" || directionId === "sobo_alt") ? 198.3 : 208.3;
+  return (directionId === "nobo_alt" || directionId === "sobo_alt")
+    ? NET_SPUR_LEN + (NET_SPINE_FULL - NET_JUNCTION)
+    : NET_SPINE_FULL;
 }
 
 /* ============================================================
@@ -171,7 +176,18 @@ async function loadNetMeta() {
     cacheSet(key, payload);
   }
   netMeta = payload;
-  console.log("[NET] net_meta loaded:", netMeta.sections?.length, "sections");
+
+  if (isFinite(netMeta?.trail?.spine_miles)) {
+    NET_SPINE_FULL = netMeta.trail.spine_miles;
+    NET_SPINE_MAX  = netMeta.trail.spine_miles;
+  }
+  if (isFinite(netMeta?.spur?.length_miles))        NET_SPUR_LEN = netMeta.spur.length_miles;
+  if (isFinite(netMeta?.spur?.junction_spine_mile)) NET_JUNCTION = netMeta.spur.junction_spine_mile;
+  const spine0 = (netMeta?.sections || []).find(s => s.mile_type === "spine");
+  if (isFinite(spine0?.mile_start)) NET_SPINE_MIN = spine0.mile_start;
+
+  console.log("[NET] net_meta loaded:", netMeta.sections?.length, "sections",
+    `| spine ${NET_SPINE_FULL}mi, spur ${NET_SPUR_LEN}mi, junction ${NET_JUNCTION}`);
 }
 
 async function loadPoints() {
@@ -631,7 +647,7 @@ async function runWeather() {
   }
 
   let point;
-  if (sectionId === "ct_middletown") {
+  if (sectionId === "ct-middletown") {
     point = getNearestSpurPoint(mile);
   } else {
     point = getNearestMainPoint(mile);
@@ -733,17 +749,22 @@ function getNearestNormals(point) {
 /**
  * Build the ordered sequence of points for a hike, one per day.
  *
- * nobo_main: Guilford (mile 1) → Royalston Falls (mile 208)  [208.3 mi]
- * nobo_alt:  Middletown spur (spur_mile 0→28) → spine (mile 38→208)  [198.3 mi]
- * sobo_main: Royalston Falls (mile 208) → Guilford (mile 1)  [208.3 mi]
- * sobo_alt:  Royalston Falls (mile 208) → junction (mile 38) → spur (28→0)  [198.3 mi]
+ * nobo_main: Guilford (mile 0) → Royalston Falls (mile 200.68)  [200.68 mi]
+ * nobo_alt:  Middletown (spur_mile 34.97→0) → spine (16.41→200.68)  [219.24 mi]
+ * sobo_main: Royalston Falls (mile 200.68) → Guilford (mile 0)  [200.68 mi]
+ * sobo_alt:  Royalston Falls (200.68) → junction (16.41) → Middletown (spur 0→34.97)  [219.24 mi]
+ *
+ * spur_mile 0 is the JUNCTION, not Middletown — the spur is stored running
+ * outward from the trail, so the alt directions that start at Middletown walk
+ * it in reverse. Starting at Middletown replaces only the 16.41mi of spine
+ * below the junction, so the alt routes are LONGER than the main ones.
  */
 function buildHikePoints({ directionId, startDate, milesPerDay, totalMiles }) {
   const durationDays = Math.ceil(totalMiles / milesPerDay);
   const hikePoints   = [];
 
   // Pre-compute split point for alt routes (miles on main spine before/after spur)
-  const mainAltLen = NET_SPINE_FULL - NET_JUNCTION; // 208.3 - 38 = 170.3 mi on spine
+  const mainAltLen = NET_SPINE_FULL - NET_JUNCTION; // 200.68 - 16.41 = 184.27 mi on spine
 
   for (let i = 0; i < durationDays; i++) {
     const date    = addDays(startDate, i);
@@ -764,9 +785,9 @@ function buildHikePoints({ directionId, startDate, milesPerDay, totalMiles }) {
         break;
       }
       case "nobo_alt": {
-        // First 28 miles on spur (Middletown → junction), then spine mile 38 → 208
+        // Spur inbound from Middletown (spur_mile 34.97 → 0), then spine 16.41 → 200.68
         if (cumMile <= NET_SPUR_LEN) {
-          point = getNearestSpurPoint(cumMile);
+          point = getNearestSpurPoint(Math.max(NET_SPUR_LEN - cumMile, 0));
         } else {
           const spineMile = Math.min(NET_JUNCTION + (cumMile - NET_SPUR_LEN), NET_SPINE_MAX);
           point = getNearestMainPoint(spineMile);
@@ -774,12 +795,12 @@ function buildHikePoints({ directionId, startDate, milesPerDay, totalMiles }) {
         break;
       }
       case "sobo_alt": {
-        // First 170.3 miles on spine (208 → 38), then 28 miles on spur (28 → 0)
+        // Spine 200.68 → 16.41, then spur outbound to Middletown (spur_mile 0 → 34.97)
         if (cumMile <= mainAltLen) {
           const spineMile = Math.max(NET_SPINE_FULL - cumMile, NET_JUNCTION);
-          point = getNearestMainPoint(Math.round(spineMile));
+          point = getNearestMainPoint(spineMile);
         } else {
-          const spurMile = Math.max(NET_SPUR_LEN - (cumMile - mainAltLen), 0);
+          const spurMile = Math.min(cumMile - mainAltLen, NET_SPUR_LEN);
           point = getNearestSpurPoint(spurMile);
         }
         break;
