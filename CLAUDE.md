@@ -474,8 +474,8 @@ Region → Section → Point
 - **Data files:** `points.json`, `net_meta.json`, `trail.geojson`, `historical_weather.json`
 - **Normals source:** Open-Meteo ERA5-Land archive (2018–2024), generated via `tools/generate-normals-net.js`
 - **Weather resolution:** 5-mile intervals (50 points: 43 main + 7 spur)
-- **Total spine:** 200.68 miles (Guilford, CT → Royalston Falls, MA); CT/MA border at mile 103.6
-- **Point spacing:** 0.1 mile (2,357 points: 2,007 main + 350 spur)
+- **Total spine:** 206.81 miles (Guilford, CT → Royalston Falls, MA); CT/MA border at mile 109.7
+- **Point spacing:** 0.1 mile (2,358 points: 2,069 main + 289 spur)
 
 ### NET Geometry Source
 
@@ -486,27 +486,34 @@ Rebuilt 2026-09 from the **NPS authoritative centerline**, `NEEN_BND_NationalSce
 https://services1.arcgis.com/fBc8EJBxQRMcHlei/arcgis/rest/services/NEEN_BND_NationalScenicTrailCenterline_ln/FeatureServer/0
 ```
 
-One MultiLineString, 14 parts, 103,732 vertices, **235.65mi = 200.68 spine + 34.97 spur** — the official
+One MultiLineString, 14 parts, 103,732 vertices, **235.65mi = 206.81 spine + 28.84 spur** — the official
 "235 miles" *includes* the spur. Built by `SectionsHiked/scripts/build-net-data.js --tt-points`, which
 writes this repo's `points.json`, `net_meta.json`, `trail.geojson` and re-keys `historical_weather.json`
 (normals are location-based, so they were remapped onto the nearest new point rather than re-fetched;
 worst displacement 248ft, all 50 matched). The prior geometry was a 6,918-vertex decimation that measured
 only 184mi and whose miles 17–22 ran along the spur rather than the spine.
 
-**Two gaps** in the centerline, both excluded from mileage:
+**T-junction splitting is load-bearing.** The Menunkatuck's north end does not meet the Mattabesett
+end-to-end — it lands 17ft into the **middle** of the 34.97mi Mattabesett line, 6.13mi along it. Parts
+must be split there before the spine router runs. Without the split that whole line reads as one route
+and gets classed as the Middletown spur, which strands the 6.13mi that actually carries the NET main
+route and opens a **phantom 2.98mi "gap"** where the Menunkatuck joins. That bug shipped once, and the
+inherited data it replaced had been right all along: its miles 17–22 "running along the spur" were
+following the real NET route, and its 28-mile spur figure was close to the true 28.84.
+Confirmed against CFPA's own data — CT DEEP's
+[Blue-Blazed Hiking Trails](https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/BlueBlazedHikingTrails/FeatureServer/0)
+layer (updated May 2024, sourced from CFPA), where the Menunkatuck's 16.41mi run from the Guilford
+terminus meets the Mattabesett at 17ft with no break.
 
-- **Connecticut River, ~1.49mi after mile 127.07** (Easthampton / South Hadley). There is *no pedestrian
+**One real gap** in the centerline, excluded from mileage:
+
+- **Connecticut River, ~1.49mi after mile 133.2** (Easthampton / South Hadley). There is *no pedestrian
   crossing at all* — per [newenglandtrail.org/thru-hiking](https://newenglandtrail.org/thru-hiking/),
   hikers arrange a car or boat ride across (rideshare ~$15–30); the 10.2mi road walk around via US-5N
   and MA-47N is explicitly not recommended. NB resumes on Old Mountain Road near Skinner State Park;
   SB at 2-98 Underwood Ave, Easthampton. Drawn as a **dashed connector tagged `route_id: "roadwalk"`** —
   the non-hikeable sense of that tag (Natchez's parkway precedent): rendered for continuity, carries no
   mileage, no points.json entries, and `map.js` skips it when building the hikeable spine.
-- **~2.98mi after mile 16.41** (Guilford section to the Mattabesett). Left **undrawn**. The connecting
-  Menunkatuck Trail was reported complete in 2013, so this looks more like a hole in the published NPS
-  layer than a gap on the ground; the build records it in `net_meta.gaps` with a null id rather than
-  characterising it either way.
-
 Known gaps are matched in `build-net-data.js` by **endpoint coordinates**, not part index, so a
 republished source layer stops matching rather than silently mislabelling a different break.
 
@@ -514,16 +521,17 @@ republished source layer stops matching rather than silently mislabelling a diff
 
 | id | Name | mile_type | Range |
 |----|------|-----------|-------|
-| `ct-guilford` | Connecticut — Main Spine | spine | 0–103.6 |
-| `ct-middletown` | Connecticut — Middletown Spur | spur | 0–34.97 |
-| `ma` | Massachusetts — Main Spine | spine | 103.6–200.68 |
+| `ct-guilford` | Connecticut — Main Spine | spine | 0–109.7 |
+| `ct-middletown` | Connecticut — Middletown Spur | spur | 0–28.84 |
+| `ma` | Massachusetts — Main Spine | spine | 109.7–206.81 |
 
 Section ids are hyphenated, matching SectionsHiked's canonical schema. `app.js` tests for
 `"ct-middletown"` to decide spur vs. spine lookup — keep those in sync.
 
 ### NET Spur
 
-The Middletown Connector spur (34.97 miles) joins the main spine at **mile 16.41** and dead-ends at
+The Middletown Connector spur (28.84 miles) joins the main spine at **mile 16.41** — the point where the
+Menunkatuck meets the Mattabesett — and dead-ends at
 Middletown, CT. It is an alternate southern start, not an alternate through-route.
 
 **`spur_mile` 0 is the JUNCTION, not Middletown** — the spur is stored running outward from the trail,
@@ -534,12 +542,12 @@ so the alt directions (which start at Middletown) walk it in reverse. Because th
 
 | id | Label | Miles | Uses spur |
 |----|-------|-------|-----------|
-| `nobo_main` | Northbound — Guilford → Royalston Falls (Main) | 200.68 | No |
+| `nobo_main` | Northbound — Guilford → Royalston Falls (Main) | 206.81 | No |
 | `nobo_alt` | Northbound — Middletown → Royalston Falls (Alt.) | 219.24 | Yes |
-| `sobo_main` | Southbound — Royalston Falls → Guilford (Main) | 200.68 | No |
+| `sobo_main` | Southbound — Royalston Falls → Guilford (Main) | 206.81 | No |
 | `sobo_alt` | Southbound — Royalston Falls → Middletown (Alt.) | 219.24 | Yes |
 
-Alt mileage: 34.97 (spur) + (200.68 − 16.41) = 219.24 miles
+Alt mileage: 28.84 (spur) + (206.81 − 16.41) = 219.24 miles
 
 `NET_SPINE_MIN/MAX/FULL`, `NET_SPUR_LEN` and `NET_JUNCTION` in `app.js` are **fallbacks only** —
 `loadNetMeta()` overwrites them from `net_meta.json`. They drifted from the data once (junction was
@@ -569,10 +577,10 @@ Main spine points:
   "sec_mile": 50, "route_id": "main-spine", "state": "CT" }
 ```
 
-Spur points — `mile` is appended past the spine (200.68→235.65) so the axis covers every
+Spur points — `mile` is appended past the spine (206.81→235.65) so the axis covers every
 official mile exactly once; `sec_mile`/`spur_mile` are the true distance from the junction:
 ```json
-{ "id": "net-spur-mi0015000", "lat": ..., "lon": ..., "mile": 215.68,
+{ "id": "net-spur-mi0015000", "lat": ..., "lon": ..., "mile": 221.81,
   "region_id": "ct", "region_name": "Connecticut",
   "section_id": "ct-middletown", "section_name": "Connecticut — Middletown Terminus",
   "sec_mile": 15, "route_id": "middletown-spur", "alt_of": "main-spine",
