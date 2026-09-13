@@ -1,4 +1,25 @@
 #!/usr/bin/env node
+//
+// SUPERSEDED -- DO NOT RUN.
+//
+// This tool rebuilt trail.geojson by interpolating the simplified shapefile
+// and rescaling it to an assumed 2,653.0-mile total. That axis is wrong:
+// uniform scaling of a simplified line does not reproduce official mileage,
+// and measured against PCTA's 2026 mile markers it drifted up to 7 miles
+// (worst through miles 250-750).
+//
+// Running this overwrites the current PCTA-based data with the old broken
+// axis -- it has already happened once by accident. The guard below stops
+// that. The original implementation is kept intact underneath as a record of
+// how the pre-2026-09 files were made.
+//
+// Current pipeline:
+//   SectionsHiked  scripts/build-pct-data.js        (points.json, trail.geojson)
+//   TrailTemps     tools/migrate-pct-canonical.js   (weather remap, pct_meta.json)
+//
+console.error('build-geojson-pct.js: SUPERSEDED, refusing to run. See the header comment.');
+process.exit(1);
+
 /**
  * build-geojson-pct.js
  *

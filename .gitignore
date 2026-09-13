@@ -11,3 +11,10 @@ trails/continental-divide-trail/data/trail_hires.geojson
 trails/new-england-trail/data/points_backup.json
 trails/new-england-trail/data/trail_backup.geojson
 trails/new-england-trail/data/historical_weather_backup.json
+
+# Pre-rebuild PCT data — kept locally, not served. The originals are also in
+# git history at 50a90b1 (the commit before the PCTA rebuild).
+trails/pacific-crest-trail/data/points_backup.json
+trails/pacific-crest-trail/data/trail_backup.geojson
+trails/pacific-crest-trail/data/pct_meta_backup.json
+trails/pacific-crest-trail/data/historical_weather_backup.json

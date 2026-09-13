@@ -1,65 +1,381 @@
 {
   "trail": {
     "name": "Pacific Crest Trail",
-    "total_trail_miles": 2653.0,
+    "total_trail_miles": 2655.66,
     "map_center": [
       40.5,
-      -120.0
+      -120
     ],
     "map_zoom": 5,
     "termini": {
       "south": "Campo, CA (Mexican Border)",
       "north": "Manning Park, BC (Canadian Border)"
-    }
+    },
+    "source": "Pacific Crest Trail Association — PCT Mile Markers 2026, PCT Letter Sections, PCTA Centerline Regions",
+    "rebuilt": "2026-09-13"
   },
-  "sections": [
+  "regions": [
     {
       "id": "socal",
       "name": "Southern California",
-      "state": "CA",
       "mile_start": 0,
-      "mile_end": 702
+      "mile_end": 519.5,
+      "states": [
+        "CA"
+      ]
     },
     {
-      "id": "central-cal",
-      "name": "Central California",
-      "state": "CA",
-      "mile_start": 702,
-      "mile_end": 1092
+      "id": "southern-sierra",
+      "name": "Southern Sierra",
+      "mile_start": 520,
+      "mile_end": 1000,
+      "states": [
+        "CA"
+      ]
     },
     {
-      "id": "norcal",
-      "name": "Northern California",
-      "state": "CA",
-      "mile_start": 1092,
-      "mile_end": 1702
+      "id": "northern-sierra",
+      "name": "Northern Sierra",
+      "mile_start": 1000.5,
+      "mile_end": 1419,
+      "states": [
+        "CA"
+      ]
     },
     {
-      "id": "oregon",
-      "name": "Oregon",
-      "state": "OR",
-      "mile_start": 1702,
-      "mile_end": 2147
+      "id": "norcal-soor",
+      "name": "Northern California / Southern Oregon",
+      "mile_start": 1419.5,
+      "mile_end": 1879.5,
+      "states": [
+        "CA",
+        "OR"
+      ]
     },
     {
-      "id": "washington",
-      "name": "Washington",
-      "state": "WA",
-      "mile_start": 2147,
-      "mile_end": 2653
+      "id": "central-cascades",
+      "name": "Central Cascades",
+      "mile_start": 1880,
+      "mile_end": 2253,
+      "states": [
+        "OR",
+        "WA"
+      ]
+    },
+    {
+      "id": "north-cascades",
+      "name": "North Cascades",
+      "mile_start": 2253.5,
+      "mile_end": 2655.66,
+      "states": [
+        "WA"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": "ca-a",
+      "name": "California Section A",
+      "mile_start": 0,
+      "mile_end": 109,
+      "states": [
+        "CA"
+      ],
+      "region": "socal"
+    },
+    {
+      "id": "ca-b",
+      "name": "California Section B",
+      "mile_start": 109.5,
+      "mile_end": 209.5,
+      "states": [
+        "CA"
+      ],
+      "region": "socal"
+    },
+    {
+      "id": "ca-c",
+      "name": "California Section C",
+      "mile_start": 210,
+      "mile_end": 341.5,
+      "states": [
+        "CA"
+      ],
+      "region": "socal"
+    },
+    {
+      "id": "ca-d",
+      "name": "California Section D",
+      "mile_start": 342,
+      "mile_end": 454,
+      "states": [
+        "CA"
+      ],
+      "region": "socal"
+    },
+    {
+      "id": "ca-e",
+      "name": "California Section E",
+      "mile_start": 454.5,
+      "mile_end": 566,
+      "states": [
+        "CA"
+      ],
+      "region": "socal"
+    },
+    {
+      "id": "ca-f",
+      "name": "California Section F",
+      "mile_start": 566.5,
+      "mile_end": 653,
+      "states": [
+        "CA"
+      ],
+      "region": "southern-sierra"
+    },
+    {
+      "id": "ca-g",
+      "name": "California Section G",
+      "mile_start": 653.5,
+      "mile_end": 768,
+      "states": [
+        "CA"
+      ],
+      "region": "southern-sierra"
+    },
+    {
+      "id": "ca-h",
+      "name": "California Section H",
+      "mile_start": 768.5,
+      "mile_end": 943.5,
+      "states": [
+        "CA"
+      ],
+      "region": "southern-sierra"
+    },
+    {
+      "id": "ca-i",
+      "name": "California Section I",
+      "mile_start": 944,
+      "mile_end": 1017.5,
+      "states": [
+        "CA"
+      ],
+      "region": "southern-sierra"
+    },
+    {
+      "id": "ca-j",
+      "name": "California Section J",
+      "mile_start": 1018,
+      "mile_end": 1093.5,
+      "states": [
+        "CA"
+      ],
+      "region": "northern-sierra"
+    },
+    {
+      "id": "ca-k",
+      "name": "California Section K",
+      "mile_start": 1094,
+      "mile_end": 1158,
+      "states": [
+        "CA"
+      ],
+      "region": "northern-sierra"
+    },
+    {
+      "id": "ca-l",
+      "name": "California Section L",
+      "mile_start": 1158.5,
+      "mile_end": 1196.5,
+      "states": [
+        "CA"
+      ],
+      "region": "northern-sierra"
+    },
+    {
+      "id": "ca-m",
+      "name": "California Section M",
+      "mile_start": 1197,
+      "mile_end": 1288.5,
+      "states": [
+        "CA"
+      ],
+      "region": "northern-sierra"
+    },
+    {
+      "id": "ca-n",
+      "name": "California Section N",
+      "mile_start": 1289,
+      "mile_end": 1419.5,
+      "states": [
+        "CA"
+      ],
+      "region": "northern-sierra"
+    },
+    {
+      "id": "ca-o",
+      "name": "California Section O",
+      "mile_start": 1420,
+      "mile_end": 1502.5,
+      "states": [
+        "CA"
+      ],
+      "region": "norcal-soor"
+    },
+    {
+      "id": "ca-p",
+      "name": "California Section P",
+      "mile_start": 1503,
+      "mile_end": 1601,
+      "states": [
+        "CA"
+      ],
+      "region": "norcal-soor"
+    },
+    {
+      "id": "ca-q",
+      "name": "California Section Q",
+      "mile_start": 1601.5,
+      "mile_end": 1657.5,
+      "states": [
+        "CA"
+      ],
+      "region": "norcal-soor"
+    },
+    {
+      "id": "ca-r",
+      "name": "California Section R",
+      "mile_start": 1658,
+      "mile_end": 1720,
+      "states": [
+        "CA",
+        "OR"
+      ],
+      "region": "norcal-soor"
+    },
+    {
+      "id": "or-b",
+      "name": "Oregon Section B",
+      "mile_start": 1720.5,
+      "mile_end": 1774.5,
+      "states": [
+        "OR"
+      ],
+      "region": "norcal-soor"
+    },
+    {
+      "id": "or-c",
+      "name": "Oregon Section C",
+      "mile_start": 1775,
+      "mile_end": 1849,
+      "states": [
+        "OR"
+      ],
+      "region": "norcal-soor"
+    },
+    {
+      "id": "or-d",
+      "name": "Oregon Section D",
+      "mile_start": 1849.5,
+      "mile_end": 1909,
+      "states": [
+        "OR"
+      ],
+      "region": "norcal-soor"
+    },
+    {
+      "id": "or-e",
+      "name": "Oregon Section E",
+      "mile_start": 1909.5,
+      "mile_end": 1985,
+      "states": [
+        "OR"
+      ],
+      "region": "central-cascades"
+    },
+    {
+      "id": "or-f",
+      "name": "Oregon Section F",
+      "mile_start": 1985.5,
+      "mile_end": 2094.5,
+      "states": [
+        "OR"
+      ],
+      "region": "central-cascades"
+    },
+    {
+      "id": "or-g",
+      "name": "Oregon Section G",
+      "mile_start": 2095,
+      "mile_end": 2150,
+      "states": [
+        "OR"
+      ],
+      "region": "central-cascades"
+    },
+    {
+      "id": "wa-h",
+      "name": "Washington Section H",
+      "mile_start": 2150.5,
+      "mile_end": 2298,
+      "states": [
+        "WA"
+      ],
+      "region": "central-cascades"
+    },
+    {
+      "id": "wa-i",
+      "name": "Washington Section I",
+      "mile_start": 2298.5,
+      "mile_end": 2396,
+      "states": [
+        "WA"
+      ],
+      "region": "north-cascades"
+    },
+    {
+      "id": "wa-j",
+      "name": "Washington Section J",
+      "mile_start": 2396.5,
+      "mile_end": 2467,
+      "states": [
+        "WA"
+      ],
+      "region": "north-cascades"
+    },
+    {
+      "id": "wa-k",
+      "name": "Washington Section K",
+      "mile_start": 2467.5,
+      "mile_end": 2594,
+      "states": [
+        "WA"
+      ],
+      "region": "north-cascades"
+    },
+    {
+      "id": "wa-l",
+      "name": "Washington Section L",
+      "mile_start": 2594.5,
+      "mile_end": 2655.66,
+      "states": [
+        "WA"
+      ],
+      "region": "north-cascades"
     }
   ],
   "direction_options": [
     {
       "id": "nobo",
       "label": "Northbound — Campo (Mexican Border) → Manning Park (Canadian Border)",
-      "total_miles": 2653.0,
+      "total_miles": 2655.66,
       "is_nobo": true
     },
     {
       "id": "sobo",
       "label": "Southbound — Manning Park (Canadian Border) → Campo (Mexican Border)",
-      "total_miles": 2653.0,
+      "total_miles": 2655.66,
       "is_nobo": false
     }
   ]

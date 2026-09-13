@@ -171,14 +171,16 @@ trails/
     index.html
     js/app.js
     data/
-      points.json                   ← 532 points at 5-mile intervals (miles 0–2,653)
-      trail.geojson
-      pct_meta.json
-      historical_weather.json       ← 384 normals points at ~5-mile intervals; wrapped in { meta, points }
+      points.json                   ← 5,313 points at 0.5-mile intervals (miles 0–2,655.66)
+      trail.geojson                 ← 6 region LineStrings
+      pct_meta.json                 ← 6 PCTA regions + 29 PCTA letter sections
+      historical_weather.json       ← 532 normals points at ~5-mile intervals; wrapped in { meta, points }
+      weather_id_remap.json         ← audit record of the 2026-09 normals re-keying
     tools/
-      build-geojson-pct.js          ← Fetches USFS/PCTA geometry, writes trail.geojson
-      build-points-pct.js           ← Builds points.json at 5-mile intervals with SRTM elevation
-      generate-normals-pct.js       ← Fetches ERA5-Land normals for all 384 points; resume-safe
+      migrate-pct-canonical.js      ← Re-keys normals to the canonical point ids; writes pct_meta.json
+      generate-normals-pct.js       ← Fetches ERA5-Land normals; resume-safe
+      build-geojson-pct.js          ← SUPERSEDED, guarded; would restore the old broken mile axis
+      build-points-pct.js           ← SUPERSEDED, guarded; ditto
   pacific-northwest-trail/
     index.html
     js/app.js
@@ -803,33 +805,51 @@ The only saltwater ferry crossing on any National Scenic Trail. The trail crosse
 
 ## Pacific Crest Trail (PCT) — Live
 
-- **Status:** Fully live as of April 2026.
+- **Status:** Fully live as of April 2026. **Rebuilt 2026-09** from PCTA's official GIS; now on the canonical points.json schema.
 - **Point ID format:** `pct-main-mi0000000` (thousandth-mile precision, zero-padded to 7 digits)
-- **Data files:** `points.json`, `pct_meta.json`, `trail.geojson`, `historical_weather.json`
+- **Data files:** `points.json`, `pct_meta.json`, `trail.geojson`, `historical_weather.json`, `weather_id_remap.json`
 - **Normals source:** Open-Meteo ERA5-Land archive (2018–2024)
-- **Weather resolution:** 5-mile intervals (532 points, miles 0–2,653)
-- **Normals count:** 384 points at ~7-mile intervals; wrapped in `{ meta, points }` object
-- **Trail geometry source:** USFS / PCTA geometry
+- **Point resolution:** 0.5-mile intervals (5,313 points, miles 0–2,655.66)
+- **Normals count:** 532 points at ~5-mile intervals; wrapped in `{ meta, points }` object. **Not** densified to match the 0.5mi points — ERA5-Land's grid is ~9km, so finer sampling returns the same cell; `getNearestNormals` falls back to nearest-by-mile (worst case 3.0mi).
+- **Trail geometry source:** PCTA — *PCT Mile Markers 2026* (the mile axis), *PCT Letter Sections*, *PCTA Centerline Regions*, all on `services5.arcgis.com/ZldHa25efPFpMmfB`. Built by SectionsHiked's `scripts/build-pct-data.js`; `points.json` and `trail.geojson` are copied here unchanged.
+- **Why the rebuild:** the old axis interpolated a simplified shapefile and rescaled it to an assumed 2,653.0 total. Simplification does not shorten a line uniformly, so one scale factor cannot correct it — measured against PCTA's markers the old axis drifted up to **7 miles**, worst through miles 250–750. Nothing internal could catch it: endpoints matched, total matched, and points.json and trail.geojson agreed because both came from the same rescaled line.
 - **Trail color:** `#e06060` (same salmon/red as FT, NET, NTT, AZT, IAT)
 - **Direction convention:** NOBO (northbound, Campo → Manning Park) / SOBO (southbound); uses `is_nobo` flag
 - **Elevation source:** `trail_elev` per point from SRTM via OpenTopoData (feet); `grid_elev` from `historical_weather.json` (Open-Meteo ERA5-Land, stored in feet)
 
-### PCT Geographic Sections (5)
+### PCT Regions (6) — these drive the `sectionSelect` dropdown
 
-| id | Name | State | Mile range |
-|----|------|-------|-----------|
-| `socal` | Southern California | CA | 0–702 |
-| `central-cal` | Central California | CA | 702–1,092 |
-| `norcal` | Northern California | CA | 1,092–1,702 |
-| `oregon` | Oregon | OR | 1,702–2,147 |
-| `washington` | Washington | WA | 2,147–2,653 |
+PCTA's own administrative regions. The UI labels this control "Region", so the
+dropdown reads `pct_meta.json`'s `regions`, not `sections`. `index.html` also
+carries a `window.PCT_REGIONS_BOOTSTRAP` copy for use before the meta loads —
+keep the two in step.
+
+| id | Name | States | Mile range |
+|----|------|--------|-----------|
+| `socal` | Southern California | CA | 0–519.5 |
+| `southern-sierra` | Southern Sierra | CA | 520–1,000 |
+| `northern-sierra` | Northern Sierra | CA | 1,000.5–1,419 |
+| `norcal-soor` | Northern California / Southern Oregon | CA, OR | 1,419.5–1,879.5 |
+| `central-cascades` | Central Cascades | OR, WA | 1,880–2,253 |
+| `north-cascades` | North Cascades | WA | 2,253.5–2,655.66 |
+
+### PCT Letter Sections (29)
+
+PCTA's lettered sections (CA A–R, OR B–G, WA H–L), in `pct_meta.json`'s
+`sections`. Used by `pctPointLabel()` for point labels, not by the dropdown.
+
+**These deliberately do not follow state lines.** CA Section R ends at
+Interstate 5 near Ashland, roughly 27 miles inside Oregon. Never infer a
+point's state from its section's letter prefix — `state` is computed
+independently, from the 42nd parallel (CA/OR, mile 1693) and the Columbia
+River crossing at the Bridge of the Gods (OR/WA, mile 2150.5).
 
 ### PCT Direction Options (2)
 
 | id | Label | Total miles |
 |----|-------|------------|
-| `nobo` | Northbound — Campo (Mexican Border) → Manning Park (Canadian Border) | 2,653.0 |
-| `sobo` | Southbound — Manning Park (Canadian Border) → Campo (Mexican Border) | 2,653.0 |
+| `nobo` | Northbound — Campo (Mexican Border) → Manning Park (Canadian Border) | 2,655.66 |
+| `sobo` | Southbound — Manning Park (Canadian Border) → Campo (Mexican Border) | 2,655.66 |
 
 ### PCT Elevation Correction
 

@@ -4,17 +4,18 @@
            - 2 direction options (NOBO / SOBO)
            - Single continuous spine; no alternates
    Tool A+: Temperature extremes across the hike
-           - Uses precomputed normals (historical_weather.json, 5-mile intervals)
+           - Uses precomputed normals (historical_weather.json, ~5-mile intervals;
+             points.json is 0.5mi, so most points use the nearest-by-mile fallback)
            - Elevation correction applied to apparent temperatures
            - Heat index advisory when apparent high ≥ 100 °F
            - Wind chill advisory when apparent low ≤ 20 °F
    Tool B: Weather planner
-           - Section selector (5 sections) → Trail Mile → Date
+           - Region selector (6 PCTA regions) → Trail Mile → Date
            - Open-Meteo forecast (5-day) + current conditions
            - 7-year planning average high/low
            - Apparent temperature (Steadman: heat index + wind chill)
            - Elevation correction applied to apparent temperatures
-   Maps: Leaflet + OSM tiles + trail.geojson overlay (5 section LineStrings)
+   Maps: Leaflet + OSM tiles + trail.geojson overlay (6 region LineStrings)
    Units: Fahrenheit, mph, %
    Caching: localStorage (TTL-based); HTTP cache for large files
 
@@ -98,7 +99,7 @@ const HIST_TTL_MS           = 24 * 60 * 60 * 1000;      // 24 hr
 const TRAIL_TTL_MS          = 30 * 24 * 60 * 60 * 1000; // 30 days
 const NORMALS_CACHE_VERSION = "v1";
 
-const PCT_TRAIL_MILES = 2653.0;
+const PCT_TRAIL_MILES = 2655.66; // PCTA 2026 mile markers, Campo to the Canadian border
 
 // Elevation correction thresholds (matches AZT)
 const ELEV_THRESHOLD_FT     = 300;  // deadband before any correction fires
@@ -189,8 +190,11 @@ function elevCorrectionNote(direction, elevDiffFt) {
    7. POINT LABEL HELPER
    ============================================================ */
 
+// Labels a point with its PCTA letter section ("California Section H"), which
+// is finer than the region shown in the dropdown. Falls back to the regions if
+// the meta hasn't loaded, since those are bootstrapped inline in index.html.
 function pctPointLabel(point) {
-  const sections = pctMeta?.sections || window.PCT_SECTIONS_BOOTSTRAP || [];
+  const sections = pctMeta?.sections || pctMeta?.regions || window.PCT_REGIONS_BOOTSTRAP || [];
   const sec = sections.find(s => point.mile >= s.mile_start && point.mile <= s.mile_end);
   const secName = sec ? sec.name : "Mile " + fmtMile(point.mile);
   return `${secName} \u2014 ${point.state} \u2014 Mile ${fmtMile(point.mile)}`;
@@ -628,8 +632,8 @@ function updateSectionInfo() {
   const mileInput = el("pctMileInput");
   if (!sectionId || !infoEl) return;
 
-  const sections = pctMeta?.sections || window.PCT_SECTIONS_BOOTSTRAP || [];
-  const sec = sections.find(s => s.id === sectionId);
+  const regions = pctMeta?.regions || window.PCT_REGIONS_BOOTSTRAP || [];
+  const sec = regions.find(s => s.id === sectionId);
   if (!sec) return;
 
   infoEl.textContent = `Region Range: ${sec.mile_start}\u2013${sec.mile_end} Miles`;
@@ -658,8 +662,8 @@ async function runWeather() {
   const mile = Number(mileRaw);
   if (!isFinite(mile)) { setWeatherStatus("Please enter a valid number for the trail mile."); return; }
 
-  const sections = pctMeta?.sections || window.PCT_SECTIONS_BOOTSTRAP || [];
-  const sec = sections.find(s => s.id === sectionId);
+  const regions = pctMeta?.regions || window.PCT_REGIONS_BOOTSTRAP || [];
+  const sec = regions.find(s => s.id === sectionId);
   if (sec && (mile < sec.mile_start || mile > sec.mile_end)) {
     setWeatherStatus(`Please enter a mile between ${sec.mile_start} and ${sec.mile_end} for this region.`);
     return;
@@ -753,8 +757,8 @@ function getNearestNormals(point) {
 
 /**
  * Build ordered sequence of trail points for a hike, one per day.
- * NOBO: Campo (mile 0) → Manning Park (mile 2653)
- * SOBO: Manning Park (mile 2653) → Campo (mile 0)
+ * NOBO: Campo (mile 0) → Canadian border (mile 2655.66)
+ * SOBO: Canadian border (mile 2655.66) → Campo (mile 0)
  */
 function buildHikePoints({ directionId, startDate, milesPerDay, totalMiles }) {
   const durationDays = Math.ceil(totalMiles / milesPerDay);

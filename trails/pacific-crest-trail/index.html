@@ -4,12 +4,12 @@
   <meta charset="utf-8" />
   <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Plan your PCT thru-hike with 5-day forecasts, Best Start date estimate, and elevation-corrected temperatures for 2,650 miles from California to Washington." />
+  <meta name="description" content="Plan your PCT thru-hike with 5-day forecasts, Best Start date estimate, and elevation-corrected temperatures for 2,655 miles from California to Washington." />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="TrailTemps" />
   <meta property="og:url" content="https://trailtemps.com/trails/pacific-crest-trail/" />
   <meta property="og:title" content="Pacific Crest Trail Weather Planner | TrailTemps" />
-  <meta property="og:description" content="Plan your PCT thru-hike with 5-day forecasts, Best Start date estimate, and elevation-corrected temperatures for 2,650 miles from California to Washington." />
+  <meta property="og:description" content="Plan your PCT thru-hike with 5-day forecasts, Best Start date estimate, and elevation-corrected temperatures for 2,655 miles from California to Washington." />
   <meta property="og:image" content="https://trailtemps.com/images/og/og-pacific-crest-trail.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="canonical" href="https://trailtemps.com/trails/pacific-crest-trail/" />
@@ -28,7 +28,7 @@
         "@type": "WebApplication",
         "name": "Pacific Crest Trail Weather Planner",
         "url": "https://trailtemps.com/trails/pacific-crest-trail/",
-        "description": "Plan your PCT thru-hike with 5-day forecasts, Best Start date estimate, and elevation-corrected temperatures for 2,650 miles from California to Washington.",
+        "description": "Plan your PCT thru-hike with 5-day forecasts, Best Start date estimate, and elevation-corrected temperatures for 2,655 miles from California to Washington.",
         "applicationCategory": "TravelApplication",
         "operatingSystem": "All",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -191,12 +191,15 @@
         <!-- Section Selector -->
         <div class="ft-select-col">
           <label for="sectionSelect">Region:</label>
+          <!-- PCTA's six official regions. Mile ranges come from PCTA's 2026
+               mile markers, so they do not match the older published figures. -->
           <select id="sectionSelect">
             <option value="socal">Southern California (CA)</option>
-            <option value="central-cal">Central California (CA)</option>
-            <option value="norcal">Northern California (CA)</option>
-            <option value="oregon">Oregon (OR)</option>
-            <option value="washington">Washington (WA)</option>
+            <option value="southern-sierra">Southern Sierra (CA)</option>
+            <option value="northern-sierra">Northern Sierra (CA)</option>
+            <option value="norcal-soor">Northern California / Southern Oregon (CA, OR)</option>
+            <option value="central-cascades">Central Cascades (OR, WA)</option>
+            <option value="north-cascades">North Cascades (WA)</option>
           </select>
         </div>
 
@@ -294,7 +297,7 @@
                 early in the season.
               </li>
               <li>
-                <strong>Washington (miles 2,147&ndash;2,653):</strong> The North Cascades demand
+                <strong>Washington (miles 2,150&ndash;2,656):</strong> The North Cascades demand
                 respect. High passes such as Glacier Pass and Hart&rsquo;s Pass can hold snow into
                 August. Rain and cloud cover are the norm even in summer. Hikers finishing in late
                 September or October face a real risk of early-season snowstorm closures at elevation.
@@ -356,7 +359,7 @@
             <ul class="weather-data-notes__links">
               <li>
                 <strong>Trail miles:</strong> Displayed mileage is measured from Campo, CA
-                (mile 0) northward to Manning Park, BC (mile 2,653). Mile markers correspond
+                (mile 0) northward to the Canadian border (mile 2,655.7). Mile markers correspond
                 to PCTA official mileposts where possible, with minor interpolation due to
                 the simplified trail geometry used for this planner.
               </li>
@@ -428,12 +431,15 @@
        UI population before pct_meta.json finishes loading.
        ------------------------------------------------------- -->
   <script>
-    window.PCT_SECTIONS_BOOTSTRAP = [
-      { id: "socal",       name: "Southern California", mile_start:    0, mile_end:  702 },
-      { id: "central-cal", name: "Central California",  mile_start:  702, mile_end: 1092 },
-      { id: "norcal",      name: "Northern California", mile_start: 1092, mile_end: 1702 },
-      { id: "oregon",      name: "Oregon",              mile_start: 1702, mile_end: 2147 },
-      { id: "washington",  name: "Washington",          mile_start: 2147, mile_end: 2653 }
+    // Mirrors pct_meta.json's `regions`, so the dropdown works before the
+    // meta has loaded. Keep the two in step.
+    window.PCT_REGIONS_BOOTSTRAP = [
+      { id: "socal",            name: "Southern California",                   mile_start:      0, mile_end:  519.5 },
+      { id: "southern-sierra",  name: "Southern Sierra",                       mile_start:    520, mile_end:   1000 },
+      { id: "northern-sierra",  name: "Northern Sierra",                       mile_start: 1000.5, mile_end:   1419 },
+      { id: "norcal-soor",      name: "Northern California / Southern Oregon", mile_start: 1419.5, mile_end: 1879.5 },
+      { id: "central-cascades", name: "Central Cascades",                      mile_start:   1880, mile_end:   2253 },
+      { id: "north-cascades",   name: "North Cascades",                        mile_start: 2253.5, mile_end: 2655.66 }
     ];
 
     function pctUpdateSectionInfo() {
@@ -442,7 +448,7 @@
       const mileInput = document.getElementById("pctMileInput");
       if (!sectionId || !infoEl) return;
 
-      const sec = window.PCT_SECTIONS_BOOTSTRAP.find(s => s.id === sectionId);
+      const sec = window.PCT_REGIONS_BOOTSTRAP.find(s => s.id === sectionId);
       if (!sec) return;
 
       infoEl.textContent = "Region Range: " + sec.mile_start + "\u2013" + sec.mile_end + " Miles";
