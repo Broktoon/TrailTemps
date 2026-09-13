@@ -489,9 +489,22 @@ writes this repo's `points.json`, `net_meta.json`, `trail.geojson` and re-keys `
 worst displacement 248ft, all 50 matched). The prior geometry was a 6,918-vertex decimation that measured
 only 184mi and whose miles 17–22 ran along the spur rather than the spine.
 
-**Two real gaps** in the centerline, excluded from mileage and never drawn across: ~2.98mi after mile
-16.41 (Guilford section to the Mattabesett) and ~1.49mi after mile 127.07 (Connecticut River, not
-crossable on foot).
+**Two gaps** in the centerline, both excluded from mileage:
+
+- **Connecticut River, ~1.49mi after mile 127.07** (Easthampton / South Hadley). There is *no pedestrian
+  crossing at all* — per [newenglandtrail.org/thru-hiking](https://newenglandtrail.org/thru-hiking/),
+  hikers arrange a car or boat ride across (rideshare ~$15–30); the 10.2mi road walk around via US-5N
+  and MA-47N is explicitly not recommended. NB resumes on Old Mountain Road near Skinner State Park;
+  SB at 2-98 Underwood Ave, Easthampton. Drawn as a **dashed connector tagged `route_id: "roadwalk"`** —
+  the non-hikeable sense of that tag (Natchez's parkway precedent): rendered for continuity, carries no
+  mileage, no points.json entries, and `map.js` skips it when building the hikeable spine.
+- **~2.98mi after mile 16.41** (Guilford section to the Mattabesett). Left **undrawn**. The connecting
+  Menunkatuck Trail was reported complete in 2013, so this looks more like a hole in the published NPS
+  layer than a gap on the ground; the build records it in `net_meta.gaps` with a null id rather than
+  characterising it either way.
+
+Known gaps are matched in `build-net-data.js` by **endpoint coordinates**, not part index, so a
+republished source layer stops matching rather than silently mislabelling a different break.
 
 ### NET Sections (3)
 
