@@ -1508,7 +1508,7 @@ points with. Every one of the 131 sections starts at `sec_mile` 0.
 
 - **BestStart!** — fully implemented
 - **No advisory logic in Duration Calculator** — `warningHtml = ""`; advisories only in Weather Planner
-- **`NORMALS_CACHE_VERSION`:** bump whenever `historical_weather.json` is rebuilt
+- **`NORMALS_CACHE_VERSION`:** declared but **never read** — in CDT and in every other trail. `historical_weather.json` is fetched with a plain `fetch()` and relies on the HTTP cache only (it is far too large for localStorage), so bumping this does nothing. AT sits at "v3" from someone bumping it in the belief that it did. Left alone here rather than fixed trail-by-trail.
 - **`{ meta, points }` wrapper** — same structure as IAT/PCT/PHT
 - **`historical_weather.json`** — 653 records, re-keyed by location from the old 657 (4 dropped as duplicates). Median move 0.119mi, 95th 0.232mi, max 5.795mi. The three that moved over 3mi sit where CDTC's 2026 route and the 2019 line genuinely differ, plus the northern terminus, which CDTC places 3.3mi from where the old axis ended — all well inside ERA5-Land's ~9km cell. `weather_id_remap.json` is the audit record.
 - The 9 old `rmnp` normals records re-keyed onto the main spine (7) and Tonahutu (1), with 1 dropped. Correct, not a loss — that route is the spine now.
