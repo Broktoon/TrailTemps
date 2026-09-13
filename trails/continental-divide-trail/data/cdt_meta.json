@@ -1385,16 +1385,16 @@
       "id": "spotted-bear",
       "name": "Spotted Bear Route",
       "official": false,
-      "source": "OSM relation 8034122",
+      "source": "OSM relation 8034122 + way 891724062 (connector)",
       "section_id": "alt-spotted-bear",
       "section_name": "Spotted Bear Route",
       "branch_mile": 2833.5,
       "rejoin_mile": 2877,
-      "alt_miles": 26.6,
+      "alt_miles": 27.8,
       "main_miles": 43.5,
-      "delta_miles": -16.9,
+      "delta_miles": -15.7,
       "segments": 1,
-      "points": 55
+      "points": 57
     }
   ],
   "direction_options": [

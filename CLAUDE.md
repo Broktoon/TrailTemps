@@ -1408,7 +1408,7 @@ previous build's cached OSM relations and are tagged `official: false`.
 | `gila` | OSM 7917427 | 173 | 351.5 | 106.7 | −71.8 | no |
 | `tonahutu` | CDTC section 068 | 1,374.5 | 1,396.5 | 4.4 | −17.6 | yes |
 | `anaconda` | OSM 8107272 | 2,480 | 2,628.5 | 53.1 | −95.4 | no |
-| `spotted-bear` | OSM 8034122 | 2,833.5 | 2,877 | 26.6 | −16.9 | no |
+| `spotted-bear` | OSM 8034122 + way 891724062 | 2,833.5 | 2,877 | 27.8 | −15.7 | no |
 | `chief-mtn` | CDTC section 128 | 3,003.5 | — | 27.2 | — | yes |
 
 `chief-mtn` has no `rejoin_mile`: it ends at a different border crossing. UI code
@@ -1419,7 +1419,7 @@ The old build's fourth OSM alternate, relation 6747529 ("RMNP Loop"), is
 **deliberately dropped**: under CDTC's routing that geometry is the main spine.
 Keeping it would have re-created the inversion.
 
-#### The OSM alternates' mileages moved, and one is still doubtful
+#### The OSM alternates' mileages moved
 
 The old chainer only appended to the tail of the growing chain, so whichever OSM
 way sorted first became the seed and everything upstream was stranded. Anaconda
@@ -1431,15 +1431,39 @@ gives one continuous chain per route, longest step 0.86mi.
 |---|---|---|---|
 | Gila River | 104.9 | 106.7 | 8 of 61 ways still unstitched (5.1mi of side paths), reported at build time |
 | Anaconda | 57.6 | 53.1 | 4.5mi of the old figure was the phantom straight line |
-| Spotted Bear | 35.5 | 26.6 | 8.9mi was phantom — and note this doc already recorded 26.6mi of real tread while `cdt_meta.json` said 35.5 |
+| Spotted Bear | 35.5 | 27.8 | 8.9mi was phantom; 1.2mi added back from a connector way |
 
-**Spotted Bear is the one to distrust.** It now computes as 16.9mi *shorter* than
-the spine stretch it replaces, but it is normally described as a longer scenic
-detour through the Bob Marshall. Either relation 8034122 covers only part of the
-route, or its branch point is wrong — its rejoin end snaps 1.21mi from the
-spine, far looser than every other alternate's endpoints (all under 0.15mi).
-`index.html` therefore quotes **no** mileage delta for it. Resolve against a real
-CDT guide or CDTC's `Reroutes_view` layer before relying on that number.
+#### Spotted Bear: the loose endpoint, resolved
+
+Spotted Bear's rejoin endpoint used to snap 1.21mi from the spine while every
+other alternate's endpoints were under 0.15mi. That was a real hole in OSM, not
+a chaining artifact:
+
+- Relation 8034122 has exactly 5 member ways — confirmed against the OSM API, so
+  the cache was never truncated. Its last member, `Clack Creek`, ends at
+  48.00220,-113.07510.
+- That point is a **T-junction into the middle of** the `Big River` trail
+  (Flathead NF #155, OSM way 891724062). The relation does not include the rest
+  of that trail.
+- Big River carries on 1.210mi to the Bowl Creek / Strawberry Creek junction at
+  48.00095,-113.05296, which is **0.184mi from CDT mile 2877** — where the CDT
+  actually crosses.
+
+`build-cdt-data.js` borrows that stretch through `connectorWays`, keeping only
+the portion between where the way meets the chain and where it comes nearest the
+spine. The endpoint now lands at 0.18mi.
+
+**The route is 27.8mi against 43.5mi of spine — a real 15.7mi saving**, not the
+"+20.5mi scenic detour" the old files claimed. Both old numbers were artifacts:
+the 35.5mi included the phantom line, and the 15mi "main" span came from
+branch/rejoin points derived from the same broken chain. There was never a
+trustworthy prior figure to contradict.
+
+Being shorter is not itself suspicious. Through this stretch the CDT follows the
+divide while the alternate drops into the Spotted Bear River drainage and cuts
+across; the straight-line distance between the two junctions is about 18mi, so
+43.5mi of spine and 27.8mi of alternate are both reasonable. Hikers take it for
+the South Fork Flathead country, not to save time — but it does save distance.
 
 ### CDT `CDT_REGIONS_BOOTSTRAP`
 
