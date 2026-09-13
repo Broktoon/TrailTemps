@@ -1446,12 +1446,22 @@ a chaining artifact:
   (Flathead NF #155, OSM way 891724062). The relation does not include the rest
   of that trail.
 - Big River carries on 1.210mi to the Bowl Creek / Strawberry Creek junction at
-  48.00095,-113.05296, which is **0.184mi from CDT mile 2877** — where the CDT
-  actually crosses.
+  48.00095,-113.05296, which sits **37 feet off the CDT centerline** — where the
+  CDT actually crosses. Bowl Creek and Strawberry Creek essentially *are* the CDT
+  through there.
 
 `build-cdt-data.js` borrows that stretch through `connectorWays`, keeping only
 the portion between where the way meets the chain and where it comes nearest the
-spine. The endpoint now lands at 0.18mi.
+spine. Both endpoints now land within 0.001mi of the centerline.
+
+The builder also stopped reporting endpoint offsets as distance to the nearest
+*sampled point*. The spine carries a point every 0.5mi, so something sitting
+exactly on the trail can read a quarter mile out — which is what made this
+endpoint look 0.18mi adrift after it had already been fixed, and what made
+section 018's markers look 1.0mi off their own section line when they are on it.
+Offsets are now perpendicular to the centerline, and all five alternates report
+under 0.02mi at both ends. Branch and rejoin *miles* still come from the nearest
+sampled point, which is what puts them on the axis.
 
 **The route is 27.8mi against 43.5mi of spine — a real 15.7mi saving**, not the
 "+20.5mi scenic detour" the old files claimed. Both old numbers were artifacts:
