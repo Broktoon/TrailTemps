@@ -1,3 +1,32 @@
+#!/usr/bin/env node
+//
+// SUPERSEDED -- DO NOT RUN. This tool was actively wrong.
+//
+// It split the Puget Sound line at its LARGEST COORDINATE JUMP and called
+// everything after that the ferry. The largest jump on that line is mid-channel,
+// not at the dock, so the split landed 0.855mi out in Admiralty Inlet:
+//
+//   * only 4.866mi of the 5.792mi crossing became the dashed ferry feature;
+//   * the other 0.926mi -- open saltwater -- stayed a solid trail line;
+//   * and BOTH halves sat on the mile axis, so every Olympic Peninsula mile was
+//     5.79mi too high while pnt_meta.json said "no hiking miles added".
+//
+// None of this needed a heuristic. The USFS source carries the crossing as its
+// own feature, FID 322, RTE_NAME "Port Townsend/Keystone Ferry", COMMENT
+// "Ferry", 5.792mi, starting at the Keystone/Fort Casey dock. The current build
+// reads that attribute and gives the feature zero axis length.
+//
+// Kept as a record of the defect. Running it against the current trail.geojson
+// would corrupt it -- there is no longer a puget-sound section feature to split,
+// and the ferry it would look for is already correct.
+//
+// Current pipeline:
+//   SectionsHiked  scripts/build-pnt-data.js          (points.json, trail.geojson, pnt_meta.json)
+//   TrailTemps     tools/migrate-pnt-canonical.js     (weather remap)
+//
+console.error('fix-ferry-geometry.js: SUPERSEDED, refusing to run. See the header comment.');
+process.exit(1);
+
 /**
  * fix-ferry-geometry.js
  *

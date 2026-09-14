@@ -32,3 +32,11 @@ trails/north-country-trail/data/points_backup.json
 trails/north-country-trail/data/trail_backup.geojson
 trails/north-country-trail/data/nct_meta_backup.json
 trails/north-country-trail/data/historical_weather_backup.json
+
+trails/pacific-northwest-trail/data/points_backup.json
+trails/pacific-northwest-trail/data/trail_backup.geojson
+trails/pacific-northwest-trail/data/pnt_meta_backup.json
+trails/pacific-northwest-trail/data/historical_weather_backup.json
+# ^ pre-rebuild PNT data, kept on disk for comparison, not committed.
+#   migrate-pnt-canonical.js reads historical_weather_backup.json as its input,
+#   so that one must exist locally before the migration is re-run.

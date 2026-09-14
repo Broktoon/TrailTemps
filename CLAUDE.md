@@ -82,8 +82,7 @@ node trails/arizona-trail/tools/generate-normals-azt.js
 node trails/pacific-crest-trail/tools/build-geojson-pct.js
 node trails/pacific-crest-trail/tools/build-points-pct.js
 node trails/pacific-crest-trail/tools/generate-normals-pct.js
-node trails/pacific-northwest-trail/tools/build-pnt-data.js
-node trails/pacific-northwest-trail/tools/fix-ferry-geometry.js
+node trails/pacific-northwest-trail/tools/migrate-pnt-canonical.js
 node trails/pacific-northwest-trail/tools/generate-normals-pnt.js
 node trails/ice-age-trail/tools/build-points-iat.js
 node trails/ice-age-trail/tools/generate-normals-iat.js
@@ -187,15 +186,18 @@ trails/
     index.html
     js/app.js
     data/
-      points.json                   ← 245 points at 5-mile intervals (miles 0–1,217.77)
-      trail.geojson                 ← 6 features: 5 section LineStrings + 1 ferry connector
-      pnt_meta.json
-      historical_weather.json       ← 245 points, all complete
-      _raw_usfs.json                ← cached USFS source geometry (used by build-pnt-data.js)
+      points.json                   ← 2,423 points at 0.5-mile spacing (miles 0–1,210.95)
+      trail.geojson                 ← 127 features: 66 trail, 60 roadwalk, 1 ferry
+      pnt_meta.json                 ← 5 regions; sections[] is empty by design
+      historical_weather.json       ← 245 records, re-keyed to the rebuilt points
+      weather_id_remap.json         ← audit of how far each normals record moved
+      _raw_usfs.json                ← cached USFS source; the live build caches its own
+                                      copy at SectionsHiked scripts/cache/pnt_usfs.json
     tools/
-      build-pnt-data.js             ← Fetches USFS Region 6 ArcGIS, builds points.json + trail.geojson + pnt_meta.json
-      fix-ferry-geometry.js         ← Splits Puget Sound section at water crossing; makes ferry a dashed feature
-      generate-normals-pnt.js       ← Fetches ERA5-Land normals for all 245 points; resume-safe (~61 min)
+      build-pnt-data.js             ← SUPERSEDED, refuses to run; see its header
+      fix-ferry-geometry.js         ← SUPERSEDED, refuses to run; was actively wrong
+      migrate-pnt-canonical.js      ← Re-keys historical_weather.json to the rebuilt points
+      generate-normals-pnt.js       ← Fetches ERA5-Land normals for the 245 records; resume-safe (~61 min)
   ice-age-trail/
     index.html
     js/app.js
@@ -769,49 +771,96 @@ Located in `trails/arizona-trail/tools/`:
 
 ## Pacific Northwest Trail (PNT) — Live
 
-- **Status:** Fully live as of April 2026.
+- **Status:** Fully live as of April 2026. **Rebuilt on the canonical schema 2026-09-13.**
 - **Point ID format:** `pnt-main-mi0000000` (thousandth-mile precision, zero-padded to 7 digits)
-- **Data files:** `points.json`, `pnt_meta.json`, `trail.geojson`, `historical_weather.json`
+- **Data files:** `points.json`, `pnt_meta.json`, `trail.geojson`, `historical_weather.json`, `weather_id_remap.json`
 - **Normals source:** Open-Meteo ERA5-Land archive (2018–2024)
-- **Weather resolution:** 5-mile intervals (245 points, miles 0–1,217.77)
-- **Trail geometry source:** USFS Region 6 ArcGIS Feature Service (`services1.arcgis.com/gGHDlz6USftL5Pau`)
+- **Points:** 2,423 at **0.5-mile** spacing, miles 0–**1,210.95**
+- **Weather resolution:** still 245 normals records at ~5-mile spacing; `app.js` falls back to nearest-by-mile for the other ~90% of points. **Do not densify** — ERA5-Land's grid is ~9km, so finer sampling returns the same cell.
+- **Trail geometry source:** USFS Region 6 ArcGIS Feature Service (`services1.arcgis.com/gGHDlz6USftL5Pau`) — **the congressionally designated route as of 2016-05-05**, per the item description, not PNTA's current hiking route
 - **Trail color:** `#e06060` (same salmon/red as FT, NET, NTT)
 - **Direction convention:** WEBO (westbound, Chief Mountain → Cape Alava) / EABO (eastbound); uses `is_webo` flag in meta (vs `is_nobo` on other trails); app checks `directionId === "webo"` directly
 
-### PNT Geographic Sections (5)
+### PNT Geographic Regions (5)
 
 | id | Name | States | Mile range |
 |----|------|--------|-----------|
-| `rocky-mountains` | Rocky Mountains | MT/ID | 0–310 |
-| `columbia-mountains` | Columbia Mountains | WA | 310–621 |
-| `north-cascades` | North Cascades | WA | 621–853 |
-| `puget-sound` | Puget Sound | WA | 853–1,001 |
-| `olympic-peninsula` | Olympic Peninsula | WA | 1,001–1,218 |
+| `rocky-mountains` | Rocky Mountains | MT/ID | 0–310.5 |
+| `okanogan-highlands` | Okanogan Highlands | WA | 310.5–620.5 |
+| `north-cascades` | North Cascades | WA | 620.5–852 |
+| `puget-sound` | Puget Sound | WA | 852–994 |
+| `olympic-peninsula` | Olympic Peninsula | WA | 994–1,210.95 |
 
-Sections match the five USFS geographic areas. Rocky Mountains section spans MT (miles 0–220) and ID (miles 220–310); `pnt_meta.json` records `"state": "MT/ID"`.
+These are **regions**, not sections — the UI's `sectionSelect` element keeps its
+old id but is labelled "Region" and reads `pntMeta.regions`. Boundaries come
+from the USFS `PNT_Sectio` attribute; names come from PNTA. The two disagree on
+area 2: USFS calls it "Northeast Washington", PNTA calls it **"Okanogan
+Highlands"**, and the name shipped until 2026-09, "Columbia Mountains", came
+from neither. Rocky Mountains spans MT (0–213) and ID (213.5–310); `state` is
+now a polygon test, which moved the MT/ID switch from mile 220.
 
-### PNT Ferry Crossing
+**`sections` is empty and `section_id`/`section_name` are null on every point.**
+Not an oversight: PNTA publishes 10 named sections with lengths but no boundary
+coordinates, and they cannot be placed on this axis — PNTA totals 1,248mi
+against our 1,210.95 because the source is the 2016 route, and the land-manager
+attribute that would corroborate a placement agrees on three boundaries,
+contradicts others by 30–65mi, and is blank for ~400mi through the middle of
+Washington. Full evidence table in SectionsHiked's CLAUDE.md, "PNT has no
+placeable sections". `pnt_meta.json` records PNTA's list in
+`notes.pnta_sections`. `sec_mile` is region-local.
 
-The only saltwater ferry crossing on any National Scenic Trail. The trail crosses Puget Sound from the Keystone/Fort Casey terminal (Whidbey Island) to Port Townsend (Olympic Peninsula) — a ~30-minute crossing.
+### PNT Ferry Crossing — was counted, now is not
 
-**In `trail.geojson`:** 6 features total — 5 trail section `LineString`s + 1 ferry `LineString`. The ferry feature has `"segment_type": "ferry"` and geometry extracted from the USFS source data (not hand-placed). The Puget Sound section ends at the Fort Casey terminal; the Olympic Peninsula section begins at Port Townsend. Ferry miles are **not** counted in `total_trail_miles`.
+The only saltwater ferry crossing on any National Scenic Trail: Keystone/Fort
+Casey (Whidbey Island) to Port Townsend, ~30 minutes.
+
+**It used to be counted as hiking miles**, despite `pnt_meta.json` saying "no
+hiking miles added" and `app.js` commenting `PNT_TRAIL_MILES = 1217.77; // ferry
+not counted`. `fix-ferry-geometry.js` split the Puget Sound line at its *largest
+coordinate jump*, which lands mid-channel, so 4.866mi became the dashed ferry,
+**0.926mi of open water stayed a solid trail line**, and both sat on the axis —
+shifting every Olympic Peninsula mile by +5.79.
+
+The source carries the crossing as its own feature (FID 322, `RTE_NAME`
+"Port Townsend/Keystone Ferry", `COMMENT` "Ferry", **5.792mi**), starting at the
+dock. The build now reads that attribute and gives the feature zero axis length.
+
+**In `trail.geojson`:** 127 features — 66 trail, 60 roadwalk, 1 ferry. The ferry
+carries `"segment_type": "ferry"` **and** `"route_id": "roadwalk"` — the
+non-hikeable sense of that tag, which is what SectionsHiked's shared `map.js`
+keys off to drop it from the spine. No `points.json` entries: the points at mile
+993.5 and 994 are 5.5mi apart on the ground and 0.5mi apart on the axis, the
+only consecutive-point gap on the trail over 0.5mi.
 
 **In `app.js`:** `applyTrailOverlay()` reads `feature.properties.segment_type`:
 - `"trail"` → `TRAIL_STYLE` (`#e06060`, weight 3.25, solid)
-- `"ferry"` → `FERRY_STYLE` (`#e06060`, weight 2, opacity 0.45, `dashArray: "8, 12"`)
+- `"roadwalk"` → `ROADWALK_STYLE` (weight 2.25, opacity 0.55, `dashArray: "4, 9"`) — hiked and counted, 38% of the trail
+- `"ferry"` → `FERRY_STYLE` (weight 2, opacity 0.45, `dashArray: "8, 12"`) — lighter and more broken, because it is not walked
 
 ### PNT Notable Features
 
-- **No alternates** — single-spine trail; no `getSelectedAlts()` needed
+- **No alternates, no spurs** — single spine, `route_id: "main"` throughout; no `getSelectedAlts()` needed. The source labels two stretches `SEGMENT: "Hurricane Alt"` (12.5mi) and `"S Olympics Alt"` (6.1mi), but they are the *only* geometry there, so the axis runs through routes USFS itself calls alternates. Not modellable without better data.
+- **Surface classification** — `route_type: "roadwalk"` on 456mi (38%) and `"cross-country"` on 17mi, both from the source's `Layer` field, which the old build never fetched.
 - **No elevation adjustment** — ERA5-Land grid points are sufficient given the PNT's terrain profile (no isolated summits or deep canyons creating abrupt micro-climate breaks); unlike AZT
-- **`fix-ferry-geometry.js`** — must be re-run after any rebuild of `trail.geojson` from `build-pnt-data.js`, as it splits the Puget Sound section at the largest coordinate jump (water crossing) and converts that portion to the ferry feature
-- **`_raw_usfs.json`** — cached USFS source data; delete it to force a fresh fetch on next `build-pnt-data.js` run
+- **localStorage cache keys are at `_v2`** (`pnt_meta_*_v2`, `trail_geojson_*_v2`). Bumped because the meta shape changed (`sections` → `regions`) under a 30-day TTL: a returning user on a v1 payload would have found `pntMeta.regions` undefined and silently fallen back to the bootstrap on a stale 1,217.77 axis. **Bump these on any future PNT data change.** NCT, PCT and CDT still sit on `_v1` and have the same latent exposure.
 
 ### PNT Tools
 
-- **`build-pnt-data.js`** — Fetches all 456 USFS features, merges by section, interpolates at 5-mile intervals, writes `trail.geojson`, `points.json`, and `pnt_meta.json`. Caches raw USFS data in `_raw_usfs.json`. Re-run if trail geometry changes, then re-run `fix-ferry-geometry.js`.
-- **`fix-ferry-geometry.js`** — Splits the Puget Sound `LineString` at the largest coordinate gap (the water crossing), keeps the land portion as the trail section, converts the water-crossing portion to the `segment_type: "ferry"` dashed feature. Replaces any hand-placed ferry connector.
-- **`generate-normals-pnt.js`** — Fetches ERA5-Land normals for all 245 points; resume-safe (saves after each point); 15-second throttle; full run ~61 minutes.
+- **`build-pnt-data.js`** — **SUPERSEDED, refuses to run.** Header records what was wrong with it. Geometry is now built in SectionsHiked, `scripts/build-pnt-data.js`.
+- **`fix-ferry-geometry.js`** — **SUPERSEDED, refuses to run.** This one was actively wrong; see its header and the ferry section above.
+- **`migrate-pnt-canonical.js`** — Re-keys `historical_weather.json` to the rebuilt points by nearest lat/lon, writes `weather_id_remap.json`. All 245 records re-keyed, none dropped, median move 0.104mi and max 0.698mi (that max is the old on-the-ferry sample, relanded at Port Townsend). Requires `historical_weather_backup.json` to exist.
+- **`generate-normals-pnt.js`** — Fetches ERA5-Land normals; resume-safe (saves after each point); 15-second throttle. Written for the 245-point file; do **not** point it at the 2,423-point one.
+
+### PNT rebuild procedure
+
+```
+# in SectionsHiked
+node scripts/build-pnt-data.js
+# copy points.json, trail.geojson, pnt_meta.json into TrailTemps' data/
+cp data/historical_weather.json data/historical_weather_backup.json   # if not already
+node trails/pacific-northwest-trail/tools/migrate-pnt-canonical.js
+# then bump the _v2 cache keys in js/app.js
+```
 
 ---
 

@@ -2,18 +2,29 @@
    ---------------------------------------------------------------
    Tool A: Hike duration / end-date calculator
            - 2 direction options (WEBO / EABO)
-           - Single continuous spine; ferry crossing noted but not counted
+           - Single continuous spine; ferry crossing drawn but not counted
    Tool A+: Temperature extremes across the hike
-           - Uses precomputed normals (historical_weather.json, 5-mile intervals)
+           - Uses precomputed normals (historical_weather.json, ~5-mile spacing
+             against points.json's 0.5mi — app.js falls back to nearest-by-mile
+             for the ~90% of points with no normals of their own; ERA5-Land's
+             grid is ~9km so denser sampling would return the same cell)
            - Heat index advisory when apparent high ≥ 100 °F
            - Wind chill advisory when apparent low ≤ 20 °F
    Tool B: Weather planner
-           - Section selector (5 sections) → Trail Mile → Date
+           - Region selector (5 geographic areas) → Trail Mile → Date
+             The PNT has no placeable section scheme — PNTA publishes 10 named
+             sections but no boundary coordinates, so points.json carries
+             section_id/section_name as null and sec_mile is region-local.
+             See SectionsHiked CLAUDE.md, "PNT has no placeable sections".
            - Open-Meteo forecast (5-day) + current conditions
            - 7-year planning average high/low
            - Apparent temperature (Steadman: heat index + wind chill)
    Maps: Leaflet + OSM tiles + trail.geojson overlay
-         Ferry segment rendered as dashed line (segment_type: "ferry")
+         Roadwalk rendered as dashed line (segment_type: "roadwalk") — hiked
+         and counted, 38% of the trail
+         Ferry rendered as a lighter, longer dash (segment_type: "ferry") —
+         drawn for continuity only, carries no mileage and no points.json
+         entries (route_id "roadwalk", the non-hikeable sense)
    Units: Fahrenheit, mph, %
    Caching: localStorage (TTL-based)
    ---------------------------------------------------------------*/
@@ -87,14 +98,18 @@ const HIST_TTL_MS           = 24 * 60 * 60 * 1000;      // 24 hr
 const TRAIL_TTL_MS          = 30 * 24 * 60 * 60 * 1000; // 30 days
 const NORMALS_CACHE_VERSION = "v1";
 
-const PNT_TRAIL_MILES = 1217.77; // total hiking miles (ferry not counted)
+// Total hiking miles, measured off the USFS 2016 congressional route. The
+// 5.79mi Puget Sound ferry really is excluded now — the previous 1217.77 said
+// "ferry not counted" but counted all of it, plus 0.93mi of open water that a
+// coordinate-jump heuristic had left classified as solid trail.
+const PNT_TRAIL_MILES = 1210.95;
 
 /* ============================================================
    4. MODULE-LEVEL STATE
    ============================================================ */
 
 let allPoints        = [];
-let pointsByMile     = new Map(); // integer mile → Point
+let pointsByMile     = new Map(); // mile → Point; half-mile keys since the rebuild. Built but not read — lookups go through getNearestPoint().
 let pointsSorted     = [];        // [Point] sorted by mile
 
 // PNT meta (loaded from pnt_meta.json)
@@ -126,17 +141,22 @@ function refreshMapSize() {
    6. POINT LABEL HELPER
    ============================================================ */
 
-const SECTION_NAMES = {
+// The 5 geographic areas. Boundaries come from the USFS PNT_Sectio attribute,
+// names from PNTA \u2014 the two disagree on area 2, which USFS calls "Northeast
+// Washington". The id previously used here, "columbia-mountains", and its name
+// came from neither. Kept only as a fallback: points.json now carries
+// region_name directly.
+const REGION_NAMES = {
   "rocky-mountains":    "Rocky Mountains",
-  "columbia-mountains": "Columbia Mountains",
+  "okanogan-highlands": "Okanogan Highlands",
   "north-cascades":     "North Cascades",
   "puget-sound":        "Puget Sound",
   "olympic-peninsula":  "Olympic Peninsula",
 };
 
 function pntPointLabel(point) {
-  const secName = SECTION_NAMES[point.section] || point.section;
-  return `${secName} \u2014 ${point.state} \u2014 Mile ${point.mile}`;
+  const regName = point.region_name || REGION_NAMES[point.region_id] || point.region_id;
+  return `${regName} \u2014 ${point.state} \u2014 Mile ${point.mile}`;
 }
 
 /* ============================================================
@@ -155,7 +175,11 @@ function calcTotalMiles(directionId) {
    ============================================================ */
 
 async function loadPntMeta() {
-  const key    = `pnt_meta_${trailSlug}_v1`;
+  // _v2: the rebuild changed the meta shape (sections -> regions) and the
+  // total. A returning user still holding a v1 payload under a 30-day TTL would
+  // find pntMeta.regions undefined and silently fall back to the bootstrap, on
+  // a stale 1217.77 axis. Bump this key on any future meta change too.
+  const key    = `pnt_meta_${trailSlug}_v2`;
   const cached = cacheGet(key, TRAIL_TTL_MS);
   let payload  = cached;
   if (!payload) {
@@ -165,7 +189,8 @@ async function loadPntMeta() {
     cacheSet(key, payload);
   }
   pntMeta = payload;
-  console.log("[PNT] pnt_meta loaded:", pntMeta.sections?.length, "sections");
+  console.log("[PNT] pnt_meta loaded:", pntMeta.regions?.length, "regions,",
+    pntMeta.sections?.length ?? 0, "sections");
 }
 
 async function loadPoints() {
@@ -229,7 +254,9 @@ async function loadPrecomputedNormals() {
    ============================================================ */
 
 async function fetchTrailGeojson() {
-  const key    = `trail_geojson_${trailSlug}_v1`;
+  // _v2 for the same reason: the rebuilt geojson has different feature
+  // properties and 3.7MB less geometry.
+  const key    = `trail_geojson_${trailSlug}_v2`;
   const cached = cacheGet(key, TRAIL_TTL_MS);
   if (cached) return cached;
   const r = await fetch(META.trailGeojsonUrl, { cache: "no-store" });
@@ -247,6 +274,13 @@ const durLayerRef     = { current: null };
 const TRAIL_STYLE = {
   color: "#e06060", weight: 3.25, opacity: 0.85, lineCap: "round", lineJoin: "round"
 };
+// Designated on-road tread — 38% of this trail, hiked and counted. Dashed but
+// solid-looking enough to read as route. Matches the NCT's treatment.
+const ROADWALK_STYLE = {
+  color: "#e06060", weight: 2.25, opacity: 0.55, dashArray: "4, 9", lineCap: "round"
+};
+// The Puget Sound crossing. Lighter and more broken than the roadwalk dash,
+// because unlike a roadwalk it is not walked and carries no mileage.
 const FERRY_STYLE = {
   color: "#e06060", weight: 2, opacity: 0.45, dashArray: "8, 12", lineCap: "round"
 };
@@ -259,9 +293,10 @@ function applyTrailOverlay(targetMap, haloRef, layerRef, onDone) {
 
       layerRef.current = L.geoJSON(geojson, {
         style: function (feature) {
-          return feature.properties?.segment_type === "ferry"
-            ? FERRY_STYLE
-            : TRAIL_STYLE;
+          const t = feature.properties?.segment_type;
+          if (t === "ferry")    return FERRY_STYLE;
+          if (t === "roadwalk") return ROADWALK_STYLE;
+          return TRAIL_STYLE;
         },
         interactive: false,
       }).addTo(targetMap);
@@ -566,11 +601,11 @@ function updateSectionInfo() {
   const mileInput = el("pntMileInput");
   if (!sectionId || !infoEl) return;
 
-  const sections = pntMeta?.sections || window.PNT_SECTIONS_BOOTSTRAP || [];
-  const sec = sections.find(s => s.id === sectionId);
+  const regions = pntMeta?.regions || window.PNT_REGIONS_BOOTSTRAP || [];
+  const sec = regions.find(r => r.id === sectionId);
   if (!sec) return;
 
-  infoEl.textContent = `Section Range: ${sec.mile_start}\u2013${sec.mile_end} Miles`;
+  infoEl.textContent = `Region Range: ${sec.mile_start}\u2013${sec.mile_end} Miles`;
 
   if (mileInput) {
     mileInput.placeholder = `e.g., ${Math.round((sec.mile_start + sec.mile_end) / 2)}`;
@@ -596,8 +631,8 @@ async function runWeather() {
   const mile = Number(mileRaw);
   if (!isFinite(mile))               { setWeatherStatus("Please enter a valid number for the trail mile."); return; }
 
-  const sections = pntMeta?.sections || window.PNT_SECTIONS_BOOTSTRAP || [];
-  const sec = sections.find(s => s.id === sectionId);
+  const regions = pntMeta?.regions || window.PNT_REGIONS_BOOTSTRAP || [];
+  const sec = regions.find(r => r.id === sectionId);
   if (sec && (mile < sec.mile_start || mile > sec.mile_end)) {
     setWeatherStatus(`Please enter a mile between ${sec.mile_start} and ${sec.mile_end} for this section.`);
     return;

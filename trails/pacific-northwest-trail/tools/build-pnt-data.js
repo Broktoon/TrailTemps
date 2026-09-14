@@ -1,4 +1,43 @@
 #!/usr/bin/env node
+//
+// SUPERSEDED -- DO NOT RUN.
+//
+// This tool built points.json, trail.geojson and pnt_meta.json from the USFS
+// Region 6 centerline. Its mile axis was, unusually, sound: measured off the
+// geometry rather than rescaled to a published total, and accurate to within
+// 0.012mi at mile 1217. Its greedy nearest-endpoint chainer -- the same routine
+// that stranded orphan runs on the NCT and put phantom straight lines in the
+// CDT alternates -- also happened not to strand anything here.
+//
+// What was wrong with it:
+//
+//   * It counted the Puget Sound ferry as hiking miles. It emitted a
+//     hand-placed Coupeville connector and left the real crossing embedded in
+//     the Puget Sound section, then handed the problem to
+//     fix-ferry-geometry.js, which made it worse. See that file's header.
+//   * It fetched only FID, PNT_Sectio, State, MILES and RTE_NAME, missing the
+//     two fields that mattered: `Layer`, an official surface classification
+//     (PNT_ROAD 461mi, PNT_XC 17.7mi), and `SEGMENT`.
+//   * It took `state` from the per-feature attribute, which puts the
+//     Montana/Idaho switch at mile 220 when the axis crosses before mile 215.
+//   * It asked for resultRecordCount=500 once, with no paging. Fine at 456
+//     features; silent truncation if the layer ever grew.
+//   * No structure. points.json was id/mile/section/state/lat/lon at 5-mile
+//     spacing: no region_id, no section_id, no sec_mile, no route_id.
+//   * It named the second geographic area "Columbia Mountains", which is
+//     neither the USFS name ("Northeast Washington") nor PNTA's
+//     ("Okanogan Highlands").
+//
+// The original implementation is kept intact underneath as a record of how the
+// pre-2026-09 files were made.
+//
+// Current pipeline:
+//   SectionsHiked  scripts/build-pnt-data.js          (points.json, trail.geojson, pnt_meta.json)
+//   TrailTemps     tools/migrate-pnt-canonical.js     (weather remap)
+//
+console.error('build-pnt-data.js: SUPERSEDED, refusing to run. See the header comment.');
+process.exit(1);
+
 /**
  * build-pnt-data.js
  * Builds trail.geojson, points.json, and pnt_meta.json for the Pacific Northwest Trail

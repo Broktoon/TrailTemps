@@ -1,7 +1,8 @@
 {
   "trail": {
     "name": "Pacific Northwest Trail",
-    "total_trail_miles": 1217.77,
+    "total_miles": 1210.95,
+    "point_spacing_miles": 0.5,
     "map_center": [
       48.2,
       -119.5
@@ -9,62 +10,110 @@
     "map_zoom": 6,
     "termini": {
       "east": "Chief Mountain, MT (Glacier NP)",
-      "west": "Cape Alava / Shi Shi Beach, WA"
+      "west": "Cape Alava, WA"
+    },
+    "source": {
+      "geometry": "Pacific_Northwest_National_Scenic_Trail/FeatureServer/0",
+      "org": "https://services1.arcgis.com/gGHDlz6USftL5Pau/arcgis/rest/services",
+      "vintage": "congressional route as of 2016-05-05, per the USFS item description",
+      "states": "US Census TIGERweb State_County",
+      "axis": "measured from the source geometry; neither USFS nor PNTA publishes a mile axis",
+      "validation": "none available - PNTA publishes no open GIS and no mile-marker layer",
+      "fetched": "2026-09-13"
     },
     "ferry": {
       "name": "Puget Sound Ferry",
-      "crossing": "Coupeville → Port Townsend",
-      "note": "~30 min crossing; no hiking miles added"
+      "crossing": "Keystone/Fort Casey to Port Townsend",
+      "miles": 5.79,
+      "counted": false,
+      "note": "Saltwater crossing, the only one on any National Scenic Trail. Taken from the source attribute (COMMENT \"Ferry\"), not from a coordinate-jump heuristic - that heuristic left 0.93mi of open water drawn and counted as trail in the files this replaces. Drawn dashed for continuity and tagged route_id \"roadwalk\" (the non-hikeable sense) so it carries no mileage and no points.json entries. The mile axis is continuous across it: the two points either side are 0.5mi apart on the axis but separated by the whole crossing on the ground, which is the only consecutive-point gap on the trail over 0.5mi. 5.9mi is excluded in total - the ferry part plus the two steps joining it to land."
+    },
+    "notes": {
+      "sections": "PNTA publishes 10 named sections with lengths but no boundary coordinates, and they cannot be placed on this axis: PNTA totals 1248mi against this axis, the source is the 2016 congressional route, and the land-manager attribute that would corroborate a placement is blank for ~400mi through the middle of Washington. section_id and section_name are held open as null; sec_mile is region-local.",
+      "pnta_sections": [
+        "Rocky Mountain 151",
+        "Purcell Mountains 99",
+        "Selkirk Mountains 152",
+        "Kettle River Range 128",
+        "Okanogan Highlands 99",
+        "Pasayten Wilderness 119",
+        "North Cascades 196",
+        "Puget Sound 70",
+        "Olympic Mountains 170",
+        "Wilderness Coast 64"
+      ],
+      "roadwalk": "On-road tread is designated, hiked and counted toward mileage; tagged route_type \"roadwalk\" and drawn dashed. 456 mi.",
+      "cross_country": "Designated route with no constructed tread, tagged route_type \"cross-country\" and drawn as ordinary trail. 17 mi.",
+      "regions": "Boundaries from the source PNT_Sectio attribute, names from PNTA. USFS calls the second area \"Northeast Washington\"; the name previously shipped, \"Columbia Mountains\", came from neither.",
+      "off_spine_miles": 0.87,
+      "bridge_miles": 0.45
     }
   },
-  "sections": [
+  "regions": [
     {
       "id": "rocky-mountains",
       "name": "Rocky Mountains",
       "state": "MT/ID",
+      "usfs_name": "Rocky Mountains",
       "mile_start": 0,
-      "mile_end": 310.04
+      "mile_end": 310.5,
+      "miles": 310.5,
+      "sections": 0
     },
     {
-      "id": "columbia-mountains",
-      "name": "Columbia Mountains",
+      "id": "okanogan-highlands",
+      "name": "Okanogan Highlands",
       "state": "WA",
-      "mile_start": 310.04,
-      "mile_end": 620.76
+      "usfs_name": "Northeast Washington",
+      "mile_start": 310.5,
+      "mile_end": 620.5,
+      "miles": 310,
+      "sections": 0
     },
     {
       "id": "north-cascades",
       "name": "North Cascades",
       "state": "WA",
-      "mile_start": 620.76,
-      "mile_end": 852.7
+      "usfs_name": "North Cascades",
+      "mile_start": 620.5,
+      "mile_end": 852,
+      "miles": 231.5,
+      "sections": 0
     },
     {
       "id": "puget-sound",
       "name": "Puget Sound",
       "state": "WA",
-      "mile_start": 852.7,
-      "mile_end": 1000.5
+      "usfs_name": "Puget Sound",
+      "mile_start": 852,
+      "mile_end": 994,
+      "miles": 142,
+      "sections": 0
     },
     {
       "id": "olympic-peninsula",
       "name": "Olympic Peninsula",
       "state": "WA",
-      "mile_start": 1000.5,
-      "mile_end": 1217.77
+      "usfs_name": "Olympic Peninsula",
+      "mile_start": 994,
+      "mile_end": 1210.95,
+      "miles": 217,
+      "sections": 0
     }
   ],
+  "sections": [],
+  "alternates": [],
   "direction_options": [
     {
       "id": "webo",
-      "label": "Westbound — Chief Mountain, MT → Cape Alava, WA",
-      "total_miles": 1217.77,
+      "label": "Westbound - Chief Mountain, MT to Cape Alava, WA",
+      "total_miles": 1210.95,
       "is_webo": true
     },
     {
       "id": "eabo",
-      "label": "Eastbound — Cape Alava, WA → Chief Mountain, MT",
-      "total_miles": 1217.77,
+      "label": "Eastbound - Cape Alava, WA to Chief Mountain, MT",
+      "total_miles": 1210.95,
       "is_webo": false
     }
   ]
