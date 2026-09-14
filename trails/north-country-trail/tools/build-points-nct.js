@@ -1,4 +1,35 @@
 #!/usr/bin/env node
+//
+// SUPERSEDED -- DO NOT RUN.
+//
+// This tool built points.json, trail.geojson and nct_meta.json. Its greedy
+// nearest-endpoint chainer only ever appended to the tail of the growing chain,
+// so whichever feature sorted first became the seed and every run belonging
+// upstream of it was stranded and appended afterwards instead. Three things
+// were wrong with the result:
+//
+//   * Orphan runs mid-axis. trail.geojson carried 29 document-order joins over
+//     2 miles, the worst 360mi. Measured against SectionsHiked's own slicing,
+//     a 40-mile segment drew as 713 miles and a 30-mile segment as 904 miles.
+//   * ~52 miles dropped. 25 NCTA features carry a null `state` attribute and
+//     this script groups features strictly by that field.
+//   * No structure. points.json was id/mile/state/lat/lon at 5-mile spacing:
+//     no region, no section, no sec_mile, no route_id.
+//
+// It also injected the Superior Hiking Trail from OpenStreetMap relation
+// 1612587. NCTA publishes its own SHT layer (agol_sht_public/1), which the
+// current pipeline uses instead.
+//
+// The original implementation is kept intact underneath as a record of how the
+// pre-2026-09 files were made.
+//
+// Current pipeline:
+//   SectionsHiked  scripts/build-nct-data.js          (points.json, trail.geojson, nct_meta.json)
+//   TrailTemps     tools/migrate-nct-canonical.js     (weather remap)
+//
+console.error('build-points-nct.js: SUPERSEDED, refusing to run. See the header comment.');
+process.exit(1);
+
 /**
  * build-points-nct.js
  *

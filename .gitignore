@@ -25,3 +25,10 @@ trails/continental-divide-trail/data/points_backup.json
 trails/continental-divide-trail/data/trail_backup.geojson
 trails/continental-divide-trail/data/cdt_meta_backup.json
 trails/continental-divide-trail/data/historical_weather_backup.json
+
+# Pre-rebuild NCT data — kept locally, not served. The originals are also in
+# git history at 0c1d583 (the commit before the NCTA rebuild).
+trails/north-country-trail/data/points_backup.json
+trails/north-country-trail/data/trail_backup.geojson
+trails/north-country-trail/data/nct_meta_backup.json
+trails/north-country-trail/data/historical_weather_backup.json

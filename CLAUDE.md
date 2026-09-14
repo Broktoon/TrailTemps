@@ -87,14 +87,14 @@ node trails/pacific-northwest-trail/tools/fix-ferry-geometry.js
 node trails/pacific-northwest-trail/tools/generate-normals-pnt.js
 node trails/ice-age-trail/tools/build-points-iat.js
 node trails/ice-age-trail/tools/generate-normals-iat.js
-node trails/north-country-trail/tools/build-points-nct.js
-node trails/north-country-trail/tools/generate-normals-nct.js
+node trails/north-country-trail/tools/migrate-nct-canonical.js
 node trails/potomac-heritage-trail/tools/build-points-pht.js
 node trails/potomac-heritage-trail/tools/generate-normals-pht.js
 node trails/continental-divide-trail/tools/migrate-cdt-canonical.js
 node trails/continental-divide-trail/tools/generate-normals-cdt.js
-# build-points-cdt.js is superseded and refuses to run; the CDT is rebuilt
-# in SectionsHiked via scripts/build-cdt-data.js
+# build-points-cdt.js and build-points-nct.js are superseded and refuse to
+# run; the CDT and NCT are rebuilt in SectionsHiked via
+# scripts/build-cdt-data.js and scripts/build-nct-data.js
 ```
 
 There are no tests, no linter, and no build step.
@@ -212,15 +212,17 @@ trails/
     index.html
     js/app.js                       ← Single-file client app
     data/
-      points.json                   ← 977 points at 5-mile intervals (miles 0–4,877.03, WEBO)
-      trail.geojson                 ← 1,324 features (NCTA ArcGIS Layer 2; off-road solid, roadwalk dashed)
-      nct_meta.json
-      historical_weather.json       ← (~977 normals points when complete, ~60 MB; generation in progress)
-      _raw_nct.json                 ← cached NCTA ArcGIS source geometry (used by build-points-nct.js)
-      _raw_sht.json                 ← cached OSM SHT ways (480 ways, relation 1612587)
+      points.json                   ← 9,671 points at 0.5-mile intervals (miles 0–4,834.95, WEBO)
+      trail.geojson                 ← 1,136 features (NCTA + NCTA SHT; off-road solid, roadwalk dashed)
+      nct_meta.json                 ← 8 regions (the states); sections[] empty by design
+      historical_weather.json       ← 977 normals points, ~62 MB; complete
+      weather_id_remap.json         ← audit of the 2026-09 normals re-key
+      _raw_nct.json                 ← stale cache from the retired build; SectionsHiked caches its own
+      _raw_sht.json                 ← stale cache of OSM relation 1612587; NCTA's own SHT layer is used now
     tools/
-      build-points-nct.js           ← Fetches NCTA ArcGIS + OSM SHT; stitches, interpolates, writes all data files
-      generate-normals-nct.js       ← Fetches ERA5-Land normals for all 977 points; resume-safe (~82 min at 5-sec delay)
+      build-points-nct.js           ← SUPERSEDED, guarded; would restore the broken axis
+      generate-normals-nct.js       ← Fetches ERA5-Land normals; do NOT re-run to match 0.5mi spacing
+      migrate-nct-canonical.js      ← Re-keys historical_weather.json onto the rebuilt points by lat/lon
   potomac-heritage-trail/
     index.html
     js/app.js                       ← Single-file client app
@@ -1061,96 +1063,81 @@ Located in `trails/ice-age-trail/tools/`:
 
 ## North Country Trail (NCT) — Live
 
-- **Status:** Live (April 2026). `historical_weather.json` normals generation underway (resume-safe; use Open-Meteo Professional API).
-- **Point ID format:** `nct-{state_id}-mi{7digits}` (thousandth-mile precision, zero-padded to 7 digits; state_id is lowercase, e.g. `nct-mn-mi3533803`)
-- **Data files:** `points.json`, `nct_meta.json`, `trail.geojson`, `historical_weather.json` (in progress), `_raw_nct.json`, `_raw_sht.json`
-- **Normals source:** Open-Meteo ERA5-Land archive (2018–2024), via `generate-normals-nct.js`; uses Professional API (`customer-archive-api.open-meteo.com`, 2-second throttle)
-- **Weather resolution:** 5-mile intervals (977 points, miles 0–4,877.03, WEBO order)
+- **Status:** Live. **Rebuilt 2026-09** from NCTA's own GIS in SectionsHiked (`scripts/build-nct-data.js`); normals complete and re-keyed.
+- **Point ID format:** `nct-main-mi{7digits}` (thousandth-mile precision, zero-padded). Was `nct-{state}-mi{7digits}` before the rebuild — **every id changed**.
+- **Data files:** `points.json`, `nct_meta.json`, `trail.geojson`, `historical_weather.json`, `weather_id_remap.json`
+- **Normals source:** Open-Meteo ERA5-Land archive (2018–2024); 977 records at ~5-mile spacing, re-keyed onto the 0.5-mile points by nearest lat/lon
+- **Weather resolution:** points at **0.5mi** (9,671); normals at ~5mi (977, 10.1% coverage), app.js fills the rest by nearest-by-mile
 - **Trail geometry sources:**
-  - NCTA ArcGIS FeatureServer Layer 2 — main source for all 8 states
-  - OSM Overpass API — Superior Hiking Trail (relation 1612587, 480 ways) injected for northeastern MN (Duluth → Silver Bay corridor, ~100 miles omitted from NCTA FeatureServer)
-- **Trail color:** `#e06060` (same salmon/red as FT, NET, NTT, AZT, IAT, PCT)
-- **Direction convention:** WEBO (westbound, Crown Point NY/Vermont → Lake Sakakawea ND) / EABO (eastbound); uses `is_webo` flag in meta
-- **Cache files:** `_raw_nct.json` (NCTA ArcGIS, cached to avoid repeated fetches); `_raw_sht.json` (OSM SHT ways, cached similarly). Delete either to force a fresh fetch on next build run.
+  - NCTA ArcGIS `nct_public/FeatureServer/2` — the centerline, 4,004 features
+  - NCTA ArcGIS `agol_sht_public/FeatureServer/1` — the Superior Hiking Trail, 272 features. **The centerline omits the SHT entirely**, not merely the Duluth–Silver Bay stretch the old notes claimed. This replaced the OSM Overpass injection of relation 1612587.
+- **Trail color:** `#e06060`
+- **Direction convention:** WEBO (Vermont → Lake Sakakawea ND) / EABO; `is_webo` flag in meta
 
-### NCT Geographic Sections (8 States)
+### NCT Regions (8 states)
 
-| State | Name | Axis start | Axis end | Miles |
-|-------|------|-----------|---------|-------|
-| `vt` | Vermont | 0 | 70.583 | 70.6 |
-| `ny` | New York | 70.583 | 775.202 | 704.6 |
-| `pa` | Pennsylvania | 775.202 | 1,059.746 | 284.5 |
-| `oh` | Ohio | 1,059.746 | 2,132.692 | 1,072.9 |
-| `mi` | Michigan | 2,132.692 | 3,318.58 | 1,185.9 |
-| `wi` | Wisconsin | 3,318.58 | 3,533.803 | 215.2 |
-| `mn` | Minnesota | 3,533.803 | 4,410.87 | 877.1 |
-| `nd` | North Dakota | 4,410.87 | 4,877.027 | 466.2 |
+| id | Name | mile_start | mile_end | Miles |
+|----|------|-----------|---------|-------|
+| `vt` | Vermont | 0 | 71 | 71.0 |
+| `ny` | New York | 71 | 775.5 | 704.5 |
+| `pa` | Pennsylvania | 775.5 | 1,061 | 285.5 |
+| `oh` | Ohio | 1,061 | 2,132.5 | 1,071.5 |
+| `mi` | Michigan | 2,132.5 | 3,309 | 1,176.5 |
+| `wi` | Wisconsin | 3,309 | 3,524.5 | 215.5 |
+| `mn` | Minnesota | 3,524.5 | 4,381 | 856.5 |
+| `nd` | North Dakota | 4,381 | 4,834.95 | 453.9 |
 
-**Total trail miles: 4,877.03** (as built from NCTA ArcGIS + SHT injection)
+**Total trail miles: 4,834.95.** These are `nct_meta.json`'s `regions` and the `NCT_REGIONS_BOOTSTRAP` in `index.html`; re-copy both whenever SectionsHiked's rebuild moves the axis — it prints them at the end of every run.
 
-These values are the `NCT_STATES_BOOTSTRAP` in `index.html` and must match `nct_meta.json`. **Re-run `build-points-nct.js` and update both places whenever geometry changes.**
+**"Regions", not "states".** On this trail they are the same eight, but they are not the same field. Below Jay Cooke the state line *is* the St. Louis River and the trail weaves across it, so four points carry `state: "MN"` inside `region_id: "wi"`. Region is what the axis is cut on; state is where a point physically sits. Same split the CDT makes on the Montana/Idaho divide.
+
+### NCT has no sections
+
+`nct_meta.json`'s `sections` is `[]` and every point carries `section_id: null`, `section_name: null` — deliberately. NCT has no official trail-wide section scheme; all 69 services in NCTA's ArcGIS org and their website were checked. `sec_mile` is **state-local**, which is exactly what the Weather Planner's "State + State Mile" input asks for: `region.mile_start + stateMile` is the spine mile by construction. The full search and the rejected candidates are in SectionsHiked's CLAUDE.md under "NCT has no sections".
+
+Do not populate `sections` with chapters, `seg_name`, or map-sheet numbers. The fields are held open so a future official scheme drops in without another migration.
 
 ### NCT Direction Options (2)
 
 | id | Label | Total miles |
 |----|-------|------------|
-| `webo` | Westbound — Crown Point, NY / Vermont → Lake Sakakawea, ND | 4,877.03 |
-| `eabo` | Eastbound — Lake Sakakawea, ND → Crown Point, NY / Vermont | 4,877.03 |
+| `webo` | Westbound — Vermont → Lake Sakakawea, ND | 4,834.95 |
+| `eabo` | Eastbound — Lake Sakakawea, ND → Vermont | 4,834.95 |
 
-### NCT `nct_meta.json` Structure
+### Why the axis moved 4,877.03 → 4,834.95
 
-```json
-{
-  "trail": { "name", "total_trail_miles", "map_center", "map_zoom", "termini" },
-  "states": [ { "id", "name", "axis_start", "axis_end" } ],
-  "direction_options": [ { "id", "label", "total_miles", "is_webo" } ]
-}
+Not a remeasurement of the same line — the old axis was locally **scrambled**. Its builder's greedy chainer only appended to the tail, so runs belonging upstream of the seed were stranded and appended after it: 29 document-order joins over 2 miles, worst 360mi. Measured against SectionsHiked's own slicing, a 40-mile segment drew as **713 miles** and a 30-mile segment as **904 miles**.
+
+The 42.08mi difference is excluded side material, not dropped trail. The rebuild accounts for every mile:
+
+```
+  4876.03   all source tread (NCTA centerline + NCTA SHT)
+ -  43.42   off-spine side material, 275 features, none over 5.0mi
+ +   0.91   bridge connector at Silver Bay
+ +   1.56   node-merge slack, 4,012 feature joins at 2.1 ft each
+ = 4834.95   axis
 ```
 
-### NCT `index.html` Bootstrap
-
-`NCT_STATES_BOOTSTRAP` is hardcoded in `index.html` for immediate UI population before `nct_meta.json` loads. It is a JS array with `{ state, name, axis_start, axis_end }` per state. **Must be updated after every `build-points-nct.js` run** — the script prints exact values to the console. The UI uses this to compute each state's max mile (`axis_end - axis_start`) and set the mile input placeholder.
-
-### NCT Build Pipeline — Key Parameters
-
-The `build-points-nct.js` script has several non-obvious parameters that were tuned during the initial build. Do not change without re-measuring:
-
-- **`MAX_STEP_MI = 8.0`** — Drops any NCTA feature whose coordinates include a single step > 8 miles (filters teleporting ArcGIS artifacts). Raised from 3.0 after legitimate rural roadwalk features in MN (Red River Valley, Cr-88, 4.7 mi step) and ND (New Rockford → Lake Ashtabula, 6.94 mi step) were incorrectly excluded. Bad ArcGIS artifacts are 50–300 miles; real steps are ≤ 7 miles.
-- **`MAX_MERGE_GAP_MI = 2.0`** — Adjacent same-`trail_stat` segments within 2 miles of each other are merged into one run. Unchanged from initial value.
-- **`chainStateFeatures()`** — Greedy nearest-endpoint stitching: for each state, visits ~4,000 features by always connecting to the feature whose nearest endpoint is closest to the current chain tail.
-- **`reorderToWesternTerminus(runs)`** — Post-processing step applied after greedy stitching. Identifies the run with the westernmost endpoint as the true terminus, moves any "orphan" runs that ended up appended after it to just before it. Prevents greedy orphans from displacing the western terminus.
-- **`interpolateAtAcrossRuns(runs, targetDist)`** — Replaces a previous `interpolateAt(flatCoords, ...)` approach. Iterates each run independently and teleports across inter-run gaps (rather than counting gap distance toward the target). This is critical: the old approach caused 5-mile interpolation points to be placed at wrong (eastern) locations whenever large gaps existed between stitched runs.
-- **`stateMiles`** — Computed as `runs.reduce((sum, r) => sum + pathLen(r.coords), 0)` — excludes inter-run bridge/gap distances. Must match the denominator used by `interpolateAtAcrossRuns`.
-
-### NCT SHT Injection (northeastern Minnesota)
-
-The NCTA ArcGIS FeatureServer omits the lower Superior Hiking Trail (SHT) corridor through northeastern Minnesota (roughly Duluth to Silver Bay, ~100 miles along the Lake Superior North Shore). This section is co-managed by the Superior Hiking Trail Association (SHTA).
-
-`build-points-nct.js` fetches the SHT geometry separately from the OSM Overpass API:
-- **Relation:** OSM relation 1612587 (Superior Hiking Trail)
-- **Request method:** POST to `https://overpass-api.de/api/interpreter` with URL-encoded `data=` body
-- **Cache:** `data/_raw_sht.json` (480 ways). Delete to force a fresh fetch.
-- The SHT features are injected into the Minnesota feature set alongside the NCTA features before stitching.
-
-If the Overpass API returns an HTML error (transient overload), simply re-run the script — `_raw_sht.json` will be re-fetched.
+The axis is **measured, not official** — NCTA publishes half-mile markers only as a per-state patchwork with holes. They are used to validate it instead, and all 13 layers agree within 0.7%.
 
 ### NCT Notable Features
 
-- **Longest National Scenic Trail** — ~4,877 miles across 8 states (Vermont through North Dakota)
-- **No alternates** — single-spine trail; no `getSelectedAlts()` needed
-- **Large `historical_weather.json`** (~55–60 MB when complete) — will exceed localStorage quota; browser HTTP cache handles reuse, same as AT
-- **Significant roadwalk sections** — roughly half of Ohio and parts of New York are on-road; shown as dashed lines on the map (`trail_stat: "Roadwalk"` or similar NCTA classification). The NCT `index.html` notes section explains this.
+- **Longest National Scenic Trail** — ~4,835 miles across 8 states (Vermont through North Dakota)
+- **No alternates, no spurs** — `trail_stat` carries only `NCT` and `NCT (on-road)`, so `route_id` is `"main"` throughout. `trls_other` layers 1 and 2 are nearby trails and campsite spurs, not spine.
+- **Roadwalk is ~31% of the trail** — designated, hiked, and **counted** toward mileage. Tagged `segment_type: "roadwalk"` (what app.js styles on) and `route_type: "roadwalk"` (the canonical hikeable sense). Roughly half of Ohio.
+- **Large `historical_weather.json`** (~62 MB) — exceeds localStorage quota; browser HTTP cache handles reuse, same as AT
 - **Ohio heat concern** — Ohio and parts of New York are the primary heat stress states (low elevation, high humidity, roadwalk)
 - **MN/ND cold concern** — Western MN and ND can see very cold nights into May and again in September
-- **Weather Planner UI:** State selector → State Mile typed input (0 to state's max mile, computed from `NCT_STATES_BOOTSTRAP`)
-- **BestStart!** — not yet implemented; to be added to `app.js` following the same `runBestStartShared` pattern as other trails
+- **Weather Planner UI:** State selector → State Mile typed input (0 to the region's `mile_end - mile_start`)
+- **BestStart!** — still not implemented
 
 ### NCT Tools
 
 Located in `trails/north-country-trail/tools/`:
 
-- **`build-points-nct.js`** — Fetches all NCTA ArcGIS Layer 2 features (paginated), fetches SHT OSM ways (Overpass API, cached), stitches per-state feature chains using greedy nearest-endpoint algorithm, applies `reorderToWesternTerminus`, interpolates at 5-mile intervals using `interpolateAtAcrossRuns`, writes `points.json`, `trail.geojson`, and `nct_meta.json`. Caches raw source data in `_raw_nct.json` and `_raw_sht.json`. Re-run if NCTA geometry changes; always update `NCT_STATES_BOOTSTRAP` in `index.html` afterward.
-- **`generate-normals-nct.js`** — Fetches ERA5-Land normals for all 977 target points at 5-mile intervals; resume-safe (saves after each point); 2-second throttle (Open-Meteo Professional subscription — `customer-archive-api.open-meteo.com`, `apikey=TTyLPYLitRdmWqlF`); full run ~82 minutes at 2-second delay. Output is a `{ meta, points }` wrapped `historical_weather.json` (same schema as IAT/PCT).
+- **`build-points-nct.js`** — **SUPERSEDED, guarded, refuses to run.** Implementation kept intact underneath as a record of how the pre-2026-09 files were made.
+- **`migrate-nct-canonical.js`** — re-keys `historical_weather.json` onto the rebuilt points by nearest lat/lon and writes `weather_id_remap.json`. Requires `historical_weather_backup.json`. Re-run after any `build-nct-data.js` run that moves the axis. **This is not optional after a rebuild**: app.js builds its nearest-by-mile fallback index from points that already have normals, so with every id stale that index comes out empty and the page shows *no* normals rather than degraded ones.
+- **`generate-normals-nct.js`** — fetches ERA5-Land normals; resume-safe; 2-second throttle (Open-Meteo Professional). **Do not re-run it to match the 0.5-mile spacing** — its loop is one request per point, so it would fire 9,671 times to resample the same ~9km ERA5-Land cells. Re-run only to refresh the normals themselves, restricting the target list to ~5-mile spacing first.
 
 ---
 

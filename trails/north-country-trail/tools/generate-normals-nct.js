@@ -2,8 +2,19 @@
  * generate-normals-nct.js
  *
  * Generates daily "normals" (365-day averaged arrays) for North Country Trail points.
+ *
+ * DO NOT re-run this just because points.json got denser. The 2026-09 rebuild
+ * re-cut the trail to 0.5-mile spacing (977 points -> 9,671), so the "one
+ * request per point" loop below would now fire 9,671 times. That buys nothing:
+ * ERA5-Land's grid is ~9km, so sampling finer than ~5 miles returns the same
+ * cell. The existing 977 normals were re-keyed onto the new points by nearest
+ * lat/lon (tools/migrate-nct-canonical.js) and app.js falls back to
+ * nearest-by-mile for the rest. Re-run this only to refresh the normals
+ * themselves, and restrict the target list to ~5-mile spacing first.
+ *
  * - Reads trails/north-country-trail/data/points.json
- * - All points are at 5-mile intervals (~887 points expected)
+ * - Written when every point was at 5-mile spacing (~887 expected); after the
+ *   2026-09 rebuild that assumption no longer holds — see above
  * - Fetches daily max/min temps, apparent temps, humidity, and wind speed
  *   via Open-Meteo Historical Weather API (ERA5-Land, 2018-2024)
  * - Computes average for each MM-DD across START_DATE..END_DATE (skips Feb 29)

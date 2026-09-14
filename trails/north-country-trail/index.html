@@ -119,8 +119,8 @@
         <div class="ft-select-col">
           <label for="durDirectionSelect">Direction:</label>
           <select id="durDirectionSelect">
-            <option value="webo">Westbound: Crown Point, NY / Vermont &rarr; Lake Sakakawea, ND</option>
-            <option value="eabo">Eastbound: Lake Sakakawea, ND &rarr; Crown Point, NY / Vermont</option>
+            <option value="webo">Westbound: Maine Junction, VT &rarr; Lake Sakakawea, ND</option>
+            <option value="eabo">Eastbound: Lake Sakakawea, ND &rarr; Maine Junction, VT</option>
           </select>
         </div>
 
@@ -350,23 +350,29 @@
   <script>window.TRAIL_SLUG = "north-country-trail";</script>
 
   <!-- -------------------------------------------------------
-       Inline bootstrap: NCT state metadata for immediate
+       Inline bootstrap: NCT region metadata for immediate
        UI population before nct_meta.json finishes loading.
 
-       UPDATE axis_start / axis_end values after running:
-         node trails/north-country-trail/tools/build-points-nct.js
-       The script prints the exact values to copy here.
+       These mirror nct_meta.json's `regions`, which SectionsHiked's
+       scripts/build-nct-data.js prints at the end of every run. Re-copy them
+       whenever that rebuild moves the axis.
+
+       "Regions", not "states": on this trail they happen to be the same eight,
+       but they are not the same field. Below Jay Cooke the state line is the
+       St. Louis River and the trail weaves across it, so four points carry
+       state "MN" inside region "wi". The region is what the mile axis is cut
+       on; the state is where a point physically sits.
        ------------------------------------------------------- -->
   <script>
-    window.NCT_STATES_BOOTSTRAP = [
-      { state: "VT", name: "Vermont",       axis_start: 0,        axis_end: 70.583    },
-      { state: "NY", name: "New York",      axis_start: 70.583,   axis_end: 775.202   },
-      { state: "PA", name: "Pennsylvania",  axis_start: 775.202,  axis_end: 1059.746  },
-      { state: "OH", name: "Ohio",          axis_start: 1059.746, axis_end: 2132.692  },
-      { state: "MI", name: "Michigan",      axis_start: 2132.692, axis_end: 3318.58   },
-      { state: "WI", name: "Wisconsin",     axis_start: 3318.58,  axis_end: 3533.803  },
-      { state: "MN", name: "Minnesota",     axis_start: 3533.803, axis_end: 4410.87   },
-      { state: "ND", name: "North Dakota",  axis_start: 4410.87,  axis_end: 4877.027  }
+    window.NCT_REGIONS_BOOTSTRAP = [
+      { state: "VT", name: "Vermont",       mile_start: 0,      mile_end: 71      },
+      { state: "NY", name: "New York",      mile_start: 71,     mile_end: 775.5   },
+      { state: "PA", name: "Pennsylvania",  mile_start: 775.5,  mile_end: 1061    },
+      { state: "OH", name: "Ohio",          mile_start: 1061,   mile_end: 2132.5  },
+      { state: "MI", name: "Michigan",      mile_start: 2132.5, mile_end: 3309    },
+      { state: "WI", name: "Wisconsin",     mile_start: 3309,   mile_end: 3524.5  },
+      { state: "MN", name: "Minnesota",     mile_start: 3524.5, mile_end: 4381    },
+      { state: "ND", name: "North Dakota",  mile_start: 4381,   mile_end: 4834.95 }
     ];
 
     function nctUpdateStateInfo() {
@@ -375,10 +381,10 @@
       const mileInput = document.getElementById("nctMileInput");
       if (!stateId || !infoEl) return;
 
-      const sec = window.NCT_STATES_BOOTSTRAP.find(s => s.state === stateId);
+      const sec = window.NCT_REGIONS_BOOTSTRAP.find(s => s.state === stateId);
       if (!sec) return;
 
-      const maxMile = Math.round(sec.axis_end - sec.axis_start);
+      const maxMile = Math.round(sec.mile_end - sec.mile_start);
       infoEl.textContent = "State Range: 0\u2013" + maxMile + " Miles";
 
       if (mileInput) {

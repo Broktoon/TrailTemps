@@ -1,86 +1,120 @@
 {
   "trail": {
     "name": "North Country Trail",
-    "total_trail_miles": 4877.03,
+    "total_miles": 4834.95,
+    "point_spacing_miles": 0.5,
     "map_center": [
-      43.39,
-      -87.15
+      45.5,
+      -87
     ],
     "map_zoom": 5,
     "termini": {
-      "east": "Crown Point, NY (Lake Champlain) / Vermont",
+      "east": "Vermont (Appalachian Trail junction, Maine Junction)",
       "west": "Lake Sakakawea State Park, ND"
+    },
+    "source": {
+      "geometry": "NCTA nct_public/FeatureServer/2",
+      "superior_hiking_trail": "NCTA agol_sht_public/FeatureServer/1",
+      "states": "US Census TIGERweb State_County",
+      "axis": "measured from the source geometry; NCTA publishes no trail-wide mile axis",
+      "validation": "NCTA per-state half-mile marker layers (partial coverage)",
+      "org": "https://services2.arcgis.com/UfGVyqUm4GHa2zrj/arcgis/rest/services",
+      "fetched": "2026-09-13"
+    },
+    "notes": {
+      "sections": "NCT has no official trail-wide section scheme. section_id and section_name are held open as null; sec_mile is state-local.",
+      "roadwalk": "On-road tread is designated, hiked and counted toward mileage; tagged route_type \"roadwalk\" and drawn dashed.",
+      "off_spine_miles": 43.42,
+      "bridge_miles": 0.91
     }
   },
-  "sections": [
+  "regions": [
     {
       "id": "vt",
       "name": "Vermont",
       "state": "VT",
-      "axis_start": 0,
-      "axis_end": 70.583
+      "mile_start": 0,
+      "mile_end": 71,
+      "miles": 71,
+      "sections": 0
     },
     {
       "id": "ny",
       "name": "New York",
       "state": "NY",
-      "axis_start": 70.583,
-      "axis_end": 775.202
+      "mile_start": 71,
+      "mile_end": 775.5,
+      "miles": 704.5,
+      "sections": 0
     },
     {
       "id": "pa",
       "name": "Pennsylvania",
       "state": "PA",
-      "axis_start": 775.202,
-      "axis_end": 1059.746
+      "mile_start": 775.5,
+      "mile_end": 1061,
+      "miles": 285.5,
+      "sections": 0
     },
     {
       "id": "oh",
       "name": "Ohio",
       "state": "OH",
-      "axis_start": 1059.746,
-      "axis_end": 2132.692
+      "mile_start": 1061,
+      "mile_end": 2132.5,
+      "miles": 1071.5,
+      "sections": 0
     },
     {
       "id": "mi",
       "name": "Michigan",
       "state": "MI",
-      "axis_start": 2132.692,
-      "axis_end": 3318.58
+      "mile_start": 2132.5,
+      "mile_end": 3309,
+      "miles": 1176.5,
+      "sections": 0
     },
     {
       "id": "wi",
       "name": "Wisconsin",
       "state": "WI",
-      "axis_start": 3318.58,
-      "axis_end": 3533.803
+      "mile_start": 3309,
+      "mile_end": 3524.5,
+      "miles": 215.5,
+      "sections": 0
     },
     {
       "id": "mn",
       "name": "Minnesota",
       "state": "MN",
-      "axis_start": 3533.803,
-      "axis_end": 4410.87
+      "mile_start": 3524.5,
+      "mile_end": 4381,
+      "miles": 856.5,
+      "sections": 0
     },
     {
       "id": "nd",
       "name": "North Dakota",
       "state": "ND",
-      "axis_start": 4410.87,
-      "axis_end": 4877.027
+      "mile_start": 4381,
+      "mile_end": 4834.95,
+      "miles": 453.9,
+      "sections": 0
     }
   ],
+  "sections": [],
+  "alternates": [],
   "direction_options": [
     {
       "id": "webo",
-      "label": "Westbound — Crown Point, NY / Vermont → Lake Sakakawea, ND",
-      "total_miles": 4877.03,
+      "label": "Westbound - Vermont -> Lake Sakakawea, ND",
+      "total_miles": 4834.95,
       "is_webo": true
     },
     {
       "id": "eabo",
-      "label": "Eastbound — Lake Sakakawea, ND → Crown Point, NY / Vermont",
-      "total_miles": 4877.03,
+      "label": "Eastbound - Lake Sakakawea, ND -> Vermont",
+      "total_miles": 4834.95,
       "is_webo": false
     }
   ]

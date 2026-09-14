@@ -136,10 +136,11 @@ function calcTotalMiles(directionId) {
   const opts = nctMeta?.direction_options || [];
   const opt  = opts.find(o => o.id === directionId);
   if (opt) return opt.total_miles;
-  // Fallback: use the largest axis_end from sections
-  const sections = nctMeta?.sections || window.NCT_STATES_BOOTSTRAP || [];
-  if (sections.length) return sections[sections.length - 1].axis_end;
-  return 4400;
+  if (nctMeta?.trail?.total_miles) return nctMeta.trail.total_miles;
+  // Fallback: the last region's mile_end is the end of the axis.
+  const regions = nctMeta?.regions || window.NCT_REGIONS_BOOTSTRAP || [];
+  if (regions.length) return regions[regions.length - 1].mile_end;
+  return 4834.95;
 }
 
 /* ============================================================
@@ -157,7 +158,8 @@ async function loadNctMeta() {
     cacheSet(key, payload);
   }
   nctMeta = payload;
-  console.log("[NCT] nct_meta loaded:", nctMeta.sections?.length, "sections");
+  console.log("[NCT] nct_meta loaded:", nctMeta.regions?.length, "regions,",
+    nctMeta.sections?.length, "sections (NCT has none by design)");
 }
 
 async function loadPoints() {
@@ -554,11 +556,13 @@ function updateStateInfo() {
   const mileInput = el("nctMileInput");
   if (!stateId || !infoEl) return;
 
-  const sections = nctMeta?.sections || window.NCT_STATES_BOOTSTRAP || [];
-  const sec = sections.find(s => s.state === stateId);
+  // NCT's canonical nct_meta.json carries `regions` (the 8 states) and an
+  // intentionally empty `sections` \u2014 the trail has no official section scheme.
+  const regions = nctMeta?.regions || window.NCT_REGIONS_BOOTSTRAP || [];
+  const sec = regions.find(s => s.state === stateId);
   if (!sec) return;
 
-  const maxMile = Math.round(sec.axis_end - sec.axis_start);
+  const maxMile = Math.round(sec.mile_end - sec.mile_start);
   infoEl.textContent = `State Range: 0\u2013${maxMile} Miles`;
 
   if (mileInput) {
@@ -588,17 +592,19 @@ async function runWeather() {
     return;
   }
 
-  const sections = nctMeta?.sections || window.NCT_STATES_BOOTSTRAP || [];
-  const sec = sections.find(s => s.state === stateId);
+  const regions = nctMeta?.regions || window.NCT_REGIONS_BOOTSTRAP || [];
+  const sec = regions.find(s => s.state === stateId);
   if (sec) {
-    const maxMile = sec.axis_end - sec.axis_start;
+    const maxMile = sec.mile_end - sec.mile_start;
     if (stateMile > maxMile) {
       setWeatherStatus(`Please enter a mile between 0 and ${Math.round(maxMile)} for ${sec.name}.`);
       return;
     }
   }
 
-  const spineMile = sec ? sec.axis_start + stateMile : stateMile;
+  // The mile the user types is state-local, which is exactly the canonical
+  // `sec_mile`; adding the region's start converts it to the spine axis.
+  const spineMile = sec ? sec.mile_start + stateMile : stateMile;
   const point     = getNearestPoint(spineMile);
   if (!point) {
     setHtmlIfExists("currentBlock", "<p>No data point found for this location. Trail data may still be loading.</p>");
