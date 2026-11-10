@@ -40,3 +40,12 @@ trails/pacific-northwest-trail/data/historical_weather_backup.json
 # ^ pre-rebuild PNT data, kept on disk for comparison, not committed.
 #   migrate-pnt-canonical.js reads historical_weather_backup.json as its input,
 #   so that one must exist locally before the migration is re-run.
+
+# Pre-rebuild PHT data, kept locally, not served. The originals are also in
+# git history at 2301583 (the commit before the canonical PHT migration).
+# migrate-pht-canonical.js reads historical_weather_backup.json as its input,
+# so that one must exist locally before the migration is re-run.
+trails/potomac-heritage-trail/data/points_backup.json
+trails/potomac-heritage-trail/data/trail_backup.geojson
+trails/potomac-heritage-trail/data/pht_meta_backup.json
+trails/potomac-heritage-trail/data/historical_weather_backup.json

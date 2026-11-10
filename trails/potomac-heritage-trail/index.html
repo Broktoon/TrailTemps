@@ -128,15 +128,17 @@
       <fieldset class="alt-group-block" style="margin-top:10px;">
         <legend>Washington D.C. Route</legend>
         <div class="alt-options">
+          <!-- The two lengths are filled in by app.js from the trail data
+               (updateDcRouteLabels), so no mileage is written here. -->
           <label>
-            <input type="radio" name="dcRoute" value="river-trail" checked />
-            DC River Trail (Main)
-            <span class="alt-delta">12.3 mi &mdash; Anacostia Riverwalk &rarr; Potomac River Trail &rarr; Georgetown</span>
+            <input type="radio" name="dcRoute" value="city-park-trail" checked />
+            DC City Park Trail (Main)
+            <span class="alt-delta"><span id="dcMainMiles"></span>Civil War Defenses of Washington &rarr; Fort Circle &rarr; Georgetown</span>
           </label>
           <label>
-            <input type="radio" name="dcRoute" value="city-park-trail" />
-            DC City Park Trail
-            <span class="alt-delta">29.0 mi (+16.7 mi) &mdash; Civil War Defenses of Washington &rarr; Fort Circle &rarr; Georgetown</span>
+            <input type="radio" name="dcRoute" value="river-trail" />
+            DC River Trail
+            <span class="alt-delta"><span id="dcAltMiles"></span>Anacostia Riverwalk &rarr; Potomac River Trail &rarr; Georgetown</span>
           </label>
         </div>
       </fieldset>
@@ -206,14 +208,8 @@
         <div class="ft-select-col">
           <label for="phtRegionSelect">Region:</label>
           <select id="phtRegionSelect">
-            <option value="southern-maryland">Southern Maryland</option>
-            <option value="washington-dc">Washington D.C.</option>
-            <option value="co-canal-nhp">C&amp;O Canal</option>
-            <option value="great-allegheny-passage">Great Allegheny Passage</option>
-            <option value="laurel-highlands">Laurel Highlands</option>
-            <option value="northern-virginia">Northern Virginia</option>
-            <option value="northern-neck-virginia">Northern Neck of Virginia</option>
-            <option value="eastern-continental-divide">Eastern Continental Divide</option>
+            <!-- Populated by app.js from pht_meta.json once the trail data loads -->
+            <option value="">Loading&hellip;</option>
           </select>
         </div>
 
@@ -222,7 +218,7 @@
           <label for="phtSectionSelect">Section:</label>
           <select id="phtSectionSelect">
             <!-- Populated dynamically by app.js based on region selection -->
-            <option value="southern-maryland">Southern Maryland</option>
+            <option value="">Loading&hellip;</option>
           </select>
         </div>
 
@@ -295,32 +291,32 @@
            <p>Specific issues on the various sections of the trail include:</p>
             <ul>
               <li>
-                <strong>Southern Maryland (miles 0&ndash;217):</strong> Low elevation, high humidity coastal
+                <strong>Southern Maryland (miles 0&ndash;173):</strong> Low elevation, high humidity coastal
                 plain. Heat and humidity are the primary warm-season concerns; the region regularly sees
                 apparent temperatures above 100&nbsp;&deg;F in July and August. Winters are mild but damp.
                 Much of this section is on paved roads.
               </li>
               <li>
-                <strong>Washington D.C. (miles 217&ndash;229 or 245):</strong> Urban environment with an
+                <strong>Washington D.C. (miles 173&ndash;206, or 173&ndash;184 by the DC River Trail):</strong> Urban environment with an
                 urban heat island effect; apparent temperatures in summer can exceed the surrounding countryside.
                 The DC River Trail runs close to the Potomac and Anacostia rivers, which moderate temperatures
                 somewhat. The City Park Trail passes through the wooded Fort Circle parks, which offer more
                 shade but more elevation change.
               </li>
               <li>
-                <strong>C&amp;O Canal Towpath (miles 229&ndash;414):</strong> Flat to gently rolling trail
+                <strong>C&amp;O Canal Towpath (miles 206&ndash;390):</strong> Flat to gently rolling trail
                 along the Potomac River floodplain. Hot and humid in summer, particularly in the lower
                 sections near DC. The Paw Paw Tunnel area and upper sections near Cumberland, MD can see
                 cooler temperatures and more variable conditions.
               </li>
               <li>
-                <strong>Great Allegheny Passage (miles 414&ndash;486):</strong> Follows the Casselman River
+                <strong>Great Allegheny Passage (miles 390&ndash;462):</strong> Follows the Casselman River
                 and the Youghiogheny River gorge. More moderate temperatures than the lowland sections;
                 the gorge can trap cool air in morning and evening. Fall foliage is spectacular here in
                 October.
               </li>
               <li>
-                <strong>Laurel Highlands Hiking Trail (miles 486&ndash;553):</strong> The most rugged section
+                <strong>Laurel Highlands Hiking Trail (miles 462&ndash;529):</strong> The most rugged section
                 of the PHT, crossing the Laurel Ridge at elevations approaching 3,000 feet. Temperatures
                 are noticeably cooler than the lowland sections; snow is possible from November through
                 March. Spring runoff can make stream crossings difficult in late winter and early spring.
@@ -351,17 +347,22 @@
             <p>
               Trail centerline geometry is provided by the
               <strong>National Park Service</strong> via the Federal Trail Data Standards (FTDS) ArcGIS
-              Feature Service for the Potomac Heritage National Scenic Trail. On-spine sections are shown
-              as solid lines; Virginia and Eastern Continental Divide sections available only in the
-              Weather Planner are shown as lighter, semi-transparent lines. For authoritative navigation,
+              Feature Service for the Potomac Heritage National Scenic Trail. The through-hike route is shown
+              as solid lines; side trails available only in the Weather Planner (the Virginia network, the
+              Eastern Continental Divide trails, and spurs off the main route such as the one to Piney Point
+              Lighthouse) are shown as lighter, semi-transparent lines. The dashed line near the Eastern
+              Continental Divide is the Youghiogheny River paddle route, which is mapped but not walked. For authoritative navigation,
               always consult the NPS and the Potomac Heritage Trail Association.
             </p>
             <ul class="weather-data-notes__links">
               <li>
-                <strong>Trail miles:</strong> Section miles within each named section are measured from the
-                section&rsquo;s eastern starting terminus (mile 0) to its western end. For through-hike planning, miles
-                accumulate from Point Lookout, MD (mile 0) westward to Laurel Ridge, PA (mile ~553 or ~570
-                depending on the D.C. route chosen).
+                <strong>Trail miles:</strong> Section miles along the main route are measured within each
+                region from its eastern end (mile 0) to its western end, and the DC River Trail is measured
+                the same way. Side trails are measured from one end of the trail as the National Park Service
+                maps it. For through-hike planning, miles accumulate from Point Lookout, MD (mile 0) westward
+                to Laurel Ridge, PA (mile ~529, or ~507 by the DC River Trail). The mile ranges quoted in
+                the Weather Notes above follow the main route through Washington D.C.; by the DC River Trail,
+                everything west of the city falls about 22 miles earlier.
               </li>
               <li>
                 <strong>Road segments (Southern Maryland):</strong> The Southern Maryland section is largely
@@ -374,8 +375,8 @@
               </li>
               <li>
                 <strong>Virginia and Eastern Continental Divide sections:</strong> The PHT network includes
-                sections in Northern Virginia, the Northern Neck of Virginia, and an Eastern Continental
-                Divide Loop near the Pennsylvania border. These sections are shown on the map (at reduced
+                sections in Northern Virginia, the Fredericksburg area, the Northern Neck of Virginia, and an
+                Eastern Continental Divide Loop near the Pennsylvania border. These sections are shown on the map (at reduced
                 opacity) and are available in the Weather Planner tool, but they are not part of the
                 continuous through-hike spine used by the Duration Calculator and <em>BestStart!</em> tool.
                 Many of these Virginia sections are still under development and may be disconnected from the
@@ -439,106 +440,12 @@
   <script>window.SITE_BASE = "";</script>
   <script>window.TRAIL_SLUG = "potomac-heritage-trail";</script>
 
-  <!-- -------------------------------------------------------
-       Inline bootstrap: PHT sections and regions for immediate
-       UI population before pht_meta.json finishes loading.
-       ------------------------------------------------------- -->
-  <script>
-    window.PHT_REGIONS_BOOTSTRAP = [
-      { id: "southern-maryland",         name: "Southern Maryland",         on_spine: true  },
-      { id: "washington-dc",             name: "Washington D.C.",           on_spine: true  },
-      { id: "co-canal-nhp",              name: "C\u0026O Canal",            on_spine: true  },
-      { id: "great-allegheny-passage",   name: "Great Allegheny Passage",   on_spine: true  },
-      { id: "laurel-highlands",          name: "Laurel Highlands",          on_spine: true  },
-      { id: "northern-virginia",         name: "Northern Virginia",         on_spine: false },
-      { id: "northern-neck-virginia",    name: "Northern Neck of Virginia", on_spine: false },
-      { id: "eastern-continental-divide",name: "Eastern Continental Divide",on_spine: false }
-    ];
-
-    window.PHT_SECTIONS_BOOTSTRAP = [
-      // Spine sections
-      { id: "southern-maryland",         name: "Southern Maryland",           region: "southern-maryland",         on_spine: true,  mile_start: 0,      mile_end: 216.6   },
-      { id: "dc-river-trail",            name: "DC River Trail",              region: "washington-dc",             on_spine: true,  mile_start: 0,      mile_end: 12.3,   alt_id: "river-trail"     },
-      { id: "dc-city-park-trail",        name: "DC City Park Trail",          region: "washington-dc",             on_spine: true,  mile_start: 0,      mile_end: 29.0,   alt_id: "city-park-trail" },
-      { id: "co-canal",                  name: "C\u0026O Canal Towpath",      region: "co-canal-nhp",              on_spine: true,  mile_start: 0,      mile_end: 184.6   },
-      { id: "great-allegheny-passage",   name: "Great Allegheny Passage",     region: "great-allegheny-passage",   on_spine: true,  mile_start: 0,      mile_end: 72.0    },
-      { id: "laurel-highlands",          name: "Laurel Highlands Trail",      region: "laurel-highlands",          on_spine: true,  mile_start: 0,      mile_end: 67.4    },
-      // WP-only — Northern Neck of Virginia
-      { id: "northern-neck",             name: "Northern Neck of Virginia",   region: "northern-neck-virginia",    on_spine: false, mile_start: 0,      mile_end: 94.8    },
-      // WP-only — Northern Virginia (subset of sections; full list from pht_meta.json)
-      { id: "mount-vernon-trail",        name: "Mount Vernon Trail",          region: "northern-virginia",         on_spine: false, mile_start: 0,      mile_end: 18.7    },
-      { id: "washington-and-old-dominion-trail", name: "Washington and Old Dominion Trail", region: "northern-virginia", on_spine: false, mile_start: 0, mile_end: 5.5   },
-      { id: "neabsco-creek-boardwalk",   name: "Neabsco Creek Boardwalk",     region: "northern-virginia",         on_spine: false, mile_start: 0,      mile_end: 1.3     },
-      { id: "mason-neck-heritage-trail", name: "Mason Neck Heritage Trail",   region: "northern-virginia",         on_spine: false, mile_start: 0,      mile_end: 3.1     },
-      { id: "north-valley-trail",        name: "North Valley Trail",          region: "northern-virginia",         on_spine: false, mile_start: 0,      mile_end: 4.6     },
-      { id: "east-coast-greenway",       name: "East Coast Greenway",         region: "northern-virginia",         on_spine: false, mile_start: 0,      mile_end: 2.6     },
-      { id: "belmont-ferry-farm-trail",  name: "Belmont Ferry Farm Trail",    region: "northern-virginia",         on_spine: false, mile_start: 0,      mile_end: 2.8     },
-      { id: "rappahannock-river-heritage-trail", name: "Rappahannock River Heritage Trail", region: "northern-virginia", on_spine: false, mile_start: 0, mile_end: 0.8   },
-      { id: "brooke-rd",                 name: "Brooke Rd",                   region: "northern-virginia",         on_spine: false, mile_start: 0,      mile_end: 5.8     },
-      { id: "northern-virginia-unnamed", name: "Northern Virginia (Mixed)",   region: "northern-virginia",         on_spine: false, mile_start: 0,      mile_end: 79.8    },
-      // WP-only — Eastern Continental Divide
-      { id: "eastern-continental-divide-loop", name: "Eastern Continental Divide Loop", region: "eastern-continental-divide", on_spine: false, mile_start: 0, mile_end: 59.7 }
-    ];
-
-    // Populate section select from bootstrap on region change
-    (function () {
-      var PHT_SECTION_DISPLAY_NAMES = {
-        "ent-to-red-rock-wilderness-overlook-regional-park": "Red Rock Wilderness Overlook",
-        "belmont-ferry-farm-trail-to-rappahannock-river-heritage-trail-connector": "Belmont Ferry to Rappahannock Trail"
-      };
-      var PHT_SECTION_UI_HIDDEN = { "northern-virginia-unnamed": true };
-
-      function phtPopulateSections(regionId) {
-        const secSel = document.getElementById("phtSectionSelect");
-        if (!secSel) return;
-        const sections = (window.PHT_SECTIONS_BOOTSTRAP || []).filter(s => s.region === regionId && !PHT_SECTION_UI_HIDDEN[s.id]);
-        secSel.innerHTML = "";
-        for (const sec of sections) {
-          const opt = document.createElement("option");
-          opt.value = sec.id;
-          opt.textContent = PHT_SECTION_DISPLAY_NAMES[sec.id] || sec.name;
-          secSel.appendChild(opt);
-        }
-        phtUpdateSectionInfo();
-      }
-
-      function phtUpdateSectionInfo() {
-        const sectionId = document.getElementById("phtSectionSelect")?.value;
-        const infoEl    = document.getElementById("phtSectionInfo");
-        const mileInput = document.getElementById("phtMileInput");
-        if (!sectionId || !infoEl) return;
-
-        const sec = (window.PHT_SECTIONS_BOOTSTRAP || []).find(s => s.id === sectionId);
-        if (!sec) return;
-
-        infoEl.textContent = "Section Range: 0\u2013" + sec.mile_end.toFixed(1) + " Miles";
-
-        if (mileInput) {
-          mileInput.placeholder = "e.g., " + Math.round(sec.mile_end / 2);
-          const cur = Number(mileInput.value);
-          if (cur < 0 || cur > sec.mile_end) mileInput.value = "";
-        }
-      }
-
-      document.addEventListener("DOMContentLoaded", function () {
-        const regionSel  = document.getElementById("phtRegionSelect");
-        const sectionSel = document.getElementById("phtSectionSelect");
-
-        if (regionSel) {
-          phtPopulateSections(regionSel.value);
-          regionSel.addEventListener("change", function () {
-            phtPopulateSections(this.value);
-          });
-        }
-        if (sectionSel) {
-          sectionSel.addEventListener("change", phtUpdateSectionInfo);
-        }
-      });
-    })();
-  </script>
-
   <script defer src="/js/trail-nav.js"></script>
   <script defer src="/js/shared-utils.js"></script>
+  <!-- Rebuilds each point's id, region and route_kind from pht_meta.json;
+       points.json itself stores only position, mile and route. Must load
+       before app.js. -->
+  <script defer src="/js/hydrate-points.js"></script>
   <script defer src="js/app.js"></script>
 
   <p class="contact-line">Have feedback? Need support? Please contact <a href="mailto:Hiker@TrailTemps.com">Hiker@TrailTemps.com</a> and we'll be happy to assist.</p>

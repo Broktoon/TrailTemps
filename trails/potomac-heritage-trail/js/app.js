@@ -2,7 +2,8 @@
    ---------------------------------------------------------------
    Tool A: Hike duration / end-date calculator
            - 2 direction options (Westbound / Eastbound)
-           - DC route alternate: River Trail (main) or City Park Trail (+16.71 mi)
+           - DC route: City Park Trail (the main spine) or the River Trail
+             alternate, which is shorter. Every length is read from the data.
    Tool A+: Temperature extremes across the hike
            - Uses precomputed normals (historical_weather.json, ~5-mile intervals)
            - No elevation correction (low-elevation trail)
@@ -10,13 +11,19 @@
            - Wind chill advisory when apparent low ≤ 20 °F
    Tool B: Weather planner
            - Region selector → Section selector → Section Mile → Date
-           - Includes Virginia and Eastern Continental Divide WP-only sections
+           - A "section" is the main route within a region, the DC alternate,
+             or a named side trail. Includes the Virginia and Eastern
+             Continental Divide side trails, which are not on the hike route.
            - Open-Meteo forecast (5-day) + current conditions
            - 7-year planning average high/low
            - Apparent temperature (Steadman: heat index + wind chill)
    Maps: Leaflet + OSM tiles + trail.geojson overlay
-         - Spine features: full opacity
-         - WP-only features (VA, ECD): reduced opacity
+         - Spine and alternate: full opacity
+         - Side trails (VA, ECD, spurs): reduced opacity
+         - Youghiogheny paddle route: dashed; drawn, not walked
+   Data: canonical 7-field points.json, hydrated at load from pht_meta.json
+         by /js/hydrate-points.js. Rebuilt in SectionsHiked from the NPS POHE
+         centerline; mile 0 is Laurel Ridge, PA and the axis runs east.
    Units: Fahrenheit, mph, %
    Caching: localStorage (TTL-based); HTTP cache for large files
    ---------------------------------------------------------------*/
@@ -90,26 +97,50 @@ const HIST_TTL_MS           = 24 * 60 * 60 * 1000;      // 24 hr
 const TRAIL_TTL_MS          = 30 * 24 * 60 * 60 * 1000; // 30 days
 const NORMALS_CACHE_VERSION = "v1";
 
-// Spine geometry constants (match pht_meta.json exactly)
-const PHT_BASE_SPINE_MILES = 552.96;
-const DC_BRANCH_MILE       = 216.586;  // spine mile at DC fork (Anacostia/South Capitol)
-const DC_REJOIN_MILE       = 228.914;  // spine mile at Georgetown / C&O Canal mile 0
-const DC_RIVER_LEN         = 12.328;   // DC River Trail section length (miles)
-const DC_CITY_PARK_LEN     = 29.043;   // DC City Park Trail section length (miles)
-const DC_CITY_PARK_DELTA   = 16.71;    // extra miles via City Park Trail vs River Trail
+// No mileage is written down in this file. The spine length, where the DC
+// alternate leaves and rejoins, and both DC route lengths are all measured
+// from points.json and pht_meta.json at load (see resolveDcAlternate). The
+// constants that used to sit here went stale the moment NPS republished the
+// layer, and the spine total among them outlived the route it described.
+
+// The two values of the "dcRoute" radio group in index.html.
+const DC_MAIN_CHOICE = "city-park-trail";   // the spine
+const DC_ALT_CHOICE  = "river-trail";       // the one alternate
+
+// Side trails shorter than this are left out of the Weather Planner's section
+// list. They stay in the data and on the map. The NPS layer cuts the Virginia
+// network into 171 side routes, 66 of them under half a mile (a bridge, a
+// park entrance, one block of a street), and a planner list that long buries
+// the trails people are looking for. Weather does not vary over half a mile.
+const WP_MIN_SIDE_TRAIL_MILES = 0.5;
 
 /* ============================================================
    4. MODULE-LEVEL STATE
    ============================================================ */
 
-let allPoints      = [];
-let spinePoints    = [];  // on-spine points only, sorted by mile
-let pointsBySection = new Map(); // section_id → points sorted by section_mile
+let allPoints     = [];
+let spinePoints   = [];          // route "main" only, sorted by mile (west to east)
+let pointsByRoute = new Map();   // route_id → points sorted by that route's mile
 
-let phtMeta = null;
+let phtMeta     = null;
+let routeById   = new Map();     // route_id → pht_meta.routes entry
+let regionById  = new Map();     // region_id → pht_meta.regions entry
 
-let normalsByPointId        = new Map(); // point.id → normals
-let normalsBySectionMile    = new Map(); // section_id → [{id, section_mile}] sorted
+// The DC alternate, resolved against the spine at load. null if the data has
+// no alternate. { route, lo, hi, length, zeroAtLo, points }
+let dcAlt = null;
+
+// One entry per thing the Weather Planner can look up: the main route within
+// a region, the alternate, or a side trail. key → place.
+let wpPlaces     = [];
+let wpPlaceByKey = new Map();
+
+// The walked line for each DC choice, built once. choice → { axis, total }
+let hikeAxisCache = new Map();
+
+let normalsByPointId = new Map();   // point.id → normals
+let normalsSamples   = [];          // [{ id, lat, lon }] where weather was sampled
+let normalsMemo      = new Map();   // point.id → normals found by location
 
 // Leaflet — Weather map
 let map       = null;
@@ -133,11 +164,16 @@ function refreshMapSize() {
    6. POINT LABEL HELPER
    ============================================================ */
 
+// Which Weather Planner place a point belongs to. A spine point belongs to
+// its region's stretch of the main route; anything else to its own route.
+function placeKeyOf(point) {
+  return point.route_id === "main" ? "main|" + point.region_id : point.route_id;
+}
+
 function phtPointLabel(point) {
-  const sections = phtMeta?.sections || window.PHT_SECTIONS_BOOTSTRAP || [];
-  const sec = sections.find(s => s.id === point.section_id);
-  const secName = sec ? sec.name : (point.section_id || "Unknown");
-  return `${secName} \u2014 Mile ${fmtMile(point.section_mile ?? 0)}`;
+  const place = wpPlaceByKey.get(placeKeyOf(point));
+  if (!place) return point.region_name || "Unknown";
+  return `${place.name} \u2014 Mile ${fmtMile(place.mileOf(point))}`;
 }
 
 /* ============================================================
@@ -145,15 +181,15 @@ function phtPointLabel(point) {
    ============================================================ */
 
 function getSelectedAlts() {
-  const dcVal = document.querySelector('input[name="dcRoute"]:checked')?.value || "river-trail";
+  const dcVal = document.querySelector('input[name="dcRoute"]:checked')?.value || DC_MAIN_CHOICE;
   return { "dc-route": dcVal };
 }
 
+// Total distance walked for a DC choice, or null while the trail data is
+// still loading. Direction does not change the distance on this trail.
 function calcTotalMiles(directionId, selectedAlts) {
-  const base    = phtMeta?.trail?.spine_miles ?? PHT_BASE_SPINE_MILES;
-  const dcChoice = selectedAlts?.["dc-route"] || "river-trail";
-  const delta   = (dcChoice === "city-park-trail") ? DC_CITY_PARK_DELTA : 0;
-  return base + delta;
+  if (!spinePoints.length) return null;
+  return getHikeAxis(selectedAlts?.["dc-route"]).total;
 }
 
 /* ============================================================
@@ -161,53 +197,59 @@ function calcTotalMiles(directionId, selectedAlts) {
    ============================================================ */
 
 async function loadPhtMeta() {
-  const key    = `pht_meta_${trailSlug}_v1`;
-  const cached = cacheGet(key, TRAIL_TTL_MS);
-  let payload  = cached;
-  if (!payload) {
-    const r = await fetch(META.phtMetaUrl, { cache: "no-cache" });
-    if (!r.ok) throw new Error(`pht_meta.json fetch failed (${r.status})`);
-    payload = await r.json();
-    cacheSet(key, payload);
-  }
-  phtMeta = payload;
-  console.log("[PHT] pht_meta loaded:", phtMeta.sections?.length, "sections");
+  // Deliberately NOT kept in localStorage any more. This file used to hold
+  // labels, and a 30-day-old copy only showed a stale name. It now holds the
+  // tables every point is rebuilt from, so it must be the same vintage as
+  // points.json, which is revalidated on every load. A cached meta file paired
+  // with fresh points after a data update would hand out wrong regions and
+  // ids with no error. "no-cache" revalidates, so an unchanged file costs one
+  // conditional request.
+  const r = await fetch(META.phtMetaUrl, { cache: "no-cache" });
+  if (!r.ok) throw new Error(`pht_meta.json fetch failed (${r.status})`);
+  phtMeta    = await r.json();
+  routeById  = new Map((phtMeta.routes  || []).map(r => [r.id, r]));
+  regionById = new Map((phtMeta.regions || []).map(r => [r.id, r]));
+  console.log("[PHT] pht_meta loaded:", routeById.size, "routes,", regionById.size, "regions");
 }
 
 async function loadPoints() {
+  // points.json stores only lat, lon, mile, route_id, route_type and state.
+  // Everything else this file reads off a point (id, region, route_kind) is
+  // rebuilt from the meta file, so the meta has to be here first.
+  if (!phtMeta) throw new Error("pht_meta.json must be loaded before points.json");
+
   const r = await fetch(META.pointsUrl, { cache: "no-cache" });
   if (!r.ok) throw new Error(`points.json fetch failed (${r.status})`);
   const data = await r.json();
 
-  allPoints = data.filter(p =>
-    isFinite(Number(p.lat)) && isFinite(Number(p.lon))
-  ).map(p => ({
-    ...p,
-    lat:          Number(p.lat),
-    lon:          Number(p.lon),
-    id:           String(p.id),
-    section_mile: Number(p.section_mile ?? 0),
-    mile:         p.mile != null ? Number(p.mile) : null,
-  }));
+  allPoints = hydratePoints(data, phtMeta)
+    .filter(p => isFinite(Number(p.lat)) && isFinite(Number(p.lon)) && p.mile != null)
+    .map(p => ({
+      ...p,
+      lat:  Number(p.lat),
+      lon:  Number(p.lon),
+      id:   String(p.id),
+      mile: Number(p.mile),
+    }));
 
-  // Spine points: have mile, no alt_id, not DC alt sections
-  spinePoints = allPoints
-    .filter(p => p.mile != null && !p.alt_id)
-    .sort((a, b) => a.mile - b.mile);
-
-  // Group all points by section_id, sorted by section_mile
-  pointsBySection = new Map();
+  // A mile is only meaningful within one route: every side trail restarts at
+  // zero. So points are grouped by route before anything is sorted by mile.
+  pointsByRoute = new Map();
   for (const p of allPoints) {
-    if (!p.section_id) continue;
-    if (!pointsBySection.has(p.section_id)) pointsBySection.set(p.section_id, []);
-    pointsBySection.get(p.section_id).push(p);
+    if (!pointsByRoute.has(p.route_id)) pointsByRoute.set(p.route_id, []);
+    pointsByRoute.get(p.route_id).push(p);
   }
-  for (const pts of pointsBySection.values()) {
-    pts.sort((a, b) => a.section_mile - b.section_mile);
-  }
+  for (const pts of pointsByRoute.values()) pts.sort((a, b) => a.mile - b.mile);
+
+  spinePoints   = pointsByRoute.get("main") || [];
+  hikeAxisCache = new Map();
+
+  resolveDcAlternate();
+  buildWeatherPlaces();
 
   console.log("[PHT] points loaded:", allPoints.length,
-    "(spine:", spinePoints.length, ", by-section:", pointsBySection.size, "sections)");
+    "(spine:", spinePoints.length, ", routes:", pointsByRoute.size,
+    ", planner places:", wpPlaces.length, ")");
 }
 
 async function loadPrecomputedNormals() {
@@ -216,12 +258,14 @@ async function loadPrecomputedNormals() {
   if (!r.ok) throw new Error(`historical_weather.json fetch failed (${r.status})`);
   const payload = await r.json();
 
-  normalsByPointId     = new Map();
-  normalsBySectionMile = new Map();
+  normalsByPointId = new Map();
+  normalsSamples   = [];
+  normalsMemo      = new Map();
 
   for (const p of (payload.points || [])) {
     if (!p?.id) continue;
-    normalsByPointId.set(String(p.id), {
+    const id = String(p.id);
+    normalsByPointId.set(id, {
       hi:     p.hi     || [],
       lo:     p.lo     || [],
       app_hi: p.hi_app || p.hi || [],
@@ -231,16 +275,11 @@ async function loadPrecomputedNormals() {
       ws:     p.ws     || [],
     });
 
-    const sid = p.section_id;
-    if (sid) {
-      if (!normalsBySectionMile.has(sid)) normalsBySectionMile.set(sid, []);
-      normalsBySectionMile.get(sid).push({ id: String(p.id), section_mile: p.section_mile ?? 0 });
+    // lat/lon here is where ERA5-Land was sampled, which the migration keeps
+    // even though the id now names the nearest trail point.
+    if (p.hi?.length && isFinite(Number(p.lat)) && isFinite(Number(p.lon))) {
+      normalsSamples.push({ id, lat: Number(p.lat), lon: Number(p.lon) });
     }
-  }
-
-  // Sort each section's normals by section_mile
-  for (const arr of normalsBySectionMile.values()) {
-    arr.sort((a, b) => a.section_mile - b.section_mile);
   }
 
   console.log("[PHT] normals loaded:", normalsByPointId.size, "points");
@@ -253,7 +292,10 @@ async function loadPrecomputedNormals() {
    ============================================================ */
 
 async function fetchTrailGeojson() {
-  const key    = `trail_geojson_${trailSlug}_v1`;
+  // _v2 for the same reason as the meta file: the rebuilt geojson carries
+  // route_kind where the old one carried on_spine, so a cached _v1 copy would
+  // draw every feature in the wrong style.
+  const key    = `trail_geojson_${trailSlug}_v2`;
   const cached = cacheGet(key, TRAIL_TTL_MS);
   if (cached) return cached;
   const r = await fetch(META.trailGeojsonUrl);
@@ -274,6 +316,26 @@ const TRAIL_STYLE = {
 const TRAIL_STYLE_WP = {
   color: "#e06060", weight: 2, opacity: 0.45, lineCap: "round", lineJoin: "round"
 };
+// Drawn for corridor completeness but not walked: the Youghiogheny River
+// paddle route. It carries no mileage and no points.
+const TRAIL_STYLE_NOT_WALKED = {
+  color: "#e06060", weight: 2, opacity: 0.45, dashArray: "6 6", lineCap: "butt", lineJoin: "round"
+};
+
+// The geojson tags each feature with the canonical route fields.
+//   route_id "roadwalk"  the NON-hikeable sense of that tag: a connector drawn
+//                        for continuity only. On this trail, the paddle route.
+//   route_kind "side"    additional to the through-route; available in the
+//                        Weather Planner, never on the hike.
+//   anything else        the spine or the DC alternate.
+// Road-walked stretches of the spine (route_type "roadwalk") are hikeable and
+// counted, and stay solid: about a third of the spine is on roads.
+function trailFeatureStyle(feature) {
+  const p = feature.properties || {};
+  if (p.route_id === "roadwalk") return TRAIL_STYLE_NOT_WALKED;
+  if (p.route_kind === "side")   return TRAIL_STYLE_WP;
+  return TRAIL_STYLE;
+}
 
 function applyTrailOverlay(targetMap, haloRef, layerRef, onDone) {
   fetchTrailGeojson()
@@ -282,10 +344,7 @@ function applyTrailOverlay(targetMap, haloRef, layerRef, onDone) {
       if (layerRef.current) { try { targetMap.removeLayer(layerRef.current); } catch {} }
 
       layerRef.current = L.geoJSON(geojson, {
-        style: (feature) => {
-          const onSpine = feature.properties?.on_spine !== false;
-          return onSpine ? TRAIL_STYLE : TRAIL_STYLE_WP;
-        },
+        style: trailFeatureStyle,
         interactive: false,
       }).addTo(targetMap);
 
@@ -363,33 +422,139 @@ function binaryNearest(sortedArr, target, keyFn) {
   );
 }
 
-/** Look up the nearest spine point (southern-maryland, co-canal, gap, lhht) by spine mile */
-function getNearestSpinePoint(spineMile) {
-  return binaryNearest(spinePoints, spineMile, p => p.mile);
+/** Nearest spine point to a location. Used once, to seat the DC alternate. */
+function nearestSpinePointByLocation(lat, lon) {
+  let best = null, bd = Infinity;
+  for (const p of spinePoints) {
+    const d = haversineMiles(lat, lon, p.lat, p.lon);
+    if (d < bd) { bd = d; best = p; }
+  }
+  return best;
 }
 
-/** Look up the nearest point within a specific section by section_mile */
-function getNearestSectionPoint(sectionId, secMile) {
-  const pts = pointsBySection.get(sectionId) || [];
-  return binaryNearest(pts, secMile, p => p.section_mile);
+function haversineMiles(lat1, lon1, lat2, lon2) {
+  const R = 3958.8, t = Math.PI / 180;
+  const dLat = (lat2 - lat1) * t, dLon = (lon2 - lon1) * t;
+  const a = Math.sin(dLat / 2) ** 2
+    + Math.cos(lat1 * t) * Math.cos(lat2 * t) * Math.sin(dLon / 2) ** 2;
+  return R * 2 * Math.asin(Math.sqrt(a));
 }
 
-/** Find nearest normals for any point (by direct id, then section fallback) */
+/**
+ * Work out where the DC alternate leaves and rejoins the spine, from the
+ * geometry itself.
+ *
+ * The meta file records one junction (junction_mile) and the alternate's
+ * length, but not the mile where it rejoins, so the far end is found by
+ * snapping each end of the alternate to the spine. `lo` and `hi` are the two
+ * spine miles in axis order; the stretch of spine between them is what the
+ * alternate replaces.
+ *
+ * zeroAtLo records which way the alternate's own mile runs, so it can be
+ * walked in axis order whichever end NPS happened to digitise first.
+ */
+function resolveDcAlternate() {
+  dcAlt = null;
+  const route = (phtMeta?.routes || []).find(r => r.kind === "alternate");
+  const pts   = route ? pointsByRoute.get(route.id) : null;
+  if (!route || !pts?.length || !spinePoints.length) return;
+
+  const first = pts[0], last = pts[pts.length - 1];
+  const a = nearestSpinePointByLocation(first.lat, first.lon);
+  const b = nearestSpinePointByLocation(last.lat,  last.lon);
+  const zeroAtLo = a.mile <= b.mile;
+
+  dcAlt = {
+    route,
+    lo:     Math.min(a.mile, b.mile),
+    hi:     Math.max(a.mile, b.mile),
+    length: last.mile - first.mile,
+    zeroAtLo,
+    // In axis order: from the lo junction to the hi junction.
+    points: zeroAtLo ? pts : pts.slice().reverse(),
+  };
+  console.log("[PHT] DC alternate:", route.name, fmtMile(dcAlt.length), "mi, replacing spine mile",
+    dcAlt.lo, "to", dcAlt.hi, "(" + fmtMile(dcAlt.hi - dcAlt.lo) + " mi)");
+}
+
+/**
+ * The line a hiker walks for one DC choice, as an ordered list of
+ * { h, point } where h is miles from the western terminus.
+ *
+ * Main route: the spine, as is.
+ * Alternate:  the spine up to `lo`, then the alternate, then the spine from
+ *             `hi`, with everything after shifted by the miles saved.
+ *
+ * Built once per choice and reused: BestStart! walks this line 365 times.
+ */
+function getHikeAxis(dcChoice) {
+  const useAlt = dcChoice === DC_ALT_CHOICE && dcAlt;
+  const key    = useAlt ? "alt" : "main";
+  if (hikeAxisCache.has(key)) return hikeAxisCache.get(key);
+
+  const axis = [];
+  const base = spinePoints.length ? spinePoints[0].mile : 0;
+
+  if (!useAlt) {
+    for (const p of spinePoints) axis.push({ h: p.mile - base, point: p });
+  } else {
+    const { lo, hi, length, points, zeroAtLo } = dcAlt;
+    const altStart = points[0].mile;
+    for (const p of spinePoints) {
+      if (p.mile <= lo) axis.push({ h: p.mile - base, point: p });
+    }
+    for (const p of points) {
+      const along = zeroAtLo ? p.mile - altStart : altStart - p.mile;
+      axis.push({ h: (lo - base) + along, point: p });
+    }
+    for (const p of spinePoints) {
+      if (p.mile >= hi) axis.push({ h: (lo - base) + length + (p.mile - hi), point: p });
+    }
+  }
+
+  const built = { axis, total: axis.length ? axis[axis.length - 1].h : 0 };
+  hikeAxisCache.set(key, built);
+  return built;
+}
+
+/** Look up the nearest point within a Weather Planner place by its displayed mile */
+function getNearestPlacePoint(placeKey, mile) {
+  const place = wpPlaceByKey.get(placeKey);
+  if (!place) return null;
+  return binaryNearest(place.points, mile, place.mileOf);
+}
+
+/**
+ * Find normals for any point: its own if it has them, otherwise the sample
+ * nearest to it on the ground.
+ *
+ * Nearest by LOCATION, not by mile. On a single line the two agree, which is
+ * why the other trails use mile. This trail is a network, and each of its 171
+ * side trails restarts at mile zero, so a mile comparison across routes would
+ * be comparing unrelated numbers. Every point is within 4.7 miles of a sample
+ * (2.5 on the spine), inside one ERA5-Land cell; migrate-pht-canonical.js
+ * checks that and fails if it stops being true.
+ *
+ * Squared equirectangular distance is enough to rank 216 samples a few miles
+ * apart, and the answer is remembered per point.
+ */
 function getNearestNormals(point) {
   const direct = normalsByPointId.get(point.id);
   if (direct?.hi?.length) return direct;
 
-  // Nearest in the same section by section_mile
-  const sectionNormals = normalsBySectionMile.get(point.section_id);
-  if (sectionNormals?.length) {
-    const best = binaryNearest(sectionNormals, point.section_mile ?? 0, e => e.section_mile);
-    if (best) {
-      const n = normalsByPointId.get(best.id);
-      if (n?.hi?.length) return n;
-    }
-  }
+  if (normalsMemo.has(point.id)) return normalsMemo.get(point.id);
 
-  return null;
+  let best = null, bd = Infinity;
+  const cosLat = Math.cos(point.lat * Math.PI / 180);
+  for (const s of normalsSamples) {
+    const dy = s.lat - point.lat;
+    const dx = (s.lon - point.lon) * cosLat;
+    const d  = dx * dx + dy * dy;
+    if (d < bd) { bd = d; best = s; }
+  }
+  const found = best ? (normalsByPointId.get(best.id) || null) : null;
+  normalsMemo.set(point.id, found);
+  return found;
 }
 
 /* ============================================================
@@ -608,70 +773,186 @@ function renderForecastTable(forecastData, point) {
    15. WEATHER TOOL SECTION/REGION SELECTOR
    ============================================================ */
 
-// UI-only display name overrides (data files unchanged)
-const SECTION_DISPLAY_NAMES = {
-  "ent-to-red-rock-wilderness-overlook-regional-park": "Red Rock Wilderness Overlook",
-  "belmont-ferry-farm-trail-to-rappahannock-river-heritage-trail-connector": "Belmont Ferry to Rappahannock Trail",
+// UI-only display names, keyed by the route name NPS publishes.
+const ROUTE_DISPLAY_NAMES = {
+  // The Duration Calculator and the page text call the alternate the DC
+  // River Trail; NPS names its longest piece. One name for one route.
+  "Potomac River Trail": "DC River Trail",
+  "Ent to Red Rock Wilderness Overlook Regional Park": "Red Rock Wilderness Overlook",
+  "Belmont Ferry Farm Trail to Rappahannock River Heritage Trail Connector": "Belmont Ferry to Rappahannock Trail",
 };
 
-// Sections hidden from the UI selector (still present in data for lookups)
-const SECTION_UI_HIDDEN = new Set([
-  "northern-virginia-unnamed",
-]);
-
-function sectionDisplayName(sec) {
-  return SECTION_DISPLAY_NAMES[sec.id] || sec.name;
+function routeDisplayName(route) {
+  const name = (route.name || "").trim();
+  return ROUTE_DISPLAY_NAMES[name] || name;
 }
 
-function getSections() {
-  return phtMeta?.sections || window.PHT_SECTIONS_BOOTSTRAP || [];
+// A quarter of the side network by length (34 routes, 75 miles) carries no
+// name in any NPS field. A route that cannot be offered by name is left out
+// of the section list; it stays in the data and on the map.
+function isUnnamedRoute(route) {
+  return /^Unnamed\b/i.test((route.name || "").trim());
 }
 
-function getRegions() {
-  return phtMeta?.regions || window.PHT_REGIONS_BOOTSTRAP || [];
+function addWeatherPlace(place) {
+  wpPlaces.push(place);
+  wpPlaceByKey.set(place.key, place);
+}
+
+/**
+ * Build the list of things the Weather Planner can look up.
+ *
+ * The old data had 48 named sections. The rebuilt data has none (NPS
+ * publishes no section scheme for this trail), so a "section" here is one of:
+ *
+ *   the main route within one region   key "main|<region id>"
+ *   the DC alternate                   key "<route id>"
+ *   a side trail                       key "<route id>"
+ *
+ * Each place carries its own mileOf(), the mile shown to the user, and its
+ * points sorted by that mile, so lookup and labelling cannot disagree.
+ */
+function buildWeatherPlaces() {
+  wpPlaces     = [];
+  wpPlaceByKey = new Map();
+
+  // The main route. Miles count from each region's EASTERN end, as this page
+  // always has: the C&O towpath and the Great Allegheny Passage are both
+  // mileposted from their east ends. The data's own axis runs the other way
+  // (mile 0 is Laurel Ridge), so the shown mile is measured back from the
+  // region's easternmost point.
+  for (const region of (phtMeta?.regions || [])) {
+    const pts = spinePoints.filter(p => p.region_id === region.id);
+    if (!pts.length) continue;
+    const eastMile = pts[pts.length - 1].mile;
+    addWeatherPlace({
+      key:      "main|" + region.id,
+      regionId: region.id,
+      kind:     "spine",
+      name:     region.name,
+      length:   eastMile - pts[0].mile,
+      mileOf:   p => eastMile - p.mile,
+      points:   pts.slice().reverse(),
+      listed:   true,
+    });
+  }
+
+  // The alternate and the side trails, one place per route. A side trail has
+  // no position on the trail axis, so its mile simply runs from the end NPS
+  // digitised first. The alternate is turned to count from its eastern end,
+  // to match the main route beside it.
+  for (const route of (phtMeta?.routes || [])) {
+    if (route.kind === "spine") continue;
+    const pts = pointsByRoute.get(route.id);
+    if (!pts?.length) continue;
+
+    const first    = pts[0].mile;
+    const last     = pts[pts.length - 1].mile;
+    const isAlt    = route.kind === "alternate";
+    const fromEast = isAlt && dcAlt && dcAlt.route.id === route.id && dcAlt.zeroAtLo;
+
+    // The route's published length, not the span of its points. Points sit
+    // every 0.05 mi and the last can fall up to that far short of the route's
+    // true end: two half-mile trails have their last point at 0.45, and
+    // judged by their points they dropped out of the section list.
+    const length = Number.isFinite(route.miles) ? route.miles : (last - first);
+
+    addWeatherPlace({
+      key:      route.id,
+      regionId: route.region_id,
+      kind:     route.kind,
+      name:     routeDisplayName(route),
+      length,
+      mileOf:   fromEast ? (p => last - p.mile) : (p => p.mile - first),
+      points:   fromEast ? pts.slice().reverse() : pts,
+      listed:   isAlt || (!isUnnamedRoute(route) && length >= WP_MIN_SIDE_TRAIL_MILES),
+    });
+  }
+}
+
+// The places offered for one region: main route first, then the alternate,
+// then side trails longest first.
+function placesForRegion(regionId) {
+  const rank = { spine: 0, alternate: 1, side: 2 };
+  return wpPlaces
+    .filter(p => p.regionId === regionId && p.listed)
+    .sort((a, b) => (rank[a.kind] - rank[b.kind]) || (b.length - a.length));
+}
+
+function placeOptionLabel(place, siblings) {
+  if (place.kind === "spine")     return place.name + " (main route)";
+  if (place.kind === "alternate") return place.name + " (alternate)";
+  // NPS reuses names: there are two Ridge Rds and three pieces of the Mount
+  // Vernon Trail. Their lengths tell them apart.
+  const shared = siblings.filter(s => s.name === place.name).length > 1;
+  return shared ? `${place.name} (${fmtMile(place.length)} mi)` : place.name;
+}
+
+// Regions on the main route are listed east to west, the page's primary
+// direction; the side regions follow in the order the meta file gives them.
+function populateRegionSelect() {
+  const regionSel = el("phtRegionSelect");
+  if (!regionSel) return;
+
+  const regions  = (phtMeta?.regions || []).filter(r => placesForRegion(r.id).length > 0);
+  const onSpine  = regions.filter(r => r.on_spine).sort((a, b) => b.mile_start - a.mile_start);
+  const offSpine = regions.filter(r => !r.on_spine);
+  const ordered  = [...onSpine, ...offSpine];
+
+  const previous = regionSel.value;
+  regionSel.innerHTML = "";
+  for (const region of ordered) {
+    const opt = document.createElement("option");
+    opt.value = region.id;
+    opt.textContent = region.name;
+    regionSel.appendChild(opt);
+  }
+  if (ordered.some(r => r.id === previous)) regionSel.value = previous;
+
+  populateSectionSelect(regionSel.value);
 }
 
 function populateSectionSelect(regionId) {
   const sectionSel = el("phtSectionSelect");
   if (!sectionSel) return;
 
-  const sections = getSections();
-  const filtered = sections.filter(s => s.region === regionId && !SECTION_UI_HIDDEN.has(s.id));
-
+  const places = placesForRegion(regionId);
   sectionSel.innerHTML = "";
-  for (const sec of filtered) {
+  for (const place of places) {
     const opt = document.createElement("option");
-    opt.value = sec.id;
-    opt.textContent = sectionDisplayName(sec);
+    opt.value = place.key;
+    opt.textContent = placeOptionLabel(place, places);
     sectionSel.appendChild(opt);
   }
   updateSectionInfo();
 }
 
-function getSectionLength(sec) {
-  // pht_meta.json stores spine-absolute mile_start/mile_end; bootstrap uses mile_start=0
-  return (sec.mile_end ?? 0) - (sec.mile_start ?? 0);
-}
-
 function updateSectionInfo() {
-  const sectionId = el("phtSectionSelect")?.value;
+  const place     = wpPlaceByKey.get(el("phtSectionSelect")?.value);
   const infoEl    = el("phtSectionInfo");
   const mileInput = el("phtMileInput");
-  if (!sectionId || !infoEl) return;
+  if (!place || !infoEl) return;
 
-  const sections = getSections();
-  const sec = sections.find(s => s.id === sectionId);
-  if (!sec) return;
-
-  const secLen  = getSectionLength(sec);
-  const maxMile = fmtMile(secLen);
-  infoEl.textContent = `Section Range: 0\u2013${maxMile} Miles`;
+  infoEl.textContent = `Section Range: 0\u2013${fmtMile(place.length)} Miles`;
 
   if (mileInput) {
-    mileInput.placeholder = `e.g., ${Math.round(secLen / 2)}`;
+    const mid = place.length / 2;
+    mileInput.placeholder = `e.g., ${place.length >= 4 ? Math.round(mid) : fmtMile(mid)}`;
     const cur = Number(mileInput.value);
-    if (cur < 0 || cur > secLen) mileInput.value = "";
+    if (cur < 0 || cur > place.length) mileInput.value = "";
   }
+}
+
+// The two DC route lengths shown beside the radio buttons come from the data,
+// so they cannot drift from what the calculator actually uses.
+function updateDcRouteLabels() {
+  if (!dcAlt) return;
+  const mainLen = dcAlt.hi - dcAlt.lo;
+  const altLen  = dcAlt.length;
+  const mainEl  = el("dcMainMiles");
+  const altEl   = el("dcAltMiles");
+  if (mainEl) mainEl.textContent = `${fmtMile(mainLen)} mi: `;
+  if (altEl)  altEl.textContent  = `${fmtMile(altLen)} mi (${fmtMile(mainLen - altLen)} mi shorter): `;
 }
 
 /* ============================================================
@@ -691,17 +972,14 @@ async function runWeather() {
   const mile = Number(mileRaw);
   if (!isFinite(mile) || mile < 0) { setWeatherStatus("Please enter a valid number for the trail mile."); return; }
 
-  const sections = getSections();
-  const sec = sections.find(s => s.id === sectionId);
-  if (sec) {
-    const secLen = getSectionLength(sec);
-    if (mile > secLen) {
-      setWeatherStatus(`Please enter a mile between 0 and ${fmtMile(secLen)} for this section.`);
-      return;
-    }
+  // The select's value is a Weather Planner place key (see buildWeatherPlaces).
+  const place = wpPlaceByKey.get(sectionId);
+  if (place && mile > place.length) {
+    setWeatherStatus(`Please enter a mile between 0 and ${fmtMile(place.length)} for this section.`);
+    return;
   }
 
-  const point = getNearestSectionPoint(sectionId, mile);
+  const point = getNearestPlacePoint(sectionId, mile);
   if (!point) {
     setHtmlIfExists("currentBlock", "<p>No data point found for this location. Trail data may still be loading.</p>");
     return;
@@ -746,22 +1024,31 @@ async function runWeather() {
    17. DURATION CALCULATOR (Tool A)
    ============================================================ */
 
+function directionLabel(directionId) {
+  const termini = phtMeta?.trail?.termini || {};
+  const east = termini.east || "Point Lookout, MD";
+  const west = termini.west || "Laurel Ridge, PA";
+  return directionId === "westbound"
+    ? `Westbound \u2014 ${east} \u2192 ${west}`
+    : `Eastbound \u2014 ${west} \u2192 ${east}`;
+}
+
+function dcRouteLabel(dcChoice) {
+  if (dcChoice === DC_ALT_CHOICE && dcAlt) {
+    const saved = (dcAlt.hi - dcAlt.lo) - dcAlt.length;
+    return `DC River Trail (${fmtMile(saved)} mi shorter)`;
+  }
+  return "DC City Park Trail";
+}
+
 function renderDurationResult({ directionId, startDate, endDate, totalMiles, milesPerDay, durationDays, selectedAlts }) {
   const startStr = startDate.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
   const endStr   = endDate.toLocaleDateString(undefined,   { year: "numeric", month: "long", day: "numeric" });
-  const opts     = phtMeta?.direction_options || [];
-  const dirLabel = opts.find(o => o.id === directionId)?.label
-    || (directionId === "westbound"
-        ? "Westbound \u2014 Point Lookout, MD \u2192 Laurel Ridge, PA"
-        : "Eastbound \u2014 Laurel Ridge, PA \u2192 Point Lookout, MD");
-
-  const dcChoice  = selectedAlts?.["dc-route"] || "river-trail";
-  const dcLabel   = dcChoice === "city-park-trail" ? "DC City Park Trail (+16.7 mi)" : "DC River Trail";
 
   el("durResult").innerHTML = `
     <table>
-      <tr><th>Direction</th><td>${dirLabel}</td></tr>
-      <tr><th>D.C. Route</th><td>${dcLabel}</td></tr>
+      <tr><th>Direction</th><td>${directionLabel(directionId)}</td></tr>
+      <tr><th>D.C. Route</th><td>${dcRouteLabel(selectedAlts?.["dc-route"])}</td></tr>
       <tr><th>Start Date</th><td>${startStr}</td></tr>
       <tr><th>Total Distance</th><td>${fmtMile(totalMiles)} miles</td></tr>
       <tr><th>Miles per Day</th><td>${fmtMile(milesPerDay)}</td></tr>
@@ -776,67 +1063,31 @@ function renderDurationResult({ directionId, startDate, endDate, totalMiles, mil
    ============================================================ */
 
 /**
- * Build ordered sequence of trail points for a hike, one per day.
- * Handles the DC alternate routing zone.
+ * Build the ordered sequence of trail points for a hike, one per day.
  *
- * Westbound (Point Lookout → Laurel Ridge):
- *   cumMile 0…branchMile:             Southern Maryland (spine mile = cumMile)
- *   cumMile branchMile…branchMile+dcLen: DC alt zone (section_mile = cumMile - branchMile)
- *   cumMile beyond DC zone:            C&O/GAP/LHHT (spine mile = cumMile - altDelta)
+ * getHikeAxis returns the walked line measured from the western terminus,
+ * with the DC alternate already spliced in if it was chosen. A day's position
+ * is then only a distance along that line:
  *
- * Eastbound (Laurel Ridge → Point Lookout):
- *   cumMile 0…(baseMiles-rejoinMile):  LHHT/GAP/C&O (spine mile = baseMiles - cumMile)
- *   DC zone:                           section_mile = dcLen - (cumMile - dcEnter)
- *   beyond DC zone:                    Southern Maryland (spine mile = totalMiles - cumMile)
+ *   Eastbound (Laurel Ridge to Point Lookout):  the distance walked
+ *   Westbound (Point Lookout to Laurel Ridge):  the total minus the distance walked
+ *
+ * This replaced three hand-written zones (before DC, inside DC, after DC) for
+ * each direction, each with its own offset arithmetic against constants.
  */
 function buildHikePoints({ directionId, startDate, milesPerDay, totalMiles, selectedAlts }) {
+  const { axis, total } = getHikeAxis(selectedAlts?.["dc-route"]);
+  if (!axis.length) return [];
+
   const durationDays = Math.ceil(totalMiles / milesPerDay);
   const isWestbound  = directionId === "westbound";
-  const dcChoice     = selectedAlts?.["dc-route"] || "river-trail";
-  const dcAltLen     = (dcChoice === "city-park-trail") ? DC_CITY_PARK_LEN   : DC_RIVER_LEN;
-  const altDelta     = (dcChoice === "city-park-trail") ? DC_CITY_PARK_DELTA : 0;
-  const dcSectionId  = (dcChoice === "city-park-trail") ? "dc-city-park-trail" : "dc-river-trail";
-
-  // DC zone boundaries in hike-mile space (distance from start)
-  const dcEnter = isWestbound
-    ? DC_BRANCH_MILE                              // westbound: branch at mile 216.586
-    : (PHT_BASE_SPINE_MILES - DC_REJOIN_MILE);   // eastbound: reach rejoin ~mile 324.046
-  const dcExit = dcEnter + dcAltLen;
-
-  const hikePoints = [];
+  const hikePoints   = [];
 
   for (let i = 0; i < durationDays; i++) {
-    const date = addDays(startDate, i);
-    const h    = Math.min(milesPerDay * i, totalMiles);
-
-    let point = null;
-
-    if (h >= dcEnter && h <= dcExit) {
-      // Within DC alternate zone
-      const secMile = isWestbound
-        ? h - DC_BRANCH_MILE                    // 0 at branch, dcAltLen at rejoin
-        : dcAltLen - (h - dcEnter);             // dcAltLen at rejoin end, 0 at branch end
-      point = getNearestSectionPoint(dcSectionId, Math.max(0, Math.min(dcAltLen, secMile)));
-    } else if (isWestbound) {
-      if (h < DC_BRANCH_MILE) {
-        // Southern Maryland (pre-DC, westbound)
-        point = getNearestSpinePoint(h);
-      } else {
-        // C&O Canal, GAP, LHHT (post-DC, westbound)
-        point = getNearestSpinePoint(h - altDelta);
-      }
-    } else {
-      // Eastbound
-      if (h < dcEnter) {
-        // LHHT, GAP, C&O (pre-DC, eastbound) — spine mile counts DOWN from western end
-        point = getNearestSpinePoint(PHT_BASE_SPINE_MILES - h);
-      } else {
-        // Southern Maryland (post-DC, eastbound)
-        point = getNearestSpinePoint(totalMiles - h);
-      }
-    }
-
-    if (point) hikePoints.push({ date, point });
+    const date   = addDays(startDate, i);
+    const walked = Math.min(milesPerDay * i, total);
+    const entry  = binaryNearest(axis, isWestbound ? total - walked : walked, e => e.h);
+    if (entry) hikePoints.push({ date, point: entry.point });
   }
 
   return hikePoints;
@@ -988,6 +1239,8 @@ function runDurationCalculator() {
   if (mpd < 5)                 { setDurStatus("For this planner, hikes must average at least 5 miles per day."); return; }
 
   const totalMiles   = calcTotalMiles(directionId, selectedAlts);
+  // The distance is measured from points.json, so there is none until it loads.
+  if (totalMiles == null) { setDurStatus("Trail data is still loading. Please try again in a moment."); return; }
   const durationDays = Math.ceil(totalMiles / mpd);
 
   if (durationDays > 365) {
@@ -1029,6 +1282,8 @@ function runBestStart() {
   const directionId  = el("durDirectionSelect")?.value || "westbound";
   const selectedAlts = getSelectedAlts();
   const totalMiles   = calcTotalMiles(directionId, selectedAlts);
+  // The distance is measured from points.json, so there is none until it loads.
+  if (totalMiles == null) { setDurStatus("Trail data is still loading. Please try again in a moment."); return; }
   const durationDays = Math.ceil(totalMiles / mpd);
 
   if (durationDays > 365) {
@@ -1089,12 +1344,12 @@ function initWeatherUI() {
   const regionSel  = el("phtRegionSelect");
   const sectionSel = el("phtSectionSelect");
 
+  // Both selects are filled by populateRegionSelect() once the trail data has
+  // loaded: the list of regions and sections is read from that data.
   if (regionSel) {
     regionSel.addEventListener("change", () => {
       populateSectionSelect(regionSel.value);
     });
-    // Initialize with first region
-    populateSectionSelect(regionSel.value);
   }
 
   if (sectionSel) {
@@ -1114,24 +1369,23 @@ async function main() {
   initMap();
   loadTrailOverlay();
 
-  // Load pht_meta.json (non-blocking — bootstrap handles immediate UI)
-  loadPhtMeta()
-    .then(() => {
-      const regionSel = el("phtRegionSelect");
-      if (regionSel) populateSectionSelect(regionSel.value);
-    })
-    .catch(e => console.warn("[PHT] pht_meta not loaded:", e));
-
-  // Load points
+  // Meta first, then points: points.json holds only position, mile and route,
+  // and the rest is rebuilt from the meta file, so the order is not optional. The region and
+  // section lists, and the DC route lengths, are filled in from the result.
   try {
+    await loadPhtMeta();
     await loadPoints();
+
+    populateRegionSelect();
+    updateDcRouteLabels();
 
     if (map) {
       const b = boundsFromPoints(allPoints);
       if (b) map.fitBounds(b, { padding: [20, 20] });
     }
   } catch (err) {
-    console.error("[PHT] loadPoints failed:", err);
+    console.error("[PHT] trail data failed to load:", err);
+    setWeatherStatus("Trail data could not be loaded. Please refresh the page.");
   }
 
   // Load precomputed normals (best-effort)
