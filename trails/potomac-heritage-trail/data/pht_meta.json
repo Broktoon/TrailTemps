@@ -2,7 +2,7 @@
   "trail": {
     "name": "Potomac Heritage National Scenic Trail",
     "spine_miles": 529.14,
-    "off_spine_miles": 306.98,
+    "off_spine_miles": 307.01,
     "point_spacing_miles": 0.05,
     "map_center": [
       39.22,
@@ -14,7 +14,7 @@
       "east": "Point Lookout, MD"
     },
     "source": "NPS POHE Trail Centerline FTDS view, layer 0",
-    "built": "2026-10-19",
+    "built": "2026-11-10",
     "schema": "canonical-7"
   },
   "regions": [
@@ -80,7 +80,7 @@
       "on_spine": false,
       "mile_start": null,
       "mile_end": null,
-      "miles": 128.47,
+      "miles": 128.49,
       "sections": 0,
       "route_id": "main"
     },
@@ -2143,7 +2143,7 @@
       "kind": "side",
       "alt_of": null,
       "region_id": "northern-virginia",
-      "miles": 2.51,
+      "miles": 2.54,
       "junction_mile": null,
       "junction_sec_mile": null,
       "hikeable": true,
