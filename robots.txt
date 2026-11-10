@@ -1,3 +1,37 @@
+# robots.txt for trailtemps.com
+#
+# Search engines, and AI assistants looking something up for a person, are
+# welcome. Collecting this site to train AI models is not permitted.
+#
+# The names in the first group are the ones their operators say gather
+# training data. Each operator runs separate crawlers for search and for
+# fetching a page a person asked about (OAI-SearchBot, ChatGPT-User,
+# Claude-SearchBot, Claude-User, Googlebot, Applebot). Those are deliberately
+# NOT listed, so they fall under the allow-all group at the bottom.
+#
+# Google-Extended and Applebot-Extended are control tokens, not crawlers: they
+# tell Google and Apple not to train on pages their ordinary crawlers fetched.
+# Blocking Google-Extended also stops the Gemini app citing this site. Google
+# Search is unaffected.
+#
+# Names checked 2026-11-09. They change, and a misspelled or retired name
+# fails silently, so recheck this list about once a year.
+
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: meta-externalagent
+User-agent: Amazonbot
+User-agent: CCBot
+User-agent: Bytespider
+Disallow: /
+
+# Everyone else. The Content-Signal line (Cloudflare Content Signals Policy)
+# states the same preference for any crawler not named above: index for
+# search, use to answer a question, do not train.
 User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /
+
 Sitemap: https://trailtemps.com/sitemap.xml
