@@ -214,24 +214,24 @@ function calcTotalMiles(directionId) {
    9. DATA LOADING
    ============================================================ */
 
+// Not cached in localStorage: points.json is slim and rebuilt from this file
+// at load (hydrate-points.js), so the two must always be the same vintage. A
+// meta cached for 30 days next to fresh points would rebuild them wrongly.
 async function loadPctMeta() {
-  const key    = `pct_meta_${trailSlug}_v1`;
-  const cached = cacheGet(key, TRAIL_TTL_MS);
-  let payload  = cached;
-  if (!payload) {
-    const r = await fetch(META.pctMetaUrl, { cache: "no-cache" });
-    if (!r.ok) throw new Error(`pct_meta.json fetch failed (${r.status})`);
-    payload = await r.json();
-    cacheSet(key, payload);
-  }
-  pctMeta = payload;
+  const r = await fetch(META.pctMetaUrl, { cache: "no-cache" });
+  if (!r.ok) throw new Error(`pct_meta.json fetch failed (${r.status})`);
+  pctMeta = await r.json();
   console.log("[PCT] pct_meta loaded:", pctMeta.sections?.length, "sections");
 }
 
 async function loadPoints() {
   const r = await fetch(META.pointsUrl, { cache: "no-cache" });
   if (!r.ok) throw new Error(`points.json fetch failed (${r.status})`);
-  const data = await r.json();
+  // points.json carries only lat, lon, mile, route_id, trail_elev and state;
+  // id, section and region come back from pct_meta.json. The ids must be
+  // rebuilt exactly, because historical_weather.json is joined on them.
+  if (!pctMeta?.hydrate) throw new Error("pct_meta.json must load before points.json");
+  const data = hydratePoints(await r.json(), pctMeta);
 
   allPoints = data.filter(p =>
     isFinite(Number(p.lat)) && isFinite(Number(p.lon))
@@ -1028,13 +1028,10 @@ async function main() {
   initMap();
   loadTrailOverlay();
 
-  // Load pct_meta.json (non-blocking)
-  loadPctMeta()
-    .then(() => { updateSectionInfo(); })
-    .catch(e => console.warn("[PCT] pct_meta not loaded:", e));
-
-  // Load points
+  // Load points: pct_meta.json first, since the points are rebuilt from it.
   try {
+    await loadPctMeta();
+    updateSectionInfo();
     await loadPoints();
 
     if (map) {

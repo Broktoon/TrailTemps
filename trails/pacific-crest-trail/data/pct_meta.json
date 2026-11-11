@@ -22,7 +22,8 @@
       "mile_end": 519.5,
       "states": [
         "CA"
-      ]
+      ],
+      "route_id": "main-spine"
     },
     {
       "id": "southern-sierra",
@@ -31,7 +32,8 @@
       "mile_end": 1000,
       "states": [
         "CA"
-      ]
+      ],
+      "route_id": "main-spine"
     },
     {
       "id": "northern-sierra",
@@ -40,7 +42,8 @@
       "mile_end": 1419,
       "states": [
         "CA"
-      ]
+      ],
+      "route_id": "main-spine"
     },
     {
       "id": "norcal-soor",
@@ -50,7 +53,8 @@
       "states": [
         "CA",
         "OR"
-      ]
+      ],
+      "route_id": "main-spine"
     },
     {
       "id": "central-cascades",
@@ -60,7 +64,8 @@
       "states": [
         "OR",
         "WA"
-      ]
+      ],
+      "route_id": "main-spine"
     },
     {
       "id": "north-cascades",
@@ -69,7 +74,8 @@
       "mile_end": 2655.66,
       "states": [
         "WA"
-      ]
+      ],
+      "route_id": "main-spine"
     }
   ],
   "sections": [
@@ -81,7 +87,9 @@
       "states": [
         "CA"
       ],
-      "region": "socal"
+      "region": "socal",
+      "route_id": "main-spine",
+      "region_id": "socal"
     },
     {
       "id": "ca-b",
@@ -91,7 +99,9 @@
       "states": [
         "CA"
       ],
-      "region": "socal"
+      "region": "socal",
+      "route_id": "main-spine",
+      "region_id": "socal"
     },
     {
       "id": "ca-c",
@@ -101,7 +111,9 @@
       "states": [
         "CA"
       ],
-      "region": "socal"
+      "region": "socal",
+      "route_id": "main-spine",
+      "region_id": "socal"
     },
     {
       "id": "ca-d",
@@ -111,7 +123,9 @@
       "states": [
         "CA"
       ],
-      "region": "socal"
+      "region": "socal",
+      "route_id": "main-spine",
+      "region_id": "socal"
     },
     {
       "id": "ca-e",
@@ -121,7 +135,9 @@
       "states": [
         "CA"
       ],
-      "region": "socal"
+      "region": "socal",
+      "route_id": "main-spine",
+      "region_id": "socal"
     },
     {
       "id": "ca-f",
@@ -131,7 +147,9 @@
       "states": [
         "CA"
       ],
-      "region": "southern-sierra"
+      "region": "southern-sierra",
+      "route_id": "main-spine",
+      "region_id": "southern-sierra"
     },
     {
       "id": "ca-g",
@@ -141,7 +159,9 @@
       "states": [
         "CA"
       ],
-      "region": "southern-sierra"
+      "region": "southern-sierra",
+      "route_id": "main-spine",
+      "region_id": "southern-sierra"
     },
     {
       "id": "ca-h",
@@ -151,7 +171,9 @@
       "states": [
         "CA"
       ],
-      "region": "southern-sierra"
+      "region": "southern-sierra",
+      "route_id": "main-spine",
+      "region_id": "southern-sierra"
     },
     {
       "id": "ca-i",
@@ -161,7 +183,9 @@
       "states": [
         "CA"
       ],
-      "region": "southern-sierra"
+      "region": "southern-sierra",
+      "route_id": "main-spine",
+      "region_id": "southern-sierra"
     },
     {
       "id": "ca-j",
@@ -171,7 +195,9 @@
       "states": [
         "CA"
       ],
-      "region": "northern-sierra"
+      "region": "northern-sierra",
+      "route_id": "main-spine",
+      "region_id": "northern-sierra"
     },
     {
       "id": "ca-k",
@@ -181,7 +207,9 @@
       "states": [
         "CA"
       ],
-      "region": "northern-sierra"
+      "region": "northern-sierra",
+      "route_id": "main-spine",
+      "region_id": "northern-sierra"
     },
     {
       "id": "ca-l",
@@ -191,7 +219,9 @@
       "states": [
         "CA"
       ],
-      "region": "northern-sierra"
+      "region": "northern-sierra",
+      "route_id": "main-spine",
+      "region_id": "northern-sierra"
     },
     {
       "id": "ca-m",
@@ -201,7 +231,9 @@
       "states": [
         "CA"
       ],
-      "region": "northern-sierra"
+      "region": "northern-sierra",
+      "route_id": "main-spine",
+      "region_id": "northern-sierra"
     },
     {
       "id": "ca-n",
@@ -211,7 +243,9 @@
       "states": [
         "CA"
       ],
-      "region": "northern-sierra"
+      "region": "northern-sierra",
+      "route_id": "main-spine",
+      "region_id": "northern-sierra"
     },
     {
       "id": "ca-o",
@@ -221,7 +255,9 @@
       "states": [
         "CA"
       ],
-      "region": "norcal-soor"
+      "region": "norcal-soor",
+      "route_id": "main-spine",
+      "region_id": "norcal-soor"
     },
     {
       "id": "ca-p",
@@ -231,7 +267,9 @@
       "states": [
         "CA"
       ],
-      "region": "norcal-soor"
+      "region": "norcal-soor",
+      "route_id": "main-spine",
+      "region_id": "norcal-soor"
     },
     {
       "id": "ca-q",
@@ -241,7 +279,9 @@
       "states": [
         "CA"
       ],
-      "region": "norcal-soor"
+      "region": "norcal-soor",
+      "route_id": "main-spine",
+      "region_id": "norcal-soor"
     },
     {
       "id": "ca-r",
@@ -252,7 +292,9 @@
         "CA",
         "OR"
       ],
-      "region": "norcal-soor"
+      "region": "norcal-soor",
+      "route_id": "main-spine",
+      "region_id": "norcal-soor"
     },
     {
       "id": "or-b",
@@ -262,7 +304,9 @@
       "states": [
         "OR"
       ],
-      "region": "norcal-soor"
+      "region": "norcal-soor",
+      "route_id": "main-spine",
+      "region_id": "norcal-soor"
     },
     {
       "id": "or-c",
@@ -272,7 +316,9 @@
       "states": [
         "OR"
       ],
-      "region": "norcal-soor"
+      "region": "norcal-soor",
+      "route_id": "main-spine",
+      "region_id": "norcal-soor"
     },
     {
       "id": "or-d",
@@ -282,7 +328,9 @@
       "states": [
         "OR"
       ],
-      "region": "norcal-soor"
+      "region": "norcal-soor",
+      "route_id": "main-spine",
+      "region_id": "norcal-soor"
     },
     {
       "id": "or-e",
@@ -292,7 +340,9 @@
       "states": [
         "OR"
       ],
-      "region": "central-cascades"
+      "region": "central-cascades",
+      "route_id": "main-spine",
+      "region_id": "central-cascades"
     },
     {
       "id": "or-f",
@@ -302,7 +352,9 @@
       "states": [
         "OR"
       ],
-      "region": "central-cascades"
+      "region": "central-cascades",
+      "route_id": "main-spine",
+      "region_id": "central-cascades"
     },
     {
       "id": "or-g",
@@ -312,7 +364,9 @@
       "states": [
         "OR"
       ],
-      "region": "central-cascades"
+      "region": "central-cascades",
+      "route_id": "main-spine",
+      "region_id": "central-cascades"
     },
     {
       "id": "wa-h",
@@ -322,7 +376,9 @@
       "states": [
         "WA"
       ],
-      "region": "central-cascades"
+      "region": "central-cascades",
+      "route_id": "main-spine",
+      "region_id": "central-cascades"
     },
     {
       "id": "wa-i",
@@ -332,7 +388,9 @@
       "states": [
         "WA"
       ],
-      "region": "north-cascades"
+      "region": "north-cascades",
+      "route_id": "main-spine",
+      "region_id": "north-cascades"
     },
     {
       "id": "wa-j",
@@ -342,7 +400,9 @@
       "states": [
         "WA"
       ],
-      "region": "north-cascades"
+      "region": "north-cascades",
+      "route_id": "main-spine",
+      "region_id": "north-cascades"
     },
     {
       "id": "wa-k",
@@ -352,7 +412,9 @@
       "states": [
         "WA"
       ],
-      "region": "north-cascades"
+      "region": "north-cascades",
+      "route_id": "main-spine",
+      "region_id": "north-cascades"
     },
     {
       "id": "wa-l",
@@ -362,7 +424,9 @@
       "states": [
         "WA"
       ],
-      "region": "north-cascades"
+      "region": "north-cascades",
+      "route_id": "main-spine",
+      "region_id": "north-cascades"
     }
   ],
   "direction_options": [
@@ -378,5 +442,41 @@
       "total_miles": 2655.66,
       "is_nobo": false
     }
-  ]
+  ],
+  "routes": [
+    {
+      "id": "main-spine",
+      "name": null,
+      "kind": "spine",
+      "alt_of": null,
+      "junction_mile": null,
+      "junction_sec_mile": null,
+      "hikeable": true,
+      "miles": 2655.7
+    }
+  ],
+  "hydrate": {
+    "id": {
+      "prefix": "pct",
+      "token_by": "route",
+      "from": "mile",
+      "scale": 1000,
+      "width": 7,
+      "tokens": {
+        "main-spine": "main"
+      }
+    },
+    "sec_mile_from": "section",
+    "sec_mile_decimals": 2,
+    "region_from": "ranges",
+    "emit": {
+      "route_kind": false,
+      "alt_of": false,
+      "junction_mile": false,
+      "junction_sec_mile": false
+    }
+  },
+  "notes": {
+    "schema": "points.json carries only lat, lon, mile, route_id and, where present, trail_elev, route_type and state. id, sec_mile, region_id, region_name, section_id and section_name are rebuilt at load by hydrate-points.js from the tables in this file. Converted by scripts/slim-trail.js."
+  }
 }
