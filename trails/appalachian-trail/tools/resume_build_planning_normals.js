@@ -1,4 +1,22 @@
 #!/usr/bin/env node
+// ============================================================================
+// OUTDATED (2026-11-12): do not run without updating first.
+//
+// trails/appalachian-trail/data/points.json changed shape on 2026-11-12:
+//   - 0.1mi spacing (21,901 points), the same file SectionsHiked ships.
+//     This script was written for 5mi or 10mi points; anything that loops
+//     over every point would now make ~10x to 50x the requests or records.
+//   - Canonical slim records: lat, lon, mile, route_id, trail_elev, state.
+//     There is no `id`, `legacy_id` or `mile_est` in the file any more.
+//     id, section and region are rebuilt at load from at_meta.json by
+//     /js/hydrate-points.js (hydratePoints(points, meta)).
+//   - Writing this file back in the old shape would undo the migration.
+//
+// Weather records stay keyed `at-main-mi<mile*1000>` at ~5mi spacing; the
+// page matches a point to the nearest record by mile (normalsFor in
+// trails/appalachian-trail/js/app.js), so the weather file does not need
+// one record per point.
+// ============================================================================
 /**
  * Resume build_planning_normals.json from a given mile.
  *

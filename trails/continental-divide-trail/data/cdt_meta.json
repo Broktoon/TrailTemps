@@ -27,35 +27,40 @@
       "name": "New Mexico",
       "mile_start": 0,
       "mile_end": 794.5,
-      "sections": 31
+      "sections": 31,
+      "route_id": "main"
     },
     {
       "id": "colorado",
       "name": "Colorado",
       "mile_start": 794.5,
       "mile_end": 1535,
-      "sections": 43
+      "sections": 43,
+      "route_id": "main"
     },
     {
       "id": "wyoming",
       "name": "Wyoming",
       "mile_start": 1535,
       "mile_end": 2047,
-      "sections": 22
+      "sections": 22,
+      "route_id": "main"
     },
     {
       "id": "montana-idaho",
       "name": "Montana/Idaho",
       "mile_start": 2047,
       "mile_end": 2406,
-      "sections": 12
+      "sections": 12,
+      "route_id": "main"
     },
     {
       "id": "montana",
       "name": "Montana",
       "mile_start": 2406,
       "mile_end": 3039.979,
-      "sections": 18
+      "sections": 18,
+      "route_id": "main"
     }
   ],
   "sections": [
@@ -1426,5 +1431,124 @@
       "is_nobo": false,
       "terminus": "chief_mtn"
     }
-  ]
+  ],
+  "routes": [
+    {
+      "id": "main",
+      "name": null,
+      "kind": "spine",
+      "alt_of": null,
+      "junction_mile": null,
+      "junction_sec_mile": null,
+      "hikeable": true,
+      "miles": 3040
+    },
+    {
+      "id": "anaconda",
+      "name": null,
+      "kind": "alternate",
+      "alt_of": "main",
+      "junction_mile": null,
+      "junction_sec_mile": null,
+      "hikeable": true,
+      "miles": 53.094,
+      "region_from": "route",
+      "region_id": "montana",
+      "section_id": "alt-anaconda",
+      "section_name": "Anaconda Cutoff",
+      "sec_mile_from": "route",
+      "sec_mile_scale": 2.79694,
+      "id_from": "sec_mile"
+    },
+    {
+      "id": "chief-mtn",
+      "name": null,
+      "kind": "alternate",
+      "alt_of": "main",
+      "junction_mile": null,
+      "junction_sec_mile": null,
+      "hikeable": true,
+      "miles": 27.156,
+      "region_from": "route",
+      "region_id": "montana",
+      "section_id": "128",
+      "section_name": "Many Glacier to Chief Mountain Border Crossing",
+      "sec_mile_from": "route",
+      "id_from": "sec_mile"
+    },
+    {
+      "id": "gila",
+      "name": null,
+      "kind": "alternate",
+      "alt_of": "main",
+      "junction_mile": null,
+      "junction_sec_mile": null,
+      "hikeable": true,
+      "miles": 106.675,
+      "region_from": "route",
+      "region_id": "new-mexico",
+      "section_id": "alt-gila",
+      "section_name": "Gila River Route",
+      "sec_mile_from": "route",
+      "sec_mile_scale": 1.67331,
+      "id_from": "sec_mile"
+    },
+    {
+      "id": "spotted-bear",
+      "name": null,
+      "kind": "alternate",
+      "alt_of": "main",
+      "junction_mile": null,
+      "junction_sec_mile": null,
+      "hikeable": true,
+      "miles": 27.831,
+      "region_from": "route",
+      "region_id": "montana",
+      "section_id": "alt-spotted-bear",
+      "section_name": "Spotted Bear Route",
+      "sec_mile_from": "route",
+      "sec_mile_scale": 1.563,
+      "id_from": "sec_mile"
+    },
+    {
+      "id": "tonahutu",
+      "name": null,
+      "kind": "alternate",
+      "alt_of": "main",
+      "junction_mile": null,
+      "junction_sec_mile": null,
+      "hikeable": true,
+      "miles": 4.37,
+      "region_from": "route",
+      "region_id": "colorado",
+      "section_id": "068",
+      "section_name": "Grand Lake to Big Meadows",
+      "sec_mile_from": "route",
+      "sec_mile_decimals": 2,
+      "sec_mile_scale": 5.03,
+      "id_from": "sec_mile"
+    }
+  ],
+  "hydrate": {
+    "id": {
+      "prefix": "cdt",
+      "token_by": "route",
+      "from": "mile",
+      "scale": 1000,
+      "width": 7
+    },
+    "sec_mile_from": "section",
+    "sec_mile_decimals": 3,
+    "region_from": "section",
+    "emit": {
+      "route_kind": false,
+      "alt_of": true,
+      "junction_mile": false,
+      "junction_sec_mile": false
+    },
+    "boundary": "next"
+  },
+  "notes": {
+    "schema": "points.json carries only lat, lon, mile, route_id and, where present, trail_elev, route_type and state. id, sec_mile, region_id, region_name, section_id and section_name are rebuilt at load by hydrate-points.js from the tables in this file. Converted by scripts/slim-trail.js."
+  }
 }

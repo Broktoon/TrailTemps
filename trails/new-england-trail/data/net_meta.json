@@ -1,1 +1,182 @@
-{"trail":{"name":"New England Trail","total_miles":235.65,"spine_miles":206.81,"map_center":[41.9,-72.5],"map_zoom":8,"termini":{"south":"Guilford, CT","north":"Royalston Falls, MA","alt_south":"Middletown, CT"},"source":{"name":"NEEN_BND_NationalScenicTrailCenterline_ln","publisher":"National Park Service (CFPA + AMC survey data)","url":"https://services1.arcgis.com/fBc8EJBxQRMcHlei/arcgis/rest/services/NEEN_BND_NationalScenicTrailCenterline_ln/FeatureServer/0","retrieved":"2026-09-13"}},"sections":[{"id":"ct-guilford","name":"Connecticut — Guilford Terminus","mile_type":"spine","mile_start":0,"mile_end":109.7},{"id":"ma","name":"Massachusetts","mile_type":"spine","mile_start":109.7,"mile_end":206.81},{"id":"ct-middletown","name":"Connecticut — Middletown Terminus","mile_type":"spur","mile_start":0,"mile_end":28.84}],"spur":{"name":"Middletown Connector","start_terminus":"Middletown, CT","length_miles":28.84,"junction_spine_mile":16.41,"axis_mile_start":206.81,"axis_mile_end":235.65},"gaps":[{"id":"connecticut-river","name":"Connecticut River crossing","after_mile":133.2,"miles":1.49,"from":[42.283766,-72.627115],"to":[42.291357,-72.599923],"passable_on_foot":false,"note":"No pedestrian crossing exists. Northbound the trail resumes on Old Mountain Road near Skinner State Park; southbound at 2-98 Underwood Ave, Easthampton MA. Hikers arrange a boat or car ride across; the road detour via US-5N and MA-47N is 10.2mi and not recommended (high traffic).","source":"https://newenglandtrail.org/thru-hiking/"}],"direction_options":[{"id":"nobo_main","label":"Northbound — Guilford, CT → Royalston Falls, MA (Main)","total_miles":206.81,"uses_spur":false,"is_nobo":true},{"id":"nobo_alt","label":"Northbound — Middletown, CT → Royalston Falls, MA (Alt.)","total_miles":219.24,"uses_spur":true,"is_nobo":true},{"id":"sobo_main","label":"Southbound — Royalston Falls, MA → Guilford, CT (Main)","total_miles":206.81,"uses_spur":false,"is_nobo":false},{"id":"sobo_alt","label":"Southbound — Royalston Falls, MA → Middletown, CT (Alt.)","total_miles":219.24,"uses_spur":true,"is_nobo":false}]}
+{
+  "trail": {
+    "name": "New England Trail",
+    "total_miles": 235.65,
+    "spine_miles": 206.81,
+    "map_center": [
+      41.9,
+      -72.5
+    ],
+    "map_zoom": 8,
+    "termini": {
+      "south": "Guilford, CT",
+      "north": "Royalston Falls, MA",
+      "alt_south": "Middletown, CT"
+    },
+    "source": {
+      "name": "NEEN_BND_NationalScenicTrailCenterline_ln",
+      "publisher": "National Park Service (CFPA + AMC survey data)",
+      "url": "https://services1.arcgis.com/fBc8EJBxQRMcHlei/arcgis/rest/services/NEEN_BND_NationalScenicTrailCenterline_ln/FeatureServer/0",
+      "retrieved": "2026-09-13"
+    }
+  },
+  "sections": [
+    {
+      "id": "ct-guilford",
+      "name": "Connecticut — Guilford Terminus",
+      "mile_type": "spine",
+      "mile_start": 0,
+      "mile_end": 109.7,
+      "route_id": "main-spine",
+      "region_id": "ct"
+    },
+    {
+      "id": "ma",
+      "name": "Massachusetts",
+      "mile_type": "spine",
+      "mile_start": 109.7,
+      "mile_end": 206.81,
+      "route_id": "main-spine",
+      "region_id": "ma"
+    },
+    {
+      "id": "ct-middletown",
+      "name": "Connecticut — Middletown Terminus",
+      "mile_type": "spur",
+      "mile_start": 0,
+      "mile_end": 28.84,
+      "route_id": "middletown-spur"
+    }
+  ],
+  "spur": {
+    "name": "Middletown Connector",
+    "start_terminus": "Middletown, CT",
+    "length_miles": 28.84,
+    "junction_spine_mile": 16.41,
+    "axis_mile_start": 206.81,
+    "axis_mile_end": 235.65
+  },
+  "gaps": [
+    {
+      "id": "connecticut-river",
+      "name": "Connecticut River crossing",
+      "after_mile": 133.2,
+      "miles": 1.49,
+      "from": [
+        42.283766,
+        -72.627115
+      ],
+      "to": [
+        42.291357,
+        -72.599923
+      ],
+      "passable_on_foot": false,
+      "note": "No pedestrian crossing exists. Northbound the trail resumes on Old Mountain Road near Skinner State Park; southbound at 2-98 Underwood Ave, Easthampton MA. Hikers arrange a boat or car ride across; the road detour via US-5N and MA-47N is 10.2mi and not recommended (high traffic).",
+      "source": "https://newenglandtrail.org/thru-hiking/"
+    }
+  ],
+  "direction_options": [
+    {
+      "id": "nobo_main",
+      "label": "Northbound — Guilford, CT → Royalston Falls, MA (Main)",
+      "total_miles": 206.81,
+      "uses_spur": false,
+      "is_nobo": true
+    },
+    {
+      "id": "nobo_alt",
+      "label": "Northbound — Middletown, CT → Royalston Falls, MA (Alt.)",
+      "total_miles": 219.24,
+      "uses_spur": true,
+      "is_nobo": true
+    },
+    {
+      "id": "sobo_main",
+      "label": "Southbound — Royalston Falls, MA → Guilford, CT (Main)",
+      "total_miles": 206.81,
+      "uses_spur": false,
+      "is_nobo": false
+    },
+    {
+      "id": "sobo_alt",
+      "label": "Southbound — Royalston Falls, MA → Middletown, CT (Alt.)",
+      "total_miles": 219.24,
+      "uses_spur": true,
+      "is_nobo": false
+    }
+  ],
+  "regions": [
+    {
+      "id": "ct",
+      "name": "Connecticut",
+      "state": "CT",
+      "route_id": "main-spine",
+      "mile_start": 0,
+      "mile_end": 109.6,
+      "miles": 109.6,
+      "sections": 1
+    },
+    {
+      "id": "ma",
+      "name": "Massachusetts",
+      "state": "MA",
+      "route_id": "main-spine",
+      "mile_start": 109.7,
+      "mile_end": 206.8,
+      "miles": 97.1,
+      "sections": 1
+    }
+  ],
+  "routes": [
+    {
+      "id": "main-spine",
+      "name": null,
+      "kind": "spine",
+      "alt_of": null,
+      "junction_mile": null,
+      "junction_sec_mile": null,
+      "hikeable": true,
+      "miles": 206.8
+    },
+    {
+      "id": "middletown-spur",
+      "name": null,
+      "kind": "alternate",
+      "alt_of": "main-spine",
+      "junction_mile": null,
+      "junction_sec_mile": null,
+      "hikeable": true,
+      "miles": 28.8,
+      "region_from": "route",
+      "region_id": "ct",
+      "sec_mile_from": "route",
+      "id_from": "sec_mile"
+    }
+  ],
+  "hydrate": {
+    "id": {
+      "prefix": "net",
+      "token_by": "route",
+      "from": "mile",
+      "scale": 1000,
+      "width": 7,
+      "tokens": {
+        "main-spine": "main",
+        "middletown-spur": "spur"
+      }
+    },
+    "sec_mile_from": "section",
+    "sec_mile_decimals": 1,
+    "region_from": "section",
+    "emit": {
+      "route_kind": false,
+      "alt_of": true,
+      "junction_mile": false,
+      "junction_sec_mile": false
+    },
+    "boundary": "next"
+  },
+  "notes": {
+    "schema": "points.json carries only lat, lon, mile, route_id and, where present, trail_elev, route_type and state. id, sec_mile, region_id, region_name, section_id and section_name are rebuilt at load by hydrate-points.js from the tables in this file. Converted by scripts/slim-trail.js."
+  }
+}

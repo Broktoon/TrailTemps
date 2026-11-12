@@ -159,23 +159,19 @@ function calcTotalMiles(directionId, selectedAlt) {
    ============================================================ */
 
 async function loadIatMeta() {
-  const key = `iat_meta_${trailSlug}_v1`;
-  const cached = cacheGet(key, TRAIL_TTL_MS);
-  let payload = cached;
-  if (!payload) {
-    const r = await fetch(META.iatMetaUrl, { cache: "no-cache" });
-    if (!r.ok) throw new Error(`iat_meta.json fetch failed (${r.status})`);
-    payload = await r.json();
-    cacheSet(key, payload);
-  }
-  iatMeta = payload;
+  // Not cached in localStorage: points.json is rebuilt from this file at
+  // load (hydrate-points.js), so a stale cached copy would mis-hydrate it.
+  const r = await fetch(META.iatMetaUrl, { cache: "no-cache" });
+  if (!r.ok) throw new Error(`iat_meta.json fetch failed (${r.status})`);
+  iatMeta = await r.json();
   console.log("[IAT] iat_meta loaded:", iatMeta.sections?.length, "sections");
 }
 
 async function loadPoints() {
   const r = await fetch(META.pointsUrl, { cache: "no-cache" });
   if (!r.ok) throw new Error(`points.json fetch failed (${r.status})`);
-  const data = await r.json();
+  if (!iatMeta?.hydrate) throw new Error("iat_meta.json must load before points.json");
+  const data = hydratePoints(await r.json(), iatMeta);
 
   const parsed = data.filter(p =>
     isFinite(Number(p.lat)) && isFinite(Number(p.lon))
@@ -1066,13 +1062,11 @@ async function main() {
   initMap();
   loadTrailOverlay();
 
-  // Load iat_meta.json (non-blocking)
-  loadIatMeta()
-    .then(() => updateSegmentInfo())
-    .catch(e => console.warn("[IAT] iat_meta not loaded:", e));
-
-  // Load points
+  // The meta comes first: points.json carries only the canonical fields,
+  // and hydrate-points.js rebuilds the rest from it.
   try {
+    await loadIatMeta();
+    updateSegmentInfo();
     await loadPoints();
 
     if (map) {

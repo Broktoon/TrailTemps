@@ -1,0 +1,321 @@
+{
+  "trail": {
+    "name": "Appalachian National Scenic Trail",
+    "total_miles": 2190,
+    "point_spacing_miles": 0.1,
+    "source": "Extracted from the existing points.json by scripts/build-meta-from-points.js. Geometry untouched; this file records the tables that were previously copied onto every point.",
+    "built": "2026-11-04"
+  },
+  "regions": [
+    {
+      "id": "GA",
+      "name": "Georgia",
+      "state": "GA",
+      "route_id": "main-spine",
+      "mile_start": 0,
+      "mile_end": 76.2,
+      "miles": 76.2,
+      "sections": 1
+    },
+    {
+      "id": "NC-TN",
+      "name": "North Carolina / Tennessee",
+      "state": "NC-TN",
+      "route_id": "main-spine",
+      "mile_start": 76.3,
+      "mile_end": 457.5,
+      "miles": 381.2,
+      "sections": 4
+    },
+    {
+      "id": "VA",
+      "name": "Virginia",
+      "state": "VA",
+      "route_id": "main-spine",
+      "mile_start": 457.6,
+      "mile_end": 1024.7,
+      "miles": 567.1,
+      "sections": 3
+    },
+    {
+      "id": "WV",
+      "name": "West Virginia",
+      "state": "WV",
+      "route_id": "main-spine",
+      "mile_start": 648.4,
+      "mile_end": 1035.7,
+      "miles": 387.3,
+      "sections": 0
+    },
+    {
+      "id": "MD",
+      "name": "Maryland",
+      "state": "MD",
+      "route_id": "main-spine",
+      "mile_start": 1019.4,
+      "mile_end": 1076,
+      "miles": 56.6,
+      "sections": 0
+    },
+    {
+      "id": "PA",
+      "name": "Pennsylvania",
+      "state": "PA",
+      "route_id": "main-spine",
+      "mile_start": 1059.2,
+      "mile_end": 1315.8,
+      "miles": 256.6,
+      "sections": 1
+    },
+    {
+      "id": "NJ",
+      "name": "New Jersey",
+      "state": "NJ",
+      "route_id": "main-spine",
+      "mile_start": 1299.4,
+      "mile_end": 1386.1,
+      "miles": 86.7,
+      "sections": 0
+    },
+    {
+      "id": "NY",
+      "name": "New York",
+      "state": "NY",
+      "route_id": "main-spine",
+      "mile_start": 1357.9,
+      "mile_end": 1485,
+      "miles": 127.1,
+      "sections": 1
+    },
+    {
+      "id": "CT",
+      "name": "Connecticut",
+      "state": "CT",
+      "route_id": "main-spine",
+      "mile_start": 1467.9,
+      "mile_end": 1525.8,
+      "miles": 57.9,
+      "sections": 0
+    },
+    {
+      "id": "MA",
+      "name": "Massachusetts",
+      "state": "MA",
+      "route_id": "main-spine",
+      "mile_start": 1518.1,
+      "mile_end": 1615.7,
+      "miles": 97.6,
+      "sections": 0
+    },
+    {
+      "id": "VT",
+      "name": "Vermont",
+      "state": "VT",
+      "route_id": "main-spine",
+      "mile_start": 1600,
+      "mile_end": 1766,
+      "miles": 166,
+      "sections": 1
+    },
+    {
+      "id": "NH",
+      "name": "New Hampshire",
+      "state": "NH",
+      "route_id": "main-spine",
+      "mile_start": 1758.5,
+      "mile_end": 1916.2,
+      "miles": 157.7,
+      "sections": 2
+    },
+    {
+      "id": "ME",
+      "name": "Maine",
+      "state": "ME",
+      "route_id": "main-spine",
+      "mile_start": 1909.2,
+      "mile_end": 2190,
+      "miles": 280.8,
+      "sections": 3
+    }
+  ],
+  "sections": [
+    {
+      "id": "georgia-springer-to-bly-gap",
+      "name": "Georgia: Springer to Bly Gap",
+      "region_id": "GA",
+      "route_id": "main-spine",
+      "mile_start": 0,
+      "mile_end": 79.9,
+      "miles": 79.9
+    },
+    {
+      "id": "southern-appalachians-nc-tn-nantahala-smokies-approach",
+      "name": "Southern Appalachians (NC/TN): Nantahala & Smokies approach",
+      "region_id": "NC-TN",
+      "route_id": "main-spine",
+      "mile_start": 80,
+      "mile_end": 169.9,
+      "miles": 89.9
+    },
+    {
+      "id": "great-smoky-mountains",
+      "name": "Great Smoky Mountains",
+      "region_id": "NC-TN",
+      "route_id": "main-spine",
+      "mile_start": 170,
+      "mile_end": 239.9,
+      "miles": 69.9
+    },
+    {
+      "id": "highlands-balds-tn-nc-roan-unaka-iron-mtn",
+      "name": "Highlands & Balds (TN/NC): Roan / Unaka / Iron Mtn",
+      "region_id": "NC-TN",
+      "route_id": "main-spine",
+      "mile_start": 240,
+      "mile_end": 419.9,
+      "miles": 179.9
+    },
+    {
+      "id": "virginia-highlands-damascus-to-grayson-mt-rogers",
+      "name": "Virginia Highlands: Damascus to Grayson / Mt Rogers",
+      "region_id": "NC-TN",
+      "route_id": "main-spine",
+      "mile_start": 420,
+      "mile_end": 559.9,
+      "miles": 139.9
+    },
+    {
+      "id": "virginia-triple-crown-blue-ridge",
+      "name": "Virginia: Triple Crown & Blue Ridge",
+      "region_id": "VA",
+      "route_id": "main-spine",
+      "mile_start": 560,
+      "mile_end": 839.9,
+      "miles": 279.9
+    },
+    {
+      "id": "shenandoah-national-park-vicinity",
+      "name": "Shenandoah National Park vicinity",
+      "region_id": "VA",
+      "route_id": "main-spine",
+      "mile_start": 840,
+      "mile_end": 949.9,
+      "miles": 109.9
+    },
+    {
+      "id": "mid-atlantic-wv-md-pa-harpers-ferry-to-rocksylvania",
+      "name": "Mid-Atlantic: WV/MD/PA (Harpers Ferry to Rocksylvania)",
+      "region_id": "VA",
+      "route_id": "main-spine",
+      "mile_start": 950,
+      "mile_end": 1299.9,
+      "miles": 349.9
+    },
+    {
+      "id": "new-jersey-new-york-ridges",
+      "name": "New Jersey & New York Ridges",
+      "region_id": "PA",
+      "route_id": "main-spine",
+      "mile_start": 1300,
+      "mile_end": 1459.9,
+      "miles": 159.9
+    },
+    {
+      "id": "connecticut-berkshires-ct-ma",
+      "name": "Connecticut & Berkshires (CT/MA)",
+      "region_id": "NY",
+      "route_id": "main-spine",
+      "mile_start": 1460,
+      "mile_end": 1609.9,
+      "miles": 149.9
+    },
+    {
+      "id": "vermont-green-mountains",
+      "name": "Vermont Green Mountains",
+      "region_id": "VT",
+      "route_id": "main-spine",
+      "mile_start": 1610,
+      "mile_end": 1759.9,
+      "miles": 149.9
+    },
+    {
+      "id": "new-hampshire-whites-moosilauke-to-gorham",
+      "name": "New Hampshire: Whites (Moosilauke to Gorham)",
+      "region_id": "NH",
+      "route_id": "main-spine",
+      "mile_start": 1760,
+      "mile_end": 1889.9,
+      "miles": 129.9
+    },
+    {
+      "id": "mahoosucs-nh-me-border",
+      "name": "Mahoosucs (NH/ME border)",
+      "region_id": "NH",
+      "route_id": "main-spine",
+      "mile_start": 1890,
+      "mile_end": 1929.9,
+      "miles": 39.9
+    },
+    {
+      "id": "maine-western-mountains-lakes",
+      "name": "Maine: Western Mountains & Lakes",
+      "region_id": "ME",
+      "route_id": "main-spine",
+      "mile_start": 1930,
+      "mile_end": 2089.9,
+      "miles": 159.9
+    },
+    {
+      "id": "hundred-mile-wilderness",
+      "name": "Hundred-Mile Wilderness",
+      "region_id": "ME",
+      "route_id": "main-spine",
+      "mile_start": 2090,
+      "mile_end": 2189.9,
+      "miles": 99.9
+    },
+    {
+      "id": "baxter-state-park-katahdin",
+      "name": "Baxter State Park & Katahdin",
+      "region_id": "ME",
+      "route_id": "main-spine",
+      "mile_start": 2190,
+      "mile_end": 2190,
+      "miles": 0
+    }
+  ],
+  "routes": [
+    {
+      "id": "main-spine",
+      "name": null,
+      "kind": "spine",
+      "alt_of": null,
+      "junction_mile": null,
+      "junction_sec_mile": null,
+      "hikeable": true,
+      "miles": 2190
+    }
+  ],
+  "hydrate": {
+    "id": {
+      "prefix": "at",
+      "token_by": "route",
+      "from": "mile",
+      "scale": 1000,
+      "width": 7,
+      "tokens": {
+        "main-spine": "main"
+      }
+    },
+    "sec_mile_from": "section",
+    "sec_mile_decimals": 1,
+    "region_from": "state",
+    "emit": {
+      "route_kind": false,
+      "alt_of": false,
+      "junction_mile": false,
+      "junction_sec_mile": false
+    }
+  },
+  "notes": {}
+}

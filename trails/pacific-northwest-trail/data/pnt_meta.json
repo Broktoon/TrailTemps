@@ -58,7 +58,8 @@
       "mile_start": 0,
       "mile_end": 310.5,
       "miles": 310.5,
-      "sections": 0
+      "sections": 0,
+      "route_id": "main"
     },
     {
       "id": "okanogan-highlands",
@@ -68,7 +69,8 @@
       "mile_start": 310.5,
       "mile_end": 620.5,
       "miles": 310,
-      "sections": 0
+      "sections": 0,
+      "route_id": "main"
     },
     {
       "id": "north-cascades",
@@ -78,7 +80,8 @@
       "mile_start": 620.5,
       "mile_end": 852,
       "miles": 231.5,
-      "sections": 0
+      "sections": 0,
+      "route_id": "main"
     },
     {
       "id": "puget-sound",
@@ -88,7 +91,8 @@
       "mile_start": 852,
       "mile_end": 994,
       "miles": 142,
-      "sections": 0
+      "sections": 0,
+      "route_id": "main"
     },
     {
       "id": "olympic-peninsula",
@@ -98,7 +102,8 @@
       "mile_start": 994,
       "mile_end": 1210.95,
       "miles": 217,
-      "sections": 0
+      "sections": 0,
+      "route_id": "main"
     }
   ],
   "sections": [],
@@ -116,5 +121,39 @@
       "total_miles": 1210.95,
       "is_webo": false
     }
-  ]
+  ],
+  "routes": [
+    {
+      "id": "main",
+      "name": null,
+      "kind": "spine",
+      "alt_of": null,
+      "junction_mile": null,
+      "junction_sec_mile": null,
+      "hikeable": true,
+      "miles": 1211
+    }
+  ],
+  "hydrate": {
+    "id": {
+      "prefix": "pnt",
+      "token_by": "route",
+      "from": "mile",
+      "scale": 1000,
+      "width": 7
+    },
+    "sec_mile_from": "region",
+    "sec_mile_decimals": 1,
+    "region_from": "ranges",
+    "emit": {
+      "route_kind": false,
+      "alt_of": false,
+      "junction_mile": false,
+      "junction_sec_mile": false
+    },
+    "boundary": "next"
+  },
+  "notes": {
+    "schema": "points.json carries only lat, lon, mile, route_id and, where present, trail_elev, route_type and state. id, sec_mile, region_id, region_name, section_id and section_name are rebuilt at load by hydrate-points.js from the tables in this file. Converted by scripts/slim-trail.js."
+  }
 }

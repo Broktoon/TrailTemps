@@ -34,6 +34,7 @@
 //   sec_mile_from   "section" | "region"  section-local on AT/CDT/PCT/...,
 //                                         region-local on NCT/PNT/PHT
 //   region_from     "state" | "section" | "ranges"
+//   boundary        "next" when table rows share boundary miles (NCT, PNT)
 //
 // Used by both repos. SectionsHiked calls it once in the shared map.js;
 // TrailTemps calls it from each trail's own app.js.
@@ -71,7 +72,13 @@ function makeRangeIndex(ranges) {
 // The walk advances when the mile passes the current range's end, or when it
 // sits exactly on that end and a point there has already been assigned. With
 // no shared boundary miles this behaves exactly like the plain lookup.
-function assignRangesInOrder(points, indices, ranges) {
+//
+// `boundary: "next"` (meta.hydrate.boundary) is the other convention: table
+// rows written with a shared boundary mile (Vermont 0-71, New York 71-775.5,
+// as NCT and PNT publish them) where the single point at that mile belongs
+// to the range that STARTS there. Off by default, so trails whose rows end at
+// their own last point are unaffected.
+function assignRangesInOrder(points, indices, ranges, boundaryNext) {
   const sorted = [...ranges].sort((a, b) => a.mile_start - b.mile_start);
   const out = new Map();
   if (!sorted.length) return out;
@@ -83,7 +90,8 @@ function assignRangesInOrder(points, indices, ranges) {
     if (typeof mile === 'number') {
       while (r + 1 < sorted.length
         && (mile > sorted[r].mile_end
-          || (mile === sorted[r].mile_end && touchedEnd && sorted[r + 1].mile_start <= mile))) {
+          || (mile === sorted[r].mile_end && (touchedEnd || boundaryNext)
+            && sorted[r + 1].mile_start <= mile))) {
         r++;
         touchedEnd = false;
       }
@@ -105,7 +113,10 @@ function padNum(value, scale, width) {
 function makeIdComposer(spec) {
   if (!spec) return () => null;
   const tokens = spec.tokens || {};
-  return function composeId(point, derived) {
+  // `from` may be overridden per route (route row `id_from`): on CDT and NET
+  // the spine's ids encode trail mile while an alternate's encode its own
+  // route distance, which is its sec_mile.
+  return function composeId(point, derived, route) {
     const keyValue = spec.token_by === 'section'
       ? derived.section_id
       : (point.route_id ?? SPINE_ROUTE);
@@ -113,7 +124,8 @@ function makeIdComposer(spec) {
     const token = Object.prototype.hasOwnProperty.call(tokens, keyValue)
       ? tokens[keyValue]
       : keyValue;
-    const basis = spec.from === 'sec_mile' ? derived.sec_mile : point.mile;
+    const from = (route && route.id_from) || spec.from;
+    const basis = from === 'sec_mile' ? derived.sec_mile : point.mile;
     if (basis === null || basis === undefined) return null;
     return spec.prefix + '-' + token + '-mi' + padNum(basis, spec.scale, spec.width);
   };
@@ -164,16 +176,17 @@ function hydratePoints(points, meta) {
     indicesByRoute.get(rid).push(i);
   }
 
+  const boundaryNext = h.boundary === 'next';
   const sectionFor = new Map();
   const regionForByRange = new Map();
   for (const [rid, indices] of indicesByRoute) {
     const secs = sectionRows.get(rid);
     if (secs) {
-      for (const [i, row] of assignRangesInOrder(points, indices, secs)) sectionFor.set(i, row);
+      for (const [i, row] of assignRangesInOrder(points, indices, secs, boundaryNext)) sectionFor.set(i, row);
     }
     const regs = regionRows.get(rid);
     if (regs) {
-      for (const [i, row] of assignRangesInOrder(points, indices, regs)) regionForByRange.set(i, row);
+      for (const [i, row] of assignRangesInOrder(points, indices, regs, boundaryNext)) regionForByRange.set(i, row);
     }
   }
 
@@ -223,7 +236,14 @@ function hydratePoints(points, meta) {
     const route = routeById.get(routeId) || null;
 
     // --- section ---------------------------------------------------------
-    const section = sections.length ? (sectionFor.get(i) || null) : null;
+    // A route row may name its one section directly (route `section_id` and
+    // `section_name`): CDT's alternates each carry a section that is not in
+    // the meta's section table, and adding rows there would put alternates
+    // into the apps' section lists.
+    const routeSection = route && route.section_id != null
+      ? { id: route.section_id, name: route.section_name ?? null, mile_start: null }
+      : null;
+    const section = (sections.length ? sectionFor.get(i) : null) || routeSection;
 
     // --- region ----------------------------------------------------------
     const regionFrom = regionFromFor(routeId);
@@ -249,11 +269,16 @@ function hydratePoints(points, meta) {
       : basis === 'route'
         ? (routeBase.get(routeId) ?? 0)
         : (section ? section.mile_start : null);
+    // An alternate's `mile` on CDT and IAT is its own distance projected
+    // linearly onto the spine span it replaces (Anaconda: 53.1mi of tread over
+    // 148.5 spine miles), so its route distance is (mile - base) divided by
+    // that factor, kept on the route row as `sec_mile_scale`.
     let secMile = null;
     if (p.mile !== null && p.mile !== undefined && base !== null && base !== undefined) {
-      const dp = h.sec_mile_decimals ?? 1;
+      const dp = (route && route.sec_mile_decimals) ?? h.sec_mile_decimals ?? 1;
       const f = Math.pow(10, dp);
-      secMile = Math.round((p.mile - base) * f) / f;
+      const scale = (basis === 'route' && route && route.sec_mile_scale) || 1;
+      secMile = Math.round(((p.mile - base) / scale) * f) / f;
     }
 
     const derived = {
@@ -265,7 +290,7 @@ function hydratePoints(points, meta) {
     // Key order follows the files as they ship today, so a JSON diff of the
     // round-trip is empty rather than a reordering.
     const rec = {
-      id: composeId(p, derived),
+      id: composeId(p, derived, route),
       lat: p.lat,
       lon: p.lon,
     };
@@ -280,9 +305,6 @@ function hydratePoints(points, meta) {
     if (p.state !== undefined) rec.state = p.state;
     if (p.trail_elev !== undefined) rec.trail_elev = p.trail_elev;
     if (p.route_type !== undefined) rec.route_type = p.route_type;
-    // Carried, not derived: legacy_id varies per point, so it cannot live in
-    // meta. It moves to weather_id_remap.json in Phase 4, not here.
-    if (p.legacy_id !== undefined) rec.legacy_id = p.legacy_id;
 
     // Only the route fields the trail actually carries. `emit` is recorded at
     // extraction time, so hydrating never *adds* a field the file did not
@@ -312,17 +334,12 @@ function hydratePoints(points, meta) {
 
 /**
  * Strip a full record down to what the canonical file stores.
- *
- * legacy_id is kept: it is per-point data with no source in meta, so dropping
- * it here would lose it rather than move it. Phase 4 relocates it to
- * weather_id_remap.json, and it leaves the record then.
  */
 function slimPoint(p) {
   const out = { lat: p.lat, lon: p.lon, mile: p.mile, route_id: p.route_id };
   if (p.trail_elev !== undefined && p.trail_elev !== null) out.trail_elev = p.trail_elev;
   if (p.route_type !== undefined && p.route_type !== null) out.route_type = p.route_type;
   if (p.state !== undefined && p.state !== null) out.state = p.state;
-  if (p.legacy_id !== undefined && p.legacy_id !== null) out.legacy_id = p.legacy_id;
   return out;
 }
 

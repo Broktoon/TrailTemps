@@ -148,16 +148,11 @@ function calcTotalMiles(directionId) {
    ============================================================ */
 
 async function loadNctMeta() {
-  const key    = `nct_meta_${trailSlug}_v1`;
-  const cached = cacheGet(key, TRAIL_TTL_MS);
-  let payload  = cached;
-  if (!payload) {
-    const r = await fetch(META.nctMetaUrl, { cache: "no-cache" });
-    if (!r.ok) throw new Error(`nct_meta.json fetch failed (${r.status})`);
-    payload = await r.json();
-    cacheSet(key, payload);
-  }
-  nctMeta = payload;
+  // Not cached in localStorage: points.json is rebuilt from this file at
+  // load (hydrate-points.js), so a stale cached copy would mis-hydrate it.
+  const r = await fetch(META.nctMetaUrl, { cache: "no-cache" });
+  if (!r.ok) throw new Error(`nct_meta.json fetch failed (${r.status})`);
+  nctMeta = await r.json();
   console.log("[NCT] nct_meta loaded:", nctMeta.regions?.length, "regions,",
     nctMeta.sections?.length, "sections (NCT has none by design)");
 }
@@ -165,7 +160,8 @@ async function loadNctMeta() {
 async function loadPoints() {
   const r = await fetch(META.pointsUrl, { cache: "no-cache" });
   if (!r.ok) throw new Error(`points.json fetch failed (${r.status})`);
-  const data = await r.json();
+  if (!nctMeta?.hydrate) throw new Error("nct_meta.json must load before points.json");
+  const data = hydratePoints(await r.json(), nctMeta);
 
   allPoints = data.filter(p =>
     isFinite(Number(p.lat)) && isFinite(Number(p.lon))
@@ -964,13 +960,11 @@ async function main() {
   initMap();
   loadTrailOverlay();
 
-  // Load meta (non-blocking — updates state info when ready)
-  loadNctMeta()
-    .then(() => updateStateInfo())
-    .catch(e => console.warn("[NCT] nct_meta not loaded:", e));
-
-  // Load trail points
+  // Load trail points. The meta comes first: points.json carries only the
+  // canonical fields, and hydrate-points.js rebuilds the rest from it.
   try {
+    await loadNctMeta();
+    updateStateInfo();
     await loadPoints();
     if (map) {
       const b = boundsFromPoints(allPoints);

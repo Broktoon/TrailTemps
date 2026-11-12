@@ -195,16 +195,11 @@ function calcTotalMiles(directionId, selectedAlts) {
    ============================================================ */
 
 async function loadCdtMeta() {
-  const key    = `cdt_meta_${trailSlug}_v1`;
-  const cached = cacheGet(key, TRAIL_TTL_MS);
-  let payload  = cached;
-  if (!payload) {
-    const r = await fetch(META.cdtMetaUrl, { cache: "no-cache" });
-    if (!r.ok) throw new Error(`cdt_meta.json fetch failed (${r.status})`);
-    payload = await r.json();
-    cacheSet(key, payload);
-  }
-  cdtMeta = payload;
+  // Not cached in localStorage: points.json is rebuilt from this file at
+  // load (hydrate-points.js), so a stale cached copy would mis-hydrate it.
+  const r = await fetch(META.cdtMetaUrl, { cache: "no-cache" });
+  if (!r.ok) throw new Error(`cdt_meta.json fetch failed (${r.status})`);
+  cdtMeta = await r.json();
   console.log("[CDT] cdt_meta loaded:", cdtMeta.regions?.length, "regions,",
     cdtMeta.sections?.length, "sections,", cdtMeta.alternates?.length, "alternates");
 }
@@ -212,7 +207,8 @@ async function loadCdtMeta() {
 async function loadPoints() {
   const r = await fetch(META.pointsUrl, { cache: "no-cache" });
   if (!r.ok) throw new Error(`points.json fetch failed (${r.status})`);
-  const data = await r.json();
+  if (!cdtMeta?.hydrate) throw new Error("cdt_meta.json must load before points.json");
+  const data = hydratePoints(await r.json(), cdtMeta);
 
   allPoints = data.filter(p =>
     Number.isFinite(Number(p.lat)) && Number.isFinite(Number(p.lon))
@@ -1140,11 +1136,11 @@ async function main() {
   initMap();
   loadTrailOverlay();
 
-  loadCdtMeta()
-    .then(() => updateStateInfo())
-    .catch(e => console.warn("[CDT] cdt_meta not loaded:", e));
-
+  // The meta comes first: points.json carries only the canonical fields,
+  // and hydrate-points.js rebuilds the rest from it.
   try {
+    await loadCdtMeta();
+    updateStateInfo();
     await loadPoints();
     if (map) {
       const b = boundsFromPoints(allPoints);

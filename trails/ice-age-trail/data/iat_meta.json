@@ -24,15 +24,24 @@
   "regions": [
     {
       "id": "western",
-      "name": "Western"
+      "name": "Western",
+      "route_id": "main-spine",
+      "mile_start": 0,
+      "mile_end": 446.67
     },
     {
       "id": "central",
-      "name": "Central"
+      "name": "Central",
+      "route_id": "main-spine",
+      "mile_start": 446.88,
+      "mile_end": 861.26
     },
     {
       "id": "eastern",
-      "name": "Eastern"
+      "name": "Eastern",
+      "route_id": "main-spine",
+      "mile_start": 861.74,
+      "mile_end": 1153.02
     }
   ],
   "sections": [
@@ -43,7 +52,11 @@
       "state": "WI",
       "certified_miles": 8.91,
       "ui_mile_start": 0,
-      "ui_mile_end": 13.43
+      "ui_mile_end": 13.43,
+      "route_id": "main-spine",
+      "mile_start": 0,
+      "mile_end": 13,
+      "region_id": "western"
     },
     {
       "id": "gandy-dancer",
@@ -52,7 +65,11 @@
       "state": "WI",
       "certified_miles": 15.14,
       "ui_mile_start": 13.43,
-      "ui_mile_end": 28.89
+      "ui_mile_end": 28.89,
+      "route_id": "main-spine",
+      "mile_start": 13.43,
+      "mile_end": 28.43,
+      "region_id": "western"
     },
     {
       "id": "trade-river",
@@ -61,7 +78,11 @@
       "state": "WI",
       "certified_miles": 3.9,
       "ui_mile_start": 28.89,
-      "ui_mile_end": 33.23
+      "ui_mile_end": 33.23,
+      "route_id": "main-spine",
+      "mile_start": 28.89,
+      "mile_end": 32.89,
+      "region_id": "western"
     },
     {
       "id": "straight-lake",
@@ -70,7 +91,11 @@
       "state": "WI",
       "certified_miles": 3.58,
       "ui_mile_start": 33.23,
-      "ui_mile_end": 37.61
+      "ui_mile_end": 37.61,
+      "route_id": "main-spine",
+      "mile_start": 33.23,
+      "mile_end": 37.23,
+      "region_id": "western"
     },
     {
       "id": "straight-river",
@@ -79,7 +104,11 @@
       "state": "WI",
       "certified_miles": 3.46,
       "ui_mile_start": 37.61,
-      "ui_mile_end": 41.07
+      "ui_mile_end": 41.07,
+      "route_id": "main-spine",
+      "mile_start": 37.61,
+      "mile_end": 40.61,
+      "region_id": "western"
     },
     {
       "id": "pine-lake",
@@ -88,7 +117,11 @@
       "state": "WI",
       "certified_miles": 2.97,
       "ui_mile_start": 41.07,
-      "ui_mile_end": 44.77
+      "ui_mile_end": 44.77,
+      "route_id": "main-spine",
+      "mile_start": 41.07,
+      "mile_end": 44.57,
+      "region_id": "western"
     },
     {
       "id": "mckenzie-creek",
@@ -97,7 +130,11 @@
       "state": "WI",
       "certified_miles": 9.41,
       "ui_mile_start": 44.77,
-      "ui_mile_end": 54.18
+      "ui_mile_end": 54.18,
+      "route_id": "main-spine",
+      "mile_start": 44.77,
+      "mile_end": 53.77,
+      "region_id": "western"
     },
     {
       "id": "indian-creek",
@@ -106,7 +143,11 @@
       "state": "WI",
       "certified_miles": 5.42,
       "ui_mile_start": 54.18,
-      "ui_mile_end": 59.6
+      "ui_mile_end": 59.6,
+      "route_id": "main-spine",
+      "mile_start": 54.18,
+      "mile_end": 59.18,
+      "region_id": "western"
     },
     {
       "id": "sand-creek",
@@ -115,7 +156,11 @@
       "state": "WI",
       "certified_miles": 5.67,
       "ui_mile_start": 59.6,
-      "ui_mile_end": 65.57
+      "ui_mile_end": 65.57,
+      "route_id": "main-spine",
+      "mile_start": 59.6,
+      "mile_end": 65.1,
+      "region_id": "western"
     },
     {
       "id": "timberland-hills",
@@ -124,7 +169,11 @@
       "state": "WI",
       "certified_miles": 10.9,
       "ui_mile_start": 65.57,
-      "ui_mile_end": 78.97
+      "ui_mile_end": 78.97,
+      "route_id": "main-spine",
+      "mile_start": 65.57,
+      "mile_end": 78.57,
+      "region_id": "western"
     },
     {
       "id": "grassy-lake",
@@ -133,7 +182,11 @@
       "state": "WI",
       "certified_miles": 8.52,
       "ui_mile_start": 78.97,
-      "ui_mile_end": 87.49
+      "ui_mile_end": 87.49,
+      "route_id": "main-spine",
+      "mile_start": 78.97,
+      "mile_end": 87.47,
+      "region_id": "western"
     },
     {
       "id": "bear-lake",
@@ -142,7 +195,11 @@
       "state": "WI",
       "certified_miles": 5.31,
       "ui_mile_start": 87.49,
-      "ui_mile_end": 98.47
+      "ui_mile_end": 98.47,
+      "route_id": "main-spine",
+      "mile_start": 87.49,
+      "mile_end": 97.99,
+      "region_id": "western"
     },
     {
       "id": "tuscobia",
@@ -151,7 +208,11 @@
       "state": "WI",
       "certified_miles": 11.2,
       "ui_mile_start": 98.47,
-      "ui_mile_end": 112.06
+      "ui_mile_end": 112.06,
+      "route_id": "main-spine",
+      "mile_start": 98.47,
+      "mile_end": 111.97,
+      "region_id": "western"
     },
     {
       "id": "hemlock-creek",
@@ -160,7 +221,11 @@
       "state": "WI",
       "certified_miles": 6.95,
       "ui_mile_start": 112.06,
-      "ui_mile_end": 119.01
+      "ui_mile_end": 119.01,
+      "route_id": "main-spine",
+      "mile_start": 112.06,
+      "mile_end": 118.56,
+      "region_id": "western"
     },
     {
       "id": "northern-blue-hills",
@@ -169,7 +234,11 @@
       "state": "WI",
       "certified_miles": 9.56,
       "ui_mile_start": 119.01,
-      "ui_mile_end": 129.73
+      "ui_mile_end": 129.73,
+      "route_id": "main-spine",
+      "mile_start": 119.01,
+      "mile_end": 129.51,
+      "region_id": "western"
     },
     {
       "id": "southern-blue-hills",
@@ -178,7 +247,11 @@
       "state": "WI",
       "certified_miles": 7.29,
       "ui_mile_start": 129.73,
-      "ui_mile_end": 158.36
+      "ui_mile_end": 158.36,
+      "route_id": "main-spine",
+      "mile_start": 129.73,
+      "mile_end": 158.23,
+      "region_id": "western"
     },
     {
       "id": "chippewa-moraine",
@@ -187,7 +260,11 @@
       "state": "WI",
       "certified_miles": 7.86,
       "ui_mile_start": 158.36,
-      "ui_mile_end": 166.22
+      "ui_mile_end": 166.22,
+      "route_id": "main-spine",
+      "mile_start": 158.36,
+      "mile_end": 165.86,
+      "region_id": "western"
     },
     {
       "id": "harwood-lakes",
@@ -196,7 +273,11 @@
       "state": "WI",
       "certified_miles": 6.5,
       "ui_mile_start": 166.22,
-      "ui_mile_end": 174.52
+      "ui_mile_end": 174.52,
+      "route_id": "main-spine",
+      "mile_start": 166.22,
+      "mile_end": 174.22,
+      "region_id": "western"
     },
     {
       "id": "firth-lake",
@@ -205,7 +286,11 @@
       "state": "WI",
       "certified_miles": 5.86,
       "ui_mile_start": 174.52,
-      "ui_mile_end": 182.79
+      "ui_mile_end": 182.79,
+      "route_id": "main-spine",
+      "mile_start": 174.52,
+      "mile_end": 182.52,
+      "region_id": "western"
     },
     {
       "id": "chippewa-river",
@@ -214,7 +299,11 @@
       "state": "WI",
       "certified_miles": 1.81,
       "ui_mile_start": 182.79,
-      "ui_mile_end": 185.93
+      "ui_mile_end": 185.93,
+      "route_id": "main-spine",
+      "mile_start": 182.79,
+      "mile_end": 185.79,
+      "region_id": "western"
     },
     {
       "id": "cornell",
@@ -223,7 +312,11 @@
       "state": "WI",
       "certified_miles": 1.53,
       "ui_mile_start": 185.93,
-      "ui_mile_end": 209.06
+      "ui_mile_end": 209.06,
+      "route_id": "main-spine",
+      "mile_start": 185.93,
+      "mile_end": 208.93,
+      "region_id": "western"
     },
     {
       "id": "otter-lake",
@@ -232,7 +325,11 @@
       "state": "WI",
       "certified_miles": 0.75,
       "ui_mile_start": 209.06,
-      "ui_mile_end": 226.13
+      "ui_mile_end": 226.13,
+      "route_id": "main-spine",
+      "mile_start": 209.06,
+      "mile_end": 226.06,
+      "region_id": "western"
     },
     {
       "id": "lake-eleven",
@@ -241,7 +338,11 @@
       "state": "WI",
       "certified_miles": 15.55,
       "ui_mile_start": 226.13,
-      "ui_mile_end": 241.69
+      "ui_mile_end": 241.69,
+      "route_id": "main-spine",
+      "mile_start": 226.13,
+      "mile_end": 241.63,
+      "region_id": "western"
     },
     {
       "id": "jerry-lake",
@@ -250,7 +351,11 @@
       "state": "WI",
       "certified_miles": 15.18,
       "ui_mile_start": 241.69,
-      "ui_mile_end": 256.86
+      "ui_mile_end": 256.86,
+      "route_id": "main-spine",
+      "mile_start": 241.69,
+      "mile_end": 256.69,
+      "region_id": "western"
     },
     {
       "id": "mondeaux-esker",
@@ -259,7 +364,11 @@
       "state": "WI",
       "certified_miles": 11.66,
       "ui_mile_start": 256.86,
-      "ui_mile_end": 271.86
+      "ui_mile_end": 271.86,
+      "route_id": "main-spine",
+      "mile_start": 256.86,
+      "mile_end": 271.36,
+      "region_id": "western"
     },
     {
       "id": "pine-line",
@@ -268,7 +377,11 @@
       "state": "WI",
       "certified_miles": 0.89,
       "ui_mile_start": 271.86,
-      "ui_mile_end": 273.4
+      "ui_mile_end": 273.4,
+      "route_id": "main-spine",
+      "mile_start": 271.86,
+      "mile_end": 273.36,
+      "region_id": "western"
     },
     {
       "id": "east-lake",
@@ -277,7 +390,11 @@
       "state": "WI",
       "certified_miles": 6.94,
       "ui_mile_start": 273.4,
-      "ui_mile_end": 280.34
+      "ui_mile_end": 280.34,
+      "route_id": "main-spine",
+      "mile_start": 273.4,
+      "mile_end": 279.9,
+      "region_id": "western"
     },
     {
       "id": "rib-lake",
@@ -286,7 +403,11 @@
       "state": "WI",
       "certified_miles": 6.45,
       "ui_mile_start": 280.34,
-      "ui_mile_end": 287.47
+      "ui_mile_end": 287.47,
+      "route_id": "main-spine",
+      "mile_start": 280.34,
+      "mile_end": 287.34,
+      "region_id": "western"
     },
     {
       "id": "wood-lake",
@@ -295,7 +416,11 @@
       "state": "WI",
       "certified_miles": 13.35,
       "ui_mile_start": 287.47,
-      "ui_mile_end": 300.82
+      "ui_mile_end": 300.82,
+      "route_id": "main-spine",
+      "mile_start": 287.47,
+      "mile_end": 300.47,
+      "region_id": "western"
     },
     {
       "id": "timberland-wilderness",
@@ -304,7 +429,11 @@
       "state": "WI",
       "certified_miles": 3.94,
       "ui_mile_start": 300.82,
-      "ui_mile_end": 306.61
+      "ui_mile_end": 306.61,
+      "route_id": "main-spine",
+      "mile_start": 300.82,
+      "mile_end": 306.32,
+      "region_id": "western"
     },
     {
       "id": "camp-27",
@@ -313,7 +442,11 @@
       "state": "WI",
       "certified_miles": 2.92,
       "ui_mile_start": 306.61,
-      "ui_mile_end": 309.52
+      "ui_mile_end": 309.52,
+      "route_id": "main-spine",
+      "mile_start": 306.61,
+      "mile_end": 309.11,
+      "region_id": "western"
     },
     {
       "id": "new-wood",
@@ -322,7 +455,11 @@
       "state": "WI",
       "certified_miles": 6.91,
       "ui_mile_start": 309.52,
-      "ui_mile_end": 317.05
+      "ui_mile_end": 317.05,
+      "route_id": "main-spine",
+      "mile_start": 309.52,
+      "mile_end": 317.02,
+      "region_id": "western"
     },
     {
       "id": "averill-kelly-creek-wilderness",
@@ -331,7 +468,11 @@
       "state": "WI",
       "certified_miles": 4.64,
       "ui_mile_start": 317.05,
-      "ui_mile_end": 321.68
+      "ui_mile_end": 321.68,
+      "route_id": "main-spine",
+      "mile_start": 317.05,
+      "mile_end": 321.55,
+      "region_id": "western"
     },
     {
       "id": "turtle-rock",
@@ -340,7 +481,11 @@
       "state": "WI",
       "certified_miles": 5.1,
       "ui_mile_start": 321.68,
-      "ui_mile_end": 328.86
+      "ui_mile_end": 328.86,
+      "route_id": "main-spine",
+      "mile_start": 321.68,
+      "mile_end": 328.68,
+      "region_id": "western"
     },
     {
       "id": "grandfather-falls",
@@ -349,7 +494,11 @@
       "state": "WI",
       "certified_miles": 2.23,
       "ui_mile_start": 328.86,
-      "ui_mile_end": 337.29
+      "ui_mile_end": 337.29,
+      "route_id": "main-spine",
+      "mile_start": 328.86,
+      "mile_end": 336.86,
+      "region_id": "western"
     },
     {
       "id": "underdown",
@@ -358,7 +507,11 @@
       "state": "WI",
       "certified_miles": 8.36,
       "ui_mile_start": 337.29,
-      "ui_mile_end": 350.25
+      "ui_mile_end": 350.25,
+      "route_id": "main-spine",
+      "mile_start": 337.29,
+      "mile_end": 349.79,
+      "region_id": "western"
     },
     {
       "id": "harrison-hills",
@@ -367,7 +520,11 @@
       "state": "WI",
       "certified_miles": 14.42,
       "ui_mile_start": 350.25,
-      "ui_mile_end": 364.67
+      "ui_mile_end": 364.67,
+      "route_id": "main-spine",
+      "mile_start": 350.25,
+      "mile_end": 364.25,
+      "region_id": "western"
     },
     {
       "id": "parrish-hills",
@@ -376,7 +533,11 @@
       "state": "WI",
       "certified_miles": 12.05,
       "ui_mile_start": 364.67,
-      "ui_mile_end": 376.72
+      "ui_mile_end": 376.72,
+      "route_id": "main-spine",
+      "mile_start": 364.67,
+      "mile_end": 376.67,
+      "region_id": "western"
     },
     {
       "id": "highland-lakes",
@@ -385,7 +546,11 @@
       "state": "WI",
       "certified_miles": 8.22,
       "ui_mile_start": 376.72,
-      "ui_mile_end": 389.52
+      "ui_mile_end": 389.52,
+      "route_id": "main-spine",
+      "mile_start": 376.72,
+      "mile_end": 389.22,
+      "region_id": "western"
     },
     {
       "id": "summit-moraine",
@@ -394,7 +559,11 @@
       "state": "WI",
       "certified_miles": 12.34,
       "ui_mile_start": 389.52,
-      "ui_mile_end": 401.86
+      "ui_mile_end": 401.86,
+      "route_id": "main-spine",
+      "mile_start": 389.52,
+      "mile_end": 401.52,
+      "region_id": "western"
     },
     {
       "id": "lumbercamp",
@@ -403,7 +572,11 @@
       "state": "WI",
       "certified_miles": 11.97,
       "ui_mile_start": 401.86,
-      "ui_mile_end": 413.84
+      "ui_mile_end": 413.84,
+      "route_id": "main-spine",
+      "mile_start": 401.86,
+      "mile_end": 413.36,
+      "region_id": "western"
     },
     {
       "id": "kettlebowl",
@@ -412,7 +585,11 @@
       "state": "WI",
       "certified_miles": 10.17,
       "ui_mile_start": 413.84,
-      "ui_mile_end": 429.17
+      "ui_mile_end": 429.17,
+      "route_id": "main-spine",
+      "mile_start": 413.84,
+      "mile_end": 428.84,
+      "region_id": "western"
     },
     {
       "id": "antigo-heights",
@@ -421,7 +598,11 @@
       "state": "WI",
       "certified_miles": 2.97,
       "ui_mile_start": 429.17,
-      "ui_mile_end": 446.88
+      "ui_mile_end": 446.88,
+      "route_id": "main-spine",
+      "mile_start": 429.17,
+      "mile_end": 446.67,
+      "region_id": "western"
     },
     {
       "id": "plover-river",
@@ -430,7 +611,11 @@
       "state": "WI",
       "certified_miles": 6.6,
       "ui_mile_start": 446.88,
-      "ui_mile_end": 461.69
+      "ui_mile_end": 461.69,
+      "route_id": "main-spine",
+      "mile_start": 446.88,
+      "mile_end": 461.38,
+      "region_id": "central"
     },
     {
       "id": "dells-of-the-eau-claire",
@@ -439,7 +624,11 @@
       "state": "WI",
       "certified_miles": 2.64,
       "ui_mile_start": 461.69,
-      "ui_mile_end": 464.33
+      "ui_mile_end": 464.33,
+      "route_id": "main-spine",
+      "mile_start": 461.69,
+      "mile_end": 464.19,
+      "region_id": "central"
     },
     {
       "id": "thornapple-creek",
@@ -448,7 +637,11 @@
       "state": "WI",
       "certified_miles": 3.02,
       "ui_mile_start": 464.33,
-      "ui_mile_end": 468.28
+      "ui_mile_end": 468.28,
+      "route_id": "main-spine",
+      "mile_start": 464.33,
+      "mile_end": 467.83,
+      "region_id": "central"
     },
     {
       "id": "ringle",
@@ -457,7 +650,11 @@
       "state": "WI",
       "certified_miles": 9.55,
       "ui_mile_start": 468.28,
-      "ui_mile_end": 481.11
+      "ui_mile_end": 481.11,
+      "route_id": "main-spine",
+      "mile_start": 468.28,
+      "mile_end": 480.78,
+      "region_id": "central"
     },
     {
       "id": "white-cedar",
@@ -466,7 +663,11 @@
       "state": "WI",
       "certified_miles": 0.61,
       "ui_mile_start": 481.11,
-      "ui_mile_end": 506.25
+      "ui_mile_end": 506.25,
+      "route_id": "main-spine",
+      "mile_start": 481.11,
+      "mile_end": 506.11,
+      "region_id": "central"
     },
     {
       "id": "new-hope",
@@ -475,7 +676,11 @@
       "state": "WI",
       "certified_miles": 3.67,
       "ui_mile_start": 506.25,
-      "ui_mile_end": 509.92
+      "ui_mile_end": 509.92,
+      "route_id": "main-spine",
+      "mile_start": 506.25,
+      "mile_end": 509.75,
+      "region_id": "central"
     },
     {
       "id": "iola-ski-hill",
@@ -484,7 +689,11 @@
       "state": "WI",
       "certified_miles": 2.5,
       "ui_mile_start": 509.92,
-      "ui_mile_end": 525.51
+      "ui_mile_end": 525.51,
+      "route_id": "main-spine",
+      "mile_start": 509.92,
+      "mile_end": 525.42,
+      "region_id": "central"
     },
     {
       "id": "skunk-and-foster-lakes",
@@ -493,7 +702,11 @@
       "state": "WI",
       "certified_miles": 3.54,
       "ui_mile_start": 525.51,
-      "ui_mile_end": 529.88
+      "ui_mile_end": 529.88,
+      "route_id": "main-spine",
+      "mile_start": 525.51,
+      "mile_end": 529.51,
+      "region_id": "central"
     },
     {
       "id": "waupaca-river",
@@ -502,7 +715,11 @@
       "state": "WI",
       "certified_miles": 2.24,
       "ui_mile_start": 529.88,
-      "ui_mile_end": 534.74
+      "ui_mile_end": 534.74,
+      "route_id": "main-spine",
+      "mile_start": 529.88,
+      "mile_end": 534.38,
+      "region_id": "central"
     },
     {
       "id": "hartman-creek",
@@ -511,7 +728,11 @@
       "state": "WI",
       "certified_miles": 5.47,
       "ui_mile_start": 534.74,
-      "ui_mile_end": 540.22
+      "ui_mile_end": 540.22,
+      "route_id": "main-spine",
+      "mile_start": 534.74,
+      "mile_end": 539.74,
+      "region_id": "central"
     },
     {
       "id": "emmons-creek",
@@ -520,7 +741,11 @@
       "state": "WI",
       "certified_miles": 2.57,
       "ui_mile_start": 540.22,
-      "ui_mile_end": 557.44
+      "ui_mile_end": 557.44,
+      "route_id": "main-spine",
+      "mile_start": 540.22,
+      "mile_end": 557.22,
+      "region_id": "central"
     },
     {
       "id": "deerfield",
@@ -529,7 +754,11 @@
       "state": "WI",
       "certified_miles": 3.67,
       "ui_mile_start": 557.44,
-      "ui_mile_end": 562.88
+      "ui_mile_end": 562.88,
+      "route_id": "main-spine",
+      "mile_start": 557.44,
+      "mile_end": 562.44,
+      "region_id": "central"
     },
     {
       "id": "bohn-lake",
@@ -538,7 +767,11 @@
       "state": "WI",
       "certified_miles": 1.84,
       "ui_mile_start": 562.88,
-      "ui_mile_end": 565.7
+      "ui_mile_end": 565.7,
+      "route_id": "main-spine",
+      "mile_start": 562.88,
+      "mile_end": 565.38,
+      "region_id": "central"
     },
     {
       "id": "greenwood",
@@ -547,7 +780,11 @@
       "state": "WI",
       "certified_miles": 4.68,
       "ui_mile_start": 565.7,
-      "ui_mile_end": 571.14
+      "ui_mile_end": 571.14,
+      "route_id": "main-spine",
+      "mile_start": 565.7,
+      "mile_end": 570.7,
+      "region_id": "central"
     },
     {
       "id": "mecan-river",
@@ -556,7 +793,11 @@
       "state": "WI",
       "certified_miles": 7.12,
       "ui_mile_start": 571.14,
-      "ui_mile_end": 580.9
+      "ui_mile_end": 580.9,
+      "route_id": "main-spine",
+      "mile_start": 571.14,
+      "mile_end": 580.64,
+      "region_id": "central"
     },
     {
       "id": "wedde-creek",
@@ -565,7 +806,11 @@
       "state": "WI",
       "certified_miles": 1.19,
       "ui_mile_start": 580.9,
-      "ui_mile_end": 582.78
+      "ui_mile_end": 582.78,
+      "route_id": "main-spine",
+      "mile_start": 580.9,
+      "mile_end": 582.4,
+      "region_id": "central"
     },
     {
       "id": "chaffee-creek",
@@ -574,7 +819,11 @@
       "state": "WI",
       "certified_miles": 3.21,
       "ui_mile_start": 582.78,
-      "ui_mile_end": 593.11
+      "ui_mile_end": 593.11,
+      "route_id": "main-spine",
+      "mile_start": 582.78,
+      "mile_end": 592.78,
+      "region_id": "central"
     },
     {
       "id": "karner-blue",
@@ -583,7 +832,11 @@
       "state": "WI",
       "certified_miles": 1.15,
       "ui_mile_start": 593.11,
-      "ui_mile_end": 615.47
+      "ui_mile_end": 615.47,
+      "route_id": "main-spine",
+      "mile_start": 593.11,
+      "mile_end": 615.11,
+      "region_id": "central"
     },
     {
       "id": "montello",
@@ -592,7 +845,11 @@
       "state": "WI",
       "certified_miles": 1.97,
       "ui_mile_start": 615.47,
-      "ui_mile_end": 628.63
+      "ui_mile_end": 628.63,
+      "route_id": "main-spine",
+      "mile_start": 615.47,
+      "mile_end": 628.47,
+      "region_id": "central"
     },
     {
       "id": "john-muir-park",
@@ -601,7 +858,11 @@
       "state": "WI",
       "certified_miles": 1.83,
       "ui_mile_start": 628.63,
-      "ui_mile_end": 642.89
+      "ui_mile_end": 642.89,
+      "route_id": "main-spine",
+      "mile_start": 628.63,
+      "mile_end": 642.63,
+      "region_id": "central"
     },
     {
       "id": "portage-canal",
@@ -610,7 +871,11 @@
       "state": "WI",
       "certified_miles": 2.02,
       "ui_mile_start": 642.89,
-      "ui_mile_end": 666.93
+      "ui_mile_end": 666.93,
+      "route_id": "main-spine",
+      "mile_start": 642.89,
+      "mile_end": 666.89,
+      "region_id": "central"
     },
     {
       "id": "sauk-point",
@@ -619,7 +884,11 @@
       "state": "WI",
       "certified_miles": 3.86,
       "ui_mile_start": 666.93,
-      "ui_mile_end": 670.83
+      "ui_mile_end": 670.83,
+      "route_id": "main-spine",
+      "mile_start": 666.93,
+      "mile_end": 670.43,
+      "region_id": "central"
     },
     {
       "id": "devils-lake",
@@ -628,7 +897,11 @@
       "state": "WI",
       "certified_miles": 10.91,
       "ui_mile_start": 670.83,
-      "ui_mile_end": 681.74
+      "ui_mile_end": 681.74,
+      "route_id": "main-spine",
+      "mile_start": 670.83,
+      "mile_end": 681.33,
+      "region_id": "central"
     },
     {
       "id": "merrimac",
@@ -637,7 +910,11 @@
       "state": "WI",
       "certified_miles": 3.61,
       "ui_mile_start": 681.74,
-      "ui_mile_end": 687.32
+      "ui_mile_end": 687.32,
+      "route_id": "main-spine",
+      "mile_start": 681.74,
+      "mile_end": 687.24,
+      "region_id": "central"
     },
     {
       "id": "gibraltar-rock",
@@ -646,7 +923,11 @@
       "state": "WI",
       "certified_miles": 3.96,
       "ui_mile_start": 687.32,
-      "ui_mile_end": 694.35
+      "ui_mile_end": 694.35,
+      "route_id": "main-spine",
+      "mile_start": 687.32,
+      "mile_end": 694.32,
+      "region_id": "central"
     },
     {
       "id": "fern-glen",
@@ -655,7 +936,11 @@
       "state": "WI",
       "certified_miles": 1.31,
       "ui_mile_start": 694.35,
-      "ui_mile_end": 697.38
+      "ui_mile_end": 697.38,
+      "route_id": "main-spine",
+      "mile_start": 694.35,
+      "mile_end": 697.35,
+      "region_id": "central"
     },
     {
       "id": "lodi",
@@ -664,7 +949,11 @@
       "state": "WI",
       "certified_miles": 2.89,
       "ui_mile_start": 697.38,
-      "ui_mile_end": 700.27
+      "ui_mile_end": 700.27,
+      "route_id": "main-spine",
+      "mile_start": 697.38,
+      "mile_end": 699.88,
+      "region_id": "central"
     },
     {
       "id": "lodi-marsh",
@@ -673,7 +962,11 @@
       "state": "WI",
       "certified_miles": 5.05,
       "ui_mile_start": 700.27,
-      "ui_mile_end": 715.23
+      "ui_mile_end": 715.23,
+      "route_id": "main-spine",
+      "mile_start": 700.27,
+      "mile_end": 714.77,
+      "region_id": "central"
     },
     {
       "id": "indian-lake",
@@ -682,7 +975,11 @@
       "state": "WI",
       "certified_miles": 3.49,
       "ui_mile_start": 715.23,
-      "ui_mile_end": 722.28
+      "ui_mile_end": 722.28,
+      "route_id": "main-spine",
+      "mile_start": 715.23,
+      "mile_end": 722.23,
+      "region_id": "central"
     },
     {
       "id": "table-bluff",
@@ -691,7 +988,11 @@
       "state": "WI",
       "certified_miles": 2.48,
       "ui_mile_start": 722.28,
-      "ui_mile_end": 726.6
+      "ui_mile_end": 726.6,
+      "route_id": "main-spine",
+      "mile_start": 722.28,
+      "mile_end": 726.28,
+      "region_id": "central"
     },
     {
       "id": "cross-plains",
@@ -700,7 +1001,11 @@
       "state": "WI",
       "certified_miles": 10.14,
       "ui_mile_start": 726.6,
-      "ui_mile_end": 739.32
+      "ui_mile_end": 739.32,
+      "route_id": "main-spine",
+      "mile_start": 726.6,
+      "mile_end": 739.1,
+      "region_id": "central"
     },
     {
       "id": "valley-view",
@@ -709,7 +1014,11 @@
       "state": "WI",
       "certified_miles": 3.65,
       "ui_mile_start": 739.32,
-      "ui_mile_end": 744.81
+      "ui_mile_end": 744.81,
+      "route_id": "main-spine",
+      "mile_start": 739.32,
+      "mile_end": 744.32,
+      "region_id": "central"
     },
     {
       "id": "madison",
@@ -718,7 +1027,11 @@
       "state": "WI",
       "certified_miles": 3.04,
       "ui_mile_start": 744.81,
-      "ui_mile_end": 747.85
+      "ui_mile_end": 747.85,
+      "route_id": "main-spine",
+      "mile_start": 744.81,
+      "mile_end": 747.81,
+      "region_id": "central"
     },
     {
       "id": "verona",
@@ -727,7 +1040,11 @@
       "state": "WI",
       "certified_miles": 6.32,
       "ui_mile_start": 747.85,
-      "ui_mile_end": 757.06
+      "ui_mile_end": 757.06,
+      "route_id": "main-spine",
+      "mile_start": 747.85,
+      "mile_end": 756.85,
+      "region_id": "central"
     },
     {
       "id": "montrose",
@@ -736,7 +1053,11 @@
       "state": "WI",
       "certified_miles": 7.49,
       "ui_mile_start": 757.06,
-      "ui_mile_end": 764.55
+      "ui_mile_end": 764.55,
+      "route_id": "main-spine",
+      "mile_start": 757.06,
+      "mile_end": 764.06,
+      "region_id": "central"
     },
     {
       "id": "brooklyn-wildlife",
@@ -745,7 +1066,11 @@
       "state": "WI",
       "certified_miles": 3.35,
       "ui_mile_start": 764.55,
-      "ui_mile_end": 771.61
+      "ui_mile_end": 771.61,
+      "route_id": "main-spine",
+      "mile_start": 764.55,
+      "mile_end": 771.55,
+      "region_id": "central"
     },
     {
       "id": "monticello",
@@ -754,7 +1079,11 @@
       "state": "WI",
       "certified_miles": 6.58,
       "ui_mile_start": 771.61,
-      "ui_mile_end": 778.19
+      "ui_mile_end": 778.19,
+      "route_id": "main-spine",
+      "mile_start": 771.61,
+      "mile_end": 778.11,
+      "region_id": "central"
     },
     {
       "id": "albany",
@@ -763,7 +1092,11 @@
       "state": "WI",
       "certified_miles": 9.31,
       "ui_mile_start": 778.19,
-      "ui_mile_end": 798.19
+      "ui_mile_end": 798.19,
+      "route_id": "main-spine",
+      "mile_start": 778.19,
+      "mile_end": 798.19,
+      "region_id": "central"
     },
     {
       "id": "evansville",
@@ -772,7 +1105,11 @@
       "state": "WI",
       "certified_miles": 2.72,
       "ui_mile_start": 798.19,
-      "ui_mile_end": 810.22
+      "ui_mile_end": 810.22,
+      "route_id": "main-spine",
+      "mile_start": 798.19,
+      "mile_end": 810.19,
+      "region_id": "central"
     },
     {
       "id": "gibbs-lake",
@@ -781,7 +1118,11 @@
       "state": "WI",
       "certified_miles": 1.27,
       "ui_mile_start": 810.22,
-      "ui_mile_end": 822.42
+      "ui_mile_end": 822.42,
+      "route_id": "main-spine",
+      "mile_start": 810.22,
+      "mile_end": 822.22,
+      "region_id": "central"
     },
     {
       "id": "arbor-ridge",
@@ -790,7 +1131,11 @@
       "state": "WI",
       "certified_miles": 2.07,
       "ui_mile_start": 822.42,
-      "ui_mile_end": 824.49
+      "ui_mile_end": 824.49,
+      "route_id": "main-spine",
+      "mile_start": 822.42,
+      "mile_end": 824.42,
+      "region_id": "central"
     },
     {
       "id": "devils-staircase",
@@ -799,7 +1144,11 @@
       "state": "WI",
       "certified_miles": 1.83,
       "ui_mile_start": 824.49,
-      "ui_mile_end": 826.32
+      "ui_mile_end": 826.32,
+      "route_id": "main-spine",
+      "mile_start": 824.49,
+      "mile_end": 825.99,
+      "region_id": "central"
     },
     {
       "id": "janesville",
@@ -808,7 +1157,11 @@
       "state": "WI",
       "certified_miles": 10.33,
       "ui_mile_start": 826.32,
-      "ui_mile_end": 836.65
+      "ui_mile_end": 836.65,
+      "route_id": "main-spine",
+      "mile_start": 826.32,
+      "mile_end": 836.32,
+      "region_id": "central"
     },
     {
       "id": "janesville-to-milton",
@@ -817,7 +1170,11 @@
       "state": "WI",
       "certified_miles": 1.69,
       "ui_mile_start": 836.65,
-      "ui_mile_end": 839.84
+      "ui_mile_end": 839.84,
+      "route_id": "main-spine",
+      "mile_start": 836.65,
+      "mile_end": 839.65,
+      "region_id": "central"
     },
     {
       "id": "milton",
@@ -826,7 +1183,11 @@
       "state": "WI",
       "certified_miles": 4.33,
       "ui_mile_start": 839.84,
-      "ui_mile_end": 844.17
+      "ui_mile_end": 844.17,
+      "route_id": "main-spine",
+      "mile_start": 839.84,
+      "mile_end": 843.84,
+      "region_id": "central"
     },
     {
       "id": "storrs-lake",
@@ -835,7 +1196,11 @@
       "state": "WI",
       "certified_miles": 1.81,
       "ui_mile_start": 844.17,
-      "ui_mile_end": 855.26
+      "ui_mile_end": 855.26,
+      "route_id": "main-spine",
+      "mile_start": 844.17,
+      "mile_end": 855.17,
+      "region_id": "central"
     },
     {
       "id": "clover-valley",
@@ -844,7 +1209,11 @@
       "state": "WI",
       "certified_miles": 1.61,
       "ui_mile_start": 855.26,
-      "ui_mile_end": 861.74
+      "ui_mile_end": 861.74,
+      "route_id": "main-spine",
+      "mile_start": 855.26,
+      "mile_end": 861.26,
+      "region_id": "central"
     },
     {
       "id": "whitewater-lake",
@@ -853,7 +1222,11 @@
       "state": "WI",
       "certified_miles": 4.57,
       "ui_mile_start": 861.74,
-      "ui_mile_end": 866.31
+      "ui_mile_end": 866.31,
+      "route_id": "main-spine",
+      "mile_start": 861.74,
+      "mile_end": 866.24,
+      "region_id": "eastern"
     },
     {
       "id": "blackhawk",
@@ -862,7 +1235,11 @@
       "state": "WI",
       "certified_miles": 7.03,
       "ui_mile_start": 866.31,
-      "ui_mile_end": 873.34
+      "ui_mile_end": 873.34,
+      "route_id": "main-spine",
+      "mile_start": 866.31,
+      "mile_end": 873.31,
+      "region_id": "eastern"
     },
     {
       "id": "blue-spring-lake",
@@ -871,7 +1248,11 @@
       "state": "WI",
       "certified_miles": 7.26,
       "ui_mile_start": 873.34,
-      "ui_mile_end": 880.6
+      "ui_mile_end": 880.6,
+      "route_id": "main-spine",
+      "mile_start": 873.34,
+      "mile_end": 880.34,
+      "region_id": "eastern"
     },
     {
       "id": "stony-ridge",
@@ -880,7 +1261,11 @@
       "state": "WI",
       "certified_miles": 3.07,
       "ui_mile_start": 880.6,
-      "ui_mile_end": 883.67
+      "ui_mile_end": 883.67,
+      "route_id": "main-spine",
+      "mile_start": 880.6,
+      "mile_end": 883.6,
+      "region_id": "eastern"
     },
     {
       "id": "eagle",
@@ -889,7 +1274,11 @@
       "state": "WI",
       "certified_miles": 5.6,
       "ui_mile_start": 883.67,
-      "ui_mile_end": 889.27
+      "ui_mile_end": 889.27,
+      "route_id": "main-spine",
+      "mile_start": 883.67,
+      "mile_end": 889.17,
+      "region_id": "eastern"
     },
     {
       "id": "scuppernong",
@@ -898,7 +1287,11 @@
       "state": "WI",
       "certified_miles": 5.91,
       "ui_mile_start": 889.27,
-      "ui_mile_end": 895.85
+      "ui_mile_end": 895.85,
+      "route_id": "main-spine",
+      "mile_start": 889.27,
+      "mile_end": 895.77,
+      "region_id": "eastern"
     },
     {
       "id": "waterville",
@@ -907,7 +1300,11 @@
       "state": "WI",
       "certified_miles": 6.02,
       "ui_mile_start": 895.85,
-      "ui_mile_end": 902.1
+      "ui_mile_end": 902.1,
+      "route_id": "main-spine",
+      "mile_start": 895.85,
+      "mile_end": 901.85,
+      "region_id": "eastern"
     },
     {
       "id": "lapham-peak",
@@ -916,7 +1313,11 @@
       "state": "WI",
       "certified_miles": 6.07,
       "ui_mile_start": 902.1,
-      "ui_mile_end": 908.18
+      "ui_mile_end": 908.18,
+      "route_id": "main-spine",
+      "mile_start": 902.1,
+      "mile_end": 908.1,
+      "region_id": "eastern"
     },
     {
       "id": "delafield",
@@ -925,7 +1326,11 @@
       "state": "WI",
       "certified_miles": 3.21,
       "ui_mile_start": 908.18,
-      "ui_mile_end": 911.39
+      "ui_mile_end": 911.39,
+      "route_id": "main-spine",
+      "mile_start": 908.18,
+      "mile_end": 911.18,
+      "region_id": "eastern"
     },
     {
       "id": "hartland",
@@ -934,7 +1339,11 @@
       "state": "WI",
       "certified_miles": 5.6,
       "ui_mile_start": 911.39,
-      "ui_mile_end": 918.15
+      "ui_mile_end": 918.15,
+      "route_id": "main-spine",
+      "mile_start": 911.39,
+      "mile_end": 917.89,
+      "region_id": "eastern"
     },
     {
       "id": "merton",
@@ -943,7 +1352,11 @@
       "state": "WI",
       "certified_miles": 2.64,
       "ui_mile_start": 918.15,
-      "ui_mile_end": 923.28
+      "ui_mile_end": 923.28,
+      "route_id": "main-spine",
+      "mile_start": 918.15,
+      "mile_end": 923.15,
+      "region_id": "eastern"
     },
     {
       "id": "monches",
@@ -952,7 +1365,11 @@
       "state": "WI",
       "certified_miles": 3.08,
       "ui_mile_start": 923.28,
-      "ui_mile_end": 926.37
+      "ui_mile_end": 926.37,
+      "route_id": "main-spine",
+      "mile_start": 923.28,
+      "mile_end": 926.28,
+      "region_id": "eastern"
     },
     {
       "id": "loew-lake",
@@ -961,7 +1378,11 @@
       "state": "WI",
       "certified_miles": 4.53,
       "ui_mile_start": 926.37,
-      "ui_mile_end": 932.43
+      "ui_mile_end": 932.43,
+      "route_id": "main-spine",
+      "mile_start": 926.37,
+      "mile_end": 932.37,
+      "region_id": "eastern"
     },
     {
       "id": "holy-hill",
@@ -970,7 +1391,11 @@
       "state": "WI",
       "certified_miles": 6.76,
       "ui_mile_start": 932.43,
-      "ui_mile_end": 939.19
+      "ui_mile_end": 939.19,
+      "route_id": "main-spine",
+      "mile_start": 932.43,
+      "mile_end": 938.93,
+      "region_id": "eastern"
     },
     {
       "id": "pike-lake",
@@ -979,7 +1404,11 @@
       "state": "WI",
       "certified_miles": 3.24,
       "ui_mile_start": 939.19,
-      "ui_mile_end": 942.43
+      "ui_mile_end": 942.43,
+      "route_id": "main-spine",
+      "mile_start": 939.19,
+      "mile_end": 942.19,
+      "region_id": "eastern"
     },
     {
       "id": "slinger",
@@ -988,7 +1417,11 @@
       "state": "WI",
       "certified_miles": 2.09,
       "ui_mile_start": 942.43,
-      "ui_mile_end": 944.52
+      "ui_mile_end": 944.52,
+      "route_id": "main-spine",
+      "mile_start": 942.43,
+      "mile_end": 944.43,
+      "region_id": "eastern"
     },
     {
       "id": "cedar-lakes",
@@ -997,7 +1430,11 @@
       "state": "WI",
       "certified_miles": 4.01,
       "ui_mile_start": 944.52,
-      "ui_mile_end": 952.95
+      "ui_mile_end": 952.95,
+      "route_id": "main-spine",
+      "mile_start": 944.52,
+      "mile_end": 952.52,
+      "region_id": "eastern"
     },
     {
       "id": "west-bend",
@@ -1006,7 +1443,11 @@
       "state": "WI",
       "certified_miles": 6.14,
       "ui_mile_start": 952.95,
-      "ui_mile_end": 959.09
+      "ui_mile_end": 959.09,
+      "route_id": "main-spine",
+      "mile_start": 952.95,
+      "mile_end": 958.95,
+      "region_id": "eastern"
     },
     {
       "id": "kewaskum",
@@ -1015,7 +1456,11 @@
       "state": "WI",
       "certified_miles": 3.17,
       "ui_mile_start": 959.09,
-      "ui_mile_end": 964.51
+      "ui_mile_end": 964.51,
+      "route_id": "main-spine",
+      "mile_start": 959.09,
+      "mile_end": 964.09,
+      "region_id": "eastern"
     },
     {
       "id": "milwaukee-river-washington-co",
@@ -1024,7 +1469,11 @@
       "state": "WI",
       "certified_miles": 6.87,
       "ui_mile_start": 964.51,
-      "ui_mile_end": 971.38
+      "ui_mile_end": 971.38,
+      "route_id": "main-spine",
+      "mile_start": 964.51,
+      "mile_end": 971.01,
+      "region_id": "eastern"
     },
     {
       "id": "milwaukee-river-fond-du-lac-co",
@@ -1033,7 +1482,11 @@
       "state": "WI",
       "certified_miles": 4.25,
       "ui_mile_start": 971.38,
-      "ui_mile_end": 975.63
+      "ui_mile_end": 975.63,
+      "route_id": "main-spine",
+      "mile_start": 971.38,
+      "mile_end": 975.38,
+      "region_id": "eastern"
     },
     {
       "id": "parnell",
@@ -1042,7 +1495,11 @@
       "state": "WI",
       "certified_miles": 13.87,
       "ui_mile_start": 975.63,
-      "ui_mile_end": 989.5
+      "ui_mile_end": 989.5,
+      "route_id": "main-spine",
+      "mile_start": 975.63,
+      "mile_end": 989.13,
+      "region_id": "eastern"
     },
     {
       "id": "greenbush",
@@ -1051,7 +1508,11 @@
       "state": "WI",
       "certified_miles": 8.5,
       "ui_mile_start": 989.5,
-      "ui_mile_end": 1002.22
+      "ui_mile_end": 1002.22,
+      "route_id": "main-spine",
+      "mile_start": 989.5,
+      "mile_end": 1002,
+      "region_id": "eastern"
     },
     {
       "id": "labudde-creek",
@@ -1060,7 +1521,11 @@
       "state": "WI",
       "certified_miles": 3.66,
       "ui_mile_start": 1002.22,
-      "ui_mile_end": 1011.56
+      "ui_mile_end": 1011.56,
+      "route_id": "main-spine",
+      "mile_start": 1002.22,
+      "mile_end": 1011.22,
+      "region_id": "eastern"
     },
     {
       "id": "walla-hi",
@@ -1069,7 +1534,11 @@
       "state": "WI",
       "certified_miles": 2.28,
       "ui_mile_start": 1011.56,
-      "ui_mile_end": 1041.04
+      "ui_mile_end": 1041.04,
+      "route_id": "main-spine",
+      "mile_start": 1011.56,
+      "mile_end": 1040.56,
+      "region_id": "eastern"
     },
     {
       "id": "manitowoc",
@@ -1078,7 +1547,11 @@
       "state": "WI",
       "certified_miles": 7.51,
       "ui_mile_start": 1041.04,
-      "ui_mile_end": 1048.55
+      "ui_mile_end": 1048.55,
+      "route_id": "main-spine",
+      "mile_start": 1041.04,
+      "mile_end": 1048.54,
+      "region_id": "eastern"
     },
     {
       "id": "dunes",
@@ -1087,7 +1560,11 @@
       "state": "WI",
       "certified_miles": 2.64,
       "ui_mile_start": 1048.55,
-      "ui_mile_end": 1051.19
+      "ui_mile_end": 1051.19,
+      "route_id": "main-spine",
+      "mile_start": 1048.55,
+      "mile_end": 1051.05,
+      "region_id": "eastern"
     },
     {
       "id": "two-rivers",
@@ -1096,7 +1573,11 @@
       "state": "WI",
       "certified_miles": 3.02,
       "ui_mile_start": 1051.19,
-      "ui_mile_end": 1054.2
+      "ui_mile_end": 1054.2,
+      "route_id": "main-spine",
+      "mile_start": 1051.19,
+      "mile_end": 1054.19,
+      "region_id": "eastern"
     },
     {
       "id": "point-beach",
@@ -1105,7 +1586,11 @@
       "state": "WI",
       "certified_miles": 9.83,
       "ui_mile_start": 1054.2,
-      "ui_mile_end": 1069.29
+      "ui_mile_end": 1069.29,
+      "route_id": "main-spine",
+      "mile_start": 1054.2,
+      "mile_end": 1069.2,
+      "region_id": "eastern"
     },
     {
       "id": "mishicot",
@@ -1114,7 +1599,11 @@
       "state": "WI",
       "certified_miles": 2.85,
       "ui_mile_start": 1069.29,
-      "ui_mile_end": 1072.86
+      "ui_mile_end": 1072.86,
+      "route_id": "main-spine",
+      "mile_start": 1069.29,
+      "mile_end": 1072.79,
+      "region_id": "eastern"
     },
     {
       "id": "east-twin-river",
@@ -1123,7 +1612,11 @@
       "state": "WI",
       "certified_miles": 1.42,
       "ui_mile_start": 1072.86,
-      "ui_mile_end": 1080.07
+      "ui_mile_end": 1080.07,
+      "route_id": "main-spine",
+      "mile_start": 1072.86,
+      "mile_end": 1079.86,
+      "region_id": "eastern"
     },
     {
       "id": "tisch-mills",
@@ -1132,7 +1625,11 @@
       "state": "WI",
       "certified_miles": 1.82,
       "ui_mile_start": 1080.07,
-      "ui_mile_end": 1103.03
+      "ui_mile_end": 1103.03,
+      "route_id": "main-spine",
+      "mile_start": 1080.07,
+      "mile_end": 1102.57,
+      "region_id": "eastern"
     },
     {
       "id": "kewaunee-river",
@@ -1141,7 +1638,11 @@
       "state": "WI",
       "certified_miles": 12.43,
       "ui_mile_start": 1103.03,
-      "ui_mile_end": 1127.28
+      "ui_mile_end": 1127.28,
+      "route_id": "main-spine",
+      "mile_start": 1103.03,
+      "mile_end": 1127.03,
+      "region_id": "eastern"
     },
     {
       "id": "algoma",
@@ -1150,7 +1651,11 @@
       "state": "WI",
       "certified_miles": 2.59,
       "ui_mile_start": 1127.28,
-      "ui_mile_end": 1129.88
+      "ui_mile_end": 1129.88,
+      "route_id": "main-spine",
+      "mile_start": 1127.28,
+      "mile_end": 1129.78,
+      "region_id": "eastern"
     },
     {
       "id": "forestville",
@@ -1159,7 +1664,11 @@
       "state": "WI",
       "certified_miles": 9.14,
       "ui_mile_start": 1129.88,
-      "ui_mile_end": 1139.02
+      "ui_mile_end": 1139.02,
+      "route_id": "main-spine",
+      "mile_start": 1129.88,
+      "mile_end": 1138.88,
+      "region_id": "eastern"
     },
     {
       "id": "sturgeon-bay",
@@ -1168,7 +1677,11 @@
       "state": "WI",
       "certified_miles": 14.04,
       "ui_mile_start": 1139.02,
-      "ui_mile_end": 1153.05
+      "ui_mile_end": 1153.05,
+      "route_id": "main-spine",
+      "mile_start": 1139.02,
+      "mile_end": 1153.02,
+      "region_id": "eastern"
     }
   ],
   "alt_groups": [
@@ -1201,5 +1714,54 @@
       "total_miles": 1153.1,
       "is_west_to_east": false
     }
-  ]
+  ],
+  "routes": [
+    {
+      "id": "main-spine",
+      "name": null,
+      "kind": "spine",
+      "alt_of": null,
+      "junction_mile": null,
+      "junction_sec_mile": null,
+      "hikeable": true,
+      "miles": 1153
+    },
+    {
+      "id": "west-alt",
+      "name": null,
+      "kind": "alternate",
+      "alt_of": "main-spine",
+      "junction_mile": null,
+      "junction_sec_mile": null,
+      "hikeable": true,
+      "miles": 80.5,
+      "region_from": "route",
+      "region_id": "central",
+      "section_id": "baraboo",
+      "section_name": "Baraboo",
+      "sec_mile_from": "route",
+      "sec_mile_scale": 1.045
+    }
+  ],
+  "hydrate": {
+    "id": {
+      "prefix": "iat",
+      "token_by": "section",
+      "from": "sec_mile",
+      "scale": 10,
+      "width": 4
+    },
+    "sec_mile_from": "section",
+    "sec_mile_decimals": 1,
+    "region_from": "section",
+    "emit": {
+      "route_kind": false,
+      "alt_of": true,
+      "junction_mile": false,
+      "junction_sec_mile": false
+    }
+  },
+  "notes": {
+    "schema": "points.json carries only lat, lon, mile, route_id and, where present, trail_elev, route_type and state. id, sec_mile, region_id, region_name, section_id and section_name are rebuilt at load by hydrate-points.js from the tables in this file. Converted by scripts/slim-trail.js."
+  }
 }

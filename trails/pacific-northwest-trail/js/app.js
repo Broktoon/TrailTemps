@@ -175,20 +175,11 @@ function calcTotalMiles(directionId) {
    ============================================================ */
 
 async function loadPntMeta() {
-  // _v2: the rebuild changed the meta shape (sections -> regions) and the
-  // total. A returning user still holding a v1 payload under a 30-day TTL would
-  // find pntMeta.regions undefined and silently fall back to the bootstrap, on
-  // a stale 1217.77 axis. Bump this key on any future meta change too.
-  const key    = `pnt_meta_${trailSlug}_v2`;
-  const cached = cacheGet(key, TRAIL_TTL_MS);
-  let payload  = cached;
-  if (!payload) {
-    const r = await fetch(META.pntMetaUrl, { cache: "no-cache" });
-    if (!r.ok) throw new Error(`pnt_meta.json fetch failed (${r.status})`);
-    payload = await r.json();
-    cacheSet(key, payload);
-  }
-  pntMeta = payload;
+  // Not cached in localStorage: points.json is rebuilt from this file at
+  // load (hydrate-points.js), so a stale cached copy would mis-hydrate it.
+  const r = await fetch(META.pntMetaUrl, { cache: "no-cache" });
+  if (!r.ok) throw new Error(`pnt_meta.json fetch failed (${r.status})`);
+  pntMeta = await r.json();
   console.log("[PNT] pnt_meta loaded:", pntMeta.regions?.length, "regions,",
     pntMeta.sections?.length ?? 0, "sections");
 }
@@ -196,7 +187,8 @@ async function loadPntMeta() {
 async function loadPoints() {
   const r = await fetch(META.pointsUrl, { cache: "no-cache" });
   if (!r.ok) throw new Error(`points.json fetch failed (${r.status})`);
-  const data = await r.json();
+  if (!pntMeta?.hydrate) throw new Error("pnt_meta.json must load before points.json");
+  const data = hydratePoints(await r.json(), pntMeta);
 
   allPoints = data.filter(p =>
     isFinite(Number(p.lat)) && isFinite(Number(p.lon))
@@ -997,15 +989,11 @@ async function main() {
   initMap();
   loadTrailOverlay();
 
-  // Load pnt_meta.json (non-blocking — updates section info if loaded)
-  loadPntMeta()
-    .then(() => {
-      updateSectionInfo();
-    })
-    .catch(e => console.warn("[PNT] pnt_meta not loaded:", e));
-
-  // Load points
+  // Load points. The meta comes first: points.json carries only the
+  // canonical fields, and hydrate-points.js rebuilds the rest from it.
   try {
+    await loadPntMeta();
+    updateSectionInfo();
     await loadPoints();
 
     if (map) {

@@ -36,7 +36,8 @@
       "mile_start": 0,
       "mile_end": 71,
       "miles": 71,
-      "sections": 0
+      "sections": 0,
+      "route_id": "main"
     },
     {
       "id": "ny",
@@ -45,7 +46,8 @@
       "mile_start": 71,
       "mile_end": 775.5,
       "miles": 704.5,
-      "sections": 0
+      "sections": 0,
+      "route_id": "main"
     },
     {
       "id": "pa",
@@ -54,7 +56,8 @@
       "mile_start": 775.5,
       "mile_end": 1061,
       "miles": 285.5,
-      "sections": 0
+      "sections": 0,
+      "route_id": "main"
     },
     {
       "id": "oh",
@@ -63,7 +66,8 @@
       "mile_start": 1061,
       "mile_end": 2132.5,
       "miles": 1071.5,
-      "sections": 0
+      "sections": 0,
+      "route_id": "main"
     },
     {
       "id": "mi",
@@ -72,7 +76,8 @@
       "mile_start": 2132.5,
       "mile_end": 3309,
       "miles": 1176.5,
-      "sections": 0
+      "sections": 0,
+      "route_id": "main"
     },
     {
       "id": "wi",
@@ -81,7 +86,8 @@
       "mile_start": 3309,
       "mile_end": 3524.5,
       "miles": 215.5,
-      "sections": 0
+      "sections": 0,
+      "route_id": "main"
     },
     {
       "id": "mn",
@@ -90,7 +96,8 @@
       "mile_start": 3524.5,
       "mile_end": 4381,
       "miles": 856.5,
-      "sections": 0
+      "sections": 0,
+      "route_id": "main"
     },
     {
       "id": "nd",
@@ -99,7 +106,8 @@
       "mile_start": 4381,
       "mile_end": 4834.95,
       "miles": 453.9,
-      "sections": 0
+      "sections": 0,
+      "route_id": "main"
     }
   ],
   "sections": [],
@@ -117,5 +125,39 @@
       "total_miles": 4834.95,
       "is_webo": false
     }
-  ]
+  ],
+  "routes": [
+    {
+      "id": "main",
+      "name": null,
+      "kind": "spine",
+      "alt_of": null,
+      "junction_mile": null,
+      "junction_sec_mile": null,
+      "hikeable": true,
+      "miles": 4835
+    }
+  ],
+  "hydrate": {
+    "id": {
+      "prefix": "nct",
+      "token_by": "route",
+      "from": "mile",
+      "scale": 1000,
+      "width": 7
+    },
+    "sec_mile_from": "region",
+    "sec_mile_decimals": 1,
+    "region_from": "ranges",
+    "emit": {
+      "route_kind": false,
+      "alt_of": false,
+      "junction_mile": false,
+      "junction_sec_mile": false
+    },
+    "boundary": "next"
+  },
+  "notes": {
+    "schema": "points.json carries only lat, lon, mile, route_id and, where present, trail_elev, route_type and state. id, sec_mile, region_id, region_name, section_id and section_name are rebuilt at load by hydrate-points.js from the tables in this file. Converted by scripts/slim-trail.js."
+  }
 }

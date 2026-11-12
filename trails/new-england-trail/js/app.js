@@ -166,16 +166,11 @@ function calcTotalMiles(directionId) {
    ============================================================ */
 
 async function loadNetMeta() {
-  const key = `net_meta_${trailSlug}_v1`;
-  const cached = cacheGet(key, TRAIL_TTL_MS);
-  let payload = cached;
-  if (!payload) {
-    const r = await fetch(META.netMetaUrl, { cache: "no-cache" });
-    if (!r.ok) throw new Error(`net_meta.json fetch failed (${r.status})`);
-    payload = await r.json();
-    cacheSet(key, payload);
-  }
-  netMeta = payload;
+  // Not cached in localStorage: points.json is rebuilt from this file at
+  // load (hydrate-points.js), so a stale cached copy would mis-hydrate it.
+  const r = await fetch(META.netMetaUrl, { cache: "no-cache" });
+  if (!r.ok) throw new Error(`net_meta.json fetch failed (${r.status})`);
+  netMeta = await r.json();
 
   if (isFinite(netMeta?.trail?.spine_miles)) {
     NET_SPINE_FULL = netMeta.trail.spine_miles;
@@ -193,7 +188,11 @@ async function loadNetMeta() {
 async function loadPoints() {
   const r = await fetch(META.pointsUrl, { cache: "no-cache" });
   if (!r.ok) throw new Error(`points.json fetch failed (${r.status})`);
-  const data = await r.json();
+  if (!netMeta?.hydrate) throw new Error("net_meta.json must load before points.json");
+  const data = hydratePoints(await r.json(), netMeta)
+    // This page reads `spur` and `spur_mile` off each point; neither is a
+    // canonical field, so derive them: the Middletown route, and its own mile.
+    .map(p => (p.route_id === "middletown-spur" ? { ...p, spur: true, spur_mile: p.sec_mile } : p));
 
   allPoints = data.filter(p =>
     isFinite(Number(p.lat)) && isFinite(Number(p.lon))
@@ -1058,16 +1057,11 @@ async function main() {
   initMap();
   loadTrailOverlay();
 
-  // Load net_meta.json (non-blocking — updates direction labels if loaded)
-  loadNetMeta()
-    .then(() => {
-      // Refresh section info with canonical meta data
-      updateSectionInfo();
-    })
-    .catch(e => console.warn("[NET] net_meta not loaded:", e));
-
-  // Load points
+  // The meta comes first: points.json carries only the canonical fields,
+  // and hydrate-points.js rebuilds the rest from it.
   try {
+    await loadNetMeta();
+    updateSectionInfo();
     await loadPoints();
 
     if (map) {

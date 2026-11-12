@@ -26,6 +26,7 @@ function getTrailMeta() {
     pageDir: pageDir.href,
     dataDir: dataDir.href,
     pointsUrl: new URL("points.json", dataDir).href,
+    metaUrl: new URL("at_meta.json", dataDir).href,
     trailGeojsonUrl: new URL("trail.geojson", dataDir).href,
     normalsUrl: new URL("historical_weather.json", dataDir).href,
     defaultMapCenter: [38.5, -81.0],
@@ -667,10 +668,18 @@ function buildPointsByState() {
   }
 }
 
+// TEMPORARY: ranges are taken from whole-mile points only, which reproduces
+// the ranges this page showed when points.json was 1mi apart. At 0.1mi the
+// points catch brief border touches (New York at 1358 and 1366, New Jersey at
+// 1299.4, West Virginia at 648.4), which would widen the ranges. Replace once
+// AT state assignment is reviewed (border weave absorbed into one state, as
+// the NCT build does).
 function getStateMileRange(state) {
   const arr = pointsByState.get(state) || [];
   if (arr.length === 0) return null;
-  const miles = arr.map(p => getPointMile(p)).filter(Number.isFinite);
+  const miles = arr.map(p => getPointMile(p))
+    .filter(m => Number.isFinite(m) && Math.abs(m - Math.round(m)) < 1e-6);
+  if (miles.length === 0) return null;
   return { min: Math.min(...miles), max: Math.max(...miles) };
 }
 
@@ -884,9 +893,18 @@ async function loadTrailOverlayForDurMap() {
    Data loading
 ---------------------------- */
 async function loadPoints() {
-  const resp = await fetch(POINTS_URL, { cache: "no-cache" });
+  // points.json carries only lat, lon, mile, route_id, trail_elev and state;
+  // id, section and region are rebuilt from at_meta.json (hydrate-points.js),
+  // so the two files must always be the same vintage.
+  const [resp, metaResp] = await Promise.all([
+    fetch(POINTS_URL, { cache: "no-cache" }),
+    fetch(META.metaUrl, { cache: "no-cache" }),
+  ]);
   if (!resp.ok) throw new Error(`Failed to load ${POINTS_URL} (${resp.status})`);
-  const data = await resp.json();
+  if (!metaResp.ok) throw new Error(`Failed to load ${META.metaUrl} (${metaResp.status})`);
+  const atMeta = await metaResp.json();
+  if (!atMeta?.hydrate) throw new Error("at_meta.json has no hydrate block");
+  const data = hydratePoints(await resp.json(), atMeta);
 
   allPoints = data
     .map(p => {
@@ -975,14 +993,13 @@ async function loadPrecomputedNormals() {
 }
 
 /**
- * Normals for a point: exact id, then legacy id, then nearest by mile.
+ * Normals for a point: exact id, then nearest by mile.
  * The nearest-mile fallback is what lets points.json change resolution
  * independently of historical_weather.json.
  */
 function normalsFor(point) {
   if (!point) return null;
-  const direct = normalsByPointId.get(point.id)
-    || (point.legacy_id ? normalsByPointId.get(point.legacy_id) : null);
+  const direct = normalsByPointId.get(point.id);
   if (direct) return direct;
 
   if (!normalsByMile.length) return null;
